@@ -1,0 +1,10 @@
+{
+  "schema": "threshcert-shutter-identity-v1",
+  "generatedAt": "2026-07-16T06:37:45Z",
+  "keyperConfigIndex": "1",
+  "identityPrefix": "0x9992434b767ace0702534d07bdaf06d8b074cfe1b0c93d939cacdc640e7e2c66",
+  "sender": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+  "identityPreimage": "0x9b135262569838d98cdc64af1d19d0c1287a73278282c0085992a55e492ca30c",
+  "identityHash": "0x3ae2569f065d49e2e32d651415dba6f7d84c818dd8d436c89e16856f598488e2",
+  "triggerTimestamp": "1784185638"
+}

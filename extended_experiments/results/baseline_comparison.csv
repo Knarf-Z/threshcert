@@ -1,0 +1,65 @@
+profile,required_shares,method,value,exact_certificate,ratio_to_exact,certified_lower_bound,basis
+uniform,3,public_only,0.000000,30,0.000000,true,no member-level evidence
+uniform,3,minimum_member_floor,30.000000,30,1.000000,true,q times the global member floor
+uniform,3,exact_lower_tail,30.000000,30,1.000000,true,sum of q smallest certified resistances
+uniform,3,mean_resistance_heuristic,30.000000,30,1.000000,false,q times the committee mean
+uniform,4,public_only,0.000000,40,0.000000,true,no member-level evidence
+uniform,4,minimum_member_floor,40.000000,40,1.000000,true,q times the global member floor
+uniform,4,exact_lower_tail,40.000000,40,1.000000,true,sum of q smallest certified resistances
+uniform,4,mean_resistance_heuristic,40.000000,40,1.000000,false,q times the committee mean
+uniform,5,public_only,0.000000,50,0.000000,true,no member-level evidence
+uniform,5,minimum_member_floor,50.000000,50,1.000000,true,q times the global member floor
+uniform,5,exact_lower_tail,50.000000,50,1.000000,true,sum of q smallest certified resistances
+uniform,5,mean_resistance_heuristic,50.000000,50,1.000000,false,q times the committee mean
+uniform,6,public_only,0.000000,60,0.000000,true,no member-level evidence
+uniform,6,minimum_member_floor,60.000000,60,1.000000,true,q times the global member floor
+uniform,6,exact_lower_tail,60.000000,60,1.000000,true,sum of q smallest certified resistances
+uniform,6,mean_resistance_heuristic,60.000000,60,1.000000,false,q times the committee mean
+balanced,3,public_only,0.000000,24,0.000000,true,no member-level evidence
+balanced,3,minimum_member_floor,21.000000,24,0.875000,true,q times the global member floor
+balanced,3,exact_lower_tail,24.000000,24,1.000000,true,sum of q smallest certified resistances
+balanced,3,mean_resistance_heuristic,30.000000,24,1.250000,false,q times the committee mean
+balanced,4,public_only,0.000000,34,0.000000,true,no member-level evidence
+balanced,4,minimum_member_floor,28.000000,34,0.823529,true,q times the global member floor
+balanced,4,exact_lower_tail,34.000000,34,1.000000,true,sum of q smallest certified resistances
+balanced,4,mean_resistance_heuristic,40.000000,34,1.176471,false,q times the committee mean
+balanced,5,public_only,0.000000,45,0.000000,true,no member-level evidence
+balanced,5,minimum_member_floor,35.000000,45,0.777778,true,q times the global member floor
+balanced,5,exact_lower_tail,45.000000,45,1.000000,true,sum of q smallest certified resistances
+balanced,5,mean_resistance_heuristic,50.000000,45,1.111111,false,q times the committee mean
+balanced,6,public_only,0.000000,57,0.000000,true,no member-level evidence
+balanced,6,minimum_member_floor,42.000000,57,0.736842,true,q times the global member floor
+balanced,6,exact_lower_tail,57.000000,57,1.000000,true,sum of q smallest certified resistances
+balanced,6,mean_resistance_heuristic,60.000000,57,1.052632,false,q times the committee mean
+bimodal,3,public_only,0.000000,12,0.000000,true,no member-level evidence
+bimodal,3,minimum_member_floor,12.000000,12,1.000000,true,q times the global member floor
+bimodal,3,exact_lower_tail,12.000000,12,1.000000,true,sum of q smallest certified resistances
+bimodal,3,mean_resistance_heuristic,30.000000,12,2.500000,false,q times the committee mean
+bimodal,4,public_only,0.000000,16,0.000000,true,no member-level evidence
+bimodal,4,minimum_member_floor,16.000000,16,1.000000,true,q times the global member floor
+bimodal,4,exact_lower_tail,16.000000,16,1.000000,true,sum of q smallest certified resistances
+bimodal,4,mean_resistance_heuristic,40.000000,16,2.500000,false,q times the committee mean
+bimodal,5,public_only,0.000000,34,0.000000,true,no member-level evidence
+bimodal,5,minimum_member_floor,20.000000,34,0.588235,true,q times the global member floor
+bimodal,5,exact_lower_tail,34.000000,34,1.000000,true,sum of q smallest certified resistances
+bimodal,5,mean_resistance_heuristic,50.000000,34,1.470588,false,q times the committee mean
+bimodal,6,public_only,0.000000,52,0.000000,true,no member-level evidence
+bimodal,6,minimum_member_floor,24.000000,52,0.461538,true,q times the global member floor
+bimodal,6,exact_lower_tail,52.000000,52,1.000000,true,sum of q smallest certified resistances
+bimodal,6,mean_resistance_heuristic,60.000000,52,1.153846,false,q times the committee mean
+heavy_lower_tail,3,public_only,0.000000,10,0.000000,true,no member-level evidence
+heavy_lower_tail,3,minimum_member_floor,3.000000,10,0.300000,true,q times the global member floor
+heavy_lower_tail,3,exact_lower_tail,10.000000,10,1.000000,true,sum of q smallest certified resistances
+heavy_lower_tail,3,mean_resistance_heuristic,30.000000,10,3.000000,false,q times the committee mean
+heavy_lower_tail,4,public_only,0.000000,18,0.000000,true,no member-level evidence
+heavy_lower_tail,4,minimum_member_floor,4.000000,18,0.222222,true,q times the global member floor
+heavy_lower_tail,4,exact_lower_tail,18.000000,18,1.000000,true,sum of q smallest certified resistances
+heavy_lower_tail,4,mean_resistance_heuristic,40.000000,18,2.222222,false,q times the committee mean
+heavy_lower_tail,5,public_only,0.000000,29,0.000000,true,no member-level evidence
+heavy_lower_tail,5,minimum_member_floor,5.000000,29,0.172414,true,q times the global member floor
+heavy_lower_tail,5,exact_lower_tail,29.000000,29,1.000000,true,sum of q smallest certified resistances
+heavy_lower_tail,5,mean_resistance_heuristic,50.000000,29,1.724138,false,q times the committee mean
+heavy_lower_tail,6,public_only,0.000000,45,0.000000,true,no member-level evidence
+heavy_lower_tail,6,minimum_member_floor,6.000000,45,0.133333,true,q times the global member floor
+heavy_lower_tail,6,exact_lower_tail,45.000000,45,1.000000,true,sum of q smallest certified resistances
+heavy_lower_tail,6,mean_resistance_heuristic,60.000000,45,1.333333,false,q times the committee mean

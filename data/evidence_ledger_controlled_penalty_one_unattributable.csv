@@ -1,0 +1,8 @@
+member,weight,base_resistance,p_lower,nominal_penalty,forfeiture_certified,attribution_certified,enforcement_certified,evidence_status
+k1,0.14285714285714285,0,1,2500,1,0,1,controlled attribution failure; not deployment evidence
+k2,0.14285714285714285,0,1,2500,1,1,1,controlled input; not deployment evidence
+k3,0.14285714285714285,0,1,2500,1,1,1,controlled input; not deployment evidence
+k4,0.14285714285714285,0,1,2500,1,1,1,controlled input; not deployment evidence
+k5,0.14285714285714285,0,1,2500,1,1,1,controlled input; not deployment evidence
+k6,0.14285714285714285,0,1,2500,1,1,1,controlled input; not deployment evidence
+k7,0.14285714285714285,0,1,2500,1,1,1,controlled input; not deployment evidence

@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use ThreshCert, please cite this software artifact."
+title: "ThreshCert: Certifying the Economic Security of Threshold Committees"
+type: software
+authors:
+  - family-names: Zhang
+    given-names: Jiaqi
+    orcid: "https://orcid.org/0009-0005-3271-3106"
+  - family-names: Fu
+    given-names: Honghao
+repository-code: "https://github.com/Knarf-Z/threshcert"
+url: "https://github.com/Knarf-Z/threshcert"
+version: 1.0.0
+date-released: 2026-07-16
+abstract: >-
+  Reproducible experiments and a public testnet deployment for attack-cost
+  certificates, activation-aware acquisition, coordinated defense, and
+  evidence-based slashing in threshold committees.
+keywords:
+  - threshold cryptography
+  - economic security
+  - blockchain security
+  - attack-cost certificate
+  - slashing
+  - Rolling Shutter
+  - reproducible research

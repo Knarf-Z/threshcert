@@ -1,0 +1,30 @@
+{
+  "name": "threshcert-deployment",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "test:solidity": "hardhat test solidity",
+    "typecheck": "hardhat compile && tsc --noEmit",
+    "verify:static": "python scripts/verify-bundle.py",
+    "verify": "npm run verify:static && npm run typecheck && npm test",
+    "derive:identity": "node --import tsx scripts/derive-shutter-identity.ts",
+    "e2e:local": "hardhat run scripts/local-e2e.ts",
+    "deploy:local": "hardhat run scripts/deploy.ts",
+    "deploy:chiado": "hardhat run scripts/deploy.ts --network chiado",
+    "open:chiado": "hardhat run scripts/open-release.ts --network chiado",
+    "slash:chiado": "hardhat run scripts/submit-evidence.ts --network chiado"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox-viem": "5.0.7",
+    "@openzeppelin/contracts": "5.6.1",
+    "@types/node": "22.20.1",
+    "hardhat": "3.9.1",
+    "solc": "0.8.28",
+    "typescript": "6.0.3",
+    "tsx": "4.20.6",
+    "viem": "2.55.2"
+  }
+}

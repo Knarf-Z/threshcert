@@ -1,0 +1,4 @@
+dune_validation_checks=10
+dune_validation_failures=0
+dune_selected_coverage_rows=7
+dune_interpretation=CALIBRATION_ONLY_NOT_VALUE_CAP

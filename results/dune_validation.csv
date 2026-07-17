@@ -1,0 +1,11 @@
+check,passed,detail
+daily_sum_matches_summary,True,1672005
+transfer_count_matches_summary,True,1672005
+transfer_coverage_ratio,True,1
+transfer_usd_coverage_ratio,True,0.9793595114847144595859462143
+curve_thresholds_strictly_increasing,True,401
+curve_coverage_nondecreasing,True,401
+selected_rows_match_curve,True,7
+dex_usd_count_bounded,True,1285403
+dex_usd_coverage_ratio,True,99.89756909228962611164347205
+dex_quantiles_ordered,True,23.29761622483605;758.7585057379812;1775.9093245885115;10410.10784133416

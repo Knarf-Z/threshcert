@@ -1,0 +1,14 @@
+{
+  "captured_at": "2026-07-14",
+  "operating_system": "Windows",
+  "shell": "Windows PowerShell 5.1",
+  "cpu": "13th Gen Intel(R) Core(TM) i7-13650HX",
+  "physical_cores": 14,
+  "logical_processors": 20,
+  "total_physical_memory_bytes": 16849256448,
+  "python_version": "3.11.1",
+  "runs": 10,
+  "source_archive": "solver_scaling_repeats.zip",
+  "source_archive_sha256": "89e3507610dbb2b5fb44b1145165c764bf90be70f29ed27804d314c7722a5fc4",
+  "outlier_policy": "No runs removed; report median and inclusive IQR with raw files retained."
+}

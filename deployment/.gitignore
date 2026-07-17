@@ -1,0 +1,17 @@
+node_modules/
+artifacts/
+cache/
+coverage/
+dist/
+.env
+.env.*
+!.env.example
+.idea/
+.vscode/
+rolling-shutter/upstream/
+rolling-shutter/runtime/
+rolling-shutter/bin/
+runtime/
+results/*.json
+evidence/*.json
+*.log

@@ -1,0 +1,2 @@
+settlement_txs,joined_transfer_rows,rows_with_transfer_match,rows_with_amount_usd,txs_with_transfer_match,txs_with_amount_usd,tx_transfer_coverage,tx_usd_coverage,min_settlement_block_time,max_settlement_block_time,min_transfer_block_time,max_transfer_block_time
+1.672005e+06,1.9915128e+07,1.9915128e+07,1.2548403e+07,1.672005e+06,1.637494e+06,1.00000000000000000,0.97935951148471446,2024-07-12 00:01:00.000 UTC,2026-06-12 23:58:25.000 UTC,2024-07-12 00:01:00.000 UTC,2026-06-12 23:58:25.000 UTC

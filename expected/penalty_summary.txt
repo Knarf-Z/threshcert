@@ -1,0 +1,3 @@
+penalty_scenarios=2
+penalty_scenarios_passed=2
+penalty_interpretation=CONTROLLED_NOT_DEPLOYMENT_EVIDENCE

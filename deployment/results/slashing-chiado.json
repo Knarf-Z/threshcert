@@ -1,0 +1,28 @@
+{
+  "schema": "threshcert-slashing-result-v1",
+  "generatedAt": "2026-07-16T07:11:37.187Z",
+  "deploymentFile": "results/deployment-chiado.json",
+  "jobFile": "results/job-chiado.json",
+  "evidenceFile": "evidence/shutter-evidence.json",
+  "chainId": 10200,
+  "contract": "0x3C16dd5689D67d51c076fe80CB7189041c107721",
+  "jobId": "0xe33257d2784a1695ae1e14d9cc5b4852ff78debe7fdbd60b6facd939895b636f",
+  "memberIndex": 0,
+  "keyperAddress": "0xe199394a9524D5BC79748F01827A39A13bf2eff2",
+  "shareHash": "0x80e369e892b7ecfa3c0b4768298d936cdc7204e8a90a4de815a7fec9772e1070",
+  "memberSignatureHash": "0xefc1b178a679fb0a97f6ae4d664ca4814ef9cd989365b671f4032f21e8d24aa3",
+  "verifier": "0xE744A5E02A37b0512578B3f94B8e0584427eA792",
+  "observedAt": "1784185880",
+  "releaseTime": "1784191230",
+  "prematureBySeconds": "5350",
+  "certificateBeforeWei": "4000000000000",
+  "certificateAfterWei": "3000000000000",
+  "transaction": {
+    "hash": "0x26ff2f395c8e4bf6e4f8af170030c5a55e751b652d7e6ab7c9dc30bb422ddabd",
+    "blockNumber": "22111234",
+    "blockHash": "0xd72a5b0fa18e0867b961b4d601545607cb5f72cb4e3950bed8cc7e8f4e1f46a8",
+    "gasUsed": "108629",
+    "effectiveGasPrice": "10000000007",
+    "status": "success"
+  }
+}

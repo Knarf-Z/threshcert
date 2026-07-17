@@ -1,0 +1,21 @@
+{
+  "schema": "threshcert-release-job-v1",
+  "generatedAt": "2026-07-16T06:40:50.416Z",
+  "deploymentFile": "results/deployment-chiado.json",
+  "chainId": 10200,
+  "contract": "0x3C16dd5689D67d51c076fe80CB7189041c107721",
+  "jobId": "0xe33257d2784a1695ae1e14d9cc5b4852ff78debe7fdbd60b6facd939895b636f",
+  "eon": "1",
+  "identityPreimage": "0x9b135262569838d98cdc64af1d19d0c1287a73278282c0085992a55e492ca30c",
+  "identityHash": "0x3ae2569f065d49e2e32d651415dba6f7d84c818dd8d436c89e16856f598488e2",
+  "releaseTime": "1784191230",
+  "nonce": "1",
+  "transaction": {
+    "hash": "0xec6ecd8fc4a7df5bbf68e5ee8ff408ad7f6e0ed9d0a179cc3068448042fbcaa6",
+    "blockNumber": "22110908",
+    "blockHash": "0x2baec2e724d0d35d8c49d6c143624c75331ef034811814a996845a2e3ba65161",
+    "gasUsed": "99378",
+    "effectiveGasPrice": "10000000007",
+    "status": "success"
+  }
+}

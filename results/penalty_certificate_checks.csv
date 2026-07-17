@@ -1,0 +1,3 @@
+scenario,threshold_count,ordered_certified_resistances,certificate,target,decision,interpretation
+all_evidence_complete,4,2500;2500;2500;2500;2500;2500;2500,10000.0,10000.0,ACCEPT,controlled; not deployment evidence
+one_member_unattributable,4,0;2500;2500;2500;2500;2500;2500,7500.0,10000.0,REJECT,controlled; not deployment evidence

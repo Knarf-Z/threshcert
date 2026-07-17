@@ -1,0 +1,5 @@
+k,sequential,simultaneous,package,robust_TC
+1,5,infinity,4,4
+2,6,infinity,4,4
+4,8,infinity,4,4
+8,12,infinity,4,4

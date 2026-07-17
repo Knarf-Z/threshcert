@@ -1,0 +1,95 @@
+{
+  "schema": "threshcert-shutter-evidence-v1",
+  "generatedAt": "2026-07-16T07:07:20.158936098Z",
+  "rollingShutterVersion": "v1.4.4",
+  "rollingShutterCommit": "d143fffcf51f85b30375134d2d29756417f333b9",
+  "instanceId": 0,
+  "eon": "1",
+  "epochId": "0x885b05e888c930848cdc5f3770557599bc57e1670f272d24f11013097993370f03b692dacd66d70d8398897c564f91c6",
+  "threshold": 4,
+  "numKeypers": 7,
+  "identityPreimage": "0x9b135262569838d98cdc64af1d19d0c1287a73278282c0085992a55e492ca30c",
+  "identityHash": "0x3ae2569f065d49e2e32d651415dba6f7d84c818dd8d436c89e16856f598488e2",
+  "aggregateKey": "0x986b211c9e9c9cb84397d4bbccc447c289b0d1fdc792ee08a537eb391343dbf0cd95e541f61867171ac3f3330436ae52",
+  "aggregateKeyValid": true,
+  "reconstructionMatchesStoredKey": true,
+  "shares": [
+    {
+      "memberIndex": 0,
+      "keyperAddress": "0xe199394a9524D5BC79748F01827A39A13bf2eff2",
+      "share": "0xa7947b2361da4f064da6f665d04f5d09093be85859a9ec4b04a1e7777b174778fe5de7aafca4b68bbff13b8747c577b5",
+      "shareHash": "0x80e369e892b7ecfa3c0b4768298d936cdc7204e8a90a4de815a7fec9772e1070",
+      "publicKeyShare": "0x98c254f4795a572b60c17c8a16ee383556b6297a5491488772e73dd36c160ee62b28b5a1d0967102deccf232fa6897ea0164aeb6d8997e45cd8abe34dea1405f00259a527354deae2d6883eb7e1a0d63fba6ba9b27fe077a65ac7527aedd14bc",
+      "shareValid": true,
+      "nativeSignature": "0xa642d321b6875209adabff77f2d972c52dcb5db992fd8cc550ff2c648c77eaf04c0310a2de4198a04333abde138b8178f5992bc26e56ea45f7b03d3c8b89999001",
+      "nativeSignatureHash": "0xefc1b178a679fb0a97f6ae4d664ca4814ef9cd989365b671f4032f21e8d24aa3",
+      "nativeSignatureValid": true
+    },
+    {
+      "memberIndex": 1,
+      "keyperAddress": "0x6257448DD21ECe10A1b08684A21324200eBfE318",
+      "share": "0x96933dff7557f8fe18f0f214a18134fae49c72c36943e4f3da4484c77c9273d71c1c11beebd234496db9ee3673aa9ea6",
+      "shareHash": "0x2c8cd41eb8ecbe1bbc39237580c3dd800f46dd44674991c7507fa6cfa39de823",
+      "publicKeyShare": "0x8f4deeb8e57cf6de92b76a541e9f22dc22cd5ad191bf540213b29519f4b341435ac25ebde8e570d583b0c3a982af2ca610da3fc89826b66a2d61ab794a93652292d9e3798d02e808c83989dc7690e6941e70f18d41fd59e4e0a9c50f9d1f3f0b",
+      "shareValid": true,
+      "nativeSignature": "0x0d934764fc82d98f62bb5ff6ce14e7bc3517937bbdda7d06bd55970c8b1e819a67ebdc519d2acd1268a2e8c3051c46aeeb28cc3dc2f95da690b37b514e4cbc3201",
+      "nativeSignatureHash": "0xa3d0ccf3f8998131263c5d7e29c26c818a730b68fe954bd9abd3886e45a1045c",
+      "nativeSignatureValid": true
+    },
+    {
+      "memberIndex": 2,
+      "keyperAddress": "0xF1FE5f08c9c16A87CcC9E165a2FD9C2776ce6e68",
+      "share": "0x9019c944837a40681407a3f445a64affc8e16a45109cf952a9ade75ffcdfdfd4a5ffd10f9106a95b730bb92567faeb3d",
+      "shareHash": "0x449d86a21fddcc90b27477e72641e46c4bab33900487d0e1fefd261a998339b7",
+      "publicKeyShare": "0xb409919870ae8e811c34b122a1d91e8d06ab270fed99935fa5d9ef0a6947c8c6f345f188733537c742c5c7efa09d1e7101afadfadb2b5ad12038f2443625ea14bd652862c6d12b7b9d34c8a0ea7005cd6cd9eee30e21f706e86f326dd21f3646",
+      "shareValid": true,
+      "nativeSignature": "0xef5c22aa22abc3604fb84e20a5f03d7b5366245b6586639c8f429ad4547f35bf00fa6bc2760bd34227ec2c4915e7a75931bdbd840771a275e127c17d28020c6600",
+      "nativeSignatureHash": "0xc26389672d02330c1ddf4b0b115f55ecdf0247e90980435666c62939ea41a08d",
+      "nativeSignatureValid": true
+    },
+    {
+      "memberIndex": 3,
+      "keyperAddress": "0x2e48d861f80d5b291549D1800969Ff741599d059",
+      "share": "0xa656950653383c1428fca7b7105655169f27e39aa9a02b3f57c632a6917c9a5df6f9c1392dfe030c310a968a445ffca0",
+      "shareHash": "0x1971be7a8892cd1f94a3e3806210c049c45255b2de74581dd1bd79c10fc7c7f3",
+      "publicKeyShare": "0xab4c46e02020585f20d8f1feb77be2d64d4e5df6d756cb98ccc9716dd381fa6dff827e447db0556e37fd7c55fe04461d03fcecef4a88eb2827317f20959b7976383d540dacc976de44eebb926f038d78e976f92e43ae0f30f8f96c0a0be36d1d",
+      "shareValid": true,
+      "nativeSignature": "0xf3c78df5ba37dd5b8bbbe0a652e753bb7099155a58e91db906e1d532ebb935bf5dd4c32b010e219c6e974fd1bcd585a808015348700f782ba04a5b21e82d6eaa01",
+      "nativeSignatureHash": "0x1cf0b673ca85752be7e14338b1b2853a1c4bd1141fba2a0f5e6b32a55e2a4cd1",
+      "nativeSignatureValid": true
+    },
+    {
+      "memberIndex": 4,
+      "keyperAddress": "0x314A9bF106E2DCcD56b24ad3F11967B715EFae3C",
+      "share": "0x83509e246edb3450b4f84b3859c1ac3a25bb971f31859642d212f9ed789231dc38fc9a5b911bf674a5ddd98762b185eb",
+      "shareHash": "0xe74dde652620a27487d0d7562c3320970216c90b217d4b09f91ace4db9d91b37",
+      "publicKeyShare": "0x8da36a15663c171d78105a639ef3f70dcac6f44aaa2dd0d6326b4458b90344dc073fe3e9771ed6dba038982258268999096b98ffa488ad434fc56e79c4182326f969f037288c4794b7a5ce49bc484cb8cc0755e617a420275b72a7ed7f46262f",
+      "shareValid": true,
+      "nativeSignature": "0x4ca37a8ffdfab0ca2d3fce480894d81650fbca1ca893b40c718bdc972675da152c1f387b99a32ab666f4d7149d8ad307bdbfccffd0b3c5feea224f5a98499d0601",
+      "nativeSignatureHash": "0x9491481101cb109b862eca5ca9a4d50254ee01fedf808b4e45da37330342cd6e",
+      "nativeSignatureValid": true
+    },
+    {
+      "memberIndex": 5,
+      "keyperAddress": "0x64Dd07Fa802ad5f4a85773DE200d913198CC8d53",
+      "share": "0x85f64940357dadbf713b1e8704061a4849ef2acfae7ab100836f3697c7eaf927243653618c64686d3243eacc88efc7c5",
+      "shareHash": "0xe2fb45ef4c572f1b27645012e5dbbe006c6e5dac565343783fea3670357bb565",
+      "publicKeyShare": "0x9089e40781030c9dad5abe69310b07365aca7c599c1afcfc5548b2a6b6e3be352fb2de2174096654e7560173d91f3f6c0a3a4fec701dcc5a470b324d42e9edab3df19bcf5a4638d2b7f887ed6c357177f03849b9dd1ae9efe158e68e49286d1e",
+      "shareValid": true,
+      "nativeSignature": "0x5f96596e370417fd71d40f9737f404ff5f7eee04638c84c7c2044ed20a5b8e024dbc893643a975c1282cf096b6e80d75c3219fff87a24cc7386216cfece092b200",
+      "nativeSignatureHash": "0xa0725cdd87c483eaf52246c549b7f38c195454730d7731d2dde3e79fc2a95dbb",
+      "nativeSignatureValid": true
+    },
+    {
+      "memberIndex": 6,
+      "keyperAddress": "0xE2E1150e93d7001c1C7565BB7346fe2a8de05318",
+      "share": "0xb1b9b62a1bd397925406c840bcad85a259a2eb41e65e081fe7c98f9679e1389c4cbfba74fa6d342ae3631ed4b34ade28",
+      "shareHash": "0x37d3cd291a748ab6877d8b662d00e8e85bf54d34f41329af9999a9e18afb79fe",
+      "publicKeyShare": "0x921872c06db2d89df1f8f1ee564d5a5ade6eca96367804f119a858483b14698b64980acfccde75e326977d36bd3bfd650c2e9cfa86457b36c6eec82635eea68234aaa34cf461ed4bdc3342207ef4641919c32a63c4c0d9bb6c4e8124c711ec03",
+      "shareValid": true,
+      "nativeSignature": "0x2a3088904ee7fd6864204830f534eb12ad0c86ee0d5b547be4165aa45dbe5b936cb0ec423a3747ffbe1b0dd89b00e67b53dc2427c27e24f01584691ecd2daef601",
+      "nativeSignatureHash": "0x830fa9c6a5c9a99775accb89e6f1cd7f29808c791637e4cf657cb0d7f74e314a",
+      "nativeSignatureValid": true
+    }
+  ]
+}

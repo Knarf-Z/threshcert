@@ -1,0 +1,7 @@
+budget,cheapest_resistance,largest_weight,bottleneck
+0,6,6,6
+2,6,6,7
+4,6,6,8
+6,6,7,9
+8,7,9,10
+10,9,9,11

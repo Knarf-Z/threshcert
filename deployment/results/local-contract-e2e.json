@@ -1,0 +1,112 @@
+{
+  "schema": "threshcert-local-contract-e2e-v1",
+  "generatedAt": "2026-07-16T07:58:31.189Z",
+  "evidenceMode": "synthetic-contract-harness-only",
+  "warning": "This record tests contract wiring and is not Rolling Shutter deployment evidence.",
+  "chainId": 31337,
+  "contract": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+  "committeeSize": 7,
+  "threshold": 4,
+  "bondWeiPerMember": "2000000000000000000",
+  "certificateBeforeWei": "8000000000000000000",
+  "certificateAfterWei": "6000000000000000000",
+  "transactions": {
+    "deploy": {
+      "hash": "0x278f385586936a78d3d731606a90a3f6e5112e515a5b4ad0cbdc8a93a8184ee2",
+      "blockNumber": "1",
+      "blockHash": "0x027f273b27eaa0bdf6985145e108157c141b6e2a3e5ec481bc27806c68e1d8a7",
+      "gasUsed": "1559648",
+      "effectiveGasPrice": "1107421875",
+      "status": "success"
+    },
+    "registrations": [
+      {
+        "memberIndex": 0,
+        "hash": "0xd9eb107049c2bc8ba70858a2079bdaa8782625d59834fa452f0ae99eb879f8b6",
+        "blockNumber": "2",
+        "blockHash": "0x69aca38cb6b13faeef54e827fca57e4c42e41b9d3a9d9213a011b3c1e934f869",
+        "gasUsed": "115629",
+        "effectiveGasPrice": "976190759",
+        "status": "success"
+      },
+      {
+        "memberIndex": 1,
+        "hash": "0x07a5aa2810f4c4bc0263d09c202d2b8579b9bf72727683c7812577b04c539655",
+        "blockNumber": "3",
+        "blockHash": "0xcfc3ffb50fca6817e83792098ae7953ba29b52ce0bd885e5a8b700e2afc230ef",
+        "gasUsed": "98541",
+        "effectiveGasPrice": "854637230",
+        "status": "success"
+      },
+      {
+        "memberIndex": 2,
+        "hash": "0x12947a467e070d6f22ff1a359fe8285db90e4747dd1dfb0d4b82bc355da190f4",
+        "blockNumber": "4",
+        "blockHash": "0xed6ec6184428d6f34bbb68f39e5f6e918b4cb5c9d77e8fc5a6d2e8f31df45aa2",
+        "gasUsed": "98541",
+        "effectiveGasPrice": "748158480",
+        "status": "success"
+      },
+      {
+        "memberIndex": 3,
+        "hash": "0xf24ab374b1d237a8adf007beef346d46c26f6155a290b5ea713d7e629adeae25",
+        "blockNumber": "5",
+        "blockHash": "0xcccab6e4f204f19351f1e4bcc7d897d2fa231c85aa59503a14490279e271c8f0",
+        "gasUsed": "98541",
+        "effectiveGasPrice": "654945856",
+        "status": "success"
+      },
+      {
+        "memberIndex": 4,
+        "hash": "0x8bde311fb9c4d02fe63fff4e4ec2632b1fd201d06becd7501213567802b2646d",
+        "blockNumber": "6",
+        "blockHash": "0xec32bba41f232a4195350b019d1cea4ddefa0edc64cbc12c3cb101a8ae1a7dd6",
+        "gasUsed": "98541",
+        "effectiveGasPrice": "573346537",
+        "status": "success"
+      },
+      {
+        "memberIndex": 5,
+        "hash": "0xc537270522da8d7f1fe60da10e0b103c1ffe77d91edc0530af5c71fe244f0479",
+        "blockNumber": "7",
+        "blockHash": "0x18e0e5257ae70fed450aab579e83d70d4e79cbcab0623ba8c15495da3f2a3497",
+        "gasUsed": "98541",
+        "effectiveGasPrice": "501913629",
+        "status": "success"
+      },
+      {
+        "memberIndex": 6,
+        "hash": "0x36eb85f08ab22796fb0162016783a0e1cf409134bac7cefbc3495996138b2143",
+        "blockNumber": "8",
+        "blockHash": "0x31b6d33d35c59881ffe43e8a56dfc432d33471d98b2a76e7d13f356fe07be524",
+        "gasUsed": "98529",
+        "effectiveGasPrice": "439380505",
+        "status": "success"
+      }
+    ],
+    "freeze": {
+      "hash": "0x99e02e9c9ff716bd8238322d83440644418f5b7c932546b2dd0d683ba79ca175",
+      "blockNumber": "9",
+      "blockHash": "0x51e5639c06ef53fe1aa27bd8ecd2909a472f9f418949961253fa7c727a2eeb16",
+      "gasUsed": "51942",
+      "effectiveGasPrice": "384638325",
+      "status": "success"
+    },
+    "openRelease": {
+      "hash": "0x94bc45b76dbd769605e0d645cafd9f97178e06f30665f0d3e11fc968a8f1f545",
+      "blockNumber": "10",
+      "blockHash": "0x9f941fbd7e274b084a87d697fb0f0f1dc6af3d56d093e6d4b1136982ac43f17d",
+      "gasUsed": "99378",
+      "effectiveGasPrice": "336641780",
+      "status": "success"
+    },
+    "slash": {
+      "hash": "0x8ab9bb70de44f45ee6ac7e9f7a46c5926c5867e483819dfb8d41b47d498767dd",
+      "blockNumber": "11",
+      "blockHash": "0x5c087963bb64fe644cc7041a2e7c4e68f9634096173e700ecd3a84e5269a42eb",
+      "gasUsed": "83629",
+      "effectiveGasPrice": "294700953",
+      "status": "success"
+    }
+  }
+}

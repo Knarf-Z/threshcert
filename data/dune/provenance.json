@@ -1,0 +1,69 @@
+{
+  "source": "Dune exported CSV files supplied with the uploaded experiment archive",
+  "retrieved_at": null,
+  "archival_block_number": null,
+  "archival_block_hash": null,
+  "query_sql_included": false,
+  "interpretation": "Historical calibration only; not a resistance estimate, attack-profit observation, or future value upper bound.",
+  "datasets": [
+    {
+      "file": "raw/01_settlement_tx_count_summary.csv",
+      "query_id": 7714633,
+      "method_family": "GPv2 settlement and token-transfer join",
+      "status": "supplied export"
+    },
+    {
+      "file": "raw/02_daily_settlement_tx_count.csv",
+      "query_id": 7714683,
+      "method_family": "GPv2 settlement and token-transfer join",
+      "status": "supplied export"
+    },
+    {
+      "file": "raw/03_transfer_join_coverage.csv",
+      "query_id": 7714701,
+      "method_family": "GPv2 settlement and token-transfer join",
+      "status": "supplied export"
+    },
+    {
+      "file": "raw/certificate_coverage_curve.csv",
+      "query_id": 7715186,
+      "method_family": "historical target calibration",
+      "status": "supplied export"
+    },
+    {
+      "file": "raw/04_empirical_target_coverage_selected.csv",
+      "query_id": null,
+      "method_family": "historical target calibration",
+      "status": "selected rows derived from certificate_coverage_curve.csv"
+    },
+    {
+      "file": "raw/05_top_token_symbols.csv",
+      "query_id": 7715248,
+      "method_family": "GPv2 settlement and token-transfer join",
+      "status": "supplied export"
+    },
+    {
+      "file": "raw/06_top_notional_outliers.csv",
+      "query_id": 7715263,
+      "method_family": "GPv2 settlement and token-transfer join",
+      "status": "supplied export"
+    },
+    {
+      "file": "raw/07_dex_trades_aggregate_stats.csv",
+      "query_id": 7899253,
+      "method_family": "dex.trades transaction-level aggregation",
+      "status": "supplied export"
+    },
+    {
+      "file": "raw/01_settlement_tx_count_legacy_daily.csv",
+      "query_id": null,
+      "method_family": "legacy daily settlement count",
+      "status": "retained for provenance; not used by deterministic validation"
+    }
+  ],
+  "limitations": [
+    "The original archive did not record Dune execution IDs or retrieval timestamps.",
+    "The transfer-join and dex.trades datasets use different methods and sample sizes and are not merged.",
+    "Historical transaction notional is not an application-side worst-case value cap."
+  ]
+}

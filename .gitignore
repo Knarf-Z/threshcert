@@ -1,0 +1,13 @@
+.idea/
+.vscode/
+.venv/
+venv/
+node_modules/
+__pycache__/
+*.py[cod]
+lattice_mobius_summary.txt
+deployment/runtime/
+deployment/evidence/*.json
+deployment/results/*.json
+deployment/rolling-shutter/upstream/
+deployment/rolling-shutter/bin/

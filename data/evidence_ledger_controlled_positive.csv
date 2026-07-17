@@ -1,0 +1,8 @@
+member,weight,certified_resistance,evidence_status
+k1,0.142857,2500,controlled input; not deployment evidence
+k2,0.142857,2800,controlled input; not deployment evidence
+k3,0.142857,3000,controlled input; not deployment evidence
+k4,0.142857,3200,controlled input; not deployment evidence
+k5,0.142857,3500,controlled input; not deployment evidence
+k6,0.142857,4000,controlled input; not deployment evidence
+k7,0.142857,4500,controlled input; not deployment evidence

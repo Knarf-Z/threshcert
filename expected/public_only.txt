@@ -1,0 +1,6 @@
+threshold_count=4
+ordered_certified_resistances=0,0,0,0,0,0,0
+threshold_cover_certificate=0
+target=10000
+decision=REJECT
+provenance_warning=The original audit recorded the date and active set index but not a fixed archival block number or block hash. This file does not invent either value.

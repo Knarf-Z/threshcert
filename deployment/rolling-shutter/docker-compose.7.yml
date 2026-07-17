@@ -1,0 +1,107 @@
+services:
+  db:
+    image: postgres:17
+    ports:
+      - "127.0.0.1:15432:5432"
+    volumes:
+      - threshcert-postgres-data:/var/lib/postgresql/data
+
+  chain-3-validator:
+    image: rolling-shutter
+    restart: always
+    entrypoint: ["/rolling-shutter", "chain"]
+    volumes:
+      - ./data/chain-3-validator:/chain
+      - ./data/deployments:/deployments
+    command: "--config /chain/config/config.toml"
+    depends_on: [deploy-contracts]
+
+  chain-4-validator:
+    image: rolling-shutter
+    restart: always
+    entrypoint: ["/rolling-shutter", "chain"]
+    volumes:
+      - ./data/chain-4-validator:/chain
+      - ./data/deployments:/deployments
+    command: "--config /chain/config/config.toml"
+    depends_on: [deploy-contracts]
+
+  chain-5-validator:
+    image: rolling-shutter
+    restart: always
+    entrypoint: ["/rolling-shutter", "chain"]
+    volumes:
+      - ./data/chain-5-validator:/chain
+      - ./data/deployments:/deployments
+    command: "--config /chain/config/config.toml"
+    depends_on: [deploy-contracts]
+
+  chain-6-validator:
+    image: rolling-shutter
+    restart: always
+    entrypoint: ["/rolling-shutter", "chain"]
+    volumes:
+      - ./data/chain-6-validator:/chain
+      - ./data/deployments:/deployments
+    command: "--config /chain/config/config.toml"
+    depends_on: [deploy-contracts]
+
+  keyper-3:
+    image: rolling-shutter
+    restart: always
+    entrypoint: ["/rolling-shutter", "shutterservicekeyper"]
+    command: "--config /config/keyper-3.toml"
+    volumes:
+      - ./config:/config
+      - ./data/deployments:/deployments
+    ports: ["9203:9100"]
+    depends_on:
+      db: {condition: service_healthy}
+      bootnode-0: {condition: service_started}
+      chain-3-validator: {condition: service_started}
+
+  keyper-4:
+    image: rolling-shutter
+    restart: always
+    entrypoint: ["/rolling-shutter", "shutterservicekeyper"]
+    command: "--config /config/keyper-4.toml"
+    volumes:
+      - ./config:/config
+      - ./data/deployments:/deployments
+    ports: ["9204:9100"]
+    depends_on:
+      db: {condition: service_healthy}
+      bootnode-0: {condition: service_started}
+      chain-4-validator: {condition: service_started}
+
+  keyper-5:
+    image: rolling-shutter
+    restart: always
+    entrypoint: ["/rolling-shutter", "shutterservicekeyper"]
+    command: "--config /config/keyper-5.toml"
+    volumes:
+      - ./config:/config
+      - ./data/deployments:/deployments
+    ports: ["9205:9100"]
+    depends_on:
+      db: {condition: service_healthy}
+      bootnode-0: {condition: service_started}
+      chain-5-validator: {condition: service_started}
+
+  keyper-6:
+    image: rolling-shutter
+    restart: always
+    entrypoint: ["/rolling-shutter", "shutterservicekeyper"]
+    command: "--config /config/keyper-6.toml"
+    volumes:
+      - ./config:/config
+      - ./data/deployments:/deployments
+    ports: ["9206:9100"]
+    depends_on:
+      db: {condition: service_healthy}
+      bootnode-0: {condition: service_started}
+      chain-6-validator: {condition: service_started}
+
+volumes:
+  threshcert-postgres-data:
+    name: threshcert-rolling-shutter-postgres-17

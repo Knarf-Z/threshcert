@@ -1,0 +1,15 @@
+{
+  "deployment": "Shutterized Gnosis Chain",
+  "network": "Gnosis Chain",
+  "chain_id": 100,
+  "observation_date": "2026-06-13",
+  "active_keyper_set_index": 10,
+  "committee_size": 7,
+  "threshold_count": 4,
+  "weights": [0.14285714285714285, 0.14285714285714285, 0.14285714285714285, 0.14285714285714285, 0.14285714285714285, 0.14285714285714285, 0.14285714285714285],
+  "initial_exposure": 0.0,
+  "archival_block_number": null,
+  "archival_block_hash": null,
+  "provenance_status": "incomplete",
+  "provenance_limitation": "The original audit recorded the date and active set index but not a fixed archival block number or block hash. This file does not invent either value."
+}

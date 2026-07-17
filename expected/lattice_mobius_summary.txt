@@ -1,0 +1,7 @@
+pure_kway_cases=18
+pure_kway_passed=18
+random_uniform_trials=100
+random_monotonicity_failures=0
+decoy_greedy_cases=15
+decoy_greedy_passed=15
+random_seed=20260714

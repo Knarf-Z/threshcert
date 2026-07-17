@@ -52,7 +52,7 @@ resistance evidence.
 ## Authors
 
 - [Jiaqi Zhang](https://orcid.org/0009-0005-3271-3106)
-- Honghao Fu
+- [Honghao Fu](https://orcid.org/0000-0002-1934-3391)
 
 ## Contents
 

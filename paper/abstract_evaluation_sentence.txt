@@ -1,0 +1,1 @@
+Controlled checks exercise the certificate branches and check the reference implementation; an address-level audit of a pinned seven-member production Keyper set identifies the evidence required to turn its current zero certified lower bound positive.

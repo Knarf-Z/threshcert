@@ -1,0 +1,96 @@
+{
+  "certificateId": "sha256:29919a58c4e6d1d744a0a2df54664dceff2781c3559445b650084edffe5aef75",
+  "schema": "fc-chiado-execution-certificate-v1",
+  "certificateClass": "controlled-public-testnet-threshold-cover",
+  "claim": {
+    "status": "POSITIVE_WITHIN_RECORDED_TESTNET_MECHANISM",
+    "statement": "At the recorded Chiado state, the instrumented 4-of-7 contract's sum-of-four-smallest-live-bonds value is 3000000000000 wei.",
+    "unconditionalProductionAttackCostLowerBound": null,
+    "productionShutterCertificate": "NOT_CERTIFIED",
+    "productionMemberResistance": "NOT_CERTIFIED",
+    "productionActivationEvidence": "NOT_CERTIFIED",
+    "deploymentWideEnforcementProbability": "NOT_CERTIFIED"
+  },
+  "scope": {
+    "networkName": "chiado",
+    "chainId": 10200,
+    "contract": "0x3C16dd5689D67d51c076fe80CB7189041c107721",
+    "recordedBlockNumber": "22111234",
+    "recordedBlockHash": "0xd72a5b0fa18e0867b961b4d601545607cb5f72cb4e3950bed8cc7e8f4e1f46a8",
+    "committeeSize": 7,
+    "threshold": 4,
+    "keyperProcessModel": "seven-colocated-processes-on-one-host",
+    "mechanism": "verifier-attested early-share slashing with on-chain bond transfer",
+    "certificateInput": "remaining on-chain testnet bond balances under the covered verifier-gated enforcement path",
+    "coveredExecutionConditions": [
+      "the pinned exporter detects and validates a premature share",
+      "the designated verifier issues the field-bound EIP-712 attestation",
+      "the attestation reaches the contract before the recorded release deadline"
+    ]
+  },
+  "certificate": {
+    "formula": "sum_of_q_smallest_live_bonds",
+    "unit": "wei",
+    "before": {
+      "memberBounds": [
+        "1000000000000",
+        "1000000000000",
+        "1000000000000",
+        "1000000000000",
+        "1000000000000",
+        "1000000000000",
+        "1000000000000"
+      ],
+      "value": "4000000000000"
+    },
+    "after": {
+      "memberBounds": [
+        "0",
+        "1000000000000",
+        "1000000000000",
+        "1000000000000",
+        "1000000000000",
+        "1000000000000",
+        "1000000000000"
+      ],
+      "value": "3000000000000"
+    }
+  },
+  "observedEvidence": {
+    "rollingShutterVersion": "v1.4.4",
+    "rollingShutterCommit": "d143fffcf51f85b30375134d2d29756417f333b9",
+    "eon": "1",
+    "jobId": "0xe33257d2784a1695ae1e14d9cc5b4852ff78debe7fdbd60b6facd939895b636f",
+    "releaseTime": "1784191230",
+    "observedAt": "1784185880",
+    "prematureBySeconds": "5350",
+    "validatedShares": 7,
+    "validNativeSignatures": 7,
+    "aggregateKeyValid": true,
+    "fourShareReconstructionMatches": true,
+    "slashedMemberIndex": 0,
+    "slashingTransaction": {
+      "hash": "0x26ff2f395c8e4bf6e4f8af170030c5a55e751b652d7e6ab7c9dc30bb422ddabd",
+      "blockNumber": "22111234",
+      "blockHash": "0xd72a5b0fa18e0867b961b4d601545607cb5f72cb4e3950bed8cc7e8f4e1f46a8",
+      "status": "success"
+    },
+    "recordedTransactionCount": 11
+  },
+  "verification": {
+    "offlineCommand": "python scripts/verify_chiado_certificate.py",
+    "liveChainCommand": "npm run verify:chiado:live",
+    "liveChainVerificationRequiredForPublicChainClaim": true,
+    "sourceDigestsSha256": {
+      "contracts/BondedKeyperSlasher.sol": "fba6683c343e573c53cb39908740a68d9d6e78afbba015d63f87d664ae2d942d",
+      "evidence/shutter-evidence.json": "8457edc24f0fecf423e1d11132997a7f27ba96f19980fd6660ea2506a3b4e942",
+      "results/deployment-chiado.json": "4167628c56f4c60d7a70883bdfb1696cc1a2c54bd52c4374d2b7d374ca61d153",
+      "results/job-chiado.json": "ec8c4cee953d9719fdb24c04be4da65ef199edd9f8820d855df40bc2caa2403a",
+      "results/slashing-chiado.json": "6b39610660f117ef2be7f28866f32942d390f610098686e5c5344b8778bab9e0",
+      "rolling-shutter/evidence-exporter/main.go": "81ec34764cea7c594dcf69e90ea0147ccd6d289682b51b55eb3a967c0e1baa25",
+      "rolling-shutter/evidence-exporter/main_test.go": "3e9b179ecd7cabe86a1e33ffb8931f25e6bc1ea10a659591b4737f0bc72d4966",
+      "runtime/keyper-set.json": "0fdbbc6fda08239a1f0a93c9caa5c709acc3fe7bc98238dce180f2bfbc43da1f",
+      "scripts/verify-chiado-live.ts": "26c1ffe75b18468aebce0a179e8ba031cd91c7b0fb55b4466af7f5b09e72d7f6"
+    }
+  }
+}

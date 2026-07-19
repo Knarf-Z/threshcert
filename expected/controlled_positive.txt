@@ -3,4 +3,4 @@ ordered_certified_resistances=2500,2800,3000,3200,3500,4000,4500
 threshold_cover_certificate=11500
 target=10000
 decision=ACCEPT
-provenance_warning=The original audit recorded the date and active set index but not a fixed archival block number or block hash. This file does not invent either value.
+provenance_warning=The block, set, threshold, and seven member addresses are pinned. The chain state does not itself establish member resistance, activation, attribution, forfeiture, insurance, compensation, or joint enforcement-probability floors.

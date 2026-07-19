@@ -11,7 +11,7 @@ set -x
 "${DC[@]}" up -d blockchain
 sleep 5
 "${DC[@]}" run --rm deploy-contracts
-"$THRESHCERT_ROOT/get-contracts-7.sh"
+"$FC_ROOT/get-contracts-7.sh"
 
 "${DC[@]}" run --rm --no-deps chain-seed init --root /chain --blocktime 1 \
   --listen-address "tcp://0.0.0.0:$TM_RPC_PORT" --role seed

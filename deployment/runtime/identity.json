@@ -1,5 +1,5 @@
 {
-  "schema": "threshcert-shutter-identity-v1",
+  "schema": "fc-shutter-identity-v1",
   "generatedAt": "2026-07-16T06:37:45Z",
   "keyperConfigIndex": "1",
   "identityPrefix": "0x9992434b767ace0702534d07bdaf06d8b074cfe1b0c93d939cacdc640e7e2c66",

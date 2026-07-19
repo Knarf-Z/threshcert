@@ -4,7 +4,7 @@ services:
     ports:
       - "127.0.0.1:15432:5432"
     volumes:
-      - threshcert-postgres-data:/var/lib/postgresql/data
+      - fc-postgres-data:/var/lib/postgresql/data
 
   chain-3-validator:
     image: rolling-shutter
@@ -103,5 +103,5 @@ services:
       chain-6-validator: {condition: service_started}
 
 volumes:
-  threshcert-postgres-data:
-    name: threshcert-rolling-shutter-postgres-17
+  fc-postgres-data:
+    name: fc-rolling-shutter-postgres-17

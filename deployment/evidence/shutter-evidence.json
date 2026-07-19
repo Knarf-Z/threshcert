@@ -1,5 +1,5 @@
 {
-  "schema": "threshcert-shutter-evidence-v1",
+  "schema": "fc-shutter-evidence-v1",
   "generatedAt": "2026-07-16T07:07:20.158936098Z",
   "rollingShutterVersion": "v1.4.4",
   "rollingShutterCommit": "d143fffcf51f85b30375134d2d29756417f333b9",

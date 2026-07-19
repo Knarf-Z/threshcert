@@ -25,8 +25,8 @@ import (
 )
 
 const (
-	schemaEvidence = "threshcert-shutter-evidence-v1"
-	schemaKeypers  = "threshcert-keyper-set-v1"
+	schemaEvidence = "fc-shutter-evidence-v1"
+	schemaKeypers  = "fc-keyper-set-v1"
 	pinnedVersion  = "v1.4.4"
 	pinnedCommit   = "d143fffcf51f85b30375134d2d29756417f333b9"
 )
@@ -105,6 +105,17 @@ func decodePreimage(value string) (identitypreimage.IdentityPreimage, error) {
 		return nil, fmt.Errorf("identity preimage must be exactly 32 bytes, got %d", len(b))
 	}
 	return identitypreimage.IdentityPreimage(b), nil
+}
+
+func recordKeyperIndex(seen map[int64]struct{}, index int64, count int) error {
+	if index < 0 || index >= int64(count) {
+		return fmt.Errorf("out-of-range keyper index %d", index)
+	}
+	if _, exists := seen[index]; exists {
+		return fmt.Errorf("duplicate keyper index %d", index)
+	}
+	seen[index] = struct{}{}
+	return nil
 }
 
 func loadKeyperSet(ctx context.Context, pool *pgxpool.Pool, index int64) (obsdb.KeyperSet, []keyperEntry, error) {
@@ -199,7 +210,11 @@ func run() error {
 		return fmt.Errorf("load native decryption signatures: %w", err)
 	}
 	signatures := make(map[int64][]byte, len(signatureRows))
+	seenSignatureIndices := make(map[int64]struct{}, len(signatureRows))
 	for _, row := range signatureRows {
+		if err := recordKeyperIndex(seenSignatureIndices, row.KeyperIndex, len(entries)); err != nil {
+			return fmt.Errorf("native signature row: %w", err)
+		}
 		signatures[row.KeyperIndex] = row.Signature
 	}
 	signatureData, err := serviceztypes.NewDecryptionSignatureData(*instanceID, uint64(*configIndex), []identitypreimage.IdentityPreimage{preimage})
@@ -210,9 +225,10 @@ func run() error {
 	outputs := make([]shareOutput, 0, len(shareRows))
 	validIndices := make([]int, 0, int(set.Threshold))
 	validShares := make([]*shcrypto.EpochSecretKeyShare, 0, int(set.Threshold))
+	seenShareIndices := make(map[int64]struct{}, len(shareRows))
 	for _, row := range shareRows {
-		if row.KeyperIndex < 0 || row.KeyperIndex >= int64(len(entries)) {
-			return fmt.Errorf("share has out-of-range keyper index %d", row.KeyperIndex)
+		if err := recordKeyperIndex(seenShareIndices, row.KeyperIndex, len(entries)); err != nil {
+			return fmt.Errorf("decryption-share row: %w", err)
 		}
 		share, decodeErr := shdb.DecodeEpochSecretKeyShare(row.DecryptionKeyShare)
 		shareValid := decodeErr == nil && shcrypto.VerifyEpochSecretKeyShare(

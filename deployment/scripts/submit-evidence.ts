@@ -90,7 +90,7 @@ const certificateAfter = await contract.read.currentCertificate();
 const block = await publicClient.getBlock({ blockNumber: receipt.blockNumber });
 
 const result = {
-  schema: "threshcert-slashing-result-v1",
+  schema: "fc-slashing-result-v1",
   generatedAt: new Date().toISOString(),
   deploymentFile: artifactReference(deploymentPath),
   jobFile: artifactReference(jobPath),

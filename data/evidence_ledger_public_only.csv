@@ -1,8 +1,8 @@
 member,weight,resistance_lower_bound,activation_lower_bound,enforceability_lower_bound,nominal_penalty,evidence_status
-k1,0.142857,,,,,public threshold structure only
-k2,0.142857,,,,,public threshold structure only
-k3,0.142857,,,,,public threshold structure only
-k4,0.142857,,,,,public threshold structure only
-k5,0.142857,,,,,public threshold structure only
-k6,0.142857,,,,,public threshold structure only
-k7,0.142857,,,,,public threshold structure only
+0x4ba8E8e0061EA7CE9353e7B641A116F1d48d9d46,0.14285714285714285,0,0,0,0,actual resistance unknown; certified public-evidence floor zero
+0xcB43AEAA8c029Da18A499dC684FdD250ab3FCd13,0.14285714285714285,0,0,0,0,actual resistance unknown; certified public-evidence floor zero
+0x46c24A9B4C92Aeb416d732801208ADD353635EC4,0.14285714285714285,0,0,0,0,actual resistance unknown; certified public-evidence floor zero
+0x772213aaD4c6B37d2cc0Fa3B74F9ace5a028B8C8,0.14285714285714285,0,0,0,0,actual resistance unknown; certified public-evidence floor zero
+0x2711d53B3dF060D08AC30C6517D4B8EED50A54B3,0.14285714285714285,0,0,0,0,actual resistance unknown; certified public-evidence floor zero
+0x4B5E2356b666898e101627BdDc518956bcd90a03,0.14285714285714285,0,0,0,0,actual resistance unknown; certified public-evidence floor zero
+0x48A0e1789C82084aE28c179bd5742454f8CD4ed6,0.14285714285714285,0,0,0,0,actual resistance unknown; certified public-evidence floor zero

@@ -1,5 +1,5 @@
 {
-  "schema": "threshcert-slashing-result-v1",
+  "schema": "fc-slashing-result-v1",
   "generatedAt": "2026-07-16T07:11:37.187Z",
   "deploymentFile": "results/deployment-chiado.json",
   "jobFile": "results/job-chiado.json",

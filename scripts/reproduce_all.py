@@ -39,6 +39,12 @@ def main() -> None:
 
     run("scripts/verify_manifest.py")
     run("scripts/run_controlled_checks.py")
+    production_audit_output = run(
+        "scripts/run_production_evidence_audit.py",
+        capture=True,
+    )
+    assert_expected(production_audit_output, "production_evidence_audit.txt")
+
     public_output = run(
         "scripts/verify_certificate.py",
         "--snapshot",
@@ -62,6 +68,12 @@ def main() -> None:
         capture=True,
     )
     assert_expected(positive_output, "controlled_positive.txt")
+
+    chiado_certificate_output = run(
+        "deployment/scripts/verify_chiado_certificate.py",
+        capture=True,
+    )
+    assert_expected(chiado_certificate_output, "chiado_execution_certificate.txt")
 
     lattice_output = run("scripts/run_lattice_mobius_experiments.py", capture=True)
     assert_expected(lattice_output, "lattice_mobius_summary.txt")

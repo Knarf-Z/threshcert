@@ -10,4 +10,4 @@ for index in {0..6}; do
   docker run --rm -v "$SETUP/config:/config" rolling-shutter \
     shutterservicekeyper generate-config --output "/config/keyper-$index.toml" --force
 done
-python3 "$THRESHCERT_ROOT/configure-runtime.py" "$SETUP/config"
+python3 "$FC_ROOT/configure-runtime.py" "$SETUP/config"

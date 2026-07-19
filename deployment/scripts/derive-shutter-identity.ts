@@ -23,7 +23,7 @@ const keyperConfigIndex = requireEnv("KEYPER_CONFIG_INDEX");
 const timestamp = requireEnv("TIMESTAMP");
 
 const result = {
-  schema: "threshcert-shutter-identity-v1",
+  schema: "fc-shutter-identity-v1",
   generatedAt: new Date().toISOString(),
   keyperConfigIndex,
   identityPrefix: prefix,

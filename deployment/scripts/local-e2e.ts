@@ -39,7 +39,7 @@ const certificateBefore = await contract.read.currentCertificate();
 
 const block = await publicClient.getBlock();
 const releaseTime = block.timestamp + 3_600n;
-const identityHash = keccak256(stringToHex("threshcert-local-contract-harness"));
+const identityHash = keccak256(stringToHex("fc-local-contract-harness"));
 const openHash = await contract.write.openRelease([1n, identityHash, releaseTime], {
   account: owner.account,
 });
@@ -67,7 +67,7 @@ const slashReceipt = await publicClient.waitForTransactionReceipt({ hash: slashH
 const certificateAfter = await contract.read.currentCertificate();
 
 const result = {
-  schema: "threshcert-local-contract-e2e-v1",
+  schema: "fc-local-contract-e2e-v1",
   generatedAt: new Date().toISOString(),
   evidenceMode: "synthetic-contract-harness-only",
   warning: "This record tests contract wiring and is not Rolling Shutter deployment evidence.",

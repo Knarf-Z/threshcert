@@ -31,6 +31,22 @@ directly from `deployment-chiado.json`, `job-chiado.json`,
 `../evidence/shutter-evidence.json`, `slashing-chiado.json`, and the exported
 Keyper set.
 
+## Machine-readable certificate
+
+`../certificates/chiado-execution-certificate.json` binds these run records,
+the contract, the pinned evidence exporter, the exported Keyper set, and the
+live-chain verifier by SHA-256. It recomputes the exact four-smallest-bonds
+values as `4,000,000,000,000` wei before slashing and
+`3,000,000,000,000` wei after slashing. Verify it from `deployment/` with:
+
+```bash
+python scripts/verify_chiado_certificate.py
+```
+
+The certificate class is `controlled-public-testnet-threshold-cover`. The JSON
+itself records `productionShutterCertificate: NOT_CERTIFIED`, so the positive
+testnet result cannot be silently relabeled as a production resistance claim.
+
 ## Boundary
 
 This is a verifier-gated, single-host, controlled testnet experiment. It is not

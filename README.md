@@ -1,67 +1,57 @@
-# ThreshCert: Certifying the Economic Security of Threshold Committees
+# ThreshCert complete experiment bundle
 
-[![Reproducibility](https://img.shields.io/badge/reproducibility-passing-brightgreen)](#reproduce)
-[![Python 3.11](https://img.shields.io/badge/python-3.11-blue)](https://www.python.org/)
-[![Solidity](https://img.shields.io/badge/Solidity-Hardhat-363636)](deployment/)
-[![GitHub stars](https://img.shields.io/github/stars/Knarf-Z/threshcert?style=social)](https://github.com/Knarf-Z/threshcert/stargazers)
+ThreshCert is a reproducible artifact for threshold attack-cost certificates,
+activation-aware evidence acquisition, coordinated defense, and
+evidence-gated slashing. This complete bundle contains a pinned production
+deployment evidence audit, all original certificate, activation, allocation,
+exact-solver, defense-lattice, Möbius, penalty-evidence, Dune/GPv2, and public
+Chiado pilot materials. The three added
+scalability, parameter-sensitivity, and baseline-comparison studies remain
+isolated in `extended_experiments/`, so reproducing them does not overwrite the
+original experiment results.
 
-**ThreshCert** is the reproducible artifact for studying and certifying the
-economic security of threshold committees. It connects attack-cost
-certificates, activation-aware acquisition, defensive allocation, Boolean
-lattice interactions, and evidence-based slashing in one executable workflow.
+Authors: Jiaqi Zhang
+([ORCID 0009-0005-3271-3106](https://orcid.org/0009-0005-3271-3106)) and
+Honghao Fu
+([ORCID 0000-0002-1934-3391](https://orcid.org/0000-0002-1934-3391)).
+See `CITATION.cff` for machine-readable citation metadata and `EXPERIMENTS.md`
+for the complete inventory and claim boundaries.
 
-The artifact combines deterministic Python experiments with a seven-process,
-4-of-7 Rolling Shutter deployment, validation of seven decryption shares, and
-a verifier-gated slashing transaction on the public Gnosis Chiado testnet.
+It intentionally excludes virtual environments, IDE metadata, `.env` files,
+and secrets.
 
-## Highlights
-
-- Exact certificate, activation, allocation, and defense-lattice experiments.
-- Ten recorded solver-scaling repeats plus independent scalability,
-  parameter-sensitivity, and baseline-comparison experiments.
-- A seven-Keyper, seven-validator, 4-of-7 Rolling Shutter DKG on one host.
-- Validation of seven BLS shares, native Keyper signatures, the stored
-  aggregate key, and four-share key reconstruction.
-- A public Chiado deployment whose certificate changed from
-  `4000000000000` wei to `3000000000000` wei after successful evidence-based
-  slashing.
-
-## Public deployment evidence
-
-- Contract: [`0x3C16dd5689D67d51c076fe80CB7189041c107721`](https://gnosis-chiado.blockscout.com/address/0x3C16dd5689D67d51c076fe80CB7189041c107721)
-- Slashing transaction: [`0x26ff2f395c8e4bf6e4f8af170030c5a55e751b652d7e6ab7c9dc30bb422ddabd`](https://gnosis-chiado.blockscout.com/tx/0x26ff2f395c8e4bf6e4f8af170030c5a55e751b652d7e6ab7c9dc30bb422ddabd)
-- Chain ID: `10200`
-- Committee and threshold: `7` and `4`
-- Slashing gas used: `108629`
-
-Machine-readable deployment, release-job, evidence, and slashing records are
-under [`deployment/results`](deployment/results/) and
-[`deployment/evidence`](deployment/evidence/).
-
-## Artifact boundaries
-
-The seven Keypers are separate processes on one host, not seven independently
-governed production operators. Controlled resistance ledgers test the
-certificate machinery and are not claims about private production-member
-costs. Historical Dune exports are calibration inputs, not member-level
-resistance evidence.
-
-`RESULTS_SUMMARY.md` summarizes the reproduced findings, while
-`EXPERIMENTS.md` defines the full inventory and every interpretation boundary.
-
-## Authors
-
-- [Jiaqi Zhang](https://orcid.org/0009-0005-3271-3106)
-- [Honghao Fu](https://orcid.org/0000-0002-1934-3391)
+`RESULTS_SUMMARY.md` gives the compact reproduced findings. `EXPERIMENTS.md`
+defines every experiment and its interpretation boundary.
 
 ## Contents
 
-- `data/shutter_keyper_snapshot.json`: the recorded public snapshot inputs. The archival block number and block hash are deliberately `null` because they were not recorded in the manuscript's original audit.
-- `data/evidence_ledger_public_only.csv`: public threshold structure without member-level resistance evidence.
+- `data/shutter_keyper_snapshot.json`: the production committee snapshot pinned
+  to Gnosis block `46,666,718` and its block hash.
+- `data/production_keyper_set_20260613.json`: the manager, set contract,
+  creation and registration transactions, activation block, four-of-seven
+  threshold, and seven real member addresses retrieved at the pinned block.
+- `data/production_member_evidence.csv`: the seven-row evidence audit covering
+  resistance, activation, attribution, forfeiture, joint enforcement
+  probability, and insurance or compensation for every production member.
+- `scripts/run_production_evidence_audit.py`: validates all cross-record
+  bindings, applies the evidence gates, computes the production lower bound,
+  and writes the per-member audit and evidence-gap result files.
+- `scripts/verify_production_snapshot_live.py`: optional standard-library live
+  recheck of the fixed block, contracts, event, threshold, and seven members.
+- `paper/section7_evaluation.tex`: page-length-preserving paper update centered
+  on the production audit, with the member evidence panels arranged as paired
+  `subtable`s.
+- `paper/abstract_evaluation_sentence.txt`: compact abstract replacement that
+  distinguishes controlled branch checks from the production evidence audit.
+- `data/evidence_ledger_public_only.csv`: address-level compatibility view of
+  the production audit for the basic threshold-cover verifier.
 - `data/evidence_ledger_controlled_positive.csv`: a controlled positive ledger used only to test the verifier. It is not deployment evidence.
 - `scripts/verify_certificate.py`: computes the uniform threshold-cover certificate.
 - `scripts/run_controlled_checks.py`: writes the activation-ladder, mechanism-scope, defensive-allocation, and sensitivity outputs.
 - `scripts/run_scaling_benchmark.py`: runs a machine-specific exact subset-state scaling check.
+- `extended_experiments/`: self-contained scalability,
+  certificate-computation cost, parameter-sensitivity, and baseline-comparison
+  experiments with their own inputs, results, tests, and reproduction command.
 - `scripts/defense_lattice.py`: exact sequential solver, Boolean-lattice
   transforms, target-plan enumeration, and allocation utilities.
 - `scripts/run_lattice_mobius_experiments.py`: writes the pure high-order,
@@ -73,6 +63,12 @@ resistance evidence.
   recorded Windows/Python 3.11.1 machine.
 - `deployment/`: Solidity, Hardhat, Rolling Shutter 7-process overlay, the Go
   BLS/native-signature evidence exporter, and the Chiado transaction scripts.
+- `deployment/certificates/chiado-execution-certificate.json`: a
+  machine-readable positive certificate for the recorded controlled Chiado
+  mechanism. It binds the exact lower-tail calculation to hashed evidence
+  records and explicitly marks production Shutter resistance as not certified.
+- `deployment/scripts/verify_chiado_certificate.py`: deterministic offline
+  verification of that certificate and all source-file bindings.
 
 ## Reproduce
 
@@ -95,6 +91,7 @@ The equivalent individual commands are:
 
 ```bash
 python scripts/run_controlled_checks.py
+python scripts/run_production_evidence_audit.py
 python scripts/verify_certificate.py \
   --snapshot data/shutter_keyper_snapshot.json \
   --ledger data/evidence_ledger_public_only.csv \
@@ -103,10 +100,19 @@ python scripts/verify_certificate.py \
   --snapshot data/shutter_keyper_snapshot.json \
   --ledger data/evidence_ledger_controlled_positive.csv \
   --target 10000
+python deployment/scripts/verify_chiado_certificate.py
 python scripts/run_scaling_benchmark.py
 python scripts/run_lattice_mobius_experiments.py
 python -m unittest discover -s tests -v
 ```
+
+Run the three added experiments separately:
+
+```bash
+python extended_experiments/reproduce_extended.py
+```
+
+Expected final output: `extended_experiments=PASS`.
 
 To check the deterministic experiment summary exactly:
 
@@ -120,9 +126,10 @@ deterministic. The wall-clock and memory columns in `results/solver_scaling.csv`
 are machine-specific. The supplied one-off run, ten repeat files, and their
 deterministic summary are retained with hardware metadata. Rerunning with
 `--include-scaling` changes the machine-specific file and therefore requires
-regenerating `MANIFEST.sha256` before redistributing the artifact.
+regenerating `MANIFEST.sha256` with
+`python scripts/verify_manifest.py --write` before redistributing the artifact.
 
-## Real-deployment pilot
+## Recorded public-testnet execution certificate
 
 The deployment source has a separate acceptance command:
 
@@ -132,8 +139,9 @@ npm ci
 npm run verify
 ```
 
-That command runs static checks, TypeScript checks, and six Solidity/Hardhat
-tests. The complete Rolling Shutter and Chiado procedure is in
+That command verifies the machine-readable Chiado certificate, runs static and
+TypeScript checks, and runs seven Solidity/Hardhat tests. The complete Rolling
+Shutter and Chiado procedure is in
 `deployment/README.md`. On Windows it starts from the PyCharm PowerShell
 terminal with:
 
@@ -146,6 +154,69 @@ artifact also contains the four machine records from the completed public run:
 `deployment-chiado.json`, `job-chiado.json`, `shutter-evidence.json`, and
 `slashing-chiado.json`. See `deployment/results/PUBLIC_RUN.md` for their
 cross-record summary and public explorer links.
+
+The certificate can be checked offline, without trusting the prose summary:
+
+```bash
+cd deployment
+python scripts/verify_chiado_certificate.py
+```
+
+It recomputes the sum of the four smallest bond balances before and after the
+recorded slashing, validates all cross-record identities and hashes, and checks
+SHA-256 bindings to the contract, exporter, Keyper set, live verifier, and run
+records. The expected result is a positive controlled-scope value of
+`3,000,000,000,000` wei and
+`production_shutter_certificate=NOT_CERTIFIED`.
+
+The recorded public run can also be checked directly against current Chiado
+RPC state without a private key:
+
+```powershell
+cd deployment
+$env:CHIADO_RPC_URL = "https://rpc.chiado.gnosis.gateway.fm"
+npm run verify:chiado:live
+```
+
+The offline certificate and live-chain verifier serve different purposes. The
+offline command establishes deterministic record binding and exact calculation;
+the live command establishes that the recorded transactions, bytecode, event,
+and contract state are present on Chiado.
+
+## Production deployment evidence audit
+
+The production audit is a separate real-deployment case, not a controlled
+profile. It fixes `2026-06-13T00:00:00Z` to Gnosis block `46,666,718` (hash
+`0x574ec26ee7b2e2bfddd991bf99d37a79455428bc4dfe342b0ccf55d071229b60`),
+then binds Keyper-set index 10, contract
+`0xE817E77109e2E6a8025eB30dB3542eC18bBDE828`, threshold four, and the seven
+member addresses. Run the deterministic audit with:
+
+```bash
+python scripts/run_production_evidence_audit.py
+```
+
+The recorded result has seven verified membership rows but zero positive
+certified member floors. For every member, the result distinguishes unknown
+actual resistance from a zero evidence-supported lower bound and records two
+ways to make the row positive: a directly audited positive resistance floor,
+or a complete attribution--forfeiture--execution path with a positive nominal
+amount and joint probability floor. Activation evidence is audited separately
+because it can upgrade the activation-respecting branch but cannot be exported
+to package acquisition.
+
+For a four-of-seven threshold, a positive threshold-cover certificate requires
+strictly positive certified floors for at least four members. A target `B`
+requires the sum of the four smallest member floors to be at least `B`. The
+current audit therefore reports `additional_positive_member_floors_needed=4`;
+it does not assert that actual resistance is zero.
+
+With a reachable archival Gnosis RPC, recheck the frozen state and the
+`KeyperSetAdded` and creation receipts:
+
+```bash
+python scripts/verify_production_snapshot_live.py
+```
 
 ## Lattice and Möbius outputs
 
@@ -171,14 +242,42 @@ cross-record summary and public explorer links.
   the paper.
 - `results/penalty_certificate_checks.csv`: complete versus incomplete
   penalty-attribution evidence in controlled four-of-seven ledgers.
+- `results/production_member_evidence_audit.csv`: all seven production member
+  addresses, computed direct/penalty/compensation contributions, activation
+  status, and the exact missing evidence on each path.
+- `results/production_evidence_audit.json`: machine-readable pinned snapshot,
+  certificate, per-member evidence gaps, minimum positive-member count, target
+  condition, and non-transfer rule for the Chiado pilot.
 - `results/dune_validation.csv`: deterministic consistency checks over the
   supplied Dune exports.
 - `results/dune_calibration_summary.csv`: clearly labeled historical
   calibration metrics from the two distinct Dune method families.
+- `extended_experiments/results/scalability_analysis.csv`: committee size, exact subset-state count,
+  and median/IQR/range runtime from the ten retained benchmark repeats.
+- `extended_experiments/results/certificate_cost_models.csv`: operation-growth comparison between
+  sorted uniform threshold-cover evaluation and generic subset-state search.
+- `extended_experiments/results/parameter_sensitivity.csv`: 48 controlled combinations of threshold,
+  resistance shape, and initial exposure.
+- `extended_experiments/results/baseline_comparison.csv`: public-only, minimum-member-floor,
+  exact-lower-tail, and mean-resistance heuristic outputs, with certification
+  status recorded explicitly.
 
 ## Interpretation boundary
 
-The controlled positive ledger proves that the verifier can output a positive certificate when certified resistance inputs are supplied. It does not prove that the Shutterized Gnosis Chain deployment currently has those inputs. A non-counterfactual positive deployment certificate requires public or institutionally auditable member-level evidence. No such evidence is fabricated here.
+The production experiment now audits the actual seven-member set at a pinned
+historical block. It verifies committee state and then evaluates each member's
+retained resistance, activation, attribution, execution, and compensation
+evidence. Its result is a falsifiable evidence-gap finding: four additional
+positive member floors are necessary for any positive four-of-seven
+certificate, and each row states which auditable material would change it.
+The controlled positive ledger remains only a verifier fixture.
+
+The new sensitivity and baseline tables use normalized controlled resistance
+profiles with equal mean resistance. They identify structural dependence on
+threshold, exposure, and lower-tail shape; they are not measurements of live
+Keyper resistance. The runtime table reports the supplied laptop repeats and
+is an implementation benchmark rather than a hardware-independent complexity
+claim.
 
 The lattice and Möbius experiments are theorem and algorithm checks over
 controlled or seeded instances. They do not turn the public Shutter snapshot
@@ -206,19 +305,3 @@ signatures, the aggregate key, and 4-share reconstruction; Solidity validates
 the verifier's EIP-712 attestation, timing, bond transfer, and certificate
 update. The controlled positive ledgers remain separate from public production
 resistance evidence.
-
-## Citation
-
-If you use ThreshCert, please cite the repository metadata in
-[`CITATION.cff`](CITATION.cff). GitHub's **Cite this repository** menu will
-generate a formatted citation from that file.
-
-```bibtex
-@software{zhang_fu_2026_threshcert,
-  author  = {Jiaqi Zhang and Honghao Fu},
-  title   = {ThreshCert: Certifying the Economic Security of Threshold Committees},
-  year    = {2026},
-  version = {1.0.0},
-  url     = {https://github.com/Knarf-Z/threshcert}
-}
-```

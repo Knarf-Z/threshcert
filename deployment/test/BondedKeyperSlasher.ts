@@ -56,7 +56,7 @@ async function openJob(
   const latest = await fixture.publicClient.getBlock();
   const releaseTime = latest.timestamp + secondsFromNow;
   const eon = 1n;
-  const identityHash = keccak256(stringToHex("threshcert-deployment-identity"));
+  const identityHash = keccak256(stringToHex("fc-deployment-identity"));
   await fixture.contract.write.openRelease(
     [eon, identityHash, releaseTime],
     { account: fixture.owner.account },
@@ -117,6 +117,30 @@ describe("BondedKeyperSlasher", function () {
     assert.equal(await contract.read.committeeFrozen(), true);
     assert.equal(await contract.read.totalBond(), 14n * 10n ** 18n);
     assert.equal(await contract.read.currentCertificate(), 8n * 10n ** 18n);
+  });
+
+  it("computes the 4-of-7 certificate from non-uniform bonds", async function () {
+    const connection = await network.create();
+    const { viem } = connection;
+    const wallets = await viem.getWalletClients();
+    const [owner, verifier, treasury, ...members] = wallets;
+    const contract = await viem.deployContract("BondedKeyperSlasher", [
+      owner.account.address,
+      verifier.account.address,
+      treasury.account.address,
+    ]);
+    const bonds = [7n, 1n, 5n, 2n, 6n, 3n, 4n];
+
+    for (let index = 0; index < bonds.length; index += 1) {
+      await contract.write.registerMember(
+        [index, members[index].account.address],
+        { account: owner.account, value: bonds[index] },
+      );
+    }
+    await contract.write.freezeCommittee({ account: owner.account });
+
+    assert.equal(await contract.read.totalBond(), 28n);
+    assert.equal(await contract.read.currentCertificate(), 10n);
   });
 
   it("slashes a verifier-attested premature share and updates the certificate", async function () {
@@ -195,9 +219,10 @@ describe("BondedKeyperSlasher", function () {
     );
   });
 
-  it("binds the verifier signature to the exact share hash", async function () {
+  it("binds the verifier signature to every evidence field", async function () {
     const fixture = await setup();
     const { jobId } = await openJob(fixture);
+    const { jobId: otherJobId } = await openJob(fixture);
     const evidence: EarlyShareEvidence = {
       jobId,
       memberIndex: 3,
@@ -206,10 +231,49 @@ describe("BondedKeyperSlasher", function () {
     };
     const signature = await signatureFor(fixture, evidence);
     const substitutedShareHash = keccak256(stringToHex("substituted-share"));
+    const substitutedSignatureHash = keccak256(
+      stringToHex("substituted-signature"),
+    );
 
     await assert.rejects(
       fixture.contract.write.slashEarlyShare(
         [jobId, 3, substitutedShareHash, evidence.memberSignatureHash, signature],
+        { account: fixture.submitter.account },
+      ),
+      /InvalidVerifierSignature/,
+    );
+
+    await assert.rejects(
+      fixture.contract.write.slashEarlyShare(
+        [
+          jobId,
+          3,
+          evidence.shareHash,
+          substitutedSignatureHash,
+          signature,
+        ],
+        { account: fixture.submitter.account },
+      ),
+      /InvalidVerifierSignature/,
+    );
+
+    await assert.rejects(
+      fixture.contract.write.slashEarlyShare(
+        [jobId, 4, evidence.shareHash, evidence.memberSignatureHash, signature],
+        { account: fixture.submitter.account },
+      ),
+      /InvalidVerifierSignature/,
+    );
+
+    await assert.rejects(
+      fixture.contract.write.slashEarlyShare(
+        [
+          otherJobId,
+          3,
+          evidence.shareHash,
+          evidence.memberSignatureHash,
+          signature,
+        ],
         { account: fixture.submitter.account },
       ),
       /InvalidVerifierSignature/,

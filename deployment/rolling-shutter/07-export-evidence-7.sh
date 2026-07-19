@@ -2,8 +2,8 @@
 source "$(dirname "$0")/common-7.sh"
 
 # Export and independently validate all seven shares without requiring jq.
-IDENTITY_FILE="${IDENTITY_FILE:-$THRESHCERT_ROOT/../runtime/identity.json}"
-OUTPUT="${EVIDENCE_OUTPUT:-$THRESHCERT_ROOT/../evidence/shutter-evidence.json}"
+IDENTITY_FILE="${IDENTITY_FILE:-$FC_ROOT/../runtime/identity.json}"
+OUTPUT="${EVIDENCE_OUTPUT:-$FC_ROOT/../evidence/shutter-evidence.json}"
 
 [[ -f "$IDENTITY_FILE" ]] || {
   echo "identity record not found: $IDENTITY_FILE" >&2
@@ -17,7 +17,7 @@ import sys
 
 with open(sys.argv[1], "r", encoding="utf-8") as handle:
     data = json.load(handle)
-if data.get("schema") != "threshcert-shutter-identity-v1":
+if data.get("schema") != "fc-shutter-identity-v1":
     raise SystemExit("unknown identity schema")
 index = str(data.get("keyperConfigIndex", ""))
 preimage = str(data.get("identityPreimage", ""))
@@ -33,7 +33,7 @@ PY
 index="$(printf '%s\n' "$identity_values" | sed -n '1p')"
 preimage="$(printf '%s\n' "$identity_values" | sed -n '2p')"
 
-"$THRESHCERT_ROOT/build-exporter.sh"
+"$FC_ROOT/build-exporter.sh"
 mkdir -p "$(dirname "$OUTPUT")"
 
 attempts="${EVIDENCE_WAIT_ATTEMPTS:-3600}"
@@ -46,7 +46,7 @@ log_file="$(mktemp)"
 trap 'rm -f "$log_file"' EXIT
 
 for ((attempt = 1; attempt <= attempts; attempt++)); do
-  if "$THRESHCERT_ROOT/bin/threshcert-evidence-exporter" \
+  if "$FC_ROOT/bin/fc-evidence-exporter" \
     --database-url 'postgres://postgres@127.0.0.1:15432/keyper-0?sslmode=disable' \
     --keyper-config-index "$index" \
     --instance-id 0 \
@@ -63,7 +63,7 @@ with open(sys.argv[1], "r", encoding="utf-8") as handle:
     data = json.load(handle)
 
 checks = {
-    "schema": data.get("schema") == "threshcert-shutter-evidence-v1",
+    "schema": data.get("schema") == "fc-shutter-evidence-v1",
     "threshold": data.get("threshold") == 4,
     "numKeypers": data.get("numKeypers") == 7,
     "shareCount": len(data.get("shares", [])) == 7,

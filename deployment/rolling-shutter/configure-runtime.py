@@ -43,7 +43,7 @@ def main() -> None:
         "CustomBootstrapAddresses",
         [f"/dns4/bootnode-0/tcp/23000{bootstrap_peer}"],
     )
-    bootstrap = replace_scalar(bootstrap, "DiscoveryNamespace", '"threshcert-shutter-4of7"')
+    bootstrap = replace_scalar(bootstrap, "DiscoveryNamespace", '"fc-shutter-4of7"')
     bootstrap_path.write_text(bootstrap, encoding="utf-8")
 
     addresses: list[str] = []
@@ -60,7 +60,7 @@ def main() -> None:
             "CustomBootstrapAddresses",
             [f"/dns4/bootnode-0/tcp/23000{bootstrap_peer}"],
         )
-        text = replace_scalar(text, "DiscoveryNamespace", '"threshcert-shutter-4of7"')
+        text = replace_scalar(text, "DiscoveryNamespace", '"fc-shutter-4of7"')
         text = replace_scalar(text, "SyncStartBlockNumber", "0")
         text = replace_scalar(text, "SyncMonitorCheckInterval", "60")
         text = replace_scalar(text, "DeploymentDir", '"/deployments/localhost/"')

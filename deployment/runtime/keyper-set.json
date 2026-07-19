@@ -1,5 +1,5 @@
 {
-  "schema": "threshcert-keyper-set-v1",
+  "schema": "fc-keyper-set-v1",
   "generatedAt": "2026-07-16T06:28:32.186318719Z",
   "rollingShutterVersion": "v1.4.4",
   "rollingShutterCommit": "d143fffcf51f85b30375134d2d29756417f333b9",

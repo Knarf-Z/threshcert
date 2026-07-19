@@ -1,0 +1,12 @@
+certificate_id=sha256:29919a58c4e6d1d744a0a2df54664dceff2781c3559445b650084edffe5aef75
+certificate_class=controlled-public-testnet-threshold-cover
+chain_id=10200
+contract=0x3C16dd5689D67d51c076fe80CB7189041c107721
+threshold=4-of-7
+validated_shares=7
+recorded_transactions=11
+certificate_before_wei=4000000000000
+certificate_after_wei=3000000000000
+offline_evidence_binding=PASS
+production_shutter_certificate=NOT_CERTIFIED
+chiado_execution_certificate=PASS

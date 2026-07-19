@@ -21,6 +21,9 @@ def main() -> None:
         "scripts/deploy.ts",
         "scripts/open-release.ts",
         "scripts/submit-evidence.ts",
+        "scripts/verify_chiado_certificate.py",
+        "scripts/verify-chiado-live.ts",
+        "certificates/chiado-execution-certificate.json",
         "SECURITY.md",
     ]
     missing = [path for path in required if not (ROOT / path).is_file()]

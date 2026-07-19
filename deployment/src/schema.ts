@@ -3,7 +3,7 @@ import type { Address, Hex } from "viem";
 export type KeyperEntry = { index: number; address: Address };
 
 export type KeyperSetFile = {
-  schema: "threshcert-keyper-set-v1";
+  schema: "fc-keyper-set-v1";
   rollingShutterVersion?: string;
   rollingShutterCommit?: string;
   threshold: number;
@@ -20,7 +20,7 @@ export type TransactionRecord = {
 };
 
 export type DeploymentFile = {
-  schema: "threshcert-bonded-keyper-deployment-v1";
+  schema: "fc-bonded-keyper-deployment-v1";
   generatedAt: string;
   networkName: string;
   chainId: number;
@@ -42,7 +42,7 @@ export type DeploymentFile = {
 };
 
 export type JobFile = {
-  schema: "threshcert-release-job-v1";
+  schema: "fc-release-job-v1";
   generatedAt: string;
   deploymentFile: string;
   chainId: number;
@@ -69,7 +69,7 @@ export type ExportedShare = {
 };
 
 export type EvidenceFile = {
-  schema: "threshcert-shutter-evidence-v1";
+  schema: "fc-shutter-evidence-v1";
   generatedAt: string;
   rollingShutterVersion: string;
   rollingShutterCommit: string;

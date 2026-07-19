@@ -1,15 +1,41 @@
 {
+  "schema": "threshcert-production-committee-snapshot-v2",
   "deployment": "Shutterized Gnosis Chain",
   "network": "Gnosis Chain",
   "chain_id": 100,
   "observation_date": "2026-06-13",
+  "observation_timestamp_utc": "2026-06-13T00:00:00Z",
+  "anchor_policy": "The start of the previously recorded UTC observation date is used as a reproducible archival anchor.",
+  "archival_block_number": 46666718,
+  "archival_block_hash": "0x574ec26ee7b2e2bfddd991bf99d37a79455428bc4dfe342b0ccf55d071229b60",
+  "archival_block_timestamp": 1781308800,
+  "keyper_set_manager": "0x7C2337f9bFce19d8970661DA50dE8DD7d3D34abb",
   "active_keyper_set_index": 10,
+  "active_keyper_set_contract": "0xE817E77109e2E6a8025eB30dB3542eC18bBDE828",
+  "activation_block_number": 46271880,
   "committee_size": 7,
   "threshold_count": 4,
-  "weights": [0.14285714285714285, 0.14285714285714285, 0.14285714285714285, 0.14285714285714285, 0.14285714285714285, 0.14285714285714285, 0.14285714285714285],
+  "member_addresses": [
+    "0x4ba8E8e0061EA7CE9353e7B641A116F1d48d9d46",
+    "0xcB43AEAA8c029Da18A499dC684FdD250ab3FCd13",
+    "0x46c24A9B4C92Aeb416d732801208ADD353635EC4",
+    "0x772213aaD4c6B37d2cc0Fa3B74F9ace5a028B8C8",
+    "0x2711d53B3dF060D08AC30C6517D4B8EED50A54B3",
+    "0x4B5E2356b666898e101627BdDc518956bcd90a03",
+    "0x48A0e1789C82084aE28c179bd5742454f8CD4ed6"
+  ],
+  "weights": [
+    0.14285714285714285,
+    0.14285714285714285,
+    0.14285714285714285,
+    0.14285714285714285,
+    0.14285714285714285,
+    0.14285714285714285,
+    0.14285714285714285
+  ],
   "initial_exposure": 0.0,
-  "archival_block_number": null,
-  "archival_block_hash": null,
-  "provenance_status": "incomplete",
-  "provenance_limitation": "The original audit recorded the date and active set index but not a fixed archival block number or block hash. This file does not invent either value."
+  "provenance_record": "data/production_keyper_set_20260613.json",
+  "member_evidence_record": "data/production_member_evidence.csv",
+  "provenance_status": "complete_for_committee_state_only",
+  "provenance_limitation": "The block, set, threshold, and seven member addresses are pinned. The chain state does not itself establish member resistance, activation, attribution, forfeiture, insurance, compensation, or joint enforcement-probability floors."
 }

@@ -12,3 +12,9 @@ The Solidity contract does not verify Shutter BLS12-381 proofs directly. The pin
 the BLS share, native Keyper signature, aggregate key, and threshold reconstruction off chain. The
 contract verifies that verifier's EIP-712 attestation, enforces the release deadline, transfers the
 bond, and updates the certificate. Paper claims must describe this as **verifier-gated slashing**.
+
+The machine-readable Chiado certificate is a positive certificate only for the
+recorded controlled testnet mechanism. It certifies the observed on-chain bond
+floor and evidence-to-enforcement execution. It does not certify production
+Keyper resistance, activation thresholds, operator independence, or a
+deployment-wide lower bound on detection and enforcement probability.

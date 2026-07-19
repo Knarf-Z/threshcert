@@ -91,7 +91,7 @@ identity_hash="$(
   exit 1
 }
 
-identity_output="$THRESHCERT_ROOT/../runtime/identity.json"
+identity_output="$FC_ROOT/../runtime/identity.json"
 mkdir -p "$(dirname "$identity_output")"
 python3 - \
   "$identity_output" \
@@ -116,7 +116,7 @@ import sys
 ) = sys.argv[1:]
 
 record = {
-    "schema": "threshcert-shutter-identity-v1",
+    "schema": "fc-shutter-identity-v1",
     "generatedAt": datetime.datetime.now(datetime.timezone.utc)
         .replace(microsecond=0)
         .isoformat()

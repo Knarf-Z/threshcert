@@ -1,4 +1,4 @@
-# ThreshCert deployment
+# ThreshCert real-deployment pilot
 
 This bundle adds a real, seven-process, 4-of-7 Rolling Shutter deployment and a public Chiado
 verifier-gated slashing transaction to the existing Python experiments. It pins Rolling Shutter
@@ -25,7 +25,7 @@ npm run typecheck
 npm test
 ```
 
-Expected result: six passing contract tests.
+Expected result: seven passing contract tests.
 
 ## 2. Start the real 7-process, 4-of-7 Shutter network
 
@@ -109,3 +109,41 @@ The final artifact includes a completed run with the following public results:
 - final certificate: `3,000,000,000,000` wei
 
 See `results/PUBLIC_RUN.md` for explorer links and exact interpretation boundaries.
+
+## Machine-readable execution certificate
+
+The completed run is summarized by
+`certificates/chiado-execution-certificate.json`. This is not a copied prose
+number: the verifier reconstructs the member bond vectors, computes the sum of
+the four smallest values, validates every cross-record identifier, and checks
+SHA-256 bindings to the underlying evidence and implementation files.
+
+```powershell
+python scripts/verify_chiado_certificate.py
+```
+
+Expected final lines:
+
+```text
+certificate_after_wei=3000000000000
+offline_evidence_binding=PASS
+production_shutter_certificate=NOT_CERTIFIED
+chiado_execution_certificate=PASS
+```
+
+Use `--write` only when deliberately rebuilding the certificate after changing
+one of its bound source files. A rebuilt certificate changes its content ID and
+requires a corresponding manifest update.
+
+## Independent live-chain verification
+
+Anyone can check the recorded transactions, deployment bytecode, constructor arguments, events,
+and current contract state directly against a Chiado RPC endpoint. This command is read-only and
+does not load a wallet private key or send a transaction:
+
+```powershell
+$env:CHIADO_RPC_URL = "https://rpc.chiado.gnosis.gateway.fm"
+npm run verify:chiado:live
+```
+
+Expected final line: `chiado_live_verification=PASS`.

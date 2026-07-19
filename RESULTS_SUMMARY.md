@@ -1,5 +1,31 @@
 # Reproduced results summary
 
+## Production deployment evidence audit
+
+- The audit anchor is Gnosis block `46,666,718` at
+  `2026-06-13T00:00:00Z`, hash
+  `0x574ec26ee7b2e2bfddd991bf99d37a79455428bc4dfe342b0ccf55d071229b60`.
+- Manager `0x7C2337f9bFce19d8970661DA50dE8DD7d3D34abb` selects Keyper-set index 10,
+  contract `0xE817E77109e2E6a8025eB30dB3542eC18bBDE828`, with seven members and
+  threshold four. The optional archival-RPC verifier confirmed the block,
+  creation receipt, `KeyperSetAdded` event, set state, member order, and
+  threshold.
+- All `7/7` real member addresses have verified committee membership. Each row
+  audits direct resistance, activation, attribution, forfeiture, joint
+  execution probability, and insurance or compensation. No retained row has a
+  positive auditable floor on either the direct or penalty-backed path.
+- The seven certified member floors are `0,0,0,0,0,0,0`; actual member
+  resistance remains `UNKNOWN_NOT_MEASURED`. The zero is an evidence-supported
+  lower bound, not an estimate of actual resistance.
+- A positive four-of-seven certificate needs at least four strictly positive
+  member floors, so the current evidence gap is four members. A target `B`
+  requires the sum of the four smallest certified member floors to be at least
+  `B`.
+- No member-specific activation evidence is certified, so the audit retains
+  threshold cover rather than claiming the activation-respecting branch. The
+  Chiado value is not transferred because its operators, environment, and
+  mechanism differ.
+
 ## Certificate checks
 
 - Public-only four-of-seven certificate: `0`, with every positive target
@@ -51,13 +77,38 @@
 - No timing run was deleted. The median/IQR are primary because three `n=18`
   runs show substantial system-noise inflation.
 
+## Extended scalability, sensitivity, and baselines
+
+- Exact subset states rise from `256` at `n=8` to `262,144` at `n=18`.
+  Across the ten retained repeats, median runtime rises from `0.000683300` to
+  `7.495092400` seconds, a measured factor of approximately `10,968.96` on the
+  recorded laptop.
+- For the uniform threshold-cover special case, sorting gives an `O(n log n)`
+  computation path. At `n=448`, the recorded comparison is a sorting-work
+  upper proxy of `4,032` against `2^448` generic subset states. This is a model
+  comparison, not a measured `n=448` runtime.
+- The parameter grid contains 48 controlled cases. At threshold `4/7` and zero
+  initial exposure, exact certificates are `40`, `34`, `16`, and `18` for the
+  uniform, balanced, bimodal, and heavy-lower-tail profiles respectively, even
+  though all four profiles have mean resistance `10`.
+- Certificates increase with threshold and decrease with initial exposure in
+  every tested profile. For the heavy-lower-tail profile at zero exposure, the
+  values at thresholds `3/7`, `4/7`, `5/7`, and `6/7` are `10`, `18`, `29`,
+  and `45`.
+- The public-only baseline remains the certified zero bound. On the heavy-tail
+  `4/7` case, the certified minimum-member-floor baseline is `4` versus the
+  exact lower-tail value `18`; the mean-resistance heuristic reports `40` but
+  is explicitly marked uncertified because it can overstate the certificate.
+
 ## Deployment implementation status
 
-- Six Solidity/Hardhat tests pass, including duplicate-signer rejection,
-  verifier binding, deadline enforcement, penalty transfer, and certificate
-  recomputation from `8` to `6` bond units in the local harness.
-- Three Go cryptographic tests pass: seven-share validation, 4-of-7
-  reconstruction, and native Keyper signature binding to instance/eon/identity.
+- Seven Solidity/Hardhat tests pass, including duplicate-signer rejection,
+  nonuniform-bond certificate computation, binding every verifier-signed evidence
+  field, deadline enforcement, penalty transfer, and certificate recomputation
+  from `8` to `6` bond units in the local harness.
+- Four Go tests pass: seven-share validation, 4-of-7 reconstruction, native
+  Keyper signature binding to instance/eon/identity, and rejection of duplicate
+  or out-of-range Keyper indices.
 - The official Rolling Shutter v1.4.4 configuration generator was used to
   validate fresh generation of seven distinct Keyper identities.
 - The seven-process local Rolling Shutter network completed DKG with threshold
@@ -77,6 +128,16 @@
   `0x26ff2f395c8e4bf6e4f8af170030c5a55e751b652d7e6ab7c9dc30bb422ddabd`
   succeeded at block `22,111,234`, reducing the certificate from
   `4,000,000,000,000` to `3,000,000,000,000` wei.
+- The read-only `verify:chiado:live` command independently checks all 11 public
+  transaction receipts, exact deployment bytecode and constructor arguments,
+  slashing calldata/event fields, and the current contract state through a
+  Chiado RPC endpoint; it requires no wallet private key.
+- The machine-readable certificate
+  `deployment/certificates/chiado-execution-certificate.json` independently
+  recomputes the four-smallest-bonds values, binds nine source artifacts by
+  SHA-256, and reports
+  `POSITIVE_WITHIN_RECORDED_TESTNET_MECHANISM`. Its stored post-slashing value is
+  `3,000,000,000,000` wei.
 
 The historical values are calibration statistics, not resistance estimates,
 attack-profit observations, or worst-case value caps. All positive certificate
@@ -84,3 +145,14 @@ ledgers in this bundle are controlled inputs rather than production resistance
 evidence. The completed pilot is verifier-gated, testnet-only, and single-host;
 it must not be described as native on-chain BLS verification, a production
 deployment, or seven independent operators.
+
+The positive Chiado value and the production evidence-audit result are not the
+same claim. The former certifies an executed bond-floor state inside the
+instrumented testnet mechanism. The latter binds seven real production member
+addresses and reports exactly which resistance, activation, attribution,
+forfeiture, insurance or compensation, and enforcement-probability evidence is
+missing from each row.
+
+Likewise, the extended sensitivity and baseline numbers are normalized
+controlled profiles, not observations of production Keyper resistance. The
+scalability times are tied to the recorded machine and Python implementation.

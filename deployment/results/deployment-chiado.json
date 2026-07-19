@@ -1,5 +1,5 @@
 {
-  "schema": "threshcert-bonded-keyper-deployment-v1",
+  "schema": "fc-bonded-keyper-deployment-v1",
   "generatedAt": "2026-07-16T03:30:28.787Z",
   "networkName": "chiado",
   "chainId": 10200,

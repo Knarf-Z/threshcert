@@ -15,6 +15,7 @@ from defense_lattice import (
     marginal_greedy,
     minimal_target_masks,
     mobius_transform,
+    sequential_float_sum,
     truncated_value,
     uniform_threshold_certificate,
     zeta_transform,
@@ -137,7 +138,7 @@ def random_uniform_experiments() -> tuple[int, int]:
         coefficients = mobius_transform(values, n)
         scale = max(1.0, values[-1] - values[0])
         for order in range(1, n + 1):
-            mass = sum(
+            mass = sequential_float_sum(
                 abs(coefficient)
                 for mask, coefficient in enumerate(coefficients)
                 if mask.bit_count() == order

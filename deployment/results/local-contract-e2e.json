@@ -1,5 +1,5 @@
 {
-  "schema": "threshcert-local-contract-e2e-v1",
+  "schema": "fc-local-contract-e2e-v1",
   "generatedAt": "2026-07-16T07:58:31.189Z",
   "evidenceMode": "synthetic-contract-harness-only",
   "warning": "This record tests contract wiring and is not Rolling Shutter deployment evidence.",

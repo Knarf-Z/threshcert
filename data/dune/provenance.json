@@ -9,24 +9,28 @@
     {
       "file": "raw/01_settlement_tx_count_summary.csv",
       "query_id": 7714633,
+      "query_url": "https://dune.com/queries/7714633",
       "method_family": "GPv2 settlement and token-transfer join",
       "status": "supplied export"
     },
     {
       "file": "raw/02_daily_settlement_tx_count.csv",
       "query_id": 7714683,
+      "query_url": "https://dune.com/queries/7714683",
       "method_family": "GPv2 settlement and token-transfer join",
       "status": "supplied export"
     },
     {
       "file": "raw/03_transfer_join_coverage.csv",
       "query_id": 7714701,
+      "query_url": "https://dune.com/queries/7714701",
       "method_family": "GPv2 settlement and token-transfer join",
       "status": "supplied export"
     },
     {
       "file": "raw/certificate_coverage_curve.csv",
       "query_id": 7715186,
+      "query_url": "https://dune.com/queries/7715186",
       "method_family": "historical target calibration",
       "status": "supplied export"
     },
@@ -39,18 +43,21 @@
     {
       "file": "raw/05_top_token_symbols.csv",
       "query_id": 7715248,
+      "query_url": "https://dune.com/queries/7715248",
       "method_family": "GPv2 settlement and token-transfer join",
       "status": "supplied export"
     },
     {
       "file": "raw/06_top_notional_outliers.csv",
       "query_id": 7715263,
+      "query_url": "https://dune.com/queries/7715263",
       "method_family": "GPv2 settlement and token-transfer join",
       "status": "supplied export"
     },
     {
       "file": "raw/07_dex_trades_aggregate_stats.csv",
       "query_id": 7899253,
+      "query_url": "https://dune.com/queries/7899253",
       "method_family": "dex.trades transaction-level aggregation",
       "status": "supplied export"
     },
@@ -63,6 +70,7 @@
   ],
   "limitations": [
     "The original archive did not record Dune execution IDs or retrieval timestamps.",
+    "The original archive did not include the query SQL; the public query URLs are recorded, but immutable SQL snapshots still require manual export from the owning Dune account.",
     "The transfer-join and dex.trades datasets use different methods and sample sizes and are not merged.",
     "Historical transaction notional is not an application-side worst-case value cap."
   ]

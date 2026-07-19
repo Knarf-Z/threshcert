@@ -21,7 +21,7 @@ async function externalKeypers(): Promise<KeyperEntry[]> {
   const path = process.env.KEYPER_SET_FILE?.trim();
   if (!path) throw new Error("Chiado deployment requires KEYPER_SET_FILE");
   const set = await readJson<KeyperSetFile>(path);
-  if (set.schema !== "threshcert-keyper-set-v1") throw new Error("unknown keyper-set schema");
+  if (set.schema !== "fc-keyper-set-v1") throw new Error("unknown keyper-set schema");
   if (set.threshold !== 4 || set.keypers.length !== 7) {
     throw new Error("keyper set must be exactly 4-of-7");
   }
@@ -93,7 +93,7 @@ const freezeHash = await contract.write.freezeCommittee({ account: ownerWallet.a
 const freezeReceipt = await publicClient.waitForTransactionReceipt({ hash: freezeHash });
 
 const result: DeploymentFile = {
-  schema: "threshcert-bonded-keyper-deployment-v1",
+  schema: "fc-bonded-keyper-deployment-v1",
   generatedAt: new Date().toISOString(),
   networkName,
   chainId,

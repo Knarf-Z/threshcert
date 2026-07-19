@@ -10,8 +10,14 @@ from pathlib import PurePosixPath, PureWindowsPath
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
+sys.path.insert(0, str(ROOT / "deployment" / "scripts"))
 
 from run_penalty_certificate_checks import evaluate  # noqa: E402
+from run_production_evidence_audit import (  # noqa: E402
+    audit_production_evidence,
+    evaluate_member,
+)
+from verify_chiado_certificate import build_certificate  # noqa: E402
 
 
 class BundleIntegrityTests(unittest.TestCase):
@@ -34,13 +40,119 @@ class BundleIntegrityTests(unittest.TestCase):
 
     def test_real_deployment_sources_present(self) -> None:
         required = [
+            "data/production_keyper_set_20260613.json",
+            "data/production_member_evidence.csv",
+            "scripts/run_production_evidence_audit.py",
+            "scripts/verify_production_snapshot_live.py",
             "deployment/contracts/BondedKeyperSlasher.sol",
             "deployment/rolling-shutter/evidence-exporter/main.go",
             "deployment/rolling-shutter/docker-compose.7.yml",
             "deployment/scripts/submit-evidence.ts",
+            "deployment/scripts/verify_chiado_certificate.py",
+            "deployment/scripts/verify-chiado-live.ts",
+            "deployment/certificates/chiado-execution-certificate.json",
         ]
         for relative in required:
             self.assertTrue((ROOT / relative).is_file(), relative)
+
+    def test_production_snapshot_is_pinned_and_member_specific(self) -> None:
+        snapshot = json.loads(
+            (ROOT / "data/shutter_keyper_snapshot.json").read_text(encoding="utf-8")
+        )
+        provenance = json.loads(
+            (ROOT / "data/production_keyper_set_20260613.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        self.assertEqual(snapshot["archival_block_number"], 46_666_718)
+        self.assertEqual(
+            snapshot["archival_block_hash"],
+            "0x574ec26ee7b2e2bfddd991bf99d37a79455428bc4dfe342b0ccf55d071229b60",
+        )
+        self.assertEqual(snapshot["active_keyper_set_index"], 10)
+        self.assertEqual(
+            snapshot["active_keyper_set_contract"].lower(),
+            "0xe817e77109e2e6a8025eb30db3542ec18bbde828",
+        )
+        self.assertEqual(snapshot["committee_size"], 7)
+        self.assertEqual(snapshot["threshold_count"], 4)
+        self.assertEqual(len(set(map(str.lower, snapshot["member_addresses"]))), 7)
+        self.assertEqual(
+            list(map(str.lower, snapshot["member_addresses"])),
+            list(map(str.lower, provenance["keyper_set"]["members"])),
+        )
+        self.assertTrue(provenance["keyper_set"]["finalized"])
+        self.assertEqual(provenance["keyper_set"]["activation_block"], 46_271_880)
+
+    def test_production_evidence_audit(self) -> None:
+        result = audit_production_evidence()
+        self.assertEqual(result["snapshot"]["membership_records_verified"], 7)
+        self.assertEqual(
+            result["certificate"]["ordered_certified_member_floors"],
+            ["0"] * 7,
+        )
+        self.assertEqual(result["certificate"]["threshold_cover_lower_bound"], "0")
+        self.assertEqual(result["certificate"]["positive_member_floors"], 0)
+        self.assertEqual(
+            result["certificate"][
+                "minimum_positive_members_for_positive_certificate"
+            ],
+            4,
+        )
+        self.assertEqual(
+            result["certificate"]["additional_positive_member_floors_needed"], 4
+        )
+        self.assertEqual(
+            result["activation"]["status"], "NOT_CERTIFIED_USE_THRESHOLD_COVER"
+        )
+        self.assertEqual(
+            result["claim"]["actual_member_resistance"], "UNKNOWN_NOT_MEASURED"
+        )
+        self.assertTrue(
+            all(member["direct_path_gap"] for member in result["members"])
+        )
+        self.assertTrue(
+            all(member["penalty_path_gap"] for member in result["members"])
+        )
+
+        recorded = json.loads(
+            (ROOT / "results/production_evidence_audit.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        self.assertEqual(recorded, result)
+
+    def test_production_evidence_gates_require_auditable_material(self) -> None:
+        with (ROOT / "data/production_member_evidence.csv").open(
+            newline="", encoding="utf-8"
+        ) as handle:
+            row = next(csv.DictReader(handle))
+
+        claimed_without_evidence = dict(row)
+        claimed_without_evidence["base_resistance_floor"] = "25"
+        self.assertEqual(
+            evaluate_member(claimed_without_evidence)["certified_member_floor"], "0"
+        )
+
+        direct = dict(claimed_without_evidence)
+        direct["base_resistance_evidence_status"] = "CERTIFIED"
+        self.assertEqual(evaluate_member(direct)["certified_member_floor"], "25")
+
+        nominal_only = dict(row)
+        nominal_only["nominal_penalty_floor"] = "20"
+        nominal_only["joint_enforcement_probability_floor"] = "0.5"
+        self.assertEqual(evaluate_member(nominal_only)["certified_member_floor"], "0")
+
+        complete_penalty = dict(nominal_only)
+        for field in (
+            "attribution_evidence_status",
+            "forfeiture_evidence_status",
+            "enforcement_evidence_status",
+        ):
+            complete_penalty[field] = "CERTIFIED"
+        self.assertEqual(
+            evaluate_member(complete_penalty)["certified_member_floor"], "10"
+        )
 
     def test_public_deployment_records_are_cross_consistent(self) -> None:
         deployment_root = ROOT / "deployment"
@@ -66,10 +178,10 @@ class BundleIntegrityTests(unittest.TestCase):
             (deployment_root / "runtime/keyper-set.json").read_text(encoding="utf-8")
         )
 
-        self.assertEqual(deployment["schema"], "threshcert-bonded-keyper-deployment-v1")
-        self.assertEqual(job["schema"], "threshcert-release-job-v1")
-        self.assertEqual(evidence["schema"], "threshcert-shutter-evidence-v1")
-        self.assertEqual(slashing["schema"], "threshcert-slashing-result-v1")
+        self.assertEqual(deployment["schema"], "fc-bonded-keyper-deployment-v1")
+        self.assertEqual(job["schema"], "fc-release-job-v1")
+        self.assertEqual(evidence["schema"], "fc-shutter-evidence-v1")
+        self.assertEqual(slashing["schema"], "fc-slashing-result-v1")
         self.assertEqual({deployment["chainId"], job["chainId"], slashing["chainId"]}, {10200})
         self.assertEqual(
             {deployment["contract"].lower(), job["contract"].lower(), slashing["contract"].lower()},
@@ -134,6 +246,26 @@ class BundleIntegrityTests(unittest.TestCase):
             "0x26ff2f395c8e4bf6e4f8af170030c5a55e751b652d7e6ab7c9dc30bb422ddabd",
         )
 
+    def test_machine_readable_chiado_certificate(self) -> None:
+        certificate_path = (
+            ROOT / "deployment" / "certificates" / "chiado-execution-certificate.json"
+        )
+        recorded = json.loads(certificate_path.read_text(encoding="utf-8"))
+        self.assertEqual(recorded, build_certificate())
+        self.assertEqual(
+            recorded["claim"]["status"],
+            "POSITIVE_WITHIN_RECORDED_TESTNET_MECHANISM",
+        )
+        self.assertEqual(recorded["certificate"]["before"]["value"], "4000000000000")
+        self.assertEqual(recorded["certificate"]["after"]["value"], "3000000000000")
+        self.assertIsNone(
+            recorded["claim"]["unconditionalProductionAttackCostLowerBound"]
+        )
+        self.assertEqual(
+            recorded["claim"]["productionShutterCertificate"],
+            "NOT_CERTIFIED",
+        )
+
     def test_public_record_references_are_portable(self) -> None:
         result_root = ROOT / "deployment/results"
         job = json.loads((result_root / "job-chiado.json").read_text(encoding="utf-8"))
@@ -155,6 +287,11 @@ class BundleIntegrityTests(unittest.TestCase):
         for dataset in provenance["datasets"]:
             referenced = provenance_path.parent / dataset["file"]
             self.assertTrue(referenced.is_file(), referenced)
+            if dataset["query_id"] is not None:
+                self.assertEqual(
+                    dataset["query_url"],
+                    f"https://dune.com/queries/{dataset['query_id']}",
+                )
         self.assertFalse(provenance["query_sql_included"])
 
     def test_selected_coverage_rows_match_full_curve(self) -> None:

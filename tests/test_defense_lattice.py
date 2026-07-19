@@ -17,12 +17,16 @@ from defense_lattice import (  # noqa: E402
     marginal_greedy,
     minimal_target_masks,
     mobius_transform,
+    sequential_float_sum,
     truncated_value,
     zeta_transform,
 )
 
 
 class DefenseLatticeTests(unittest.TestCase):
+    def test_float_accumulation_matches_recorded_python311_order(self) -> None:
+        self.assertEqual(sequential_float_sum([1e16, 1.0, -1e16]), 0.0)
+
     def test_mobius_round_trip(self) -> None:
         values = [0, 1, 2, 7, 3, 8, 10, 25]
         coefficients = mobius_transform(values, 3)

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-THRESHCERT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-UPSTREAM="${ROLLING_SHUTTER_DIR:-$THRESHCERT_ROOT/upstream}"
+FC_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+UPSTREAM="${ROLLING_SHUTTER_DIR:-$FC_ROOT/upstream}"
 SETUP="$UPSTREAM/docker-test-setup-api"
-COMPOSE_EXTRA="$THRESHCERT_ROOT/docker-compose.7.yml"
+COMPOSE_EXTRA="$FC_ROOT/docker-compose.7.yml"
 EXPECTED_COMMIT="d143fffcf51f85b30375134d2d29756417f333b9"
 DEPLOY_KEY="${DEPLOY_KEY:-0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80}"
 export DEPLOY_KEY

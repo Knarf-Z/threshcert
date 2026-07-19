@@ -25,12 +25,12 @@ let eon: bigint;
 const evidencePath = process.env.EVIDENCE_FILE?.trim();
 if (evidencePath) {
   const evidence = await readJson<EvidenceFile>(evidencePath);
-  if (evidence.schema !== "threshcert-shutter-evidence-v1") throw new Error("unknown evidence schema");
+  if (evidence.schema !== "fc-shutter-evidence-v1") throw new Error("unknown evidence schema");
   identityPreimage = evidence.identityPreimage;
   eon = BigInt(evidence.eon);
 } else {
   const raw = process.env.IDENTITY_PREIMAGE_HEX?.trim();
-  identityPreimage = raw && isHex(raw) ? raw : stringToHex("threshcert-deployment");
+  identityPreimage = raw && isHex(raw) ? raw : stringToHex("fc-real-deployment-pilot");
   eon = BigInt(process.env.EON?.trim() ?? "1");
 }
 const identityHash = keccak256(identityPreimage);
@@ -49,7 +49,7 @@ const nonce = await contract.read.jobCount();
 const jobId = await contract.read.computeJobId([eon, identityHash, releaseTime, nonce]);
 
 const result: JobFile = {
-  schema: "threshcert-release-job-v1",
+  schema: "fc-release-job-v1",
   generatedAt: new Date().toISOString(),
   deploymentFile: artifactReference(deploymentPath),
   chainId,

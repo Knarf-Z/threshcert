@@ -62,16 +62,48 @@ func TestNativeKeyperSignatureBindsInstanceEonAndIdentity(t *testing.T) {
 	if err != nil || !valid {
 		t.Fatalf("native signature rejected: valid=%t err=%v", valid, err)
 	}
-	wrong, err := serviceztypes.NewDecryptionSignatureData(0, 2, []identitypreimage.IdentityPreimage{preimage})
-	if err != nil {
-		t.Fatal(err)
+	otherPreimage := identitypreimage.IdentityPreimage(bytes.Repeat([]byte{0x7b}, 32))
+	cases := []struct {
+		name       string
+		instanceID uint64
+		eon        uint64
+		identities []identitypreimage.IdentityPreimage
+	}{
+		{name: "instance", instanceID: 1, eon: 1, identities: []identitypreimage.IdentityPreimage{preimage}},
+		{name: "eon", instanceID: 0, eon: 2, identities: []identitypreimage.IdentityPreimage{preimage}},
+		{name: "identity", instanceID: 0, eon: 1, identities: []identitypreimage.IdentityPreimage{otherPreimage}},
 	}
-	valid, err = wrong.CheckSignature(signature, crypto.PubkeyToAddress(key.PublicKey))
-	if err != nil {
-		t.Fatal(err)
+	for _, testCase := range cases {
+		t.Run(testCase.name, func(t *testing.T) {
+			wrong, err := serviceztypes.NewDecryptionSignatureData(
+				testCase.instanceID,
+				testCase.eon,
+				testCase.identities,
+			)
+			if err != nil {
+				t.Fatal(err)
+			}
+			valid, err := wrong.CheckSignature(signature, crypto.PubkeyToAddress(key.PublicKey))
+			if err != nil {
+				t.Fatal(err)
+			}
+			if valid {
+				t.Fatalf("signature remained valid after changing the %s", testCase.name)
+			}
+		})
 	}
-	if valid {
-		t.Fatal("signature remained valid after changing the eon")
+}
+
+func TestKeyperIndexGate(t *testing.T) {
+	seen := make(map[int64]struct{})
+	if err := recordKeyperIndex(seen, 3, 7); err != nil {
+		t.Fatalf("valid keyper index was rejected: %v", err)
+	}
+	if err := recordKeyperIndex(seen, 3, 7); err == nil {
+		t.Fatal("duplicate keyper index was accepted")
+	}
+	if err := recordKeyperIndex(seen, 7, 7); err == nil {
+		t.Fatal("out-of-range keyper index was accepted")
 	}
 }
 

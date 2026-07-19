@@ -17,6 +17,21 @@ from typing import Callable, Iterable, Sequence
 Number = int | float | Fraction
 
 
+def sequential_float_sum(values: Iterable[float]) -> float:
+    """Sum floats in a fixed left-to-right order across Python versions.
+
+    CPython 3.12 changed the implementation of the built-in ``sum`` for
+    floating-point inputs.  The recorded artifact was produced with Python
+    3.11, so spelling out the accumulation order keeps regenerated CSV bytes
+    identical on both 3.11 and 3.12.
+    """
+
+    total = 0.0
+    for value in values:
+        total += value
+    return total
+
+
 @dataclass(frozen=True)
 class StepCap:
     """Right-continuous, weakly increasing acquisition-cap schedule."""
@@ -250,7 +265,7 @@ def uniform_threshold_certificate(
         resistance + (increments[i] if action_mask & (1 << i) else 0.0)
         for i, resistance in enumerate(resistances)
     ]
-    return sum(sorted(post)[:q])
+    return sequential_float_sum(sorted(post)[:q])
 
 
 def exact_budget_maximizer(

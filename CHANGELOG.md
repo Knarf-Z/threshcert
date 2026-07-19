@@ -1,5 +1,26 @@
 # ThreshCert artifact changelog
 
+## 2026-07-19 pinned-geometry counterfactual branch check
+
+- Added a deterministic seven-member, four-of-seven counterfactual fixture
+  bound to the pinned Gnosis committee geometry, with explicitly hypothetical
+  resistance and activation floors in normalized cost units and a separate
+  counterfactual ledger.
+- Added strictly conditional paper language for the `0 -> 4 -> 10` evidence
+  layers, plus synchronized limitations and conclusion language; the actual
+  production ledger remains zero.
+- Ran the existing exact subset-state solver through the public, TC, AC, and
+  robust-fallback branches, recording `0 -> 4 -> 10 -> 4`, TC cover
+  `{2,3,4,5}`, and AC witness `(0,1,2,3)`.
+- Checked all 21 seed-member placements and verified that disabling either the
+  ordered-witness or exposure-sufficiency gate suppresses the AC value and
+  returns the separable-payment TC fallback of `4`.
+- Added a portable result JSON, exact expected stdout, five regression tests,
+  and root-reproduction integration. No Chiado or production-chain experiment
+  was rerun.
+- Fixed the retained production-audit JSON writer to emit UTF-8/LF bytes on
+  every operating system, preventing Windows/Linux manifest drift.
+
 ## 2026-07-19 production deployment evidence audit
 
 - Replaced the date-only production snapshot with an archival anchor at Gnosis

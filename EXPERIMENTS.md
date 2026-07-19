@@ -31,79 +31,89 @@ that actual member resistance is zero.
 
 ## Controlled certificate and mechanism checks
 
-6. Public-evidence compatibility view: checks that the address-level production
+6. Pinned-geometry counterfactual: keeps the real seven-member, four-of-seven
+   committee geometry but uses a separate counterfactual ledger, `I_cf`, to
+   supply explicitly hypothetical resistance floors `[4,4,1,1,1,1,1]` and
+   activation floors `[0,0,2/7,2/7,2/7,2/7,2/7]`, all in normalized cost
+   units. The unified solver returns public `0`,
+   resistance-only TC `4`, activation AC `10`, and robust fallback `4` when
+   either activation gate is disabled. It records TC cover `{2,3,4,5}`, AC
+   witness `(0,1,2,3)`, and all 21 choices of the two seed-member positions.
+7. Public-evidence compatibility view: checks that the address-level production
    ledger maps to the same zero threshold-cover lower bound.
-7. Controlled positive resistance ledger: checks the threshold-cover verifier.
-8. Penalty-evidence gate: compares complete attribution and enforcement
+8. Controlled positive resistance ledger: checks the threshold-cover verifier.
+9. Penalty-evidence gate: compares complete attribution and enforcement
    evidence with one unattributable member.
-9. Activation ladder: checks the controlled TC/AC gap.
-10. Mechanism-scope stress test: compares sequential, simultaneous, package,
+10. Activation ladder: checks the controlled TC/AC gap.
+11. Mechanism-scope stress test: compares sequential, simultaneous, package,
     and robust-threshold-cover values in the stated controlled family.
-11. Defensive allocation: computes cheapest-resistance, weight-cycle, and
+12. Defensive allocation: computes cheapest-resistance, weight-cycle, and
     exact bottleneck allocations, including every increment and cover cost.
-12. Enforceability sensitivity: varies one certified probability lower bound.
-13. Exact subset-state scaling: records machine-specific runtime and memory.
+13. Enforceability sensitivity: varies one certified probability lower bound.
+14. Exact subset-state scaling: records machine-specific runtime and memory.
     Ten supplied repeats are summarized with median and inclusive IQR; no run
     is removed as an outlier.
 
 These checks exercise certificate branches and check the reference
-implementation. They do not empirically validate production resistance.
+implementation. The pinned-geometry check is deterministic and counterfactual;
+its positive values are conditional and do not empirically validate production
+resistance, activation, operator independence, or payment conditions.
 
 ## Defense lattice and Möbius checks
 
-14. Pure high-order interaction: exact sequential instances for several `k`
+15. Pure high-order interaction: exact sequential instances for several `k`
     and `M`, with every nonempty proper Möbius coefficient equal to zero.
-15. Low-order truncation: measures the arbitrary underprediction caused by
+16. Low-order truncation: measures the arbitrary underprediction caused by
     dropping the full-order coefficient.
-16. Seeded random four-of-seven interactions: 100 instances with interaction
+17. Seeded random four-of-seven interactions: 100 instances with interaction
     mass by order and truncation errors.
-17. Target upper sets: enumerates inclusion-minimal target-achieving plans.
-18. Exact versus marginal-greedy allocation on the random instances.
-19. Greedy-decoy failure: checks a fixed certified-family construction in
+18. Target upper sets: enumerates inclusion-minimal target-achieving plans.
+19. Exact versus marginal-greedy allocation on the random instances.
+20. Greedy-decoy failure: checks a fixed certified-family construction in
     which local positive marginal gains divert greedy allocation from the
     coordinated optimum.
 
 ## Historical calibration checks
 
-20. Dune export validation: reconciles daily counts, transfer coverage,
+21. Dune export validation: reconciles daily counts, transfer coverage,
     selected coverage-curve rows, and dex.trades aggregate statistics.
-21. Historical target calibration: reports selected empirical coverage values
+22. Historical target calibration: reports selected empirical coverage values
     while marking every value as calibration-only.
 
 ## Scalability, sensitivity, and baseline checks
 
-22. Committee-size scalability: reports exact subset-state counts and the
+23. Committee-size scalability: reports exact subset-state counts and the
     median, inclusive IQR, range, and peak traced memory from all ten retained
     laptop repeats for `n=8,10,12,14,16,18`.
-23. Certificate-computation cost: contrasts the `O(n log n)` sorting proxy for
+24. Certificate-computation cost: contrasts the `O(n log n)` sorting proxy for
     a uniform threshold-cover certificate with the `2^n` state count of the
     generic exact subset-state method for committee sizes through `n=448`.
-24. Parameter sensitivity: evaluates 48 controlled combinations covering
+25. Parameter sensitivity: evaluates 48 controlled combinations covering
     thresholds `3/7` through `6/7`, four equal-mean resistance distributions,
     and zero, one, or two initially exposed shares.
-25. Baseline comparison: compares public-only zero, a certified
+26. Baseline comparison: compares public-only zero, a certified
     minimum-member-floor bound, the exact lower-tail threshold certificate,
     and an explicitly uncertified mean-resistance heuristic.
 
 ## Controlled public-testnet enforcement pilot
 
-26. Seven Solidity/Hardhat checks for a seven-member four-of-seven bonded
+27. Seven Solidity/Hardhat checks for a seven-member four-of-seven bonded
     committee, verifier-only evidence, deadline enforcement, binding of every
     signed evidence field, duplicate-signer rejection, nonuniform-bond
     certificate computation, penalty transfer, and certificate update.
-27. Seven-process Rolling Shutter v1.4.4 overlay with fresh runtime keys, DKG,
+28. Seven-process Rolling Shutter v1.4.4 overlay with fresh runtime keys, DKG,
     individual decryption-share persistence, and a fixed four-of-seven
     threshold.
-28. Go evidence export requiring seven uniquely indexed valid BLS shares,
+29. Go evidence export requiring seven uniquely indexed valid BLS shares,
     seven uniquely indexed valid native Keyper signatures, a valid stored
     aggregate key, and equality with a four-share reconstruction.
-29. Chiado deployment, release-job, and verifier-gated slashing scripts that
+30. Chiado deployment, release-job, and verifier-gated slashing scripts that
     record transaction hashes, blocks, gas, timing, and certificate changes
     without recording private keys.
-30. Read-only live-chain verification of all 11 receipts, exact deployment
+31. Read-only live-chain verification of all 11 receipts, exact deployment
     bytecode and constructor arguments, slashing calldata and event fields, and
     current contract state through a Chiado RPC endpoint.
-31. A deterministic machine-readable Chiado execution certificate binding the
+32. A deterministic machine-readable Chiado execution certificate binding the
     contract, exporter, Keyper set, four run records, and live verifier by
     SHA-256; it recomputes the four-smallest-bonds value from `4e12` to `3e12`
     wei and records the production-transfer exclusions in the certificate.
@@ -122,3 +132,6 @@ implementation. They do not empirically validate production resistance.
 - The production audit and Chiado pilot are separate evidence domains. The
   pilot cannot fill missing production member rows, and the controlled
   arithmetic checks cannot supply real member inputs.
+- The `0 -> 4 -> 10 -> 4` pinned-geometry result uses hypothetical floors. It
+  is not a Gnosis activation experiment, production validation, or measurement
+  of Keyper resistance.

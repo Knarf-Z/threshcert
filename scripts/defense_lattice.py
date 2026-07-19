@@ -80,8 +80,24 @@ class SequentialInstance:
             raise ValueError("invalid exposure or threshold")
 
 
-def exact_minimum_sequential_cost(instance: SequentialInstance) -> Fraction | None:
-    """Return the exact minimum cost, or None when no attack is feasible."""
+@dataclass(frozen=True)
+class SequentialSolution:
+    """Exact minimum-cost threshold-reaching set and one acquisition witness."""
+
+    cost: Fraction
+    member_mask: int
+    witness: tuple[int, ...]
+
+
+def exact_minimum_sequential_solution(
+    instance: SequentialInstance,
+) -> SequentialSolution | None:
+    """Return the exact minimum solution, or ``None`` when none is feasible.
+
+    Masks and candidate members are visited in increasing integer order.  Ties
+    therefore have a stable witness, which is useful for byte-reproducible
+    experiment records without changing the certificate value.
+    """
 
     n = len(instance.weights)
     size = 1 << n
@@ -96,7 +112,9 @@ def exact_minimum_sequential_cost(instance: SequentialInstance) -> Fraction | No
 
     reachable = bytearray(size)
     reachable[0] = 1
-    best: Fraction | None = None
+    predecessor: list[tuple[int, int] | None] = [None] * size
+    best_mask: int | None = None
+    best_cost: Fraction | None = None
     full_mask = size - 1
 
     for mask in range(size):
@@ -105,8 +123,9 @@ def exact_minimum_sequential_cost(instance: SequentialInstance) -> Fraction | No
         exposure = instance.initial_exposure + weight_sum[mask]
         if exposure >= instance.threshold:
             cost = resistance_sum[mask]
-            if best is None or cost < best:
-                best = cost
+            if best_cost is None or cost < best_cost:
+                best_cost = cost
+                best_mask = mask
             continue
 
         remaining = full_mask ^ mask
@@ -114,10 +133,36 @@ def exact_minimum_sequential_cost(instance: SequentialInstance) -> Fraction | No
             bit = remaining & -remaining
             member = bit.bit_length() - 1
             if instance.resistances[member] <= instance.caps[member].at(exposure):
-                reachable[mask | bit] = 1
+                next_mask = mask | bit
+                if not reachable[next_mask]:
+                    reachable[next_mask] = 1
+                    predecessor[next_mask] = (mask, member)
             remaining ^= bit
 
-    return best
+    if best_mask is None or best_cost is None:
+        return None
+
+    reversed_witness: list[int] = []
+    cursor = best_mask
+    while cursor:
+        step = predecessor[cursor]
+        if step is None:
+            raise AssertionError("reachable mask is missing a predecessor")
+        cursor, member = step
+        reversed_witness.append(member)
+    reversed_witness.reverse()
+    return SequentialSolution(
+        cost=best_cost,
+        member_mask=best_mask,
+        witness=tuple(reversed_witness),
+    )
+
+
+def exact_minimum_sequential_cost(instance: SequentialInstance) -> Fraction | None:
+    """Return the exact minimum cost, or None when no attack is feasible."""
+
+    solution = exact_minimum_sequential_solution(instance)
+    return None if solution is None else solution.cost
 
 
 def coordinated_defense_instance(

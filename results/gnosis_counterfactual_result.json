@@ -1,0 +1,416 @@
+{
+  "schema": "threshcert-gnosis-counterfactual-result-v1",
+  "classification": "deterministic counterfactual check on the pinned committee geometry",
+  "pinned_geometry": {
+    "archival_block_number": 46666718,
+    "archival_block_hash": "0x574ec26ee7b2e2bfddd991bf99d37a79455428bc4dfe342b0ccf55d071229b60",
+    "keyper_set_index": 10,
+    "keyper_set_contract": "0xE817E77109e2E6a8025eB30dB3542eC18bBDE828",
+    "committee_size": 7,
+    "threshold": "4/7",
+    "member_count_verified": 7
+  },
+  "counterfactual_inputs": {
+    "ledger": "I_cf",
+    "cost_units": "normalized cost units",
+    "weights": [
+      "1/7",
+      "1/7",
+      "1/7",
+      "1/7",
+      "1/7",
+      "1/7",
+      "1/7"
+    ],
+    "resistance_floors": [
+      "4",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1"
+    ],
+    "activation_floors": [
+      "0",
+      "0",
+      "2/7",
+      "2/7",
+      "2/7",
+      "2/7",
+      "2/7"
+    ]
+  },
+  "branches": {
+    "public_ledger": {
+      "certificate": "0",
+      "uses_hypothetical_member_floors": false
+    },
+    "resistance_only_threshold_cover": {
+      "certificate": "4",
+      "cover": [
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "activation_cover": {
+      "certificate": "10",
+      "witness": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "member_mask": 15,
+      "selected_branch": "ACTIVATION_COVER",
+      "activation_certificate_emitted": true
+    },
+    "activation_gate_rejected_robust_fallback": {
+      "gate_values": {
+        "ordered_witness_certified": false,
+        "exposure_sufficiency_certified": false,
+        "separable_payment_lower_bounds_certified": true
+      },
+      "threshold_cover_witness": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "selected_branch": "ROBUST_THRESHOLD_COVER_FALLBACK",
+      "certificate": "4",
+      "activation_certificate_emitted": false
+    }
+  },
+  "regression_checks": {
+    "seed_member_placements_checked": 21,
+    "seed_member_placements": [
+      {
+        "seed_members": [
+          0,
+          1
+        ],
+        "threshold_cover": "4",
+        "activation_cover": "10",
+        "activation_witness": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "seed_members": [
+          0,
+          2
+        ],
+        "threshold_cover": "4",
+        "activation_cover": "10",
+        "activation_witness": [
+          0,
+          2,
+          1,
+          3
+        ]
+      },
+      {
+        "seed_members": [
+          0,
+          3
+        ],
+        "threshold_cover": "4",
+        "activation_cover": "10",
+        "activation_witness": [
+          0,
+          3,
+          1,
+          2
+        ]
+      },
+      {
+        "seed_members": [
+          0,
+          4
+        ],
+        "threshold_cover": "4",
+        "activation_cover": "10",
+        "activation_witness": [
+          0,
+          4,
+          1,
+          2
+        ]
+      },
+      {
+        "seed_members": [
+          0,
+          5
+        ],
+        "threshold_cover": "4",
+        "activation_cover": "10",
+        "activation_witness": [
+          0,
+          5,
+          1,
+          2
+        ]
+      },
+      {
+        "seed_members": [
+          0,
+          6
+        ],
+        "threshold_cover": "4",
+        "activation_cover": "10",
+        "activation_witness": [
+          0,
+          6,
+          1,
+          2
+        ]
+      },
+      {
+        "seed_members": [
+          1,
+          2
+        ],
+        "threshold_cover": "4",
+        "activation_cover": "10",
+        "activation_witness": [
+          1,
+          2,
+          0,
+          3
+        ]
+      },
+      {
+        "seed_members": [
+          1,
+          3
+        ],
+        "threshold_cover": "4",
+        "activation_cover": "10",
+        "activation_witness": [
+          1,
+          3,
+          0,
+          2
+        ]
+      },
+      {
+        "seed_members": [
+          1,
+          4
+        ],
+        "threshold_cover": "4",
+        "activation_cover": "10",
+        "activation_witness": [
+          1,
+          4,
+          0,
+          2
+        ]
+      },
+      {
+        "seed_members": [
+          1,
+          5
+        ],
+        "threshold_cover": "4",
+        "activation_cover": "10",
+        "activation_witness": [
+          1,
+          5,
+          0,
+          2
+        ]
+      },
+      {
+        "seed_members": [
+          1,
+          6
+        ],
+        "threshold_cover": "4",
+        "activation_cover": "10",
+        "activation_witness": [
+          1,
+          6,
+          0,
+          2
+        ]
+      },
+      {
+        "seed_members": [
+          2,
+          3
+        ],
+        "threshold_cover": "4",
+        "activation_cover": "10",
+        "activation_witness": [
+          2,
+          3,
+          0,
+          1
+        ]
+      },
+      {
+        "seed_members": [
+          2,
+          4
+        ],
+        "threshold_cover": "4",
+        "activation_cover": "10",
+        "activation_witness": [
+          2,
+          4,
+          0,
+          1
+        ]
+      },
+      {
+        "seed_members": [
+          2,
+          5
+        ],
+        "threshold_cover": "4",
+        "activation_cover": "10",
+        "activation_witness": [
+          2,
+          5,
+          0,
+          1
+        ]
+      },
+      {
+        "seed_members": [
+          2,
+          6
+        ],
+        "threshold_cover": "4",
+        "activation_cover": "10",
+        "activation_witness": [
+          2,
+          6,
+          0,
+          1
+        ]
+      },
+      {
+        "seed_members": [
+          3,
+          4
+        ],
+        "threshold_cover": "4",
+        "activation_cover": "10",
+        "activation_witness": [
+          3,
+          4,
+          0,
+          1
+        ]
+      },
+      {
+        "seed_members": [
+          3,
+          5
+        ],
+        "threshold_cover": "4",
+        "activation_cover": "10",
+        "activation_witness": [
+          3,
+          5,
+          0,
+          1
+        ]
+      },
+      {
+        "seed_members": [
+          3,
+          6
+        ],
+        "threshold_cover": "4",
+        "activation_cover": "10",
+        "activation_witness": [
+          3,
+          6,
+          0,
+          1
+        ]
+      },
+      {
+        "seed_members": [
+          4,
+          5
+        ],
+        "threshold_cover": "4",
+        "activation_cover": "10",
+        "activation_witness": [
+          4,
+          5,
+          0,
+          1
+        ]
+      },
+      {
+        "seed_members": [
+          4,
+          6
+        ],
+        "threshold_cover": "4",
+        "activation_cover": "10",
+        "activation_witness": [
+          4,
+          6,
+          0,
+          1
+        ]
+      },
+      {
+        "seed_members": [
+          5,
+          6
+        ],
+        "threshold_cover": "4",
+        "activation_cover": "10",
+        "activation_witness": [
+          5,
+          6,
+          0,
+          1
+        ]
+      }
+    ],
+    "all_seed_placements_tc_4_ac_10": true,
+    "gate_disable_cases": [
+      {
+        "disabled_gate": "ordered_witness_certified",
+        "selected_branch": "ROBUST_THRESHOLD_COVER_FALLBACK",
+        "certificate": "4",
+        "activation_certificate_emitted": false
+      },
+      {
+        "disabled_gate": "exposure_sufficiency_certified",
+        "selected_branch": "ROBUST_THRESHOLD_COVER_FALLBACK",
+        "certificate": "4",
+        "activation_certificate_emitted": false
+      }
+    ],
+    "all_activation_gate_failures_fall_back_to_4": true
+  },
+  "claim_boundary": {
+    "resistance_floor_status": "HYPOTHETICAL_NOT_MEASURED",
+    "activation_floor_status": "HYPOTHETICAL_NOT_MEASURED",
+    "positive_values_are_conditional": true,
+    "production_validation": false,
+    "measured_keyper_resistance": false,
+    "new_chain_experiment": false,
+    "allowed_description": "deterministic counterfactual check on the pinned committee geometry",
+    "forbidden_descriptions": [
+      "Gnosis activation experiment",
+      "production validation",
+      "measured Keyper resistance"
+    ]
+  }
+}

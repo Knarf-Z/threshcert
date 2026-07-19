@@ -1,0 +1,36 @@
+{
+  "schema": "threshcert-gnosis-counterfactual-fixture-v1",
+  "classification": "deterministic counterfactual check on the pinned committee geometry",
+  "production_geometry": {
+    "source": "data/production_keyper_set_20260613.json",
+    "snapshot_time_utc": "2026-06-13T00:00:00Z",
+    "archival_block_number": 46666718,
+    "archival_block_hash": "0x574ec26ee7b2e2bfddd991bf99d37a79455428bc4dfe342b0ccf55d071229b60",
+    "keyper_set_index": 10,
+    "keyper_set_contract": "0xE817E77109e2E6a8025eB30dB3542eC18bBDE828",
+    "committee_size": 7,
+    "threshold": "4/7",
+    "threshold_count": 4,
+    "initial_exposure": "0"
+  },
+  "counterfactual_inputs": {
+    "ledger": "I_cf",
+    "cost_units": "normalized cost units",
+    "weights": ["1/7", "1/7", "1/7", "1/7", "1/7", "1/7", "1/7"],
+    "resistance_floors": ["4", "4", "1", "1", "1", "1", "1"],
+    "activation_floors": ["0", "0", "2/7", "2/7", "2/7", "2/7", "2/7"]
+  },
+  "certificate_gates": {
+    "ordered_witness_certified": true,
+    "exposure_sufficiency_certified": true,
+    "separable_payment_lower_bounds_certified": true
+  },
+  "claim_boundary": {
+    "resistance_floor_status": "HYPOTHETICAL_NOT_MEASURED",
+    "activation_floor_status": "HYPOTHETICAL_NOT_MEASURED",
+    "positive_values_are_conditional": true,
+    "production_validation": false,
+    "measured_keyper_resistance": false,
+    "new_chain_experiment": false
+  }
+}

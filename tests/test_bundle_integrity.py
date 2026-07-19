@@ -115,11 +115,11 @@ class BundleIntegrityTests(unittest.TestCase):
             all(member["penalty_path_gap"] for member in result["members"])
         )
 
-        recorded = json.loads(
-            (ROOT / "results/production_evidence_audit.json").read_text(
-                encoding="utf-8"
-            )
-        )
+        recorded_path = ROOT / "results" / "production_evidence_audit.json"
+        recorded_bytes = recorded_path.read_bytes()
+        self.assertTrue(recorded_bytes.endswith(b"\n"))
+        self.assertNotIn(b"\r\n", recorded_bytes)
+        recorded = json.loads(recorded_bytes)
         self.assertEqual(recorded, result)
 
     def test_production_evidence_gates_require_auditable_material(self) -> None:

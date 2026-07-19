@@ -1,0 +1,14 @@
+counterfactual_classification=deterministic counterfactual check on the pinned committee geometry
+counterfactual_ledger=I_cf
+cost_units=normalized cost units
+public_certificate=0
+resistance_only_TC=4
+TC_cover=2,3,4,5
+activation_AC=10
+AC_witness=0,1,2,3
+activation_gate_rejected_certificate=4
+activation_gate_rejected_branch=ROBUST_THRESHOLD_COVER_FALLBACK
+seed_position_choices=21
+seed_position_regression=PASS
+activation_gate_fallback_regression=PASS
+claim_boundary=HYPOTHETICAL_FLOORS_NOT_PRODUCTION_EVIDENCE

@@ -30,6 +30,12 @@
 
 - Public-only four-of-seven certificate: `0`, with every positive target
   rejected.
+- Deterministic counterfactual check on the pinned committee geometry: public
+  `0`; resistance-only TC `4` with cover `{2,3,4,5}`; activation AC `10` with
+  witness `(0,1,2,3)`; and robust fallback `4` when the ordered-witness or
+  exposure-sufficiency gate is disabled. All 21 choices of two seed-member
+  positions return `(TC=4, AC=10)`. The positive values belong to the separate
+  counterfactual ledger `I_cf` and use normalized cost units.
 - Controlled nonuniform resistance ledger: `11,500` against target `10,000`.
 - Controlled uniform penalty ledger with complete evidence: `10,000`.
 - The same penalty ledger with one unattributable member: `7,500`.
@@ -145,6 +151,12 @@ ledgers in this bundle are controlled inputs rather than production resistance
 evidence. The completed pilot is verifier-gated, testnet-only, and single-host;
 it must not be described as native on-chain BLS verification, a production
 deployment, or seven independent operators.
+
+The pinned-geometry counterfactual reuses only the verified seven-member,
+four-of-seven structure. Its resistance and activation floors are hypothetical,
+and its positive values are conditional, so it must not be described as a
+Gnosis activation experiment, production validation, measured Keyper
+resistance, or any production cost estimate.
 
 The positive Chiado value and the production evidence-audit result are not the
 same claim. The former certifies an executed bond-floor state inside the

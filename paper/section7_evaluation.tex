@@ -2,12 +2,12 @@
 \section{Evaluation}
 \label{sec:evaluation}
 
-The evaluation combines an address-level production evidence audit, controlled
-implementation checks, and a public-testnet enforcement execution. The first
-pins the active Gnosis committee and computes both its supported floor and the
-evidence needed to change it. Controlled profiles exercise the certificate
-branches and check the reference implementation. The Chiado pilot tests a
-machine-readable evidence-to-penalty transition.
+The evaluation combines an address-level production audit, controlled checks,
+and a public-testnet enforcement execution. The audit pins the Gnosis
+committee, supported floor, and evidence gaps. A counterfactual on that geometry and
+controlled profiles exercise the certificate branches and check the reference
+implementation. The Chiado pilot tests a machine-readable evidence-to-penalty
+transition.
 
 We ask what the production record certifies; how activation order and
 acquisition mechanism change fixed-resistance costs; whether local hardening
@@ -48,14 +48,17 @@ test fixtures, not production measurements.}
 \label{tab:parameter-sensitivity}
 \label{tab:baseline-comparison}
 \label{tab:solver-scaling}
+\label{tab:gnosis-counterfactual}
 \begin{tabularx}{\linewidth}{p{0.18\linewidth}p{0.27\linewidth}Y}
 \toprule
 Check & Recorded result & Supported inference \\
 \midrule
 Evidence layers
-& Pinned production audit \(0\); resistance fixture \(11{,}500\); incomplete attribution
-  reduces \(10{,}000\) to \(7{,}500\)
-& Missing member evidence is not replaced by a nominal bond or point estimate.
+& Pinned production audit \(0\); counterfactual completion on the same
+  four-of-seven geometry gives \(0\to4\to10\)
+& The sharp boundary changes with certified evidence even when the public
+  committee is fixed; the positive values are conditional, not production
+  measurements.
 \\
 Activation ladder
 & With resistance fixed, TC stays \(5\) while exact AC rises
@@ -87,11 +90,10 @@ Computation
 
 Exact-solver, scaled dynamic-program, sensitivity-grid, baseline, and command
 details appear in Appendix~\ref{app:evaluation-artifacts}. Equal-mean
-four-of-seven profiles
-produce certificates from \(16\) to \(40\), confirming that the lower tail,
-not the mean, drives the uniform certificate. These experiments exercise
-implementations of stated mathematical inputs; they do not validate those
-inputs for real Keypers.
+four-of-seven profiles produce certificates from 16 to 40, confirming that
+the lower tail, not the mean, drives the uniform certificate. These checks
+exercise the implementation on declared mathematical inputs; they do not
+validate those inputs for real Keypers.
 
 \subsubsection{Activation paths and mechanism scope}
 
@@ -341,6 +343,55 @@ further requires
 \[
   \sum_{j=1}^{4}\underline R_{(j)} \ge B.
 \]
+
+\paragraph{Illustrative activation completion on the pinned committee
+(counterfactual).}
+The production ledger in Table~\ref{tab:production-member-audit} remains
+unchanged. To illustrate how the nontrivial branch of
+Theorem~\ref{thm:information-boundary} would operate on the same public
+committee geometry, consider a separate counterfactual ledger
+\(\mathcal I_{\mathrm{cf}}\). Keep the pinned seven equal-weight members,
+threshold four, and \(A_0=\varnothing\), but suppose that future evidence
+certified, in normalized cost units,
+\[
+  (\underline R_i,\underline\tau_i)=
+  \begin{cases}
+     (4,0),   & i\in\{0,1\},\\
+     (1,2/7), & i\in\{2,\ldots,6\}.
+  \end{cases}
+\]
+These values are illustrative assumptions, not measurements or claims about
+the current Keypers.
+
+With only public data, the verifier-optimal certificate remains zero. With
+the counterfactual resistance floors but no activation evidence, the four
+cheapest members form a static threshold cover, so
+\[
+    \mathsf{TC}_{\underline R}(\varnothing)
+      =1+1+1+1=4.
+\]
+Under the additional activation floors, none of members \(2,\ldots,6\) is
+buildable before exposure reaches \(2/7\). The certified outer family must
+therefore acquire members \(0\) and \(1\) before using any two of the remaining
+members to cross the four-share threshold. Hence
+\[
+    \mathsf{AC}_{\underline R,\underline\tau}(\varnothing)
+      =4+4+1+1=10.
+\]
+Thus the same pinned committee geometry yields the three sharp information
+boundaries
+\[
+      0 \longrightarrow 4 \longrightarrow 10
+\]
+as the declared ledger is strengthened.
+
+The activation value additionally assumes that the covered mechanism admits
+an exposure-ordered first-crossing witness and separable effective payments.
+It also assumes that acquisition history is summarized by released weight.
+If, for example, members \(0\) and \(1\) shared an economic controller, or
+acquiring one changed the other's resistance for identity-dependent reasons,
+the scope gate would fail and the value ten would not be issued.
+
 Table~\ref{tab:evidence-upgrade-chiado} gives the row-level upgrades and the
 independent Chiado contrast.
 
@@ -411,7 +462,12 @@ Approximate activation inputs remain unsafe near path boundaries, and general
 exact search does not scale. Production evidence also lacks the positive
 member floors and worst-case value cap needed for a no-profit claim.
 
-The artifact includes the pinned set, seven-row ledger, member-gap CSV, audit
-JSON, archival-RPC verifier, and Chiado certificate. Deterministic results run
-offline; timing provenance and live-chain steps appear in
+The counterfactual four-of-seven calculation illustrates certificate
+computation on the pinned committee geometry, but does not certify its
+assumed resistance, activation, operator-independence, or payment conditions
+for the production Keypers.
+
+The artifact includes the pinned set, seven-row ledger, counterfactual fixture
+and result, audit JSON, archival-RPC verifier, and Chiado certificate.
+Deterministic results run offline; timing provenance and live-chain steps appear in
 Appendices~\ref{app:extended-reproduction} and~\ref{app:chiado-live-verification}.

@@ -38,9 +38,23 @@ defines every experiment and its interpretation boundary.
   and writes the per-member audit and evidence-gap result files.
 - `scripts/verify_production_snapshot_live.py`: optional standard-library live
   recheck of the fixed block, contracts, event, threshold, and seven members.
-- `paper/section7_evaluation.tex`: page-length-preserving paper update centered
-  on the production audit, with the member evidence panels arranged as paired
-  `subtable`s.
+- `data/gnosis_counterfactual_fixture.json`: a separate counterfactual ledger
+  with explicitly hypothetical resistance and activation floors, denominated
+  only in normalized cost units, on the pinned seven-member, four-of-seven
+  committee geometry.
+- `scripts/run_gnosis_counterfactual.py`: sends that fixture through the exact
+  subset-state solver and the certificate gates, including all 21 seed-member
+  placements.
+- `results/gnosis_counterfactual_result.json`: records public `0`, TC `4`, AC
+  `10`, gate-rejected fallback `4`, and both witnesses with the non-production
+  claim boundary.
+- `tests/test_gnosis_counterfactual.py`: verifies the geometry binding,
+  witnesses, seed-position invariance, gate fallback, and portable JSON bytes.
+- `paper/section7_evaluation.tex`: paper update centered on the production
+  audit and strictly conditioned counterfactual, with related evidence panels
+  arranged as paired `subtable`s.
+- `paper/conclusion_counterfactual_sentence.tex`: synchronized conclusion
+  sentence that keeps the actual production certificate at zero.
 - `paper/abstract_evaluation_sentence.txt`: compact abstract replacement that
   distinguishes controlled branch checks from the production evidence audit.
 - `data/evidence_ledger_public_only.csv`: address-level compatibility view of
@@ -92,6 +106,7 @@ The equivalent individual commands are:
 ```bash
 python scripts/run_controlled_checks.py
 python scripts/run_production_evidence_audit.py
+python scripts/run_gnosis_counterfactual.py
 python scripts/verify_certificate.py \
   --snapshot data/shutter_keyper_snapshot.json \
   --ledger data/evidence_ledger_public_only.csv \
@@ -217,6 +232,28 @@ With a reachable archival Gnosis RPC, recheck the frozen state and the
 ```bash
 python scripts/verify_production_snapshot_live.py
 ```
+
+## Deterministic counterfactual on the pinned geometry
+
+Run the small offline branch check with:
+
+```bash
+python scripts/run_gnosis_counterfactual.py
+```
+
+It retains the verified seven-member, four-of-seven Gnosis committee geometry
+but places the hypothetical floors `R=[4,4,1,1,1,1,1]` and
+`tau=[0,0,2/7,2/7,2/7,2/7,2/7]` in the separate counterfactual ledger
+`I_cf`, using normalized cost units rather than estimates. The unified solver records public `0`,
+resistance-only TC `4` with cover `{2,3,4,5}`, activation AC `10` with witness
+`(0,1,2,3)`, and robust fallback `4` when either the ordered-witness or
+exposure-sufficiency gate is disabled. All 21 placements of the two seed
+members reproduce `(TC=4, AC=10)`.
+
+This is a **deterministic counterfactual check on the pinned committee
+geometry**. It is not a Gnosis activation experiment, production validation,
+or measured Keyper resistance. It performs no chain write and does not rerun
+the Chiado pilot.
 
 ## Lattice and Möbius outputs
 

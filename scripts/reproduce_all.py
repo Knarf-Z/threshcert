@@ -45,6 +45,12 @@ def main() -> None:
     )
     assert_expected(production_audit_output, "production_evidence_audit.txt")
 
+    counterfactual_output = run(
+        "scripts/run_gnosis_counterfactual.py",
+        capture=True,
+    )
+    assert_expected(counterfactual_output, "gnosis_counterfactual.txt")
+
     public_output = run(
         "scripts/verify_certificate.py",
         "--snapshot",

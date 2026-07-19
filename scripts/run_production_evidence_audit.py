@@ -270,8 +270,8 @@ def audit_production_evidence(
 
 def write_results(result: dict[str, Any]) -> None:
     RESULT_JSON.parent.mkdir(exist_ok=True)
-    RESULT_JSON.write_text(
-        json.dumps(result, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+    RESULT_JSON.write_bytes(
+        (json.dumps(result, indent=2, ensure_ascii=False) + "\n").encode("utf-8")
     )
     fieldnames = [
         "member_index",

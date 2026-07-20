@@ -55,7 +55,7 @@ def phi(k, M, A):
 
 print("=== Coordinated hardening / pure Mobius interaction (exact appendix construction) ===")
 all_ok = True
-for k in (1, 2, 3, 4, 5):
+for k in (1, 2, 3, 4, 5, 6, 7, 8, 9):
     for M in (2, 5, 10):
         empty_val = phi(k, M, set())
         ok_empty = (empty_val == 2)

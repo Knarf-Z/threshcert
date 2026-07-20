@@ -36,7 +36,7 @@ scripts -- keep it in the same folder.
 | Script | What it checks | Expected output |
 |---|---|---|
 | `core.py` | Shared module: brute-force sequential-search `Gamma*`, the independent subset/canonical-order (AC) formula solver, the uniform lower-tail closed form, and a random-instance generator. Not run directly. | (none, imported by others) |
-| `test_equivalence.py` | Random cross-validation of the central theorem (`Gamma* == min over T+(A0) of resistance sum`) on ~1200 random small instances (n=3..9) plus 5 hand-picked edge cases (all-zero tau, tied tau, zero-resistance members, near-threshold `A0`, an infeasible instance). | `Total ... Mismatches: 0` |
+| `test_equivalence.py` | Random cross-validation of the central theorem (`Gamma* == min over T+(A0) of resistance sum`) on 720 random small instances (n=3..8, uniform and non-uniform weights, 60 trials each) plus 5 hand-picked edge cases (all-zero tau, tied tau, zero-resistance members, near-threshold `A0`, an infeasible instance). | `Total instances tested: 725`, `Mismatches: 0` |
 | `reproduce_paper_numbers.py` | Reproduces all 36 specific numbers claimed in Section 7 (activation ladder 5/14/23/32/41, mechanism-stress k+4 vs 4, the exact published defensive-allocation instance and its three-rule table, the baseline-comparison numbers 0/4/18/40). | `TOTAL CHECKS: 36   MATCH: 36   MISMATCH: 0` |
 | `hardening_and_greedy.py` | Reconstructs the exact appendix instances for the coordinated-hardening / pure-Möbius-interaction theorem and the singleton-greedy-no-guarantee proposition, and checks them **exhaustively** (every subset, not a sample) for several k and M / rho values. | Two `PASS` lines |
 | `instability.py` | Reconstructs the exact appendix instance for the activation-boundary-instability theorem; brute-force-checks it for small K and arithmetic-checks the same construction for large K (K up to 1,000,000). | `PASS: True` |
@@ -69,7 +69,7 @@ scripts -- keep it in the same folder.
 
 ## Result summary (as last run)
 
-- `test_equivalence.py`: 1200 random instances + 5 edge cases, 0 mismatches.
+- `test_equivalence.py`: 720 random instances (n=3..8) + 5 edge cases, 725 total, 0 mismatches.
 - `reproduce_paper_numbers.py`: 36/36 matched.
 - `hardening_and_greedy.py`: coordinated-hardening theorem verified
   exhaustively (all 2^k-1 proper subsets, not sampled) for k up to 9 and

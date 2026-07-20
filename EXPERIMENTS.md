@@ -72,48 +72,83 @@ resistance, activation, operator independence, or payment conditions.
 20. Greedy-decoy failure: checks a fixed certified-family construction in
     which local positive marginal gains divert greedy allocation from the
     coordinated optimum.
+21. Generalized committee-shape sweep: repeats checks 17, a truncation-error
+    check analogous to 16/18, and check 19 at four additional committee
+    shapes (3-of-5, 5-of-9, 6-of-11, 7-of-13, 100 seeded trials each), so the
+    n=7 findings are not read as an artifact of one committee size. Truncation
+    error is computed via a per-order zeta-transform accumulation rather than
+    the O(3^n) per-mask subset enumeration used for the single n=7 case, so
+    the check stays cheap up to n=13. Additive: does not modify or rerun the
+    n=7 experiment or its recorded outputs.
 
 ## Historical calibration checks
 
-21. Dune export validation: reconciles daily counts, transfer coverage,
+22. Dune export validation: reconciles daily counts, transfer coverage,
     selected coverage-curve rows, and dex.trades aggregate statistics.
-22. Historical target calibration: reports selected empirical coverage values
+23. Historical target calibration: reports selected empirical coverage values
     while marking every value as calibration-only.
 
 ## Scalability, sensitivity, and baseline checks
 
-23. Committee-size scalability: reports exact subset-state counts and the
+24. Committee-size scalability: reports exact subset-state counts and the
     median, inclusive IQR, range, and peak traced memory from all ten retained
     laptop repeats for `n=8,10,12,14,16,18`.
-24. Certificate-computation cost: contrasts the `O(n log n)` sorting proxy for
+25. Certificate-computation cost: contrasts the `O(n log n)` sorting proxy for
     a uniform threshold-cover certificate with the `2^n` state count of the
     generic exact subset-state method for committee sizes through `n=448`.
-25. Parameter sensitivity: evaluates 48 controlled combinations covering
+26. Parameter sensitivity: evaluates 48 controlled combinations covering
     thresholds `3/7` through `6/7`, four equal-mean resistance distributions,
     and zero, one, or two initially exposed shares.
-26. Baseline comparison: compares public-only zero, a certified
+27. Boundary and larger-committee sensitivity: 64 combinations covering
+    degenerate threshold margins (`q=1` and `q=7` on the original n=7
+    profiles), an all-zero and a single-dominant-member resistance profile
+    swept across the full threshold range, and committee sizes 14 and 28
+    built by tiling the original profile shapes and holding the 4-of-7
+    threshold ratio (plus full unanimity). Kept in a separate output from
+    check 26 so that table's row count and recorded numbers stay unchanged.
+28. Baseline comparison: compares public-only zero, a certified
     minimum-member-floor bound, the exact lower-tail threshold certificate,
     and an explicitly uncertified mean-resistance heuristic.
 
+## Independent from-scratch verification
+
+29. A from-scratch reimplementation of the paper's core acquisition-cost
+    objects, built only from the formulas in the paper's own text (not the
+    authors' code), independently cross-checks all 36 named numbers in
+    Section 7, random/exhaustively stress-tests the central equivalence and
+    hardening theorems on instances beyond the paper's own hand-picked
+    examples, and extends the exact-solver scaling table to n=22 on an
+    independent implementation. A separate script checks the replacement-hull
+    attribution theorem's two formulas against each other via an exact
+    Fraction-equality check on 200 random instances (built from the theorem
+    statement supplied directly by the paper's author, since `main_text.tex`
+    is not on this machine, unlike the rest of this suite) plus its
+    separation corollary on three hand-picked constructive instances. See
+    `verification_scripts/README.md` for full per-script coverage and stated
+    limitations (this suite cannot catch a shared conceptual mistake that
+    both the paper and a from-scratch reimplementation would make the same
+    way, and the replacement-hull separation corollary is only checked
+    constructively rather than by a general solver).
+
 ## Controlled public-testnet enforcement pilot
 
-27. Seven Solidity/Hardhat checks for a seven-member four-of-seven bonded
+30. Seven Solidity/Hardhat checks for a seven-member four-of-seven bonded
     committee, verifier-only evidence, deadline enforcement, binding of every
     signed evidence field, duplicate-signer rejection, nonuniform-bond
     certificate computation, penalty transfer, and certificate update.
-28. Seven-process Rolling Shutter v1.4.4 overlay with fresh runtime keys, DKG,
+31. Seven-process Rolling Shutter v1.4.4 overlay with fresh runtime keys, DKG,
     individual decryption-share persistence, and a fixed four-of-seven
     threshold.
-29. Go evidence export requiring seven uniquely indexed valid BLS shares,
+32. Go evidence export requiring seven uniquely indexed valid BLS shares,
     seven uniquely indexed valid native Keyper signatures, a valid stored
     aggregate key, and equality with a four-share reconstruction.
-30. Chiado deployment, release-job, and verifier-gated slashing scripts that
+33. Chiado deployment, release-job, and verifier-gated slashing scripts that
     record transaction hashes, blocks, gas, timing, and certificate changes
     without recording private keys.
-31. Read-only live-chain verification of all 11 receipts, exact deployment
+34. Read-only live-chain verification of all 11 receipts, exact deployment
     bytecode and constructor arguments, slashing calldata and event fields, and
     current contract state through a Chiado RPC endpoint.
-32. A deterministic machine-readable Chiado execution certificate binding the
+35. A deterministic machine-readable Chiado execution certificate binding the
     contract, exporter, Keyper set, four run records, and live verifier by
     SHA-256; it recomputes the four-smallest-bonds value from `4e12` to `3e12`
     wei and records the production-transfer exclusions in the certificate.
@@ -122,7 +157,8 @@ resistance, activation, operator independence, or payment conditions.
 
 - The archival production snapshot and every member address were checked
   against Gnosis RPC state; the offline artifact retains all fixed identifiers
-  needed to repeat that verification.
+  needed to repeat that verification. As last run (2026-07-20), the live
+  recheck and the live Chiado chain recheck both still returned `PASS`.
 - The Docker DKG, seven-share evidence export, public Chiado deployment,
   release job, and verifier-gated slashing transaction completed successfully.
   Their records and hashes are cross-checked by bundle-integrity tests.
@@ -135,3 +171,7 @@ resistance, activation, operator independence, or payment conditions.
 - The `0 -> 4 -> 10 -> 4` pinned-geometry result uses hypothetical floors. It
   is not a Gnosis activation experiment, production validation, or measurement
   of Keyper resistance.
+- The generalized committee-shape sweep and the boundary/larger-committee
+  sensitivity rows are both extensions of the same normalized, seeded, or
+  tiled controlled constructions used elsewhere in this inventory; neither
+  introduces new production or deployment evidence.

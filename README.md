@@ -5,17 +5,18 @@ activation-aware evidence acquisition, coordinated defense, and
 evidence-gated slashing. This complete bundle contains a pinned production
 deployment evidence audit, all original certificate, activation, allocation,
 exact-solver, defense-lattice, Möbius, penalty-evidence, Dune/GPv2, and public
-Chiado pilot materials. The three added
-scalability, parameter-sensitivity, and baseline-comparison studies remain
-isolated in `extended_experiments/`, so reproducing them does not overwrite the
-original experiment results.
+Chiado pilot materials, the generalized committee-shape and boundary-parameter
+sweeps, and an independent from-scratch reimplementation that cross-checks
+the paper's own numbers. The three added scalability, parameter-sensitivity,
+and baseline-comparison studies remain isolated in `extended_experiments/`,
+so reproducing them does not overwrite the original experiment results.
 
 Authors: Jiaqi Zhang
 ([ORCID 0009-0005-3271-3106](https://orcid.org/0009-0005-3271-3106)) and
 Honghao Fu
 ([ORCID 0000-0002-1934-3391](https://orcid.org/0000-0002-1934-3391)).
-See `CITATION.cff` for machine-readable citation metadata and `EXPERIMENTS.md`
-for the complete inventory and claim boundaries.
+See `CITATION.cff` for machine-readable citation metadata and `HARDENING.md`
+for how the verification layers fit together.
 
 It intentionally excludes virtual environments, IDE metadata, `.env` files,
 and secrets.
@@ -50,27 +51,32 @@ defines every experiment and its interpretation boundary.
   claim boundary.
 - `tests/test_gnosis_counterfactual.py`: verifies the geometry binding,
   witnesses, seed-position invariance, gate fallback, and portable JSON bytes.
-- `paper/section7_evaluation.tex`: paper update centered on the production
-  audit and strictly conditioned counterfactual, with related evidence panels
-  arranged as paired `subtable`s.
-- `paper/conclusion_counterfactual_sentence.tex`: synchronized conclusion
-  sentence that keeps the actual production certificate at zero.
-- `paper/abstract_evaluation_sentence.txt`: compact abstract replacement that
-  distinguishes controlled branch checks from the production evidence audit.
 - `data/evidence_ledger_public_only.csv`: address-level compatibility view of
   the production audit for the basic threshold-cover verifier.
 - `data/evidence_ledger_controlled_positive.csv`: a controlled positive ledger used only to test the verifier. It is not deployment evidence.
 - `scripts/verify_certificate.py`: computes the uniform threshold-cover certificate.
 - `scripts/run_controlled_checks.py`: writes the activation-ladder, mechanism-scope, defensive-allocation, and sensitivity outputs.
 - `scripts/run_scaling_benchmark.py`: runs a machine-specific exact subset-state scaling check.
-- `extended_experiments/`: self-contained scalability,
-  certificate-computation cost, parameter-sensitivity, and baseline-comparison
-  experiments with their own inputs, results, tests, and reproduction command.
 - `scripts/defense_lattice.py`: exact sequential solver, Boolean-lattice
   transforms, target-plan enumeration, and allocation utilities.
 - `scripts/run_lattice_mobius_experiments.py`: writes the pure high-order,
   low-order truncation, random four-of-seven, target-lattice, and greedy-decoy
   results.
+- `scripts/run_generalized_committee_sweep.py`: repeats the seeded random
+  monotonicity, Möbius truncation-error, and exact-vs-greedy allocation checks
+  at committee shapes 3-of-5, 5-of-9, 6-of-11, and 7-of-13, so the n=7
+  findings above are not read as an artifact of the one committee size the
+  paper headlines. Additive: it does not modify or rerun the n=7 experiment.
+- `extended_experiments/`: self-contained scalability,
+  certificate-computation cost, parameter-sensitivity, and baseline-comparison
+  experiments with their own inputs, results, tests, and reproduction command.
+  Its `parameter_sensitivity_boundary.csv` output covers degenerate threshold
+  margins, an all-zero and a single-dominant-member resistance profile, and
+  committee sizes 14 and 28, kept separate from the original 48-row table.
+- `verification_scripts/`: an independent, from-scratch reimplementation built
+  only from the paper's own formulas (not the authors' code), used to
+  cross-check every named number in Section 7 and stress-test the central
+  theorems beyond the paper's own hand-picked examples. See its own `README.md`.
 - `tests/test_defense_lattice.py`: standard-library unit tests for the new
   lattice and Möbius calculations.
 - `results/solver_scaling_repeats/`: all ten raw benchmark repeats from the
@@ -85,6 +91,15 @@ defines every experiment and its interpretation boundary.
   verification of that certificate and all source-file bindings.
 
 ## Reproduce
+
+Run every offline, deterministic check from one entry point:
+
+```bash
+python reproduce_everything.py
+```
+
+Expected final line: `everything=PASS`. This chains the four layers below,
+which also remain independently runnable.
 
 Run all deterministic checks from the artifact root:
 
@@ -121,13 +136,34 @@ python scripts/run_lattice_mobius_experiments.py
 python -m unittest discover -s tests -v
 ```
 
-Run the three added experiments separately:
+Run the generalized committee-shape sweep separately (additive, does not
+rerun the n=7 experiment above):
+
+```bash
+python scripts/run_generalized_committee_sweep.py
+```
+
+Run the three added scalability/sensitivity/baseline experiments separately:
 
 ```bash
 python extended_experiments/reproduce_extended.py
 ```
 
 Expected final output: `extended_experiments=PASS`.
+
+Run the independent from-scratch verification suite separately:
+
+```bash
+cd verification_scripts
+python test_equivalence.py
+python reproduce_paper_numbers.py
+python hardening_and_greedy.py
+python instability.py
+python scaling_fast.py --ns 8 10 12 14 16 18
+```
+
+See `verification_scripts/README.md` for what each script checks and its
+honest limitations.
 
 To check the deterministic experiment summary exactly:
 
@@ -196,7 +232,9 @@ npm run verify:chiado:live
 The offline certificate and live-chain verifier serve different purposes. The
 offline command establishes deterministic record binding and exact calculation;
 the live command establishes that the recorded transactions, bytecode, event,
-and contract state are present on Chiado.
+and contract state are present on Chiado. As last run (2026-07-20), both the
+live Chiado check and the live Gnosis production-snapshot recheck below still
+returned `PASS` against current chain state.
 
 ## Production deployment evidence audit
 
@@ -272,6 +310,12 @@ the Chiado pilot.
   greedy allocation on the random four-of-seven instances.
 - `results/greedy_decoy_failure.csv`: a fixed-family construction in which
   positive-marginal decoys divert greedy allocation from a coordinated optimum.
+- `results/mobius_generalized_sweep.csv`: monotonicity and first/second/third-
+  order truncation error at committee shapes 3-of-5, 5-of-9, 6-of-11, and
+  7-of-13, 100 seeded trials each.
+- `results/allocation_generalized_sweep.csv`: exact-versus-greedy allocation
+  gain ratios at the same generalized committee shapes and budgets one
+  through three.
 - `results/defensive_allocation.csv`: computed member-level increment vectors,
   four minimal-cover costs, and the resulting certificate for every controlled
   allocation strategy and budget.
@@ -295,6 +339,9 @@ the Chiado pilot.
   sorted uniform threshold-cover evaluation and generic subset-state search.
 - `extended_experiments/results/parameter_sensitivity.csv`: 48 controlled combinations of threshold,
   resistance shape, and initial exposure.
+- `extended_experiments/results/parameter_sensitivity_boundary.csv`: 64 rows covering degenerate
+  threshold margins (q=1, q=7), an all-zero and a single-dominant-member
+  resistance profile, and committee sizes 14 and 28.
 - `extended_experiments/results/baseline_comparison.csv`: public-only, minimum-member-floor,
   exact-lower-tail, and mean-resistance heuristic outputs, with certification
   status recorded explicitly.
@@ -314,7 +361,14 @@ profiles with equal mean resistance. They identify structural dependence on
 threshold, exposure, and lower-tail shape; they are not measurements of live
 Keyper resistance. The runtime table reports the supplied laptop repeats and
 is an implementation benchmark rather than a hardware-independent complexity
-claim.
+claim. The boundary and larger-committee rows are the same normalized-profile
+construction taken to its parameter extremes; they do not introduce new
+production evidence either.
+
+The generalized committee-shape sweep is the same seeded-random-instance
+construction as the n=7 experiment, run at four additional shapes. It shows
+the monotonicity and truncation-error findings are not specific to 4-of-7; it
+is not a claim about any real committee of those other sizes.
 
 The lattice and Möbius experiments are theorem and algorithm checks over
 controlled or seeded instances. They do not turn the public Shutter snapshot

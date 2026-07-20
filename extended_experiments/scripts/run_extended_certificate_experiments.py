@@ -20,6 +20,13 @@ RESISTANCE_PROFILES: dict[str, tuple[int, ...]] = {
 THRESHOLD_SHARES = (3, 4, 5, 6)
 EXPOSURE_SHARES = (0, 1, 2)
 
+BOUNDARY_RESISTANCE_PROFILES: dict[str, tuple[int, ...]] = {
+    "all_zero": (0, 0, 0, 0, 0, 0, 0),
+    "single_dominant_member": (100, 1, 1, 1, 1, 1, 1),
+}
+DEGENERATE_THRESHOLD_SHARES = (1, 7)
+LARGER_COMMITTEE_SIZES = (14, 28)
+
 
 def write_rows(path: Path, fields: list[str], rows: list[dict[str, object]]) -> None:
     with path.open("w", newline="", encoding="utf-8") as handle:
@@ -169,6 +176,100 @@ def parameter_sensitivity() -> list[dict[str, object]]:
     return rows
 
 
+def tile_profile(profile: tuple[int, ...], n: int) -> tuple[int, ...]:
+    base = len(profile)
+    if n % base != 0:
+        raise ValueError("committee size must be a multiple of the base profile length")
+    return profile * (n // base)
+
+
+def boundary_and_scale_sensitivity() -> list[dict[str, object]]:
+    """Extreme-parameter and larger-committee cases.
+
+    Kept in a separate output from the 48-row `parameter_sensitivity` table
+    above so that table's existing row count and recorded numbers stay
+    unchanged.
+    """
+
+    rows: list[dict[str, object]] = []
+    n = 7
+
+    for profile, resistances in RESISTANCE_PROFILES.items():
+        for threshold_shares in DEGENERATE_THRESHOLD_SHARES:
+            for exposure_shares in EXPOSURE_SHARES:
+                required = threshold_shares - exposure_shares
+                if not 1 <= required <= n:
+                    continue
+                rows.append(
+                    {
+                        "case": "degenerate_threshold_margin",
+                        "profile": profile,
+                        "n": n,
+                        "threshold_shares": threshold_shares,
+                        "initial_exposure_shares": exposure_shares,
+                        "required_additional_shares": required,
+                        "exact_certificate": exact_uniform_certificate(
+                            resistances, required
+                        ),
+                    }
+                )
+
+    extended_threshold_shares = sorted(set(THRESHOLD_SHARES) | set(DEGENERATE_THRESHOLD_SHARES))
+    for profile, resistances in BOUNDARY_RESISTANCE_PROFILES.items():
+        for threshold_shares in extended_threshold_shares:
+            for exposure_shares in EXPOSURE_SHARES:
+                required = threshold_shares - exposure_shares
+                if not 1 <= required <= n:
+                    continue
+                rows.append(
+                    {
+                        "case": "boundary_resistance_profile",
+                        "profile": profile,
+                        "n": n,
+                        "threshold_shares": threshold_shares,
+                        "initial_exposure_shares": exposure_shares,
+                        "required_additional_shares": required,
+                        "exact_certificate": exact_uniform_certificate(
+                            resistances, required
+                        ),
+                    }
+                )
+
+    for size in LARGER_COMMITTEE_SIZES:
+        for profile_name, base_resistances in RESISTANCE_PROFILES.items():
+            resistances = tile_profile(base_resistances, size)
+            proportional_required = round(4 * size / 7)
+            for required in sorted({proportional_required, size}):
+                rows.append(
+                    {
+                        "case": "larger_committee",
+                        "profile": profile_name,
+                        "n": size,
+                        "threshold_shares": required,
+                        "initial_exposure_shares": 0,
+                        "required_additional_shares": required,
+                        "exact_certificate": exact_uniform_certificate(
+                            resistances, required
+                        ),
+                    }
+                )
+
+    write_rows(
+        RESULTS / "parameter_sensitivity_boundary.csv",
+        [
+            "case",
+            "profile",
+            "n",
+            "threshold_shares",
+            "initial_exposure_shares",
+            "required_additional_shares",
+            "exact_certificate",
+        ],
+        rows,
+    )
+    return rows
+
+
 def baseline_comparison() -> list[dict[str, object]]:
     rows: list[dict[str, object]] = []
     methods = (
@@ -227,6 +328,7 @@ def main() -> None:
     scaling = scalability_analysis()
     cost_models = certificate_cost_models()
     sensitivity = parameter_sensitivity()
+    boundary_sensitivity = boundary_and_scale_sensitivity()
     baselines = baseline_comparison()
     runtime_ratio = float(scaling[-1]["median_seconds"]) / float(
         scaling[0]["median_seconds"]
@@ -245,6 +347,7 @@ def main() -> None:
     print(f"cost_model_rows={len(cost_models)}")
     print(f"parameter_sensitivity_rows={len(sensitivity)}")
     print(f"heavy_lower_tail_4of7_certificate={heavy['exact_certificate']}")
+    print(f"boundary_sensitivity_rows={len(boundary_sensitivity)}")
     print(f"baseline_rows={len(baselines)}")
 
 

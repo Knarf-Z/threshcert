@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from run_extended_certificate_experiments import (  # noqa: E402
+    BOUNDARY_RESISTANCE_PROFILES,
     RESISTANCE_PROFILES,
     exact_uniform_certificate,
 )
@@ -74,6 +75,45 @@ class ExtendedCertificateExperimentTests(unittest.TestCase):
                 for row in sorted(group, key=lambda item: int(item["initial_exposure_shares"]))
             ]
             self.assertTrue(all(left >= right for left, right in zip(values, values[1:])))
+
+    def test_boundary_and_scale_sensitivity_extreme_cases(self) -> None:
+        rows = read_rows("parameter_sensitivity_boundary.csv")
+        self.assertEqual(len(rows), 64)
+
+        all_zero_rows = [row for row in rows if row["profile"] == "all_zero"]
+        self.assertTrue(all_zero_rows)
+        self.assertTrue(
+            all(int(row["exact_certificate"]) == 0 for row in all_zero_rows)
+        )
+
+        dominant = BOUNDARY_RESISTANCE_PROFILES["single_dominant_member"]
+        unanimous_rows = [
+            row
+            for row in rows
+            if row["profile"] == "single_dominant_member"
+            and int(row["required_additional_shares"]) == 7
+        ]
+        self.assertTrue(unanimous_rows)
+        self.assertTrue(
+            all(
+                int(row["exact_certificate"]) == sum(dominant)
+                for row in unanimous_rows
+            )
+        )
+
+        larger = [row for row in rows if row["case"] == "larger_committee"]
+        self.assertTrue(all(int(row["n"]) in (14, 28) for row in larger))
+        self.assertTrue(
+            all(
+                int(row["exact_certificate"])
+                == exact_uniform_certificate(
+                    RESISTANCE_PROFILES[row["profile"]]
+                    * (int(row["n"]) // len(RESISTANCE_PROFILES[row["profile"]])),
+                    int(row["required_additional_shares"]),
+                )
+                for row in larger
+            )
+        )
 
     def test_simple_baseline_validity_and_tightness(self) -> None:
         rows = read_rows("baseline_comparison.csv")

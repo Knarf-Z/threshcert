@@ -1,5 +1,52 @@
 # ThreshCert artifact changelog
 
+## 2026-07-20 pre-submission hardening pass
+
+- Merged this working tree with the parallel `FC_complete_experiment_bundle`
+  distribution, which had independently gained an independent from-scratch
+  reimplementation (`verification_scripts/`) that cross-checks the paper's
+  own numbers; that suite was ported in, and this tree's production evidence
+  audit, Gnosis counterfactual, and Chiado execution certificate were ported
+  the other way so both stay at feature parity.
+- Added a generalized committee-shape sweep
+  (`scripts/run_generalized_committee_sweep.py`) that repeats the seeded
+  random monotonicity, Möbius truncation-error, and exact-vs-greedy
+  allocation checks at four additional committee shapes (3-of-5, 5-of-9,
+  6-of-11, 7-of-13, 100 trials each), so the n=7 findings are not read as an
+  artifact of the one committee size the paper headlines. Truncation error is
+  computed via a per-order zeta-transform accumulation rather than the
+  original `O(3^n)` per-mask routine, keeping the check cheap up to n=13; the
+  faster routine was cross-checked exactly against the original for `0`
+  mismatches on a held-out instance.
+- Added a boundary and larger-committee sensitivity sweep to
+  `extended_experiments/` (`parameter_sensitivity_boundary.csv`, 64 rows):
+  degenerate threshold margins (`q=1`, `q=7`), an all-zero and a
+  single-dominant-member resistance profile, and committee sizes 14 and 28
+  built by tiling the original profile shapes. Kept separate from the
+  existing 48-row table so its row count and recorded numbers are unchanged.
+- Added `reproduce_everything.py` at the artifact root, chaining the four
+  previously separate reproduction entry points
+  (`scripts/reproduce_all.py`, the new generalized sweep,
+  `extended_experiments/reproduce_extended.py`, and the
+  `verification_scripts/` suite) plus the offline Chiado certificate check
+  into one `everything=PASS` command.
+- Re-ran the live production-snapshot recheck and the live Chiado recheck;
+  both still returned `PASS` against current chain state as of this pass.
+- Added `verification_scripts/replacement_hull.py`, closing the one
+  previously-unexercised item in that suite's own limitations list: the
+  replacement-hull attribution theorem (public-attribution-formal-bounds),
+  from the theorem statement supplied directly by the paper's author since
+  `main_text.tex` is not on this machine. Checks the primal (lambda) formula
+  against the equivalent (s, Q in conv(R)) formula for `A_i^eps(C,x)` on 200
+  random instances via an exact Fraction-equality check (not tolerance-based:
+  extracts `s*` from the primal LP's own optimal solution and independently
+  re-solves the other formula's inner problem at that exact value), plus the
+  separation corollary on three hand-picked constructive instances. Not part
+  of the routine reproduction chain (takes ~45 seconds; run separately, like
+  `scaling_fast.py`).
+- Regenerated `MANIFEST.sha256` after the merge and additions; every
+  reproduction layer, including the seven-test deployment suite, passes.
+
 ## 2026-07-19 pinned-geometry counterfactual branch check
 
 - Added a deterministic seven-member, four-of-seven counterfactual fixture

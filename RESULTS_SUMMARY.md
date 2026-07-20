@@ -60,6 +60,25 @@
 - In the constructed decoy family, the greedy-to-optimal gain ratio fell to
   approximately `0.00005005`.
 
+## Generalized committee-shape sweep
+
+- All 100 seeded trials were monotone at every one of the four additional
+  shapes (3-of-5, 5-of-9, 6-of-11, 7-of-13): `0` monotonicity failures each.
+- Median maximum relative truncation errors after retaining interactions
+  through order one/two/three: `0.310/0.188/0.112` (3-of-5), `0.341/0.271/0.262`
+  (5-of-9), `0.342/0.251/0.289` (6-of-11), and `0.374/0.276/0.367` (7-of-13).
+  Error does not decrease monotonically with retained order at every shape
+  (order three exceeds order two at 6-of-11 and 7-of-13); this is an expected
+  property of a signed Möbius expansion, not a computation error, and was
+  cross-checked exactly against the original `O(3^n)` per-mask reference
+  routine on a held-out instance (`0` mismatches across `1,536` compared
+  values).
+- Minimum greedy gain ratios by budget: budget one is exactly `1.000` at every
+  shape; budget two ranges from `0.473` (3-of-5) to `0.949` (6-of-11); budget
+  three ranges from `0.418` (3-of-5) to `0.898` (6-of-11). The qualitative
+  finding from the n=7 experiment -- greedy is exact at budget one and can
+  degrade at higher budgets -- generalizes across all four shapes.
+
 ## Historical calibration checks
 
 - Transfer-join family: `1,672,005` settlement transactions and approximately
@@ -106,6 +125,27 @@
   exact lower-tail value `18`; the mean-resistance heuristic reports `40` but
   is explicitly marked uncertified because it can overstate the certificate.
 
+## Boundary and larger-committee sensitivity
+
+- All-zero resistance profile: the certificate is exactly `0` at every tested
+  threshold and exposure combination, as required.
+- Single-dominant-member profile `(100,1,1,1,1,1,1)`: the certificate stays at
+  the number of shares required (`1` through `6`) while unanimity is not
+  required, then jumps to `106` at full unanimity (`q=7`) once the dominant
+  member's resistance must be included -- an 18x jump from the `q=6` value of
+  `6`, illustrating how concentrated resistance mass can make the threshold
+  cover certificate highly sensitive to whether the last share is required.
+- Degenerate threshold margins (`q=1` and `q=7`) on the original four profiles
+  reproduce the same monotone pattern seen in the 48-row table, extended to
+  its two endpoints.
+- Larger committees built by tiling the original profile shapes: at `n=14`
+  (double the original committee, threshold held at the `4/7` ratio, so
+  `q=8`), certificates are `80`, `68`, `32`, and `36` for the uniform,
+  balanced, bimodal, and heavy-lower-tail profiles; at `n=28` (`q=16`), they
+  are `160`, `136`, `64`, and `72`. Each is exactly double (`n=14`) or
+  quadruple (`n=28`) its `n=7` counterpart at the matching per-tile share
+  count, as expected from tiling identical resistance values.
+
 ## Deployment implementation status
 
 - Seven Solidity/Hardhat tests pass, including duplicate-signer rejection,
@@ -137,7 +177,9 @@
 - The read-only `verify:chiado:live` command independently checks all 11 public
   transaction receipts, exact deployment bytecode and constructor arguments,
   slashing calldata/event fields, and the current contract state through a
-  Chiado RPC endpoint; it requires no wallet private key.
+  Chiado RPC endpoint; it requires no wallet private key. As last run
+  (2026-07-20) it still returned `PASS`, with total bond `6,000,000,000,000`
+  wei and certificate `3,000,000,000,000` wei live on Chiado.
 - The machine-readable certificate
   `deployment/certificates/chiado-execution-certificate.json` independently
   recomputes the four-smallest-bonds values, binds nine source artifacts by
@@ -165,6 +207,8 @@ addresses and reports exactly which resistance, activation, attribution,
 forfeiture, insurance or compensation, and enforcement-probability evidence is
 missing from each row.
 
-Likewise, the extended sensitivity and baseline numbers are normalized
-controlled profiles, not observations of production Keyper resistance. The
-scalability times are tied to the recorded machine and Python implementation.
+Likewise, the extended sensitivity and baseline numbers, the boundary and
+larger-committee rows, and the generalized committee-shape sweep are all
+normalized or seeded controlled constructions, not observations of production
+Keyper resistance. The scalability times are tied to the recorded machine and
+Python implementation.

@@ -5,4 +5,5 @@ n18_over_n8_median_runtime=10968.962974
 cost_model_rows=7
 parameter_sensitivity_rows=48
 heavy_lower_tail_4of7_certificate=18
+boundary_sensitivity_rows=64
 baseline_rows=64

@@ -11,3 +11,4 @@ deployment/evidence/*.json
 deployment/results/*.json
 deployment/rolling-shutter/upstream/
 deployment/rolling-shutter/bin/
+paper/

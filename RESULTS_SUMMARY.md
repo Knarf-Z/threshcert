@@ -78,6 +78,19 @@
   three ranges from `0.418` (3-of-5) to `0.898` (6-of-11). The qualitative
   finding from the n=7 experiment -- greedy is exact at budget one and can
   degrade at higher budgets -- generalizes across all four shapes.
+- Two further shapes (8-of-15, 9-of-17) were added in a later pass, kept
+  additive (the four shapes above and the n=7 experiment are untouched;
+  each shape's random draws are independently seeded by `(n, q)`, so adding
+  shapes cannot perturb already-recorded values). Both were monotone across
+  all 100 trials (`0` failures each). Median maximum relative truncation
+  errors after retaining interactions through order one/two/three:
+  `0.341/0.262/0.372` (8-of-15) and `0.390/0.298/0.484` (9-of-17) -- order
+  three again exceeds order two at both shapes, consistent with the
+  non-monotonic pattern already noted above. Minimum greedy gain ratio is
+  exactly `1.000` at budgets one and two for both shapes, falling to
+  `0.921037` (8-of-15) and `0.911440` (9-of-17) at budget three -- the same
+  qualitative pattern (exact at low budget, can degrade at higher budget)
+  continues to two more committee sizes.
 
 ## Historical calibration checks
 
@@ -101,6 +114,22 @@
   traced memory was `4.253922462` MiB.
 - No timing run was deleted. The median/IQR are primary because three `n=18`
   runs show substantial system-noise inflation.
+
+## Additive n=20 scaling extension
+
+- A later pass added one further point, `n=20` (`1,048,576` subset states),
+  reusing the same solver and ten-repeat discipline in a separate output
+  (`results/solver_scaling_repeats_extended*`) so the six-point table above
+  is untouched.
+- Median wall time was `32.244088250` s; the inclusive IQR was
+  `[32.168975150, 32.327625925]` s; the observed range was
+  `32.131784300` to `33.657295000` s. Peak traced memory was
+  `17.004906654` MiB (the raw per-repeat value varied by under `0.00002`
+  MiB across the ten runs -- negligible allocator noise, not treated as a
+  hard-equality check the way the original table treats it).
+- This is one additional machine-specific timing point on this machine, not
+  a new algorithm or a claim about asymptotic behavior beyond what the
+  six-point table already shows.
 
 ## Extended scalability, sensitivity, and baselines
 

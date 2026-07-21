@@ -1,5 +1,54 @@
 # ThreshCert artifact changelog
 
+## 2026-07-21 second upgrade pass
+
+- Extended the generalized committee-shape sweep
+  (`scripts/run_generalized_committee_sweep.py`) with two more shapes,
+  8-of-15 and 9-of-17 (100 trials each), continuing the existing
+  `(5,3),(9,5),(11,6),(13,7)` progression. Purely additive: each shape's
+  random draws are independently seeded by `(n, q)`, so the four
+  previously-recorded shapes and the original n=7 experiment are unchanged;
+  confirmed by rerunning and diffing the four original shapes' printed
+  values. Both new shapes were monotone across all 100 trials and greedy
+  was exact at budget one and two, degrading at budget three -- the same
+  qualitative pattern as the existing four shapes.
+- Added a new parallel scaling point, `n=20`, to the machine-specific exact-
+  solver benchmark (`scripts/run_scaling_benchmark_extended.py` +
+  `scripts/summarize_scaling_repeats_extended.py`), with its own ten-repeat
+  raw files and median/IQR summary
+  (`results/solver_scaling_repeats_extended*`). Kept separate from
+  `scripts/run_scaling_benchmark.py`'s existing n=8..18 table because that
+  table's file/row counts are hard-asserted and its summary is consumed
+  (byte-compared) by `extended_experiments/`. Median wall time `32.244088` s,
+  consistent with the existing growth trend.
+- Actually ran and recorded (rather than just documenting as possible) the
+  independent-implementation scaling check
+  (`verification_scripts/scaling_fast.py`) through n=24, saving the full
+  n=8..24 table to the new `verification_scripts/results/scaling_fast_extended.txt`
+  (n=24: 16,777,216 states, median 55.99 s).
+- Neither new scaling script joins the automatic `reproduce_everything.py`
+  chain, consistent with the existing exclusion of machine-specific timing
+  benchmarks from that chain.
+- Received the paper's full `main_text.tex` directly from the author and
+  saved it to `paper/main_text.tex`, closing the "paper source not on this
+  machine" gap noted for every theorem except the replacement-hull one
+  (confirmed the previously pasted replacement-hull theorem statement
+  matches `main_text.tex` exactly; `appendix_route_b.tex`, containing the
+  proofs, is still not present).
+- Added `verification_scripts/information_boundary.py`, independently
+  stress-testing the paper's central theorem (evidence-optimal certificates
+  under activation scope). Unlike `test_equivalence.py` (which checks the
+  (AC) reduction for one fixed profile), this tests the theorem's actual
+  claim about an evidence ledger: on 300 random small instances (n=3..7),
+  the exact-floor profile attains TCR/ACR exactly (tightness), and 1,500
+  further profiles built strictly above the same floors -- resistance and
+  activation independently perturbed upward, including the
+  most-permissive all-zero-tau case for the mechanism-robust TCR claim --
+  never certified a smaller attack cost (soundness); a separate 60-instance
+  check confirms the public-only layer collapses to exactly zero. Not part
+  of the routine reproduction chain (same tier as `replacement_hull.py` and
+  `scaling_fast.py`).
+
 ## 2026-07-20 pre-submission hardening pass
 
 - Merged this working tree with the parallel `FC_complete_experiment_bundle`

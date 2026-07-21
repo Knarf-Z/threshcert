@@ -1,0 +1,2 @@
+n,runs,subset_states,min_seconds,q1_seconds,median_seconds,q3_seconds,max_seconds,mean_seconds,peak_mib,optimum
+20,10,1048576,32.131784300,32.168975150,32.244088250,32.327625925,33.657295000,32.389361470,17.004906654,29.567070853621

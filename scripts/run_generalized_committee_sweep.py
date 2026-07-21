@@ -29,7 +29,7 @@ RESULTS = ROOT / "results"
 RESULTS.mkdir(exist_ok=True)
 RANDOM_TRIALS = 100
 RANDOM_SEED = 20260714
-COMMITTEE_SHAPES = [(5, 3), (9, 5), (11, 6), (13, 7)]
+COMMITTEE_SHAPES = [(5, 3), (9, 5), (11, 6), (13, 7), (15, 8), (17, 9)]
 MAX_ORDERS = (1, 2, 3)
 
 

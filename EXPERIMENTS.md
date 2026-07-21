@@ -73,13 +73,16 @@ resistance, activation, operator independence, or payment conditions.
     which local positive marginal gains divert greedy allocation from the
     coordinated optimum.
 21. Generalized committee-shape sweep: repeats checks 17, a truncation-error
-    check analogous to 16/18, and check 19 at four additional committee
-    shapes (3-of-5, 5-of-9, 6-of-11, 7-of-13, 100 seeded trials each), so the
+    check analogous to 16/18, and check 19 at six additional committee
+    shapes (3-of-5, 5-of-9, 6-of-11, 7-of-13, 8-of-15, 9-of-17, 100 seeded
+    trials each; the last two were added in a later additive pass), so the
     n=7 findings are not read as an artifact of one committee size. Truncation
     error is computed via a per-order zeta-transform accumulation rather than
     the O(3^n) per-mask subset enumeration used for the single n=7 case, so
-    the check stays cheap up to n=13. Additive: does not modify or rerun the
-    n=7 experiment or its recorded outputs.
+    the check stays cheap up to n=17. Additive: does not modify or rerun the
+    n=7 experiment, the four originally-added shapes, or any of their
+    recorded outputs (each shape's random draws are independently seeded by
+    `(n, q)`).
 
 ## Historical calibration checks
 
@@ -92,7 +95,11 @@ resistance, activation, operator independence, or payment conditions.
 
 24. Committee-size scalability: reports exact subset-state counts and the
     median, inclusive IQR, range, and peak traced memory from all ten retained
-    laptop repeats for `n=8,10,12,14,16,18`.
+    laptop repeats for `n=8,10,12,14,16,18`. A later additive pass added one
+    further point, `n=20`, in a separate ten-repeat file/summary
+    (`results/solver_scaling_repeats_extended*`) reusing the same solver, so
+    the original six-point table and its consumer in
+    `extended_experiments/` are untouched.
 25. Certificate-computation cost: contrasts the `O(n log n)` sorting proxy for
     a uniform threshold-cover certificate with the `2^n` state count of the
     generic exact subset-state method for committee sizes through `n=448`.
@@ -118,12 +125,23 @@ resistance, activation, operator independence, or payment conditions.
     Section 7, random/exhaustively stress-tests the central equivalence and
     hardening theorems on instances beyond the paper's own hand-picked
     examples, and extends the exact-solver scaling table to n=22 on an
-    independent implementation. A separate script checks the replacement-hull
+    independent implementation (a later additive pass actually ran and
+    recorded one point further, n=24, median 55.99s; see
+    `verification_scripts/results/scaling_fast_extended.txt`). A separate
+    script checks the replacement-hull
     attribution theorem's two formulas against each other via an exact
-    Fraction-equality check on 200 random instances (built from the theorem
-    statement supplied directly by the paper's author, since `main_text.tex`
-    is not on this machine, unlike the rest of this suite) plus its
-    separation corollary on three hand-picked constructive instances. See
+    Fraction-equality check on 200 random instances (originally built from
+    the theorem statement supplied directly by the paper's author, before
+    `main_text.tex` was on this machine, unlike the rest of this suite;
+    `main_text.tex` arrived in a later pass and confirms the statement was
+    transcribed correctly) plus its separation corollary on three
+    hand-picked constructive instances. A further script,
+    `information_boundary.py`, stress-tests the central theorem
+    (evidence-optimal certificates / information boundary) directly: on 300
+    random evidence ledgers it confirms the exact-floor profile attains
+    TCR/ACR exactly, and on 1,500 further profiles built strictly above the
+    same floors it confirms none ever certifies a smaller attack cost,
+    plus a 60-instance public-only check collapsing to exactly zero. See
     `verification_scripts/README.md` for full per-script coverage and stated
     limitations (this suite cannot catch a shared conceptual mistake that
     both the paper and a from-scratch reimplementation would make the same

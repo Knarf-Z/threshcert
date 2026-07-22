@@ -40,7 +40,12 @@ import sys, os, random
 from fractions import Fraction as Fr
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from core import brute_force_gamma_star, ac_formula_gamma_star, random_instance
+from core import (
+    brute_force_gamma_star,
+    ac_formula_gamma_star,
+    random_instance,
+    deterministic_seed,
+)
 
 _ZERO_TAU_CACHE = {}
 
@@ -79,7 +84,7 @@ def check_tightness_and_soundness(
 
     for n in n_values:
         for trial in range(trials_per_n):
-            seed = hash((n, trial, seed_base)) & 0xFFFFFFFF
+            seed = deterministic_seed(n, trial, seed_base)
             wk = "random" if trial % 2 else "uniform"
             w, t, A0, tau_floor, R_floor = random_instance(n, seed, weight_kind=wk)
             rng = random.Random(seed ^ 0x5BD1E995)
@@ -130,7 +135,7 @@ def check_public_only_layer(n_values=(3, 5, 7), trials_per_n=20, seed_base=20260
     mismatches = []
     for n in n_values:
         for trial in range(trials_per_n):
-            seed = hash((n, trial, seed_base, "pub")) & 0xFFFFFFFF
+            seed = deterministic_seed(n, trial, seed_base, "pub")
             w, t, A0, _, _ = random_instance(n, seed)
             zero_R = [Fr(0)] * n
             total += 1

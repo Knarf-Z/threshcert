@@ -12,11 +12,29 @@ confused by floating-point noise.
 """
 from fractions import Fraction as Fr
 from itertools import permutations, combinations
+import hashlib
 import random
 
 
 def to_frac_list(xs):
     return [Fr(x) for x in xs]
+
+
+def deterministic_seed(*parts):
+    """A seed that is actually reproducible across processes and machines.
+
+    Python's built-in `hash()` is randomized per-process for str/bytes
+    (PYTHONHASHSEED) -- `hash((n, trial, "label"))` returns a *different*
+    value in a different interpreter invocation whenever the tuple contains
+    a string, silently breaking "deterministic seeded" reproducibility.
+    Tuples of only integers are unaffected (int hashing is not randomized),
+    but any label suffix used to keep two check functions' seed spaces apart
+    reintroduces the bug. This hashes the parts' string representation with
+    SHA-256 instead, which has no process-dependent randomization.
+    """
+    payload = "|".join(str(p) for p in parts).encode("utf-8")
+    digest = hashlib.sha256(payload).digest()
+    return int.from_bytes(digest[:4], byteorder="big", signed=False)
 
 
 def brute_force_gamma_star(w, t, A0, tau, R):

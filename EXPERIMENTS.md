@@ -148,7 +148,33 @@ resistance, activation, operator independence, or payment conditions.
     certified): 200 random instances for boundary/monotonicity checks (0
     mismatches), a further 200 for tightness against the proposition's own
     least-favourable-profile construction (0 mismatches), and 1,000
-    perturbed profiles for soundness (0 violations). See
+    perturbed profiles for soundness (0 violations). A fifth script,
+    `atomic_bypass_hierarchy.py`, stress-tests the one-shot atomic-bypass
+    mechanism hierarchy (ABC_b: at most one atomic, activation-free package
+    of at most `b` members across the *entire* attack, not a repeatable
+    per-transaction cap, interpolating between the sequential and
+    all-or-nothing-package mechanisms): 640 random instances cross-validate
+    the theorem's closed form against an independent state-space
+    computation that does not assume the package triggers first (0
+    mismatches), a further 360 confirm the boundary and monotonicity claims
+    (0
+    mismatches), and the paper's own four-of-seven counterfactual curve is
+    reproduced exactly (10,7,4,4,4,4,4,4). A sixth script,
+    `general_package_family_hierarchy.py`, stress-tests the generalization
+    of that hierarchy to an arbitrary certified package family with a
+    repetition budget (`m_{B,r}`: at most `r` pairwise-disjoint packages
+    from a family `B` not necessarily bounded by cardinality): 800 random
+    instances with deliberately non-cardinality (exotic) families
+    cross-validate the general closed form against an independent
+    state-space computation (0 mismatches), a further 1,500 confirm that
+    for a cardinality-bounded family the repetition budget is entirely
+    redundant (`B_b^{+r} = B_{r*b}` exactly, matching the single-package
+    theorem's own closed form, 0 mismatches), and a further 240 confirm
+    that once the family contains every singleton, unlimited repetition
+    collapses the certificate all the way to TCR (0 mismatches) --
+    together showing why the paper's one-shot restriction (`r=1`) is the
+    boundary at which the hierarchy stops collapsing, not an arbitrary
+    modeling choice. See
     `verification_scripts/README.md` for full per-script coverage and stated
     limitations (this suite cannot catch a shared conceptual mistake that
     both the paper and a from-scratch reimplementation would make the same

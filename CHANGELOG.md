@@ -1,5 +1,163 @@
 # ThreshCert artifact changelog
 
+## 2026-07-22 sixth pass: generalizing the atomic-bypass hierarchy to arbitrary package families
+
+Following the fifth pass's naming/code corrections, generalized the
+one-shot atomic-bypass mechanism (`m_bypass(b)`, a single size-bounded
+package, `r=1`) to an arbitrary certified package family `B` with an
+explicit repetition budget `r` -- both to answer "why fix the family to a
+size cap, and why fix the repetition to one use?" with a proof rather than
+an assertion.
+
+- New: Definition (general bypass mechanism `m_{B,r}`), Theorem (exact
+  characterization: `Gamma*_{m_{B,r}} = ABC_{B,r} = min` over the `r`-fold
+  disjoint-union closure `B^{+r}` of package cost plus the sequential
+  remainder), Corollary (cardinality-family redundancy: for
+  `B_b = {P : |P|<=b}`, `B_b^{+r} = B_{min(r*b,|U0|)}` exactly, so
+  repeating a size-`b` package cap buys nothing a single bigger package
+  doesn't already give -- proved via a direct partition argument, not just
+  checked), Corollary (unbounded-repetition collapse: any family
+  containing every singleton collapses all the way to TCR once
+  `r >= |U0|`) -- added to `main_text.tex`
+  (`subsec:general-package-family`) with full proofs in
+  `appendix_route_b.tex` (`app:proof-general-package-family`, extending the
+  fifth pass's exchange argument from one package to `s<=r`
+  pairwise-disjoint packages).
+- The second corollary is the actual payoff: it proves, rather than
+  asserts, that the fifth pass's `r=1` restriction is exactly the boundary
+  at which the hierarchy survives -- any family rich enough to rebuild an
+  arbitrary set piece by piece (singletons being the minimal such
+  richness) erases the whole hierarchy under unlimited reuse. The first
+  corollary shows repetition is genuinely vacuous for the cardinality
+  family already in the paper, so `ABC_b`'s existing curve
+  (`10,7,4,4,4,4,4,4`) already captures everything reachable by repeating
+  same-shape packages -- repetition only matters for families that are
+  *not* cardinality-closed (e.g. a fixed menu of specific, non-nested
+  multisignature contracts), a case this pass verifies computationally but
+  does not further characterize.
+- New verification script `verification_scripts/general_package_family_hierarchy.py`:
+  cross-validates the general closed form against an independent
+  state-space computation on 800 random instances using deliberately
+  non-cardinality (exotic) families (0 mismatches); confirms the
+  cardinality-redundancy corollary against `atomic_bypass_hierarchy.py`'s
+  own closed form on 1,500 instances (0 mismatches); confirms the
+  singleton-collapse corollary against an independently computed TCR on
+  240 instances (0 mismatches). 2,540 total instances, 0 mismatches, all
+  exact (Fraction arithmetic), deterministically seeded via `core.py`'s
+  `deterministic_seed`. Drafted and cross-validated in scratch first, at
+  smaller scale (880 instances), before being finalized at this scale and
+  moved into `verification_scripts/` -- no bugs found in this pass, unlike
+  the first `ABC_b` draft.
+- Updated `verification_scripts/README.md` (new table row, run command,
+  result summary) and `EXPERIMENTS.md` item 29's paragraph in both trees;
+  mirrored `main_text.tex` and `appendix_route_b.tex` to the bundle.
+- Left deliberately light-touch: the abstract, Contributions, and
+  Conclusion are not changed by this pass -- the generalization justifies
+  an existing restriction rather than introducing a new headline number,
+  so it is presented as a strengthening of Section
+  `subsec:atomic-bypass-hierarchy`, not as a new top-level claim.
+
+## 2026-07-22 fifth pass: correcting the atomic-bypass theorem's naming and code
+
+A review of the previous pass's `m_batch(b)`/`BCR_b` result confirmed the
+closed-form theorem, its exchange-argument proof, the boundary conditions,
+and the four-of-seven curve are all correct under the mechanism as actually
+defined -- but found three real issues, all fixed before anything further
+was built on top:
+
+- **Naming was misleading.** "`m_batch(b)`" and "batch size `b`" read as an
+  ordinary per-transaction cap usable repeatedly. The mechanism actually
+  defined and proved permits **at most one** atomic package, of size at
+  most `b` in total, **across the entire attack** -- allowing unlimited
+  repeated size-`b` packages would collapse every `b>=1` straight to TCR
+  and erase the hierarchy. Renamed throughout `main_text.tex` and
+  `appendix_route_b.tex`: `m_batch(b)` to `m_bypass(b)`, `BCR_b` to
+  `ABC_b` ("atomic-bypass cover"), the section/definition/theorem titles
+  from "bounded-package"/"batch" to "atomic-bypass", and strengthened the
+  definition and every prose mention (abstract, Contributions, Section
+  7.2, Conclusion) to say explicitly "at most one ... across the entire
+  attack." `verification_scripts/batch_mechanism_hierarchy.py` renamed to
+  `atomic_bypass_hierarchy.py` with matching internal renames.
+- **The brute-force "ground truth" was not literally mechanism-faithful.**
+  It enumerated every target set and continued checking members past the
+  first threshold crossing, relying on non-negative costs and separate
+  enumeration of truncated subsets to still reach the correct minimum --
+  correct, but the docstring's "directly from the mechanism definition"
+  claim was stronger than the implementation. Replaced with
+  `abc_state_space`: a memoized recursion over (acquired set,
+  package-used-or-not) that returns `0` the instant cumulative weight
+  reaches the threshold, so every explored path is by construction a
+  literal mechanism schedule, not a truncation-argument-dependent one. Same
+  0 mismatches on the same 640+360 instances after the rewrite.
+- **Seeding used Python's `hash()` on tuples containing string labels**
+  (e.g. `hash((n, trial, seed_base, "bd"))`), which is randomized
+  per-process for str/bytes (`PYTHONHASHSEED`) -- "deterministic seeded"
+  reproducibility claims were not actually reproducible across machines or
+  interpreter invocations, only self-consistent within one run. Added
+  `core.py:deterministic_seed()` (SHA-256-based, no process-dependent
+  randomization) and switched every affected seed call in
+  `atomic_bypass_hierarchy.py`, `information_boundary.py`, and
+  `partial_activation_evidence.py` to use it. All three scripts re-run
+  clean afterward (different underlying random instances, same 0
+  mismatches). **Not yet checked or fixed:** `test_equivalence.py`'s own
+  `hash((n, wk, trial))` call has the identical pattern (`wk` is the string
+  `"uniform"`/`"random"`) -- this is pre-existing code with its own
+  already-cited "725 instances, 0 mismatches" numbers, so it was flagged
+  rather than silently modified; a decision on whether to fix it is still
+  open.
+- Softened the previous pass's PASS-message wording ("the package-first
+  WLOG lemma holds on every tested instance") to state plainly that no
+  counterexample was found in the tested instances and that the lemma
+  itself is established analytically by the exchange argument, not by
+  these tests -- matching this project's standing rule against letting a
+  finite random check read as a proof.
+
+## 2026-07-22 fourth pass: new theorem answering the package-mechanism gap
+
+- Added a genuinely new theoretical result addressing the reviewers'
+  central critique (the strongest theorem, ACR, holds only under the
+  sequential mechanism, which the paper's own package counterexample shows
+  is not mechanism-robust): a bounded-package mechanism hierarchy `BCR_b`
+  interpolating between the sequential mechanism (`b=0`, recovering ACR
+  exactly) and the all-or-nothing package (`b=|U0|`, recovering TCR
+  exactly), where the adversary may use one atomic, activation-free package
+  of at most `b` co-signed members plus ordinary sequential acquisition for
+  the rest.
+  - New: Definition (bounded-package mechanism), Lemma (the package is WLOG
+    triggered first, via an exchange argument), Theorem (exact
+    characterization `BCR_b(A0) = min over P, |P|<=b, of sum R_i(P) +
+    ACR(A0 union P)`, reusing the existing ACR solver as a subroutine
+    rather than a new one), and a Corollary (boundary conditions,
+    monotonicity, and a strict separation on the paper's own four-of-seven
+    counterfactual: `10,7,4,4,4,4,4,4` for `b=0..7`, already exact at
+    `b=2`, not only in the unbounded limit).
+  - Explicitly scoped as NOT proven: the evidence-optimal (floors-only)
+    extension at fixed `b>0`, and the complexity of `BCR_b` for fixed
+    `b>0` (weak NP-hardness is plausible by analogy but not established).
+    Stated as open in the paper itself, not silently omitted.
+  - Added `verification_scripts/batch_mechanism_hierarchy.py`: cross-checks
+    the closed form against a mechanism-definition-faithful brute force
+    that does NOT assume the package-first lemma (640 random instances, 0
+    mismatches), confirms the boundary/monotonicity claims (360 instances,
+    0 mismatches), and reproduces the four-of-seven curve exactly. A real
+    implementation bug (an unhandled `w(A0)>=t` edge case violating
+    `ac_formula_gamma_star`'s own `w(A0)<t` precondition) was caught by
+    this cross-check and fixed before the theorem was written into the
+    paper -- the first draft run found 26/135 mismatches; after the fix,
+    1,000 instances total, 0 mismatches.
+  - Updated the abstract, Contributions (new bullet), Section 7.2's
+    counterfactual paragraph (full BCR curve replacing the single
+    "10 collapses to 4" sentence), and the Conclusion to reflect this
+    result. This was developed as a draft (definitions, theorem
+    statement, and verification script written and cross-checked in a
+    scratch location) before being written into `main_text.tex` /
+    `appendix_route_b.tex`, not derived directly in the paper source.
+  - This does not resolve whether the deployed Shutter protocol excludes a
+    bounded package of any given size -- that scope argument is still
+    owed, and the paper says so.
+
+# ThreshCert artifact changelog
+
 ## 2026-07-22 second paper-review response pass: complete paper received
 
 - Received the complete, substantially revised `main_text.tex` and, for the

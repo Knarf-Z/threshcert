@@ -19,6 +19,7 @@ IGNORED_PARTS = {
     "node_modules",
     "artifacts",
     "cache",
+    ".claude",
 }
 
 

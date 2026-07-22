@@ -39,7 +39,12 @@ import sys, os, random
 from fractions import Fraction as Fr
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from core import brute_force_gamma_star, ac_formula_gamma_star, random_instance
+from core import (
+    brute_force_gamma_star,
+    ac_formula_gamma_star,
+    random_instance,
+    deterministic_seed,
+)
 
 _ZERO_TAU_CACHE = {}
 _BIG_R = Fr(10**9)
@@ -110,7 +115,7 @@ def check_boundary_and_monotonicity(
 
     for n in n_values:
         for trial in range(trials_per_n):
-            seed = hash((n, trial, seed_base)) & 0xFFFFFFFF
+            seed = deterministic_seed(n, trial, seed_base)
             wk = "random" if trial % 2 else "uniform"
             w, t, A0, tau_floor, R_floor = random_instance(n, seed, weight_kind=wk)
             U0 = [i for i in range(n) if i not in A0]
@@ -153,7 +158,7 @@ def check_tightness_and_soundness(
 
     for n in n_values:
         for trial in range(trials_per_n):
-            seed = hash((n, trial, seed_base, "tight")) & 0xFFFFFFFF
+            seed = deterministic_seed(n, trial, seed_base, "tight")
             wk = "random" if trial % 2 else "uniform"
             w, t, A0, tau_floor, R_floor = random_instance(n, seed, weight_kind=wk)
             U0 = [i for i in range(n) if i not in A0]

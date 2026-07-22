@@ -141,7 +141,14 @@ resistance, activation, operator independence, or payment conditions.
     random evidence ledgers it confirms the exact-floor profile attains
     TCR/ACR exactly, and on 1,500 further profiles built strictly above the
     same floors it confirms none ever certifies a smaller attack cost,
-    plus a 60-instance public-only check collapsing to exactly zero. See
+    plus a 60-instance public-only check collapsing to exactly zero. A
+    fourth script, `partial_activation_evidence.py`, stress-tests the newer
+    partial-activation-floor-evidence proposition (the MCR certificate
+    between TCR and ACR when only some members' activation floors are
+    certified): 200 random instances for boundary/monotonicity checks (0
+    mismatches), a further 200 for tightness against the proposition's own
+    least-favourable-profile construction (0 mismatches), and 1,000
+    perturbed profiles for soundness (0 violations). See
     `verification_scripts/README.md` for full per-script coverage and stated
     limitations (this suite cannot catch a shared conceptual mistake that
     both the paper and a from-scratch reimplementation would make the same
@@ -170,6 +177,13 @@ resistance, activation, operator independence, or payment conditions.
     contract, exporter, Keyper set, four run records, and live verifier by
     SHA-256; it recomputes the four-smallest-bonds value from `4e12` to `3e12`
     wei and records the production-transfer exclusions in the certificate.
+36. A standalone additive script (`deployment/scripts/report_slashing_fee_ratio.py`)
+    recomputes the recorded slashing transaction's own fee from its stored gas
+    used and effective gas price and compares it to the bond it forfeited,
+    without modifying the certificate file above (whose hash is cited by exact
+    value elsewhere): `108,629` gas at `10,000,000,007` wei/gas is
+    `1,086,290,000,760,403` wei, versus a `1e12`-wei bond forfeited --
+    the attestation cost about `1,086x` the bond it recovered.
 
 ## Completed observations and scope boundary
 

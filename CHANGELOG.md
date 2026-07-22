@@ -1,5 +1,95 @@
 # ThreshCert artifact changelog
 
+## 2026-07-22 second paper-review response pass: complete paper received
+
+- Received the complete, substantially revised `main_text.tex` and, for the
+  first time, `appendix_route_b.tex` directly from the author. The new
+  version adds real new theory beyond what existed in the earlier partial
+  copy: a partial-activation-floor-evidence certificate MCR (Proposition
+  partial-profile-evidence) that interpolates between TCR and ACR when only
+  some members' activation floors are certified, its remediation cost
+  analysis (monotonicity, an exact target-reachability characterization,
+  and a P=NP-hardness argument for exact zero-cost remediation via a
+  Turing reduction to activation cover), a conditional-versus-unconditional
+  certificate distinction (`C^cond` vs `C^evid`), an engineering-exposure-
+  sufficiency design route (anonymizing release channels), and a timing
+  gate for the verifier workflow. Replaced both files in `paper/` with
+  this version in both trees.
+- Re-applied the same three prose fixes from the previous pass onto this
+  new base text (the new version had branched before those fixes and did
+  not include them): the abstract rewrite (this time 266 words, also
+  crediting the new MCR result in one added clause), the Contributions
+  section's opening ("None of the individual mathematical patterns... is
+  new by itself" replaced with a direct positive framing that doesn't lead
+  with self-deprecation), and the introduction's `$870 million` downgrade.
+- Added `verification_scripts/partial_activation_evidence.py`, closing the
+  gap the main text's own "Verification" paragraph pointed at ("script in
+  the supplementary artifact") and the "Limitations" section had flagged as
+  missing. On 200 random instances: MCR at `M=empty`/`full` matches
+  TCR/ACR exactly (0 mismatches, cross-checked via `core.py`'s existing
+  `ac_formula_gamma_star`); MCR never decreases along a random growing-`M`
+  chain (0 monotonicity violations); a further 200 instances confirm the
+  proposition's own least-favourable-profile construction attains
+  `MCR_M + |S*|*epsilon` exactly (0 tightness mismatches); and 1,000
+  perturbed profiles confirm soundness (0 violations). Updated the main
+  text's "Clean-room reimplementation" paragraph (now covers this
+  proposition) and "Limitations" section (removed the now-stale claim,
+  added an honest new one: the remediation Turing-reduction's own
+  binary-search procedure is not yet separately re-implemented and
+  compared against direct brute-force ACR, only the underlying MCR
+  characterization is).
+- The previous pass's note that `appendix_route_b.tex` (and Table 1's
+  caption/column issues inside it) was inaccessible is now resolved --
+  the file is present, and its actual verifier-workflow table
+  (`tab:verifier-workflow`) already reflects the conditional/unconditional
+  split from this pass's math, so the earlier review's caption critique no
+  longer applies to the received version.
+
+## 2026-07-22 paper-review response pass
+
+- Filled in the paper's own `[AUTHOR TODO: state the effective gas price...]`
+  placeholder in the Chiado pilot discussion with the recorded transaction's
+  actual gas cost versus the bond it forfeited, and added a standalone
+  additive script, `deployment/scripts/report_slashing_fee_ratio.py`, that
+  recomputes the same ratio from the already-recorded
+  `results/slashing-chiado.json` without modifying the Chiado execution
+  certificate (whose hash is cited by exact value elsewhere): `108,629` gas
+  at `10,000,000,007` wei/gas is `1,086,290,000,760,403` wei against a
+  `1e12`-wei forfeited bond, i.e. the attestation cost about `1,086x` the
+  bond it recovered.
+- Updated the generalized committee-shape sweep's two paper paragraphs
+  (Section 7's table row and its "Generalization across committee shapes"
+  subsubsection) to reflect the six-shape, 600-trial sweep added in the
+  2026-07-21 pass (previously only the original four shapes were described
+  in the paper text itself, even though the code/CHANGELOG already had six).
+- Added one sentence to Section 7's "Independent reimplementation"
+  subsubsection describing the new `information_boundary.py` check (added
+  2026-07-21) -- previously absent from the paper text entirely.
+- In response to a simulated-review pass, rewrote the abstract (324 to 254
+  words; dropped the defense-interaction/replacement-hull sentence, kept in
+  the introduction and contributions instead) and fixed an overclaim: "activation
+  cover remains sound only with an ordered first-crossing witness" (reads as
+  a necessity claim) became "we give a sufficient condition under which
+  activation cover remains sound... and show by an atomic-package
+  counterexample that it is not generally mechanism-robust without it" --
+  matching what Theorem~(activation-respecting-soundness) and
+  Proposition~(activation-not-mechanism-robust) actually establish (a
+  sufficient condition plus one counterexample, not a necessary-and-sufficient
+  characterization).
+- Added a lead sentence to the Contributions subsection stating the
+  contribution directly (exact identification of the evidence-induced robust
+  value, applied to a live committee) instead of only listing consequences,
+  repositioning the paper's framing toward a verifier-facing audit
+  methodology rather than a general economic-security claim.
+- Downgraded the introduction's specific "\$870 million" DEX-volume figure to
+  a qualitative "substantial production order flow" statement, pointing to
+  the appendix calibration section for the actual number -- avoids reading
+  as impact inflation on the first page for a figure the paper itself says
+  is a scale proxy, not an attack-value bound.
+- Table 1 (`tab:verifier-workflow`, in `appendix_route_b.tex`) has separately
+  flagged caption/column issues from the same review pass that could not be
+  addressed -- that file is not present on this machine.
+
 ## 2026-07-21 second upgrade pass
 
 - Extended the generalized committee-shape sweep

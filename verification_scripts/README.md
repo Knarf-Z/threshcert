@@ -24,6 +24,7 @@ python .\instability.py
 python .\scaling_fast.py --ns 8 10 12 14 16 18
 python .\replacement_hull.py
 python .\information_boundary.py
+python .\partial_activation_evidence.py
 ```
 
 If `python` is not recognized, try `py` instead (`py .\test_equivalence.py`).
@@ -44,6 +45,7 @@ scripts -- keep it in the same folder.
 | `scaling_fast.py` | Independent timing benchmark of the exact subset-state solver on random instances, mirroring (not matching wall-clock time with -- different machine/implementation) the paper's own n=8..18 scaling table. Extend with `--ns 20 22` etc.; runtime grows fast (n=22 took ~15s on the machine this was built on), so raise `--ns` gradually. A later pass actually ran and recorded `--ns 8 10 12 14 16 18 20 22 24` (n=24 median 55.99s); see `results/scaling_fast_extended.txt`. | A timing table; states should quadruple and runtime roughly track it for every +2 in n |
 | `replacement_hull.py` | Independent verification of the replacement-hull characterization theorem (public-attribution-formal-bounds), originally written from the theorem statement pasted directly by the paper's author, before `main_text.tex` was available on this machine (see limitations below; `main_text.tex` arrived in a later pass and confirms the theorem was transcribed correctly). Checks the primal (lambda) formula against the equivalent (s, Q in conv(R)) formula for `A_i^eps(C,x)` on 200 random small instances (two committee/outcome shapes, five `eps` values) by extracting `s* = sum(lambda*)` from the primal LP's own optimal solution and re-solving the (s, Q)-formula's inner problem independently at that exact `s*` -- an exact Fraction-equality check, not a tolerance-based one. Separately checks the separation corollary (`Q_Cx` outside `conv(R)` iff a separating functional exists) on three hand-picked constructive instances where the functional is exhibited directly. Takes about 45 seconds -- not part of the other scripts' quick run. | `replacement_hull_theorem=PASS`, `formula_equivalence_mismatches=0` |
 | `information_boundary.py` | Independent stress-test of the central theorem (information-boundary / evidence-optimal certificates), added once `main_text.tex` became available. `test_equivalence.py` only checks the (AC) reduction for one fixed profile; this script tests the theorem's actual claim about an evidence LEDGER of certified floors: on 300 random small instances (n=3..7), the exact-floor profile attains TCR/ACR exactly (tightness), and 1,500 further profiles built strictly above the same floors -- resistance and activation independently perturbed upward, including the most-permissive all-zero-tau case for the mechanism-robust TCR claim -- never produced a smaller brute-force attack cost (soundness). A separate 60-instance check confirms the public-only layer (zero resistance floor) collapses to exactly zero. | `soundness_violations=0`, `tightness_mismatches=0`, `public_only_mismatches=0` |
+| `partial_activation_evidence.py` | Independent stress-test of the newer partial-activation-floor-evidence proposition (the MCR certificate interpolating between TCR and ACR as the ledger certifies activation floors for only some members M), added once the appendix arrived with its proof. On 200 random instances: MCR at M=empty/full matches TCR/ACR exactly (computed via `core.py`'s own `ac_formula_gamma_star`); MCR never decreases along a random chain of growing M (remediation monotonicity); the proposition's own least-favourable profile attains `MCR_M + |S*|*epsilon` exactly via brute-force sequential search (tightness); and 1,000 further profiles built strictly consistent with the same partial evidence -- M-members perturbed upward, non-M members given an unconstrained random activation floor -- never certified a smaller attack cost (soundness). | `boundary_mismatches=0`, `monotonicity_violations=0`, `tightness_mismatches=0`, `soundness_violations=0` |
 
 ## Honest limitations
 
@@ -55,11 +57,10 @@ scripts -- keep it in the same folder.
   from the theorem statement pasted directly by the paper's author, at a
   time when neither `main_text.tex` nor `appendix_route_b.tex` was present
   on this machine -- this script was not independently derived from the
-  paper text the way the others were. `main_text.tex` arrived on this
-  machine in a later pass and confirms the pasted statement matches
-  Theorem~(replacement-hull) exactly; `appendix_route_b.tex` (containing the
-  proof) is still not present. Its separation-corollary check also only
-  covers three hand-picked constructive instances (where a separating
+  paper text the way the others were. Both files have since arrived and
+  confirm the pasted statement, and its proof, match
+  Theorem~(replacement-hull) exactly. Its separation-corollary check still
+  only covers three hand-picked constructive instances (where a separating
   functional is exhibited directly), not a general separating-hyperplane
   solver over random instances the way the formula-equivalence check does --
   writing one from scratch (matching this module's no-third-party-package
@@ -70,6 +71,13 @@ scripts -- keep it in the same folder.
   (Theorems activation-respecting-soundness / mechanism-robust-threshold-cover)
   that let the ACR/TCR bounds survive beyond that one mechanism -- those are
   not yet covered by an independent script.
+- `partial_activation_evidence.py` checks the MCR characterization and its
+  remediation monotonicity, but not the specific zero-cost-remediation
+  binary-search reduction used to recover ACR
+  (Appendix `app:proof-remediation-monotone`'s "Turing reduction" argument)
+  -- that reduction is not yet independently re-implemented and compared
+  against direct brute-force ACR computation the way the appendix's own
+  text describes checking it.
 - The Gnosis production audit and the Chiado testnet pilot
   are on-chain facts, not algorithms -- nothing here re-audits them.
 - The mechanism-stress-test instance in `reproduce_paper_numbers.py` is
@@ -105,3 +113,9 @@ scripts -- keep it in the same folder.
   separate 60-instance public-only check, 0 mismatches (all-zero resistance
   floor collapses to exactly zero certificate in every case). All exact
   (Fraction arithmetic).
+- `partial_activation_evidence.py`: 200 random instances (n=3..7), 0
+  boundary mismatches (MCR at M=empty/full vs TCR/ACR) and 0 monotonicity
+  violations across a random growing-M chain per instance; a further 200
+  instances for tightness (0 mismatches against the proposition's own
+  least-favourable-profile construction) plus 1,000 perturbed profiles for
+  soundness (0 violations). All exact (Fraction arithmetic).

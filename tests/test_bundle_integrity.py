@@ -18,6 +18,9 @@ from run_production_evidence_audit import (  # noqa: E402
     evaluate_member,
 )
 from verify_chiado_certificate import build_certificate  # noqa: E402
+from verify_chiado_certificate_rewarded import (  # noqa: E402
+    build_certificate as build_certificate_rewarded,
+)
 
 
 class BundleIntegrityTests(unittest.TestCase):
@@ -261,6 +264,28 @@ class BundleIntegrityTests(unittest.TestCase):
         self.assertIsNone(
             recorded["claim"]["unconditionalProductionAttackCostLowerBound"]
         )
+        self.assertEqual(
+            recorded["claim"]["productionShutterCertificate"],
+            "NOT_CERTIFIED",
+        )
+
+    def test_machine_readable_chiado_certificate_rewarded(self) -> None:
+        certificate_path = (
+            ROOT
+            / "deployment"
+            / "certificates"
+            / "chiado-execution-certificate-rewarded.json"
+        )
+        recorded = json.loads(certificate_path.read_text(encoding="utf-8"))
+        self.assertEqual(recorded, build_certificate_rewarded())
+        self.assertEqual(
+            recorded["claim"]["status"],
+            "POSITIVE_WITHIN_RECORDED_TESTNET_MECHANISM",
+        )
+        self.assertEqual(recorded["certificate"]["before"]["value"], "80000000000000000")
+        self.assertEqual(recorded["certificate"]["after"]["value"], "60000000000000000")
+        self.assertTrue(recorded["enforcementIncentive"]["rewardCoversGasCost"])
+        self.assertGreater(int(recorded["enforcementIncentive"]["netSubmitterGainWei"]), 0)
         self.assertEqual(
             recorded["claim"]["productionShutterCertificate"],
             "NOT_CERTIFIED",

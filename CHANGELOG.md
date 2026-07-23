@@ -1,5 +1,352 @@
 # ThreshCert artifact changelog
 
+## 2026-07-23 eleventh pass: `references.bib` was missing from both trees
+
+While recompiling the paper to verify the tenth pass's Chiado additions
+hadn't pushed the body past 15 pages, `bibtex` reported 40 "didn't find a
+database entry" warnings. Investigation found `paper/references.bib` --
+the actual bibliography source, containing every citation the paper
+uses -- did not exist anywhere in either tree (nor in any location on this
+machine that could be searched), and had evidently been missing for some
+time; MiKTeX's on-the-fly install silently substituted an unrelated file
+of the same name from its own package cache, so every prior `pdflatex`
+compile this session (including the ninth pass's "confirmed 15 pages by
+direct PDF inspection") ran against a broken bibliography without
+producing a hard error -- every `\cite` rendered as an unresolved
+reference and the printed page count for the body was measured against a
+near-empty References section, not a real one. The user supplied the real
+`references.bib` content directly. Restored it to both trees (40 entries,
+matching every citation key `bibtex` had flagged as missing, zero left
+over on either side), reran the full `pdflatex` -> `bibtex` -> `pdflatex`
+-> `pdflatex` cycle, and confirmed body length is genuinely **15 pages**
+with a properly resolved 40-entry reference list (total document length
+rose from 67 to 69 pages once real citations replaced the placeholder
+ones, confirming the earlier measurements really had been running against
+a broken bibliography). Re-ran the dangling-cross-reference checker (still
+0 missing) and cleaned up LaTeX build artifacts in both trees.
+
+**Lesson for future page-count verification passes**: a `bibtex` run that
+reports zero "didn't find a database entry" warnings is a precondition for
+trusting any page-count measurement from that compile, not an optional
+side-check -- silently substituted or missing `.bib` files do not hard-fail
+`pdflatex`, so a page count can look plausible while resting on a broken
+bibliography.
+
+## 2026-07-23 tenth pass: the rewarded Chiado deployment, actually executed
+
+The eighth pass built `BondedKeyperSlasherRewarded.sol` and its supporting
+scripts but left them undeployed for lack of a funded Chiado key. The user
+supplied one (funding a freshly generated deployer address from an
+existing wallet holding leftover balance from the original pilot), so this
+pass actually ran the deployment rather than continuing to describe it as
+pending.
+
+- **Real, independently-verifiable transactions on Chiado (chain ID
+  10200), not a simulation.** Deployed `BondedKeyperSlasherRewarded` at
+  `0x7cDC9C1fC1EC5841908dE73391717Cf3381e583a`, registered the same
+  seven-Keyper committee used by the original pilot, froze it (initial
+  certificate `8e16` wei), opened a release job for the same validated
+  identity and evidence already on record, and submitted member 0's
+  already-validated share as evidence -- all 11 transactions `status:
+  success`, independently cross-checked against Blockscout
+  (`gnosis-chiado.blockscout.com`), not just the local JSON records.
+  Certificate dropped from `8e16` to `6e16` wei; the submitting account was
+  paid a `1e16`-wei caller reward against a gas cost of only `933176` wei
+  (effective gas price `8` wei/gas on Chiado at execution time, three
+  orders of magnitude below the `1e10` wei/gas worst case the reward was
+  originally sized against) -- net gain to the submitter after its own gas
+  cost: `9999999999066824` wei, positive. This is the "genuinely positive,
+  reward-covering certificate" the review's P1 item asked for, not merely
+  a mechanically-executable one.
+- **Caught and fixed a real bug in `submit-evidence-rewarded.ts`'s own
+  arithmetic** while building the certificate for this run:
+  `netSubmitterGainWei` was computed as `(balanceAfter - balanceBefore) +
+  gasCostWei`, which double-corrects for gas and silently reports the full
+  reward regardless of gas cost. Fixed to compute directly from the
+  contract's immutable `callerRewardWei` minus the recorded gas cost;
+  corrected the one already-recorded value this bug had produced
+  (`results/slashing-chiado-rewarded.json`) to match, since that file
+  was not yet bound into any certificate at the time -- this session
+  built its certificate for the first time, so there was no historical
+  record to preserve.
+- **New parallel certificate script**,
+  `deployment/scripts/verify_chiado_certificate_rewarded.py`, mirroring
+  `verify_chiado_certificate.py`'s cross-consistency checks against the
+  rewarded run's own records and additionally verifying the
+  reward-covers-gas-cost claim arithmetically; a new test,
+  `test_machine_readable_chiado_certificate_rewarded`, wires it into the
+  standard suite. `contracts/BondedKeyperSlasher.sol` and its historical
+  certificate remain completely untouched.
+- New parallel script `scripts/open-release-rewarded.ts` (not hash-bound,
+  but kept parallel to the un-rewarded `open-release.ts` for consistency
+  with the rest of this pass's additive naming).
+- Regenerated `MANIFEST.sha256` and reran `reproduce_everything.py` in
+  both trees; confirmed `PASS` in each.
+
+## 2026-07-23 ninth pass: a real tightness-proof gap, and back to 15 pages
+
+A fifth review of the eighth pass's draft made one substantive
+correctness claim and one page-density complaint, both independently
+verified before acting on them (per standing instruction to apply
+independent judgment to review demands rather than execute them
+literally).
+
+- **A genuine tightness-proof gap, confirmed and fixed.** The review
+  claimed the tightness directions of `Theorem evidence-optimal-atomic-bypass`
+  and `Theorem master-certificate-boundary` cannot literally use the
+  "exact-floor profile" `(R-bar, tau-bar)` as a canonical profile, since
+  the model defines `tau_i := inf{alpha : R_i <= v_i(alpha)}` with
+  `v_i >= 0`, forcing `tau_i = 0` whenever `R_i = 0` -- so a member with
+  `R-bar_i = 0 < tau-bar_i` cannot be realized by any actual profile with
+  `R_i = R-bar_i` exactly. Verified directly against the paper's own
+  model definitions and cross-checked against `Theorem
+  information-boundary`'s own (correct) tightness construction and
+  `Proposition partial-profile-evidence`'s own proof, which already
+  documents this exact degeneracy and uses an epsilon-perturbed profile
+  with a limit epsilon-to-0 instead. Both newer theorems' appendix proofs
+  had skipped that step and claimed exact attainment directly -- a real
+  gap, not a review hallucination. Fixed both tightness proofs with the
+  same epsilon-perturbation technique already established and correct
+  elsewhere in the paper; softened the two "the exact-floor profile...
+  attains X exactly" experimental-verification sentences to correctly
+  describe what the numerical state-space check verifies (a discrete
+  combinatorial identity, independent of the continuous
+  profile-realizability question the proof's epsilon-limit resolves). No
+  main-text theorem statement changed -- the certified values were never
+  wrong, only the proof technique establishing them.
+- **Declined the rest of the same review's demands** on inspection: a
+  "Master Certificate Theorem" restructuring of Section 5 (already done
+  in the eighth pass, and the review's premise that it didn't exist was
+  incorrect), a deployment-requirements table, a quantitative
+  baseline-comparison table, and converting more inline definitions to
+  display equations on the already-full page 10 (display equations cost
+  more vertical space than inline text, directly working against the
+  page-budget fix below -- a real tension the review did not
+  acknowledge).
+- **Main body restored to exactly 15 pages**, verified by direct PDF
+  inspection (References now starts on the page immediately after the
+  Ethics-considerations paragraph), not by the `\typeout`-based marker
+  used in the seventh/eighth passes -- that marker is off by one in
+  exactly this kind of boundary case, because TeX's page builder ships
+  pages asynchronously, so `\thepage` at a `\typeout` can lag one page
+  behind where the immediately preceding text actually lands. Merged
+  Ethics Considerations into the Conclusion as a `\paragraph` (removing a
+  forced `\section` break) and trimmed Limitations, Discussion,
+  Conclusion, Introduction, Contributions, and Related Work prose without
+  cutting any theorem, proof, or substantive hedge -- confirmed by
+  re-running the dangling-cross-reference checker (0 missing) after every
+  edit.
+- Regenerated `MANIFEST.sha256` and reran `reproduce_everything.py` in
+  both trees; confirmed `PASS` in each.
+
+## 2026-07-23 eighth pass: a master certificate theorem and a positive-enforcement deployment target
+
+A fourth review, on the seventh pass's already-compiled 15-page draft,
+argued the atomic-bypass/evidence-optimal machinery still read as an
+appended result rather than the paper's actual central theorem, that the
+path from a zero certificate to a positive one stayed too abstract, and
+that the Chiado pilot's own incentive defect (fee exceeds bond) was never
+actually fixed. Addressed in priority order:
+
+- **A genuinely new unifying theorem, not a reframing.** The review
+  claimed a combined package-power-and-partial-evidence certificate
+  `MABC_{b,M}` already existed in the paper; it did not -- only the
+  full-evidence case (`M=U0`) had been proved (sixth/seventh pass). Built
+  the general object: `MABC_{b,M}(A0) := min` over packages `Q` of size
+  at most `b` of package cost plus the partial-evidence certificate MCR
+  restricted to `M \ Q` (removing a bought package's own members from the
+  certified set, since a package bypasses activation entirely once
+  bought). Proved Theorem master-certificate-boundary
+  (`C_{m_bypass(b)}(I_{R,tau,M},A0) = MABC_{b,M}(A0)`) by the same
+  composition technique already used for the `M=U0` case, substituting
+  Proposition partial-profile-evidence for Theorem information-boundary.
+  Every certificate this paper proves -- `0`, `TCR`, `MCR_M`, `ACR`,
+  `ABC-bar_b` -- is now a boundary case of this one theorem, not five
+  parallel results. New verification script
+  `verification_scripts/mixed_evidence_atomic_bypass.py`: 2,900 random
+  instances (mixed-tau-vector MCR reduction cross-validated against
+  independent brute force, tightness, and soundness at random `(b,M)`
+  pairs), 0 discrepancies -- catching and fixing a real bug in the
+  script's own first draft (the tightness check compared against a
+  ground-truth profile using the wrong floor vector).
+- **A concrete positive-certificate target, not just a requirements
+  list.** Added Corollary positive-deployment-target: a direct
+  instantiation of Proposition public-penalty-input for four bonded
+  Keypers each backed by one fixed, funded public enforcement procedure,
+  giving an explicit lower bound `>= sum of the four smallest (p*P)`
+  rather than only prose about what evidence would help.
+- **Declined, on inspection, to add:** a separate "deployment requirements"
+  table and a "quantitative baseline" table the review also requested --
+  both would mostly reformat content already stated compactly in the
+  Discussion and Section 7.2 prose, at real page-budget cost, for limited
+  additional information; and a two-axis `(b,M)` overview figure, deferred
+  as presentational polish lower priority than the theorem itself. All
+  three remain available to add if requested specifically.
+- **Addressed the Chiado pilot's actual incentive defect with a new,
+  parallel contract, not an in-place patch.** The already-recorded
+  `certificates/chiado-execution-certificate.json` binds a SHA-256 hash of
+  `deployment/contracts/BondedKeyperSlasher.sol` and
+  `deployment/scripts/verify-chiado-live.ts` to a real, already-executed
+  Chiado deployment (`deployment/scripts/verify_chiado_certificate.py`'s
+  `SOURCE_PATHS`); editing those files in place would silently break that
+  historical certificate's binding claim. So `BondedKeyperSlasher.sol`,
+  `deploy.ts`, `verify-chiado-live.ts`, and `submit-evidence.ts` are
+  untouched, and the reward-split design instead lives in new,
+  parallel files: `deployment/contracts/BondedKeyperSlasherRewarded.sol`
+  (an immutable `callerRewardWei` split at slash time between the caller
+  and the treasury, sized against the worst-case recorded gas cost --
+  `108,629` gas @ `10,000,000,007` wei/gas ~= `1.0863e15` wei -- with
+  roughly a 9x safety margin; a `registerMember` guard that a bond must
+  exceed the reward; `SelfSlashNotAllowed` blocking a slashed member from
+  claiming its own reward), `deploy-rewarded.ts`, `submit-evidence-rewarded.ts`,
+  and a new `RewardedDeploymentFile` schema type. `src/evidence.ts` gained
+  one optional, default-preserving parameter (the EIP-712 domain name) so
+  the new contract's differently-named domain verifies correctly; this
+  file is not hash-bound and the added parameter does not change behavior
+  for any existing caller. New parallel test suite
+  `test/BondedKeyperSlasherRewarded.ts` (self-slash rejection,
+  bond-must-exceed-reward, reward-split balance assertions) alongside the
+  original, untouched `test/BondedKeyperSlasher.ts` -- all 15 tests passing
+  locally (`npx hardhat test`) in both trees after `npm install`, and
+  `verify_chiado_certificate.py` re-confirmed `PASS` against the untouched
+  historical certificate. **Not yet executed on Chiado**: no funded
+  Chiado-only private key or RPC access exists anywhere in this repository
+  (confirmed by inspection -- only `.env.example` placeholders and the
+  well-known public Anvil test key scoped to the disposable local chain),
+  so an actual positive on-chain certificate for the rewarded contract
+  needs the user to supply one. Separately, splitting the seven-Keyper DKG
+  itself across at least three independently managed environments (as
+  requested) is not achievable through configuration alone -- the current
+  harness is one Docker Compose project on one host with every dependency
+  wired via Docker-internal DNS -- and would require provisioning
+  genuinely separate hosts/networks and rerunning the DKG end to end, both
+  outside what this session can provision on its own.
+- Installed MiKTeX (`winget install MiKTeX.MiKTeX`) to compile
+  `main_text.tex` directly rather than estimate; confirmed the master
+  theorem and corollary push the verified body length from 15 to 16
+  pages, and applied the same compaction techniques as the seventh pass
+  (collapsing display equations, tightening Discussion/Conclusion/Ethics
+  prose) without fully closing the extra page -- flagged honestly rather
+  than claimed fixed. Regenerated `MANIFEST.sha256` and reran
+  `reproduce_everything.py` in both trees; confirmed no dangling
+  `\ref`/`\label` pairs.
+
+## 2026-07-22 seventh pass: closing the evidence-optimal gap and fixing a real proof bug
+
+A third detailed review of the sixth pass's generalization confirmed the
+math was sound but found a genuine proof gap, a missing appendix anchor
+(a literal broken cross-reference in the compiled PDF), a dozen smaller
+prose/notation errors, and -- most importantly -- reiterated that the
+atomic-bypass hierarchy was still only an *exact-profile* characterization,
+not yet connected back to the paper's central evidence-boundary question.
+All were addressed:
+
+- **Fixed a real broken reference.** `main_text.tex` cited
+  `Appendix~\ref{app:proof-general-package-family}`, a label that did not
+  exist anywhere in `appendix_route_b.tex` -- it would have compiled to a
+  literal "Appendix ??" in the PDF. Fixed by giving the general-family
+  proof its own proper subsection and label, rather than leaving it folded
+  into the atomic-bypass subsection's label as before.
+- **Fixed a genuine gap in Lemma package-first-wlog's proof.** The
+  previous proof showed the reordered (package-first) schedule has the
+  same final exposure as the original and is "successful exactly when the
+  original is," but did not account for the mechanism's first-crossing
+  semantics: moving the package earlier can make the reordered sequence
+  cross the threshold *before* reaching the original's own stopping
+  point, and continuing past that point is not a valid schedule.
+  Rewrote the proof to explicitly truncate the reordered sequence at its
+  own first crossing, arguing the truncation cannot raise cost since
+  every resistance value is nonnegative -- exactly the fix the review
+  proposed. Strengthened the lemma's own statement to match ("every
+  successful schedule using package Q has a package-first successful
+  schedule of no greater cost," not just "some optimal schedule is
+  package-first"). Added an extended `Gamma-hat_seq` (zero once the
+  initial-release set alone already reaches threshold) so the closed-form
+  formula is well-defined even when a package alone crosses the
+  threshold, which the previous version left implicit.
+- **Closed the evidence-optimal gap -- the review's central conceptual
+  critique.** The atomic-bypass hierarchy answered "given a known private
+  profile, what is the exact cost under `m_bypass(b)`?" but not "what can
+  a verifier certify from floors alone?", leaving the new machinery
+  disconnected from the paper's actual novelty (the information-boundary
+  theorem). Added Theorem evidence-optimal-atomic-bypass: under
+  `m_bypass(b)`, public evidence alone certifies exactly `0`, resistance
+  floors alone certify exactly `TCR` (regardless of `b`), and
+  resistance-plus-activation floors certify exactly a new floors-based
+  `ABC-bar_b`. The proof composes the already-proved atomic-bypass and
+  information-boundary theorems at a shifted initial-release set
+  `A0 union Q` for each candidate package `Q`, so it is short and reuses
+  existing machinery rather than needing a new argument from scratch.
+  New verification script `evidence_optimal_atomic_bypass.py`: 2,440 total
+  random instances (tightness, soundness against perturbed profiles, and
+  both degenerate boundary layers), 0 discrepancies.
+- **A dozen smaller fixes** raised by the same review, all applied:
+  renamed the package variable from `P` to `Q` throughout (it visually
+  collided with the private profile `P`, already denoted with a script
+  P); redefined `b*` as the size of a *smallest* TCR-optimal cover, not
+  just "some" cover; fixed `B_b`'s definition to explicitly exclude the
+  empty set, consistent with the general family's own
+  `B subset 2^{U0} minus {emptyset}`; corrected "strict at every
+  intermediate step" to "strict at both nontrivial steps before reaching
+  its plateau" (the curve `10,7,4,4,4,4,4,4` is flat from `b=2` onward);
+  fixed the Contributions section's "three contributions" undercounting
+  four actual bullets; fixed a remaining "the ordered-witness condition is
+  necessary" overclaim in the mechanism-scope paragraph (a duplicate of a
+  wording bug fixed elsewhere in an earlier pass, missed here); completed
+  the abstract's fallback sentence to state the sound certificate is zero
+  when mechanism-robust floors are not certified, not just "threshold
+  cover is the safe fallback"; added the same missing "otherwise zero"
+  branch to the appendix's verifier-workflow table's ordered-witness and
+  timing rows; softened "real atomic bribery contracts are bounded in
+  practice" (an unsupported empirical claim) to "this paper does not
+  claim the deployed protocol enforces any particular value of `b`";
+  consolidated the main text's repeated per-check instance counts (640,
+  360, 800, 1,500, 240) down to one number per theorem, with full
+  breakdowns moved to this changelog, `EXPERIMENTS.md`, and the
+  verification scripts' own docstrings.
+- **Trimmed main-text length** toward the venue's page budget: moved the
+  cardinality-family-redundancy corollary's full statement and proof out
+  of the main text into the appendix (main text now states only the
+  hierarchy-defining theorem and the collapse corollary that motivates
+  fixing `r=1`); compressed the Application Value section, moving the
+  continuation-value-cap derivation's full economic argument into the
+  appendix (which previously *claimed* to contain it but did not -- a
+  second, independent gap this pass also closed) and leaving only a
+  pointer in the main text.
+- Regenerated `MANIFEST.sha256` and reran `reproduce_everything.py` in
+  both trees; confirmed no dangling `\ref`/`\label` pairs anywhere in
+  either LaTeX file via a standalone cross-reference check.
+- **Verified the actual page count by compiling, rather than estimating.**
+  No LaTeX toolchain existed on this machine; installed MiKTeX (`winget
+  install MiKTeX.MiKTeX`) and compiled `main_text.tex` directly --
+  `main_text.tex` uses the plain `article` class (10pt, 1in margins, only
+  common packages), not a custom LNCS `.cls`, so this required no
+  additional template files. The real body-only count (measured by a
+  `\typeout{\thepage}` marker placed immediately before the
+  `\clearpage`/`\bibliography` call, with `\appendix\input{appendix_route_b}`
+  excluded from that measurement) came back at 19 pages initially --
+  higher than either this pass's own estimate or the prior simulated
+  review's 18-page guess. Iteratively re-measured after each further
+  round of cuts (per-page character counts extracted via `pypdf` to
+  locate exactly which pages were under-full and pinpoint where
+  additional trims would actually move the final page boundary, since
+  not every cut propagates all the way to the last page) until the count
+  reached exactly 15: additional cuts beyond the ones above included
+  collapsing adjacent display equations into single blocks throughout
+  (`\quad`-separated single-line statements instead of stacked `\[...\]`
+  blocks, which carries real vertical-space cost independent of word
+  count -- this alone recovered close to a full page), further
+  compressing the Conclusion, Discussion, Related Work, and the Model
+  section's exposition, and moving the Higher-Order Defensive
+  Interactions section's Corollary and Proposition formal statements
+  into the appendix (keeping only the headline Theorem and a one-sentence
+  summary in the main text, mirroring the treatment already given to the
+  general-package-family section). No font size, margin, or template
+  change of any kind. Confirmed via a full two-pass compile (with
+  `bibtex` and the appendix `\input`) that the complete 67-page document
+  (15-page body, 2 pages of references, ~50-page appendix) still
+  compiles with zero LaTeX errors and zero dangling cross-references.
+
 ## 2026-07-22 sixth pass: generalizing the atomic-bypass hierarchy to arbitrary package families
 
 Following the fifth pass's naming/code corrections, generalized the
@@ -156,7 +503,44 @@ was built on top:
     bounded package of any given size -- that scope argument is still
     owed, and the paper says so.
 
-# ThreshCert artifact changelog
+## 2026-07-22 third paper-review response pass: remaining formal overclaims
+
+- Fixed three remaining formal overclaims flagged by a second simulated
+  review pass on the previous update:
+  - Contributions: "ordered-witness ... conditions ... pin down exactly
+    when the top layer holds" (reads as an iff characterization) replaced
+    with "gives a sufficient outcome-level condition under which activation
+    cover remains sound ... and an atomic-package construction showing
+    activation evidence is not generally mechanism-robust without that
+    structure" -- matching what Theorem activation-respecting-soundness and
+    Proposition activation-not-mechanism-robust actually establish (a
+    sufficient condition plus one counterexample).
+  - Table~\ref{tab:certificate-summary}: caption changed from "Largest
+    sound certificate by evidence and mechanism scope" to "Exact
+    certificate boundaries and generally sound lower bounds by evidence and
+    mechanism scope"; added a Status column distinguishing "exact and
+    evidence-optimal" rows from "sound lower bound" rows; the
+    resistance-plus-activation row's condition text corrected from
+    "activation floors, profile-class validity unfalsified only" (implying
+    ACR needs only activation floors) to "resistance and activation floors;
+    canonical profile class assumed but not certified".
+  - Conclusion: "absent an ordered witness or profile-class certification,
+    threshold cover is the robust fallback" (wrong on two counts -- losing
+    the ordered witness only falls back to threshold cover when
+    mechanism-robust resistance floors are separately certified, otherwise
+    the sound certificate is zero; and losing profile-class certification
+    does not by itself force a fallback to TCR, since the per-member MCR
+    route can still apply) replaced with the precise three-way statement.
+- Reworded the Ethics Considerations disclosure sentence: "disclosed ...
+  with no response by the submission date" read badly given same-day
+  timing; replaced with language that does not imply a waiting period that
+  did not happen.
+- Added a seven-row per-member audit table directly to the Production
+  Evidence Audit subsection (Table~\ref{tab:member-audit}: resistance,
+  activation, and penalty floor status per committee slot, no full
+  addresses), pulled from the real audit data in
+  `results/production_member_evidence_audit.csv` -- previously this
+  breakdown lived only in the artifact, not the main text.
 
 ## 2026-07-22 second paper-review response pass: complete paper received
 

@@ -174,7 +174,36 @@ resistance, activation, operator independence, or payment conditions.
     collapses the certificate all the way to TCR (0 mismatches) --
     together showing why the paper's one-shot restriction (`r=1`) is the
     boundary at which the hierarchy stops collapsing, not an arbitrary
-    modeling choice. See
+    modeling choice. A seventh script, `evidence_optimal_atomic_bypass.py`,
+    closes the gap the fifth script's own theorem deliberately left open
+    (an exact-profile characterization, not yet a certificate a verifier
+    can issue from floors alone): under `m_bypass(b)`, public evidence
+    alone certifies exactly `0`, resistance floors alone certify exactly
+    `TCR` (regardless of `b`, since a package buys nothing when there is
+    no activation gate to bypass), and resistance-plus-activation floors
+    certify exactly a new floors-based `ABC-bar_b`. The proof composes the
+    already-proved atomic-bypass and information-boundary theorems at a
+    shifted initial-release set, so the script mostly cross-checks that
+    composition: 800 instances confirm tightness against the actual
+    `m_bypass(b)` state-space computation (0 mismatches), 800 further
+    perturbed-profile instances confirm soundness (0 violations), 240
+    confirm the public-only collapse (0 mismatches), and 600 confirm the
+    resistance-only collapse to TCR (0 mismatches) -- 2,440 total
+    instances, 0 discrepancies. An eighth script,
+    `mixed_evidence_atomic_bypass.py`, verifies the Master Certificate
+    Theorem `MABC_{b,M}`, the general two-axis object making every
+    certificate in this paper a boundary case of one theorem (varying
+    both the certified activation set `M` and the package budget `b`)
+    rather than five separate results: 500 instances confirm a
+    mixed-tau-vector reduction of the partial-evidence certificate MCR
+    against independent brute-force enumeration (0 mismatches; this
+    reduction reuses the existing AC-formula solver rather than a new
+    one), 1,200 confirm tightness against the actual `m_bypass(b)`
+    state-space computation at random `(b, M)` pairs (0 mismatches -- an
+    early version's ground-truth comparison used the wrong profile and
+    was caught and fixed by this same cross-check), and 1,200 confirm
+    soundness (0 violations) -- 2,900 total instances, 0 discrepancies.
+    See
     `verification_scripts/README.md` for full per-script coverage and stated
     limitations (this suite cannot catch a shared conceptual mistake that
     both the paper and a from-scratch reimplementation would make the same

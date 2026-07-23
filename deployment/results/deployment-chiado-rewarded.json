@@ -1,0 +1,129 @@
+{
+  "schema": "fc-bonded-keyper-deployment-rewarded-v1",
+  "generatedAt": "2026-07-23T03:52:16.724Z",
+  "networkName": "chiado",
+  "chainId": 10200,
+  "contract": "0x7cDC9C1fC1EC5841908dE73391717Cf3381e583a",
+  "owner": "0x81994c9e549BaAA3e8F9aada28bba23a17aEDCaf",
+  "verifier": "0xF57e595eBc978D44e4da61E8095722576DBcc508",
+  "treasury": "0xEa6Cb192Ee6Fc7E571279AC75370105A945D33f3",
+  "committeeSize": 7,
+  "threshold": 4,
+  "bondWeiPerMember": "20000000000000000",
+  "callerRewardWei": "10000000000000000",
+  "totalBondWei": "140000000000000000",
+  "initialCertificateWei": "80000000000000000",
+  "keypers": [
+    {
+      "index": 0,
+      "address": "0xe199394a9524D5BC79748F01827A39A13bf2eff2"
+    },
+    {
+      "index": 1,
+      "address": "0x6257448DD21ECe10A1b08684A21324200eBfE318"
+    },
+    {
+      "index": 2,
+      "address": "0xF1FE5f08c9c16A87CcC9E165a2FD9C2776ce6e68"
+    },
+    {
+      "index": 3,
+      "address": "0x2e48d861f80d5b291549D1800969Ff741599d059"
+    },
+    {
+      "index": 4,
+      "address": "0x314A9bF106E2DCcD56b24ad3F11967B715EFae3C"
+    },
+    {
+      "index": 5,
+      "address": "0x64Dd07Fa802ad5f4a85773DE200d913198CC8d53"
+    },
+    {
+      "index": 6,
+      "address": "0xE2E1150e93d7001c1C7565BB7346fe2a8de05318"
+    }
+  ],
+  "transactions": {
+    "deploy": {
+      "hash": "0x82f55a3d7d28913d7ed9008a9defacf6bc7e57f424efba5edb135c3474924016",
+      "blockNumber": "22216721",
+      "blockHash": "0xe4a540a5ea4a7e7d00a17c713a33dfff6783ef079840412132d8e4f27709f464",
+      "gasUsed": "1639959",
+      "effectiveGasPrice": "8",
+      "status": "success"
+    },
+    "registrations": [
+      {
+        "memberIndex": 0,
+        "hash": "0x7baafcadf902b4f222c5502c69ad883d682cac8444d689257cecfbd1cee1fabe",
+        "blockNumber": "22216724",
+        "blockHash": "0xad78b55e51cf82f69fa2141d40255da91fd39e6128a7c98377c9f4d5c5f00cf8",
+        "gasUsed": "115635",
+        "effectiveGasPrice": "8",
+        "status": "success"
+      },
+      {
+        "memberIndex": 1,
+        "hash": "0x9c2878f9d71cbd9445f2ff8eeeb443d9ffe818f5430723ca80e7ae6041659ab9",
+        "blockNumber": "22216726",
+        "blockHash": "0xe63784384b683679a2929983a95e091e076757b54a49d6b2628859e1ef10abc9",
+        "gasUsed": "98547",
+        "effectiveGasPrice": "8",
+        "status": "success"
+      },
+      {
+        "memberIndex": 2,
+        "hash": "0xc51ca47abaf45cfa744bb39e7587b4182847ade7897e4089c20a2741001bf57b",
+        "blockNumber": "22216728",
+        "blockHash": "0x82acc083ea58168033484f629a560bdaa763a15699386411696fb80ce2750114",
+        "gasUsed": "98547",
+        "effectiveGasPrice": "8",
+        "status": "success"
+      },
+      {
+        "memberIndex": 3,
+        "hash": "0x571996ff72cd3a369d5ab48e697280cfbd08aa4e0bd2f9b677155abc87ebf1f0",
+        "blockNumber": "22216731",
+        "blockHash": "0x6e2de52042ed91bed6a8b6a04ecc6d4676a5680f81364dc46f8a06d0db9161f5",
+        "gasUsed": "98547",
+        "effectiveGasPrice": "8",
+        "status": "success"
+      },
+      {
+        "memberIndex": 4,
+        "hash": "0x81fbb245d620fc886829989dff21f23c7a50d7060764fdbe81a1404440201b22",
+        "blockNumber": "22216734",
+        "blockHash": "0x942b657bcf24d80f5bee14e6bbcb414fb76a39da14ed6399d77c6ceb65980ca1",
+        "gasUsed": "98547",
+        "effectiveGasPrice": "8",
+        "status": "success"
+      },
+      {
+        "memberIndex": 5,
+        "hash": "0xa62ffa725e622f0cf464da90d302ae394ab64025bec35f2cfdda142af852e5c3",
+        "blockNumber": "22216735",
+        "blockHash": "0xb8a1a113c259110057d3324c2fb6c7fd97929d39ad2bdd8da80a1fdba7bb22e8",
+        "gasUsed": "98547",
+        "effectiveGasPrice": "8",
+        "status": "success"
+      },
+      {
+        "memberIndex": 6,
+        "hash": "0xd50f7c1c479afc3dec618c97e66503ecb10e2792bd70cd5eb589f976f455d9d8",
+        "blockNumber": "22216736",
+        "blockHash": "0x52a594cbba5a12f4205ce805d277c3ee5df2d6627c5d558cc8682490f012552b",
+        "gasUsed": "98535",
+        "effectiveGasPrice": "8",
+        "status": "success"
+      }
+    ],
+    "freeze": {
+      "hash": "0x7af528621426d478c0ca9c832d4e3cb2e1106a1e138af89d424d670b9d2f47bf",
+      "blockNumber": "22216738",
+      "blockHash": "0xfc08941ab49fe776716af8a3ae7107eb868115aeac950e40c645bdb97477c4e5",
+      "gasUsed": "51942",
+      "effectiveGasPrice": "8",
+      "status": "success"
+    }
+  }
+}

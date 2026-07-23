@@ -41,6 +41,15 @@ export type DeploymentFile = {
   };
 };
 
+/// Deployment record for the parallel, additive
+/// `BondedKeyperSlasherRewarded` contract (see that contract's own
+/// doc-comment for why it is a separate contract rather than an in-place
+/// edit of `BondedKeyperSlasher`).
+export type RewardedDeploymentFile = DeploymentFile & {
+  schema: "fc-bonded-keyper-deployment-rewarded-v1";
+  callerRewardWei: string;
+};
+
 export type JobFile = {
   schema: "fc-release-job-v1";
   generatedAt: string;

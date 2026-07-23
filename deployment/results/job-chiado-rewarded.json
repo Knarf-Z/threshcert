@@ -1,0 +1,21 @@
+{
+  "schema": "fc-release-job-v1",
+  "generatedAt": "2026-07-23T03:55:34.422Z",
+  "deploymentFile": "results/deployment-chiado-rewarded.json",
+  "chainId": 10200,
+  "contract": "0x7cDC9C1fC1EC5841908dE73391717Cf3381e583a",
+  "jobId": "0xb7d7c8e47b76a21292fae70aea7c54fb33f3f9a407d5d81dffd88bf9893af17d",
+  "eon": "1",
+  "identityPreimage": "0x9b135262569838d98cdc64af1d19d0c1287a73278282c0085992a55e492ca30c",
+  "identityHash": "0x3ae2569f065d49e2e32d651415dba6f7d84c818dd8d436c89e16856f598488e2",
+  "releaseTime": "1784780715",
+  "nonce": "2",
+  "transaction": {
+    "hash": "0x524e5d8472e46a94bd42f7b0b43a36788a1d9b45dd8c8ef441823838f1d3eddd",
+    "blockNumber": "22216770",
+    "blockHash": "0x4c34ff3dd5afa14ff66b85e6dd303d501898ae4689e7c54be7a2c19e8ffa7d73",
+    "gasUsed": "99378",
+    "effectiveGasPrice": "8",
+    "status": "success"
+  }
+}

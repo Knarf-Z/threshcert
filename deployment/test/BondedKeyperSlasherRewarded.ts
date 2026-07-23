@@ -10,7 +10,14 @@ import {
   type EarlyShareEvidence,
 } from "../src/evidence.js";
 
+/// Tests the parallel, additive `BondedKeyperSlasherRewarded` contract.
+/// Mirrors BondedKeyperSlasher.ts's test structure exactly, adding only the
+/// reward-split-specific assertions and the two new guard tests -- see
+/// BondedKeyperSlasherRewarded.sol's doc-comment for why this is a separate
+/// contract rather than an edit of BondedKeyperSlasher.
+
 const BOND = parseEther("2");
+const CALLER_REWARD = parseEther("0.1");
 
 async function setup() {
   const connection = await network.create();
@@ -23,10 +30,11 @@ async function setup() {
   const submitter = rest[8];
   const attacker = rest[9];
 
-  const contract = await viem.deployContract("BondedKeyperSlasher", [
+  const contract = await viem.deployContract("BondedKeyperSlasherRewarded", [
     owner.account.address,
     verifier.account.address,
     treasury.account.address,
+    CALLER_REWARD,
   ]);
 
   for (let i = 0; i < memberWallets.length; i += 1) {
@@ -46,6 +54,7 @@ async function setup() {
     treasury,
     submitter,
     attacker,
+    memberWallets,
   };
 }
 
@@ -80,37 +89,14 @@ async function signatureFor(
   const wallet = useAttacker ? fixture.attacker : fixture.verifier;
   return wallet.signTypedData({
     account: wallet.account,
-    domain: evidenceDomain(chainId, fixture.contract.address),
+    domain: evidenceDomain(chainId, fixture.contract.address, "BondedKeyperSlasherRewarded"),
     types: earlyShareTypes,
     primaryType: "EarlyShareEvidence",
     message: evidence,
   });
 }
 
-describe("BondedKeyperSlasher", function () {
-  it("rejects registering one signer in two committee positions", async function () {
-    const connection = await network.create();
-    const { viem } = connection;
-    const wallets = await viem.getWalletClients();
-    const [owner, verifier, treasury, member] = wallets;
-    const contract = await viem.deployContract("BondedKeyperSlasher", [
-      owner.account.address,
-      verifier.account.address,
-      treasury.account.address,
-    ]);
-    await contract.write.registerMember([0, member.account.address], {
-      account: owner.account,
-      value: BOND,
-    });
-    await assert.rejects(
-      contract.write.registerMember([1, member.account.address], {
-        account: owner.account,
-        value: BOND,
-      }),
-      /DuplicateSigner/,
-    );
-  });
-
+describe("BondedKeyperSlasherRewarded", function () {
   it("freezes a seven-member 4-of-7 committee with an 8-unit certificate", async function () {
     const { contract } = await setup();
     assert.equal(await contract.read.registeredCount(), 7);
@@ -119,17 +105,18 @@ describe("BondedKeyperSlasher", function () {
     assert.equal(await contract.read.currentCertificate(), 8n * 10n ** 18n);
   });
 
-  it("computes the 4-of-7 certificate from non-uniform bonds", async function () {
+  it("computes the 4-of-7 certificate from non-uniform bonds exceeding the reward", async function () {
     const connection = await network.create();
     const { viem } = connection;
     const wallets = await viem.getWalletClients();
     const [owner, verifier, treasury, ...members] = wallets;
-    const contract = await viem.deployContract("BondedKeyperSlasher", [
+    const contract = await viem.deployContract("BondedKeyperSlasherRewarded", [
       owner.account.address,
       verifier.account.address,
       treasury.account.address,
+      10n,
     ]);
-    const bonds = [7n, 1n, 5n, 2n, 6n, 3n, 4n];
+    const bonds = [700n, 100n, 500n, 200n, 600n, 300n, 400n];
 
     for (let index = 0; index < bonds.length; index += 1) {
       await contract.write.registerMember(
@@ -139,11 +126,11 @@ describe("BondedKeyperSlasher", function () {
     }
     await contract.write.freezeCommittee({ account: owner.account });
 
-    assert.equal(await contract.read.totalBond(), 28n);
-    assert.equal(await contract.read.currentCertificate(), 10n);
+    assert.equal(await contract.read.totalBond(), 2800n);
+    assert.equal(await contract.read.currentCertificate(), 1000n);
   });
 
-  it("slashes a verifier-attested premature share and updates the certificate", async function () {
+  it("slashes a verifier-attested premature share, paying the caller reward and updating the certificate", async function () {
     const fixture = await setup();
     const { jobId } = await openJob(fixture);
     const evidence: EarlyShareEvidence = {
@@ -156,6 +143,9 @@ describe("BondedKeyperSlasher", function () {
     const treasuryBefore = await fixture.publicClient.getBalance({
       address: fixture.treasury.account.address,
     });
+    const submitterBefore = await fixture.publicClient.getBalance({
+      address: fixture.submitter.account.address,
+    });
 
     const hash = await fixture.contract.write.slashEarlyShare(
       [
@@ -167,7 +157,8 @@ describe("BondedKeyperSlasher", function () {
       ],
       { account: fixture.submitter.account },
     );
-    await fixture.publicClient.waitForTransactionReceipt({ hash });
+    const receipt = await fixture.publicClient.waitForTransactionReceipt({ hash });
+    const gasCost = receipt.gasUsed * receipt.effectiveGasPrice;
 
     const member = await fixture.contract.read.members([0n]);
     assert.equal(member[1], 0n);
@@ -177,7 +168,58 @@ describe("BondedKeyperSlasher", function () {
     const treasuryAfter = await fixture.publicClient.getBalance({
       address: fixture.treasury.account.address,
     });
-    assert.equal(treasuryAfter - treasuryBefore, BOND);
+    assert.equal(treasuryAfter - treasuryBefore, BOND - CALLER_REWARD);
+
+    const submitterAfter = await fixture.publicClient.getBalance({
+      address: fixture.submitter.account.address,
+    });
+    assert.equal(submitterAfter - submitterBefore, CALLER_REWARD - gasCost);
+  });
+
+  it("rejects the slashed member claiming its own caller reward", async function () {
+    const fixture = await setup();
+    const { jobId } = await openJob(fixture);
+    const evidence: EarlyShareEvidence = {
+      jobId,
+      memberIndex: 0,
+      shareHash: keccak256(stringToHex("self-slash-share")),
+      memberSignatureHash: keccak256(stringToHex("self-slash-signature")),
+    };
+    const signature = await signatureFor(fixture, evidence);
+
+    await assert.rejects(
+      fixture.contract.write.slashEarlyShare(
+        [
+          evidence.jobId,
+          evidence.memberIndex,
+          evidence.shareHash,
+          evidence.memberSignatureHash,
+          signature,
+        ],
+        { account: fixture.memberWallets[0].account },
+      ),
+      /SelfSlashNotAllowed/,
+    );
+  });
+
+  it("rejects a bond that does not exceed the caller reward", async function () {
+    const connection = await network.create();
+    const { viem } = connection;
+    const wallets = await viem.getWalletClients();
+    const [owner, verifier, treasury, member] = wallets;
+    const contract = await viem.deployContract("BondedKeyperSlasherRewarded", [
+      owner.account.address,
+      verifier.account.address,
+      treasury.account.address,
+      CALLER_REWARD,
+    ]);
+    await assert.rejects(
+      contract.write.registerMember([0, member.account.address], {
+        account: owner.account,
+        value: CALLER_REWARD,
+      }),
+      /InvalidBond/,
+    );
   });
 
   it("rejects an attestation signed by the wrong verifier", async function () {

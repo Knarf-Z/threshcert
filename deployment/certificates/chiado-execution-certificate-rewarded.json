@@ -1,0 +1,102 @@
+{
+  "certificateId": "sha256:6079203bba336d9911bbdd04e39163ba80e06476f75f4dff7dad219c40d3b9c1",
+  "schema": "fc-chiado-execution-certificate-rewarded-v1",
+  "certificateClass": "controlled-public-testnet-threshold-cover-with-covered-enforcement-reward",
+  "claim": {
+    "status": "POSITIVE_WITHIN_RECORDED_TESTNET_MECHANISM",
+    "statement": "At the recorded rewarded-Chiado state, the instrumented 4-of-7 contract's sum-of-four-smallest-live-bonds value is 80000000000000000 wei, and the recorded slashing transaction paid its own submitter a caller reward that exceeds the transaction's own gas cost by 9999999999066824 wei -- enforcement is rational for an unsubsidized caller, not merely mechanically executable.",
+    "unconditionalProductionAttackCostLowerBound": null,
+    "productionShutterCertificate": "NOT_CERTIFIED",
+    "productionMemberResistance": "NOT_CERTIFIED",
+    "productionActivationEvidence": "NOT_CERTIFIED",
+    "deploymentWideEnforcementProbability": "NOT_CERTIFIED"
+  },
+  "scope": {
+    "networkName": "chiado",
+    "chainId": 10200,
+    "contract": "0x7cDC9C1fC1EC5841908dE73391717Cf3381e583a",
+    "recordedBlockNumber": "22216779",
+    "recordedBlockHash": "0x10b7f64c6487abfbc950c89d3680cf9b775ee1a64edf4090fb05461f979a02d4",
+    "committeeSize": 7,
+    "threshold": 4,
+    "keyperProcessModel": "seven-colocated-processes-on-one-host",
+    "mechanism": "verifier-attested early-share slashing with on-chain bond transfer, split between a funded penalty treasury and the transaction's own submitter",
+    "certificateInput": "remaining on-chain testnet bond balances under the covered verifier-gated enforcement path, plus the caller-reward-vs-gas-cost margin",
+    "coveredExecutionConditions": [
+      "the pinned exporter detects and validates a premature share",
+      "the designated verifier issues the field-bound EIP-712 attestation",
+      "the attestation reaches the contract before the recorded release deadline"
+    ]
+  },
+  "certificate": {
+    "formula": "sum_of_q_smallest_live_bonds",
+    "unit": "wei",
+    "before": {
+      "memberBounds": [
+        "20000000000000000",
+        "20000000000000000",
+        "20000000000000000",
+        "20000000000000000",
+        "20000000000000000",
+        "20000000000000000",
+        "20000000000000000"
+      ],
+      "value": "80000000000000000"
+    },
+    "after": {
+      "memberBounds": [
+        "0",
+        "20000000000000000",
+        "20000000000000000",
+        "20000000000000000",
+        "20000000000000000",
+        "20000000000000000",
+        "20000000000000000"
+      ],
+      "value": "60000000000000000"
+    }
+  },
+  "enforcementIncentive": {
+    "callerRewardWei": "10000000000000000",
+    "treasuryAmountWei": "10000000000000000",
+    "gasCostWei": "933176",
+    "netSubmitterGainWei": "9999999999066824",
+    "rewardCoversGasCost": true
+  },
+  "observedEvidence": {
+    "rollingShutterVersion": "v1.4.4",
+    "rollingShutterCommit": "d143fffcf51f85b30375134d2d29756417f333b9",
+    "eon": "1",
+    "jobId": "0xb7d7c8e47b76a21292fae70aea7c54fb33f3f9a407d5d81dffd88bf9893af17d",
+    "releaseTime": "1784780715",
+    "observedAt": "1784778975",
+    "prematureBySeconds": "1740",
+    "validatedShares": 7,
+    "validNativeSignatures": 7,
+    "aggregateKeyValid": true,
+    "fourShareReconstructionMatches": true,
+    "slashedMemberIndex": 0,
+    "slashingTransaction": {
+      "hash": "0x0df94c76573a525a061ec075a6e3565125f55408940b601809c38bbb98125566",
+      "blockNumber": "22216779",
+      "blockHash": "0x10b7f64c6487abfbc950c89d3680cf9b775ee1a64edf4090fb05461f979a02d4",
+      "status": "success"
+    },
+    "recordedTransactionCount": 11
+  },
+  "verification": {
+    "offlineCommand": "python scripts/verify_chiado_certificate_rewarded.py",
+    "liveChainVerificationRequiredForPublicChainClaim": true,
+    "sourceDigestsSha256": {
+      "contracts/BondedKeyperSlasherRewarded.sol": "c26073a3a88dfdcdd76877945a59f5a2affcea8255c35e9da37ee6463e8ed02f",
+      "evidence/shutter-evidence.json": "8457edc24f0fecf423e1d11132997a7f27ba96f19980fd6660ea2506a3b4e942",
+      "results/deployment-chiado-rewarded.json": "b6a3ba204941227887afb09884ce8bc24e91e41f40857c79fd6d5e53c7072915",
+      "results/job-chiado-rewarded.json": "abfb76cdbb5dc673c8d4e6aad239b69185b11308f7f4c0dbce9604cb7b4f1a50",
+      "results/slashing-chiado-rewarded.json": "10262ae8210605b839d86327550c80b71c98ce1b725cd25a58f2f92714bb9aff",
+      "rolling-shutter/evidence-exporter/main.go": "81ec34764cea7c594dcf69e90ea0147ccd6d289682b51b55eb3a967c0e1baa25",
+      "rolling-shutter/evidence-exporter/main_test.go": "3e9b179ecd7cabe86a1e33ffb8931f25e6bc1ea10a659591b4737f0bc72d4966",
+      "runtime/keyper-set.json": "0fdbbc6fda08239a1f0a93c9caa5c709acc3fe7bc98238dce180f2bfbc43da1f",
+      "scripts/submit-evidence-rewarded.ts": "3e7414074dae62f466796bb8186a72e53699e78f0acf53de5ee3be6eee73c144"
+    }
+  }
+}

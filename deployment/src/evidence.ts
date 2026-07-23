@@ -19,9 +19,10 @@ export type EarlyShareEvidence = {
 export function evidenceDomain(
   chainId: number,
   verifyingContract: Address,
+  name: string = "BondedKeyperSlasher",
 ) {
   return {
-    name: "BondedKeyperSlasher",
+    name,
     version: "1",
     chainId,
     verifyingContract,

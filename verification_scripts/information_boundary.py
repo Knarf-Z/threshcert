@@ -45,6 +45,7 @@ from core import (
     ac_formula_gamma_star,
     random_instance,
     deterministic_seed,
+    parallel_map,
 )
 
 _ZERO_TAU_CACHE = {}
@@ -72,53 +73,63 @@ def perturb_profile(rng, t, tau_floor, R_floor):
     return R2, tau2
 
 
+def _check_tightness_and_soundness_one(task):
+    n, trial, perturbations_per_trial, seed_base = task
+    seed = deterministic_seed(n, trial, seed_base)
+    wk = "random" if trial % 2 else "uniform"
+    w, t, A0, tau_floor, R_floor = random_instance(n, seed, weight_kind=wk)
+    rng = random.Random(seed ^ 0x5BD1E995)
+
+    tightness_mismatches = []
+    soundness_violations = []
+
+    acr = ac_formula_gamma_star(w, t, A0, tau_floor, R_floor)
+    tcr = ac_formula_gamma_star(w, t, A0, zero_tau(n), R_floor)
+
+    # --- Tightness: the exact-floor profile attains the certificate.
+    brute_acr = brute_force_gamma_star(w, t, A0, tau_floor, R_floor)
+    brute_tcr = brute_force_gamma_star(w, t, A0, zero_tau(n), R_floor)
+    if brute_acr != acr or brute_tcr != tcr:
+        tightness_mismatches.append(
+            (n, seed, "tightness", brute_acr, acr, brute_tcr, tcr)
+        )
+
+    # --- Soundness: nothing consistent with the floors beats them.
+    for _ in range(perturbations_per_trial):
+        R2, tau2 = perturb_profile(rng, t, tau_floor, R_floor)
+
+        bf_acr_pert = brute_force_gamma_star(w, t, A0, tau2, R2)
+        if bf_acr_pert is not None and (acr is None or bf_acr_pert < acr):
+            soundness_violations.append(
+                (n, seed, "acr", tau2, R2, bf_acr_pert, acr)
+            )
+
+        # Most-permissive tau (all zero): the mechanism-robust TCR
+        # claim requires no positive activation floor at all.
+        bf_tcr_pert = brute_force_gamma_star(w, t, A0, zero_tau(n), R2)
+        if bf_tcr_pert is not None and (tcr is None or bf_tcr_pert < tcr):
+            soundness_violations.append(
+                (n, seed, "tcr", zero_tau(n), R2, bf_tcr_pert, tcr)
+            )
+
+    return tightness_mismatches, soundness_violations
+
+
 def check_tightness_and_soundness(
     n_values=(3, 4, 5, 6, 7),
     trials_per_n=60,
     perturbations_per_trial=5,
     seed_base=20260721,
 ):
-    total_ledgers = 0
-    tightness_mismatches = []
-    soundness_violations = []
-
-    for n in n_values:
-        for trial in range(trials_per_n):
-            seed = deterministic_seed(n, trial, seed_base)
-            wk = "random" if trial % 2 else "uniform"
-            w, t, A0, tau_floor, R_floor = random_instance(n, seed, weight_kind=wk)
-            rng = random.Random(seed ^ 0x5BD1E995)
-            total_ledgers += 1
-
-            acr = ac_formula_gamma_star(w, t, A0, tau_floor, R_floor)
-            tcr = ac_formula_gamma_star(w, t, A0, zero_tau(n), R_floor)
-
-            # --- Tightness: the exact-floor profile attains the certificate.
-            brute_acr = brute_force_gamma_star(w, t, A0, tau_floor, R_floor)
-            brute_tcr = brute_force_gamma_star(w, t, A0, zero_tau(n), R_floor)
-            if brute_acr != acr or brute_tcr != tcr:
-                tightness_mismatches.append(
-                    (n, seed, "tightness", brute_acr, acr, brute_tcr, tcr)
-                )
-
-            # --- Soundness: nothing consistent with the floors beats them.
-            for _ in range(perturbations_per_trial):
-                R2, tau2 = perturb_profile(rng, t, tau_floor, R_floor)
-
-                bf_acr_pert = brute_force_gamma_star(w, t, A0, tau2, R2)
-                if bf_acr_pert is not None and (acr is None or bf_acr_pert < acr):
-                    soundness_violations.append(
-                        (n, seed, "acr", tau2, R2, bf_acr_pert, acr)
-                    )
-
-                # Most-permissive tau (all zero): the mechanism-robust TCR
-                # claim requires no positive activation floor at all.
-                bf_tcr_pert = brute_force_gamma_star(w, t, A0, zero_tau(n), R2)
-                if bf_tcr_pert is not None and (tcr is None or bf_tcr_pert < tcr):
-                    soundness_violations.append(
-                        (n, seed, "tcr", zero_tau(n), R2, bf_tcr_pert, tcr)
-                    )
-
+    tasks = [
+        (n, trial, perturbations_per_trial, seed_base)
+        for n in n_values
+        for trial in range(trials_per_n)
+    ]
+    results = parallel_map(_check_tightness_and_soundness_one, tasks)
+    total_ledgers = len(tasks)
+    tightness_mismatches = [m for tm, _ in results for m in tm]
+    soundness_violations = [v for _, sv in results for v in sv]
     return total_ledgers, tightness_mismatches, soundness_violations
 
 

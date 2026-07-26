@@ -44,6 +44,7 @@ from core import (
     ac_formula_gamma_star,
     random_instance,
     deterministic_seed,
+    parallel_map,
 )
 
 _ZERO_TAU_CACHE = {}
@@ -106,44 +107,98 @@ def leq_extended(a, b):
     return a <= b
 
 
+def _check_boundary_and_monotonicity_one(task):
+    n, trial, seed_base = task
+    seed = deterministic_seed(n, trial, seed_base)
+    wk = "random" if trial % 2 else "uniform"
+    w, t, A0, tau_floor, R_floor = random_instance(n, seed, weight_kind=wk)
+    U0 = [i for i in range(n) if i not in A0]
+
+    tcr = ac_formula_gamma_star(w, t, A0, zero_tau(n), R_floor)
+    acr = ac_formula_gamma_star(w, t, A0, tau_floor, R_floor)
+    mcr_empty, _ = mcr_brute_force(w, t, A0, tau_floor, R_floor, frozenset())
+    mcr_full, _ = mcr_brute_force(w, t, A0, tau_floor, R_floor, frozenset(U0))
+
+    boundary_mismatch = None
+    if mcr_empty != tcr or mcr_full != acr:
+        boundary_mismatch = (n, seed, mcr_empty, tcr, mcr_full, acr)
+
+    monotonicity_violations = []
+    rng = random.Random(seed ^ 0x1234)
+    order = U0[:]
+    rng.shuffle(order)
+    prev_mcr, prev_M = mcr_empty, frozenset()
+    for i in order:
+        M = prev_M | {i}
+        mcr_M, _ = mcr_brute_force(w, t, A0, tau_floor, R_floor, M)
+        if not leq_extended(prev_mcr, mcr_M):
+            monotonicity_violations.append((n, seed, prev_M, M, prev_mcr, mcr_M))
+        prev_mcr, prev_M = mcr_M, M
+
+    return boundary_mismatch, monotonicity_violations
+
+
 def check_boundary_and_monotonicity(
     n_values=(3, 4, 5, 6, 7), trials_per_n=40, seed_base=20260722
 ):
-    total = 0
-    boundary_mismatches = []
-    monotonicity_violations = []
-
-    for n in n_values:
-        for trial in range(trials_per_n):
-            seed = deterministic_seed(n, trial, seed_base)
-            wk = "random" if trial % 2 else "uniform"
-            w, t, A0, tau_floor, R_floor = random_instance(n, seed, weight_kind=wk)
-            U0 = [i for i in range(n) if i not in A0]
-            total += 1
-
-            tcr = ac_formula_gamma_star(w, t, A0, zero_tau(n), R_floor)
-            acr = ac_formula_gamma_star(w, t, A0, tau_floor, R_floor)
-            mcr_empty, _ = mcr_brute_force(w, t, A0, tau_floor, R_floor, frozenset())
-            mcr_full, _ = mcr_brute_force(
-                w, t, A0, tau_floor, R_floor, frozenset(U0)
-            )
-            if mcr_empty != tcr or mcr_full != acr:
-                boundary_mismatches.append((n, seed, mcr_empty, tcr, mcr_full, acr))
-
-            rng = random.Random(seed ^ 0x1234)
-            order = U0[:]
-            rng.shuffle(order)
-            prev_mcr, prev_M = mcr_empty, frozenset()
-            for i in order:
-                M = prev_M | {i}
-                mcr_M, _ = mcr_brute_force(w, t, A0, tau_floor, R_floor, M)
-                if not leq_extended(prev_mcr, mcr_M):
-                    monotonicity_violations.append(
-                        (n, seed, prev_M, M, prev_mcr, mcr_M)
-                    )
-                prev_mcr, prev_M = mcr_M, M
-
+    tasks = [(n, trial, seed_base) for n in n_values for trial in range(trials_per_n)]
+    results = parallel_map(_check_boundary_and_monotonicity_one, tasks)
+    total = len(tasks)
+    boundary_mismatches = [bm for bm, _ in results if bm is not None]
+    monotonicity_violations = [v for _, mv in results for v in mv]
     return total, boundary_mismatches, monotonicity_violations
+
+
+def _check_tightness_and_soundness_one(task):
+    n, trial, perturbations_per_trial, seed_base = task
+    seed = deterministic_seed(n, trial, seed_base, "tight")
+    wk = "random" if trial % 2 else "uniform"
+    w, t, A0, tau_floor, R_floor = random_instance(n, seed, weight_kind=wk)
+    U0 = [i for i in range(n) if i not in A0]
+    rng = random.Random(seed ^ 0x5BD1E995)
+    M = frozenset(i for i in U0 if rng.random() < 0.5)
+
+    B_M, S_star = mcr_brute_force(w, t, A0, tau_floor, R_floor, M)
+    if B_M is None:
+        return [], []  # nothing to construct; soundness alone gives +inf
+
+    tightness_mismatches = []
+    soundness_violations = []
+
+    # --- Tightness: the exact least-favourable profile.
+    delta = Fr(1, 1000)
+    R_eps = [
+        (R_floor[i] + delta) if i in S_star else _BIG_R
+        for i in range(n)
+    ]
+    tau_eps = [
+        (tau_floor[i] if i in M else Fr(0)) if i in S_star else Fr(0)
+        for i in range(n)
+    ]
+    brute = brute_force_gamma_star(w, t, A0, tau_eps, R_eps)
+    expected = B_M + len(S_star) * delta
+    if brute != expected:
+        tightness_mismatches.append((n, seed, M, S_star, brute, expected))
+
+    # --- Soundness: nothing consistent with the M-partial ledger
+    # beats B_M. M-members perturbed upward within [floor, t);
+    # non-M members given a random, UNCONSTRAINED activation
+    # floor, since the ledger certifies nothing about them.
+    for _ in range(perturbations_per_trial):
+        R2 = [R_floor[i] + Fr(rng.randint(0, 12)) for i in range(n)]
+        tau2 = []
+        for i in range(n):
+            if i in M:
+                room = t - tau_floor[i]
+                bump = room * Fr(rng.randint(0, 80), 100)
+                tau2.append(tau_floor[i] + bump)
+            else:
+                tau2.append(t * Fr(rng.randint(0, 99), 100))
+        bf_pert = brute_force_gamma_star(w, t, A0, tau2, R2)
+        if bf_pert is not None and bf_pert < B_M:
+            soundness_violations.append((n, seed, M, tau2, R2, bf_pert, B_M))
+
+    return tightness_mismatches, soundness_violations
 
 
 def check_tightness_and_soundness(
@@ -152,57 +207,15 @@ def check_tightness_and_soundness(
     perturbations_per_trial=5,
     seed_base=20260722,
 ):
-    total = 0
-    tightness_mismatches = []
-    soundness_violations = []
-
-    for n in n_values:
-        for trial in range(trials_per_n):
-            seed = deterministic_seed(n, trial, seed_base, "tight")
-            wk = "random" if trial % 2 else "uniform"
-            w, t, A0, tau_floor, R_floor = random_instance(n, seed, weight_kind=wk)
-            U0 = [i for i in range(n) if i not in A0]
-            rng = random.Random(seed ^ 0x5BD1E995)
-            M = frozenset(i for i in U0 if rng.random() < 0.5)
-            total += 1
-
-            B_M, S_star = mcr_brute_force(w, t, A0, tau_floor, R_floor, M)
-            if B_M is None:
-                continue  # nothing to construct; soundness alone gives +inf
-
-            # --- Tightness: the exact least-favourable profile.
-            delta = Fr(1, 1000)
-            R_eps = [
-                (R_floor[i] + delta) if i in S_star else _BIG_R
-                for i in range(n)
-            ]
-            tau_eps = [
-                (tau_floor[i] if i in M else Fr(0)) if i in S_star else Fr(0)
-                for i in range(n)
-            ]
-            brute = brute_force_gamma_star(w, t, A0, tau_eps, R_eps)
-            expected = B_M + len(S_star) * delta
-            if brute != expected:
-                tightness_mismatches.append((n, seed, M, S_star, brute, expected))
-
-            # --- Soundness: nothing consistent with the M-partial ledger
-            # beats B_M. M-members perturbed upward within [floor, t);
-            # non-M members given a random, UNCONSTRAINED activation
-            # floor, since the ledger certifies nothing about them.
-            for _ in range(perturbations_per_trial):
-                R2 = [R_floor[i] + Fr(rng.randint(0, 12)) for i in range(n)]
-                tau2 = []
-                for i in range(n):
-                    if i in M:
-                        room = t - tau_floor[i]
-                        bump = room * Fr(rng.randint(0, 80), 100)
-                        tau2.append(tau_floor[i] + bump)
-                    else:
-                        tau2.append(t * Fr(rng.randint(0, 99), 100))
-                bf_pert = brute_force_gamma_star(w, t, A0, tau2, R2)
-                if bf_pert is not None and bf_pert < B_M:
-                    soundness_violations.append((n, seed, M, tau2, R2, bf_pert, B_M))
-
+    tasks = [
+        (n, trial, perturbations_per_trial, seed_base)
+        for n in n_values
+        for trial in range(trials_per_n)
+    ]
+    results = parallel_map(_check_tightness_and_soundness_one, tasks)
+    total = len(tasks)
+    tightness_mismatches = [m for tm, _ in results for m in tm]
+    soundness_violations = [v for _, sv in results for v in sv]
     return total, tightness_mismatches, soundness_violations
 
 

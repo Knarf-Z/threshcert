@@ -1,5 +1,205 @@
 # ThreshCert artifact changelog
 
+## 2026-07-23 fourteenth pass: an FC-targeted narrative closing pass
+
+The user asked directly: why is evidence-relative certification an FC
+problem at all, and what does the MABC/TCR/zero branch structure tell
+an engineer to actually do when package bribery is real? A follow-up
+review supplied a 12-item list to address this; per standing
+instruction, each item was independently judged rather than executed
+wholesale, and the user explicitly confirmed this judgment call and the
+15-page hard constraint twice more mid-pass.
+
+- **Adopted** (verified low-risk, high value): rewrote the Contributions
+  section's opening to lead with the evidence-times-mechanism-power
+  characterization instead of a list of mathematical tools (robust
+  optimization, antimatroids, Mobius decomposition are now framed as
+  the tools used to establish the boundary, not the contribution
+  itself); added one paragraph to the Introduction making the
+  "hostile default" explicit (unrestricted or repeatable package
+  acquisition collapses activation evidence to mechanism-robust
+  threshold cover, or to zero) and tying evidence-relative certification
+  directly to the financial-security question -- a claim untraceable to
+  public, checkable evidence is not one an auditor or insurer can act
+  on; added an "Illustrative stake sizing" corollary
+  (`P > V-bar(x)/(4*p-bar)`) combining two already-proven results
+  (`Corollary positive-deployment-target`'s common-value specialization
+  and `Proposition no-profitable-premature-reconstruction`) into a
+  concrete engineering decision rule -- no new proof needed, both
+  ingredients already existed; fixed a second occurrence of "gradually"
+  describing the same two-step `10,7,4,...` curve (Section 7.2, not just
+  the abstract instance from the twelfth pass); trimmed specific
+  cross-validation instance counts (1000, 2440, 2900, 2540) out of the
+  main text, keeping "zero mismatches" and pointing to the appendix for
+  exact counts, per the user's own suggestion to reduce the
+  math-tool-listing feel.
+- **Declined** (judged lower value or already addressed, given the hard
+  15-page constraint): a full rewrite of the Contributions section's
+  second bullet (already updated in the thirteenth pass); a new Related
+  Work paragraph specifically on atomic bribing contracts (the existing
+  paragraph already cites the same source); a two-dimensional `(b,M)`
+  overview figure; any Nash-equilibrium or bargaining model (the user
+  explicitly said not to).
+- **Page-count fallout was severe this round** (net new content pushed
+  the body to 16 pages, worse than prior passes) and required far more
+  trimming than usual to close: cutting upstream content (Related Work,
+  Introduction) did not cascade at all this time, consistent with prior
+  passes' finding that only content immediately adjacent to the actual
+  overflow reliably shifts the page boundary. What did work, in order of
+  effectiveness: merging adjacent Discussion paragraphs (saving a full
+  paragraph-heading's vertical overhead, not just character count) was
+  more effective than any single wording cut; the final ~150 characters
+  required cutting into the Conclusion and Ethics-considerations
+  paragraphs directly, down to single-clause density -- confirmed
+  re-readable and grammatically intact after compression, not merely
+  character-count-compliant.
+- Re-ran the dangling-reference checker (0 missing), regenerated
+  `MANIFEST.sha256`, and reran `reproduce_everything.py` in both trees.
+
+## 2026-07-23 thirteenth pass: strengthening the master theorem to a genuine evidence-only bound
+
+A seventh review of the twelfth pass's draft raised a deeper point: not
+a correctness bug, but a scope mismatch between what `Theorem
+master-certificate-boundary` actually proved and what it was labelled as
+in the paper's own reference table. Verified against the model's exact
+definitions before acting, since this is a substantive mathematical
+claim, not a wording nit.
+
+- **The theorem was proven over the narrower canonical class
+  `P_act(A0)`, but labelled as the evidence-only certificate
+  `C^evid_{m_bypass(b)}` and claimed to "subsume" `Proposition
+  partial-profile-evidence`'s row -- which is genuinely evidence-only,
+  proven over the strictly wider, assumption-free `P_M(A0)` (no
+  exposure-sufficiency or monotonicity commitment for members outside
+  `M`).** Confirmed by reading both classes' actual definitions
+  (`P_act(A0)` requires exposure-sufficiency and monotone caps for every
+  member; `P_M(A0)` restricts only `M`, leaving everything else fully
+  unrestricted) and confirming `Theorem atomic-bypass-hierarchy` --
+  which the old proof composed with `Proposition
+  partial-profile-evidence` -- is itself stated only for `P_act(A0)`, so
+  the old proof technique could not simply be reused for the wider
+  class.
+- **Strengthened the theorem to hold over `P_M(A0)` with a genuinely new
+  soundness proof**, verified independently before writing it in: fix
+  any successful `m_bypass(b)` outcome (package `Q`, sequential remainder
+  `S`); for each `i` in `S ∩ M`, the actual exposure before `i` was
+  acquired already meets its certified floor (a raw necessary condition,
+  needing no smoothness assumption); crediting the outcome with all of
+  `Q` pre-released, rather than only whatever part of `Q` had actually
+  been used by that point, can only raise this exposure figure, so the
+  same realized order witnesses `S` in the order-feasible family for
+  `M \ Q` relative to base `A0 ∪ Q`. This bounds the payment below by
+  `MABC_{b,M}(A0)` without assuming exposure-sufficiency or monotonicity
+  anywhere, even for members outside `M`, and without assuming the
+  package runs first. Tightness needed no new construction: the existing
+  `ε`-perturbed profile already lies in `P_act(A0) ⊆ P_M(A0)`, so it
+  witnesses tightness for the wider class directly. `Theorem
+  evidence-optimal-atomic-bypass` (the `M=U0` case, still proven over
+  `P_act(A0)`) is left untouched -- it now gives the same value under a
+  narrower class than the strengthened master theorem does at `M=U0`,
+  noted in the main text rather than restructured as a corollary, to
+  keep this pass additive rather than a rewrite of an already-correct
+  result.
+- **Two wording precision fixes**, both verified against the actual
+  claims before touching them: "every certificate this paper proves ...
+  one of its boundary cases" (Conclusion) restated to match the
+  theorem's own precise scoping ("every exact fixed
+  sequential-or-one-shot-bypass certificate"); the abstract's claim that
+  the package floor is reached at "a small, instance-specific size" is
+  not always true (the smallest threshold-cover-optimal set can be as
+  large as the whole committee) -- reworded to say it can be far below
+  the full committee size, not that it always is.
+- **Added the rewarded Chiado run's real numbers to the main-text
+  Evaluation section**, not just the appendix: the caller reward
+  (`1e16` wei), forfeited bond (`2e16` wei), and real gas cost (`933176`
+  wei) now appear in `S:evaluation` itself, with an explicit disclaimer
+  that this establishes caller-side cost coverage in one execution, not
+  a uniform detection, attribution, or enforcement probability --
+  softening the previous "closes exactly this gap" phrasing the review
+  correctly flagged as overstating a single execution's significance.
+- **Closed a definitional gap the strengthening itself created**:
+  `Definition atomic-bypass-mechanism` described sequential acquisition
+  as gated by "the standard `tau_i <= exposure` rule of `m_seq`," which
+  presumes a scalar `tau_i` -- fine when `m_bypass(b)` was only ever
+  applied within the canonical class, but no longer well-posed now that
+  the strengthened master theorem applies it to general base profiles
+  in `P_M(A0)`, where non-`M` members need not have any scalar `tau_i`
+  at all. Fixed by tying the definition explicitly to `m_seq`'s own
+  general acquisition relation `Acq_P(i|A)` (already defined earlier in
+  the paper for exactly this purpose), noting it reduces to the scalar
+  rule on the canonical class. `Lemma package-first-wlog` and `Theorem
+  atomic-bypass-hierarchy` were already correctly scoped to the
+  canonical class and needed no change.
+- Named the master theorem in the Contributions section, not only the
+  Conclusion -- the second contribution bullet previously stopped at
+  `Theorem evidence-optimal-atomic-bypass` (the `M=U0` case) without
+  mentioning the general `MABC_{b,M}` result at all, so a reviewer
+  reading only the first two pages would not see the paper's actual
+  headline result. Fixed a second, independent occurrence of
+  "collapses ... gradually" (Section 7.2, not the abstract instance
+  fixed in the twelfth pass) that likewise describes a two-step curve,
+  not a gradual one.
+- Re-confirmed the 15-page body count after all of the above (net
+  content increase required a further, real trim -- not just to the
+  newly added text -- of the Ethics-considerations paragraph, the only
+  paragraph immediately adjacent to the page-16 overflow; cuts to
+  earlier prose sections did not cascade this time, consistent with the
+  eleventh/twelfth passes' finding that only cuts to content immediately
+  before an overflow reliably shift the boundary). Re-ran the
+  dangling-reference checker (0 missing), regenerated `MANIFEST.sha256`,
+  and reran `reproduce_everything.py` in both trees.
+
+## 2026-07-23 twelfth pass: a second real bug in the same tightness proof
+
+A sixth review of the eleventh pass's draft made four claims: one
+substantive correctness claim (re-examining the same tightness proof
+fixed in the ninth pass) and three structural/wording claims. All four
+were independently verified against the actual source before acting,
+per standing instruction.
+
+- **A second real bug in `Theorem master-certificate-boundary`'s
+  tightness construction, confirmed and fixed.** The ninth pass's
+  epsilon-perturbation fix built a single witnessing profile giving every
+  `i in Q*` (the atomic package) an "initially-active" cap regardless of
+  whether `i in M`, reasoning that package members never face their
+  activation gate operationally. That reasoning conflates two different
+  things: membership in `M` is a property of what the *ledger* certifies
+  about a member's true resistance profile, independent of which
+  mechanism ultimately acquires that member. Consistency with
+  `I_{R,tau,M}` requires `tau_i >= tau-bar_i` for *every* `i in M`,
+  including `i in Q* ∩ M` -- an initially-active cap gives `tau_i = 0`,
+  which is inconsistent whenever `tau-bar_i > 0`, regardless of whether
+  the package mechanism happens to skip checking it. Verified this
+  directly against my own already-written text (`grep` found the exact
+  sentence: "every i in Q* gets an initially-active cap regardless of
+  whether i in M") -- a real bug, not a review artifact. Fixed by giving
+  every `i in M` (including `Q* ∩ M`) a step cap at `tau-bar_i` instead;
+  since `m_bypass(b)` buys a package regardless of any member's cap in
+  the first place, this changes nothing about the mechanism's operation
+  or the cost bound, only the constructed profile's consistency with the
+  ledger. No theorem statement or certified value changed, again only the
+  proof technique.
+- **`Table certificate-summary` was missing a row for its own headline
+  result.** The table is introduced as "this paper's reference point"
+  but only listed the five certificates that predate the master theorem
+  (public, conditional ACR, MCR_M, activation-respecting bound,
+  mechanism-robust TCR) -- Theorem master-certificate-boundary itself had
+  no row. Added one, explicitly noting it subsumes the `MCR_M` row at
+  `b=0`.
+- **Two wording precision fixes**, both verified against the actual text
+  before touching it: "Every certificate this paper proves is a boundary
+  case of this one theorem" is too strong (the paper also has the
+  broader activation-respecting sound bound and the mechanism-robust
+  threshold cover, neither a boundary case of `MABC_{b,M}` specifically)
+  -- rescoped to "every exact certificate ... for a fixed sequential or
+  one-shot-bypass mechanism." The abstract's "collapsing gradually to 4"
+  described a curve (`10,7,4,4,4,4,4,4`) that only drops twice, not
+  gradually -- reworded to "collapsing from 10 to 7 to 4."
+- Re-verified the 15-page body count survives all four changes (it does,
+  with room to spare from earlier trims); re-ran the dangling-reference
+  checker (still 0 missing); regenerated `MANIFEST.sha256` and reran
+  `reproduce_everything.py` in both trees.
+
 ## 2026-07-23 eleventh pass: `references.bib` was missing from both trees
 
 While recompiling the paper to verify the tenth pass's Chiado additions

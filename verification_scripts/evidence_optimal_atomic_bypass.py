@@ -74,9 +74,23 @@ import sys, os
 from fractions import Fraction as Fr
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from core import ac_formula_gamma_star, random_instance, deterministic_seed
+from core import ac_formula_gamma_star, random_instance, deterministic_seed, parallel_map
 from atomic_bypass_hierarchy import abc_closed_form, abc_state_space
 from information_boundary import perturb_profile, zero_tau
+
+
+def _check_tightness_one(task):
+    n, trial, b_values, seed_base = task
+    seed = deterministic_seed(n, trial, seed_base, "eoab-tight")
+    wk = "random" if trial % 2 else "uniform"
+    w, t, A0, tau_floor, R_floor = random_instance(n, seed, weight_kind=wk)
+    mismatches = []
+    for b in b_values:
+        closed = abc_closed_form(w, t, A0, tau_floor, R_floor, b)
+        ground_truth = abc_state_space(w, t, A0, tau_floor, R_floor, b)
+        if closed != ground_truth:
+            mismatches.append((n, seed, b, closed, ground_truth))
+    return len(b_values), mismatches
 
 
 def check_tightness(
@@ -86,20 +100,49 @@ def check_tightness(
     """The exact-floor profile attains ABC-bar_b(A0) exactly, checked
     against the actual mechanism-faithful state-space computation (not
     assuming Lemma package-first-wlog), for every b."""
-    total = 0
-    mismatches = []
-    for n in n_values:
-        for trial in range(trials_per_n):
-            seed = deterministic_seed(n, trial, seed_base, "eoab-tight")
-            wk = "random" if trial % 2 else "uniform"
-            w, t, A0, tau_floor, R_floor = random_instance(n, seed, weight_kind=wk)
-            for b in b_values:
-                total += 1
-                closed = abc_closed_form(w, t, A0, tau_floor, R_floor, b)
-                ground_truth = abc_state_space(w, t, A0, tau_floor, R_floor, b)
-                if closed != ground_truth:
-                    mismatches.append((n, seed, b, closed, ground_truth))
+    tasks = [
+        (n, trial, b_values, seed_base)
+        for n in n_values
+        for trial in range(trials_per_n)
+    ]
+    results = parallel_map(_check_tightness_one, tasks)
+    total = sum(r[0] for r in results)
+    mismatches = [m for _, ms in results for m in ms]
     return total, mismatches
+
+
+def _check_soundness_one(task):
+    import random as _random
+
+    n, trial, b_values, perturbations_per_trial, seed_base = task
+    seed = deterministic_seed(n, trial, seed_base, "eoab-sound")
+    wk = "random" if trial % 2 else "uniform"
+    w, t, A0, tau_floor, R_floor = random_instance(n, seed, weight_kind=wk)
+    rng = _random.Random(seed ^ 0x2545F491)
+    violations = []
+    for b in b_values:
+        certificate = abc_closed_form(w, t, A0, tau_floor, R_floor, b)
+        for _ in range(perturbations_per_trial):
+            R2, tau2 = perturb_profile(rng, t, tau_floor, R_floor)
+            actual = abc_state_space(w, t, A0, tau2, R2, b)
+            if actual is not None and (
+                certificate is None or actual < certificate
+            ):
+                violations.append(
+                    (n, seed, b, "perturbed", tau2, R2, actual, certificate)
+                )
+            # Most-permissive tau (all zero): the resistance-only
+            # layer's collapse-to-TCR claim needs no positive
+            # activation floor certified at all.
+            actual_zero_tau = abc_state_space(w, t, A0, zero_tau(n), R2, b)
+            tcr_certificate = ac_formula_gamma_star(w, t, A0, zero_tau(n), R_floor)
+            if actual_zero_tau is not None and (
+                tcr_certificate is None or actual_zero_tau < tcr_certificate
+            ):
+                violations.append(
+                    (n, seed, b, "zero-tau", R2, actual_zero_tau, tcr_certificate)
+                )
+    return len(b_values), violations
 
 
 def check_soundness(
@@ -108,63 +151,57 @@ def check_soundness(
 ):
     """No profile consistent with the floors ever lets m_bypass(b) beat
     the floors-based certificate ABC-bar_b(A0)."""
-    import random as _random
-
-    total = 0
-    violations = []
-    for n in n_values:
-        for trial in range(trials_per_n):
-            seed = deterministic_seed(n, trial, seed_base, "eoab-sound")
-            wk = "random" if trial % 2 else "uniform"
-            w, t, A0, tau_floor, R_floor = random_instance(n, seed, weight_kind=wk)
-            rng = _random.Random(seed ^ 0x2545F491)
-            for b in b_values:
-                certificate = abc_closed_form(w, t, A0, tau_floor, R_floor, b)
-                total += 1
-                for _ in range(perturbations_per_trial):
-                    R2, tau2 = perturb_profile(rng, t, tau_floor, R_floor)
-                    actual = abc_state_space(w, t, A0, tau2, R2, b)
-                    if actual is not None and (
-                        certificate is None or actual < certificate
-                    ):
-                        violations.append(
-                            (n, seed, b, "perturbed", tau2, R2, actual, certificate)
-                        )
-                    # Most-permissive tau (all zero): the resistance-only
-                    # layer's collapse-to-TCR claim needs no positive
-                    # activation floor certified at all.
-                    actual_zero_tau = abc_state_space(
-                        w, t, A0, zero_tau(n), R2, b
-                    )
-                    tcr_certificate = ac_formula_gamma_star(
-                        w, t, A0, zero_tau(n), R_floor
-                    )
-                    if actual_zero_tau is not None and (
-                        tcr_certificate is None or actual_zero_tau < tcr_certificate
-                    ):
-                        violations.append(
-                            (n, seed, b, "zero-tau", R2, actual_zero_tau, tcr_certificate)
-                        )
+    tasks = [
+        (n, trial, b_values, perturbations_per_trial, seed_base)
+        for n in n_values
+        for trial in range(trials_per_n)
+    ]
+    results = parallel_map(_check_soundness_one, tasks)
+    total = sum(r[0] for r in results)
+    violations = [v for _, vs in results for v in vs]
     return total, violations
+
+
+def _check_public_only_one(task):
+    n, trial, b_values, seed_base = task
+    seed = deterministic_seed(n, trial, seed_base, "eoab-pub")
+    w, t, A0, _, _ = random_instance(n, seed)
+    zero_R = [Fr(0)] * n
+    mismatches = []
+    for b in b_values:
+        value = abc_closed_form(w, t, A0, zero_tau(n), zero_R, b)
+        if value != Fr(0):
+            mismatches.append((n, seed, b, value))
+    return len(b_values), mismatches
 
 
 def check_public_only(n_values=(3, 5, 7), b_values=(0, 1, 2, 3), trials_per_n=20,
                        seed_base=20260722):
     """I_pub: no resistance floor and no activation floor certified at
     all -- ABC-bar_b(A0) must collapse to exactly zero for every b."""
-    total = 0
-    mismatches = []
-    for n in n_values:
-        for trial in range(trials_per_n):
-            seed = deterministic_seed(n, trial, seed_base, "eoab-pub")
-            w, t, A0, _, _ = random_instance(n, seed)
-            zero_R = [Fr(0)] * n
-            for b in b_values:
-                total += 1
-                value = abc_closed_form(w, t, A0, zero_tau(n), zero_R, b)
-                if value != Fr(0):
-                    mismatches.append((n, seed, b, value))
+    tasks = [
+        (n, trial, b_values, seed_base)
+        for n in n_values
+        for trial in range(trials_per_n)
+    ]
+    results = parallel_map(_check_public_only_one, tasks)
+    total = sum(r[0] for r in results)
+    mismatches = [m for _, ms in results for m in ms]
     return total, mismatches
+
+
+def _check_resistance_only_collapses_to_tcr_one(task):
+    n, trial, b_values, seed_base = task
+    seed = deterministic_seed(n, trial, seed_base, "eoab-res")
+    wk = "random" if trial % 2 else "uniform"
+    w, t, A0, _, R_floor = random_instance(n, seed, weight_kind=wk)
+    tcr = ac_formula_gamma_star(w, t, A0, zero_tau(n), R_floor)
+    mismatches = []
+    for b in b_values:
+        value = abc_closed_form(w, t, A0, zero_tau(n), R_floor, b)
+        if value != tcr:
+            mismatches.append((n, seed, b, value, tcr))
+    return len(b_values), mismatches
 
 
 def check_resistance_only_collapses_to_tcr(
@@ -174,19 +211,14 @@ def check_resistance_only_collapses_to_tcr(
     """I_R: resistance floors certified, no activation floor at all
     (tau-bar=0) -- ABC-bar_b(A0) must equal TCR_{R-bar}(A0) exactly for
     every b, regardless of the package budget."""
-    total = 0
-    mismatches = []
-    for n in n_values:
-        for trial in range(trials_per_n):
-            seed = deterministic_seed(n, trial, seed_base, "eoab-res")
-            wk = "random" if trial % 2 else "uniform"
-            w, t, A0, _, R_floor = random_instance(n, seed, weight_kind=wk)
-            tcr = ac_formula_gamma_star(w, t, A0, zero_tau(n), R_floor)
-            for b in b_values:
-                total += 1
-                value = abc_closed_form(w, t, A0, zero_tau(n), R_floor, b)
-                if value != tcr:
-                    mismatches.append((n, seed, b, value, tcr))
+    tasks = [
+        (n, trial, b_values, seed_base)
+        for n in n_values
+        for trial in range(trials_per_n)
+    ]
+    results = parallel_map(_check_resistance_only_collapses_to_tcr_one, tasks)
+    total = sum(r[0] for r in results)
+    mismatches = [m for _, ms in results for m in ms]
     return total, mismatches
 
 

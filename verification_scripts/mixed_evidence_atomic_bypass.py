@@ -63,7 +63,7 @@ import random as _random
 from fractions import Fraction as Fr
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from core import ac_formula_gamma_star, random_instance, deterministic_seed
+from core import ac_formula_gamma_star, random_instance, deterministic_seed, parallel_map
 from atomic_bypass_hierarchy import abc_state_space
 from information_boundary import zero_tau
 from partial_activation_evidence import mcr_brute_force
@@ -127,25 +127,47 @@ def perturb_profile_partial(rng, t, tau_floor, R_floor, M):
     return R2, tau2
 
 
+def _check_mcr_formula_matches_brute_force_one(task):
+    n, trial, seed_base = task
+    seed = deterministic_seed(n, trial, seed_base, "meab-mcr")
+    wk = "random" if trial % 2 else "uniform"
+    w, t, A0, tau_floor, R_floor = random_instance(n, seed, weight_kind=wk)
+    U0 = [i for i in range(n) if i not in A0]
+    rng = _random.Random(seed ^ 0x1B873593)
+    M = random_M(rng, U0)
+    formula = mcr_via_formula(w, t, A0, tau_floor, R_floor, M)
+    brute, _ = mcr_brute_force(w, t, A0, tau_floor, R_floor, M)
+    if formula != brute:
+        return (n, seed, M, formula, brute)
+    return None
+
+
 def check_mcr_formula_matches_brute_force(
     n_values=(3, 4, 5, 6, 7), trials_per_n=100, seed_base=20260722
 ):
-    total = 0
-    mismatches = []
-    for n in n_values:
-        for trial in range(trials_per_n):
-            seed = deterministic_seed(n, trial, seed_base, "meab-mcr")
-            wk = "random" if trial % 2 else "uniform"
-            w, t, A0, tau_floor, R_floor = random_instance(n, seed, weight_kind=wk)
-            U0 = [i for i in range(n) if i not in A0]
-            rng = _random.Random(seed ^ 0x1B873593)
-            M = random_M(rng, U0)
-            total += 1
-            formula = mcr_via_formula(w, t, A0, tau_floor, R_floor, M)
-            brute, _ = mcr_brute_force(w, t, A0, tau_floor, R_floor, M)
-            if formula != brute:
-                mismatches.append((n, seed, M, formula, brute))
+    tasks = [(n, trial, seed_base) for n in n_values for trial in range(trials_per_n)]
+    results = parallel_map(_check_mcr_formula_matches_brute_force_one, tasks)
+    total = len(tasks)
+    mismatches = [m for m in results if m is not None]
     return total, mismatches
+
+
+def _check_tightness_one(task):
+    n, trial, b_values, seed_base = task
+    seed = deterministic_seed(n, trial, seed_base, "meab-tight")
+    wk = "random" if trial % 2 else "uniform"
+    w, t, A0, tau_floor, R_floor = random_instance(n, seed, weight_kind=wk)
+    U0 = [i for i in range(n) if i not in A0]
+    rng = _random.Random(seed ^ 0x9E3779B9)
+    mismatches = []
+    for b in b_values:
+        M = random_M(rng, U0)
+        mixed_tau = [tau_floor[i] if i in M else Fr(0) for i in range(n)]
+        closed = mabc_closed_form(w, t, A0, tau_floor, R_floor, M, b)
+        ground_truth = abc_state_space(w, t, A0, mixed_tau, R_floor, b)
+        if closed != ground_truth:
+            mismatches.append((n, seed, M, b, closed, ground_truth))
+    return len(b_values), mismatches
 
 
 def check_tightness(
@@ -159,52 +181,50 @@ def check_tightness(
     for i not in M, exactly as mcr_via_formula's own mixed vector does.
     Using the raw tau_floor for every member here would test a different,
     over-constrained profile that need not be ledger-consistent at all."""
-    total = 0
-    mismatches = []
-    for n in n_values:
-        for trial in range(trials_per_n):
-            seed = deterministic_seed(n, trial, seed_base, "meab-tight")
-            wk = "random" if trial % 2 else "uniform"
-            w, t, A0, tau_floor, R_floor = random_instance(n, seed, weight_kind=wk)
-            U0 = [i for i in range(n) if i not in A0]
-            rng = _random.Random(seed ^ 0x9E3779B9)
-            for b in b_values:
-                M = random_M(rng, U0)
-                total += 1
-                mixed_tau = [tau_floor[i] if i in M else Fr(0) for i in range(n)]
-                closed = mabc_closed_form(w, t, A0, tau_floor, R_floor, M, b)
-                ground_truth = abc_state_space(w, t, A0, mixed_tau, R_floor, b)
-                if closed != ground_truth:
-                    mismatches.append((n, seed, M, b, closed, ground_truth))
+    tasks = [
+        (n, trial, b_values, seed_base)
+        for n in n_values
+        for trial in range(trials_per_n)
+    ]
+    results = parallel_map(_check_tightness_one, tasks)
+    total = sum(r[0] for r in results)
+    mismatches = [m for _, ms in results for m in ms]
     return total, mismatches
+
+
+def _check_soundness_one(task):
+    n, trial, b_values, perturbations_per_trial, seed_base = task
+    seed = deterministic_seed(n, trial, seed_base, "meab-sound")
+    wk = "random" if trial % 2 else "uniform"
+    w, t, A0, tau_floor, R_floor = random_instance(n, seed, weight_kind=wk)
+    U0 = [i for i in range(n) if i not in A0]
+    rng = _random.Random(seed ^ 0x85EBCA6B)
+    violations = []
+    for b in b_values:
+        M = random_M(rng, U0)
+        certificate = mabc_closed_form(w, t, A0, tau_floor, R_floor, M, b)
+        for _ in range(perturbations_per_trial):
+            R2, tau2 = perturb_profile_partial(rng, t, tau_floor, R_floor, M)
+            actual = abc_state_space(w, t, A0, tau2, R2, b)
+            if actual is not None and (
+                certificate is None or actual < certificate
+            ):
+                violations.append((n, seed, M, b, tau2, R2, actual, certificate))
+    return len(b_values), violations
 
 
 def check_soundness(
     n_values=(3, 4, 5, 6, 7), b_values=(0, 1, 2, 3), trials_per_n=60,
     perturbations_per_trial=5, seed_base=20260722,
 ):
-    total = 0
-    violations = []
-    for n in n_values:
-        for trial in range(trials_per_n):
-            seed = deterministic_seed(n, trial, seed_base, "meab-sound")
-            wk = "random" if trial % 2 else "uniform"
-            w, t, A0, tau_floor, R_floor = random_instance(n, seed, weight_kind=wk)
-            U0 = [i for i in range(n) if i not in A0]
-            rng = _random.Random(seed ^ 0x85EBCA6B)
-            for b in b_values:
-                M = random_M(rng, U0)
-                certificate = mabc_closed_form(w, t, A0, tau_floor, R_floor, M, b)
-                total += 1
-                for _ in range(perturbations_per_trial):
-                    R2, tau2 = perturb_profile_partial(rng, t, tau_floor, R_floor, M)
-                    actual = abc_state_space(w, t, A0, tau2, R2, b)
-                    if actual is not None and (
-                        certificate is None or actual < certificate
-                    ):
-                        violations.append(
-                            (n, seed, M, b, tau2, R2, actual, certificate)
-                        )
+    tasks = [
+        (n, trial, b_values, perturbations_per_trial, seed_base)
+        for n in n_values
+        for trial in range(trials_per_n)
+    ]
+    results = parallel_map(_check_soundness_one, tasks)
+    total = sum(r[0] for r in results)
+    violations = [v for _, vs in results for v in vs]
     return total, violations
 
 

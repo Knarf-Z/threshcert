@@ -39,7 +39,7 @@ from functools import lru_cache
 from fractions import Fraction as Fr
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from core import ac_formula_gamma_star, random_instance, deterministic_seed
+from core import ac_formula_gamma_star, random_instance, deterministic_seed, parallel_map
 from atomic_bypass_hierarchy import abc_closed_form
 
 _ZERO_TAU_CACHE = {}
@@ -151,28 +151,54 @@ def random_family(rng, U0, size):
     return family
 
 
+def _check_general_cross_validation_one(task):
+    import random as _random
+
+    n, r, trial, seed_base = task
+    seed = deterministic_seed(n, r, trial, seed_base, "genfam")
+    wk = "random" if trial % 2 else "uniform"
+    w, t, A0, tau, R = random_instance(n, seed, weight_kind=wk)
+    U0 = [i for i in range(n) if i not in A0]
+    rng = _random.Random(seed ^ 0xABCDEF)
+    family = random_family(rng, U0, size=4)
+    gt = general_state_space(w, t, A0, tau, R, family, r)
+    cf = general_closed_form(w, t, A0, tau, R, family, r)
+    if gt != cf:
+        return (n, r, seed, family, gt, cf)
+    return None
+
+
 def check_general_cross_validation(
     n_values=(3, 4, 5, 6), r_values=(0, 1, 2, 3, 4), trials_per_n=40, seed_base=20260722
 ):
-    import random as _random
-
-    total = 0
-    mismatches = []
-    for n in n_values:
-        for r in r_values:
-            for trial in range(trials_per_n):
-                seed = deterministic_seed(n, r, trial, seed_base, "genfam")
-                wk = "random" if trial % 2 else "uniform"
-                w, t, A0, tau, R = random_instance(n, seed, weight_kind=wk)
-                U0 = [i for i in range(n) if i not in A0]
-                rng = _random.Random(seed ^ 0xABCDEF)
-                family = random_family(rng, U0, size=4)
-                total += 1
-                gt = general_state_space(w, t, A0, tau, R, family, r)
-                cf = general_closed_form(w, t, A0, tau, R, family, r)
-                if gt != cf:
-                    mismatches.append((n, r, seed, family, gt, cf))
+    tasks = [
+        (n, r, trial, seed_base)
+        for n in n_values
+        for r in r_values
+        for trial in range(trials_per_n)
+    ]
+    results = parallel_map(_check_general_cross_validation_one, tasks)
+    total = len(tasks)
+    mismatches = [m for m in results if m is not None]
     return total, mismatches
+
+
+def _check_cardinality_family_redundancy_one(task):
+    n, b, r, trial, seed_base = task
+    seed = deterministic_seed(n, b, r, trial, seed_base, "card")
+    wk = "random" if trial % 2 else "uniform"
+    w, t, A0, tau, R = random_instance(n, seed, weight_kind=wk)
+    U0 = [i for i in range(n) if i not in A0]
+    families_b = [
+        frozenset(P)
+        for k in range(1, b + 1)
+        for P in itertools.combinations(U0, k)
+    ]
+    general = general_closed_form(w, t, A0, tau, R, families_b, r)
+    single_big = abc_closed_form(w, t, A0, tau, R, min(r * b, len(U0)))
+    if general != single_big:
+        return (n, b, r, seed, general, single_big)
+    return None
 
 
 def check_cardinality_family_redundancy(
@@ -185,27 +211,31 @@ def check_cardinality_family_redundancy(
     """Corollary: for B_b = {P : |P| <= b}, B_b^{+r} == B_{r*b}, so
     ABC_{B_b,r} == ABC_{r*b} (the single-package theorem already in the
     paper, via abc_closed_form)."""
-    total = 0
-    mismatches = []
-    for n in n_values:
-        for b in b_values:
-            for r in r_values:
-                for trial in range(trials_per_n):
-                    seed = deterministic_seed(n, b, r, trial, seed_base, "card")
-                    wk = "random" if trial % 2 else "uniform"
-                    w, t, A0, tau, R = random_instance(n, seed, weight_kind=wk)
-                    U0 = [i for i in range(n) if i not in A0]
-                    families_b = [
-                        frozenset(P)
-                        for k in range(1, b + 1)
-                        for P in itertools.combinations(U0, k)
-                    ]
-                    total += 1
-                    general = general_closed_form(w, t, A0, tau, R, families_b, r)
-                    single_big = abc_closed_form(w, t, A0, tau, R, min(r * b, len(U0)))
-                    if general != single_big:
-                        mismatches.append((n, b, r, seed, general, single_big))
+    tasks = [
+        (n, b, r, trial, seed_base)
+        for n in n_values
+        for b in b_values
+        for r in r_values
+        for trial in range(trials_per_n)
+    ]
+    results = parallel_map(_check_cardinality_family_redundancy_one, tasks)
+    total = len(tasks)
+    mismatches = [m for m in results if m is not None]
     return total, mismatches
+
+
+def _check_full_collapse_with_singletons_one(task):
+    n, trial, seed_base = task
+    seed = deterministic_seed(n, trial, seed_base, "collapse")
+    wk = "random" if trial % 2 else "uniform"
+    w, t, A0, tau, R = random_instance(n, seed, weight_kind=wk)
+    U0 = [i for i in range(n) if i not in A0]
+    singleton_family = [frozenset((i,)) for i in U0]
+    tcr = ac_formula_gamma_star(w, t, A0, zero_tau(n), R)
+    collapsed = general_closed_form(w, t, A0, tau, R, singleton_family, len(U0))
+    if collapsed != tcr:
+        return (n, seed, collapsed, tcr)
+    return None
 
 
 def check_full_collapse_with_singletons(
@@ -213,22 +243,10 @@ def check_full_collapse_with_singletons(
 ):
     """Corollary: if B contains every singleton, unlimited repetition
     (r >= |U0|) collapses the certificate all the way to TCR."""
-    total = 0
-    mismatches = []
-    for n in n_values:
-        for trial in range(trials_per_n):
-            seed = deterministic_seed(n, trial, seed_base, "collapse")
-            wk = "random" if trial % 2 else "uniform"
-            w, t, A0, tau, R = random_instance(n, seed, weight_kind=wk)
-            U0 = [i for i in range(n) if i not in A0]
-            total += 1
-            singleton_family = [frozenset((i,)) for i in U0]
-            tcr = ac_formula_gamma_star(w, t, A0, zero_tau(n), R)
-            collapsed = general_closed_form(
-                w, t, A0, tau, R, singleton_family, len(U0)
-            )
-            if collapsed != tcr:
-                mismatches.append((n, seed, collapsed, tcr))
+    tasks = [(n, trial, seed_base) for n in n_values for trial in range(trials_per_n)]
+    results = parallel_map(_check_full_collapse_with_singletons_one, tasks)
+    total = len(tasks)
+    mismatches = [m for m in results if m is not None]
     return total, mismatches
 
 

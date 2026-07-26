@@ -8,21 +8,30 @@ instances -- not just the paper's own hand-picked examples.
 import sys, os
 from fractions import Fraction as Fr
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from core import brute_force_gamma_star, ac_formula_gamma_star, random_instance
+from core import brute_force_gamma_star, ac_formula_gamma_star, random_instance, parallel_map
+
+
+def _check_one_instance(task):
+    n, wk, trial = task
+    seed = hash((n, wk, trial)) & 0xffffffff
+    w, t, A0, tau, R = random_instance(n, seed, weight_kind=wk)
+    bf = brute_force_gamma_star(w, t, A0, tau, R)
+    ac = ac_formula_gamma_star(w, t, A0, tau, R)
+    if bf != ac:
+        return (n, wk, seed, w, t, A0, tau, R, bf, ac)
+    return None
+
 
 def run(n_values=(3, 4, 5, 6, 7, 8), trials_per_n=60, weight_kinds=("uniform", "random")):
-    total = 0
-    mismatches = []
-    for n in n_values:
-        for wk in weight_kinds:
-            for trial in range(trials_per_n):
-                seed = hash((n, wk, trial)) & 0xffffffff
-                w, t, A0, tau, R = random_instance(n, seed, weight_kind=wk)
-                bf = brute_force_gamma_star(w, t, A0, tau, R)
-                ac = ac_formula_gamma_star(w, t, A0, tau, R)
-                total += 1
-                if bf != ac:
-                    mismatches.append((n, wk, seed, w, t, A0, tau, R, bf, ac))
+    tasks = [
+        (n, wk, trial)
+        for n in n_values
+        for wk in weight_kinds
+        for trial in range(trials_per_n)
+    ]
+    results = parallel_map(_check_one_instance, tasks)
+    total = len(results)
+    mismatches = [r for r in results if r is not None]
     return total, mismatches
 
 

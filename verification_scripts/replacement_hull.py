@@ -46,10 +46,15 @@ Python standard library and exact `fractions.Fraction` arithmetic:
 """
 from __future__ import annotations
 
+import os
 import random
+import sys
 import time
 from fractions import Fraction as Fr
 from itertools import combinations
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from core import parallel_map
 
 
 # ---------------------------------------------------------------------------
@@ -200,6 +205,22 @@ def random_instance(
     return random_distribution(n, rng), [random_distribution(n, rng) for _ in range(m)]
 
 
+def _formula_equivalence_one(task: tuple[list[Fr], list[list[Fr]], Fr]) -> int:
+    """Returns 1 if formula 1 and formula 2 disagree on this (instance, eps)
+    pair, else 0. Pure function of its argument -- safe to run in any
+    worker process, in any order, independent of every other task."""
+    qc, replacements, eps = task
+    exact, lambda_star = formula1_solution(qc, replacements, eps)
+    s_star = sum(lambda_star)
+    if s_star == 0:
+        # formula 1 chose lambda=0: both formulas agree at the shared
+        # s -> 0 boundary value of 1 by construction, nothing further
+        # to re-solve.
+        return 0 if exact == Fr(1) else 1
+    reconstructed = s_star * eps + formula2_inner(qc, replacements, s_star)
+    return 0 if reconstructed == exact else 1
+
+
 def test_formula_equivalence(
     trials: int = 30,
     n: int = 3,
@@ -213,27 +234,24 @@ def test_formula_equivalence(
     independently coded linear program (not by reusing lambda*'s implied mu).
     Agreement is checked as an exact Fraction equality -- no grid, no
     floating-point tolerance.
+
+    The random instances are still drawn strictly sequentially from one
+    shared `random.Random(20260714)` (so exactly the same instances are
+    tested as before, in the same order); only the expensive LP-solving
+    work per (instance, eps) pair -- independent once the instances exist
+    -- is farmed out across worker processes.
     """
 
     rng = random.Random(20260714)
-    checked = 0
-    mismatches = 0
-    for _ in range(trials):
-        qc, replacements = random_instance(n, m, rng)
-        for eps in eps_values:
-            checked += 1
-            exact, lambda_star = formula1_solution(qc, replacements, eps)
-            s_star = sum(lambda_star)
-            if s_star == 0:
-                # formula 1 chose lambda=0: both formulas agree at the shared
-                # s -> 0 boundary value of 1 by construction, nothing further
-                # to re-solve.
-                if exact != Fr(1):
-                    mismatches += 1
-                continue
-            reconstructed = s_star * eps + formula2_inner(qc, replacements, s_star)
-            if reconstructed != exact:
-                mismatches += 1
+    instances = [random_instance(n, m, rng) for _ in range(trials)]
+    tasks = [
+        (qc, replacements, eps)
+        for qc, replacements in instances
+        for eps in eps_values
+    ]
+    results = parallel_map(_formula_equivalence_one, tasks)
+    checked = len(tasks)
+    mismatches = sum(results)
     return checked, mismatches
 
 

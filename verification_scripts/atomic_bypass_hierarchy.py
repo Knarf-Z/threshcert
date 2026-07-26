@@ -53,7 +53,7 @@ from functools import lru_cache
 from fractions import Fraction as Fr
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from core import ac_formula_gamma_star, random_instance, deterministic_seed
+from core import ac_formula_gamma_star, random_instance, deterministic_seed, parallel_map
 
 _ZERO_TAU_CACHE = {}
 
@@ -144,57 +144,72 @@ def abc_state_space(w, t, A0, tau, R, b):
     return solve(frozenset(), False)
 
 
+def _check_cross_validation_one(task):
+    n, b, trial, seed_base = task
+    seed = deterministic_seed(n, b, trial, seed_base)
+    wk = "random" if trial % 2 else "uniform"
+    w, t, A0, tau, R = random_instance(n, seed, weight_kind=wk)
+    state_space = abc_state_space(w, t, A0, tau, R, b)
+    closed = abc_closed_form(w, t, A0, tau, R, b)
+    if state_space != closed:
+        return (n, b, seed, state_space, closed)
+    return None
+
+
 def check_cross_validation(
     n_values=(3, 4, 5, 6), b_values=(0, 1, 2, 3), trials_per_n=40, seed_base=20260722
 ):
-    total = 0
-    mismatches = []
-    for n in n_values:
-        for b in b_values:
-            for trial in range(trials_per_n):
-                seed = deterministic_seed(n, b, trial, seed_base)
-                wk = "random" if trial % 2 else "uniform"
-                w, t, A0, tau, R = random_instance(n, seed, weight_kind=wk)
-                total += 1
-                state_space = abc_state_space(w, t, A0, tau, R, b)
-                closed = abc_closed_form(w, t, A0, tau, R, b)
-                if state_space != closed:
-                    mismatches.append((n, b, seed, state_space, closed))
+    tasks = [
+        (n, b, trial, seed_base)
+        for n in n_values
+        for b in b_values
+        for trial in range(trials_per_n)
+    ]
+    results = parallel_map(_check_cross_validation_one, tasks)
+    total = len(tasks)
+    mismatches = [r for r in results if r is not None]
     return total, mismatches
+
+
+def _check_boundaries_and_monotonicity_one(task):
+    n, trial, seed_base = task
+    seed = deterministic_seed(n, trial, seed_base, "bd")
+    wk = "random" if trial % 2 else "uniform"
+    w, t, A0, tau, R = random_instance(n, seed, weight_kind=wk)
+    U0 = [i for i in range(n) if i not in A0]
+
+    boundary_mismatches = []
+    monotonicity_violations = []
+
+    acr = ac_formula_gamma_star(w, t, A0, tau, R)
+    tcr = ac_formula_gamma_star(w, t, A0, zero_tau(n), R)
+    abc0 = abc_closed_form(w, t, A0, tau, R, 0)
+    abc_full = abc_closed_form(w, t, A0, tau, R, len(U0))
+    if abc0 != acr:
+        boundary_mismatches.append((n, seed, "b=0 vs ACR", abc0, acr))
+    if abc_full != tcr:
+        boundary_mismatches.append((n, seed, "b=|U0| vs TCR", abc_full, tcr))
+
+    prev = abc0
+    for b in range(1, len(U0) + 1):
+        cur = abc_closed_form(w, t, A0, tau, R, b)
+        if not (cur is None and prev is None) and not (
+            cur is not None and (prev is None or cur <= prev)
+        ):
+            monotonicity_violations.append((n, seed, b, prev, cur))
+        prev = cur
+
+    return boundary_mismatches, monotonicity_violations
 
 
 def check_boundaries_and_monotonicity(
     n_values=(3, 4, 5, 6, 7, 8), trials_per_n=60, seed_base=20260722
 ):
-    total = 0
-    boundary_mismatches = []
-    monotonicity_violations = []
-    for n in n_values:
-        for trial in range(trials_per_n):
-            seed = deterministic_seed(n, trial, seed_base, "bd")
-            wk = "random" if trial % 2 else "uniform"
-            w, t, A0, tau, R = random_instance(n, seed, weight_kind=wk)
-            U0 = [i for i in range(n) if i not in A0]
-            total += 1
-
-            acr = ac_formula_gamma_star(w, t, A0, tau, R)
-            tcr = ac_formula_gamma_star(w, t, A0, zero_tau(n), R)
-            abc0 = abc_closed_form(w, t, A0, tau, R, 0)
-            abc_full = abc_closed_form(w, t, A0, tau, R, len(U0))
-            if abc0 != acr:
-                boundary_mismatches.append((n, seed, "b=0 vs ACR", abc0, acr))
-            if abc_full != tcr:
-                boundary_mismatches.append((n, seed, "b=|U0| vs TCR", abc_full, tcr))
-
-            prev = abc0
-            for b in range(1, len(U0) + 1):
-                cur = abc_closed_form(w, t, A0, tau, R, b)
-                if not (cur is None and prev is None) and not (
-                    cur is not None and (prev is None or cur <= prev)
-                ):
-                    monotonicity_violations.append((n, seed, b, prev, cur))
-                prev = cur
-
+    tasks = [(n, trial, seed_base) for n in n_values for trial in range(trials_per_n)]
+    results = parallel_map(_check_boundaries_and_monotonicity_one, tasks)
+    total = len(tasks)
+    boundary_mismatches = [m for bm, _ in results for m in bm]
+    monotonicity_violations = [v for _, mv in results for v in mv]
     return total, boundary_mismatches, monotonicity_violations
 
 

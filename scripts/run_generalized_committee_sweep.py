@@ -19,6 +19,7 @@ from defense_lattice import (
     is_monotone,
     marginal_greedy,
     mobius_transform,
+    parallel_map,
     uniform_threshold_certificate,
     zeta_transform,
 )
@@ -71,44 +72,59 @@ def truncated_values_by_order(
     return results
 
 
+def _process_trial(task):
+    """Everything that follows drawing (resistances, increments) for one
+    trial -- pure function of its argument, safe to run in any worker
+    process, in any order, independent of every other trial."""
+    n, q, trial, resistances, increments = task
+    values = [
+        uniform_threshold_certificate(resistances, increments, mask, q)
+        for mask in range(1 << n)
+    ]
+    monotone = is_monotone(values, n, tolerance=1e-10)
+    coefficients = mobius_transform(values, n)
+    truncated = truncated_values_by_order(coefficients, n, MAX_ORDERS)
+
+    errors = {}
+    for max_order in MAX_ORDERS:
+        relative_errors = [
+            abs(true_value - truncated[max_order][mask])
+            / max(1.0, abs(true_value))
+            for mask, true_value in enumerate(values)
+        ]
+        errors[max_order] = max(relative_errors)
+    mobius_row = (n, q, trial, monotone, errors[1], errors[2], errors[3])
+
+    value = lambda mask: uniform_threshold_certificate(  # noqa: E731
+        resistances, increments, mask, q
+    )
+    allocation_rows = []
+    for budget in (1, 2, 3):
+        _, exact_value = exact_budget_maximizer(value, n, budget)
+        _, greedy_value = marginal_greedy(value, n, budget)
+        gain_denominator = max(1e-12, exact_value - values[0])
+        gain_ratio = (greedy_value - values[0]) / gain_denominator
+        allocation_rows.append(
+            (n, q, trial, budget, values[0], exact_value, greedy_value, gain_ratio)
+        )
+    return mobius_row, allocation_rows
+
+
 def run_shape(n: int, q: int) -> tuple[list[tuple[object, ...]], list[tuple[object, ...]]]:
     rng = random.Random(f"{RANDOM_SEED}-{n}-{q}")
-    mobius_rows: list[tuple[object, ...]] = []
-    allocation_rows: list[tuple[object, ...]] = []
-
+    # Draw every trial's randomness up front, strictly in the original
+    # sequential order, from the one shared rng -- so parallelizing the
+    # (expensive) rest of each trial below tests exactly the same instances,
+    # in the same order, as the original single-threaded loop did.
+    tasks = []
     for trial in range(RANDOM_TRIALS):
         resistances = [1.0 + 9.0 * rng.random() for _ in range(n)]
         increments = [0.5 + 12.0 * rng.random() for _ in range(n)]
-        values = [
-            uniform_threshold_certificate(resistances, increments, mask, q)
-            for mask in range(1 << n)
-        ]
-        monotone = is_monotone(values, n, tolerance=1e-10)
-        coefficients = mobius_transform(values, n)
-        truncated = truncated_values_by_order(coefficients, n, MAX_ORDERS)
+        tasks.append((n, q, trial, resistances, increments))
 
-        errors = {}
-        for max_order in MAX_ORDERS:
-            relative_errors = [
-                abs(true_value - truncated[max_order][mask])
-                / max(1.0, abs(true_value))
-                for mask, true_value in enumerate(values)
-            ]
-            errors[max_order] = max(relative_errors)
-        mobius_rows.append((n, q, trial, monotone, errors[1], errors[2], errors[3]))
-
-        value = lambda mask: uniform_threshold_certificate(  # noqa: E731
-            resistances, increments, mask, q
-        )
-        for budget in (1, 2, 3):
-            _, exact_value = exact_budget_maximizer(value, n, budget)
-            _, greedy_value = marginal_greedy(value, n, budget)
-            gain_denominator = max(1e-12, exact_value - values[0])
-            gain_ratio = (greedy_value - values[0]) / gain_denominator
-            allocation_rows.append(
-                (n, q, trial, budget, values[0], exact_value, greedy_value, gain_ratio)
-            )
-
+    results = parallel_map(_process_trial, tasks)
+    mobius_rows = [mobius_row for mobius_row, _ in results]
+    allocation_rows = [row for _, rows in results for row in rows]
     return mobius_rows, allocation_rows
 
 

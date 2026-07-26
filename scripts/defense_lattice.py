@@ -7,6 +7,8 @@ checked exactly rather than through floating-point tolerances.
 """
 from __future__ import annotations
 
+import os
+from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass
 from fractions import Fraction
 from itertools import combinations
@@ -15,6 +17,33 @@ from typing import Callable, Iterable, Sequence
 
 
 Number = int | float | Fraction
+
+
+def parallel_map(worker, tasks, workers=None):
+    """Apply ``worker`` to every item in ``tasks`` across CPU-bound worker
+    processes, returning results in the same order as ``tasks``.
+
+    Every task must be independent of every other task -- no reliance on
+    state built up by earlier calls (e.g. a shared, sequentially-advanced
+    random.Random). Callers that draw randomness from a single shared
+    generator must finish drawing before calling this, then hand each task
+    its own pre-drawn inputs, so parallelizing only changes wall-clock time,
+    never which instances get tested or in what order.
+
+    Falls back to plain sequential execution for tiny task lists or a
+    single worker, since process-pool startup overhead would dwarf the
+    savings. A local copy of verification_scripts/core.py's helper, kept
+    separate so the scripts/ and verification_scripts/ reproduction layers
+    stay independently runnable (see reproduce_everything.py's docstring).
+    """
+    tasks = list(tasks)
+    if workers is None:
+        workers = os.cpu_count() or 1
+    if workers <= 1 or len(tasks) <= 1:
+        return [worker(task) for task in tasks]
+    chunksize = max(1, len(tasks) // (workers * 4))
+    with ProcessPoolExecutor(max_workers=workers) as executor:
+        return list(executor.map(worker, tasks, chunksize=chunksize))
 
 
 def sequential_float_sum(values: Iterable[float]) -> float:

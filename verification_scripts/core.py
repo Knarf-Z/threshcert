@@ -12,12 +12,39 @@ confused by floating-point noise.
 """
 from fractions import Fraction as Fr
 from itertools import permutations, combinations
+from concurrent.futures import ProcessPoolExecutor
 import hashlib
+import os
 import random
 
 
 def to_frac_list(xs):
     return [Fr(x) for x in xs]
+
+
+def parallel_map(worker, tasks, workers=None):
+    """Apply ``worker`` to every item in ``tasks`` across CPU-bound worker
+    processes, returning results in the same order as ``tasks``.
+
+    Every task must be independent -- each call to ``worker`` must be a pure
+    function of its single argument, with no reliance on state built up by
+    earlier calls (e.g. a shared, sequentially-advanced random.Random). The
+    scripts in this directory already seed each trial deterministically and
+    independently (core.py's own ``deterministic_seed``), so splitting the
+    trial loop across processes changes only wall-clock time, not which
+    instances are tested or their pass/fail outcome.
+
+    Falls back to plain sequential execution for tiny task lists or a single
+    worker, since process-pool startup overhead would dwarf the savings.
+    """
+    tasks = list(tasks)
+    if workers is None:
+        workers = os.cpu_count() or 1
+    if workers <= 1 or len(tasks) <= 1:
+        return [worker(task) for task in tasks]
+    chunksize = max(1, len(tasks) // (workers * 4))
+    with ProcessPoolExecutor(max_workers=workers) as executor:
+        return list(executor.map(worker, tasks, chunksize=chunksize))
 
 
 def deterministic_seed(*parts):

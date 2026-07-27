@@ -7,11 +7,12 @@ Chiado and executes:
 2. one atomic four-member package; and
 3. two repeated two-member packages.
 
-Each member bond is exactly 2 Chiado native units and each accepted member
-accrues a 0.1-unit external-caller reward. A complete run therefore locks
-42 native units across the three contracts, plus gas. The deployment command
-refuses to send transactions unless the explicit execution guard is set and a
-preflight balance check succeeds.
+The low-budget default uses a 0.002-Chiado-xDAI bond per member and a 5%
+external-caller reward. A complete three-instance run therefore commits
+0.042 xDAI of principal and reserves 0.02 xDAI for gas. The deployment command
+refuses to send transactions unless the explicit execution guard is set, a
+preflight balance check succeeds, and total principal stays below the
+configured 0.1-xDAI safety cap.
 
 The result is a public, controlled enforcement-loss experiment. It does not
 claim seven independent operators, production economics, silent-leakage
@@ -36,7 +37,9 @@ Hardhat keystore:
 CHIADO_RPC_URL
 CHIADO_DEPLOYER_PRIVATE_KEY
 PHASE2_EXECUTE=I_UNDERSTAND_PUBLIC_TRANSACTIONS
-PHASE2_BOND_NATIVE=2
+PHASE2_BOND_NATIVE=0.002
+PHASE2_GAS_RESERVE_NATIVE=0.02
+PHASE2_MAX_TOTAL_NATIVE=0.1
 ```
 
 Then run:
@@ -44,6 +47,11 @@ Then run:
 ```text
 npm run phase2:deploy
 ```
+
+The bond denomination can be changed, but this does not change the
+package-invariance claim: each mode must realize exactly four bonds of loss.
+Increasing it above the default requires raising the explicit total-principal
+cap as a separate confirmation.
 
 The script generates the verifier and seven member signing keys separately
 for each instance, keeps all private keys out of the artifact, waits for

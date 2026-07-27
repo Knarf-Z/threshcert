@@ -24,11 +24,17 @@ import {
 const EXECUTION_GUARD = "I_UNDERSTAND_PUBLIC_TRANSACTIONS";
 const COMMITTEE_SIZE = 7;
 const THRESHOLD = 4;
-const CALLER_REWARD = parseEther("0.1");
 const TARGET_MEMBERS = [0, 1, 2, 3] as const;
 const MODES = ["sequential", "atomic_package", "repeated_packages"] as const;
 const CONFIRMATIONS = Number(process.env.PHASE2_CONFIRMATIONS ?? "2");
-const BOND = parseEther(process.env.PHASE2_BOND_NATIVE ?? "2");
+const BOND = parseEther(process.env.PHASE2_BOND_NATIVE ?? "0.002");
+const CALLER_REWARD = BOND / 20n;
+const GAS_RESERVE = parseEther(
+  process.env.PHASE2_GAS_RESERVE_NATIVE ?? "0.02",
+);
+const PRINCIPAL_BUDGET_CAP = parseEther(
+  process.env.PHASE2_MAX_TOTAL_NATIVE ?? "0.1",
+);
 
 type Mode = (typeof MODES)[number];
 type SignedEvidence = EarlyShareArtifact & {
@@ -54,10 +60,8 @@ if (process.env.PHASE2_EXECUTE !== EXECUTION_GUARD) {
     `Refusing public-chain writes. Set PHASE2_EXECUTE=${EXECUTION_GUARD} only after checking the RPC, deployer, balance, and bond amount.`,
   );
 }
-if (BOND !== parseEther("2")) {
-  throw new Error(
-    "The paper-matched Phase 2 run requires PHASE2_BOND_NATIVE=2 exactly.",
-  );
+if (BOND <= 20n || CALLER_REWARD === 0n || CALLER_REWARD >= BOND) {
+  throw new Error("Bond is too small to fund a positive 5% caller reward.");
 }
 if (!Number.isInteger(CONFIRMATIONS) || CONFIRMATIONS < 1) {
   throw new Error("PHASE2_CONFIRMATIONS must be a positive integer.");
@@ -91,10 +95,14 @@ const startingBalance = await publicClient.getBalance({
   address: ownerAddress,
 });
 const lockedPrincipal = BOND * BigInt(COMMITTEE_SIZE * MODES.length);
-const gasReserve = parseEther("0.5");
-if (startingBalance < lockedPrincipal + gasReserve) {
+if (lockedPrincipal > PRINCIPAL_BUDGET_CAP) {
   throw new Error(
-    `Insufficient deployer balance: need at least ${lockedPrincipal + gasReserve} wei before gas/refunds; have ${startingBalance} wei.`,
+    `Refusing principal ${lockedPrincipal} wei above PHASE2_MAX_TOTAL_NATIVE cap ${PRINCIPAL_BUDGET_CAP} wei.`,
+  );
+}
+if (startingBalance < lockedPrincipal + GAS_RESERVE) {
+  throw new Error(
+    `Insufficient deployer balance: need at least ${lockedPrincipal + GAS_RESERVE} wei before reward refunds; have ${startingBalance} wei.`,
   );
 }
 
@@ -432,6 +440,10 @@ const result = {
     threshold: THRESHOLD,
     bondWeiPerMember: BOND.toString(),
     callerRewardWeiPerSlash: CALLER_REWARD.toString(),
+    callerRewardFraction: "5%",
+    totalPrincipalWei: lockedPrincipal.toString(),
+    configuredPrincipalBudgetCapWei: PRINCIPAL_BUDGET_CAP.toString(),
+    configuredGasReserveWei: GAS_RESERVE.toString(),
   },
   certificate: {
     type: "enforcement-loss",
@@ -439,7 +451,7 @@ const result = {
     unit: "Chiado native wei",
     packageSizeParameterB: "not used",
     statement:
-      "Three public controlled instances realize the same four-member enforcement loss under sequential, one-package, and repeated-package submission. This is not by itself an attacker-payment or production-security certificate.",
+      "Three public controlled instances realize the same four-bond enforcement loss under sequential, one-package, and repeated-package submission. The deliberately small Chiado denomination is an execution parameter, not a production-economic calibration or attacker-payment certificate.",
   },
   source: {
     contractSourceSha256: createHash("sha256").update(source).digest("hex"),

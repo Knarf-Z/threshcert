@@ -240,14 +240,16 @@ resistance, activation, operator independence, or payment conditions.
     `1,086,290,000,760,403` wei, versus a `1e12`-wei bond forfeited --
     the attestation cost about `1,086x` the bond it recovered.
 37. A deployment-ready TraceThenSlash Phase 2 package
-    (`trace_then_slash_phase2_chiado/`) freezes seven 2-unit bonds at threshold
-    four, tests sequential, one-package, and repeated-package enforcement,
+    (`trace_then_slash_phase2_chiado/`) freezes seven configurable bonds at
+    threshold four, tests sequential, one-package, and repeated-package enforcement,
     exhausts the complete 192 order-partition product, and provides guarded
     three-instance Chiado deployment plus independent-RPC verification of
     deployment input, receipts, bytecode, signatures, state, events, loss,
-    reward withdrawal, and treasury accrual. Its local type check and 14 tests
-    pass; no Phase 2 public transaction record is claimed until a funded run
-    produces `results/phase2_chiado.json`.
+    reward withdrawal, and treasury accrual. Its low-budget default uses
+    0.002 xDAI per member (0.042 xDAI total principal) under a 0.1-xDAI
+    principal cap. Its local type check and 14 tests pass; no Phase 2 public
+    transaction record is claimed until a funded run produces
+    `results/phase2_chiado.json`.
 
 ## Completed observations and scope boundary
 

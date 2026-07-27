@@ -254,10 +254,11 @@ npm run ready
 
 The readiness command compiles the exact Solidity contract, performs strict
 TypeScript checking, and runs 14 adversarial tests, including the complete
-`24 x 8 = 192` order-partition product and package sizes 1--7. Public
-deployment is separately guarded because the paper-matched run creates three
-contracts and locks 42 Chiado native units plus gas. The deployment and
-independent verification commands are documented in the package README.
+`24 x 8 = 192` order-partition product and package sizes 1--7. The guarded
+public-run default uses 0.002 xDAI per member: three contracts commit
+0.042 xDAI of principal, reserve 0.02 xDAI for gas, and enforce a separate
+0.1-xDAI principal cap. The deployment and independent verification commands
+are documented in the package README.
 
 No Phase 2 public-chain result is committed yet. The directory is
 deployment-ready source and verification logic; it does not replace the

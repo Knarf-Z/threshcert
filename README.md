@@ -89,6 +89,10 @@ defines every experiment and its interpretation boundary.
   records and explicitly marks production Shutter resistance as not certified.
 - `deployment/scripts/verify_chiado_certificate.py`: deterministic offline
   verification of that certificate and all source-file bindings.
+- `trace_then_slash_phase2_chiado/`: the paper-matched 4-of-7
+  TraceThenSlash mechanism, 14 adversarial tests, guarded three-instance
+  Chiado deployment runner, and independent-RPC verifier for sequential,
+  atomic, and repeated packaging.
 
 ## Reproduce
 
@@ -235,6 +239,30 @@ the live command establishes that the recorded transactions, bytecode, event,
 and contract state are present on Chiado. As last run (2026-07-20), both the
 live Chiado check and the live Gnosis production-snapshot recheck below still
 returned `PASS` against current chain state.
+
+## TraceThenSlash Phase 2 package
+
+The separate `trace_then_slash_phase2_chiado/` package upgrades the defensive
+experiment to member-bound, nonreplayable enforcement whose certificate is
+independent of sequential, atomic, or repeated submission boundaries:
+
+```bash
+cd trace_then_slash_phase2_chiado
+npm ci
+npm run ready
+```
+
+The readiness command compiles the exact Solidity contract, performs strict
+TypeScript checking, and runs 14 adversarial tests, including the complete
+`24 x 8 = 192` order-partition product and package sizes 1--7. Public
+deployment is separately guarded because the paper-matched run creates three
+contracts and locks 42 Chiado native units plus gas. The deployment and
+independent verification commands are documented in the package README.
+
+No Phase 2 public-chain result is committed yet. The directory is
+deployment-ready source and verification logic; it does not replace the
+already recorded one-share Chiado pilot or turn the controlled 8-unit
+enforcement-loss result into an unconditional attacker-payment certificate.
 
 ## Production deployment evidence audit
 

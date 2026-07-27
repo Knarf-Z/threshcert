@@ -239,6 +239,15 @@ resistance, activation, operator independence, or payment conditions.
     value elsewhere): `108,629` gas at `10,000,000,007` wei/gas is
     `1,086,290,000,760,403` wei, versus a `1e12`-wei bond forfeited --
     the attestation cost about `1,086x` the bond it recovered.
+37. A deployment-ready TraceThenSlash Phase 2 package
+    (`trace_then_slash_phase2_chiado/`) freezes seven 2-unit bonds at threshold
+    four, tests sequential, one-package, and repeated-package enforcement,
+    exhausts the complete 192 order-partition product, and provides guarded
+    three-instance Chiado deployment plus independent-RPC verification of
+    deployment input, receipts, bytecode, signatures, state, events, loss,
+    reward withdrawal, and treasury accrual. Its local type check and 14 tests
+    pass; no Phase 2 public transaction record is claimed until a funded run
+    produces `results/phase2_chiado.json`.
 
 ## Completed observations and scope boundary
 
@@ -262,3 +271,7 @@ resistance, activation, operator independence, or payment conditions.
   sensitivity rows are both extensions of the same normalized, seeded, or
   tiled controlled constructions used elsewhere in this inventory; neither
   introduces new production or deployment evidence.
+- The TraceThenSlash Phase 2 directory is a public-replication protocol, not a
+  completed public observation. Silent leakage, verifier compromise,
+  undisclosed compensation, independent operators, and production economics
+  remain outside its declared scope.

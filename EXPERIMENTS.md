@@ -250,6 +250,15 @@ resistance, activation, operator independence, or payment conditions.
     principal cap. Its local type check and 14 tests pass; no Phase 2 public
     transaction record is claimed until a funded run produces
     `results/phase2_chiado.json`.
+38. A separate finite joint-incidence fixture
+    (`joint_incidence_fixture/`) implements the four-of-seven overlapping-pool
+    construction with two cap-2 pools and a 2-unit gross floor. Its contract
+    admits only 0, 1, or 2-unit credits. The test suite classifies all
+    \(3^7=2,187\) candidates, confirms exactly 117 feasible states, checks all
+    \(117\times35=4,095\) feasible state--set quotes against an independent
+    residual-price calculation, and executes an exact 4-unit minimizer. This
+    is a controlled contract-state test, not evidence of beneficial ownership
+    or attacker-independent funding.
 
 ## Completed observations and scope boundary
 
@@ -277,3 +286,7 @@ resistance, activation, operator independence, or payment conditions.
   completed public observation. Silent leakage, verifier compromise,
   undisclosed compensation, independent operators, and production economics
   remain outside its declared scope.
+- The finite joint-incidence fixture closes its declared contract relation,
+  not funding provenance. Its positive 4-unit value cannot be exported to a
+  production attacker-cost certificate without separate evidence that the
+  pool credits are attacker-independent.

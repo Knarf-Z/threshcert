@@ -1,0 +1,232 @@
+{
+  "schema": "threshcert-production-evidence-audit-result-v1",
+  "snapshot": {
+    "network": "Gnosis Chain",
+    "chain_id": 100,
+    "timestamp_utc": "2026-06-13T00:00:00Z",
+    "block_number": 46666718,
+    "block_hash": "0x574ec26ee7b2e2bfddd991bf99d37a79455428bc4dfe342b0ccf55d071229b60",
+    "keyper_set_index": 10,
+    "keyper_set_contract": "0xE817E77109e2E6a8025eB30dB3542eC18bBDE828",
+    "committee_size": 7,
+    "threshold_count": 4,
+    "membership_records_verified": 7,
+    "keyper_set_added_transaction": "0xd00adb4be576a75026e28f8fefea31fe94413fecfc9ebffc17bf75d31458a864"
+  },
+  "members": [
+    {
+      "member_index": 0,
+      "address": "0x4ba8E8e0061EA7CE9353e7B641A116F1d48d9d46",
+      "weight": "1/7",
+      "committee_membership_status": "VERIFIED_AT_PINNED_BLOCK",
+      "actual_resistance_status": "UNKNOWN_NOT_MEASURED",
+      "base_resistance_contribution": "0",
+      "penalty_contribution": "0",
+      "insurance_or_compensation_contribution": "0",
+      "certified_member_floor": "0",
+      "activation_branch_status": "NOT_CERTIFIED",
+      "direct_path_gap": [
+        "auditable_base_resistance_method",
+        "positive_base_resistance_floor"
+      ],
+      "penalty_path_gap": [
+        "member_specific_attribution",
+        "scope_matched_forfeiture_instrument",
+        "detection_and_execution_procedure",
+        "positive_joint_probability_floor",
+        "positive_nominal_penalty_floor"
+      ],
+      "activation_path_gap": [
+        "member_specific_activation_evidence"
+      ]
+    },
+    {
+      "member_index": 1,
+      "address": "0xcB43AEAA8c029Da18A499dC684FdD250ab3FCd13",
+      "weight": "1/7",
+      "committee_membership_status": "VERIFIED_AT_PINNED_BLOCK",
+      "actual_resistance_status": "UNKNOWN_NOT_MEASURED",
+      "base_resistance_contribution": "0",
+      "penalty_contribution": "0",
+      "insurance_or_compensation_contribution": "0",
+      "certified_member_floor": "0",
+      "activation_branch_status": "NOT_CERTIFIED",
+      "direct_path_gap": [
+        "auditable_base_resistance_method",
+        "positive_base_resistance_floor"
+      ],
+      "penalty_path_gap": [
+        "member_specific_attribution",
+        "scope_matched_forfeiture_instrument",
+        "detection_and_execution_procedure",
+        "positive_joint_probability_floor",
+        "positive_nominal_penalty_floor"
+      ],
+      "activation_path_gap": [
+        "member_specific_activation_evidence"
+      ]
+    },
+    {
+      "member_index": 2,
+      "address": "0x46c24A9B4C92Aeb416d732801208ADD353635EC4",
+      "weight": "1/7",
+      "committee_membership_status": "VERIFIED_AT_PINNED_BLOCK",
+      "actual_resistance_status": "UNKNOWN_NOT_MEASURED",
+      "base_resistance_contribution": "0",
+      "penalty_contribution": "0",
+      "insurance_or_compensation_contribution": "0",
+      "certified_member_floor": "0",
+      "activation_branch_status": "NOT_CERTIFIED",
+      "direct_path_gap": [
+        "auditable_base_resistance_method",
+        "positive_base_resistance_floor"
+      ],
+      "penalty_path_gap": [
+        "member_specific_attribution",
+        "scope_matched_forfeiture_instrument",
+        "detection_and_execution_procedure",
+        "positive_joint_probability_floor",
+        "positive_nominal_penalty_floor"
+      ],
+      "activation_path_gap": [
+        "member_specific_activation_evidence"
+      ]
+    },
+    {
+      "member_index": 3,
+      "address": "0x772213aaD4c6B37d2cc0Fa3B74F9ace5a028B8C8",
+      "weight": "1/7",
+      "committee_membership_status": "VERIFIED_AT_PINNED_BLOCK",
+      "actual_resistance_status": "UNKNOWN_NOT_MEASURED",
+      "base_resistance_contribution": "0",
+      "penalty_contribution": "0",
+      "insurance_or_compensation_contribution": "0",
+      "certified_member_floor": "0",
+      "activation_branch_status": "NOT_CERTIFIED",
+      "direct_path_gap": [
+        "auditable_base_resistance_method",
+        "positive_base_resistance_floor"
+      ],
+      "penalty_path_gap": [
+        "member_specific_attribution",
+        "scope_matched_forfeiture_instrument",
+        "detection_and_execution_procedure",
+        "positive_joint_probability_floor",
+        "positive_nominal_penalty_floor"
+      ],
+      "activation_path_gap": [
+        "member_specific_activation_evidence"
+      ]
+    },
+    {
+      "member_index": 4,
+      "address": "0x2711d53B3dF060D08AC30C6517D4B8EED50A54B3",
+      "weight": "1/7",
+      "committee_membership_status": "VERIFIED_AT_PINNED_BLOCK",
+      "actual_resistance_status": "UNKNOWN_NOT_MEASURED",
+      "base_resistance_contribution": "0",
+      "penalty_contribution": "0",
+      "insurance_or_compensation_contribution": "0",
+      "certified_member_floor": "0",
+      "activation_branch_status": "NOT_CERTIFIED",
+      "direct_path_gap": [
+        "auditable_base_resistance_method",
+        "positive_base_resistance_floor"
+      ],
+      "penalty_path_gap": [
+        "member_specific_attribution",
+        "scope_matched_forfeiture_instrument",
+        "detection_and_execution_procedure",
+        "positive_joint_probability_floor",
+        "positive_nominal_penalty_floor"
+      ],
+      "activation_path_gap": [
+        "member_specific_activation_evidence"
+      ]
+    },
+    {
+      "member_index": 5,
+      "address": "0x4B5E2356b666898e101627BdDc518956bcd90a03",
+      "weight": "1/7",
+      "committee_membership_status": "VERIFIED_AT_PINNED_BLOCK",
+      "actual_resistance_status": "UNKNOWN_NOT_MEASURED",
+      "base_resistance_contribution": "0",
+      "penalty_contribution": "0",
+      "insurance_or_compensation_contribution": "0",
+      "certified_member_floor": "0",
+      "activation_branch_status": "NOT_CERTIFIED",
+      "direct_path_gap": [
+        "auditable_base_resistance_method",
+        "positive_base_resistance_floor"
+      ],
+      "penalty_path_gap": [
+        "member_specific_attribution",
+        "scope_matched_forfeiture_instrument",
+        "detection_and_execution_procedure",
+        "positive_joint_probability_floor",
+        "positive_nominal_penalty_floor"
+      ],
+      "activation_path_gap": [
+        "member_specific_activation_evidence"
+      ]
+    },
+    {
+      "member_index": 6,
+      "address": "0x48A0e1789C82084aE28c179bd5742454f8CD4ed6",
+      "weight": "1/7",
+      "committee_membership_status": "VERIFIED_AT_PINNED_BLOCK",
+      "actual_resistance_status": "UNKNOWN_NOT_MEASURED",
+      "base_resistance_contribution": "0",
+      "penalty_contribution": "0",
+      "insurance_or_compensation_contribution": "0",
+      "certified_member_floor": "0",
+      "activation_branch_status": "NOT_CERTIFIED",
+      "direct_path_gap": [
+        "auditable_base_resistance_method",
+        "positive_base_resistance_floor"
+      ],
+      "penalty_path_gap": [
+        "member_specific_attribution",
+        "scope_matched_forfeiture_instrument",
+        "detection_and_execution_procedure",
+        "positive_joint_probability_floor",
+        "positive_nominal_penalty_floor"
+      ],
+      "activation_path_gap": [
+        "member_specific_activation_evidence"
+      ]
+    }
+  ],
+  "certificate": {
+    "ordered_certified_member_floors": [
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    "threshold_cover_lower_bound": "0",
+    "status": "NOT_CERTIFIED_POSITIVE_LOWER_BOUND",
+    "positive_member_floors": 0,
+    "minimum_positive_members_for_positive_certificate": 4,
+    "additional_positive_member_floors_needed": 4
+  },
+  "activation": {
+    "members_with_certified_activation_evidence": 0,
+    "status": "NOT_CERTIFIED_USE_THRESHOLD_COVER"
+  },
+  "evidence_gap": {
+    "positive_member_path": "For each selected member, either certify a positive direct resistance floor, or certify member attribution, a scope-matched forfeiture amount, and a positive joint detection-and-execution probability floor.",
+    "positive_certificate_count_condition": "At least 4 of 7 members need strictly positive certified floors.",
+    "target_condition": "sum of the 4 smallest certified member floors >= B",
+    "activation_upgrade": "Member-specific activation evidence is additionally required before using an activation-respecting branch; otherwise the threshold-cover fallback remains the certified result."
+  },
+  "claim": {
+    "production_certificate": "NOT_CERTIFIED",
+    "actual_member_resistance": "UNKNOWN_NOT_MEASURED",
+    "zero_interpretation": "The certified lower bound is zero because retained auditable evidence is insufficient; actual resistance is not asserted to be zero.",
+    "chiado_transfer": "PROHIBITED_DIFFERENT_OPERATORS_ENVIRONMENT_AND_MECHANISM"
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "schema": "overlapping-pool-schema-certificate/v2",
+  "generatedFromPinnedInputs": true,
+  "implementationAuditEvidence": {
+    "source": "contracts/OverlappingPoolEscrow.sol",
+    "sourceSha256": "3005e229047b60460795b2f6ae3667af6bd54bb976544d87ec52bbb590f70579",
+    "artifact": "artifacts/contracts/OverlappingPoolEscrow.sol/OverlappingPoolEscrow.json",
+    "artifactSha256": "6e36a426ab4ef36a1abc2977c67c579a08af61ff27771505aaf791162bcd821c",
+    "creationBytecodeSha256": "2c0d974ad93037c812a0cc0dce95a09d540103ee6c4851ca662283e0c213665f",
+    "runtimeBytecodeSha256": "f26d505289c131b4b146d3cea3d796804f168d01f006a51680360ecc4b08c1b9",
+    "abiSignatures": [
+      "COMMITTEE_SIZE()",
+      "CREDIT_UNIT()",
+      "MEMBER_GROSS_FLOOR()",
+      "POOL_CAP()",
+      "THRESHOLD()",
+      "acquireFour(uint8[4])",
+      "claimable(address)",
+      "completed()",
+      "configureCredits(uint256[7])",
+      "configured()",
+      "credits(uint256)",
+      "members(uint256)",
+      "poolController()",
+      "quoteCandidate(uint256[7],uint8[4])",
+      "quoteFour(uint8[4])",
+      "residualPrice(uint256)",
+      "totalAttackerPayment()",
+      "withdraw()"
+    ],
+    "mutatingEntryClosure": {
+      "initialization": [
+        "configureCredits(uint256[7])"
+      ],
+      "acquisition": [
+        "acquireFour(uint8[4])"
+      ],
+      "neutral": [
+        "withdraw()"
+      ],
+      "fallbackOrReceive": []
+    },
+    "runtimeOpcodeGuards": {
+      "executableBytes": 2476,
+      "call": 1,
+      "callcode": 0,
+      "delegatecall": 0,
+      "create": 0,
+      "create2": 0,
+      "selfdestruct": 0
+    }
+  },
+  "declaredTransactionSchema": {
+    "state": "(configured credit vector y, completed flag, selected terminal set if completed)",
+    "abstraction": "pi(x)=(empty,y) before completion; pi(x)=(S,y) after the unique successful acquireFour schema action",
+    "initialStates": 117,
+    "terminalSets": 35,
+    "quotientStates": 4212,
+    "acquisitionMacroEdges": 4095,
+    "neutralSteps": "views and withdrawals preserve (A,y); nested completion is classified by the unique completed-state write"
+  },
+  "obligations": {
+    "declaredSchemaEntryClosure": "PASS: configure, acquireFour, view, and withdraw action classes are explicit",
+    "schemaForwardSimulation": "PASS: every declared acquisition action preserves y, selects four distinct members, and maps to one root-terminal block edge",
+    "schemaBackwardRealizability": "PASS: all 117 x 35 declared block edges have a distinct tuple and exact quote",
+    "schemaTerminalEquivalence": "PASS: exactly the post-acquireFour schema states are terminal",
+    "schemaPaymentPreservation": "PASS: all 4095 schema quotes equal the RPSC residual sum",
+    "implementationToSchemaBridge": "NOT_PROVED: source/ABI/bytecode checks below are audit evidence, not an EVM reachability proof",
+    "implementationEntryEvidence": "PASS: pinned mutating ABI is configureCredits, acquireFour, withdraw; no fallback or receive",
+    "implementationOpcodeEvidence": "PASS: no delegatecall, callcode, create, create2, or selfdestruct; the sole CALL is in the guarded withdrawal path"
+  },
+  "finiteCheck": {
+    "candidateCreditVectors": 2187,
+    "admissibleCreditVectors": 117,
+    "terminalSets": 35,
+    "checkedStateSetPairs": 4095,
+    "minimumResidualPayment": 4,
+    "maximumResidualPayment": 8,
+    "coordinateResidualMinima": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "exclusions": [
+    "The certificate proves only the declared finite transaction schema.",
+    "The EVM-to-schema refinement remains an explicit unproved premise.",
+    "Pool-fund provenance and beneficial ownership remain evidence premises.",
+    "No member-willingness or production pass-through claim."
+  ]
+}

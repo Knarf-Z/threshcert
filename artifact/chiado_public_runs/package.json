@@ -1,0 +1,27 @@
+{
+  "name": "trace-then-slash-phase2-chiado",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "typecheck": "hardhat compile && tsc --noEmit",
+    "phase2:deploy": "hardhat run scripts/deploy-chiado.ts --network chiado",
+    "phase2:verify": "tsx scripts/verify-chiado.ts",
+    "phase2:settle": "hardhat run scripts/settle-chiado.ts --network chiado",
+    "manifest:build": "node scripts/run-python.mjs scripts/build-manifest.py",
+    "manifest:check": "node scripts/run-python.mjs scripts/build-manifest.py --check",
+    "ready": "npm run typecheck && npm test"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox-viem": "5.0.7",
+    "@openzeppelin/contracts": "5.6.1",
+    "@types/node": "22.20.1",
+    "hardhat": "3.9.1",
+    "solc": "0.8.28",
+    "typescript": "6.0.3",
+    "tsx": "4.20.6",
+    "viem": "2.55.2"
+  }
+}

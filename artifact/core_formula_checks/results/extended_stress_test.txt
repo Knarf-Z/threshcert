@@ -1,0 +1,25 @@
+Extended stress test (scale=8x default trials_per_n, same n_values and seed_base as each script's own default -- every originally-tested instance is a strict prefix of this run's).
+
+test_equivalence.run: instances=5760 problems=0 seconds=1.54
+information_boundary.check_tightness_and_soundness: instances=2400 problems=0 seconds=5.32
+information_boundary.check_public_only_layer: instances=480 problems=0 seconds=1.16
+partial_activation_evidence.check_boundary_and_monotonicity: instances=1600 problems=0 seconds=0.61
+partial_activation_evidence.check_tightness_and_soundness: instances=1600 problems=0 seconds=1.05
+atomic_bypass_hierarchy.check_cross_validation: instances=5120 problems=0 seconds=0.63
+atomic_bypass_hierarchy.check_boundaries_and_monotonicity: instances=2880 problems=0 seconds=5.45
+general_package_family_hierarchy.check_general_cross_validation: instances=6400 problems=0 seconds=0.56
+general_package_family_hierarchy.check_cardinality_family_redundancy: instances=12000 problems=0 seconds=2.60
+general_package_family_hierarchy.check_full_collapse_with_singletons: instances=1920 problems=0 seconds=0.82
+evidence_optimal_atomic_bypass.check_tightness: instances=6400 problems=0 seconds=0.81
+evidence_optimal_atomic_bypass.check_soundness: instances=6400 problems=0 seconds=2.60
+evidence_optimal_atomic_bypass.check_public_only: instances=1920 problems=0 seconds=0.48
+evidence_optimal_atomic_bypass.check_resistance_only_collapses_to_tcr: instances=4800 problems=0 seconds=0.69
+mixed_evidence_atomic_bypass.check_mcr_formula_matches_brute_force: instances=4000 problems=0 seconds=0.46
+mixed_evidence_atomic_bypass.check_tightness: instances=9600 problems=0 seconds=1.20
+mixed_evidence_atomic_bypass.check_soundness: instances=9600 problems=0 seconds=1.56
+replacement_hull.test_formula_equivalence(n=3,m=2): instances=1200 problems=0 seconds=3.03
+replacement_hull.test_formula_equivalence(n=4,m=3): instances=400 problems=0 seconds=13.91
+
+grand_total_instances=84480
+grand_total_problems=0
+extended_stress_test=PASS

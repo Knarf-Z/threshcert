@@ -1,0 +1,25 @@
+Recorded output of:
+
+    python scaling_fast.py --ns 8 10 12 14 16 18 20 22 24 --runs 5
+
+Additive extension of the independent-implementation scaling check
+(EXPERIMENTS.md item 29) beyond the n=8..18 range shown in
+verification_scripts/README.md's standard invocation. n=20/22/24 were
+previously only described as reachable via `--ns 20 22`; this file records
+an actual run through n=24 rather than leaving it as a documented
+possibility. This is a single from-scratch timing benchmark (not the
+ten-repeat median/IQR discipline used for results/solver_scaling_repeats*),
+mirroring but not matching wall-clock time with the paper's own scaling
+table or with scripts/run_scaling_benchmark.py's separate BFS-based
+implementation -- different algorithm, different machine.
+
+  n     states    median(s)     min(s)     max(s)
+  8        256     0.000339   0.000333   0.000353
+ 10      1,024     0.001615   0.001565   0.001814
+ 12      4,096     0.006632   0.006560   0.006850
+ 14     16,384     0.030808   0.030102   0.030874
+ 16     65,536     0.155370   0.153188   0.155455
+ 18    262,144     0.683153   0.678506   0.695389
+ 20  1,048,576     2.729990   2.722858   2.758007
+ 22  4,194,304    12.990170  12.933932  13.046974
+ 24 16,777,216    55.988136  55.657308  56.569227

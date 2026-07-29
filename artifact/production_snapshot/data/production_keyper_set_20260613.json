@@ -1,0 +1,105 @@
+{
+  "schema": "threshcert-production-keyper-set-provenance-v1",
+  "deployment": "Shutterized Gnosis Chain",
+  "network": "Gnosis Chain",
+  "chain_id": 100,
+  "retrieved_at_utc": "2026-07-19T09:16:03Z",
+  "audit_anchor": {
+    "timestamp_utc": "2026-06-13T00:00:00Z",
+    "timestamp": 1781308800,
+    "block_number": 46666718,
+    "block_hash": "0x574ec26ee7b2e2bfddd991bf99d37a79455428bc4dfe342b0ccf55d071229b60",
+    "policy": "start of the previously recorded UTC observation date"
+  },
+  "public_sources": [
+    {
+      "role": "official deployment addresses",
+      "url": "https://github.com/shutter-network/shutter-keyper-deployment/tree/gnosis/main"
+    },
+    {
+      "role": "Gnosis deployment documentation",
+      "url": "https://docs.gnosischain.com/shutterized-gc/DeployedContracts"
+    },
+    {
+      "role": "verified manager contract and ABI",
+      "url": "https://gnosis.blockscout.com/address/0x7C2337f9bFce19d8970661DA50dE8DD7d3D34abb"
+    },
+    {
+      "role": "verified Keyper-set contract and ABI",
+      "url": "https://gnosis.blockscout.com/address/0xE817E77109e2E6a8025eB30dB3542eC18bBDE828"
+    },
+    {
+      "role": "archival block",
+      "url": "https://gnosis.blockscout.com/block/46666718"
+    }
+  ],
+  "rpc_provenance": {
+    "endpoint": "https://rpc.gnosischain.com",
+    "block_tag": "0x2c813de",
+    "manager_calls": [
+      "getNumKeyperSets()",
+      "getKeyperSetIndexByBlock(uint64)",
+      "getKeyperSetAddress(uint64)",
+      "getKeyperSetActivationBlock(uint64)"
+    ],
+    "keyper_set_calls": [
+      "getMembers()",
+      "getNumMembers()",
+      "getThreshold()",
+      "getPublisher()",
+      "isFinalized()",
+      "owner()"
+    ],
+    "live_recheck_command": "python scripts/verify_production_snapshot_live.py"
+  },
+  "manager": {
+    "address": "0x7C2337f9bFce19d8970661DA50dE8DD7d3D34abb",
+    "num_keyper_sets": 11,
+    "active_keyper_set_index": 10,
+    "keyper_set_added_transaction": "0xd00adb4be576a75026e28f8fefea31fe94413fecfc9ebffc17bf75d31458a864",
+    "keyper_set_added_block": 46270333,
+    "keyper_set_added_event_topic0": "0xa940387dac06ebd336730f1d14b21629a9d137069a9137e871f95313e1010165"
+  },
+  "keyper_set": {
+    "index": 10,
+    "address": "0xE817E77109e2E6a8025eB30dB3542eC18bBDE828",
+    "creation_transaction": "0x05f08522d992c13117632ec6924e4eab0c18d87818cccdecd5c203172d8a4e06",
+    "creation_block": 46270333,
+    "creation_timestamp": 1779274265,
+    "activation_block": 46271880,
+    "activation_block_hash": "0x0ac8898aa43163daac4848d86cae6899e72dfc124c83fb146a45326e578a1bf7",
+    "activation_timestamp": 1779282200,
+    "owner": "0x8A7589135584CECFA5Bd73De02864075232407DD",
+    "publisher": "0xa6eE35704F4e9A73712b514e15D1DB8b34EC8d76",
+    "finalized": true,
+    "threshold": 4,
+    "num_members": 7,
+    "members": [
+      "0x4ba8E8e0061EA7CE9353e7B641A116F1d48d9d46",
+      "0xcB43AEAA8c029Da18A499dC684FdD250ab3FCd13",
+      "0x46c24A9B4C92Aeb416d732801208ADD353635EC4",
+      "0x772213aaD4c6B37d2cc0Fa3B74F9ace5a028B8C8",
+      "0x2711d53B3dF060D08AC30C6517D4B8EED50A54B3",
+      "0x4B5E2356b666898e101627BdDc518956bcd90a03",
+      "0x48A0e1789C82084aE28c179bd5742454f8CD4ed6"
+    ]
+  },
+  "provenance_scope": {
+    "certified": [
+      "archival block identity and timestamp",
+      "manager and active Keyper-set contracts",
+      "set index and activation block",
+      "seven member addresses",
+      "four-of-seven threshold",
+      "finalized state, owner, and publisher"
+    ],
+    "not_certified": [
+      "actual or minimum member resistance",
+      "member-specific activation constraints",
+      "premature-release attribution procedure",
+      "scope-matched forfeiture, insurance, or compensation",
+      "joint detection-and-enforcement probability lower bounds",
+      "production attack-cost or no-profit certificate"
+    ]
+  }
+}

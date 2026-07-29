@@ -1,0 +1,31 @@
+import { spawnSync } from "node:child_process";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const root = path.dirname(fileURLToPath(import.meta.url));
+function run(command, args, cwd = root) {
+  const env = { ...process.env, PYTHONDONTWRITEBYTECODE: "1" };
+  const r = spawnSync(command, args, { cwd, stdio: "inherit", shell: false, env });
+  if (r.error) throw r.error;
+  if (r.status !== 0) process.exit(r.status ?? 1);
+}
+function python(args, cwd) {
+  for (const [cmd, prefix] of [["python", []], ["python3", []], ["py", ["-3"]]]) {
+    const probe = spawnSync(cmd, [...prefix, "--version"], { stdio: "ignore", shell: false });
+    if (!probe.error && probe.status === 0) return run(cmd, [...prefix, ...args], cwd);
+  }
+  throw new Error("Python 3 not found");
+}
+
+run(process.execPath, ["build_manifest.mjs", "--check"]);
+python(["verify_offline.py"], path.join(root, "production_snapshot"));
+run(process.execPath, ["scripts/verify-preserved.mjs"], path.join(root, "chiado_public_runs"));
+run(process.execPath, ["verify_refinement.mjs"], path.join(root, "joint_incidence_refinement"));
+python(["verify_schema_independent.py"], path.join(root, "joint_incidence_refinement"));
+for (const script of [
+  "test_equivalence.py",
+  "information_boundary.py",
+  "atomic_bypass_hierarchy.py",
+  "reproduce_paper_numbers.py",
+]) python([script], path.join(root, "core_formula_checks"));
+console.log("ARTIFACT_ALL_CORE_CHECKS=PASS");

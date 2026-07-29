@@ -46,5 +46,5 @@ if args.check:
         raise SystemExit("MANIFEST=FAIL")
     print("MANIFEST=PASS")
 else:
-    MANIFEST.write_text(expected, encoding="utf-8")
+    MANIFEST.write_text(expected, encoding="utf-8", newline="\n")
     print(f"MANIFEST=WRITTEN files={len(expected.splitlines())}")

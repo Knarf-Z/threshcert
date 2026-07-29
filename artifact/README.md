@@ -17,10 +17,10 @@ node verify_all.mjs
 ```
 
 The command verifies the root manifest, recomputes the pinned Gnosis production
-snapshot certificate, checks both preserved Chiado result files, their full
-identifiers and six-contract 0.108-xDAI settlement plan, checks the declared
-finite transaction schema with independent Node and Python implementations,
-and runs the core formula checks. It performs no network access or chain write.
+snapshot certificate, checks both preserved Chiado result files and their full
+identifiers, checks the declared finite transaction schema with independent
+Node and Python implementations, and runs the core formula checks. It performs no
+network access or chain write.
 
 The schema certificate deliberately reports
 `EVM_TO_SCHEMA_BRIDGE=NOT_PROVED`. Source, ABI, build, bytecode, and opcode
@@ -32,9 +32,9 @@ as a proof covering every EVM execution.
 The pinned production snapshot can be rechecked against a user-supplied,
 read-only Gnosis archive endpoint:
 
-```text
+`	ext
 python production_snapshot/scripts/verify_production_snapshot_live.py --rpc <archive-rpc-url>
-```
+` 
 
 The preserved public-chain JSON can additionally be checked against Chiado by
 supplying a read-only archive endpoint distinct from the deployment endpoint:
@@ -56,8 +56,7 @@ equality, and the recorded coverage condition.
 - `production_snapshot/`: fixed Gnosis block and active-set record, member
   evidence ledger, canonical result, offline recomputation, and read-only RPC check.
 - `core_formula_checks/`: independent enumerations for the sequential closure,
-  information boundary, atomic-bypass hierarchy, and common-solvency
-  settlement separation.
+  information boundary, and package-language separation.
 - `joint_incidence_refinement/`: the normative finite-schema checkers,
   Solidity fixture, locked build metadata, and behavioral tests.
 - `chiado_public_runs/`: TraceThenSlash source, build metadata, deployment and

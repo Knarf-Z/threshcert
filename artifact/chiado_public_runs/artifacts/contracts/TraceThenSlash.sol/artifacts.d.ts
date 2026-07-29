@@ -15,7 +15,7 @@ export interface TraceThenSlash$Type {
   readonly deployedLinkReferences: {};
   readonly immutableReferences: {"3499":[{"length":32,"start":7601}],"3501":[{"length":32,"start":7784}],"3503":[{"length":32,"start":7547}],"3505":[{"length":32,"start":7680}],"3507":[{"length":32,"start":7718}],"3510":[{"length":32,"start":1994}],"3513":[{"length":32,"start":2035}],"7517":[{"length":32,"start":5095},{"length":32,"start":7141}],"7519":[{"length":32,"start":469},{"length":32,"start":3179}],"7521":[{"length":32,"start":1109},{"length":32,"start":2309},{"length":32,"start":3727},{"length":32,"start":5038},{"length":32,"start":7427}]};
   readonly inputSourceName: "project/contracts/TraceThenSlash.sol";
-  readonly buildInfoId: "solc-0_8_28-6e2c9673b15f1b448743106bcc23559c2e19cbd6";
+  readonly buildInfoId: "solc-0_8_28-88a200c4404ba795cdb843a395646df84095f76e";
 };
 
 import "hardhat/types/artifacts";

@@ -18,7 +18,7 @@ EXCLUDED_PARTS = {
 
 def manifest_text() -> str:
     lines: list[str] = []
-    for path in sorted(ROOT.rglob("*")):
+    for path in sorted(ROOT.rglob("*"), key=lambda p: p.relative_to(ROOT).as_posix()):
         if not path.is_file() or path == MANIFEST:
             continue
         relative = path.relative_to(ROOT)

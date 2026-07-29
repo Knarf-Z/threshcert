@@ -26,6 +26,7 @@ for (const script of [
   "test_equivalence.py",
   "information_boundary.py",
   "atomic_bypass_hierarchy.py",
+  "common_solvency_separation.py",
   "reproduce_paper_numbers.py",
 ]) python([script], path.join(root, "core_formula_checks"));
 console.log("ARTIFACT_ALL_CORE_CHECKS=PASS");

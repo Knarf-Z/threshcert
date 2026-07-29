@@ -71,6 +71,26 @@ assert(parsed.calibration.status === "PUBLIC_SCOPED_EXECUTION_REWARD_UNDERFUNDED
 checkRun(parsed.covered, "covered");
 checkRun(parsed.calibration, "calibration");
 
+const recoveryScenarios = [...parsed.calibration.scenarios, ...parsed.covered.scenarios];
+const recoveryAddresses = recoveryScenarios.map((scenario) => scenario.contractAddress.toLowerCase());
+assert(recoveryScenarios.length === 6, "settlement plan: expected six contracts");
+assert(new Set(recoveryAddresses).size === 6, "settlement plan: duplicate address");
+const recoveryTotalWei = recoveryScenarios.reduce(
+  (sum, scenario) => sum + BigInt(scenario.remainingBondWei),
+  0n,
+);
+const latestReleaseTime = recoveryScenarios.reduce(
+  (latest, scenario) => {
+    const release = BigInt(scenario.job.releaseTime);
+    return release > latest ? release : latest;
+  },
+  0n,
+);
+assert(recoveryTotalWei === 108000000000000000n, "settlement plan: aggregate bond mismatch");
+assert(latestReleaseTime === 1785808050n, "settlement plan: latest release mismatch");
+console.log(
+  `CHIADO_SETTLEMENT_PLAN=PASS contracts=6 remainingWei=${recoveryTotalWei} latestReleaseTime=${latestReleaseTime}`,
+);
 console.log("CHIADO_PRESERVED_HASHES=PASS");
 console.log("CHIADO_CANONICAL_COPY_IDENTITY=PASS");
 console.log("CHIADO_FULL_ADDRESSES_TX_AND_BLOCK_HASHES=PASS");

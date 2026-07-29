@@ -88,8 +88,9 @@ MANIFEST=PASS
 
 ## 5. Recover unslashed bonds after the release window
 
-Do not run settlement before the UTC release times recorded in
-`results\phase2_chiado.json`.
+The command covers both preserved runs (six contracts, 0.108 xDAI total).
+Do not run before 2026-08-04 01:47:30 UTC / 09:47:30 UTC+08:00, the
+latest release time recorded in the two preserved JSON files.
 
 ```powershell
 $env:PHASE2_SETTLE = "I_UNDERSTAND_PUBLIC_SETTLEMENT"
@@ -98,8 +99,10 @@ npm.cmd run manifest:build
 npm.cmd run manifest:check
 ```
 
-Successful settlement ends with:
+Successful complete settlement ends with:
 
 ```text
+PHASE2_SETTLED_CONTRACTS=6
+PHASE2_RECOVERED_TOTAL_WEI=108000000000000000
 PHASE2_REMAINING_BONDS_RECOVERED=PASS
 ```

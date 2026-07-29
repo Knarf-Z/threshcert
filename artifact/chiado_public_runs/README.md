@@ -84,18 +84,24 @@ gas coverage, and cross-mode equality.
 
 ## Recovering the remaining bonds
 
-The three unslashed owner-funded bonds in each instance remain locked through
-the release window. The contract tracks the latest opened release time and
-cannot return those bonds early. Once every recorded release window has ended,
-retire all three committees and recover the remaining principal:
+The six unslashed owner-funded bonds across the preserved calibration and
+covered runs remain locked through their release windows. The settlement
+script reads both `phase2_chiado_underfunded_run1.json` and
+`phase2_chiado_covered_run2.json`, rejects duplicate addresses, and recovers
+exactly 0.108 xDAI across all six contracts. The latest recorded release time
+is 2026-08-04 01:47:30 UTC (2026-08-04 09:47:30 UTC+08:00); run only after
+that time:
 
 ```text
 PHASE2_SETTLE=I_UNDERSTAND_PUBLIC_SETTLEMENT
 npm run phase2:settle
 ```
 
-Settlement is irreversible, prevents future release jobs, and writes
-`results/phase2_settlement.json`. The independent verifier reads the historical
+Settlement is irreversible, prevents future release jobs, and incrementally
+writes `results/phase2_settlement.json`. A rerun audits already retired
+contracts from `RemainingBondsWithdrawn` events, so interruption does not hide
+a partial recovery. Final PASS requires six records and 108000000000000000
+wei. The independent verifier reads the historical
 terminal block recorded by the deployment run, so later settlement does not
 invalidate the original public certificate.
 

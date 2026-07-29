@@ -1,0 +1,162 @@
+{
+  "schema": "fc-trace-then-slash-phase1-v1",
+  "fixtureGenesis": "2026-01-01T00:00:00.000Z",
+  "rq": "RQ2",
+  "environment": {
+    "execution": "Hardhat ephemeral EVM",
+    "hostModel": "single host, seven distinct accountability keys",
+    "independentOperators": false,
+    "productionDeployment": false
+  },
+  "committee": {
+    "size": 7,
+    "threshold": 4,
+    "bondWeiPerMember": "2000000000000000000",
+    "callerRewardWeiPerSlash": "100000000000000000"
+  },
+  "coverage": {
+    "mechanismClass": "member-signed public early-share artifact plus verifier attestation",
+    "packageSizeParameterB": "not used",
+    "acceptedAtomicPackageSizes": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "repeatedPackages": true,
+    "silentOffProtocolTransfers": false
+  },
+  "certificate": {
+    "status": "POSITIVE_SCOPED",
+    "lowerBoundWei": "8000000000000000000",
+    "unit": "bonded ETH",
+    "statement": "Under the stated artifact, verifier, timely-submission, and chain-liveness assumptions, any covered 4-of-7 early reconstruction realizes at least the sum of the four smallest frozen bonds."
+  },
+  "contractSourceSha256": "7960eabce5fe922f1f238ec3632117035f23366756d34b862668e402dec3721d",
+  "scenarios": [
+    {
+      "mode": "sequential",
+      "chainId": 31337,
+      "contract": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+      "jobId": "0xd0a71638bf1cad732873c5f052a9487bee2604e9ae78c484393d6539479887a5",
+      "releaseTime": "4102448400",
+      "grouping": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "slashedMemberIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "initialTotalBondWei": "14000000000000000000",
+      "preAttackThresholdBondFloorWei": "8000000000000000000",
+      "realizedMemberLossWei": "8000000000000000000",
+      "callerRewardAccruedWei": "400000000000000000",
+      "treasuryAccruedWei": "7600000000000000000",
+      "remainingBondWei": "6000000000000000000",
+      "postAttackCurrentCertificateWei": "0",
+      "transactions": [
+        {
+          "hash": "0x382eb4559c3e2b9877a9d1bb2ae9dbd38e6052d6c26efe50addbd06ff2aa8f9c",
+          "blockNumber": "11",
+          "status": "success",
+          "gasUsed": "153197"
+        },
+        {
+          "hash": "0x5d5781177de0f839e3f09b8344e36a1abac45f9f6b6744752a2a3c74ccd6a0bc",
+          "blockNumber": "12",
+          "status": "success",
+          "gasUsed": "119009"
+        },
+        {
+          "hash": "0x6910ede37d6e97e757d88325b7914eabf6e1cf4f806cc741f2c7804b18e22020",
+          "blockNumber": "13",
+          "status": "success",
+          "gasUsed": "119009"
+        },
+        {
+          "hash": "0x66f877ef512c44845cad71b7b3e0205e18c9eb2e7d51764d483c895e4cc5535b",
+          "blockNumber": "14",
+          "status": "success",
+          "gasUsed": "118997"
+        }
+      ]
+    },
+    {
+      "mode": "atomic_package",
+      "chainId": 31337,
+      "contract": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+      "jobId": "0x9dae357cf9d90ba8507a613a2f07881df3eb5e709038a477c0cef4666419b5cb",
+      "releaseTime": "4102448400",
+      "grouping": [
+        4
+      ],
+      "slashedMemberIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "initialTotalBondWei": "14000000000000000000",
+      "preAttackThresholdBondFloorWei": "8000000000000000000",
+      "realizedMemberLossWei": "8000000000000000000",
+      "callerRewardAccruedWei": "400000000000000000",
+      "treasuryAccruedWei": "7600000000000000000",
+      "remainingBondWei": "6000000000000000000",
+      "postAttackCurrentCertificateWei": "0",
+      "transactions": [
+        {
+          "hash": "0xa10ec61e39fe3ea8c51ce5d43168cf1fde7322bae77e868e06e718cd03080f0b",
+          "blockNumber": "11",
+          "status": "success",
+          "gasUsed": "313364"
+        }
+      ]
+    },
+    {
+      "mode": "repeated_packages",
+      "chainId": 31337,
+      "contract": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+      "jobId": "0x167c5da34af8bd124d7baed74ee53ddd990a16d81e02720f345e8ca05d64f0e2",
+      "releaseTime": "4102448400",
+      "grouping": [
+        2,
+        2
+      ],
+      "slashedMemberIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "initialTotalBondWei": "14000000000000000000",
+      "preAttackThresholdBondFloorWei": "8000000000000000000",
+      "realizedMemberLossWei": "8000000000000000000",
+      "callerRewardAccruedWei": "400000000000000000",
+      "treasuryAccruedWei": "7600000000000000000",
+      "remainingBondWei": "6000000000000000000",
+      "postAttackCurrentCertificateWei": "0",
+      "transactions": [
+        {
+          "hash": "0x8e80323f82aa43c731102f8526afc3848be987457fd4b966e5280a2e87ecd396",
+          "blockNumber": "11",
+          "status": "success",
+          "gasUsed": "209153"
+        },
+        {
+          "hash": "0xae72af47277610a1f4b497807a70ec9cebe0cac16a2db7ec6ce0936e544cce67",
+          "blockNumber": "12",
+          "status": "success",
+          "gasUsed": "174965"
+        }
+      ]
+    }
+  ]
+}

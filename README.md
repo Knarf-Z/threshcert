@@ -93,6 +93,10 @@ defines every experiment and its interpretation boundary.
   TraceThenSlash mechanism, 14 adversarial tests, guarded three-instance
   Chiado deployment runner, and independent-RPC verifier for sequential,
   atomic, and repeated packaging.
+- `joint_incidence_fixture/`: a separate finite 4-of-7 overlapping-pool
+  residual-price mechanism. It classifies all \(3^7=2,187\) integer credit
+  candidates, checks all \(117\times35=4,095\) admissible state--set pairs,
+  and executes an exact 4-unit minimizer.
 
 ## Reproduce
 
@@ -264,6 +268,29 @@ No Phase 2 public-chain result is committed yet. The directory is
 deployment-ready source and verification logic; it does not replace the
 already recorded one-share Chiado pilot or turn the controlled 8-unit
 enforcement-loss result into an unconditional attacker-payment certificate.
+
+## Finite joint-incidence fixture
+
+The separate `joint_incidence_fixture/` package implements a controlled
+four-of-seven public-state residual-price mechanism with two overlapping
+cap-2 credit pools. Each member has gross floor 2, contract credits are
+restricted to 0, 1, or 2 units, and acquiring four distinct members requires
+exact residual payment `2 - credit` to each selected member.
+
+```bash
+cd joint_incidence_fixture
+npm ci --no-audit --no-fund
+npm run ready
+npm run manifest:check
+```
+
+The tests exhaustively classify all 2,187 integer candidates, verify that
+exactly 117 states satisfy both pool caps, compare every one of the 4,095
+admissible contract quotes with an independently evaluated arithmetic sum,
+and execute a 4-unit minimizing transaction. The fixture establishes the
+declared finite state--set relation and payment equality at contract level.
+It does not establish ultimate beneficial ownership or attacker-independence
+of the pool funds, production member costs, or a real collusion price.
 
 ## Production deployment evidence audit
 

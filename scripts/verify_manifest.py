@@ -54,7 +54,7 @@ def main() -> None:
     files = distributable_files()
     if args.write:
         lines = [f"{digest(files[relative])}  ./{relative}" for relative in sorted(files)]
-        MANIFEST.write_text("\n".join(lines) + "\n", encoding="utf-8")
+        MANIFEST.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
 
     entries: dict[str, str] = {}
     for number, line in enumerate(MANIFEST.read_text(encoding="utf-8").splitlines(), 1):

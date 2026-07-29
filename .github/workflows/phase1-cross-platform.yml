@@ -1,0 +1,55 @@
+name: Phase 1 cross-platform reproduction
+
+on:
+  push:
+    paths:
+      - "trace_then_slash_phase1/**"
+      - ".github/workflows/phase1-cross-platform.yml"
+  pull_request:
+    paths:
+      - "trace_then_slash_phase1/**"
+      - ".github/workflows/phase1-cross-platform.yml"
+  workflow_dispatch:
+
+jobs:
+  reproduce:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: trace_then_slash_phase1
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: trace_then_slash_phase1/package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Record toolchain
+        run: |
+          node --version
+          npm --version
+          python --version
+      - name: Verify repository manifest
+        working-directory: .
+        run: python scripts/verify_manifest.py
+      - name: Verify frozen Phase 1 manifest
+        run: python scripts/build-manifest.py --check
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Compile and type-check
+        run: npm run typecheck
+      - name: Run contract tests
+        run: npm test
+      - name: Generate scenarios
+        run: npm run scenarios
+      - name: Verify frozen results independently
+        run: npm run verify:results
+      - name: Verify manifest after reproduction
+        run: python scripts/build-manifest.py --check

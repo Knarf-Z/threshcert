@@ -10,6 +10,9 @@ const excluded = new Set([
   "artifacts",
   "cache",
   "node_modules",
+  "out",
+  "halmos-out",
+  "preflight-out",
 ]);
 
 async function filesUnder(directory) {

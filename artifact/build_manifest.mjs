@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 const root = path.dirname(fileURLToPath(import.meta.url));
 const manifestPath = path.join(root, "MANIFEST.sha256");
 const excluded = new Set(["MANIFEST.sha256"]);
-const excludedDirectories = new Set(["node_modules", "cache", ".runtime", "__pycache__"]);
+const excludedDirectories = new Set(["node_modules", "cache", ".runtime", "__pycache__", "out", "halmos-out", "preflight-out"]);
 
 async function walk(dir) {
   const out = [];

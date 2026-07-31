@@ -97,6 +97,7 @@ async function setup() {
   return {
     contract,
     publicClient,
+    viem,
     poolController,
     attacker,
     memberWallets,
@@ -181,7 +182,13 @@ describe("OverlappingPoolEscrow residual-price fixture", () => {
     });
 
     assert.equal(await fixture.contract.read.completed(), true);
-    assert.equal(await fixture.contract.read.totalAttackerPayment(), FOUR);
+    assert.equal(await fixture.contract.read.terminalMask(), 51);
+    assert.equal(await fixture.contract.read.totalAcquisitionCallValue(), FOUR);
+    assert.equal(
+      (await fixture.contract.read.acquirer()).toLowerCase(),
+      fixture.attacker.account.address.toLowerCase(),
+    );
+    assert.equal(await fixture.contract.read.deliveredShareMask(), 51);
     assert.equal(
       await fixture.publicClient.getBalance({ address: fixture.contract.address }),
       EIGHT,
@@ -194,7 +201,81 @@ describe("OverlappingPoolEscrow residual-price fixture", () => {
         ]),
         TWO,
       );
+      assert.equal(
+        (await fixture.contract.read.shareOwner([BigInt(index)])).toLowerCase(),
+        fixture.attacker.account.address.toLowerCase(),
+      );
     }
+    for (const index of [2, 3, 6]) {
+      assert.equal(
+        (await fixture.contract.read.shareOwner([BigInt(index)])).toLowerCase(),
+        fixture.memberWallets[index].account.address.toLowerCase(),
+      );
+    }
+    await assert.rejects(
+      fixture.contract.write.acquireFour([minimizingSet], {
+        account: fixture.attacker.account,
+        value: FOUR,
+      }),
+    );
+    await assert.rejects(
+      fixture.contract.write.configureCredits([credits], {
+        account: fixture.poolController.account,
+        value: FOUR,
+      }),
+    );
+    assert.equal(await fixture.contract.read.terminalMask(), 51);
+    assert.equal(await fixture.contract.read.totalAcquisitionCallValue(), FOUR);
+    assert.equal(
+      (await fixture.contract.read.acquirer()).toLowerCase(),
+      fixture.attacker.account.address.toLowerCase(),
+    );
+    assert.equal(await fixture.contract.read.deliveredShareMask(), 51);
+  });
+
+  it("enforces controller/member separation from the acquisition payer", async () => {
+    const fixture = await setup();
+    const credits: Credits = [TWO, ZERO, ZERO, ZERO, TWO, ZERO, ZERO];
+    const minimizingSet: MemberSet = [0, 1, 4, 5];
+
+    await fixture.contract.write.configureCredits([credits], {
+      account: fixture.poolController.account,
+      value: FOUR,
+    });
+
+    await assert.rejects(
+      fixture.contract.write.acquireFour([minimizingSet], {
+        account: fixture.poolController.account,
+        value: FOUR,
+      }),
+    );
+    await assert.rejects(
+      fixture.contract.write.acquireFour([minimizingSet], {
+        account: fixture.memberWallets[0].account,
+        value: FOUR,
+      }),
+    );
+    assert.equal(await fixture.contract.read.completed(), false);
+    assert.equal(await fixture.contract.read.deliveredShareMask(), 0);
+
+    const conflictingMembers = [
+      fixture.poolController.account.address,
+      ...fixture.memberWallets.slice(1).map((wallet) => wallet.account.address),
+    ] as unknown as readonly [
+      `0x${string}`,
+      `0x${string}`,
+      `0x${string}`,
+      `0x${string}`,
+      `0x${string}`,
+      `0x${string}`,
+      `0x${string}`,
+    ];
+    await assert.rejects(
+      fixture.viem.deployContract("OverlappingPoolEscrow", [
+        fixture.poolController.account.address,
+        conflictingMembers,
+      ]),
+    );
   });
 
   it("rejects cap violations, fractional credits, and duplicate sets", async () => {
@@ -232,6 +313,8 @@ describe("OverlappingPoolEscrow residual-price fixture", () => {
 
     await assert.rejects(
       fixture.contract.read.quoteFour([[0, 0, 4, 5]]),
+    );    await assert.rejects(
+      fixture.contract.read.quoteFour([[1, 0, 4, 5]]),
     );
   });
 });

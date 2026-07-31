@@ -1,0 +1,130 @@
+{
+  "schema": "overlapping-pool-refinement-obligation-map/v1",
+  "status": "PASS",
+  "theoremShape": "initial totality for every admissible y; CR1--CR5 refinement; terminal-family completeness for K; trace exactness; then explicit payment-labelled trace--outcome correspondence for mechanism lifting",
+  "paperClauseMap": {
+    "CR1": "entryClosure",
+    "CR2": "forwardSimulation",
+    "CR3": "backwardRealization",
+    "CR4": "terminalEquivalence",
+    "CR5": "paymentPreservation",
+    "offsetLiftDefinition": "offsetLiftStructure",
+    "separatePrefixPremise": "initializationTotality",
+    "separateTerminalPremise": "terminalFamilyCompleteness",
+    "separateMechanismLiftPremise": "outcomeCompleteness"
+  },
+  "scope": {
+    "evmRevision": "cancun",
+    "deployment": "direct creation admitted against the exact runtime template and constructor; controller and seven distinct nonzero members are role-separated; member code is unrestricted, with arbitrary-callee closure relying on EVM call/storage isolation plus the shared lock and concrete hostile receivers checking the mutating-reentry basis",
+    "initializationPrefix": "from the admitted fresh deployment, each successful controller-only configureCredits(y) is exactly controller-funded and creates one post-configuration root with credits and claimable balances y, initial member-owned share rights, zero delivery/payment masks, zero acquirer, and contract balance sum(y); invalid prefixes revert",
+    "successUniverse": "the refined LTS starts after a successful one-time configuration and covers every subsequent top-level acquireFour/withdraw call; acquire values span uint256, withdraw is nonpayable, and reverts stutter",
+    "projection": "on the post-configuration LTS, (credits,completed,terminalMask,deliveredShareMask,totalAcquisitionCallValue); configured is fixed true; acquirer and shareOwner are auxiliary payer/delivery invariants; claimable balances form a projection-neutral fiber",
+    "closedContractEconomicIncidence": "every successful acquisition is called and exactly funded by an address that is neither controller nor member; it has no claimable balance, refund, rebate, or withdrawal path; controller funds the immutable credit vector; exactly the four selected on-chain share rights move from their members to that payer",
+    "externalGeneralizationNotClaimed": [
+      "off-contract reimbursements or common beneficial ownership among addresses",
+      "cryptographic usability or confidentiality of the controlled share-right token",
+      "member willingness and production-system pass-through"
+    ]
+  },
+  "refinementClauses": {
+    "initializationTotality": {
+      "status": "PASS",
+      "evidence": [
+        "check_EVMConfigureSuccessClosure (symbolic candidate and value; success iff admissible and exactly funded)",
+        "check_EVMOversizeCreditReverts + check_EVMExcessFundingReverts + check_EVMUnauthorizedConfigure",
+        "deployment admission role separation plus fresh share-right owner getters"
+      ]
+    },
+    "offsetLiftStructure": {
+      "status": "PASS",
+      "evidence": [
+        "the initial abstract set is exactly the 117 (empty,y) roots",
+        "all 4,095 nonstuttering edges preserve y and add one declared four-member block",
+        "the terminal abstract set is exactly the 117-by-35 product and there are no offset-changing edges"
+      ]
+    },
+    "terminalFamilyCompleteness": {
+      "status": "PASS",
+      "evidence": [
+        "the declared terminal family is exactly all 35 four-subsets of seven members",
+        "tuple validation admits exactly one strictly increasing encoding of each four-subset and rejects every other terminal mask",
+        "completed, terminalMask, and deliveredShareMask have their unique writers in acquireFour"
+      ]
+    },
+    "outcomeCompleteness": {
+      "status": "PASS",
+      "evidence": [
+        "the closed-contract mechanism outcome universe is defined as the successful admitted post-configuration EVM traces",
+        "entry closure and unique terminal writers make acquireFour the only success-producing transition; pair and payment labels are the same trace observations on both sides",
+        "no lift to external willingness, reimbursement, beneficial ownership, or cryptographic usability is claimed"
+      ]
+    },
+    "entryClosure": {
+      "status": "PASS",
+      "evidence": [
+        "exact mutating ABI closure: configureCredits, acquireFour, withdraw",
+        "check_EVMEntryClosure + nonpayable-withdraw proof",
+        "runtime opcode exclusion of proxy/delegate/create/selfdestruct paths"
+      ]
+    },
+    "forwardSimulation": {
+      "status": "PASS",
+      "evidence": [
+        "35 symbolic canonical-set edge wrappers quantify the role-separated payer and bind terminal/delivery masks, acquirer, zero payer claimable balance, and every share owner",
+        "invalid-tuple, wrong-payment, reconfiguration, and completed-replay rejection",
+        "source-level storage noninterference checks for the claimable fiber"
+      ]
+    },
+    "backwardRealization": {
+      "status": "PASS",
+      "evidence": [
+        "for each of 35 terminals, symbolic y, full-domain wrongPayment, and symbolic role-separated payer prove exact payment succeeds",
+        "acquireFour has no claimable-fiber read and no external call, so the realization is uniform over every reachable source fiber"
+      ]
+    },
+    "terminalEquivalence": {
+      "status": "PASS",
+      "evidence": [
+        "completed, terminalMask, and deliveredShareMask have unique writers in acquireFour",
+        "35 symbolic-payer wrappers prove the exact canonical mask, caller binding, and selected/unselected share owners; replay cannot change them"
+      ]
+    },
+    "paymentPreservation": {
+      "status": "PASS",
+      "evidence": [
+        "exact msg.value guard, unique totalAcquisitionCallValue assignment, and unique acquirer=msg.sender binding",
+        "eight role-conflict proofs plus source-order checks force the payer outside controller/member withdrawal roles",
+        "4,095 finite RPSC equalities and 35 symbolic-y/symbolic-payer EVM edge obligations",
+        "withdraw cannot read or write projection fields"
+      ]
+    },
+    "closedContractEconomicIncidence": {
+      "status": "PASS",
+      "evidence": [
+        "controller-only exact funding fixes every pool credit and controller/member roles are disjoint",
+        "eight Halmos wrappers reject acquisition by the controller or any member for symbolic admissible credit vectors",
+        "35 edge wrappers quantify a nonzero controller/member/escrow-separated payer and transfer exactly four member-owned share rights to it",
+        "the payer cannot be claimable, acquireFour has no external call, and withdraw pays members only"
+      ]
+    },
+    "callbackAndFiberClosure": {
+      "status": "PASS",
+      "evidence": [
+        "28 per-member withdrawal-class obligations",
+        "two concrete hostile receivers reenter every mutating entry in pre-terminal and terminal fibers; EVM call/storage isolation plus the shared lock supplies the arbitrary-callee semantic step",
+        "sole CALL is guarded withdraw; no DELEGATECALL/CALLCODE"
+      ]
+    }
+  },
+  "trustedComputingBase": [
+    "Solidity 0.8.28 compiler and Cancun code generation",
+    "Foundry/Hardhat compilation and their agreed executable runtime hash",
+    "Halmos 0.3.3 symbolic EVM semantics and path exploration",
+    "Yices 2.6.4 SMT solving",
+    "the runner proof-name/parser closure, harness assumptions, source-level noninterference checks, admission checker, and the EVM call/storage-isolation argument for arbitrary callees"
+  ],
+  "explicitExclusions": [
+    "out-of-gas behavior, chain reorganization, non-Cancun execution, and unadmitted creation/runtime",
+    "off-contract reimbursement/common beneficial ownership, cryptographic usability of each controlled share right, member willingness, and production pass-through"
+  ]
+}

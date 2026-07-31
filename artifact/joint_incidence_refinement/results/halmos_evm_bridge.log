@@ -1,0 +1,281 @@
+=== edge-1 ===
+Compiling 2 files with Solc 0.8.28
+Solc 0.8.28 finished in 8.26s
+Compiler run successful!
+
+Running 10 tests for formal/OverlappingPoolEscrowBridge.t.sol:OverlappingPoolEscrowBridgeProof
+[PASS] check_EVMEdge_0123(uint256[7],uint256,address) (paths: 5, time: 39.56s, bounds: [])
+[PASS] check_EVMEdge_0124(uint256[7],uint256,address) (paths: 6, time: 52.01s, bounds: [])
+[PASS] check_EVMEdge_0125(uint256[7],uint256,address) (paths: 6, time: 50.48s, bounds: [])
+[PASS] check_EVMEdge_0126(uint256[7],uint256,address) (paths: 7, time: 63.78s, bounds: [])
+[PASS] check_EVMEdge_0134(uint256[7],uint256,address) (paths: 4, time: 32.58s, bounds: [])
+[PASS] check_EVMEdge_0135(uint256[7],uint256,address) (paths: 3, time: 25.93s, bounds: [])
+[PASS] check_EVMEdge_0136(uint256[7],uint256,address) (paths: 3, time: 26.88s, bounds: [])
+[PASS] check_EVMEdge_0145(uint256[7],uint256,address) (paths: 4, time: 42.10s, bounds: [])
+[PASS] check_EVMEdge_0146(uint256[7],uint256,address) (paths: 4, time: 25.73s, bounds: [])
+[PASS] check_EVMEdge_0156(uint256[7],uint256,address) (paths: 5, time: 49.62s, bounds: [])
+Symbolic test result: 10 passed; 0 failed; time: 408.69s
+
+=== edge-2 ===
+Compiling 2 files with Solc 0.8.28
+Solc 0.8.28 finished in 8.19s
+Compiler run successful!
+
+Running 10 tests for formal/OverlappingPoolEscrowBridge.t.sol:OverlappingPoolEscrowBridgeProof
+[PASS] check_EVMEdge_0234(uint256[7],uint256,address) (paths: 7, time: 58.52s, bounds: [])
+[PASS] check_EVMEdge_0235(uint256[7],uint256,address) (paths: 7, time: 59.37s, bounds: [])
+[PASS] check_EVMEdge_0236(uint256[7],uint256,address) (paths: 5, time: 51.33s, bounds: [])
+[PASS] check_EVMEdge_0245(uint256[7],uint256,address) (paths: 7, time: 68.24s, bounds: [])
+[PASS] check_EVMEdge_0246(uint256[7],uint256,address) (paths: 5, time: 47.68s, bounds: [])
+[PASS] check_EVMEdge_0256(uint256[7],uint256,address) (paths: 3, time: 26.02s, bounds: [])
+[PASS] check_EVMEdge_0345(uint256[7],uint256,address) (paths: 7, time: 66.49s, bounds: [])
+[PASS] check_EVMEdge_0346(uint256[7],uint256,address) (paths: 3, time: 24.87s, bounds: [])
+[PASS] check_EVMEdge_0356(uint256[7],uint256,address) (paths: 7, time: 65.69s, bounds: [])
+[PASS] check_EVMEdge_0456(uint256[7],uint256,address) (paths: 5, time: 57.57s, bounds: [])
+Symbolic test result: 10 passed; 0 failed; time: 525.79s
+
+=== edge-3 ===
+Compiling 2 files with Solc 0.8.28
+Solc 0.8.28 finished in 8.20s
+Compiler run successful!
+
+Running 10 tests for formal/OverlappingPoolEscrowBridge.t.sol:OverlappingPoolEscrowBridgeProof
+[PASS] check_EVMEdge_1234(uint256[7],uint256,address) (paths: 6, time: 56.27s, bounds: [])
+[PASS] check_EVMEdge_1235(uint256[7],uint256,address) (paths: 5, time: 49.90s, bounds: [])
+[PASS] check_EVMEdge_1236(uint256[7],uint256,address) (paths: 3, time: 24.58s, bounds: [])
+[PASS] check_EVMEdge_1245(uint256[7],uint256,address) (paths: 7, time: 68.34s, bounds: [])
+[PASS] check_EVMEdge_1246(uint256[7],uint256,address) (paths: 8, time: 71.59s, bounds: [])
+[PASS] check_EVMEdge_1256(uint256[7],uint256,address) (paths: 4, time: 40.21s, bounds: [])
+[PASS] check_EVMEdge_1345(uint256[7],uint256,address) (paths: 6, time: 55.01s, bounds: [])
+[PASS] check_EVMEdge_1346(uint256[7],uint256,address) (paths: 3, time: 18.09s, bounds: [])
+[PASS] check_EVMEdge_1356(uint256[7],uint256,address) (paths: 7, time: 65.60s, bounds: [])
+[PASS] check_EVMEdge_1456(uint256[7],uint256,address) (paths: 4, time: 54.66s, bounds: [])
+Symbolic test result: 10 passed; 0 failed; time: 504.27s
+
+=== edge-4 ===
+Compiling 2 files with Solc 0.8.28
+Solc 0.8.28 finished in 8.14s
+Compiler run successful!
+
+Running 5 tests for formal/OverlappingPoolEscrowBridge.t.sol:OverlappingPoolEscrowBridgeProof
+[PASS] check_EVMEdge_2345(uint256[7],uint256,address) (paths: 5, time: 49.33s, bounds: [])
+[PASS] check_EVMEdge_2346(uint256[7],uint256,address) (paths: 5, time: 48.87s, bounds: [])
+[PASS] check_EVMEdge_2356(uint256[7],uint256,address) (paths: 3, time: 39.55s, bounds: [])
+[PASS] check_EVMEdge_2456(uint256[7],uint256,address) (paths: 5, time: 52.70s, bounds: [])
+[PASS] check_EVMEdge_3456(uint256[7],uint256,address) (paths: 7, time: 57.63s, bounds: [])
+Symbolic test result: 5 passed; 0 failed; time: 248.11s
+
+=== withdraw-1 ===
+Compiling 2 files with Solc 0.8.28
+Solc 0.8.28 finished in 7.03s
+Compiler run successful!
+
+Running 2 tests for formal/OverlappingPoolEscrowBridge.t.sol:OverlappingPoolEscrowBridgeProof
+[PASS] check_EVMWithdrawProjectionNeutral_0(uint256[7]) (paths: 5, time: 35.13s, bounds: [])
+[PASS] check_EVMWithdrawProjectionNeutral_1(uint256[7]) (paths: 3, time: 13.78s, bounds: [])
+Symbolic test result: 2 passed; 0 failed; time: 48.91s
+
+=== withdraw-2 ===
+Compiling 2 files with Solc 0.8.28
+Solc 0.8.28 finished in 6.77s
+Compiler run successful!
+
+Running 2 tests for formal/OverlappingPoolEscrowBridge.t.sol:OverlappingPoolEscrowBridgeProof
+[PASS] check_EVMWithdrawProjectionNeutral_2(uint256[7]) (paths: 5, time: 35.14s, bounds: [])
+[PASS] check_EVMWithdrawProjectionNeutral_3(uint256[7]) (paths: 3, time: 13.42s, bounds: [])
+Symbolic test result: 2 passed; 0 failed; time: 48.57s
+
+=== withdraw-3 ===
+Compiling 2 files with Solc 0.8.28
+Solc 0.8.28 finished in 7.30s
+Compiler run successful!
+
+Running 2 tests for formal/OverlappingPoolEscrowBridge.t.sol:OverlappingPoolEscrowBridgeProof
+[PASS] check_EVMWithdrawProjectionNeutral_4(uint256[7]) (paths: 5, time: 35.84s, bounds: [])
+[PASS] check_EVMWithdrawProjectionNeutral_5(uint256[7]) (paths: 3, time: 15.45s, bounds: [])
+Symbolic test result: 2 passed; 0 failed; time: 51.30s
+
+=== withdraw-4 ===
+Compiling 2 files with Solc 0.8.28
+Solc 0.8.28 finished in 7.38s
+Compiler run successful!
+
+Running 1 tests for formal/OverlappingPoolEscrowBridge.t.sol:OverlappingPoolEscrowBridgeProof
+[PASS] check_EVMWithdrawProjectionNeutral_6(uint256[7]) (paths: 5, time: 35.70s, bounds: [])
+Symbolic test result: 1 passed; 0 failed; time: 35.71s
+
+=== terminal-selected-1 ===
+Compiling 2 files with Solc 0.8.28
+Solc 0.8.28 finished in 7.35s
+Compiler run successful!
+
+Running 2 tests for formal/OverlappingPoolEscrowBridge.t.sol:OverlappingPoolEscrowBridgeProof
+[PASS] check_EVMTerminalWithdrawSelected_0(uint256[7]) (paths: 4, time: 40.54s, bounds: [])
+[PASS] check_EVMTerminalWithdrawSelected_1(uint256[7]) (paths: 4, time: 40.91s, bounds: [])
+Symbolic test result: 2 passed; 0 failed; time: 81.46s
+
+=== terminal-selected-2 ===
+Compiling 2 files with Solc 0.8.28
+Solc 0.8.28 finished in 6.90s
+Compiler run successful!
+
+Running 2 tests for formal/OverlappingPoolEscrowBridge.t.sol:OverlappingPoolEscrowBridgeProof
+[PASS] check_EVMTerminalWithdrawSelected_2(uint256[7]) (paths: 4, time: 39.48s, bounds: [])
+[PASS] check_EVMTerminalWithdrawSelected_3(uint256[7]) (paths: 5, time: 50.17s, bounds: [])
+Symbolic test result: 2 passed; 0 failed; time: 89.66s
+
+=== terminal-selected-3 ===
+Compiling 2 files with Solc 0.8.28
+Solc 0.8.28 finished in 7.28s
+Compiler run successful!
+
+Running 2 tests for formal/OverlappingPoolEscrowBridge.t.sol:OverlappingPoolEscrowBridgeProof
+[PASS] check_EVMTerminalWithdrawSelected_4(uint256[7]) (paths: 5, time: 46.32s, bounds: [])
+[PASS] check_EVMTerminalWithdrawSelected_5(uint256[7]) (paths: 5, time: 51.50s, bounds: [])
+Symbolic test result: 2 passed; 0 failed; time: 97.83s
+
+=== terminal-selected-4 ===
+Compiling 2 files with Solc 0.8.28
+Solc 0.8.28 finished in 6.88s
+Compiler run successful!
+
+Running 1 tests for formal/OverlappingPoolEscrowBridge.t.sol:OverlappingPoolEscrowBridgeProof
+[PASS] check_EVMTerminalWithdrawSelected_6(uint256[7]) (paths: 5, time: 46.22s, bounds: [])
+Symbolic test result: 1 passed; 0 failed; time: 46.23s
+
+=== terminal-selectedafterpoolwithdraw-1 ===
+Compiling 2 files with Solc 0.8.28
+Solc 0.8.28 finished in 7.13s
+Compiler run successful!
+
+Running 2 tests for formal/OverlappingPoolEscrowBridge.t.sol:OverlappingPoolEscrowBridgeProof
+[PASS] check_EVMTerminalWithdrawSelectedAfterPoolWithdraw_0(uint256[7]) (paths: 6, time: 41.12s, bounds: [])
+[PASS] check_EVMTerminalWithdrawSelectedAfterPoolWithdraw_1(uint256[7]) (paths: 7, time: 56.35s, bounds: [])
+Symbolic test result: 2 passed; 0 failed; time: 97.48s
+
+=== terminal-selectedafterpoolwithdraw-2 ===
+Compiling 2 files with Solc 0.8.28
+Solc 0.8.28 finished in 6.74s
+Compiler run successful!
+
+Running 2 tests for formal/OverlappingPoolEscrowBridge.t.sol:OverlappingPoolEscrowBridgeProof
+[PASS] check_EVMTerminalWithdrawSelectedAfterPoolWithdraw_2(uint256[7]) (paths: 6, time: 42.22s, bounds: [])
+[PASS] check_EVMTerminalWithdrawSelectedAfterPoolWithdraw_3(uint256[7]) (paths: 7, time: 56.57s, bounds: [])
+Symbolic test result: 2 passed; 0 failed; time: 98.80s
+
+=== terminal-selectedafterpoolwithdraw-3 ===
+Compiling 2 files with Solc 0.8.28
+Solc 0.8.28 finished in 6.84s
+Compiler run successful!
+
+Running 2 tests for formal/OverlappingPoolEscrowBridge.t.sol:OverlappingPoolEscrowBridgeProof
+[PASS] check_EVMTerminalWithdrawSelectedAfterPoolWithdraw_4(uint256[7]) (paths: 7, time: 50.47s, bounds: [])
+[PASS] check_EVMTerminalWithdrawSelectedAfterPoolWithdraw_5(uint256[7]) (paths: 5, time: 42.92s, bounds: [])
+Symbolic test result: 2 passed; 0 failed; time: 93.42s
+
+=== terminal-selectedafterpoolwithdraw-4 ===
+Compiling 2 files with Solc 0.8.28
+Solc 0.8.28 finished in 7.39s
+Compiler run successful!
+
+Running 1 tests for formal/OverlappingPoolEscrowBridge.t.sol:OverlappingPoolEscrowBridgeProof
+[PASS] check_EVMTerminalWithdrawSelectedAfterPoolWithdraw_6(uint256[7]) (paths: 7, time: 50.05s, bounds: [])
+Symbolic test result: 1 passed; 0 failed; time: 50.07s
+
+=== terminal-unselected-1 ===
+Compiling 2 files with Solc 0.8.28
+Solc 0.8.28 finished in 7.00s
+Compiler run successful!
+
+Running 2 tests for formal/OverlappingPoolEscrowBridge.t.sol:OverlappingPoolEscrowBridgeProof
+[PASS] check_EVMTerminalWithdrawUnselected_0(uint256[7]) (paths: 6, time: 47.62s, bounds: [])
+[PASS] check_EVMTerminalWithdrawUnselected_1(uint256[7]) (paths: 3, time: 24.52s, bounds: [])
+Symbolic test result: 2 passed; 0 failed; time: 72.17s
+
+=== terminal-unselected-2 ===
+Compiling 2 files with Solc 0.8.28
+Solc 0.8.28 finished in 7.28s
+Compiler run successful!
+
+Running 2 tests for formal/OverlappingPoolEscrowBridge.t.sol:OverlappingPoolEscrowBridgeProof
+[PASS] check_EVMTerminalWithdrawUnselected_2(uint256[7]) (paths: 6, time: 47.50s, bounds: [])
+[PASS] check_EVMTerminalWithdrawUnselected_3(uint256[7]) (paths: 7, time: 56.20s, bounds: [])
+Symbolic test result: 2 passed; 0 failed; time: 103.72s
+
+=== terminal-unselected-3 ===
+Compiling 2 files with Solc 0.8.28
+Solc 0.8.28 finished in 7.16s
+Compiler run successful!
+
+Running 2 tests for formal/OverlappingPoolEscrowBridge.t.sol:OverlappingPoolEscrowBridgeProof
+[PASS] check_EVMTerminalWithdrawUnselected_4(uint256[7]) (paths: 5, time: 41.18s, bounds: [])
+[PASS] check_EVMTerminalWithdrawUnselected_5(uint256[7]) (paths: 6, time: 50.33s, bounds: [])
+Symbolic test result: 2 passed; 0 failed; time: 91.53s
+
+=== terminal-unselected-4 ===
+Compiling 2 files with Solc 0.8.28
+Solc 0.8.28 finished in 7.02s
+Compiler run successful!
+
+Running 1 tests for formal/OverlappingPoolEscrowBridge.t.sol:OverlappingPoolEscrowBridgeProof
+[PASS] check_EVMTerminalWithdrawUnselected_6(uint256[7]) (paths: 5, time: 40.74s, bounds: [])
+Symbolic test result: 1 passed; 0 failed; time: 40.76s
+
+=== role-conflict-1 ===
+Compiling 2 files with Solc 0.8.28
+Solc 0.8.28 finished in 7.08s
+Compiler run successful!
+
+Running 2 tests for formal/OverlappingPoolEscrowBridge.t.sol:OverlappingPoolEscrowBridgeProof
+[PASS] check_EVMRoleConflictedController(uint256[7]) (paths: 4, time: 39.02s, bounds: [])
+[PASS] check_EVMRoleConflictedMember_0(uint256[7]) (paths: 5, time: 50.09s, bounds: [])
+Symbolic test result: 2 passed; 0 failed; time: 89.11s
+
+=== role-conflict-2 ===
+Compiling 2 files with Solc 0.8.28
+Solc 0.8.28 finished in 8.56s
+Compiler run successful!
+
+Running 2 tests for formal/OverlappingPoolEscrowBridge.t.sol:OverlappingPoolEscrowBridgeProof
+[PASS] check_EVMRoleConflictedMember_1(uint256[7]) (paths: 4, time: 39.98s, bounds: [])
+[PASS] check_EVMRoleConflictedMember_2(uint256[7]) (paths: 3, time: 30.82s, bounds: [])
+Symbolic test result: 2 passed; 0 failed; time: 70.82s
+
+=== role-conflict-3 ===
+Compiling 2 files with Solc 0.8.28
+Solc 0.8.28 finished in 7.09s
+Compiler run successful!
+
+Running 2 tests for formal/OverlappingPoolEscrowBridge.t.sol:OverlappingPoolEscrowBridgeProof
+[PASS] check_EVMRoleConflictedMember_3(uint256[7]) (paths: 4, time: 38.96s, bounds: [])
+[PASS] check_EVMRoleConflictedMember_4(uint256[7]) (paths: 5, time: 53.42s, bounds: [])
+Symbolic test result: 2 passed; 0 failed; time: 92.40s
+
+=== role-conflict-4 ===
+Compiling 2 files with Solc 0.8.28
+Solc 0.8.28 finished in 6.96s
+Compiler run successful!
+
+Running 2 tests for formal/OverlappingPoolEscrowBridge.t.sol:OverlappingPoolEscrowBridgeProof
+[PASS] check_EVMRoleConflictedMember_5(uint256[7]) (paths: 4, time: 37.79s, bounds: [])
+[PASS] check_EVMRoleConflictedMember_6(uint256[7]) (paths: 5, time: 49.21s, bounds: [])
+Symbolic test result: 2 passed; 0 failed; time: 87.01s
+
+=== auxiliary ===
+Compiling 2 files with Solc 0.8.28
+Solc 0.8.28 finished in 6.83s
+Compiler run successful!
+
+Running 11 tests for formal/OverlappingPoolEscrowBridge.t.sol:OverlappingPoolEscrowBridgeProof
+[PASS] check_EVMCompletedAcquireAlwaysReverts(uint256[7],uint8[4],uint256) (paths: 8, time: 39.53s, bounds: [])
+[PASS] check_EVMConfigureSuccessClosure(uint256[7],uint256) (paths: 11, time: 421.50s, bounds: [])
+[PASS] check_EVMEntryClosure(bytes4,uint256) (paths: 45, time: 2.24s, bounds: [])
+[PASS] check_EVMExcessFundingReverts(uint256[7],uint256) (paths: 21, time: 44.97s, bounds: [])
+[PASS] check_EVMHostileCallbackPreTerminal() (paths: 1, time: 0.12s, bounds: [])
+[PASS] check_EVMHostileCallbackTerminal() (paths: 1, time: 0.20s, bounds: [])
+[PASS] check_EVMInvalidSetReverts(uint8[4],uint256[7],uint256) (paths: 32, time: 234.04s, bounds: [])
+[PASS] check_EVMOversizeCreditReverts(uint256[7],uint256) (paths: 29, time: 11.38s, bounds: [])
+[PASS] check_EVMReconfigureAlwaysReverts(uint256[7],uint256[7],uint256) (paths: 2, time: 14.88s, bounds: [])
+[PASS] check_EVMUnauthorizedConfigure(address,uint256[7],uint256) (paths: 2, time: 0.05s, bounds: [])
+[PASS] check_EVMWithdrawValueReverts(uint256) (paths: 1, time: 0.03s, bounds: [])
+Symbolic test result: 11 passed; 0 failed; time: 768.98s

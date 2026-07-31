@@ -1,0 +1,487 @@
+{
+  "schema": "overlapping-pool-halmos-bridge/v6",
+  "status": "PASS",
+  "claim": "every admissible y has a verified configuration prefix, and T_OPE,postcfg^EVM <=_pi T_OPE^sch for the pinned Cancun runtime, including four share-right transfers to a symbolic role-separated payer, exact payer funding, and a concrete hostile mutating-reentry basis",
+  "scope": {
+    "evmRevision": "cancun",
+    "deployment": "exact non-proxy OverlappingPoolEscrow runtime; fixed controller; seven distinct nonzero members; symbolic external payer domain checked on every acquisition terminal; concrete hostile mutating-reentry basis checked",
+    "coveredSuccessUniverse": "successful configureCredits calls initialize the post-configuration roots; the refined LTS then covers all top-level acquireFour/withdraw calls; configure/acquire values range over uint256, withdraw is nonpayable, and reverting calls are projected stutters, not abstract edges",
+    "projection": "on the post-configuration LTS, pi=(credits,completed,terminalMask,deliveredShareMask,totalAcquisitionCallValue); configured is fixed true; acquirer and shareOwner are auxiliary caller/delivery invariants, while claimable balances and withdrawals are projection-neutral",
+    "excluded": [
+      "proxies, delegatecall, upgrades, CREATE/CREATE2, and selfdestruct",
+      "gas exhaustion, chain reorganization, and non-Cancun revisions",
+      "runtime-template mismatch or an uncertified deployment transaction",
+      "off-contract beneficial ownership, cryptographic usability of each share right, member willingness, and production pass-through"
+    ]
+  },
+  "tools": {
+    "python": "3.12.13",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "forge": "forge Version: 1.7.1\nCommit SHA: 4072e48705af9d93e3c0f6e29e93b5e9a40caed8\nBuild Timestamp: 2026-05-08T07:54:39.315067700Z (1778226879)\nBuild Profile: dist",
+    "halmos": "halmos 0.3.3",
+    "solver": "Yices 2.6.4\nCopyright SRI International.\nLinked with GMP 6.2.0\nCopyright Free Software Foundation, Inc.\nBuild date: 2021-10-22\nPlatform: x86_64-unknown-mingw32 (release/static)\nRevision: 500c3bbfa25e4fe62ab8ab4613fa4dfe7fb2aff9"
+  },
+  "trustedComputingBase": {
+    "components": [
+      "Solidity 0.8.28 compiler and Cancun code generation",
+      "Foundry bytecode build used by Halmos",
+      "Halmos 0.3.3 symbolic EVM semantics and path exploration",
+      "Yices 2.6.4 SMT solving",
+      "the harness assumptions and proof-obligation partition"
+    ],
+    "excludedEnvironment": [
+      "out-of-gas behavior",
+      "chain reorganization",
+      "non-Cancun revisions"
+    ]
+  },
+  "parameters": {
+    "halmosLoopBound": 8,
+    "solver": "yices-2.6.4",
+    "parallelJobs": 4,
+    "solverTimeoutBranchingMs": 10000,
+    "solverTimeoutAssertionMs": 120000,
+    "solverThreadsPerJob": 2
+  },
+  "inputs": {
+    "contract": "contracts/OverlappingPoolEscrow.sol",
+    "contractSha256": "71c14ec666c4b65a3b69bc7cb124709e1567a00cc894525c384b995b292ce445",
+    "harness": "formal/OverlappingPoolEscrowBridge.t.sol",
+    "harnessSha256": "7c5bec1321304c8258495b7db35d3cc1163ec39df6d32f21b9ea4a16480a828c",
+    "foundryConfig": "foundry.toml",
+    "foundryConfigSha256": "ec696b29db11f25f6ea5b052e9fbb5bb328820116f2c556799953ceaba84b7fc"
+  },
+  "compiledRuntime": {
+    "foundryRuntimeBytecodeSha256": "1616ba7dcc41667db9e624487af7b6b42bfa0a9cb61dde8c38da3ae4f0ab48c5",
+    "foundryRuntimeExecutableSha256": "a4cad68d723a613f94e8cd49ac21d0a033a1bf5ed4fee38ad398cb18135b8c08",
+    "foundryRuntimeExecutableBytes": 3140
+  },
+  "proofCounts": {
+    "symbolicEdgeWrappers": 35,
+    "symbolicPayerEdgeWrappers": 35,
+    "preTerminalWithdrawWrappers": 7,
+    "terminalWithdrawWrappers": 21,
+    "auxiliaryObligations": 9,
+    "roleConflictObligations": 8,
+    "hostileCallbackObligations": 2,
+    "totalProofs": 82,
+    "failed": 0,
+    "nonemptyBounds": 0
+  },
+  "proofs": {
+    "check_EVMCompletedAcquireAlwaysReverts": {
+      "paths": 8,
+      "seconds": 39.53,
+      "bounds": []
+    },
+    "check_EVMConfigureSuccessClosure": {
+      "paths": 11,
+      "seconds": 421.5,
+      "bounds": []
+    },
+    "check_EVMEdge_0123": {
+      "paths": 5,
+      "seconds": 39.56,
+      "bounds": []
+    },
+    "check_EVMEdge_0124": {
+      "paths": 6,
+      "seconds": 52.01,
+      "bounds": []
+    },
+    "check_EVMEdge_0125": {
+      "paths": 6,
+      "seconds": 50.48,
+      "bounds": []
+    },
+    "check_EVMEdge_0126": {
+      "paths": 7,
+      "seconds": 63.78,
+      "bounds": []
+    },
+    "check_EVMEdge_0134": {
+      "paths": 4,
+      "seconds": 32.58,
+      "bounds": []
+    },
+    "check_EVMEdge_0135": {
+      "paths": 3,
+      "seconds": 25.93,
+      "bounds": []
+    },
+    "check_EVMEdge_0136": {
+      "paths": 3,
+      "seconds": 26.88,
+      "bounds": []
+    },
+    "check_EVMEdge_0145": {
+      "paths": 4,
+      "seconds": 42.1,
+      "bounds": []
+    },
+    "check_EVMEdge_0146": {
+      "paths": 4,
+      "seconds": 25.73,
+      "bounds": []
+    },
+    "check_EVMEdge_0156": {
+      "paths": 5,
+      "seconds": 49.62,
+      "bounds": []
+    },
+    "check_EVMEdge_0234": {
+      "paths": 7,
+      "seconds": 58.52,
+      "bounds": []
+    },
+    "check_EVMEdge_0235": {
+      "paths": 7,
+      "seconds": 59.37,
+      "bounds": []
+    },
+    "check_EVMEdge_0236": {
+      "paths": 5,
+      "seconds": 51.33,
+      "bounds": []
+    },
+    "check_EVMEdge_0245": {
+      "paths": 7,
+      "seconds": 68.24,
+      "bounds": []
+    },
+    "check_EVMEdge_0246": {
+      "paths": 5,
+      "seconds": 47.68,
+      "bounds": []
+    },
+    "check_EVMEdge_0256": {
+      "paths": 3,
+      "seconds": 26.02,
+      "bounds": []
+    },
+    "check_EVMEdge_0345": {
+      "paths": 7,
+      "seconds": 66.49,
+      "bounds": []
+    },
+    "check_EVMEdge_0346": {
+      "paths": 3,
+      "seconds": 24.87,
+      "bounds": []
+    },
+    "check_EVMEdge_0356": {
+      "paths": 7,
+      "seconds": 65.69,
+      "bounds": []
+    },
+    "check_EVMEdge_0456": {
+      "paths": 5,
+      "seconds": 57.57,
+      "bounds": []
+    },
+    "check_EVMEdge_1234": {
+      "paths": 6,
+      "seconds": 56.27,
+      "bounds": []
+    },
+    "check_EVMEdge_1235": {
+      "paths": 5,
+      "seconds": 49.9,
+      "bounds": []
+    },
+    "check_EVMEdge_1236": {
+      "paths": 3,
+      "seconds": 24.58,
+      "bounds": []
+    },
+    "check_EVMEdge_1245": {
+      "paths": 7,
+      "seconds": 68.34,
+      "bounds": []
+    },
+    "check_EVMEdge_1246": {
+      "paths": 8,
+      "seconds": 71.59,
+      "bounds": []
+    },
+    "check_EVMEdge_1256": {
+      "paths": 4,
+      "seconds": 40.21,
+      "bounds": []
+    },
+    "check_EVMEdge_1345": {
+      "paths": 6,
+      "seconds": 55.01,
+      "bounds": []
+    },
+    "check_EVMEdge_1346": {
+      "paths": 3,
+      "seconds": 18.09,
+      "bounds": []
+    },
+    "check_EVMEdge_1356": {
+      "paths": 7,
+      "seconds": 65.6,
+      "bounds": []
+    },
+    "check_EVMEdge_1456": {
+      "paths": 4,
+      "seconds": 54.66,
+      "bounds": []
+    },
+    "check_EVMEdge_2345": {
+      "paths": 5,
+      "seconds": 49.33,
+      "bounds": []
+    },
+    "check_EVMEdge_2346": {
+      "paths": 5,
+      "seconds": 48.87,
+      "bounds": []
+    },
+    "check_EVMEdge_2356": {
+      "paths": 3,
+      "seconds": 39.55,
+      "bounds": []
+    },
+    "check_EVMEdge_2456": {
+      "paths": 5,
+      "seconds": 52.7,
+      "bounds": []
+    },
+    "check_EVMEdge_3456": {
+      "paths": 7,
+      "seconds": 57.63,
+      "bounds": []
+    },
+    "check_EVMEntryClosure": {
+      "paths": 45,
+      "seconds": 2.24,
+      "bounds": []
+    },
+    "check_EVMExcessFundingReverts": {
+      "paths": 21,
+      "seconds": 44.97,
+      "bounds": []
+    },
+    "check_EVMHostileCallbackPreTerminal": {
+      "paths": 1,
+      "seconds": 0.12,
+      "bounds": []
+    },
+    "check_EVMHostileCallbackTerminal": {
+      "paths": 1,
+      "seconds": 0.2,
+      "bounds": []
+    },
+    "check_EVMInvalidSetReverts": {
+      "paths": 32,
+      "seconds": 234.04,
+      "bounds": []
+    },
+    "check_EVMOversizeCreditReverts": {
+      "paths": 29,
+      "seconds": 11.38,
+      "bounds": []
+    },
+    "check_EVMReconfigureAlwaysReverts": {
+      "paths": 2,
+      "seconds": 14.88,
+      "bounds": []
+    },
+    "check_EVMRoleConflictedController": {
+      "paths": 4,
+      "seconds": 39.02,
+      "bounds": []
+    },
+    "check_EVMRoleConflictedMember_0": {
+      "paths": 5,
+      "seconds": 50.09,
+      "bounds": []
+    },
+    "check_EVMRoleConflictedMember_1": {
+      "paths": 4,
+      "seconds": 39.98,
+      "bounds": []
+    },
+    "check_EVMRoleConflictedMember_2": {
+      "paths": 3,
+      "seconds": 30.82,
+      "bounds": []
+    },
+    "check_EVMRoleConflictedMember_3": {
+      "paths": 4,
+      "seconds": 38.96,
+      "bounds": []
+    },
+    "check_EVMRoleConflictedMember_4": {
+      "paths": 5,
+      "seconds": 53.42,
+      "bounds": []
+    },
+    "check_EVMRoleConflictedMember_5": {
+      "paths": 4,
+      "seconds": 37.79,
+      "bounds": []
+    },
+    "check_EVMRoleConflictedMember_6": {
+      "paths": 5,
+      "seconds": 49.21,
+      "bounds": []
+    },
+    "check_EVMTerminalWithdrawSelectedAfterPoolWithdraw_0": {
+      "paths": 6,
+      "seconds": 41.12,
+      "bounds": []
+    },
+    "check_EVMTerminalWithdrawSelectedAfterPoolWithdraw_1": {
+      "paths": 7,
+      "seconds": 56.35,
+      "bounds": []
+    },
+    "check_EVMTerminalWithdrawSelectedAfterPoolWithdraw_2": {
+      "paths": 6,
+      "seconds": 42.22,
+      "bounds": []
+    },
+    "check_EVMTerminalWithdrawSelectedAfterPoolWithdraw_3": {
+      "paths": 7,
+      "seconds": 56.57,
+      "bounds": []
+    },
+    "check_EVMTerminalWithdrawSelectedAfterPoolWithdraw_4": {
+      "paths": 7,
+      "seconds": 50.47,
+      "bounds": []
+    },
+    "check_EVMTerminalWithdrawSelectedAfterPoolWithdraw_5": {
+      "paths": 5,
+      "seconds": 42.92,
+      "bounds": []
+    },
+    "check_EVMTerminalWithdrawSelectedAfterPoolWithdraw_6": {
+      "paths": 7,
+      "seconds": 50.05,
+      "bounds": []
+    },
+    "check_EVMTerminalWithdrawSelected_0": {
+      "paths": 4,
+      "seconds": 40.54,
+      "bounds": []
+    },
+    "check_EVMTerminalWithdrawSelected_1": {
+      "paths": 4,
+      "seconds": 40.91,
+      "bounds": []
+    },
+    "check_EVMTerminalWithdrawSelected_2": {
+      "paths": 4,
+      "seconds": 39.48,
+      "bounds": []
+    },
+    "check_EVMTerminalWithdrawSelected_3": {
+      "paths": 5,
+      "seconds": 50.17,
+      "bounds": []
+    },
+    "check_EVMTerminalWithdrawSelected_4": {
+      "paths": 5,
+      "seconds": 46.32,
+      "bounds": []
+    },
+    "check_EVMTerminalWithdrawSelected_5": {
+      "paths": 5,
+      "seconds": 51.5,
+      "bounds": []
+    },
+    "check_EVMTerminalWithdrawSelected_6": {
+      "paths": 5,
+      "seconds": 46.22,
+      "bounds": []
+    },
+    "check_EVMTerminalWithdrawUnselected_0": {
+      "paths": 6,
+      "seconds": 47.62,
+      "bounds": []
+    },
+    "check_EVMTerminalWithdrawUnselected_1": {
+      "paths": 3,
+      "seconds": 24.52,
+      "bounds": []
+    },
+    "check_EVMTerminalWithdrawUnselected_2": {
+      "paths": 6,
+      "seconds": 47.5,
+      "bounds": []
+    },
+    "check_EVMTerminalWithdrawUnselected_3": {
+      "paths": 7,
+      "seconds": 56.2,
+      "bounds": []
+    },
+    "check_EVMTerminalWithdrawUnselected_4": {
+      "paths": 5,
+      "seconds": 41.18,
+      "bounds": []
+    },
+    "check_EVMTerminalWithdrawUnselected_5": {
+      "paths": 6,
+      "seconds": 50.33,
+      "bounds": []
+    },
+    "check_EVMTerminalWithdrawUnselected_6": {
+      "paths": 5,
+      "seconds": 40.74,
+      "bounds": []
+    },
+    "check_EVMUnauthorizedConfigure": {
+      "paths": 2,
+      "seconds": 0.05,
+      "bounds": []
+    },
+    "check_EVMWithdrawProjectionNeutral_0": {
+      "paths": 5,
+      "seconds": 35.13,
+      "bounds": []
+    },
+    "check_EVMWithdrawProjectionNeutral_1": {
+      "paths": 3,
+      "seconds": 13.78,
+      "bounds": []
+    },
+    "check_EVMWithdrawProjectionNeutral_2": {
+      "paths": 5,
+      "seconds": 35.14,
+      "bounds": []
+    },
+    "check_EVMWithdrawProjectionNeutral_3": {
+      "paths": 3,
+      "seconds": 13.42,
+      "bounds": []
+    },
+    "check_EVMWithdrawProjectionNeutral_4": {
+      "paths": 5,
+      "seconds": 35.84,
+      "bounds": []
+    },
+    "check_EVMWithdrawProjectionNeutral_5": {
+      "paths": 3,
+      "seconds": 15.45,
+      "bounds": []
+    },
+    "check_EVMWithdrawProjectionNeutral_6": {
+      "paths": 5,
+      "seconds": 35.7,
+      "bounds": []
+    },
+    "check_EVMWithdrawValueReverts": {
+      "paths": 1,
+      "seconds": 0.03,
+      "bounds": []
+    }
+  },
+  "transcript": {
+    "path": "results/halmos_evm_bridge.log",
+    "sha256": "596200c5630c7a040a41a81af0a3bb158c9100e0e4b814d020b194dbd52cdba3"
+  }
+}

@@ -38,17 +38,18 @@ solver:
     Gamma*_{m_bypass(b),P}(A0) under any ACTUAL profile P, used below to
     check every profile consistent with the floors, not just the floors
     themselves.
-  - information_boundary.py's perturb_profile builds a random profile
-    strictly consistent with a given floor pair, reused here unchanged.
+  - information_boundary.py's cap-realizability predicate and
+    perturb_profile helper keep every tested scalar threshold inside the
+    canonical cap class.
 
 Two independent directions, exactly mirroring information_boundary.py's
 own tightness/soundness split:
 
-  1. Tightness: the exact-floor profile (R_i=R-bar_i, tau_i=tau-bar_i) is
-     itself a valid canonical profile, and abc_state_space computed
-     directly on it (the actual m_bypass(b) mechanism, not assuming
-     Lemma package-first-wlog) matches abc_closed_form on the same floors
-     exactly, for every b.
+  1. Tightness: when the exact-floor vector is cap-realizable,
+     abc_state_space computed directly on it matches the certificate.
+     If R-bar_i=0<tau-bar_i for some member, no nonnegative cap realizes
+     that exact vector; executable epsilon-raised profiles instead
+     approach the same certificate from above.
 
   2. Soundness: no OTHER profile consistent with the same floors ever
      lets m_bypass(b) beat the floors-based certificate. For each random
@@ -76,7 +77,21 @@ from fractions import Fraction as Fr
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from core import ac_formula_gamma_star, random_instance, deterministic_seed, parallel_map
 from atomic_bypass_hierarchy import abc_closed_form, abc_state_space
-from information_boundary import perturb_profile, zero_tau
+from information_boundary import (
+    floor_profile_realizable,
+    perturb_profile,
+    zero_tau,
+)
+
+
+def epsilon_raise_profile(tau_floor, R_floor, eps):
+    """Make a floor vector cap-realizable with at most eps extra resistance
+    per member. Only zero-resistance, positive-threshold coordinates need
+    to move."""
+    return [
+        r + eps if r == 0 and gate > 0 else r
+        for gate, r in zip(tau_floor, R_floor)
+    ]
 
 
 def _check_tightness_one(task):
@@ -86,10 +101,31 @@ def _check_tightness_one(task):
     w, t, A0, tau_floor, R_floor = random_instance(n, seed, weight_kind=wk)
     mismatches = []
     for b in b_values:
-        closed = abc_closed_form(w, t, A0, tau_floor, R_floor, b)
-        ground_truth = abc_state_space(w, t, A0, tau_floor, R_floor, b)
-        if closed != ground_truth:
-            mismatches.append((n, seed, b, closed, ground_truth))
+        certificate = abc_closed_form(w, t, A0, tau_floor, R_floor, b)
+        if floor_profile_realizable(tau_floor, R_floor):
+            actual = abc_state_space(w, t, A0, tau_floor, R_floor, b)
+            if certificate != actual:
+                mismatches.append(
+                    (n, seed, b, "attained", certificate, actual)
+                )
+        else:
+            eps = Fr(1, 1000)
+            R_eps = epsilon_raise_profile(tau_floor, R_floor, eps)
+            actual = abc_state_space(w, t, A0, tau_floor, R_eps, b)
+            if (
+                (certificate is None and actual is not None)
+                or (
+                    certificate is not None
+                    and (
+                        actual is None
+                        or actual < certificate
+                        or actual > certificate + n * eps
+                    )
+                )
+            ):
+                mismatches.append(
+                    (n, seed, b, "approached", certificate, actual, eps)
+                )
     return len(b_values), mismatches
 
 
@@ -97,9 +133,9 @@ def check_tightness(
     n_values=(3, 4, 5, 6, 7), b_values=(0, 1, 2, 3), trials_per_n=40,
     seed_base=20260722,
 ):
-    """The exact-floor profile attains ABC-bar_b(A0) exactly, checked
-    against the actual mechanism-faithful state-space computation (not
-    assuming Lemma package-first-wlog), for every b."""
+    """Cap-realizable exact-floor profiles attain ABC-bar_b(A0); otherwise
+    executable epsilon-raised profiles approach it within n*epsilon. Both
+    checks use the actual mechanism-faithful state-space computation."""
     tasks = [
         (n, trial, b_values, seed_base)
         for n in n_values
@@ -222,6 +258,30 @@ def check_resistance_only_collapses_to_tcr(
     return total, mismatches
 
 
+
+def check_strict_infimum_fixture():
+    """A two-member floor ledger for which every package budget has value
+    one, but no exact-floor canonical profile exists."""
+    w = [Fr(1, 2), Fr(1, 2)]
+    t = Fr(1)
+    A0 = set()
+    tau_floor = [Fr(0), Fr(1, 2)]
+    R_floor = [Fr(1), Fr(0)]
+    mismatches = []
+    epsilons = [Fr(1, 10), Fr(1, 100), Fr(1, 1000), Fr(1, 10000)]
+    for b in (0, 1, 2):
+        certificate = abc_closed_form(w, t, A0, tau_floor, R_floor, b)
+        if certificate != Fr(1):
+            mismatches.append(("certificate", b, certificate))
+            continue
+        for eps in epsilons:
+            R_eps = epsilon_raise_profile(tau_floor, R_floor, eps)
+            actual = abc_state_space(w, t, A0, tau_floor, R_eps, b)
+            if actual != certificate + eps:
+                mismatches.append(
+                    ("epsilon", b, eps, actual, certificate + eps)
+                )
+    return 3 * len(epsilons), mismatches
 if __name__ == "__main__":
     tight_total, tight_mismatches = check_tightness()
     print(f"tightness_tested={tight_total}")
@@ -239,7 +299,17 @@ if __name__ == "__main__":
     print(f"resistance_only_tested={res_total}")
     print(f"resistance_only_mismatches={len(res_mismatches)}")
 
-    problems = tight_mismatches + sound_violations + pub_mismatches + res_mismatches
+    strict_total, strict_mismatches = check_strict_infimum_fixture()
+    print(f"strict_infimum_epsilon_profiles_tested={strict_total}")
+    print(f"strict_infimum_mismatches={len(strict_mismatches)}")
+
+    problems = (
+        tight_mismatches
+        + sound_violations
+        + pub_mismatches
+        + res_mismatches
+        + strict_mismatches
+    )
     if problems:
         print("\n!!! DISCREPANCY FOUND -- first 5 shown !!!")
         for p in problems[:5]:
@@ -249,15 +319,15 @@ if __name__ == "__main__":
     print()
     print(
         "PASS: evidence_optimal_atomic_bypass -- for every tested evidence "
-        "ledger and every tested package budget b, the exact-floor profile "
-        "attains ABC-bar_b(A0) exactly against the actual "
-        "mechanism-faithful state-space computation (tightness), and every "
-        "other profile consistent with the same floors -- resistance "
-        "and/or activation perturbed upward, including the most-permissive "
-        "all-zero-tau case -- never let m_bypass(b) achieve a strictly "
-        "smaller attack cost (soundness). Public-only evidence collapsed "
-        "the certificate to exactly zero, and resistance-only evidence "
-        "(no certified activation floor) collapsed it to exactly "
-        "TCR_{R-bar}(A0) regardless of b, computationally reproducing the "
-        "theorem's three-layer boundary 0 -> TCR -> ABC-bar_b."
+        "ledger and package budget b, every cap-realizable exact-floor "
+        "profile attained ABC-bar_b(A0), while epsilon-raised profiles "
+        "approached non-realizable floor vectors against the actual "
+        "mechanism-faithful state-space computation. Every other profile "
+        "consistent with the same floors -- resistance and/or activation "
+        "perturbed upward, including the most-permissive all-zero-tau case "
+        "-- never let m_bypass(b) achieve a strictly smaller attack cost "
+        "(soundness). Public-only evidence collapsed the certificate to "
+        "exactly zero, and resistance-only evidence collapsed it to exactly "
+        "TCR_{R-bar}(A0) regardless of b. A dedicated fixture confirmed a "
+        "strict ABC-bar_b infimum for every feasible package budget."
     )

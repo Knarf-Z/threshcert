@@ -194,6 +194,9 @@ def _check_tightness_and_soundness_one(task):
                 tau2.append(tau_floor[i] + bump)
             else:
                 tau2.append(t * Fr(rng.randint(0, 99), 100))
+        for i in range(n):
+            if R2[i] == 0 and tau2[i] > 0:
+                R2[i] = Fr(1)
         bf_pert = brute_force_gamma_star(w, t, A0, tau2, R2)
         if bf_pert is not None and bf_pert < B_M:
             soundness_violations.append((n, seed, M, tau2, R2, bf_pert, B_M))
@@ -253,7 +256,7 @@ if __name__ == "__main__":
         "along a random chain of growing M (monotonicity); the exact "
         "least-favourable profile from the proposition's own proof "
         "attained MCR_M + |S*|*epsilon exactly on every instance where "
-        "MCR_M was finite (tightness); and profiles consistent with the "
+        "MCR_M was finite (tightness); and cap-realizable profiles consistent with the "
         "same partial evidence -- M-members perturbed upward, non-M "
         "members given an unconstrained random activation floor -- never "
         "certified a smaller attack cost (soundness)."

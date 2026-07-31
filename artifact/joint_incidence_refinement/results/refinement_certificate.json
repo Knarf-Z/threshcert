@@ -1,13 +1,31 @@
 {
-  "schema": "overlapping-pool-schema-certificate/v2",
+  "schema": "overlapping-pool-schema-certificate/v7",
   "generatedFromPinnedInputs": true,
   "implementationAuditEvidence": {
     "source": "contracts/OverlappingPoolEscrow.sol",
-    "sourceSha256": "3005e229047b60460795b2f6ae3667af6bd54bb976544d87ec52bbb590f70579",
+    "sourceSha256": "71c14ec666c4b65a3b69bc7cb124709e1567a00cc894525c384b995b292ce445",
     "artifact": "artifacts/contracts/OverlappingPoolEscrow.sol/OverlappingPoolEscrow.json",
-    "artifactSha256": "6e36a426ab4ef36a1abc2977c67c579a08af61ff27771505aaf791162bcd821c",
-    "creationBytecodeSha256": "2c0d974ad93037c812a0cc0dce95a09d540103ee6c4851ca662283e0c213665f",
-    "runtimeBytecodeSha256": "f26d505289c131b4b146d3cea3d796804f168d01f006a51680360ecc4b08c1b9",
+    "artifactSha256": "b664fc4ba8d620a900a99307bc288bdc89103c73e30815197d24389c1bf6e35f",
+    "creationBytecodeSha256": "1c69405619d49d5380cba6bd7fed0dc03c56043fe0c58b067c0bb03ca1107012",
+    "runtimeBytecodeSha256": "d2a1ac4088affa2516e9b9b98df91dc38e95a5528e4a44871e8226c9fde865b9",
+    "runtimeExecutableSha256": "a4cad68d723a613f94e8cd49ac21d0a033a1bf5ed4fee38ad398cb18135b8c08",
+    "runtimeExecutableBytes": 3140,
+    "halmosCertificate": "results/halmos_evm_bridge.json",
+    "halmosCertificateSha256": "c9b87c09de718e66d39b87be6d37c8bf770d80bbef38a77928f43590fe8f47bc",
+    "halmosRunner": "scripts/run_halmos_bridge.py",
+    "halmosRunnerSha256": "90ba99df844d5fedda4315940c2e04c5fa532740a21b74007652eb50950b26ac",
+    "halmosTranscript": "results/halmos_evm_bridge.log",
+    "halmosTranscriptSha256": "596200c5630c7a040a41a81af0a3bb158c9100e0e4b814d020b194dbd52cdba3",
+    "deploymentAdmissionRecord": "results/deployment_admission_local.json",
+    "deploymentAdmissionRecordSha256": "6b3ed37a1df66a55a5ce42dc2171d5a3c8f9d6312a2631b401103ecf281f0b7b",
+    "deploymentAdmissionCertificate": "results/deployment_admission_certificate.json",
+    "deploymentAdmissionCertificateSha256": "b1bf173c9864bf61cefb4037c468a6eb854e62836c9fcedf5bd5da7e5fad0327",
+    "deploymentAdmissionNegative": "results/deployment_admission_negative.json",
+    "deploymentAdmissionNegativeSha256": "72df3f7bf832f6a3b81df94ba5f8eeeac9bc9dd9e5966a42fe837db9f26dde57",
+    "deploymentAdmissionCheckerSha256": "74f309ec32158eb66c13573371c3bec8dd9eefd404fb3252d04b1000a0ccdc49",
+    "refinementObligationMap": "results/refinement_obligation_map.json",
+    "refinementObligationMapSha256": "6defa5f5ec2b980d83f3d1177693d73408b54f49686bf4fea4a5150fb0a9e512",
+    "foundryHardhatExecutableMatch": true,
     "abiSignatures": [
       "COMMITTEE_SIZE()",
       "CREDIT_UNIT()",
@@ -15,17 +33,21 @@
       "POOL_CAP()",
       "THRESHOLD()",
       "acquireFour(uint8[4])",
+      "acquirer()",
       "claimable(address)",
       "completed()",
       "configureCredits(uint256[7])",
       "configured()",
       "credits(uint256)",
+      "deliveredShareMask()",
       "members(uint256)",
       "poolController()",
       "quoteCandidate(uint256[7],uint8[4])",
       "quoteFour(uint8[4])",
       "residualPrice(uint256)",
-      "totalAttackerPayment()",
+      "shareOwner(uint256)",
+      "terminalMask()",
+      "totalAcquisitionCallValue()",
       "withdraw()"
     ],
     "mutatingEntryClosure": {
@@ -41,7 +63,7 @@
       "fallbackOrReceive": []
     },
     "runtimeOpcodeGuards": {
-      "executableBytes": 2476,
+      "executableBytes": 3140,
       "call": 1,
       "callcode": 0,
       "delegatecall": 0,
@@ -50,24 +72,42 @@
       "selfdestruct": 0
     }
   },
+  "bridgeScope": {
+    "evmRevision": "cancun",
+    "deployment": "direct creation admitted against the exact runtime template and constructor; controller and seven distinct nonzero members are role-separated; member code is unrestricted, with arbitrary-callee closure relying on EVM call/storage isolation plus the shared lock and concrete hostile receivers checking the mutating-reentry basis",
+    "initializationPrefix": "from the admitted fresh deployment, each successful controller-only configureCredits(y) is exactly controller-funded and creates one post-configuration root with credits and claimable balances y, initial member-owned share rights, zero delivery/payment masks, zero acquirer, and contract balance sum(y); invalid prefixes revert",
+    "successUniverse": "the refined LTS starts after a successful one-time configuration and covers every subsequent top-level acquireFour/withdraw call; acquire values span uint256, withdraw is nonpayable, and reverts stutter",
+    "projection": "on the post-configuration LTS, (credits,completed,terminalMask,deliveredShareMask,totalAcquisitionCallValue); configured is fixed true; acquirer and shareOwner are auxiliary payer/delivery invariants; claimable balances form a projection-neutral fiber",
+    "closedContractEconomicIncidence": "every successful acquisition is called and exactly funded by an address that is neither controller nor member; it has no claimable balance, refund, rebate, or withdrawal path; controller funds the immutable credit vector; exactly the four selected on-chain share rights move from their members to that payer",
+    "externalGeneralizationNotClaimed": [
+      "off-contract reimbursements or common beneficial ownership among addresses",
+      "cryptographic usability or confidentiality of the controlled share-right token",
+      "member willingness and production-system pass-through"
+    ]
+  },
   "declaredTransactionSchema": {
-    "state": "(configured credit vector y, completed flag, selected terminal set if completed)",
-    "abstraction": "pi(x)=(empty,y) before completion; pi(x)=(S,y) after the unique successful acquireFour schema action",
+    "state": "post-configuration root (credit vector y, member-owned share rights, incomplete) or one completed canonical terminal with four payer-owned share rights; pre-configuration states belong to the separately verified initialization prefix",
+    "abstraction": "pi(x)=(empty,y) before completion; pi(x)=(S,y) after the unique successful canonical acquireFour action, with terminalMask=deliveredShareMask=S",
     "initialStates": 117,
+    "initializationPrefixes": 117,
     "terminalSets": 35,
     "quotientStates": 4212,
     "acquisitionMacroEdges": 4095,
-    "neutralSteps": "views and withdrawals preserve (A,y); nested completion is classified by the unique completed-state write"
+    "neutralSteps": "successful/reverting withdrawals preserve pi across pre-terminal and terminal claimable classes; views are observations outside the transition LTS; reconfiguration and acquisition replay revert"
   },
   "obligations": {
-    "declaredSchemaEntryClosure": "PASS: configure, acquireFour, view, and withdraw action classes are explicit",
-    "schemaForwardSimulation": "PASS: every declared acquisition action preserves y, selects four distinct members, and maps to one root-terminal block edge",
-    "schemaBackwardRealizability": "PASS: all 117 x 35 declared block edges have a distinct tuple and exact quote",
-    "schemaTerminalEquivalence": "PASS: exactly the post-acquireFour schema states are terminal",
-    "schemaPaymentPreservation": "PASS: all 4095 schema quotes equal the RPSC residual sum",
-    "implementationToSchemaBridge": "NOT_PROVED: source/ABI/bytecode checks below are audit evidence, not an EVM reachability proof",
-    "implementationEntryEvidence": "PASS: pinned mutating ABI is configureCredits, acquireFour, withdraw; no fallback or receive",
-    "implementationOpcodeEvidence": "PASS: no delegatecall, callcode, create, create2, or selfdestruct; the sole CALL is in the guarded withdrawal path"
+    "declaredSchemaEntryClosure": "PASS: configure, canonical acquire, view, and withdraw action classes are explicit",
+    "schemaForwardSimulation": "PASS: every declared acquisition preserves y, selects one canonical four-set, and maps root to its terminal",
+    "schemaBackwardRealizability": "PASS: all 117 x 35 block edges have an exact EVM realization",
+    "schemaTerminalEquivalence": "PASS: completed, terminalMask, deliveredShareMask, and shareOwner exactly identify the unique post-acquisition terminal and four delivered rights",
+    "schemaPaymentPreservation": "PASS: all 4095 quotes equal the RPSC residual sum",
+    "implementationToSchemaBridge": "PASS on the post-configuration LTS under bridgeScope: 82 Halmos proofs, zero failures, and empty exploration bounds",
+    "implementationInitialization": "PASS: every admissible y has an exact controller-funded configuration prefix; credits, claimable balances, member-owned share rights, zero delivery/payment masks, zero acquirer, and escrow balance are checked; invalid prefixes revert",
+    "implementationEntryClosure": "PASS: symbolic selector, unauthorized/repeated configuration, eight role-conflict wrappers, invalid tuple, completed replay, success-closure, full-value-domain proofs, and a symbolic permitted payer on all 35 terminals",
+    "implementationCallbackClosure": "PASS under the stated EVM semantic lemma: concrete hostile receivers reenter acquire, configure, and withdraw in both fibers; the shared lock rejects the complete mutating-reentry basis, while Halmos does not quantify over unknown callee bytecode",
+    "implementationOpcodeClosure": "PASS: no delegatecall, callcode, create, create2, or selfdestruct; sole CALL is guarded withdrawal",
+    "implementationDeploymentAdmission": "PASS: direct creation input, role-separated constructor arguments, runtime template modulo immutables, initial share-right projection, ABI, and opcode closure are machine checked; ten tampered records are rejected",
+    "implementationArtifactIdentity": "PASS: pinned source/harness/config hashes and Foundry/Hardhat executable bytecode agree"
   },
   "finiteCheck": {
     "candidateCreditVectors": 2187,
@@ -87,9 +127,9 @@
     ]
   },
   "exclusions": [
-    "The certificate proves only the declared finite transaction schema.",
-    "The EVM-to-schema refinement remains an explicit unproved premise.",
-    "Pool-fund provenance and beneficial ownership remain evidence premises.",
-    "No member-willingness or production pass-through claim."
+    "The EVM bridge is fixture-specific, not a theorem about arbitrary contracts.",
+    "It excludes runtime-template mismatch, an uncertified creation transaction, gas exhaustion, reorganization, and non-Cancun revisions; delegation-style code on a later revision requires a revision-matched admission record.",
+    "Within the admitted contract ledger, share-right delivery, exact external payer funding, and controller-funded credits are discharged; off-contract reimbursement/common control and cryptographic usability are not.",
+    "No member-willingness, production pass-through, or nonzero production-incidence claim."
   ]
 }

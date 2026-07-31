@@ -20,9 +20,10 @@ directly). This script does not re-derive that reduction -- it tests the
 CLAIM ABOUT THE LEDGER'S INFIMUM instead, via two independent directions on
 many random small instances:
 
-  1. Tightness: the exact-floor profile (R_i = R-bar_i, tau_i = tau-bar_i)
-     attains the certificate exactly (brute-force sequential search on that
-     one profile equals the closed form).
+  1. Tightness: when the exact-floor scalar thresholds are cap-realizable,
+     that profile attains the certificate. If R-bar_i=0<tau-bar_i, nonnegative
+     caps make exact attainment impossible; executable epsilon-profiles must
+     instead approach the same infimum.
   2. Soundness: no OTHER profile consistent with the same floors ever beats
      the certificate. For each random ledger, several random profiles are
      built strictly above the floors (in resistance, in activation, or
@@ -30,9 +31,9 @@ many random small instances:
      mechanism-robust TCR claim) and brute-force Gamma* is checked against
      the certificate computed from the floors alone.
 
-A separate check reproduces the public-only branch: with an all-zero
-resistance floor (no positive member-level evidence at all), both TCR and
-ACR collapse to exactly zero and the exact-floor profile attains Gamma*=0.
+Separate checks reproduce the public-only branch, where the all-zero profile
+attains zero, and a strict-infimum fixture with R-bar_i=0<tau-bar_i, where no
+exact-floor cap profile exists but executable epsilon-profiles converge to ACR.
 
 All arithmetic is exact (fractions.Fraction); nothing here is tolerance-based.
 """
@@ -56,13 +57,17 @@ def zero_tau(n):
         _ZERO_TAU_CACHE[n] = [Fr(0)] * n
     return _ZERO_TAU_CACHE[n]
 
+def floor_profile_realizable(tau, resistance):
+    """A scalar threshold is realizable by a nonnegative monotone cap iff
+    zero resistance is not paired with a positive threshold."""
+    return all(not (r == 0 and gate > 0) for gate, r in zip(tau, resistance))
+
 
 def perturb_profile(rng, t, tau_floor, R_floor):
     """One profile strictly consistent with the floors: R_i' >= R-bar_i, and
     tau_i' >= tau-bar_i while remaining in the valid [tau-bar_i, t) exposure
-    domain (a scalar tau_i is always realizable by some weakly increasing,
-    right-continuous step cap, the same representation core.py uses
-    throughout)."""
+    domain. The zero-resistance/positive-threshold pair is excluded because
+    no nonnegative weakly increasing cap can realize it."""
     n = len(R_floor)
     R2 = [R_floor[i] + Fr(rng.randint(0, 12)) for i in range(n)]
     tau2 = []
@@ -70,6 +75,9 @@ def perturb_profile(rng, t, tau_floor, R_floor):
         room = t - tau_floor[i]
         bump = room * Fr(rng.randint(0, 80), 100)
         tau2.append(tau_floor[i] + bump)
+    for i in range(n):
+        if R2[i] == 0 and tau2[i] > 0:
+            R2[i] = Fr(1)
     return R2, tau2
 
 
@@ -86,13 +94,26 @@ def _check_tightness_and_soundness_one(task):
     acr = ac_formula_gamma_star(w, t, A0, tau_floor, R_floor)
     tcr = ac_formula_gamma_star(w, t, A0, zero_tau(n), R_floor)
 
-    # --- Tightness: the exact-floor profile attains the certificate.
-    brute_acr = brute_force_gamma_star(w, t, A0, tau_floor, R_floor)
+    # --- Tightness: TCR is attained. ACR is attained exactly when the floor
+    # profile is cap-realizable; otherwise executable epsilon profiles approach it.
     brute_tcr = brute_force_gamma_star(w, t, A0, zero_tau(n), R_floor)
-    if brute_acr != acr or brute_tcr != tcr:
-        tightness_mismatches.append(
-            (n, seed, "tightness", brute_acr, acr, brute_tcr, tcr)
-        )
+    if brute_tcr != tcr:
+        tightness_mismatches.append((n, seed, "tcr", brute_tcr, tcr))
+    if floor_profile_realizable(tau_floor, R_floor):
+        brute_acr = brute_force_gamma_star(w, t, A0, tau_floor, R_floor)
+        if brute_acr != acr:
+            tightness_mismatches.append((n, seed, "acr-attained", brute_acr, acr))
+    else:
+        eps = Fr(1, 1000)
+        R_eps = [r + eps if r == 0 and gate > 0 else r
+                 for gate, r in zip(tau_floor, R_floor)]
+        brute_eps = brute_force_gamma_star(w, t, A0, tau_floor, R_eps)
+        if ((acr is None and brute_eps is not None) or
+            (acr is not None and
+             (brute_eps is None or brute_eps < acr or brute_eps > acr + n * eps))):
+            tightness_mismatches.append(
+                (n, seed, "acr-approached", brute_eps, acr, eps)
+            )
 
     # --- Soundness: nothing consistent with the floors beats them.
     for _ in range(perturbations_per_trial):
@@ -160,19 +181,44 @@ def check_public_only_layer(n_values=(3, 5, 7), trials_per_n=20, seed_base=20260
     return total, mismatches
 
 
+
+def check_strict_infimum_fixture():
+    """Two-member ledger whose unique threshold cover contains a
+    zero-resistance, positive-gate member."""
+    w = [Fr(1, 2), Fr(1, 2)]
+    t = Fr(1)
+    A0 = set()
+    tau_floor = [Fr(0), Fr(1, 2)]
+    R_floor = [Fr(1), Fr(0)]
+    acr = ac_formula_gamma_star(w, t, A0, tau_floor, R_floor)
+    mismatches = []
+    if acr != Fr(1) or floor_profile_realizable(tau_floor, R_floor):
+        mismatches.append(("fixture", acr))
+    epsilons = [Fr(1, 10), Fr(1, 100), Fr(1, 1000), Fr(1, 10000)]
+    for eps in epsilons:
+        R_eps = [Fr(1), eps]
+        brute = brute_force_gamma_star(w, t, A0, tau_floor, R_eps)
+        if brute != acr + eps:
+            mismatches.append(("epsilon", eps, brute, acr + eps))
+    return len(epsilons), mismatches
+
 if __name__ == "__main__":
     total_ledgers, tightness_mismatches, soundness_violations = (
         check_tightness_and_soundness()
     )
     pub_total, pub_mismatches = check_public_only_layer()
+    epsilon_total, strict_infimum_mismatches = check_strict_infimum_fixture()
 
     print(f"ledgers_tested={total_ledgers}")
     print(f"tightness_mismatches={len(tightness_mismatches)}")
     print(f"soundness_violations={len(soundness_violations)}")
     print(f"public_only_ledgers_tested={pub_total}")
     print(f"public_only_mismatches={len(pub_mismatches)}")
+    print(f"strict_infimum_epsilon_profiles_tested={epsilon_total}")
+    print(f"strict_infimum_mismatches={len(strict_infimum_mismatches)}")
 
-    all_mismatches = tightness_mismatches + soundness_violations + pub_mismatches
+    all_mismatches = (tightness_mismatches + soundness_violations
+                      + pub_mismatches + strict_infimum_mismatches)
     if all_mismatches:
         print("\n!!! DISCREPANCY FOUND -- first 5 shown !!!")
         for m in all_mismatches[:5]:
@@ -180,14 +226,11 @@ if __name__ == "__main__":
         raise SystemExit(1)
 
     print(
-        "PASS: information_boundary_theorem -- for every tested evidence "
-        "ledger, the exact-floor profile attains TCR/ACR exactly (tightness), "
-        "and every other profile consistent with the same floors -- "
-        "resistance and activation independently perturbed upward, including "
-        "the most-permissive all-zero-tau case used for the mechanism-robust "
-        "TCR claim -- never produced a strictly smaller attack cost "
-        "(soundness). The public-only layer (zero resistance floor) "
-        "collapsed to exactly zero in every tested instance, reproducing the "
-        "theorem's three-layer boundary 0 -> TCR -> ACR computationally "
-        "rather than only algebraically."
+        "PASS: information_boundary_theorem -- TCR and every cap-realizable "
+        "exact-floor ACR profile attained their certificates; nondegenerate "
+        "and epsilon-raised profiles never beat the floor certificate. The "
+        "public-only layer attained zero. A dedicated zero-resistance, "
+        "positive-gate fixture confirmed a strict ACR infimum approached by "
+        "four executable epsilon-profiles, matching the theorem's exact "
+        "attainment criterion."
     )

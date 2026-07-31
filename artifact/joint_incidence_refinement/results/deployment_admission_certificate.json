@@ -1,0 +1,29 @@
+{
+  "schema": "overlapping-pool-deployment-admission-certificate/v1",
+  "status": "PASS",
+  "record": "results/deployment_admission_local.json",
+  "recordSha256": "6b3ed37a1df66a55a5ce42dc2171d5a3c8f9d6312a2631b401103ecf281f0b7b",
+  "artifact": "artifacts/contracts/OverlappingPoolEscrow.sol/OverlappingPoolEscrow.json",
+  "artifactSha256": "b664fc4ba8d620a900a99307bc288bdc89103c73e30815197d24389c1bf6e35f",
+  "chain": {
+    "chainId": 31337,
+    "blockNumber": "1",
+    "blockHash": "0xdcc56ac3e6dbdef4af5af81d87d1a980bfa100c897821bdc3cf1f998b8f5055a",
+    "transactionHashes": [
+      "0x6bd5a2501acfa2c03ece8c6594ed0635fa3cbb77362a01caa9abc56880f3f6a0"
+    ]
+  },
+  "contractAddress": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+  "runtimeSha256": "362ca1703d2ec8dad41bf22433be3e8e5b518a670f26e7311efdd9c9fc276588",
+  "obligations": {
+    "directCreationIdentity": "PASS",
+    "constructorClosure": "PASS",
+    "runtimeTemplateModuloImmutables": "PASS",
+    "roleSeparatedControllerMembersAndInitialShareOwners": "PASS",
+    "freshInitialProjection": "PASS",
+    "mutatingAbiClosure": "PASS",
+    "nonProxyOpcodeClosure": "PASS",
+    "memberCodeRestriction": "NONE: member code is observed but not restricted; arbitrary-callee projection neutrality is a separate EVM call/storage-isolation lemma, while Halmos checks the complete mutating-reentry basis on concrete hostile receivers"
+  },
+  "scope": "reproducible local direct deployment; the same record schema can be populated from archive RPC for a public deployment"
+}

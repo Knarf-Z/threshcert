@@ -38,16 +38,17 @@ solver:
   - atomic_bypass_hierarchy.py's abc_state_space is the ground truth for
     Gamma*_{m_bypass(b),P}(A0) under any ACTUAL profile P (does not assume
     Lemma package-first-wlog).
-  - information_boundary.py's perturb_profile builds a random profile
-    strictly consistent with given floors, reused unchanged.
+  - information_boundary.py's cap-realizability rule is enforced for every
+    generated witness and perturbed profile.
 
 Three checks:
   1. mcr_via_formula cross-validated against mcr_brute_force on random
      (A, tau_floor, R_floor, M) instances -- confirms the mixed-tau-vector
      reduction before it is used anywhere else in this script.
-  2. Tightness: the exact-floor profile (R_i=R-bar_i, tau_i=tau-bar_i for
-     every i, not only i in M) attains MABC_{b,M}(A0) exactly against
-     abc_state_space, for random (b, M) pairs.
+  2. Tightness: when the mixed exact-floor witness is cap-realizable, it
+     attains MABC_{b,M}(A0). If a certified positive gate is paired with
+     zero resistance, executable epsilon-raised witnesses instead approach
+     the same infimum.
   3. Soundness: profiles built strictly above the same partial-evidence
      floors -- R_i>=R-bar_i everywhere, tau_i>=tau-bar_i only enforced for
      i in M, unconstrained (tau_i:=0, i.e. the most permissive choice)
@@ -65,7 +66,7 @@ from fractions import Fraction as Fr
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from core import ac_formula_gamma_star, random_instance, deterministic_seed, parallel_map
 from atomic_bypass_hierarchy import abc_state_space
-from information_boundary import zero_tau
+from information_boundary import floor_profile_realizable, zero_tau
 from partial_activation_evidence import mcr_brute_force
 
 
@@ -111,11 +112,18 @@ def random_M(rng, U0):
     return frozenset(i for i in U0 if rng.random() < 0.5)
 
 
+def epsilon_raise_profile(tau, resistance, eps):
+    """Make the mixed scalar profile cap-realizable with at most eps extra
+    resistance per member."""
+    return [
+        r + eps if r == 0 and gate > 0 else r
+        for gate, r in zip(tau, resistance)
+    ]
+
+
 def perturb_profile_partial(rng, t, tau_floor, R_floor, M):
-    """A profile strictly consistent with a PARTIAL-evidence ledger: R_i
-    >= R-bar_i everywhere; tau_i >= tau-bar_i enforced only for i in M,
-    with i not in M given an unconstrained (any valid, here: the floor
-    itself or higher, since no ledger entry restricts it further) value."""
+    """A cap-realizable profile consistent with a partial-evidence ledger:
+    resistance floors hold everywhere and activation floors only on M."""
     n = len(R_floor)
     R2 = [R_floor[i] + Fr(rng.randint(0, 12)) for i in range(n)]
     tau2 = []
@@ -124,6 +132,9 @@ def perturb_profile_partial(rng, t, tau_floor, R_floor, M):
         room = t - base
         bump = room * Fr(rng.randint(0, 80), 100)
         tau2.append(base + bump)
+    for i in range(n):
+        if R2[i] == 0 and tau2[i] > 0:
+            R2[i] = Fr(1)
     return R2, tau2
 
 
@@ -163,10 +174,31 @@ def _check_tightness_one(task):
     for b in b_values:
         M = random_M(rng, U0)
         mixed_tau = [tau_floor[i] if i in M else Fr(0) for i in range(n)]
-        closed = mabc_closed_form(w, t, A0, tau_floor, R_floor, M, b)
-        ground_truth = abc_state_space(w, t, A0, mixed_tau, R_floor, b)
-        if closed != ground_truth:
-            mismatches.append((n, seed, M, b, closed, ground_truth))
+        certificate = mabc_closed_form(w, t, A0, tau_floor, R_floor, M, b)
+        if floor_profile_realizable(mixed_tau, R_floor):
+            actual = abc_state_space(w, t, A0, mixed_tau, R_floor, b)
+            if certificate != actual:
+                mismatches.append(
+                    (n, seed, M, b, "attained", certificate, actual)
+                )
+        else:
+            eps = Fr(1, 1000)
+            R_eps = epsilon_raise_profile(mixed_tau, R_floor, eps)
+            actual = abc_state_space(w, t, A0, mixed_tau, R_eps, b)
+            if (
+                (certificate is None and actual is not None)
+                or (
+                    certificate is not None
+                    and (
+                        actual is None
+                        or actual < certificate
+                        or actual > certificate + n * eps
+                    )
+                )
+            ):
+                mismatches.append(
+                    (n, seed, M, b, "approached", certificate, actual, eps)
+                )
     return len(b_values), mismatches
 
 
@@ -174,13 +206,9 @@ def check_tightness(
     n_values=(3, 4, 5, 6, 7), b_values=(0, 1, 2, 3), trials_per_n=60,
     seed_base=20260722,
 ):
-    """The exact-floor WITNESS profile for MABC_{b,M} is not simply
-    (R-bar, tau-bar) taken literally at every member -- the ledger
-    certifies tau-bar_i only for i in M, so the matching least-favourable
-    profile must set tau_i=0 (the most permissive, unconstrained choice)
-    for i not in M, exactly as mcr_via_formula's own mixed vector does.
-    Using the raw tau_floor for every member here would test a different,
-    over-constrained profile that need not be ledger-consistent at all."""
+    """Use the mixed gate vector certified on M and zero elsewhere. Test
+    exact attainment when it is cap-realizable; otherwise test an executable
+    epsilon approach bounded by n*epsilon."""
     tasks = [
         (n, trial, b_values, seed_base)
         for n in n_values
@@ -228,6 +256,32 @@ def check_soundness(
     return total, violations
 
 
+
+def check_strict_infimum_fixture():
+    """Partial-evidence strict infimum at M={1}, for all feasible package
+    budgets in the two-member instance."""
+    w = [Fr(1, 2), Fr(1, 2)]
+    t = Fr(1)
+    A0 = set()
+    tau_floor = [Fr(0), Fr(1, 2)]
+    R_floor = [Fr(1), Fr(0)]
+    M = frozenset({1})
+    mixed_tau = [Fr(0), Fr(1, 2)]
+    mismatches = []
+    epsilons = [Fr(1, 10), Fr(1, 100), Fr(1, 1000), Fr(1, 10000)]
+    for b in (0, 1, 2):
+        certificate = mabc_closed_form(w, t, A0, tau_floor, R_floor, M, b)
+        if certificate != Fr(1):
+            mismatches.append(("certificate", b, certificate))
+            continue
+        for eps in epsilons:
+            R_eps = epsilon_raise_profile(mixed_tau, R_floor, eps)
+            actual = abc_state_space(w, t, A0, mixed_tau, R_eps, b)
+            if actual != certificate + eps:
+                mismatches.append(
+                    ("epsilon", b, eps, actual, certificate + eps)
+                )
+    return 3 * len(epsilons), mismatches
 if __name__ == "__main__":
     mcr_total, mcr_mismatches = check_mcr_formula_matches_brute_force()
     print(f"mcr_formula_tested={mcr_total}")
@@ -241,7 +295,16 @@ if __name__ == "__main__":
     print(f"soundness_tested={sound_total}")
     print(f"soundness_violations={len(sound_violations)}")
 
-    problems = mcr_mismatches + tight_mismatches + sound_violations
+    strict_total, strict_mismatches = check_strict_infimum_fixture()
+    print(f"strict_infimum_epsilon_profiles_tested={strict_total}")
+    print(f"strict_infimum_mismatches={len(strict_mismatches)}")
+
+    problems = (
+        mcr_mismatches
+        + tight_mismatches
+        + sound_violations
+        + strict_mismatches
+    )
     if problems:
         print("\n!!! DISCREPANCY FOUND -- first 5 shown !!!")
         for p in problems[:5]:
@@ -252,14 +315,11 @@ if __name__ == "__main__":
     print(
         "PASS: mixed_evidence_atomic_bypass -- the mixed-tau-vector MCR "
         "formula matched independent brute-force MCR on every tested "
-        "instance; for every tested (b, M) pair, the exact-floor profile "
-        "attains MABC_{b,M}(A0) exactly against the actual "
-        "mechanism-faithful state-space computation (tightness), and "
-        "every other profile consistent with the same partial-evidence "
-        "floors -- resistance perturbed upward everywhere, activation "
-        "perturbed upward only where M certifies it -- never let "
-        "m_bypass(b) achieve a strictly smaller attack cost (soundness). "
-        "No counterexample was found in the tested instances; this does "
-        "not re-verify the five special cases (b=0, M=empty, M=U0) "
-        "each of which already has its own independent script."
+        "instance. Cap-realizable mixed exact-floor witnesses attained "
+        "MABC_{b,M}(A0), while epsilon-raised witnesses approached every "
+        "non-realizable tested floor vector against the mechanism-faithful "
+        "state space. Other cap-realizable profiles consistent with the "
+        "same partial-evidence floors never achieved a smaller cost. A "
+        "dedicated fixture confirmed a strict MABC infimum for every "
+        "feasible package budget."
     )

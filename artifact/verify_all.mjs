@@ -20,13 +20,19 @@ function python(args, cwd) {
 run(process.execPath, ["build_manifest.mjs", "--check"]);
 python(["verify_offline.py"], path.join(root, "production_snapshot"));
 run(process.execPath, ["scripts/verify-preserved.mjs"], path.join(root, "chiado_public_runs"));
+run(process.execPath, ["verify_deployment_admission.mjs"], path.join(root, "joint_incidence_refinement"));
+run(process.execPath, ["verify_deployment_admission_negative.mjs"], path.join(root, "joint_incidence_refinement"));
 run(process.execPath, ["verify_refinement.mjs"], path.join(root, "joint_incidence_refinement"));
 python(["verify_schema_independent.py"], path.join(root, "joint_incidence_refinement"));
 for (const script of [
   "test_equivalence.py",
   "information_boundary.py",
+  "partial_activation_evidence.py",
   "atomic_bypass_hierarchy.py",
+  "evidence_optimal_atomic_bypass.py",
+  "mixed_evidence_atomic_bypass.py",
   "common_solvency_separation.py",
+  "refinement_quantifier_boundaries.py",
   "reproduce_paper_numbers.py",
 ]) python([script], path.join(root, "core_formula_checks"));
 console.log("ARTIFACT_ALL_CORE_CHECKS=PASS");

@@ -3,3 +3,7 @@ cache/
 node_modules/
 .runtime/
 *.log
+out/
+halmos-out/
+preflight-out/
+!results/halmos_evm_bridge.log

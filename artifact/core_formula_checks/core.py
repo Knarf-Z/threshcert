@@ -205,4 +205,10 @@ def random_instance(n, seed, weight_kind="uniform"):
     tau = [Fr(rng.randint(0, 99), 100) * t for _ in range(n)]
 
     R = [Fr(rng.randint(0, 50)) for _ in range(n)]
+    # A zero resistance is active at every exposure under any nonnegative cap,
+    # so it can realize only tau=0. Keep random exact-profile instances inside
+    # the canonical cap class; dedicated floor-ledger fixtures test strict infima.
+    for i in range(n):
+        if R[i] == 0 and tau[i] > 0:
+            R[i] = Fr(1)
     return w, t, A0, tau, R

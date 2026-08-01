@@ -39,23 +39,24 @@ defines every experiment and its interpretation boundary.
   and writes the per-member audit and evidence-gap result files.
 - `scripts/verify_production_snapshot_live.py`: optional standard-library live
   recheck of the fixed block, contracts, event, threshold, and seven members.
-- `data/gnosis_counterfactual_fixture.json`: a separate counterfactual ledger
-  with explicitly hypothetical resistance and activation floors, denominated
-  only in normalized cost units, on the pinned seven-member, four-of-seven
-  committee geometry.
+- `data/gnosis_counterfactual_fixture.json`: a legacy-named but separate
+  equal-cost weighted counterfactual ledger on seven members and threshold
+  `4/7`. All member floors are one; its weights and operational gates are
+  hypothetical and do not reuse production Gnosis weight geometry.
 - `scripts/run_gnosis_counterfactual.py`: sends that fixture through the exact
-  subset-state solver and the certificate gates, including all 21 seed-member
-  placements.
-- `results/gnosis_counterfactual_result.json`: records public `0`, TC `4`, AC
-  `10`, gate-rejected fallback `4`, and both witnesses with the non-production
+  weighted threshold-cover and subset-state solvers and the certificate gates,
+  including all 210 assignments of two prerequisite and two core roles.
+- `results/gnosis_counterfactual_result.json`: records public `0`, TC `2`, AC
+  `4`, gate-rejected fallback `2`, and witnesses with the non-production
   claim boundary.
-- `tests/test_gnosis_counterfactual.py`: verifies the geometry binding,
-  witnesses, seed-position invariance, gate fallback, and portable JSON bytes.
+- `tests/test_gnosis_counterfactual.py`: verifies the cardinality/threshold
+  binding, witnesses, role-assignment invariance, gate fallback, and portable
+  JSON bytes.
 - `data/evidence_ledger_public_only.csv`: address-level compatibility view of
   the production audit for the basic threshold-cover verifier.
 - `data/evidence_ledger_controlled_positive.csv`: a controlled positive ledger used only to test the verifier. It is not deployment evidence.
 - `scripts/verify_certificate.py`: computes the uniform threshold-cover certificate.
-- `scripts/run_controlled_checks.py`: writes the activation-ladder, mechanism-scope, defensive-allocation, and sensitivity outputs.
+- `scripts/run_controlled_checks.py`: writes the equal-cost activation, fixed-uniform-cost mechanism-scope, defensive-allocation, and sensitivity outputs.
 - `scripts/run_scaling_benchmark.py`: runs a machine-specific exact subset-state scaling check.
 - `scripts/defense_lattice.py`: exact sequential solver, Boolean-lattice
   transforms, target-plan enumeration, and allocation utilities.
@@ -327,7 +328,7 @@ With a reachable archival Gnosis RPC, recheck the frozen state and the
 python scripts/verify_production_snapshot_live.py
 ```
 
-## Deterministic counterfactual on the pinned geometry
+## Deterministic equal-cost weighted counterfactual
 
 Run the small offline branch check with:
 
@@ -335,19 +336,19 @@ Run the small offline branch check with:
 python scripts/run_gnosis_counterfactual.py
 ```
 
-It retains the verified seven-member, four-of-seven Gnosis committee geometry
-but places the hypothetical floors `R=[4,4,1,1,1,1,1]` and
-`tau=[0,0,2/7,2/7,2/7,2/7,2/7]` in the separate counterfactual ledger
-`I_cf`, using normalized cost units rather than estimates. The unified solver records public `0`,
-resistance-only TC `4` with cover `{2,3,4,5}`, activation AC `10` with witness
-`(0,1,2,3)`, and robust fallback `4` when either the ordered-witness or
-exposure-sufficiency gate is disabled. All 21 placements of the two seed
-members reproduce `(TC=4, AC=10)`.
+The separate ledger `I_cf` has seven members, threshold `4/7`, weights
+`[2/7,2/7,2/21,2/21,2/21,1/14,1/14]`, one-unit floors for every
+member, and gates `[1/7,1/7,1/7,1/7,1/7,0,0]`. The exact solvers
+record public `0`, resistance-only TC `2` with cover `{0,1}`,
+activation AC `4` with witness `(5,6,0,1)`, and robust fallback
+`2` when either activation gate is disabled. All 210 assignments of the
+two prerequisite and two core roles reproduce `(TC=2, AC=4)`.
 
-This is a **deterministic counterfactual check on the pinned committee
-geometry**. It is not a Gnosis activation experiment, production validation,
-or measured Keyper resistance. It performs no chain write and does not rerun
-the Chiado pilot.
+Every member has the same floor. The difference counts two additional
+prerequisite acquisitions under stipulated operational gates; it does not
+model an attacker choosing higher-priced members first. The fixture is not a
+Gnosis activation experiment, production validation, or measured Keyper
+resistance. It performs no chain write and does not rerun the Chiado pilot.
 
 ## Lattice and Möbius outputs
 

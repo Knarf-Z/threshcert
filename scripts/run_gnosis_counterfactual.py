@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Run the deterministic counterfactual on the pinned Gnosis committee geometry.
+"""Run the deterministic equal-cost weighted counterfactual.
 
-The fixture changes no production record and uses no chain write.  Its
-resistance and activation floors are explicit hypothetical inputs that exercise
-the public, threshold-cover, activation-cover, and robust-fallback branches of
-the same exact solver used by the other controlled experiments.
+The fixture changes no production record and uses no chain write. Its weights
+and operational gates are explicit hypothetical inputs. Every member has the
+same unit floor, so the activation gap counts prerequisite acquisitions and
+cannot be attributed to purchasing higher-priced members first.
 """
 from __future__ import annotations
 
@@ -82,16 +82,21 @@ def validate_pinned_geometry(fixture: dict[str, Any]) -> dict[str, Any]:
 
 
 def threshold_cover_solution(
-    resistances: Sequence[Fraction], threshold_count: int
+    weights: Sequence[Fraction],
+    resistances: Sequence[Fraction],
+    threshold: Fraction,
 ) -> tuple[Fraction, tuple[int, ...]]:
-    if not 1 <= threshold_count <= len(resistances):
-        raise ValueError("invalid threshold count")
-    cover = tuple(
-        sorted(range(len(resistances)), key=lambda member: (resistances[member], member))[
-            :threshold_count
-        ]
-    )
-    return sum((resistances[member] for member in cover), Fraction(0)), cover
+    if len(weights) != len(resistances) or not 0 < threshold <= sum(weights):
+        raise ValueError("invalid weighted threshold-cover input")
+    candidates: list[tuple[Fraction, int, tuple[int, ...]]] = []
+    for size in range(1, len(weights) + 1):
+        for cover in combinations(range(len(weights)), size):
+            if sum((weights[i] for i in cover), Fraction(0)) >= threshold:
+                candidates.append(
+                    (sum((resistances[i] for i in cover), Fraction(0)), size, cover)
+                )
+    cost, _, cover = min(candidates)
+    return cost, cover
 
 
 def activation_instance(
@@ -164,10 +169,9 @@ def solve_profile(
     resistances: Sequence[Fraction],
     activation_floors: Sequence[Fraction],
     threshold: Fraction,
-    threshold_count: int,
     initial_exposure: Fraction,
 ) -> dict[str, object]:
-    tc_cost, tc_cover = threshold_cover_solution(resistances, threshold_count)
+    tc_cost, tc_cover = threshold_cover_solution(weights, resistances, threshold)
     solution = exact_minimum_sequential_solution(
         activation_instance(
             weights,
@@ -188,21 +192,36 @@ def solve_profile(
     }
 
 
-def counterfactual_vectors_for_seeds(
-    seed_members: Sequence[int], committee_size: int
-) -> tuple[tuple[Fraction, ...], tuple[Fraction, ...]]:
-    seeds = set(seed_members)
-    if len(seeds) != 2 or any(member not in range(committee_size) for member in seeds):
-        raise ValueError("exactly two distinct seed members are required")
-    resistances = tuple(
-        Fraction(4) if member in seeds else Fraction(1)
+def counterfactual_vectors_for_roles(
+    prerequisite_members: Sequence[int],
+    core_members: Sequence[int],
+    committee_size: int,
+) -> tuple[tuple[Fraction, ...], tuple[Fraction, ...], tuple[Fraction, ...]]:
+    prerequisites = set(prerequisite_members)
+    cores = set(core_members)
+    universe = set(range(committee_size))
+    if (
+        len(prerequisites) != 2
+        or len(cores) != 2
+        or prerequisites & cores
+        or not prerequisites | cores <= universe
+        or committee_size != 7
+    ):
+        raise ValueError("need two disjoint prerequisite and core pairs on seven members")
+    weights = tuple(
+        Fraction(1, 14)
+        if member in prerequisites
+        else Fraction(2, 7)
+        if member in cores
+        else Fraction(2, 21)
         for member in range(committee_size)
     )
+    resistances = tuple(Fraction(1) for _ in range(committee_size))
     activations = tuple(
-        Fraction(0) if member in seeds else Fraction(2, 7)
+        Fraction(0) if member in prerequisites else Fraction(1, 7)
         for member in range(committee_size)
     )
-    return resistances, activations
+    return weights, resistances, activations
 
 
 def evaluate_counterfactual(fixture: dict[str, Any] | None = None) -> dict[str, Any]:
@@ -220,14 +239,13 @@ def evaluate_counterfactual(fixture: dict[str, Any] | None = None) -> dict[str, 
     )
     threshold = parse_fraction(geometry["threshold"])
     initial_exposure = parse_fraction(geometry["initial_exposure"])
-    threshold_count = int(geometry["threshold_count"])
+    _threshold_count = int(geometry["threshold_count"])  # cardinality provenance only
 
     base = solve_profile(
         weights,
         resistances,
         activation_floors,
         threshold,
-        threshold_count,
         initial_exposure,
     )
 
@@ -246,26 +264,31 @@ def evaluate_counterfactual(fixture: dict[str, Any] | None = None) -> dict[str, 
     )
 
     placement_rows: list[dict[str, object]] = []
-    for seed_members in combinations(range(len(weights)), 2):
-        variant_resistances, variant_activations = counterfactual_vectors_for_seeds(
-            seed_members, len(weights)
-        )
-        variant = solve_profile(
-            weights,
-            variant_resistances,
-            variant_activations,
-            threshold,
-            threshold_count,
-            initial_exposure,
-        )
-        placement_rows.append(
-            {
-                "seed_members": list(seed_members),
-                "threshold_cover": format_fraction(variant["threshold_cover"]),
-                "activation_cover": format_fraction(variant["activation_cover"]),
-                "activation_witness": list(variant["activation_witness"]),
-            }
-        )
+    universe = set(range(len(weights)))
+    for prerequisite_members in combinations(range(len(weights)), 2):
+        remaining = sorted(universe - set(prerequisite_members))
+        for core_members in combinations(remaining, 2):
+            variant_weights, variant_resistances, variant_activations = (
+                counterfactual_vectors_for_roles(
+                    prerequisite_members, core_members, len(weights)
+                )
+            )
+            variant = solve_profile(
+                variant_weights,
+                variant_resistances,
+                variant_activations,
+                threshold,
+                initial_exposure,
+            )
+            placement_rows.append(
+                {
+                    "prerequisite_members": list(prerequisite_members),
+                    "core_members": list(core_members),
+                    "threshold_cover": format_fraction(variant["threshold_cover"]),
+                    "activation_cover": format_fraction(variant["activation_cover"]),
+                    "activation_witness": list(variant["activation_witness"]),
+                }
+            )
 
     gate_rows: list[dict[str, object]] = []
     for gate_name in (
@@ -280,18 +303,18 @@ def evaluate_counterfactual(fixture: dict[str, Any] | None = None) -> dict[str, 
         gate_rows.append({"disabled_gate": gate_name, **selected})
 
     placements_pass = all(
-        row["threshold_cover"] == "4" and row["activation_cover"] == "10"
+        row["threshold_cover"] == "2" and row["activation_cover"] == "4"
         for row in placement_rows
     )
     gates_pass = all(
         row["selected_branch"] == "ROBUST_THRESHOLD_COVER_FALLBACK"
-        and row["certificate"] == "4"
+        and row["certificate"] == "2"
         and not row["activation_certificate_emitted"]
         for row in gate_rows
     )
 
     return {
-        "schema": "threshcert-gnosis-counterfactual-result-v1",
+        "schema": "threshcert-equal-cost-weighted-counterfactual-result-v2",
         "classification": fixture["classification"],
         "pinned_geometry": {
             "archival_block_number": geometry["archival_block_number"],
@@ -325,11 +348,11 @@ def evaluate_counterfactual(fixture: dict[str, Any] | None = None) -> dict[str, 
             },
         },
         "regression_checks": {
-            "seed_member_placements_checked": len(placement_rows),
-            "seed_member_placements": placement_rows,
-            "all_seed_placements_tc_4_ac_10": placements_pass,
+            "role_assignments_checked": len(placement_rows),
+            "role_assignments": placement_rows,
+            "all_role_assignments_tc_2_ac_4": placements_pass,
             "gate_disable_cases": gate_rows,
-            "all_activation_gate_failures_fall_back_to_4": gates_pass,
+            "all_activation_gate_failures_fall_back_to_2": gates_pass,
         },
         "claim_boundary": {
             **fixture["claim_boundary"],
@@ -383,18 +406,18 @@ def main() -> None:
         + branches["activation_gate_rejected_robust_fallback"]["selected_branch"]
     )
     print(
-        "seed_position_choices="
-        + str(regressions["seed_member_placements_checked"])
+        "role_assignment_choices="
+        + str(regressions["role_assignments_checked"])
     )
     print(
-        "seed_position_regression="
-        + ("PASS" if regressions["all_seed_placements_tc_4_ac_10"] else "FAIL")
+        "role_assignment_regression="
+        + ("PASS" if regressions["all_role_assignments_tc_2_ac_4"] else "FAIL")
     )
     print(
         "activation_gate_fallback_regression="
         + (
             "PASS"
-            if regressions["all_activation_gate_failures_fall_back_to_4"]
+            if regressions["all_activation_gate_failures_fall_back_to_2"]
             else "FAIL"
         )
     )

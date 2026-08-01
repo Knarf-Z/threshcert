@@ -22,64 +22,54 @@ def check(name, claimed, computed):
 
 
 # ---------------------------------------------------------------------
-# 1. Activation ladder (Section 7.1.1): n=10 equal-weight, t=1/2,
-#    5 cheap (R=1) + 5 seed (R=10). Cheap members require r seed
-#    acquisitions first (tau_cheap = r/10, tau_seed = 0).
-#    Claimed: TCR=5 (all r); ACR = 5+9r for r=0..4 -> 5,14,23,32,41
+# 1. Equal-cost weighted activation check (conference appendix):
+#    all seven member floors are one. Two 1/14-weight prerequisite members
+#    are initially operational; every other member has gate 1/7.
+#    The gap is two extra acquisitions, not a higher-priced-first order.
 # ---------------------------------------------------------------------
-print("\n=== 1. Activation ladder ===")
-claimed_acr = {0: 5, 1: 14, 2: 23, 3: 32, 4: 41}
-for r in range(5):
-    n = 10
-    w = [Fr(1, 10)] * n
-    t = Fr(1, 2)
-    A0 = set()
-    # members 0-4 = cheap (R=1), 5-9 = seed (R=10)
-    R = [Fr(1)] * 5 + [Fr(10)] * 5
-    tau = [Fr(r, 10)] * 5 + [Fr(0)] * 5
-    acr = ac_formula_gamma_star(w, t, A0, tau, R)
-    check(f"activation-ladder ACR (r={r})", claimed_acr[r], acr)
-
-# TCR (static threshold cover, ignoring tau) should be 5 regardless of r:
-# cheapest 5 members by resistance are the 5 cheap ones (R=1 each) = 5
-R_full = [Fr(1)] * 5 + [Fr(10)] * 5
-tcr = sum(sorted(R_full)[:5])
-check("activation-ladder TCR (all r)", 5, tcr)
+print("\n=== 1. Equal-cost weighted activation check ===")
+w = [Fr(2, 7), Fr(2, 7), Fr(2, 21), Fr(2, 21), Fr(2, 21), Fr(1, 14), Fr(1, 14)]
+t = Fr(4, 7)
+A0 = set()
+R = [Fr(1)] * 7
+tau = [Fr(1, 7)] * 5 + [Fr(0), Fr(0)]
+acr = ac_formula_gamma_star(w, t, A0, tau, R)
+check("equal-cost weighted ACR", 4, acr)
+best_tcr = min(
+    sum(R[i] for i in combo)
+    for size in range(1, 8)
+    for combo in combinations(range(7), size)
+    if sum(w[i] for i in combo) >= t
+)
+check("equal-cost weighted TCR", 2, best_tcr)
 
 
 # ---------------------------------------------------------------------
-# 2. Mechanism stress test (Section 7.1.1): k seed members (R=1 each,
-#    tau=0) + 2 core members (R=2 each) that only activate once ALL seed
-#    weight is acquired. Claimed sequential cost = k+4; TCR = 4 (cores
-#    alone reach threshold and are cheapest static cover).
-#    Construction (derived independently to match the paper's claimed
-#    numbers -- exact weights are the paper's own appendix does not
-#    specify a unique instance, this is one that satisfies the stated
-#    properties): t=4/5, seed total weight S=1/5 split over k seeds,
-#    core weight c=2/5 each (2c=4/5=t), tau_core = S = 1/5.
+# 2. Fixed-uniform-cost mechanism stress test (Theorem 5(ii), Lambda=0):
+#    k prerequisite seeds and two cores all have unit cost. The seed total
+#    weight is delta; each core has weight (1-delta)/2 and gate delta.
+#    Sequential cost is k+2 and static/package threshold cost is 2.
 # ---------------------------------------------------------------------
-print("\n=== 2. Mechanism stress test (own construction matching stated properties) ===")
+print("\n=== 2. Fixed-uniform-cost mechanism stress test ===")
 for k in (1, 3, 5, 8):
     n = k + 2
-    S = Fr(1, 5)
-    w_seed = S / k
-    c = Fr(2, 5)
-    t = Fr(4, 5)
-    w = [w_seed] * k + [c, c]
+    delta = Fr(1, 4)
+    w_seed = delta / k
+    core_weight = (1 - delta) / 2
+    t = 1 - delta
+    w = [w_seed] * k + [core_weight, core_weight]
     A0 = set()
-    R = [Fr(1)] * k + [Fr(2), Fr(2)]
-    tau = [Fr(0)] * k + [S, S]
+    R = [Fr(1)] * n
+    tau = [Fr(0)] * k + [delta, delta]
     seq_cost = ac_formula_gamma_star(w, t, A0, tau, R)
-    check(f"mechanism-stress sequential cost (k={k})", k + 4, seq_cost)
-    # TCR: static cover ignoring tau -- brute subset search (n small)
-    best_tcr = None
-    for size in range(1, n + 1):
-        for combo in combinations(range(n), size):
-            if sum(w[i] for i in combo) >= t:
-                cost = sum(R[i] for i in combo)
-                if best_tcr is None or cost < best_tcr:
-                    best_tcr = cost
-    check(f"mechanism-stress TCR (k={k})", 4, best_tcr)
+    check(f"mechanism-stress sequential cost (k={k})", k + 2, seq_cost)
+    best_tcr = min(
+        sum(R[i] for i in combo)
+        for size in range(1, n + 1)
+        for combo in combinations(range(n), size)
+        if sum(w[i] for i in combo) >= t
+    )
+    check(f"mechanism-stress TCR (k={k})", 2, best_tcr)
 
 
 # ---------------------------------------------------------------------

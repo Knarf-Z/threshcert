@@ -1,6 +1,6 @@
 {
-  "schema": "threshcert-gnosis-counterfactual-fixture-v1",
-  "classification": "deterministic counterfactual check on the pinned committee geometry",
+  "schema": "threshcert-equal-cost-weighted-counterfactual-fixture-v2",
+  "classification": "deterministic equal-cost weighted counterfactual on a seven-member four-of-seven threshold",
   "production_geometry": {
     "source": "data/production_keyper_set_20260613.json",
     "snapshot_time_utc": "2026-06-13T00:00:00Z",
@@ -16,9 +16,9 @@
   "counterfactual_inputs": {
     "ledger": "I_cf",
     "cost_units": "normalized cost units",
-    "weights": ["1/7", "1/7", "1/7", "1/7", "1/7", "1/7", "1/7"],
-    "resistance_floors": ["4", "4", "1", "1", "1", "1", "1"],
-    "activation_floors": ["0", "0", "2/7", "2/7", "2/7", "2/7", "2/7"]
+    "weights": ["2/7", "2/7", "2/21", "2/21", "2/21", "1/14", "1/14"],
+    "resistance_floors": ["1", "1", "1", "1", "1", "1", "1"],
+    "activation_floors": ["1/7", "1/7", "1/7", "1/7", "1/7", "0", "0"]
   },
   "certificate_gates": {
     "ordered_witness_certified": true,
@@ -31,6 +31,8 @@
     "positive_values_are_conditional": true,
     "production_validation": false,
     "measured_keyper_resistance": false,
-    "new_chain_experiment": false
+    "new_chain_experiment": false,
+    "production_weight_geometry_reused": false,
+    "interpretation": "The gap comes from two equally priced prerequisite acquisitions under stipulated operational gates, not from purchasing higher-priced members first."
   }
 }

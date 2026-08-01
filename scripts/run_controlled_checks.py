@@ -10,23 +10,19 @@ RESULTS.mkdir(exist_ok=True)
 
 
 def activation_ladder() -> None:
-    rows = []
-    for r in range(5):
-        tc = 5
-        ac = 10 * r + (5 - r)
-        rows.append((r, r / 10, tc, ac, ac / tc))
+    rows = [("equal_cost_weighted_4_of_7", 2, 4, 2, 2)]
     with (RESULTS / "activation_ladder.csv").open("w", newline="", encoding="utf-8") as f:
-        w = csv.writer(f)
-        w.writerow(["r", "seed_exposure", "TC", "AC", "AC_over_TC"])
+        w = csv.writer(f, lineterminator="\n")
+        w.writerow(["fixture", "TC", "AC", "additive_gap", "AC_over_TC"])
         w.writerows(rows)
 
 
 def mechanism_scope() -> None:
     rows = []
     for k in [1, 2, 4, 8]:
-        rows.append((k, k + 4, "infinity", 4, 4))
+        rows.append((k, k + 2, "infinity", 2, 2))
     with (RESULTS / "mechanism_scope.csv").open("w", newline="", encoding="utf-8") as f:
-        w = csv.writer(f)
+        w = csv.writer(f, lineterminator="\n")
         w.writerow(["k", "sequential", "simultaneous", "package", "robust_TC"])
         w.writerows(rows)
 

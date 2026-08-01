@@ -3,16 +3,20 @@
 ## Scope
 
 This survey applies the reusable layers of the paper's deployment-admission
-method to third-party Ethereum mainnet contracts. The eight-subject cohort was
-frozen before screening at block 25,658,467, block hash
+method to third-party Ethereum mainnet contracts at block 25,658,467, block
+hash
 `0x5fdd73a6e17f7190c3afca016c1bb67a67266ccac791dbac502575d2a4aa1b11`.
-Addresses and the ex ante inclusion rule are in
+The pinned block timestamp is 2026-08-01 15:16:35 +08:00. Addresses and the
+author's recorded inclusion rule are in
 `cohort.ethereum-mainnet.v1.json`.
 
-The cohort is a purposive stress sample across Ethereum deposits, SSV,
-EigenLayer, Lido, and Rocket Pool. It is not random and supports no ecosystem
-prevalence estimate. Proxy implementations are not counted as additional
-subjects.
+The eight-subject cohort is a fixed author-selected purposive stress cohort
+across Ethereum deposits, SSV, EigenLayer, Lido, and Rocket Pool. It was not
+independently preregistered: the cohort and results were first publicly
+timestamped together in commit
+`2b8a6cd3fc0ee7ae7c1c5e50d6c4fe0ee73d2023`, so post-selection bias cannot
+be excluded. It is not random and supports no ecosystem prevalence estimate.
+Proxy implementations are not counted as additional subjects.
 
 ## Method and status meanings
 
@@ -32,7 +36,7 @@ entry closure, payer separation, payment preservation, backward realization,
 terminal equivalence, and offset closure. Missing evidence fails closed. No
 status in this survey is a claim that a contract or protocol is insecure.
 
-## Frozen result
+## Recorded result
 
 | Subject | Common static screen | Main reusable-layer reason | Full admission |
 |---|---|---|---|

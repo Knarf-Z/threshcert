@@ -38,7 +38,7 @@ Two independent computations of ABC_b(A0), cross-checked against each other:
 
 Also checks: ABC_0 == ACR; ABC_b == TCR for b at or above the size of an
 optimal TCR-achieving set; monotonicity in b; and the paper's own
-four-of-seven counterfactual curve (10, 7, 4, 4, 4, 4, 4, 4).
+equal-cost weighted seven-member curve (4, 2, 2, 2, 2, 2, 2, 2).
 
 A real implementation bug was caught and fixed while writing the first
 version of this check: `ac_formula_gamma_star` silently assumes the
@@ -213,16 +213,17 @@ def check_boundaries_and_monotonicity(
     return total, boundary_mismatches, monotonicity_violations
 
 
-def check_shutter_counterfactual_curve():
-    """The paper's own pinned four-of-seven counterfactual ledger
-    (Section 7.2): members {0,1} have (R,tau)=(4,0), members {2..6} have
-    (R,tau)=(1,2/7)."""
+def check_equal_cost_weighted_curve():
+    """The seven-member equal-cost weighted counterfactual ledger."""
     n = 7
-    w = [Fr(1, 7)] * n
+    w = [
+        Fr(2, 7), Fr(2, 7), Fr(2, 21), Fr(2, 21),
+        Fr(2, 21), Fr(1, 14), Fr(1, 14),
+    ]
     t = Fr(4, 7)
     A0 = frozenset()
-    R = [Fr(4), Fr(4), Fr(1), Fr(1), Fr(1), Fr(1), Fr(1)]
-    tau = [Fr(0), Fr(0), Fr(2, 7), Fr(2, 7), Fr(2, 7), Fr(2, 7), Fr(2, 7)]
+    R = [Fr(1)] * n
+    tau = [Fr(1, 7)] * 5 + [Fr(0), Fr(0)]
 
     curve = {}
     for b in range(0, n + 1):
@@ -252,11 +253,11 @@ if __name__ == "__main__":
         for m in monotonicity_violations[:5]:
             print(f"  {m}")
 
-    curve = check_shutter_counterfactual_curve()
-    print("four_of_seven_counterfactual_ABC_curve:")
+    curve = check_equal_cost_weighted_curve()
+    print("equal_cost_weighted_ABC_curve:")
     for b in sorted(curve):
         print(f"  ABC_{b} = {curve[b]}")
-    expected_curve = {0: 10, 1: 7, 2: 4, 3: 4, 4: 4, 5: 4, 6: 4, 7: 4}
+    expected_curve = {0: 4, 1: 2, 2: 2, 3: 2, 4: 2, 5: 2, 6: 2, 7: 2}
     curve_mismatch = [
         b for b in expected_curve if curve.get(b) != Fr(expected_curve[b])
     ]
@@ -273,8 +274,8 @@ if __name__ == "__main__":
         "state-space computation on every one of "
         f"{total + b_total} random instances, ABC_0=ACR and "
         "ABC_{|U0|}=TCR exactly, ABC_b was monotone non-increasing in b, "
-        "and the four-of-seven counterfactual curve matched the "
-        "hand-computed 10, 7, 4, 4, 4, 4, 4, 4 exactly. The package-first "
+        "and the equal-cost weighted curve matched the "
+        "hand-computed 4, 2, 2, 2, 2, 2, 2, 2 exactly. The package-first "
         "property (Lemma package-first-wlog) is established analytically "
         "by the exchange argument in the paper's proof, not by these "
         "tests -- the state-space ground truth above does not assume it, "

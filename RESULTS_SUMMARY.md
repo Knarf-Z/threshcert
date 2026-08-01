@@ -30,16 +30,18 @@
 
 - Public-only four-of-seven certificate: `0`, with every positive target
   rejected.
-- Deterministic counterfactual check on the pinned committee geometry: public
-  `0`; resistance-only TC `4` with cover `{2,3,4,5}`; activation AC `10` with
-  witness `(0,1,2,3)`; and robust fallback `4` when the ordered-witness or
-  exposure-sufficiency gate is disabled. All 21 choices of two seed-member
-  positions return `(TC=4, AC=10)`. The positive values belong to the separate
+- Deterministic equal-cost weighted counterfactual: public `0`;
+  resistance-only TC `2` with cover `{0,1}`; activation AC `4` with witness
+  `(5,6,0,1)`; and robust fallback `2` when the ordered-witness or
+  exposure-sufficiency gate is disabled. All 210 assignments of two
+  prerequisite and two core roles return `(TC=2, AC=4)`. Every member floor
+  is one, so the gap counts additional prerequisite acquisitions rather than
+  higher-priced-first behavior. The values belong to the separate
   counterfactual ledger `I_cf` and use normalized cost units.
 - Controlled nonuniform resistance ledger: `11,500` against target `10,000`.
 - Controlled uniform penalty ledger with complete evidence: `10,000`.
 - The same penalty ledger with one unattributable member: `7,500`.
-- Activation-ladder AC values: `5, 14, 23, 32, 41`, while TC remains `5`.
+- Equal-cost weighted activation check: `TC=2` and `AC=4`; all seven member floors equal one, so the gap is two extra prerequisite acquisitions.
 - Exact bottleneck-allocation values for budgets `0,2,4,6,8,10`:
   `6,7,8,9,10,11`.
 
@@ -223,11 +225,12 @@ evidence. The completed pilot is verifier-gated, testnet-only, and single-host;
 it must not be described as native on-chain BLS verification, a production
 deployment, or seven independent operators.
 
-The pinned-geometry counterfactual reuses only the verified seven-member,
-four-of-seven structure. Its resistance and activation floors are hypothetical,
-and its positive values are conditional, so it must not be described as a
-Gnosis activation experiment, production validation, measured Keyper
-resistance, or any production cost estimate.
+The equal-cost weighted counterfactual reuses only the seven-member cardinality
+and `4/7` threshold label; its unequal weights and operational gates are
+hypothetical and do not describe production Gnosis geometry. Its positive
+values are conditional, so it must not be described as a Gnosis activation
+experiment, production validation, measured Keyper resistance, or any
+production cost estimate.
 
 The positive Chiado value and the production evidence-audit result are not the
 same claim. The former certifies an executed bond-floor state inside the

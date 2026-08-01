@@ -40,11 +40,13 @@ contract-specific semantic certificate, the final result remains
 `FAIL_CLOSED`. Survey inclusion criteria, addresses, pinned blocks, sources,
 and every input/output SHA-256 must be fixed before aggregate claims are made.
 
-The frozen initial cohort and its common block are recorded in
-`cohort.ethereum-mainnet.v1.json`. Results use a three-way reusable-layer
-status: `PASS`, `FAIL`, or `INCOMPLETE`. Full incidence admission remains
-separate and fail-closed. See `SURVEY_REPORT.md` and reproduce the frozen
-aggregate with:
+The fixed author-selected cohort and its common block are recorded in
+`cohort.ethereum-mainnet.v1.json`. The cohort was not independently
+preregistered: its selection rule and results were first publicly timestamped
+together, so post-selection bias cannot be excluded. Results use a three-way
+reusable-layer status: `PASS`, `FAIL`, or `INCOMPLETE`. Full incidence
+admission remains separate and fail-closed. See `SURVEY_REPORT.md` and
+reproduce the recorded aggregate with:
 
 ```text
 node test_screen_contract_v2.mjs

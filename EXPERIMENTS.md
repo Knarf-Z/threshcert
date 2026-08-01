@@ -31,20 +31,21 @@ that actual member resistance is zero.
 
 ## Controlled certificate and mechanism checks
 
-6. Pinned-geometry counterfactual: keeps the real seven-member, four-of-seven
-   committee geometry but uses a separate counterfactual ledger, `I_cf`, to
-   supply explicitly hypothetical resistance floors `[4,4,1,1,1,1,1]` and
-   activation floors `[0,0,2/7,2/7,2/7,2/7,2/7]`, all in normalized cost
-   units. The unified solver returns public `0`,
-   resistance-only TC `4`, activation AC `10`, and robust fallback `4` when
-   either activation gate is disabled. It records TC cover `{2,3,4,5}`, AC
-   witness `(0,1,2,3)`, and all 21 choices of the two seed-member positions.
+6. Equal-cost weighted counterfactual: the separate ledger `I_cf` has seven
+   members and threshold `4/7`, hypothetical weights
+   `[2/7,2/7,2/21,2/21,2/21,1/14,1/14]`, unit resistance floors for every
+   member, and operational gates `[1/7,1/7,1/7,1/7,1/7,0,0]`. The exact
+   solvers return public `0`, resistance-only TC `2`, activation AC `4`,
+   and robust fallback `2` when either activation gate is disabled. They
+   record TC cover `{0,1}`, AC witness `(5,6,0,1)`, and all 210
+   assignments of two prerequisite and two core roles. The gap counts equally
+   priced prerequisite acquisitions, not higher-priced-first behavior.
 7. Public-evidence compatibility view: checks that the address-level production
    ledger maps to the same zero threshold-cover lower bound.
 8. Controlled positive resistance ledger: checks the threshold-cover verifier.
 9. Penalty-evidence gate: compares complete attribution and enforcement
    evidence with one unattributable member.
-10. Activation ladder: checks the controlled TC/AC gap.
+10. Equal-cost activation: checks the controlled weighted `TC=2`, `AC=4` gap.
 11. Mechanism-scope stress test: compares sequential, simultaneous, package,
     and robust-threshold-cover values in the stated controlled family.
 12. Defensive allocation: computes cheapest-resistance, weight-cycle, and
@@ -158,8 +159,8 @@ resistance, activation, operator independence, or payment conditions.
     computation that does not assume the package triggers first (0
     mismatches), a further 360 confirm the boundary and monotonicity claims
     (0
-    mismatches), and the paper's own four-of-seven counterfactual curve is
-    reproduced exactly (10,7,4,4,4,4,4,4). A sixth script,
+    mismatches), and the equal-cost weighted counterfactual curve is reproduced
+    exactly (4,2,2,2,2,2,2,2). A sixth script,
     `general_package_family_hierarchy.py`, stress-tests the generalization
     of that hierarchy to an arbitrary certified package family with a
     repetition budget (`m_{B,r}`: at most `r` pairwise-disjoint packages
@@ -275,9 +276,9 @@ resistance, activation, operator independence, or payment conditions.
 - The production audit and Chiado pilot are separate evidence domains. The
   pilot cannot fill missing production member rows, and the controlled
   arithmetic checks cannot supply real member inputs.
-- The `0 -> 4 -> 10 -> 4` pinned-geometry result uses hypothetical floors. It
-  is not a Gnosis activation experiment, production validation, or measurement
-  of Keyper resistance.
+- The equal-cost weighted result `0 -> 2 -> 4 -> 2` uses hypothetical
+  weights and operational gates. It is not a Gnosis activation experiment,
+  production validation, or measurement of Keyper resistance.
 - The generalized committee-shape sweep and the boundary/larger-committee
   sensitivity rows are both extensions of the same normalized, seeded, or
   tiled controlled constructions used elsewhere in this inventory; neither

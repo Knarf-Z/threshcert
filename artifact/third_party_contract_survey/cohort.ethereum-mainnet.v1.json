@@ -1,7 +1,10 @@
 {
   "schema": "third-party-contract-cohort/v1",
   "cohortId": "ethereum-mainnet-bonding-slashing-escrow-2026-08-01",
-  "frozenAt": "2026-08-01T00:00:00+08:00",
+  "recordedAt": "2026-08-01T15:17:42+08:00",
+  "pinnedBlockTimestamp": "2026-08-01T15:16:35+08:00",
+  "registrationStatus": "AUTHOR_RECORDED_WITH_RESULTS_NOT_INDEPENDENTLY_PREREGISTERED",
+  "firstPublicCommit": "2b8a6cd3fc0ee7ae7c1c5e50d6c4fe0ee73d2023",
   "chainId": 1,
   "pinnedBlock": "25658467",
   "pinnedBlockHash": "0x5fdd73a6e17f7190c3afca016c1bb67a67266ccac791dbac502575d2a4aa1b11",
@@ -10,9 +13,10 @@
     "source": "Address must appear on an official protocol deployment page or official protocol repository.",
     "function": "Official description or contract name must directly concern staking deposits, operator/delegation state, slashing or penalties, liquidation, or escrow.",
     "cap": "At most one subject per distinct functional role within a protocol; proxy and implementation are not double-counted.",
-    "exclusions": ["pure tokens", "view-only helpers", "treasuries", "generic registries or storage contracts", "contracts selected after observing screen results"]
+    "exclusions": ["pure tokens", "view-only helpers", "treasuries", "generic registries or storage contracts"]
   },
-  "interpretation": "This is a purposive predeclared stress sample, not a prevalence estimate. FAIL_CLOSED means that the policy's evidence obligations were not discharged; it is not an insecurity claim.",
+  "selectionNote": "This is the author's recorded selection rule. No independent public timestamp predates screening, so post-selection bias cannot be excluded.",
+  "interpretation": "This is a fixed author-selected purposive stress cohort, not a preregistered sample or a prevalence estimate. FAIL_CLOSED means that the policy's evidence obligations were not discharged; it is not an insecurity claim.",
   "subjects": [
     {"id":"ethereum-deposit-contract","protocol":"Ethereum consensus deposits","role":"staking deposit baseline","address":"0x00000000219ab540356cbb839cbe05303d7705fa","officialSource":"https://docs.ssv.network/developers/smart-contracts/"},
     {"id":"ssv-network","protocol":"SSV Network","role":"operator and cluster staking/liquidation","address":"0xdd9bc35ae942ef0cfa76930954a156b3ff30a4e1","officialSource":"https://docs.ssv.network/developers/smart-contracts/"},

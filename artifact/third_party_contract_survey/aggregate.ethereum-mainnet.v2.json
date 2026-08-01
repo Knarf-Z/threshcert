@@ -5,6 +5,10 @@
     "chainId": 1,
     "pinnedBlock": "25658467",
     "pinnedBlockHash": "0x5fdd73a6e17f7190c3afca016c1bb67a67266ccac791dbac502575d2a4aa1b11",
+    "pinnedBlockTimestamp": "2026-08-01T15:16:35+08:00",
+    "recordedAt": "2026-08-01T15:17:42+08:00",
+    "registrationStatus": "AUTHOR_RECORDED_WITH_RESULTS_NOT_INDEPENDENTLY_PREREGISTERED",
+    "firstPublicCommit": "2b8a6cd3fc0ee7ae7c1c5e50d6c4fe0ee73d2023",
     "subjectCount": 8,
     "selectionRule": {
       "network": "Ethereum mainnet only",
@@ -15,13 +19,13 @@
         "pure tokens",
         "view-only helpers",
         "treasuries",
-        "generic registries or storage contracts",
-        "contracts selected after observing screen results"
+        "generic registries or storage contracts"
       ]
-    }
+    },
+    "selectionNote": "This is the author's recorded selection rule. No independent public timestamp predates screening, so post-selection bias cannot be excluded."
   },
   "interpretation": {
-    "sampling": "Purposive predeclared stress sample; no prevalence estimate is claimed.",
+    "sampling": "Fixed author-selected purposive stress cohort; it was not independently preregistered, post-selection bias cannot be excluded, and no prevalence estimate is claimed.",
     "commonStaticPass": "All reusable provenance, direct-creation identity, runtime-template, and direct-control-flow checks passed. This is only a candidate for contract-specific semantic analysis.",
     "failClosed": "The required evidence was not fully discharged. This is not a claim that the contract or protocol is insecure."
   },

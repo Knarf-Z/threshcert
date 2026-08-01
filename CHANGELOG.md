@@ -27,7 +27,7 @@ wholesale, and the user explicitly confirmed this judgment call and the
   and `Proposition no-profitable-premature-reconstruction`) into a
   concrete engineering decision rule -- no new proof needed, both
   ingredients already existed; fixed a second occurrence of "gradually"
-  describing the same two-step `10,7,4,...` curve (Section 7.2, not just
+  describing the same two-step the retired unequal-floor curve curve (Section 7.2, not just
   the abstract instance from the twelfth pass); trimmed specific
   cross-validation instance counts (1000, 2440, 2900, 2540) out of the
   main text, keeping "zero mismatches" and pointing to the appendix for
@@ -193,7 +193,7 @@ per standing instruction.
   threshold cover, neither a boundary case of `MABC_{b,M}` specifically)
   -- rescoped to "every exact certificate ... for a fixed sequential or
   one-shot-bypass mechanism." The abstract's "collapsing gradually to 4"
-  described a curve (`10,7,4,4,4,4,4,4`) that only drops twice, not
+  described a curve (the retired unequal-floor curve) that only drops twice, not
   gradually -- reworded to "collapsing from 10 to 7 to 4."
 - Re-verified the 15-page body count survives all four changes (it does,
   with room to spare from earlier trims); re-ran the dangling-reference
@@ -488,7 +488,7 @@ All were addressed:
   empty set, consistent with the general family's own
   `B subset 2^{U0} minus {emptyset}`; corrected "strict at every
   intermediate step" to "strict at both nontrivial steps before reaching
-  its plateau" (the curve `10,7,4,4,4,4,4,4` is flat from `b=2` onward);
+  its plateau" (the curve the retired unequal-floor curve is flat from `b=2` onward);
   fixed the Contributions section's "three contributions" undercounting
   four actual bullets; fixed a remaining "the ordered-witness condition is
   necessary" overclaim in the mechanism-scope paragraph (a duplicate of a
@@ -577,7 +577,7 @@ an assertion.
   richness) erases the whole hierarchy under unlimited reuse. The first
   corollary shows repetition is genuinely vacuous for the cardinality
   family already in the paper, so `ABC_b`'s existing curve
-  (`10,7,4,4,4,4,4,4`) already captures everything reachable by repeating
+  (the retired unequal-floor curve) already captures everything reachable by repeating
   same-shape packages -- repetition only matters for families that are
   *not* cardinality-closed (e.g. a fixed menu of specific, non-nested
   multisignature contracts), a case this pass verifies computationally but
@@ -676,7 +676,7 @@ was built on top:
     ACR(A0 union P)`, reusing the existing ACR solver as a subroutine
     rather than a new one), and a Corollary (boundary conditions,
     monotonicity, and a strict separation on the paper's own four-of-seven
-    counterfactual: `10,7,4,4,4,4,4,4` for `b=0..7`, already exact at
+    counterfactual: the retired unequal-floor curve for `b=0..7`, already exact at
     `b=2`, not only in the unbounded limit).
   - Explicitly scoped as NOT proven: the evidence-optimal (floors-only)
     extension at fixed `b>0`, and the complexity of `BCR_b` for fixed
@@ -928,24 +928,15 @@ was built on top:
 - Regenerated `MANIFEST.sha256` after the merge and additions; every
   reproduction layer, including the seven-test deployment suite, passes.
 
-## 2026-07-19 pinned-geometry counterfactual branch check
+## 2026-07-19 counterfactual branch check (superseded fixture)
 
-- Added a deterministic seven-member, four-of-seven counterfactual fixture
-  bound to the pinned Gnosis committee geometry, with explicitly hypothetical
-  resistance and activation floors in normalized cost units and a separate
-  counterfactual ledger.
-- Added strictly conditional paper language for the `0 -> 4 -> 10` evidence
-  layers, plus synchronized limitations and conclusion language; the actual
-  production ledger remains zero.
-- Ran the existing exact subset-state solver through the public, TC, AC, and
-  robust-fallback branches, recording `0 -> 4 -> 10 -> 4`, TC cover
-  `{2,3,4,5}`, and AC witness `(0,1,2,3)`.
-- Checked all 21 seed-member placements and verified that disabling either the
-  ordered-witness or exposure-sufficiency gate suppresses the AC value and
-  returns the separable-payment TC fallback of `4`.
-- Added a portable result JSON, exact expected stdout, five regression tests,
-  and root-reproduction integration. No Chiado or production-chain experiment
-  was rerun.
+- Added the first deterministic branch check for public, threshold-cover,
+  activation-cover, and robust-fallback selection on a separate hypothetical
+  ledger. No Chiado or production-chain experiment was rerun.
+- On 2026-08-01 the unequal-floor fixture was retired because its ordering could
+  be misread as higher-priced-first attacker behavior. The distributed
+  replacement uses a seven-member weighted committee, unit floors for every
+  member, two prerequisite roles, and exhaustive role-assignment invariance.
 - Fixed the retained production-audit JSON writer to emit UTF-8/LF bytes on
   every operating system, preventing Windows/Linux manifest drift.
 

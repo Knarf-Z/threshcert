@@ -1,6 +1,6 @@
 {
-  "schema": "threshcert-gnosis-counterfactual-result-v1",
-  "classification": "deterministic counterfactual check on the pinned committee geometry",
+  "schema": "threshcert-equal-cost-weighted-counterfactual-result-v2",
+  "classification": "deterministic equal-cost weighted counterfactual on a seven-member four-of-seven threshold",
   "pinned_geometry": {
     "archival_block_number": 46666718,
     "archival_block_hash": "0x574ec26ee7b2e2bfddd991bf99d37a79455428bc4dfe342b0ccf55d071229b60",
@@ -14,17 +14,17 @@
     "ledger": "I_cf",
     "cost_units": "normalized cost units",
     "weights": [
-      "1/7",
-      "1/7",
-      "1/7",
-      "1/7",
-      "1/7",
-      "1/7",
-      "1/7"
+      "2/7",
+      "2/7",
+      "2/21",
+      "2/21",
+      "2/21",
+      "1/14",
+      "1/14"
     ],
     "resistance_floors": [
-      "4",
-      "4",
+      "1",
+      "1",
       "1",
       "1",
       "1",
@@ -32,13 +32,13 @@
       "1"
     ],
     "activation_floors": [
+      "1/7",
+      "1/7",
+      "1/7",
+      "1/7",
+      "1/7",
       "0",
-      "0",
-      "2/7",
-      "2/7",
-      "2/7",
-      "2/7",
-      "2/7"
+      "0"
     ]
   },
   "branches": {
@@ -47,23 +47,21 @@
       "uses_hypothetical_member_floors": false
     },
     "resistance_only_threshold_cover": {
-      "certificate": "4",
+      "certificate": "2",
       "cover": [
-        2,
-        3,
-        4,
-        5
+        0,
+        1
       ]
     },
     "activation_cover": {
-      "certificate": "10",
+      "certificate": "4",
       "witness": [
+        5,
+        6,
         0,
-        1,
-        2,
-        3
+        1
       ],
-      "member_mask": 15,
+      "member_mask": 99,
       "selected_branch": "ACTIVATION_COVER",
       "activation_certificate_emitted": true
     },
@@ -74,26 +72,28 @@
         "separable_payment_lower_bounds_certified": true
       },
       "threshold_cover_witness": [
-        2,
-        3,
-        4,
-        5
+        0,
+        1
       ],
       "selected_branch": "ROBUST_THRESHOLD_COVER_FALLBACK",
-      "certificate": "4",
+      "certificate": "2",
       "activation_certificate_emitted": false
     }
   },
   "regression_checks": {
-    "seed_member_placements_checked": 21,
-    "seed_member_placements": [
+    "role_assignments_checked": 210,
+    "role_assignments": [
       {
-        "seed_members": [
+        "prerequisite_members": [
           0,
           1
         ],
-        "threshold_cover": "4",
-        "activation_cover": "10",
+        "core_members": [
+          2,
+          3
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
         "activation_witness": [
           0,
           1,
@@ -102,250 +102,3238 @@
         ]
       },
       {
-        "seed_members": [
-          0,
-          2
-        ],
-        "threshold_cover": "4",
-        "activation_cover": "10",
-        "activation_witness": [
-          0,
-          2,
-          1,
-          3
-        ]
-      },
-      {
-        "seed_members": [
-          0,
-          3
-        ],
-        "threshold_cover": "4",
-        "activation_cover": "10",
-        "activation_witness": [
-          0,
-          3,
-          1,
-          2
-        ]
-      },
-      {
-        "seed_members": [
-          0,
-          4
-        ],
-        "threshold_cover": "4",
-        "activation_cover": "10",
-        "activation_witness": [
-          0,
-          4,
-          1,
-          2
-        ]
-      },
-      {
-        "seed_members": [
-          0,
-          5
-        ],
-        "threshold_cover": "4",
-        "activation_cover": "10",
-        "activation_witness": [
-          0,
-          5,
-          1,
-          2
-        ]
-      },
-      {
-        "seed_members": [
-          0,
-          6
-        ],
-        "threshold_cover": "4",
-        "activation_cover": "10",
-        "activation_witness": [
-          0,
-          6,
-          1,
-          2
-        ]
-      },
-      {
-        "seed_members": [
-          1,
-          2
-        ],
-        "threshold_cover": "4",
-        "activation_cover": "10",
-        "activation_witness": [
-          1,
-          2,
-          0,
-          3
-        ]
-      },
-      {
-        "seed_members": [
-          1,
-          3
-        ],
-        "threshold_cover": "4",
-        "activation_cover": "10",
-        "activation_witness": [
-          1,
-          3,
-          0,
-          2
-        ]
-      },
-      {
-        "seed_members": [
-          1,
-          4
-        ],
-        "threshold_cover": "4",
-        "activation_cover": "10",
-        "activation_witness": [
-          1,
-          4,
-          0,
-          2
-        ]
-      },
-      {
-        "seed_members": [
-          1,
-          5
-        ],
-        "threshold_cover": "4",
-        "activation_cover": "10",
-        "activation_witness": [
-          1,
-          5,
-          0,
-          2
-        ]
-      },
-      {
-        "seed_members": [
-          1,
-          6
-        ],
-        "threshold_cover": "4",
-        "activation_cover": "10",
-        "activation_witness": [
-          1,
-          6,
-          0,
-          2
-        ]
-      },
-      {
-        "seed_members": [
-          2,
-          3
-        ],
-        "threshold_cover": "4",
-        "activation_cover": "10",
-        "activation_witness": [
-          2,
-          3,
+        "prerequisite_members": [
           0,
           1
-        ]
-      },
-      {
-        "seed_members": [
+        ],
+        "core_members": [
           2,
           4
         ],
-        "threshold_cover": "4",
-        "activation_cover": "10",
+        "threshold_cover": "2",
+        "activation_cover": "4",
         "activation_witness": [
-          2,
-          4,
           0,
-          1
+          1,
+          2,
+          4
         ]
       },
       {
-        "seed_members": [
+        "prerequisite_members": [
+          0,
+          1
+        ],
+        "core_members": [
           2,
           5
         ],
-        "threshold_cover": "4",
-        "activation_cover": "10",
+        "threshold_cover": "2",
+        "activation_cover": "4",
         "activation_witness": [
-          2,
-          5,
           0,
-          1
+          1,
+          2,
+          5
         ]
       },
       {
-        "seed_members": [
+        "prerequisite_members": [
+          0,
+          1
+        ],
+        "core_members": [
           2,
           6
         ],
-        "threshold_cover": "4",
-        "activation_cover": "10",
+        "threshold_cover": "2",
+        "activation_cover": "4",
         "activation_witness": [
-          2,
-          6,
           0,
-          1
+          1,
+          2,
+          6
         ]
       },
       {
-        "seed_members": [
+        "prerequisite_members": [
+          0,
+          1
+        ],
+        "core_members": [
           3,
           4
         ],
-        "threshold_cover": "4",
-        "activation_cover": "10",
+        "threshold_cover": "2",
+        "activation_cover": "4",
         "activation_witness": [
-          3,
-          4,
           0,
-          1
+          1,
+          3,
+          4
         ]
       },
       {
-        "seed_members": [
+        "prerequisite_members": [
+          0,
+          1
+        ],
+        "core_members": [
           3,
           5
         ],
-        "threshold_cover": "4",
-        "activation_cover": "10",
+        "threshold_cover": "2",
+        "activation_cover": "4",
         "activation_witness": [
-          3,
-          5,
           0,
-          1
+          1,
+          3,
+          5
         ]
       },
       {
-        "seed_members": [
+        "prerequisite_members": [
+          0,
+          1
+        ],
+        "core_members": [
           3,
           6
         ],
-        "threshold_cover": "4",
-        "activation_cover": "10",
+        "threshold_cover": "2",
+        "activation_cover": "4",
         "activation_witness": [
-          3,
-          6,
           0,
-          1
+          1,
+          3,
+          6
         ]
       },
       {
-        "seed_members": [
+        "prerequisite_members": [
+          0,
+          1
+        ],
+        "core_members": [
           4,
           5
         ],
-        "threshold_cover": "4",
-        "activation_cover": "10",
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          1,
+          4,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          1
+        ],
+        "core_members": [
+          4,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          1,
+          4,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          1
+        ],
+        "core_members": [
+          5,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          1,
+          5,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          2
+        ],
+        "core_members": [
+          1,
+          3
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          2,
+          1,
+          3
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          2
+        ],
+        "core_members": [
+          1,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          2,
+          1,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          2
+        ],
+        "core_members": [
+          1,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          2,
+          1,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          2
+        ],
+        "core_members": [
+          1,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          2,
+          1,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          2
+        ],
+        "core_members": [
+          3,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          2
+        ],
+        "core_members": [
+          3,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          2,
+          3,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          2
+        ],
+        "core_members": [
+          3,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          2,
+          3,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          2
+        ],
+        "core_members": [
+          4,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          2,
+          4,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          2
+        ],
+        "core_members": [
+          4,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          2,
+          4,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          2
+        ],
+        "core_members": [
+          5,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          2,
+          5,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          3
+        ],
+        "core_members": [
+          1,
+          2
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          3,
+          1,
+          2
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          3
+        ],
+        "core_members": [
+          1,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          3,
+          1,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          3
+        ],
+        "core_members": [
+          1,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          3,
+          1,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          3
+        ],
+        "core_members": [
+          1,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          3,
+          1,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          3
+        ],
+        "core_members": [
+          2,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          3,
+          2,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          3
+        ],
+        "core_members": [
+          2,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          3,
+          2,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          3
+        ],
+        "core_members": [
+          2,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          3,
+          2,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          3
+        ],
+        "core_members": [
+          4,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          3
+        ],
+        "core_members": [
+          4,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          3,
+          4,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          3
+        ],
+        "core_members": [
+          5,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          3,
+          5,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          4
+        ],
+        "core_members": [
+          1,
+          2
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          4,
+          1,
+          2
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          4
+        ],
+        "core_members": [
+          1,
+          3
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          4,
+          1,
+          3
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          4
+        ],
+        "core_members": [
+          1,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          4,
+          1,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          4
+        ],
+        "core_members": [
+          1,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          4,
+          1,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          4
+        ],
+        "core_members": [
+          2,
+          3
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          4,
+          2,
+          3
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          4
+        ],
+        "core_members": [
+          2,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          4,
+          2,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          4
+        ],
+        "core_members": [
+          2,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          4,
+          2,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          4
+        ],
+        "core_members": [
+          3,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          4,
+          3,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          4
+        ],
+        "core_members": [
+          3,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          4,
+          3,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          4
+        ],
+        "core_members": [
+          5,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          4,
+          5,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          5
+        ],
+        "core_members": [
+          1,
+          2
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          5,
+          1,
+          2
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          5
+        ],
+        "core_members": [
+          1,
+          3
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          5,
+          1,
+          3
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          5
+        ],
+        "core_members": [
+          1,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          5,
+          1,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          5
+        ],
+        "core_members": [
+          1,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          5,
+          1,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          5
+        ],
+        "core_members": [
+          2,
+          3
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          5,
+          2,
+          3
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          5
+        ],
+        "core_members": [
+          2,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          5,
+          2,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          5
+        ],
+        "core_members": [
+          2,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          5,
+          2,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          5
+        ],
+        "core_members": [
+          3,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          5,
+          3,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          5
+        ],
+        "core_members": [
+          3,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          5,
+          3,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          5
+        ],
+        "core_members": [
+          4,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          5,
+          4,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          6
+        ],
+        "core_members": [
+          1,
+          2
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          6,
+          1,
+          2
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          6
+        ],
+        "core_members": [
+          1,
+          3
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          6,
+          1,
+          3
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          6
+        ],
+        "core_members": [
+          1,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          6,
+          1,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          6
+        ],
+        "core_members": [
+          1,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          6,
+          1,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          6
+        ],
+        "core_members": [
+          2,
+          3
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          6,
+          2,
+          3
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          6
+        ],
+        "core_members": [
+          2,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          6,
+          2,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          6
+        ],
+        "core_members": [
+          2,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          6,
+          2,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          6
+        ],
+        "core_members": [
+          3,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          6,
+          3,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          6
+        ],
+        "core_members": [
+          3,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          6,
+          3,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          0,
+          6
+        ],
+        "core_members": [
+          4,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          0,
+          6,
+          4,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          2
+        ],
+        "core_members": [
+          0,
+          3
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          2,
+          0,
+          3
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          2
+        ],
+        "core_members": [
+          0,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          2,
+          0,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          2
+        ],
+        "core_members": [
+          0,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          2,
+          0,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          2
+        ],
+        "core_members": [
+          0,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          2,
+          0,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          2
+        ],
+        "core_members": [
+          3,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          2
+        ],
+        "core_members": [
+          3,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          2,
+          3,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          2
+        ],
+        "core_members": [
+          3,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          2,
+          3,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          2
+        ],
+        "core_members": [
+          4,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          2,
+          4,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          2
+        ],
+        "core_members": [
+          4,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          2,
+          4,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          2
+        ],
+        "core_members": [
+          5,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          2,
+          5,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          3
+        ],
+        "core_members": [
+          0,
+          2
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          3,
+          0,
+          2
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          3
+        ],
+        "core_members": [
+          0,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          3,
+          0,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          3
+        ],
+        "core_members": [
+          0,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          3,
+          0,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          3
+        ],
+        "core_members": [
+          0,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          3,
+          0,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          3
+        ],
+        "core_members": [
+          2,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          3,
+          2,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          3
+        ],
+        "core_members": [
+          2,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          3,
+          2,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          3
+        ],
+        "core_members": [
+          2,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          3,
+          2,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          3
+        ],
+        "core_members": [
+          4,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          3
+        ],
+        "core_members": [
+          4,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          3,
+          4,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          3
+        ],
+        "core_members": [
+          5,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          3,
+          5,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          4
+        ],
+        "core_members": [
+          0,
+          2
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          4,
+          0,
+          2
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          4
+        ],
+        "core_members": [
+          0,
+          3
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          4,
+          0,
+          3
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          4
+        ],
+        "core_members": [
+          0,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          4,
+          0,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          4
+        ],
+        "core_members": [
+          0,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          4,
+          0,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          4
+        ],
+        "core_members": [
+          2,
+          3
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          4,
+          2,
+          3
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          4
+        ],
+        "core_members": [
+          2,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          4,
+          2,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          4
+        ],
+        "core_members": [
+          2,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          4,
+          2,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          4
+        ],
+        "core_members": [
+          3,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          4,
+          3,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          4
+        ],
+        "core_members": [
+          3,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          4,
+          3,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          4
+        ],
+        "core_members": [
+          5,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          4,
+          5,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          5
+        ],
+        "core_members": [
+          0,
+          2
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          5,
+          0,
+          2
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          5
+        ],
+        "core_members": [
+          0,
+          3
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          5,
+          0,
+          3
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          5
+        ],
+        "core_members": [
+          0,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          5,
+          0,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          5
+        ],
+        "core_members": [
+          0,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          5,
+          0,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          5
+        ],
+        "core_members": [
+          2,
+          3
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          5,
+          2,
+          3
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          5
+        ],
+        "core_members": [
+          2,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          5,
+          2,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          5
+        ],
+        "core_members": [
+          2,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          5,
+          2,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          5
+        ],
+        "core_members": [
+          3,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          5,
+          3,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          5
+        ],
+        "core_members": [
+          3,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          5,
+          3,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          5
+        ],
+        "core_members": [
+          4,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          5,
+          4,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          6
+        ],
+        "core_members": [
+          0,
+          2
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          6,
+          0,
+          2
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          6
+        ],
+        "core_members": [
+          0,
+          3
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          6,
+          0,
+          3
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          6
+        ],
+        "core_members": [
+          0,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          6,
+          0,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          6
+        ],
+        "core_members": [
+          0,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          6,
+          0,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          6
+        ],
+        "core_members": [
+          2,
+          3
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          6,
+          2,
+          3
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          6
+        ],
+        "core_members": [
+          2,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          6,
+          2,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          6
+        ],
+        "core_members": [
+          2,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          6,
+          2,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          6
+        ],
+        "core_members": [
+          3,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          6,
+          3,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          6
+        ],
+        "core_members": [
+          3,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          6,
+          3,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          1,
+          6
+        ],
+        "core_members": [
+          4,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          1,
+          6,
+          4,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          3
+        ],
+        "core_members": [
+          0,
+          1
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          3,
+          0,
+          1
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          3
+        ],
+        "core_members": [
+          0,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          3,
+          0,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          3
+        ],
+        "core_members": [
+          0,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          3,
+          0,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          3
+        ],
+        "core_members": [
+          0,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          3,
+          0,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          3
+        ],
+        "core_members": [
+          1,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          3,
+          1,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          3
+        ],
+        "core_members": [
+          1,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          3,
+          1,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          3
+        ],
+        "core_members": [
+          1,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          3,
+          1,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          3
+        ],
+        "core_members": [
+          4,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          3
+        ],
+        "core_members": [
+          4,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          3,
+          4,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          3
+        ],
+        "core_members": [
+          5,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          3,
+          5,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          4
+        ],
+        "core_members": [
+          0,
+          1
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          4,
+          0,
+          1
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          4
+        ],
+        "core_members": [
+          0,
+          3
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          4,
+          0,
+          3
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          4
+        ],
+        "core_members": [
+          0,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          4,
+          0,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          4
+        ],
+        "core_members": [
+          0,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          4,
+          0,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          4
+        ],
+        "core_members": [
+          1,
+          3
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          4,
+          1,
+          3
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          4
+        ],
+        "core_members": [
+          1,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          4,
+          1,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          4
+        ],
+        "core_members": [
+          1,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          4,
+          1,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          4
+        ],
+        "core_members": [
+          3,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          4,
+          3,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          4
+        ],
+        "core_members": [
+          3,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          4,
+          3,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          4
+        ],
+        "core_members": [
+          5,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          4,
+          5,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          5
+        ],
+        "core_members": [
+          0,
+          1
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          5,
+          0,
+          1
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          5
+        ],
+        "core_members": [
+          0,
+          3
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          5,
+          0,
+          3
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          5
+        ],
+        "core_members": [
+          0,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          5,
+          0,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          5
+        ],
+        "core_members": [
+          0,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          5,
+          0,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          5
+        ],
+        "core_members": [
+          1,
+          3
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          5,
+          1,
+          3
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          5
+        ],
+        "core_members": [
+          1,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          5,
+          1,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          5
+        ],
+        "core_members": [
+          1,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          5,
+          1,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          5
+        ],
+        "core_members": [
+          3,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          5,
+          3,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          5
+        ],
+        "core_members": [
+          3,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          5,
+          3,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          5
+        ],
+        "core_members": [
+          4,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          5,
+          4,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          6
+        ],
+        "core_members": [
+          0,
+          1
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          6,
+          0,
+          1
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          6
+        ],
+        "core_members": [
+          0,
+          3
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          6,
+          0,
+          3
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          6
+        ],
+        "core_members": [
+          0,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          6,
+          0,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          6
+        ],
+        "core_members": [
+          0,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          6,
+          0,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          6
+        ],
+        "core_members": [
+          1,
+          3
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          6,
+          1,
+          3
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          6
+        ],
+        "core_members": [
+          1,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          6,
+          1,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          6
+        ],
+        "core_members": [
+          1,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          6,
+          1,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          6
+        ],
+        "core_members": [
+          3,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          6,
+          3,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          6
+        ],
+        "core_members": [
+          3,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          6,
+          3,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          2,
+          6
+        ],
+        "core_members": [
+          4,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          2,
+          6,
+          4,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          3,
+          4
+        ],
+        "core_members": [
+          0,
+          1
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          3,
+          4,
+          0,
+          1
+        ]
+      },
+      {
+        "prerequisite_members": [
+          3,
+          4
+        ],
+        "core_members": [
+          0,
+          2
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          3,
+          4,
+          0,
+          2
+        ]
+      },
+      {
+        "prerequisite_members": [
+          3,
+          4
+        ],
+        "core_members": [
+          0,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          3,
+          4,
+          0,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          3,
+          4
+        ],
+        "core_members": [
+          0,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          3,
+          4,
+          0,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          3,
+          4
+        ],
+        "core_members": [
+          1,
+          2
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          3,
+          4,
+          1,
+          2
+        ]
+      },
+      {
+        "prerequisite_members": [
+          3,
+          4
+        ],
+        "core_members": [
+          1,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          3,
+          4,
+          1,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          3,
+          4
+        ],
+        "core_members": [
+          1,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          3,
+          4,
+          1,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          3,
+          4
+        ],
+        "core_members": [
+          2,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          3,
+          4,
+          2,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          3,
+          4
+        ],
+        "core_members": [
+          2,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          3,
+          4,
+          2,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          3,
+          4
+        ],
+        "core_members": [
+          5,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          3,
+          5
+        ],
+        "core_members": [
+          0,
+          1
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          3,
+          5,
+          0,
+          1
+        ]
+      },
+      {
+        "prerequisite_members": [
+          3,
+          5
+        ],
+        "core_members": [
+          0,
+          2
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          3,
+          5,
+          0,
+          2
+        ]
+      },
+      {
+        "prerequisite_members": [
+          3,
+          5
+        ],
+        "core_members": [
+          0,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          3,
+          5,
+          0,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          3,
+          5
+        ],
+        "core_members": [
+          0,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          3,
+          5,
+          0,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          3,
+          5
+        ],
+        "core_members": [
+          1,
+          2
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          3,
+          5,
+          1,
+          2
+        ]
+      },
+      {
+        "prerequisite_members": [
+          3,
+          5
+        ],
+        "core_members": [
+          1,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          3,
+          5,
+          1,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          3,
+          5
+        ],
+        "core_members": [
+          1,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          3,
+          5,
+          1,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          3,
+          5
+        ],
+        "core_members": [
+          2,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          3,
+          5,
+          2,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          3,
+          5
+        ],
+        "core_members": [
+          2,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          3,
+          5,
+          2,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          3,
+          5
+        ],
+        "core_members": [
+          4,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          3,
+          5,
+          4,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          3,
+          6
+        ],
+        "core_members": [
+          0,
+          1
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          3,
+          6,
+          0,
+          1
+        ]
+      },
+      {
+        "prerequisite_members": [
+          3,
+          6
+        ],
+        "core_members": [
+          0,
+          2
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          3,
+          6,
+          0,
+          2
+        ]
+      },
+      {
+        "prerequisite_members": [
+          3,
+          6
+        ],
+        "core_members": [
+          0,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          3,
+          6,
+          0,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          3,
+          6
+        ],
+        "core_members": [
+          0,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          3,
+          6,
+          0,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          3,
+          6
+        ],
+        "core_members": [
+          1,
+          2
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          3,
+          6,
+          1,
+          2
+        ]
+      },
+      {
+        "prerequisite_members": [
+          3,
+          6
+        ],
+        "core_members": [
+          1,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          3,
+          6,
+          1,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          3,
+          6
+        ],
+        "core_members": [
+          1,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          3,
+          6,
+          1,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          3,
+          6
+        ],
+        "core_members": [
+          2,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          3,
+          6,
+          2,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          3,
+          6
+        ],
+        "core_members": [
+          2,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          3,
+          6,
+          2,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          3,
+          6
+        ],
+        "core_members": [
+          4,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          3,
+          6,
+          4,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          4,
+          5
+        ],
+        "core_members": [
+          0,
+          1
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
         "activation_witness": [
           4,
           5,
@@ -354,12 +3342,178 @@
         ]
       },
       {
-        "seed_members": [
+        "prerequisite_members": [
+          4,
+          5
+        ],
+        "core_members": [
+          0,
+          2
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          4,
+          5,
+          0,
+          2
+        ]
+      },
+      {
+        "prerequisite_members": [
+          4,
+          5
+        ],
+        "core_members": [
+          0,
+          3
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          4,
+          5,
+          0,
+          3
+        ]
+      },
+      {
+        "prerequisite_members": [
+          4,
+          5
+        ],
+        "core_members": [
+          0,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          4,
+          5,
+          0,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          4,
+          5
+        ],
+        "core_members": [
+          1,
+          2
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          4,
+          5,
+          1,
+          2
+        ]
+      },
+      {
+        "prerequisite_members": [
+          4,
+          5
+        ],
+        "core_members": [
+          1,
+          3
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          4,
+          5,
+          1,
+          3
+        ]
+      },
+      {
+        "prerequisite_members": [
+          4,
+          5
+        ],
+        "core_members": [
+          1,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          4,
+          5,
+          1,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          4,
+          5
+        ],
+        "core_members": [
+          2,
+          3
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          4,
+          5,
+          2,
+          3
+        ]
+      },
+      {
+        "prerequisite_members": [
+          4,
+          5
+        ],
+        "core_members": [
+          2,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          4,
+          5,
+          2,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
+          4,
+          5
+        ],
+        "core_members": [
+          3,
+          6
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          4,
+          5,
+          3,
+          6
+        ]
+      },
+      {
+        "prerequisite_members": [
           4,
           6
         ],
-        "threshold_cover": "4",
-        "activation_cover": "10",
+        "core_members": [
+          0,
+          1
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
         "activation_witness": [
           4,
           6,
@@ -368,36 +3522,364 @@
         ]
       },
       {
-        "seed_members": [
+        "prerequisite_members": [
+          4,
+          6
+        ],
+        "core_members": [
+          0,
+          2
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          4,
+          6,
+          0,
+          2
+        ]
+      },
+      {
+        "prerequisite_members": [
+          4,
+          6
+        ],
+        "core_members": [
+          0,
+          3
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          4,
+          6,
+          0,
+          3
+        ]
+      },
+      {
+        "prerequisite_members": [
+          4,
+          6
+        ],
+        "core_members": [
+          0,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          4,
+          6,
+          0,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          4,
+          6
+        ],
+        "core_members": [
+          1,
+          2
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          4,
+          6,
+          1,
+          2
+        ]
+      },
+      {
+        "prerequisite_members": [
+          4,
+          6
+        ],
+        "core_members": [
+          1,
+          3
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          4,
+          6,
+          1,
+          3
+        ]
+      },
+      {
+        "prerequisite_members": [
+          4,
+          6
+        ],
+        "core_members": [
+          1,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          4,
+          6,
+          1,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          4,
+          6
+        ],
+        "core_members": [
+          2,
+          3
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          4,
+          6,
+          2,
+          3
+        ]
+      },
+      {
+        "prerequisite_members": [
+          4,
+          6
+        ],
+        "core_members": [
+          2,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          4,
+          6,
+          2,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
+          4,
+          6
+        ],
+        "core_members": [
+          3,
+          5
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          4,
+          6,
+          3,
+          5
+        ]
+      },
+      {
+        "prerequisite_members": [
           5,
           6
         ],
-        "threshold_cover": "4",
-        "activation_cover": "10",
+        "core_members": [
+          0,
+          1
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
         "activation_witness": [
           5,
           6,
           0,
           1
+        ]
+      },
+      {
+        "prerequisite_members": [
+          5,
+          6
+        ],
+        "core_members": [
+          0,
+          2
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          5,
+          6,
+          0,
+          2
+        ]
+      },
+      {
+        "prerequisite_members": [
+          5,
+          6
+        ],
+        "core_members": [
+          0,
+          3
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          5,
+          6,
+          0,
+          3
+        ]
+      },
+      {
+        "prerequisite_members": [
+          5,
+          6
+        ],
+        "core_members": [
+          0,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          5,
+          6,
+          0,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          5,
+          6
+        ],
+        "core_members": [
+          1,
+          2
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          5,
+          6,
+          1,
+          2
+        ]
+      },
+      {
+        "prerequisite_members": [
+          5,
+          6
+        ],
+        "core_members": [
+          1,
+          3
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          5,
+          6,
+          1,
+          3
+        ]
+      },
+      {
+        "prerequisite_members": [
+          5,
+          6
+        ],
+        "core_members": [
+          1,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          5,
+          6,
+          1,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          5,
+          6
+        ],
+        "core_members": [
+          2,
+          3
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          5,
+          6,
+          2,
+          3
+        ]
+      },
+      {
+        "prerequisite_members": [
+          5,
+          6
+        ],
+        "core_members": [
+          2,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          5,
+          6,
+          2,
+          4
+        ]
+      },
+      {
+        "prerequisite_members": [
+          5,
+          6
+        ],
+        "core_members": [
+          3,
+          4
+        ],
+        "threshold_cover": "2",
+        "activation_cover": "4",
+        "activation_witness": [
+          5,
+          6,
+          3,
+          4
         ]
       }
     ],
-    "all_seed_placements_tc_4_ac_10": true,
+    "all_role_assignments_tc_2_ac_4": true,
     "gate_disable_cases": [
       {
         "disabled_gate": "ordered_witness_certified",
         "selected_branch": "ROBUST_THRESHOLD_COVER_FALLBACK",
-        "certificate": "4",
+        "certificate": "2",
         "activation_certificate_emitted": false
       },
       {
         "disabled_gate": "exposure_sufficiency_certified",
         "selected_branch": "ROBUST_THRESHOLD_COVER_FALLBACK",
-        "certificate": "4",
+        "certificate": "2",
         "activation_certificate_emitted": false
       }
     ],
-    "all_activation_gate_failures_fall_back_to_4": true
+    "all_activation_gate_failures_fall_back_to_2": true
   },
   "claim_boundary": {
     "resistance_floor_status": "HYPOTHETICAL_NOT_MEASURED",
@@ -406,7 +3888,9 @@
     "production_validation": false,
     "measured_keyper_resistance": false,
     "new_chain_experiment": false,
-    "allowed_description": "deterministic counterfactual check on the pinned committee geometry",
+    "production_weight_geometry_reused": false,
+    "interpretation": "The gap comes from two equally priced prerequisite acquisitions under stipulated operational gates, not from purchasing higher-priced members first.",
+    "allowed_description": "deterministic equal-cost weighted counterfactual on a seven-member four-of-seven threshold",
     "forbidden_descriptions": [
       "Gnosis activation experiment",
       "production validation",

@@ -1,0 +1,26 @@
+{
+  "schema": "third-party-contract-cohort/v1",
+  "cohortId": "ethereum-mainnet-bonding-slashing-escrow-2026-08-01",
+  "frozenAt": "2026-08-01T00:00:00+08:00",
+  "chainId": 1,
+  "pinnedBlock": "25658467",
+  "pinnedBlockHash": "0x5fdd73a6e17f7190c3afca016c1bb67a67266ccac791dbac502575d2a4aa1b11",
+  "selectionRule": {
+    "network": "Ethereum mainnet only",
+    "source": "Address must appear on an official protocol deployment page or official protocol repository.",
+    "function": "Official description or contract name must directly concern staking deposits, operator/delegation state, slashing or penalties, liquidation, or escrow.",
+    "cap": "At most one subject per distinct functional role within a protocol; proxy and implementation are not double-counted.",
+    "exclusions": ["pure tokens", "view-only helpers", "treasuries", "generic registries or storage contracts", "contracts selected after observing screen results"]
+  },
+  "interpretation": "This is a purposive predeclared stress sample, not a prevalence estimate. FAIL_CLOSED means that the policy's evidence obligations were not discharged; it is not an insecurity claim.",
+  "subjects": [
+    {"id":"ethereum-deposit-contract","protocol":"Ethereum consensus deposits","role":"staking deposit baseline","address":"0x00000000219ab540356cbb839cbe05303d7705fa","officialSource":"https://docs.ssv.network/developers/smart-contracts/"},
+    {"id":"ssv-network","protocol":"SSV Network","role":"operator and cluster staking/liquidation","address":"0xdd9bc35ae942ef0cfa76930954a156b3ff30a4e1","officialSource":"https://docs.ssv.network/developers/smart-contracts/"},
+    {"id":"eigenlayer-delegation-manager","protocol":"EigenLayer","role":"delegation and restaking control","address":"0x39053d51b77dc0d36036fc1fcc8cb819df8ef37a","officialSource":"https://github.com/Layr-Labs/eigenlayer-contracts"},
+    {"id":"lido-staking-router","protocol":"Lido","role":"staking-module routing","address":"0xfddf38947afb03c621c71b06c9c70bce73f12999","officialSource":"https://docs.lido.fi/deployed-contracts/"},
+    {"id":"lido-deposit-security-module","protocol":"Lido","role":"deposit security","address":"0xf573e9e3de1f86b085417ab294f56e7920b4e9be","officialSource":"https://docs.lido.fi/deployed-contracts/"},
+    {"id":"lido-validator-strikes","protocol":"Lido","role":"validator strike accounting","address":"0xaa328816027f2d32b9f56d190bc9fa4a5c07637f","officialSource":"https://docs.lido.fi/deployed-contracts/"},
+    {"id":"lido-veto-signaling-escrow","protocol":"Lido","role":"governance veto escrow","address":"0x165813a31446a98c84e20dda8c101bb3c8228e1c","officialSource":"https://docs.lido.fi/deployed-contracts/"},
+    {"id":"rocket-pool-auction-manager","protocol":"Rocket Pool","role":"auction of slashed collateral","address":"0x1a2f00d187c9388fda3bf2dc46a6b4740849ecce","officialSource":"https://docs.rocketpool.net/protocol/contracts-integrations"}
+  ]
+}

@@ -1,0 +1,199 @@
+{
+  "schema": "third-party-closed-contract-screen/v2",
+  "subject": {
+    "address": "0x39053d51b77dc0d36036fc1fcc8cb819df8ef37a"
+  },
+  "policy": {
+    "id": "direct-closed-contract-incidence/v2",
+    "sha256": "60e3e175bc78587eb379c08bba6a68d2497afc39f89be501e7691c386b963f7f"
+  },
+  "inputs": {
+    "record": "D:\\paper_project\\third_party_contract_survey\\records\\eigenlayer-delegation-manager.json",
+    "recordSha256": "129c76963b02ef16cf2998b481a92e18545558cfa430c0caff9da6e8c7cbf26f",
+    "artifact": "D:\\paper_project\\third_party_contract_survey\\artifacts\\eigenlayer-delegation-manager.json",
+    "artifactSha256": "17f8d4871f591fbf3de76215ace734e39d292a5330cd14b5f4163025caa07aa0"
+  },
+  "runtime": {
+    "sha256": "9d264013c50ec73b6ed4f11020e345d6a7400f41688791725f422d76f66e2457",
+    "opcodes": {
+      "runtimeBytes": 2151,
+      "executableBytes": 2098,
+      "call": 0,
+      "callcode": 0,
+      "delegatecall": 2,
+      "staticcall": 0,
+      "create": 0,
+      "create2": 0,
+      "selfdestruct": 0
+    }
+  },
+  "abi": {
+    "mutatingEntries": [
+      "admin()",
+      "changeAdmin(address)",
+      "implementation()",
+      "upgradeTo(address)",
+      "upgradeToAndCall(address,bytes)"
+    ],
+    "fallbackOrReceive": true
+  },
+  "checks": [
+    {
+      "layer": "provenance",
+      "name": "recordSchema",
+      "status": "PASS",
+      "detail": "third-party-runtime-record/v1"
+    },
+    {
+      "layer": "provenance",
+      "name": "chainPin",
+      "status": "PASS",
+      "detail": "1:25658467:0x5fdd73a6e17f7190c3afca016c1bb67a67266ccac791dbac502575d2a4aa1b11"
+    },
+    {
+      "layer": "provenance",
+      "name": "runtimeHash",
+      "status": "PASS",
+      "detail": "9d264013c50ec73b6ed4f11020e345d6a7400f41688791725f422d76f66e2457"
+    },
+    {
+      "layer": "identity",
+      "name": "directCreation",
+      "status": "PASS",
+      "detail": "top-level creation"
+    },
+    {
+      "layer": "identity",
+      "name": "successfulReceipt",
+      "status": "PASS",
+      "detail": "success"
+    },
+    {
+      "layer": "identity",
+      "name": "creationBytecodePrefix",
+      "status": "PASS",
+      "detail": "deployment input begins with verified creation bytecode"
+    },
+    {
+      "layer": "template",
+      "name": "artifactHash",
+      "status": "PASS",
+      "detail": "17f8d4871f591fbf3de76215ace734e39d292a5330cd14b5f4163025caa07aa0"
+    },
+    {
+      "layer": "template",
+      "name": "runtimeTemplateModuloRelocations",
+      "status": "PASS",
+      "detail": "exact template match outside 0 immutable and 0 link-reference ranges"
+    },
+    {
+      "layer": "controlFlow",
+      "name": "forbid:callcode",
+      "status": "PASS",
+      "detail": "0 executable occurrences"
+    },
+    {
+      "layer": "controlFlow",
+      "name": "forbid:delegatecall",
+      "status": "FAIL",
+      "detail": "2 executable occurrences"
+    },
+    {
+      "layer": "controlFlow",
+      "name": "forbid:create",
+      "status": "PASS",
+      "detail": "0 executable occurrences"
+    },
+    {
+      "layer": "controlFlow",
+      "name": "forbid:create2",
+      "status": "PASS",
+      "detail": "0 executable occurrences"
+    },
+    {
+      "layer": "controlFlow",
+      "name": "forbid:selfdestruct",
+      "status": "PASS",
+      "detail": "0 executable occurrences"
+    },
+    {
+      "layer": "controlFlow",
+      "name": "proxySlots",
+      "status": "FAIL",
+      "detail": "nonzero slots: implementation"
+    },
+    {
+      "layer": "controlFlow",
+      "name": "minimalProxyFingerprint",
+      "status": "PASS",
+      "detail": "not the standard EIP-1167 runtime"
+    },
+    {
+      "layer": "abi",
+      "name": "abiAvailable",
+      "status": "PASS",
+      "detail": "5 mutating entries"
+    },
+    {
+      "layer": "abi",
+      "name": "mutatingEntryClosure",
+      "status": "NOT_EVALUATED",
+      "detail": "[\"admin()\",\"changeAdmin(address)\",\"implementation()\",\"upgradeTo(address)\",\"upgradeToAndCall(address,bytes)\"]"
+    },
+    {
+      "layer": "semanticIncidence",
+      "name": "entryClosure",
+      "status": "NOT_EVALUATED",
+      "detail": "no contract-specific machine-checkable evidence supplied"
+    },
+    {
+      "layer": "semanticIncidence",
+      "name": "payerSeparation",
+      "status": "NOT_EVALUATED",
+      "detail": "no contract-specific machine-checkable evidence supplied"
+    },
+    {
+      "layer": "semanticIncidence",
+      "name": "paymentPreservation",
+      "status": "NOT_EVALUATED",
+      "detail": "no contract-specific machine-checkable evidence supplied"
+    },
+    {
+      "layer": "semanticIncidence",
+      "name": "backwardRealization",
+      "status": "NOT_EVALUATED",
+      "detail": "no contract-specific machine-checkable evidence supplied"
+    },
+    {
+      "layer": "semanticIncidence",
+      "name": "terminalEquivalence",
+      "status": "NOT_EVALUATED",
+      "detail": "no contract-specific machine-checkable evidence supplied"
+    },
+    {
+      "layer": "semanticIncidence",
+      "name": "offsetClosure",
+      "status": "NOT_EVALUATED",
+      "detail": "no contract-specific machine-checkable evidence supplied"
+    }
+  ],
+  "commonStaticScreen": "FAIL",
+  "commonStaticReasons": [
+    "controlFlow/forbid:delegatecall:FAIL",
+    "controlFlow/proxySlots:FAIL"
+  ],
+  "abiInventory": "AVAILABLE",
+  "closedContractAdmission": "FAIL_CLOSED",
+  "blockingReasons": [
+    "controlFlow/forbid:delegatecall:FAIL",
+    "controlFlow/proxySlots:FAIL",
+    "abi/mutatingEntryClosure:NOT_EVALUATED",
+    "semanticIncidence/entryClosure:NOT_EVALUATED",
+    "semanticIncidence/payerSeparation:NOT_EVALUATED",
+    "semanticIncidence/paymentPreservation:NOT_EVALUATED",
+    "semanticIncidence/backwardRealization:NOT_EVALUATED",
+    "semanticIncidence/terminalEquivalence:NOT_EVALUATED",
+    "semanticIncidence/offsetClosure:NOT_EVALUATED"
+  ],
+  "interpretation": "This is a fail-closed screening result. It does not establish insecurity; missing semantic evidence and a violated bytecode condition are reported separately."
+}

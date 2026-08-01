@@ -1,0 +1,190 @@
+{
+  "schema": "third-party-closed-contract-screen/v2",
+  "subject": {
+    "address": "0x00000000219ab540356cbb839cbe05303d7705fa"
+  },
+  "policy": {
+    "id": "direct-closed-contract-incidence/v2",
+    "sha256": "60e3e175bc78587eb379c08bba6a68d2497afc39f89be501e7691c386b963f7f"
+  },
+  "inputs": {
+    "record": "D:\\paper_project\\third_party_contract_survey\\records\\ethereum-deposit-contract.json",
+    "recordSha256": "9da93ad5e9239f0df368c73e30306e71abe274de661f9e220cfdc0895b6ebcce",
+    "artifact": "D:\\paper_project\\third_party_contract_survey\\artifacts\\ethereum-deposit-contract.json",
+    "artifactSha256": "084307e2a8e0f66c4547afe0795a028f78255bc220ff78877e39e06eb5241815"
+  },
+  "runtime": {
+    "sha256": "5aaa8327c5765ec883224895ca02cade2871e12dad0197bdc791efc91c7ef18d",
+    "opcodes": {
+      "runtimeBytes": 6358,
+      "executableBytes": 6305,
+      "call": 0,
+      "callcode": 0,
+      "delegatecall": 0,
+      "staticcall": 11,
+      "create": 0,
+      "create2": 0,
+      "selfdestruct": 0
+    }
+  },
+  "abi": {
+    "mutatingEntries": [
+      "deposit(bytes,bytes,bytes,bytes32)"
+    ],
+    "fallbackOrReceive": false
+  },
+  "checks": [
+    {
+      "layer": "provenance",
+      "name": "recordSchema",
+      "status": "PASS",
+      "detail": "third-party-runtime-record/v1"
+    },
+    {
+      "layer": "provenance",
+      "name": "chainPin",
+      "status": "PASS",
+      "detail": "1:25658467:0x5fdd73a6e17f7190c3afca016c1bb67a67266ccac791dbac502575d2a4aa1b11"
+    },
+    {
+      "layer": "provenance",
+      "name": "runtimeHash",
+      "status": "PASS",
+      "detail": "5aaa8327c5765ec883224895ca02cade2871e12dad0197bdc791efc91c7ef18d"
+    },
+    {
+      "layer": "identity",
+      "name": "directCreation",
+      "status": "PASS",
+      "detail": "top-level creation"
+    },
+    {
+      "layer": "identity",
+      "name": "successfulReceipt",
+      "status": "PASS",
+      "detail": "success"
+    },
+    {
+      "layer": "identity",
+      "name": "creationBytecodePrefix",
+      "status": "PASS",
+      "detail": "deployment input begins with verified creation bytecode"
+    },
+    {
+      "layer": "template",
+      "name": "artifactHash",
+      "status": "PASS",
+      "detail": "084307e2a8e0f66c4547afe0795a028f78255bc220ff78877e39e06eb5241815"
+    },
+    {
+      "layer": "template",
+      "name": "runtimeTemplateModuloRelocations",
+      "status": "PASS",
+      "detail": "exact template match outside 0 immutable and 0 link-reference ranges"
+    },
+    {
+      "layer": "controlFlow",
+      "name": "forbid:callcode",
+      "status": "PASS",
+      "detail": "0 executable occurrences"
+    },
+    {
+      "layer": "controlFlow",
+      "name": "forbid:delegatecall",
+      "status": "PASS",
+      "detail": "0 executable occurrences"
+    },
+    {
+      "layer": "controlFlow",
+      "name": "forbid:create",
+      "status": "PASS",
+      "detail": "0 executable occurrences"
+    },
+    {
+      "layer": "controlFlow",
+      "name": "forbid:create2",
+      "status": "PASS",
+      "detail": "0 executable occurrences"
+    },
+    {
+      "layer": "controlFlow",
+      "name": "forbid:selfdestruct",
+      "status": "PASS",
+      "detail": "0 executable occurrences"
+    },
+    {
+      "layer": "controlFlow",
+      "name": "proxySlots",
+      "status": "PASS",
+      "detail": "implementation/admin/beacon slots are zero"
+    },
+    {
+      "layer": "controlFlow",
+      "name": "minimalProxyFingerprint",
+      "status": "PASS",
+      "detail": "not the standard EIP-1167 runtime"
+    },
+    {
+      "layer": "abi",
+      "name": "abiAvailable",
+      "status": "PASS",
+      "detail": "1 mutating entries"
+    },
+    {
+      "layer": "abi",
+      "name": "mutatingEntryClosure",
+      "status": "NOT_EVALUATED",
+      "detail": "[\"deposit(bytes,bytes,bytes,bytes32)\"]"
+    },
+    {
+      "layer": "semanticIncidence",
+      "name": "entryClosure",
+      "status": "NOT_EVALUATED",
+      "detail": "no contract-specific machine-checkable evidence supplied"
+    },
+    {
+      "layer": "semanticIncidence",
+      "name": "payerSeparation",
+      "status": "NOT_EVALUATED",
+      "detail": "no contract-specific machine-checkable evidence supplied"
+    },
+    {
+      "layer": "semanticIncidence",
+      "name": "paymentPreservation",
+      "status": "NOT_EVALUATED",
+      "detail": "no contract-specific machine-checkable evidence supplied"
+    },
+    {
+      "layer": "semanticIncidence",
+      "name": "backwardRealization",
+      "status": "NOT_EVALUATED",
+      "detail": "no contract-specific machine-checkable evidence supplied"
+    },
+    {
+      "layer": "semanticIncidence",
+      "name": "terminalEquivalence",
+      "status": "NOT_EVALUATED",
+      "detail": "no contract-specific machine-checkable evidence supplied"
+    },
+    {
+      "layer": "semanticIncidence",
+      "name": "offsetClosure",
+      "status": "NOT_EVALUATED",
+      "detail": "no contract-specific machine-checkable evidence supplied"
+    }
+  ],
+  "commonStaticScreen": "PASS",
+  "commonStaticReasons": [],
+  "abiInventory": "AVAILABLE",
+  "closedContractAdmission": "FAIL_CLOSED",
+  "blockingReasons": [
+    "abi/mutatingEntryClosure:NOT_EVALUATED",
+    "semanticIncidence/entryClosure:NOT_EVALUATED",
+    "semanticIncidence/payerSeparation:NOT_EVALUATED",
+    "semanticIncidence/paymentPreservation:NOT_EVALUATED",
+    "semanticIncidence/backwardRealization:NOT_EVALUATED",
+    "semanticIncidence/terminalEquivalence:NOT_EVALUATED",
+    "semanticIncidence/offsetClosure:NOT_EVALUATED"
+  ],
+  "interpretation": "This is a fail-closed screening result. It does not establish insecurity; missing semantic evidence and a violated bytecode condition are reported separately."
+}

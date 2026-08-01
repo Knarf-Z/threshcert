@@ -1,0 +1,28 @@
+{
+  "id": "direct-closed-contract-incidence/v2",
+  "requiredLayers": [
+    "provenance",
+    "identity",
+    "template",
+    "controlFlow",
+    "abi",
+    "semanticIncidence"
+  ],
+  "forbiddenOpcodes": [
+    "callcode",
+    "delegatecall",
+    "create",
+    "create2",
+    "selfdestruct"
+  ],
+  "requireZeroProxySlots": true,
+  "forbidFallbackOrReceive": false,
+  "requiredSemanticChecks": [
+    "entryClosure",
+    "payerSeparation",
+    "paymentPreservation",
+    "backwardRealization",
+    "terminalEquivalence",
+    "offsetClosure"
+  ]
+}

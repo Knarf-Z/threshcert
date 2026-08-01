@@ -1,0 +1,302 @@
+{
+  "schema": "third-party-contract-survey-aggregate/v2",
+  "cohort": {
+    "id": "ethereum-mainnet-bonding-slashing-escrow-2026-08-01",
+    "chainId": 1,
+    "pinnedBlock": "25658467",
+    "pinnedBlockHash": "0x5fdd73a6e17f7190c3afca016c1bb67a67266ccac791dbac502575d2a4aa1b11",
+    "subjectCount": 8,
+    "selectionRule": {
+      "network": "Ethereum mainnet only",
+      "source": "Address must appear on an official protocol deployment page or official protocol repository.",
+      "function": "Official description or contract name must directly concern staking deposits, operator/delegation state, slashing or penalties, liquidation, or escrow.",
+      "cap": "At most one subject per distinct functional role within a protocol; proxy and implementation are not double-counted.",
+      "exclusions": [
+        "pure tokens",
+        "view-only helpers",
+        "treasuries",
+        "generic registries or storage contracts",
+        "contracts selected after observing screen results"
+      ]
+    }
+  },
+  "interpretation": {
+    "sampling": "Purposive predeclared stress sample; no prevalence estimate is claimed.",
+    "commonStaticPass": "All reusable provenance, direct-creation identity, runtime-template, and direct-control-flow checks passed. This is only a candidate for contract-specific semantic analysis.",
+    "failClosed": "The required evidence was not fully discharged. This is not a claim that the contract or protocol is insecure."
+  },
+  "counts": {
+    "commonStaticPass": 1,
+    "commonStaticFail": 6,
+    "commonStaticIncomplete": 1,
+    "abiAvailable": 5,
+    "fullAdmissionPass": 0,
+    "fullAdmissionFailClosed": 8,
+    "delegatecallPolicyFail": 5,
+    "proxySlotFail": 4,
+    "minimalProxyFail": 1
+  },
+  "rows": [
+    {
+      "id": "ethereum-deposit-contract",
+      "protocol": "Ethereum consensus deposits",
+      "role": "staking deposit baseline",
+      "address": "0x00000000219ab540356cbb839cbe05303d7705fa",
+      "officialSource": "https://docs.ssv.network/developers/smart-contracts/",
+      "commonStaticScreen": "PASS",
+      "abiInventory": "AVAILABLE",
+      "directCreation": "PASS",
+      "runtimeTemplate": "PASS",
+      "delegatecallPolicy": "PASS",
+      "proxySlots": "PASS",
+      "minimalProxy": "PASS",
+      "closedContractAdmission": "FAIL_CLOSED",
+      "commonStaticReasons": [],
+      "blockingReasons": [
+        "abi/mutatingEntryClosure:NOT_EVALUATED",
+        "semanticIncidence/entryClosure:NOT_EVALUATED",
+        "semanticIncidence/payerSeparation:NOT_EVALUATED",
+        "semanticIncidence/paymentPreservation:NOT_EVALUATED",
+        "semanticIncidence/backwardRealization:NOT_EVALUATED",
+        "semanticIncidence/terminalEquivalence:NOT_EVALUATED",
+        "semanticIncidence/offsetClosure:NOT_EVALUATED"
+      ]
+    },
+    {
+      "id": "ssv-network",
+      "protocol": "SSV Network",
+      "role": "operator and cluster staking/liquidation",
+      "address": "0xdd9bc35ae942ef0cfa76930954a156b3ff30a4e1",
+      "officialSource": "https://docs.ssv.network/developers/smart-contracts/",
+      "commonStaticScreen": "FAIL",
+      "abiInventory": "AVAILABLE",
+      "directCreation": "PASS",
+      "runtimeTemplate": "PASS",
+      "delegatecallPolicy": "FAIL",
+      "proxySlots": "FAIL",
+      "minimalProxy": "PASS",
+      "closedContractAdmission": "FAIL_CLOSED",
+      "commonStaticReasons": [
+        "controlFlow/forbid:delegatecall:FAIL",
+        "controlFlow/proxySlots:FAIL"
+      ],
+      "blockingReasons": [
+        "controlFlow/forbid:delegatecall:FAIL",
+        "controlFlow/proxySlots:FAIL",
+        "abi/mutatingEntryClosure:NOT_EVALUATED",
+        "semanticIncidence/entryClosure:NOT_EVALUATED",
+        "semanticIncidence/payerSeparation:NOT_EVALUATED",
+        "semanticIncidence/paymentPreservation:NOT_EVALUATED",
+        "semanticIncidence/backwardRealization:NOT_EVALUATED",
+        "semanticIncidence/terminalEquivalence:NOT_EVALUATED",
+        "semanticIncidence/offsetClosure:NOT_EVALUATED"
+      ]
+    },
+    {
+      "id": "eigenlayer-delegation-manager",
+      "protocol": "EigenLayer",
+      "role": "delegation and restaking control",
+      "address": "0x39053d51b77dc0d36036fc1fcc8cb819df8ef37a",
+      "officialSource": "https://github.com/Layr-Labs/eigenlayer-contracts",
+      "commonStaticScreen": "FAIL",
+      "abiInventory": "AVAILABLE",
+      "directCreation": "PASS",
+      "runtimeTemplate": "PASS",
+      "delegatecallPolicy": "FAIL",
+      "proxySlots": "FAIL",
+      "minimalProxy": "PASS",
+      "closedContractAdmission": "FAIL_CLOSED",
+      "commonStaticReasons": [
+        "controlFlow/forbid:delegatecall:FAIL",
+        "controlFlow/proxySlots:FAIL"
+      ],
+      "blockingReasons": [
+        "controlFlow/forbid:delegatecall:FAIL",
+        "controlFlow/proxySlots:FAIL",
+        "abi/mutatingEntryClosure:NOT_EVALUATED",
+        "semanticIncidence/entryClosure:NOT_EVALUATED",
+        "semanticIncidence/payerSeparation:NOT_EVALUATED",
+        "semanticIncidence/paymentPreservation:NOT_EVALUATED",
+        "semanticIncidence/backwardRealization:NOT_EVALUATED",
+        "semanticIncidence/terminalEquivalence:NOT_EVALUATED",
+        "semanticIncidence/offsetClosure:NOT_EVALUATED"
+      ]
+    },
+    {
+      "id": "lido-staking-router",
+      "protocol": "Lido",
+      "role": "staking-module routing",
+      "address": "0xfddf38947afb03c621c71b06c9c70bce73f12999",
+      "officialSource": "https://docs.lido.fi/deployed-contracts/",
+      "commonStaticScreen": "FAIL",
+      "abiInventory": "AVAILABLE",
+      "directCreation": "PASS",
+      "runtimeTemplate": "PASS",
+      "delegatecallPolicy": "FAIL",
+      "proxySlots": "FAIL",
+      "minimalProxy": "PASS",
+      "closedContractAdmission": "FAIL_CLOSED",
+      "commonStaticReasons": [
+        "controlFlow/forbid:delegatecall:FAIL",
+        "controlFlow/proxySlots:FAIL"
+      ],
+      "blockingReasons": [
+        "controlFlow/forbid:delegatecall:FAIL",
+        "controlFlow/proxySlots:FAIL",
+        "abi/mutatingEntryClosure:NOT_EVALUATED",
+        "semanticIncidence/entryClosure:NOT_EVALUATED",
+        "semanticIncidence/payerSeparation:NOT_EVALUATED",
+        "semanticIncidence/paymentPreservation:NOT_EVALUATED",
+        "semanticIncidence/backwardRealization:NOT_EVALUATED",
+        "semanticIncidence/terminalEquivalence:NOT_EVALUATED",
+        "semanticIncidence/offsetClosure:NOT_EVALUATED"
+      ]
+    },
+    {
+      "id": "lido-deposit-security-module",
+      "protocol": "Lido",
+      "role": "deposit security",
+      "address": "0xf573e9e3de1f86b085417ab294f56e7920b4e9be",
+      "officialSource": "https://docs.lido.fi/deployed-contracts/",
+      "commonStaticScreen": "INCOMPLETE",
+      "abiInventory": "NOT_EVALUATED",
+      "directCreation": "NOT_EVALUATED",
+      "runtimeTemplate": "NOT_EVALUATED",
+      "delegatecallPolicy": "PASS",
+      "proxySlots": "PASS",
+      "minimalProxy": "PASS",
+      "closedContractAdmission": "FAIL_CLOSED",
+      "commonStaticReasons": [
+        "identity/directCreation:NOT_EVALUATED",
+        "identity/successfulReceipt:NOT_EVALUATED",
+        "identity/creationBytecodePrefix:NOT_EVALUATED",
+        "template/artifactHash:NOT_EVALUATED",
+        "template/runtimeTemplateModuloRelocations:NOT_EVALUATED"
+      ],
+      "blockingReasons": [
+        "identity/directCreation:NOT_EVALUATED",
+        "identity/successfulReceipt:NOT_EVALUATED",
+        "identity/creationBytecodePrefix:NOT_EVALUATED",
+        "template/artifactHash:NOT_EVALUATED",
+        "template/runtimeTemplateModuloRelocations:NOT_EVALUATED",
+        "abi/abiAvailable:NOT_EVALUATED",
+        "semanticIncidence/entryClosure:NOT_EVALUATED",
+        "semanticIncidence/payerSeparation:NOT_EVALUATED",
+        "semanticIncidence/paymentPreservation:NOT_EVALUATED",
+        "semanticIncidence/backwardRealization:NOT_EVALUATED",
+        "semanticIncidence/terminalEquivalence:NOT_EVALUATED",
+        "semanticIncidence/offsetClosure:NOT_EVALUATED"
+      ]
+    },
+    {
+      "id": "lido-validator-strikes",
+      "protocol": "Lido",
+      "role": "validator strike accounting",
+      "address": "0xaa328816027f2d32b9f56d190bc9fa4a5c07637f",
+      "officialSource": "https://docs.lido.fi/deployed-contracts/",
+      "commonStaticScreen": "FAIL",
+      "abiInventory": "NOT_EVALUATED",
+      "directCreation": "NOT_EVALUATED",
+      "runtimeTemplate": "NOT_EVALUATED",
+      "delegatecallPolicy": "FAIL",
+      "proxySlots": "FAIL",
+      "minimalProxy": "PASS",
+      "closedContractAdmission": "FAIL_CLOSED",
+      "commonStaticReasons": [
+        "controlFlow/forbid:delegatecall:FAIL",
+        "controlFlow/proxySlots:FAIL",
+        "identity/directCreation:NOT_EVALUATED",
+        "identity/successfulReceipt:NOT_EVALUATED",
+        "identity/creationBytecodePrefix:NOT_EVALUATED",
+        "template/artifactHash:NOT_EVALUATED",
+        "template/runtimeTemplateModuloRelocations:NOT_EVALUATED"
+      ],
+      "blockingReasons": [
+        "identity/directCreation:NOT_EVALUATED",
+        "identity/successfulReceipt:NOT_EVALUATED",
+        "identity/creationBytecodePrefix:NOT_EVALUATED",
+        "template/artifactHash:NOT_EVALUATED",
+        "template/runtimeTemplateModuloRelocations:NOT_EVALUATED",
+        "controlFlow/forbid:delegatecall:FAIL",
+        "controlFlow/proxySlots:FAIL",
+        "abi/abiAvailable:NOT_EVALUATED",
+        "semanticIncidence/entryClosure:NOT_EVALUATED",
+        "semanticIncidence/payerSeparation:NOT_EVALUATED",
+        "semanticIncidence/paymentPreservation:NOT_EVALUATED",
+        "semanticIncidence/backwardRealization:NOT_EVALUATED",
+        "semanticIncidence/terminalEquivalence:NOT_EVALUATED",
+        "semanticIncidence/offsetClosure:NOT_EVALUATED"
+      ]
+    },
+    {
+      "id": "lido-veto-signaling-escrow",
+      "protocol": "Lido",
+      "role": "governance veto escrow",
+      "address": "0x165813a31446a98c84e20dda8c101bb3c8228e1c",
+      "officialSource": "https://docs.lido.fi/deployed-contracts/",
+      "commonStaticScreen": "FAIL",
+      "abiInventory": "NOT_EVALUATED",
+      "directCreation": "NOT_EVALUATED",
+      "runtimeTemplate": "NOT_EVALUATED",
+      "delegatecallPolicy": "FAIL",
+      "proxySlots": "PASS",
+      "minimalProxy": "FAIL",
+      "closedContractAdmission": "FAIL_CLOSED",
+      "commonStaticReasons": [
+        "controlFlow/forbid:delegatecall:FAIL",
+        "controlFlow/minimalProxyFingerprint:FAIL",
+        "identity/directCreation:NOT_EVALUATED",
+        "identity/successfulReceipt:NOT_EVALUATED",
+        "identity/creationBytecodePrefix:NOT_EVALUATED",
+        "template/artifactHash:NOT_EVALUATED",
+        "template/runtimeTemplateModuloRelocations:NOT_EVALUATED"
+      ],
+      "blockingReasons": [
+        "identity/directCreation:NOT_EVALUATED",
+        "identity/successfulReceipt:NOT_EVALUATED",
+        "identity/creationBytecodePrefix:NOT_EVALUATED",
+        "template/artifactHash:NOT_EVALUATED",
+        "template/runtimeTemplateModuloRelocations:NOT_EVALUATED",
+        "controlFlow/forbid:delegatecall:FAIL",
+        "controlFlow/minimalProxyFingerprint:FAIL",
+        "abi/abiAvailable:NOT_EVALUATED",
+        "semanticIncidence/entryClosure:NOT_EVALUATED",
+        "semanticIncidence/payerSeparation:NOT_EVALUATED",
+        "semanticIncidence/paymentPreservation:NOT_EVALUATED",
+        "semanticIncidence/backwardRealization:NOT_EVALUATED",
+        "semanticIncidence/terminalEquivalence:NOT_EVALUATED",
+        "semanticIncidence/offsetClosure:NOT_EVALUATED"
+      ]
+    },
+    {
+      "id": "rocket-pool-auction-manager",
+      "protocol": "Rocket Pool",
+      "role": "auction of slashed collateral",
+      "address": "0x1a2f00d187c9388fda3bf2dc46a6b4740849ecce",
+      "officialSource": "https://docs.rocketpool.net/protocol/contracts-integrations",
+      "commonStaticScreen": "FAIL",
+      "abiInventory": "AVAILABLE",
+      "directCreation": "PASS",
+      "runtimeTemplate": "FAIL",
+      "delegatecallPolicy": "PASS",
+      "proxySlots": "PASS",
+      "minimalProxy": "PASS",
+      "closedContractAdmission": "FAIL_CLOSED",
+      "commonStaticReasons": [
+        "identity/creationBytecodePrefix:FAIL",
+        "template/runtimeTemplateModuloRelocations:FAIL"
+      ],
+      "blockingReasons": [
+        "identity/creationBytecodePrefix:FAIL",
+        "template/runtimeTemplateModuloRelocations:FAIL",
+        "abi/mutatingEntryClosure:NOT_EVALUATED",
+        "semanticIncidence/entryClosure:NOT_EVALUATED",
+        "semanticIncidence/payerSeparation:NOT_EVALUATED",
+        "semanticIncidence/paymentPreservation:NOT_EVALUATED",
+        "semanticIncidence/backwardRealization:NOT_EVALUATED",
+        "semanticIncidence/terminalEquivalence:NOT_EVALUATED",
+        "semanticIncidence/offsetClosure:NOT_EVALUATED"
+      ]
+    }
+  ]
+}

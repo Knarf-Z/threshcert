@@ -24,6 +24,10 @@ run(process.execPath, ["verify_deployment_admission.mjs"], path.join(root, "join
 run(process.execPath, ["verify_deployment_admission_negative.mjs"], path.join(root, "joint_incidence_refinement"));
 run(process.execPath, ["verify_refinement.mjs"], path.join(root, "joint_incidence_refinement"));
 python(["verify_schema_independent.py"], path.join(root, "joint_incidence_refinement"));
+const surveyRoot = path.join(root, "third_party_contract_survey");
+run(process.execPath, ["test_screen_contract_v2.mjs"], surveyRoot);
+run(process.execPath, ["aggregate_results_v2.mjs"], surveyRoot);
+run(process.execPath, ["verify_manifest_v2.mjs"], surveyRoot);
 for (const script of [
   "test_equivalence.py",
   "information_boundary.py",

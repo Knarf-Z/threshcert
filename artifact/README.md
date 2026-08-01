@@ -20,7 +20,7 @@ The command verifies the root manifest, recomputes the pinned Gnosis production
 snapshot certificate, checks both preserved Chiado result files, their full
 identifiers and six-contract 0.108-xDAI settlement plan, checks the declared
 finite transaction schema and preserved formal certificate with independent Node and Python implementations,
-and runs the core formula checks. It performs no network access or chain write.
+runs the fixed third-party contract stress-cohort checks and 41-entry survey manifest, and runs the core formula checks. It performs no network access or chain write.
 
 The joint-incidence certificate reports `CONFIGURATION_PREFIX_TOTALITY=PASS`
 and `POSTCONFIGURATION_EVM_TO_SCHEMA_BRIDGE=PASS` only for an admitted Cancun
@@ -76,6 +76,7 @@ equality, and the recorded coverage condition.
 - `joint_incidence_refinement/`: finite-schema checkers, Solidity/Hardhat
   fixture, deployment capture/admission and tamper checkers, Foundry/Halmos
   harness, preserved certificates/log, locked build metadata, and tests.
+- `third_party_contract_survey/`: fixed eight-contract stress cohort, pinned inputs, reusable static-policy checker, aggregate outputs, and 41-entry manifest.
 - `chiado_public_runs/`: TraceThenSlash source, build metadata, deployment and
   read-only verification scripts, plus both canonical result JSON files.
 

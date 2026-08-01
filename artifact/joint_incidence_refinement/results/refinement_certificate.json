@@ -13,7 +13,7 @@
     "halmosCertificate": "results/halmos_evm_bridge.json",
     "halmosCertificateSha256": "c9b87c09de718e66d39b87be6d37c8bf770d80bbef38a77928f43590fe8f47bc",
     "halmosRunner": "scripts/run_halmos_bridge.py",
-    "halmosRunnerSha256": "90ba99df844d5fedda4315940c2e04c5fa532740a21b74007652eb50950b26ac",
+    "halmosRunnerSha256": "e61c5dae343727cf13a367f4e495d8ff4329ca11eb1632b85c39bad71f31dbc5",
     "halmosTranscript": "results/halmos_evm_bridge.log",
     "halmosTranscriptSha256": "596200c5630c7a040a41a81af0a3bb158c9100e0e4b814d020b194dbd52cdba3",
     "deploymentAdmissionRecord": "results/deployment_admission_local.json",

@@ -6,8 +6,9 @@ evidence-gated slashing. This complete bundle contains a pinned production
 deployment evidence audit, all original certificate, activation, allocation,
 exact-solver, defense-lattice, Möbius, penalty-evidence, Dune/GPv2, and public
 Chiado pilot materials, the generalized committee-shape and boundary-parameter
-sweeps, and an independent from-scratch reimplementation that cross-checks
-the paper's own numbers. The three added scalability, parameter-sensitivity,
+sweeps, and a separately written from-scratch reimplementation produced
+within the authoring process. It can expose transcription errors but is not an
+independent replication. The three added scalability, parameter-sensitivity,
 and baseline-comparison studies remain isolated in `extended_experiments/`,
 so reproducing them does not overwrite the original experiment results.
 
@@ -25,6 +26,16 @@ and secrets.
 defines every experiment and its interpretation boundary.
 
 ## Contents
+- `scripts/run_floor_admission_experiment.py`: rejects unsupported or inflated
+  floor reports and admits only member-bound, automatically forfeitable value
+  net of certified recovery and reimbursement caps; it records seven scenarios,
+  10,000 seeded soundness checks, and all 128 disclosure subsets.
+- `scripts/run_refresh_window_experiment.py`: compares persistent and
+  refresh-erased shares under identical per-epoch ledgers, then checks duration
+  monotonicity and epoch decomposition on 5,000 seeded instances.
+- `results/floor_admission_experiment.json` and
+  `results/refresh_window_experiment.json`: canonical machine-readable outputs
+  for those two experiments.
 
 - `data/shutter_keyper_snapshot.json`: the production committee snapshot pinned
   to Gnosis block `46,666,718` and its block hash.
@@ -131,6 +142,8 @@ The equivalent individual commands are:
 python scripts/run_controlled_checks.py
 python scripts/run_production_evidence_audit.py
 python scripts/run_gnosis_counterfactual.py
+python scripts/run_floor_admission_experiment.py
+python scripts/run_refresh_window_experiment.py
 python scripts/verify_certificate.py \
   --snapshot data/shutter_keyper_snapshot.json \
   --ledger data/evidence_ledger_public_only.csv \
@@ -334,6 +347,8 @@ Run the small offline branch check with:
 
 ```bash
 python scripts/run_gnosis_counterfactual.py
+python scripts/run_floor_admission_experiment.py
+python scripts/run_refresh_window_experiment.py
 ```
 
 The separate ledger `I_cf` has seven members, threshold `4/7`, weights

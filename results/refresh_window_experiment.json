@@ -1,0 +1,65 @@
+{
+  "claimBoundary": {
+    "erasureRequiredForSnapshotInfimum": true,
+    "latencyEvidenceRequiredForRefreshBenefit": true,
+    "unknownCrossEpochCompatibility": "WINDOW_CERTIFICATE_NOT_IDENTIFIED"
+  },
+  "durationLadder": [
+    {
+      "duration": 4,
+      "erasureCost": "INF"
+    },
+    {
+      "duration": 6,
+      "erasureCost": "16"
+    },
+    {
+      "duration": 8,
+      "erasureCost": "12"
+    },
+    {
+      "duration": 10,
+      "erasureCost": "8"
+    },
+    {
+      "duration": 12,
+      "erasureCost": "4"
+    }
+  ],
+  "pairedWorld": {
+    "costs": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "epochDurations": [
+      6,
+      6
+    ],
+    "erasureWorldCost": "INF",
+    "interpretation": "snapshot ledgers do not identify cross-epoch compatibility",
+    "latencies": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ],
+    "persistentWorldCost": "4",
+    "sameSnapshotLedgers": true,
+    "threshold": 4
+  },
+  "randomizedChecks": {
+    "durationMonotonicityMismatches": 0,
+    "erasureDecompositionMismatches": 0,
+    "seed": 20260802,
+    "trials": 5000
+  },
+  "schema": "fc-refresh-window-experiment-v1"
+}

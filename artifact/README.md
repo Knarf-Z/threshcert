@@ -1,6 +1,6 @@
-# Anonymous reproducibility artifact
+# Reproducibility artifact v41
 
-This is the complete review artifact for the anonymized manuscript. It keeps
+This is the reproducibility artifact for the v41 manuscript. It keeps
 locked dependencies, contract source and build metadata, canonical result
 JSON, the failed calibration JSON, the fresh covered-run JSON, and executable
 checkers in one tree. It also includes the pinned Gnosis production snapshot,
@@ -17,9 +17,9 @@ node verify_all.mjs
 ```
 
 The command verifies the root manifest, recomputes the pinned Gnosis production
-snapshot certificate, checks both preserved Chiado result files, their full
+snapshot certificate, runs the report-invariant floor-admission and refresh-window experiments and their unit tests, checks both preserved Chiado result files, their full
 identifiers and six-contract 0.108-xDAI settlement plan, checks the declared
-finite transaction schema and preserved formal certificate with independent Node and Python implementations,
+finite transaction schema and preserved formal certificate with separately written Node and Python implementations,
 runs the fixed third-party contract stress-cohort checks and 41-entry survey manifest, and runs the core formula checks. It performs no network access or chain write.
 
 The joint-incidence certificate reports `CONFIGURATION_PREFIX_TOTALITY=PASS`
@@ -67,6 +67,7 @@ equality, and the recorded coverage condition.
 
 ## Contents and claim boundary
 
+- `evidence_admission/`: report-invariant collateral-floor admission, refresh-window paired-world and duration experiments, canonical JSON, expected console output, and focused unit tests.
 - `production_snapshot/`: fixed Gnosis block and active-set record, member
   evidence ledger, canonical result, offline recomputation, and read-only RPC check.
 - `core_formula_checks/`: independent enumerations for sequential closure,
@@ -76,7 +77,7 @@ equality, and the recorded coverage condition.
 - `joint_incidence_refinement/`: finite-schema checkers, Solidity/Hardhat
   fixture, deployment capture/admission and tamper checkers, Foundry/Halmos
   harness, preserved certificates/log, locked build metadata, and tests.
-- `third_party_contract_survey/`: fixed eight-contract stress cohort, pinned inputs, reusable static-policy checker, aggregate outputs, and 41-entry manifest.
+- `third_party_contract_survey/`: preserved exploratory stress cohort. The v41 paper does not use it for a prevalence or contribution claim.
 - `chiado_public_runs/`: TraceThenSlash source, build metadata, deployment and
   read-only verification scripts, plus both canonical result JSON files.
 

@@ -1,5 +1,23 @@
 # Reproduced results summary
 
+## Floor admission and proactive refresh
+
+- Signed-only reports of `10^12` and owner-funded collateral without certified
+  member pass-through both produce certificate `0`.
+- Four complete member-bound records with admitted floors `5,4,3,2` and three
+  unknown members produce four-of-seven certificate `2`. Raising every report
+  to `10^15` leaves that value unchanged. Revoking or expiring one record, or
+  removing one offset cap, returns the certificate to `0`.
+- All `10,000/10,000` seeded records passed the soundness,
+  report-inflation-invariance, and revocation checks. All `128/128` disclosure
+  subsets matched positivity exactly when `k > n-q`.
+- With identical two-epoch snapshot ledgers, the erasure world is infeasible
+  while the cross-epoch-persistent world costs `4`; the snapshots alone do not
+  identify a window certificate.
+- Under certified latencies, epoch durations `12,10,8,6,4` give local costs
+  `4,8,12,16,INF`. All `5,000/5,000` random instances passed duration
+  monotonicity and erasure-decomposition checks.
+
 ## Production deployment evidence audit
 
 - The audit anchor is Gnosis block `46,666,718` at

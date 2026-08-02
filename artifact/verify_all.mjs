@@ -19,6 +19,10 @@ function python(args, cwd) {
 
 run(process.execPath, ["build_manifest.mjs", "--check"]);
 python(["verify_offline.py"], path.join(root, "production_snapshot"));
+const evidenceRoot = path.join(root, "evidence_admission");
+python(["scripts/run_floor_admission_experiment.py"], evidenceRoot);
+python(["scripts/run_refresh_window_experiment.py"], evidenceRoot);
+python(["-m", "unittest", "tests.test_evidence_admission_and_refresh", "-v"], evidenceRoot);
 run(process.execPath, ["scripts/verify-preserved.mjs"], path.join(root, "chiado_public_runs"));
 run(process.execPath, ["verify_deployment_admission.mjs"], path.join(root, "joint_incidence_refinement"));
 run(process.execPath, ["verify_deployment_admission_negative.mjs"], path.join(root, "joint_incidence_refinement"));

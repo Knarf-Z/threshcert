@@ -51,6 +51,18 @@ def main() -> None:
     )
     assert_expected(counterfactual_output, "gnosis_counterfactual.txt")
 
+    floor_admission_output = run(
+        "scripts/run_floor_admission_experiment.py",
+        capture=True,
+    )
+    assert_expected(floor_admission_output, "floor_admission_experiment.txt")
+
+    refresh_window_output = run(
+        "scripts/run_refresh_window_experiment.py",
+        capture=True,
+    )
+    assert_expected(refresh_window_output, "refresh_window_experiment.txt")
+
     public_output = run(
         "scripts/verify_certificate.py",
         "--snapshot",

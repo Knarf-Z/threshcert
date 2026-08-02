@@ -30,6 +30,7 @@ class FloorRecord:
     max_external_reimbursement: int = 0
     signer_bound: bool = False
     member_ownership_bound: bool = False
+    member_attribution_bound: bool = False
     automatic_forfeiture: bool = False
     offset_cap_certified: bool = False
     code_hash_bound: bool = False
@@ -43,6 +44,7 @@ def admit_floor(record: FloorRecord, now: int = NOW) -> tuple[int, list[str]]:
     checks = {
         "SIGNER_BINDING_MISSING": record.signer_bound,
         "MEMBER_OWNERSHIP_MISSING": record.member_ownership_bound,
+        "MEMBER_ATTRIBUTION_MISSING": record.member_attribution_bound,
         "AUTOMATIC_FORFEITURE_MISSING": record.automatic_forfeiture,
         "OFFSET_CAP_MISSING": record.offset_cap_certified,
         "CODE_HASH_BINDING_MISSING": record.code_hash_bound,
@@ -78,6 +80,7 @@ def complete_record(member: int, net_floor: int, report: int | None = None) -> F
         max_external_reimbursement=reimbursement,
         signer_bound=True,
         member_ownership_bound=True,
+        member_attribution_bound=True,
         automatic_forfeiture=True,
         offset_cap_certified=True,
         code_hash_bound=True,
@@ -143,6 +146,10 @@ def build_scenarios() -> list[dict[str, object]]:
     unknown_offset[2] = FloorRecord(
         **{**asdict(unknown_offset[2]), "offset_cap_certified": False}
     )
+    missing_attribution = deepcopy(four_backed)
+    missing_attribution[3] = FloorRecord(
+        **{**asdict(missing_attribution[3]), "member_attribution_bound": False}
+    )
     return [
         scenario("signed_only_inflated", signed_only),
         scenario("owner_funded_without_member_pass_through", owner_funded),
@@ -151,6 +158,7 @@ def build_scenarios() -> list[dict[str, object]]:
         scenario("one_record_revoked", revoked),
         scenario("one_record_expired", expired),
         scenario("one_offset_cap_unknown", unknown_offset),
+        scenario("one_member_attribution_missing", missing_attribution),
     ]
 
 
@@ -172,6 +180,7 @@ def randomized_checks(trials: int = 10_000, seed: int = 20260802) -> dict[str, o
             max_external_reimbursement=reimbursement,
             signer_bound=complete,
             member_ownership_bound=complete,
+            member_attribution_bound=complete,
             automatic_forfeiture=complete,
             offset_cap_certified=complete,
             code_hash_bound=complete,
@@ -252,6 +261,7 @@ def main() -> None:
         "one_record_revoked": 0,
         "one_record_expired": 0,
         "one_offset_cap_unknown": 0,
+        "one_member_attribution_missing": 0,
     }
     if any(
         scenarios[name]["thresholdCertificate"] != value
@@ -284,6 +294,7 @@ def main() -> None:
         "one_record_revoked",
         "one_record_expired",
         "one_offset_cap_unknown",
+        "one_member_attribution_missing",
     ):
         print(f"{name}={scenarios[name]['thresholdCertificate']}")
     checks = result["randomizedChecks"]

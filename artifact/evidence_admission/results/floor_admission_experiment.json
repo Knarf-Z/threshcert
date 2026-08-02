@@ -50,6 +50,7 @@
           "admittedFloor": 0,
           "failures": [
             "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
             "AUTOMATIC_FORFEITURE_MISSING",
             "OFFSET_CAP_MISSING",
             "CODE_HASH_BINDING_MISSING",
@@ -62,6 +63,7 @@
           "admittedFloor": 0,
           "failures": [
             "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
             "AUTOMATIC_FORFEITURE_MISSING",
             "OFFSET_CAP_MISSING",
             "CODE_HASH_BINDING_MISSING",
@@ -74,6 +76,7 @@
           "admittedFloor": 0,
           "failures": [
             "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
             "AUTOMATIC_FORFEITURE_MISSING",
             "OFFSET_CAP_MISSING",
             "CODE_HASH_BINDING_MISSING",
@@ -86,6 +89,7 @@
           "admittedFloor": 0,
           "failures": [
             "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
             "AUTOMATIC_FORFEITURE_MISSING",
             "OFFSET_CAP_MISSING",
             "CODE_HASH_BINDING_MISSING",
@@ -98,6 +102,7 @@
           "admittedFloor": 0,
           "failures": [
             "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
             "AUTOMATIC_FORFEITURE_MISSING",
             "OFFSET_CAP_MISSING",
             "CODE_HASH_BINDING_MISSING",
@@ -110,6 +115,7 @@
           "admittedFloor": 0,
           "failures": [
             "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
             "AUTOMATIC_FORFEITURE_MISSING",
             "OFFSET_CAP_MISSING",
             "CODE_HASH_BINDING_MISSING",
@@ -122,6 +128,7 @@
           "admittedFloor": 0,
           "failures": [
             "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
             "AUTOMATIC_FORFEITURE_MISSING",
             "OFFSET_CAP_MISSING",
             "CODE_HASH_BINDING_MISSING",
@@ -148,7 +155,8 @@
         {
           "admittedFloor": 0,
           "failures": [
-            "MEMBER_OWNERSHIP_MISSING"
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING"
           ],
           "member": 0,
           "reportedFloor": 1000000000000
@@ -156,7 +164,8 @@
         {
           "admittedFloor": 0,
           "failures": [
-            "MEMBER_OWNERSHIP_MISSING"
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING"
           ],
           "member": 1,
           "reportedFloor": 1000000000000
@@ -164,7 +173,8 @@
         {
           "admittedFloor": 0,
           "failures": [
-            "MEMBER_OWNERSHIP_MISSING"
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING"
           ],
           "member": 2,
           "reportedFloor": 1000000000000
@@ -172,7 +182,8 @@
         {
           "admittedFloor": 0,
           "failures": [
-            "MEMBER_OWNERSHIP_MISSING"
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING"
           ],
           "member": 3,
           "reportedFloor": 1000000000000
@@ -180,7 +191,8 @@
         {
           "admittedFloor": 0,
           "failures": [
-            "MEMBER_OWNERSHIP_MISSING"
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING"
           ],
           "member": 4,
           "reportedFloor": 1000000000000
@@ -188,7 +200,8 @@
         {
           "admittedFloor": 0,
           "failures": [
-            "MEMBER_OWNERSHIP_MISSING"
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING"
           ],
           "member": 5,
           "reportedFloor": 1000000000000
@@ -196,7 +209,8 @@
         {
           "admittedFloor": 0,
           "failures": [
-            "MEMBER_OWNERSHIP_MISSING"
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING"
           ],
           "member": 6,
           "reportedFloor": 1000000000000
@@ -244,6 +258,7 @@
           "admittedFloor": 0,
           "failures": [
             "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
             "AUTOMATIC_FORFEITURE_MISSING",
             "OFFSET_CAP_MISSING",
             "CODE_HASH_BINDING_MISSING",
@@ -256,6 +271,7 @@
           "admittedFloor": 0,
           "failures": [
             "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
             "AUTOMATIC_FORFEITURE_MISSING",
             "OFFSET_CAP_MISSING",
             "CODE_HASH_BINDING_MISSING",
@@ -268,6 +284,7 @@
           "admittedFloor": 0,
           "failures": [
             "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
             "AUTOMATIC_FORFEITURE_MISSING",
             "OFFSET_CAP_MISSING",
             "CODE_HASH_BINDING_MISSING",
@@ -319,6 +336,7 @@
           "admittedFloor": 0,
           "failures": [
             "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
             "AUTOMATIC_FORFEITURE_MISSING",
             "OFFSET_CAP_MISSING",
             "CODE_HASH_BINDING_MISSING",
@@ -331,6 +349,7 @@
           "admittedFloor": 0,
           "failures": [
             "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
             "AUTOMATIC_FORFEITURE_MISSING",
             "OFFSET_CAP_MISSING",
             "CODE_HASH_BINDING_MISSING",
@@ -343,6 +362,7 @@
           "admittedFloor": 0,
           "failures": [
             "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
             "AUTOMATIC_FORFEITURE_MISSING",
             "OFFSET_CAP_MISSING",
             "CODE_HASH_BINDING_MISSING",
@@ -396,6 +416,7 @@
           "admittedFloor": 0,
           "failures": [
             "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
             "AUTOMATIC_FORFEITURE_MISSING",
             "OFFSET_CAP_MISSING",
             "CODE_HASH_BINDING_MISSING",
@@ -408,6 +429,7 @@
           "admittedFloor": 0,
           "failures": [
             "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
             "AUTOMATIC_FORFEITURE_MISSING",
             "OFFSET_CAP_MISSING",
             "CODE_HASH_BINDING_MISSING",
@@ -420,6 +442,7 @@
           "admittedFloor": 0,
           "failures": [
             "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
             "AUTOMATIC_FORFEITURE_MISSING",
             "OFFSET_CAP_MISSING",
             "CODE_HASH_BINDING_MISSING",
@@ -473,6 +496,7 @@
           "admittedFloor": 0,
           "failures": [
             "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
             "AUTOMATIC_FORFEITURE_MISSING",
             "OFFSET_CAP_MISSING",
             "CODE_HASH_BINDING_MISSING",
@@ -485,6 +509,7 @@
           "admittedFloor": 0,
           "failures": [
             "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
             "AUTOMATIC_FORFEITURE_MISSING",
             "OFFSET_CAP_MISSING",
             "CODE_HASH_BINDING_MISSING",
@@ -497,6 +522,7 @@
           "admittedFloor": 0,
           "failures": [
             "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
             "AUTOMATIC_FORFEITURE_MISSING",
             "OFFSET_CAP_MISSING",
             "CODE_HASH_BINDING_MISSING",
@@ -550,6 +576,7 @@
           "admittedFloor": 0,
           "failures": [
             "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
             "AUTOMATIC_FORFEITURE_MISSING",
             "OFFSET_CAP_MISSING",
             "CODE_HASH_BINDING_MISSING",
@@ -562,6 +589,7 @@
           "admittedFloor": 0,
           "failures": [
             "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
             "AUTOMATIC_FORFEITURE_MISSING",
             "OFFSET_CAP_MISSING",
             "CODE_HASH_BINDING_MISSING",
@@ -574,6 +602,7 @@
           "admittedFloor": 0,
           "failures": [
             "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
             "AUTOMATIC_FORFEITURE_MISSING",
             "OFFSET_CAP_MISSING",
             "CODE_HASH_BINDING_MISSING",
@@ -590,6 +619,86 @@
         0,
         0,
         2,
+        4,
+        5
+      ],
+      "thresholdCertificate": 0
+    },
+    {
+      "admittedRecords": [
+        {
+          "admittedFloor": 5,
+          "failures": [],
+          "member": 0,
+          "reportedFloor": 5
+        },
+        {
+          "admittedFloor": 4,
+          "failures": [],
+          "member": 1,
+          "reportedFloor": 4
+        },
+        {
+          "admittedFloor": 3,
+          "failures": [],
+          "member": 2,
+          "reportedFloor": 3
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_ATTRIBUTION_MISSING"
+          ],
+          "member": 3,
+          "reportedFloor": 2
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
+            "AUTOMATIC_FORFEITURE_MISSING",
+            "OFFSET_CAP_MISSING",
+            "CODE_HASH_BINDING_MISSING",
+            "EXPIRED"
+          ],
+          "member": 4,
+          "reportedFloor": 1000000000000
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
+            "AUTOMATIC_FORFEITURE_MISSING",
+            "OFFSET_CAP_MISSING",
+            "CODE_HASH_BINDING_MISSING",
+            "EXPIRED"
+          ],
+          "member": 5,
+          "reportedFloor": 1000000000000
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
+            "AUTOMATIC_FORFEITURE_MISSING",
+            "OFFSET_CAP_MISSING",
+            "CODE_HASH_BINDING_MISSING",
+            "EXPIRED"
+          ],
+          "member": 6,
+          "reportedFloor": 1000000000000
+        }
+      ],
+      "name": "one_member_attribution_missing",
+      "orderedAdmittedFloors": [
+        0,
+        0,
+        0,
+        0,
+        3,
         4,
         5
       ],

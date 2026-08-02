@@ -45,6 +45,15 @@ class EvidenceAdmissionTests(unittest.TestCase):
         self.assertEqual(admit_floor(expired)[0], 0)
         self.assertEqual(admit_floor(revoked)[0], 0)
 
+    def test_missing_member_attribution_fails_closed(self) -> None:
+        record = complete_record(0, 5)
+        unattributed = FloorRecord(
+            **{**asdict(record), "member_attribution_bound": False}
+        )
+        value, failures = admit_floor(unattributed)
+        self.assertEqual(value, 0)
+        self.assertIn("MEMBER_ATTRIBUTION_MISSING", failures)
+
     def test_recorded_floor_result_is_current(self) -> None:
         recorded = json.loads(
             (ROOT / "results" / "floor_admission_experiment.json").read_text(

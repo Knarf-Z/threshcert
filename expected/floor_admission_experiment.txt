@@ -6,6 +6,7 @@ inflated_reports_same_backing=2
 one_record_revoked=0
 one_record_expired=0
 one_offset_cap_unknown=0
+one_member_attribution_missing=0
 randomized_sound=10000/10000
 inflation_invariant=10000/10000
 revocation_safe=10000/10000

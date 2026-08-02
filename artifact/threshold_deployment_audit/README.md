@@ -21,3 +21,19 @@ claim that the system is insecure or that real acquisition would be free.
 
 The audit cutoff is `2026-08-03T02:21:32+08:00`.
 
+
+## Reproduce
+
+Offline verification from the artifact root:
+
+```text
+node threshold_deployment_audit/verify_offline.mjs
+```
+
+The live capture script performs read-only network queries and is not part of
+the offline one-command verifier:
+
+```text
+node threshold_deployment_audit/scripts/capture_live.mjs
+node threshold_deployment_audit/scripts/evaluate_offline.mjs
+```

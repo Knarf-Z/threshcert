@@ -1,7 +1,7 @@
 {
   "schema": "overlapping-pool-deployment-admission-negative/v1",
   "status": "PASS",
-  "canonicalRecordSha256": "6b3ed37a1df66a55a5ce42dc2171d5a3c8f9d6312a2631b401103ecf281f0b7b",
+  "canonicalRecordSha256": "edf2f12f81d8734e3caba40625182c23b8ef4642fb1f7b72c53bbfe12f645785",
   "checkerSha256": "74f309ec32158eb66c13573371c3bec8dd9eefd404fb3252d04b1000a0ccdc49",
   "rejectedTamperCases": [
     "creation-input",

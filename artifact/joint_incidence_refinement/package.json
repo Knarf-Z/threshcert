@@ -13,6 +13,8 @@
     "admission:negative": "node verify_deployment_admission_negative.mjs",
     "admission:capture": "node scripts/capture_deployment_admission.mjs",
     "formal:reproduce": "python scripts/run_halmos_bridge.py --jobs 4 --loop 8 --solver yices-2.6.4",
+    "prefunded:test": "node scripts/run_prefunded_exchange_tests.mjs",
+    "prefunded:verify": "node verify_prefunded_exchange.mjs",
     "ready": "npm run typecheck && npm test && npm run admission:verify && npm run admission:negative && npm run refinement:check",
     "manifest:build": "node scripts/build-manifest.mjs",
     "manifest:check": "node scripts/build-manifest.mjs --check"

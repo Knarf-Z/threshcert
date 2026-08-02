@@ -1,0 +1,22 @@
+{
+  "schema": "prefunded-threshold-exchange-test/v1",
+  "status": "PASS",
+  "constructionBoundary": "contract-language only; usable-share verifier, threshold-set registry, funding provenance, beneficial-control separation, and off-contract routes remain external evidence",
+  "certifiedMinimumOutflowWei": "10000000000000000000",
+  "namedTestCases": 5,
+  "fullSuitePassing": 11,
+  "inputs": {
+    "sourceSha256": "0514aeeb1a6f21972ddac462099484faf797a316e865a6e8a594a4b762bb9a2e",
+    "mockDependenciesSha256": "0ace5fe98acad8b18938f9cdd02a804847b00888ddd41fe3e2d7a024ace3247e",
+    "testSha256": "75f736ec85b014cc07f927de65ba7b4432d61a9e2606a5c24f97f8985dceb676",
+    "compiledArtifactSha256": "ad5454bf369734f475b9a4144c1d777becdd0ec475ff6e3e78768b595159387b"
+  },
+  "compiledRuntime": {
+    "bytes": 3009,
+    "sha256": "9b38dde306d5a19a56bcd32d77d6d9b60d16a747c232b392e641b84789790ae0"
+  },
+  "transcript": {
+    "path": "results/prefunded_threshold_exchange.log",
+    "sha256": "80ff13e2f7e36f964bbdec2de1b3dfde5894e7fd78b916454a822a13684171d4"
+  }
+}

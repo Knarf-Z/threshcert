@@ -49,13 +49,13 @@
       "id": "B4",
       "name": "offset-closure",
       "question": "Are all in-scope refunds, rebates, credits, recoveries, reimbursements, circular transfers, and controlled-party returns closed or subtracted?",
-      "acceptedEvidence": ["closed accounting graph with upper bounds", "enforceable scope statement plus verifier output"]
+      "acceptedEvidence": ["closed accounting graph with upper bounds", "machine-checked or legally enforceable offset caps with identified counterparties"]
     },
     {
       "id": "B5",
       "name": "alternative-route-closure",
       "question": "Does every successful route in the claimed mechanism language map to the checked transition, and are excluded languages named?",
-      "acceptedEvidence": ["success-preserving and payment-preserving refinement", "entry and upgrade closure plus explicit off-chain boundary"]
+      "acceptedEvidence": ["success-preserving and payment-preserving refinement over every usable-success route", "proved cryptographic or trusted-execution non-exportability under an explicit trust base"]
     }
   ],
   "memberLossFields": [
@@ -80,6 +80,7 @@
     "bridge-qualified": "positive only for the exact admitted mechanism language"
   },
   "decisionRule": {
+    "routeExclusionAuthority": "No deployer, operator, governance body, or author has authority to exclude a route by identity or assertion; the verifier admits only same-scope evidence that the route cannot produce usable success.",
     "positiveMechanismConditionalPayment": "all B1-B5 pass under one scope and a positive net debit floor is proved",
     "positiveDeploymentWidePayment": "every allowed acquisition language passes or is excluded by binding evidence",
     "missingOrAmbiguous": "fail closed to zero and emit explicit rejection reasons",

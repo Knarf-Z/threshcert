@@ -1,14 +1,24 @@
 {
   "schema": "threshold-deployment-bridge-audit-result/v1",
   "generatedFrom": {
-    "cohortSha256": "d1320df01a0771fe316af74fcdd96e8a58859a12098c1ed57ab15e1789e7f8a5",
-    "policySha256": "30fc779c5a6bfe2ab67c5aa2cfca14869055a57648be49688153a210470ab652",
+    "cohortSha256": "57f3c313378561c3ac9bb87146c6f8c890d2915434ddcce2d0b8e80254649e70",
+    "policySha256": "a7a45c5b901c0b287a7db46dc469e104ce48c40a2b6d66bf8e6cd469bbb8bfc1",
     "captureSha256": "23a1b82c745ebf350d8feb6847f594d2ee3f7d1cefe04e878f5f4eba10822e93"
   },
   "cohortSize": 4,
+  "planStrength": {
+    "type": "author-controlled-prospectively-frozen-plan",
+    "independentPreregistration": false,
+    "externalTimestampPredatingScreening": false,
+    "priorKnowledge": "Earlier manuscript work had already established that the pinned Shutter snapshot failed closed.",
+    "collectionTiming": "Capture and result generation followed the internal freeze on the same calendar day.",
+    "limitation": "Post-selection bias cannot be excluded."
+  },
+  "auditQuestion": "Whether the captured public threshold, fee, collateral, and slashing records support a named-acquirer payment lower bound; not whether the four projects claimed such a bound.",
   "passedPositiveMechanismConditionalPayment": 0,
   "passedPositiveDeploymentWidePayment": 0,
-  "resultBoundary": "Fixed purposive cohort; no prevalence estimate and no claim of insecurity.",
+  "firstPlausiblePositiveClass": "A protocol-enforced conditional-acquisition design in which off-route material is unusable, a named buyer funds the only usable release transition, and offsets are closed.",
+  "resultBoundary": "Fixed author-selected cohort; no prevalence estimate, independent preregistration claim, project-claim rebuttal, or insecurity finding.",
   "records": [
     {
       "id": "drand-quicknet",
@@ -152,7 +162,7 @@
       "thresholdRecord": "PASS_51_OF_100",
       "memberLossRecord": "ZERO_SLASHING_AUTHORITY_IS_NOT_AN_ATTRIBUTED_AUTOMATIC_LOSS_FLOOR_FOR_ACQUISITION",
       "refreshRecord": "NOT_CERTIFIED_FOR_CROSS_WALLET_ACCUMULATION",
-      "codeBoundary": "transparent upgradeable proxy and implementation pinned; DKG and seize paths do not bind a buyer debit",
+      "codeBoundary": "transparent upgradeable proxy and implementation pinned; repeated operator selections are committee seats, not independent-controller evidence; DKG and seize paths do not bind a buyer debit",
       "baselines": {
         "thresholdOnlyPayment": "0",
         "slashingOnlyPayment": "0",

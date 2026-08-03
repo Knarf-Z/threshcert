@@ -1,6 +1,6 @@
-# Reproducibility artifact v44
+# Reproducibility artifact v45
 
-This is the reproducibility artifact for the v44 manuscript. It keeps
+This is the reproducibility artifact for the v45 manuscript. It keeps
 locked dependencies, contract source and build metadata, canonical result
 JSON, the failed calibration JSON, the fresh covered-run JSON, and executable
 checkers in one tree. It also includes the pinned Gnosis production snapshot,
@@ -20,7 +20,7 @@ The command verifies the root manifest, recomputes the pinned Gnosis production
 snapshot certificate, runs the report-invariant, member-attributed floor-admission and refresh-window experiments and their unit tests, checks both preserved Chiado result files, their full
 identifiers and six-contract 0.108-xDAI settlement plan, checks the declared
 finite transaction schema and preserved formal certificate with separately written Node and Python implementations,
-runs the preregistered four-system threshold-deployment audit, the prefunded
+runs the prospectively frozen four-system threshold-deployment audit, the prefunded
 threshold-exchange checker, the fixed third-party contract stress-cohort checks
 and 41-entry survey manifest, and the core formula checks. It performs no
 network access or chain write.
@@ -81,10 +81,10 @@ equality, and the recorded coverage condition.
   fixtures (including the prefunded threshold exchange), deployment
   capture/admission and tamper checkers, Foundry/Halmos harness, preserved
   certificates/log, locked build metadata, and tests.
-- `threshold_deployment_audit/`: preregistered cohort and policy, pinned public
+- `threshold_deployment_audit/`: prospectively frozen author-controlled cohort and policy, pinned public
   capture for Gnosis Shutter, SSV, tBTC v2, and drand, per-gate rejection
   reasons, canonical result, and an offline verifier.
-- `third_party_contract_survey/`: preserved exploratory stress cohort. The v44
+- `third_party_contract_survey/`: preserved exploratory stress cohort. The v45
   paper does not use it for a prevalence or contribution claim.
 - `chiado_public_runs/`: TraceThenSlash source, build metadata, deployment and
   read-only verification scripts, plus both canonical result JSON files.

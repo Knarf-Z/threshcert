@@ -57,7 +57,7 @@ const systemSpecific = {
     thresholdRecord: "PASS_51_OF_100",
     memberLossRecord: "ZERO_SLASHING_AUTHORITY_IS_NOT_AN_ATTRIBUTED_AUTOMATIC_LOSS_FLOOR_FOR_ACQUISITION",
     refreshRecord: "NOT_CERTIFIED_FOR_CROSS_WALLET_ACCUMULATION",
-    codeBoundary: "transparent upgradeable proxy and implementation pinned; DKG and seize paths do not bind a buyer debit",
+    codeBoundary: "transparent upgradeable proxy and implementation pinned; repeated operator selections are committee seats, not independent-controller evidence; DKG and seize paths do not bind a buyer debit",
   },
   "drand-quicknet": {
     thresholdRecord: "INCOMPLETE_PUBLIC_CLIENT_INFO_OMITS_CURRENT_GROUP_THRESHOLD_AND_MEMBERS",
@@ -96,9 +96,12 @@ const result = {
     captureSha256: sha(captureBytes),
   },
   cohortSize: records.length,
+  planStrength: cohort.planStrength,
+  auditQuestion: "Whether the captured public threshold, fee, collateral, and slashing records support a named-acquirer payment lower bound; not whether the four projects claimed such a bound.",
   passedPositiveMechanismConditionalPayment: 0,
   passedPositiveDeploymentWidePayment: 0,
-  resultBoundary: "Fixed purposive cohort; no prevalence estimate and no claim of insecurity.",
+  firstPlausiblePositiveClass: "A protocol-enforced conditional-acquisition design in which off-route material is unusable, a named buyer funds the only usable release transition, and offsets are closed.",
+  resultBoundary: "Fixed author-selected cohort; no prevalence estimate, independent preregistration claim, project-claim rebuttal, or insecurity finding.",
   records,
 };
 

@@ -2,6 +2,14 @@
   "schema": "threshold-deployment-audit-cohort/v1",
   "frozenAt": "2026-08-03T02:21:32+08:00",
   "cutoffDate": "2026-08-03",
+  "planStrength": {
+    "type": "author-controlled-prospectively-frozen-plan",
+    "independentPreregistration": false,
+    "externalTimestampPredatingScreening": false,
+    "priorKnowledge": "Earlier manuscript work had already established that the pinned Shutter snapshot failed closed.",
+    "collectionTiming": "Capture and result generation followed the internal freeze on the same calendar day.",
+    "limitation": "Post-selection bias cannot be excluded."
+  },
   "selection": {
     "type": "purposive-cross-application-stress-cohort",
     "inclusionRule": [
@@ -10,12 +18,12 @@
       "official public source exposes a stable deployment, contract, network, or chain identifier",
       "system represents a distinct application class among decryption, validator signing, custody signing, and randomness"
     ],
-    "exclusions": [
-      "systems selected after observing bridge-audit results",
-      "paper-authored mechanisms",
-      "private deployments without reproducible public identifiers"
+    "postFreezeRule": [
+      "no system replacement after a failed query or bridge decision",
+      "paper-authored mechanisms excluded from the deployment cohort",
+      "private deployments without reproducible public identifiers excluded"
     ],
-    "claimBoundary": "Results describe this fixed cohort only; no population prevalence is inferred."
+    "claimBoundary": "Results describe this fixed author-selected cohort only; no population prevalence or independent preregistration claim is inferred."
   },
   "systems": [
     {

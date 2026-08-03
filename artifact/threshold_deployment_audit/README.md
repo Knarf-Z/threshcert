@@ -1,10 +1,13 @@
-# Preregistered threshold-deployment bridge audit
+# Prospectively frozen threshold-deployment bridge audit
 
 This directory contains a fixed-cohort audit of whether public records can
 certify attacker-funded acquisition payment. The cohort and checklist were
-committed before the per-system results were generated. The audit is a
-purposive, cross-application stress cohort, not a random sample and not a
-prevalence estimate.
+committed before the reported result was generated. This was an
+author-controlled, prospectively frozen plan, not independent preregistration:
+no external timestamp predates screening, collection followed the same day, and
+earlier manuscript work had already established the Shutter zero. Post-selection
+bias cannot be excluded. The audit is purposive, not a random sample or a
+prevalence estimate, and it does not test a claim made by the four projects.
 
 The frozen inputs are:
 
@@ -12,7 +15,7 @@ The frozen inputs are:
 - `policy.bridge-evidence.v1.json`: claim semantics, five bridge gates,
   loss-floor fields, temporal fields, and fail-closed decision rules.
 
-Later result records must not change these files. A system passes a positive
+After the freeze, result generation did not change these files. A system passes a positive
 attacker-payment claim only when all five bridge gates are supported for the
 same deployment, event, time interval, payer, usable-delivery predicate, and
 mechanism language. Threshold-only, slashing-only, and self-reported-price

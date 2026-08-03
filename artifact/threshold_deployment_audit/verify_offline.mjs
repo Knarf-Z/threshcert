@@ -21,6 +21,14 @@ if (result.value.generatedFrom.cohortSha256 !== sha(cohort.bytes)) throw new Err
 if (result.value.generatedFrom.policySha256 !== sha(policy.bytes)) throw new Error("policy hash mismatch");
 if (result.value.generatedFrom.captureSha256 !== sha(capture.bytes)) throw new Error("capture hash mismatch");
 if (result.value.cohortSize !== 4 || result.value.records.length !== 4) throw new Error("result size mismatch");
+if (cohort.value.planStrength?.independentPreregistration !== false) throw new Error("plan-strength claim mismatch");
+if (cohort.value.planStrength?.externalTimestampPredatingScreening !== false) throw new Error("timestamp-strength claim mismatch");
+if (result.value.planStrength?.limitation !== "Post-selection bias cannot be excluded.") throw new Error("selection limitation missing");
+if (!result.value.auditQuestion.includes("not whether the four projects claimed")) throw new Error("audit-question boundary missing");
+if (!result.value.firstPlausiblePositiveClass.includes("off-route material is unusable")) throw new Error("positive frontier missing");
+if (!result.value.resultBoundary.includes("no prevalence estimate") || !result.value.resultBoundary.includes("independent preregistration")) throw new Error("result boundary missing");
+if (!policy.value.bridgeGates.find((x) => x.id === "B5").acceptedEvidence.join(" ").includes("non-exportability")) throw new Error("B5 route authority missing");
+if (!policy.value.decisionRule.routeExclusionAuthority.startsWith("No deployer") || !policy.value.decisionRule.routeExclusionAuthority.includes("has authority to exclude a route by identity or assertion")) throw new Error("route-exclusion authority missing");
 if (result.value.passedPositiveMechanismConditionalPayment !== 0) throw new Error("unexpected mechanism pass");
 if (result.value.passedPositiveDeploymentWidePayment !== 0) throw new Error("unexpected deployment pass");
 for (const record of result.value.records) {

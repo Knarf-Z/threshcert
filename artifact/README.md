@@ -1,6 +1,6 @@
-# Reproducibility artifact v48
+# Reproducibility artifact v49
 
-This archive separates the v48 manuscript checks from retained exploratory and
+This archive separates the v49 manuscript checks from retained exploratory and
 legacy modules. It also separates integrity verification from fresh tool
 execution. A preserved Halmos certificate is not described as a rerun.
 
@@ -9,30 +9,39 @@ asset, unit, control closure, funding lookback, and refund horizon. Legacy
 member-loss sentinels and the unbridged values 4, 18, and 40 are not
 attacker-payment certificates.
 
+The checker takes an explicitly materialized finite acquisition LTS. It does not
+derive routes from bytecode, crawl deployments, or prove route completeness.
+Any deployment-wide lift requires an independent coverage/refinement proof.
+TRUST_AND_CHECKING_BOUNDARY.md separates fresh machine checks, preserved-proof
+integrity, human semantic lemmas, and external cryptographic/economic assumptions.
+
 ## Integrity and preserved-proof verification
 
 Prerequisites: Node.js 20+ and Python 3.10+. From the extracted archive root:
 
 ```text
-node verify_integrity_v48.mjs
+node verify_integrity_v49.mjs
 ```
 
 This offline entry point checks the root manifest and frozen Git object,
-verifies the raw HTML/JSON/RPC recapture, regenerates the generic evidence
-compiler result, byte-compares generated and canonical JSON, reruns the
-admission/refresh formula checks, and checks the preserved Hardhat and Halmos
-certificates against their bound sources, transcripts, proof names, empty
-bounds, and runtime hashes. It prints
+verifies the raw HTML/JSON/RPC recapture, regenerates the finite-LTS evidence
+result, byte-compares generated and canonical JSON, reruns the admission/refresh
+formula checks, and checks the preserved Hardhat and Halmos certificates
+against their bound sources, transcripts, proof names, empty bounds, and
+runtime hashes. The finite-LTS stage runs 40 malformed-schema regressions,
+eight raw-JSON rejection cases, four semantic counterexamples, four
+exact-rational tests, three exact-boundary cases, and 1,024 fixed-graph
+monotonicity comparisons. It prints
 `FORMAL_MODE=PRESERVED_PROOF_HASH_AND_SEMANTIC_VERIFICATION_NOT_REEXECUTION` and
-does not invoke Halmos. It took roughly 20 seconds on the reference host; filesystem and antivirus overhead vary.
+does not invoke Halmos. The final v49 run took about 30 seconds on the reference host; filesystem and antivirus overhead vary.
 
-`node verify_paper_v48.mjs` is a thin compatibility alias for this integrity
+`node verify_paper_v49.mjs` is a thin compatibility alias for this integrity
 entry point.
 
 ## Fresh source rebuild and proof re-execution
 
 ```text
-node verify_rebuild_v48.mjs
+node verify_rebuild_v49.mjs
 ```
 
 This entry point installs locked Node dependencies when absent, force-recompiles
@@ -41,27 +50,26 @@ freshly invokes Halmos 0.3.3 with Yices 2.6.4, loop bound eight, and four jobs.
 It writes proof outputs only to a validated system-temporary directory, then
 compares all 82 proof names, zero failures, empty bounds, source/config hashes,
 and compiled runtime with the canonical certificate before removing the temp
-directory. It prints `V48_FRESH_REBUILD=PASS` only after this re-execution. A complete
-run took approximately 25 minutes on the reference host; solver and CPU
-variability can change that time substantially.
+directory. It prints `V49_FRESH_REBUILD=PASS` only after this re-execution. The final v49 run, including creation of the locked Python environment, took 1,266 seconds (21 minutes 6 seconds) on the reference host; solver, network-cache, and CPU variability can change that time substantially.
 
 Foundry must be on `PATH` or named by `FOUNDRY_BIN`. The driver creates an
-excluded local Python virtual environment when needed; `V48_PYTHON` may instead
+excluded local Python virtual environment when needed; `V49_PYTHON` may instead
 name an existing Python that provides Halmos 0.3.3. On Windows/Python 3.11 the
 portable environment uses `eth-hash[pycryptodome]` because the obsolete
-`safe-pysha3` source dependency requires a separate MSVC toolchain.
+`safe-pysha3` source dependency requires a separate MSVC toolchain. The
+preserved filename `requirements-v48-portable.txt` dates that dependency lock,
+not the v49 checker or manuscript.
 ## Full archival verification
 
 ```text
 node verify_all.mjs
 ```
 
-The archival driver took approximately two minutes (121.6 seconds) on the
-reference host. It additionally runs preserved Chiado evidence, the withdrawn
+The final v49 archival driver took 168 seconds on the reference host. It additionally runs preserved Chiado evidence, the withdrawn
 third-party contract survey, financing/activation formula families, and other
-historical checks. It labels those sections `EXPLORATORY_NOT_USED_BY_V48` or
-`ARCHIVAL_FORMULA_FAMILIES_NOT_USED_BY_V48`. They are retained for provenance,
-not used as evidence for the v48 manuscript.
+historical checks. It labels those sections `EXPLORATORY_NOT_USED_BY_V49` or
+`ARCHIVAL_FORMULA_FAMILIES_NOT_USED_BY_V49`. They are retained for provenance,
+not used as evidence for the v49 manuscript.
 The joint-incidence certificate reports `CONFIGURATION_PREFIX_TOTALITY=PASS`
 and `POSTCONFIGURATION_EVM_TO_SCHEMA_BRIDGE=PASS` only for an admitted Cancun
 runtime and the declared universe. Admission checks the direct creation input,
@@ -108,8 +116,8 @@ equality, and the recorded coverage condition.
 ## Contents and claim boundary
 
 - `evidence_admission/`: report-invariant collateral-floor admission, refresh-window paired-world and duration experiments, canonical JSON, expected console output, and focused unit tests.
-- `production_snapshot/`: fixed Gnosis block and active-set record, member
-  evidence ledger, canonical result, offline recomputation, and read-only RPC check.
+- `production_snapshot/`: fixed Gnosis block and set-10 snapshot record,
+  member evidence ledger, canonical result, offline recomputation, and read-only RPC check.
 - `core_formula_checks/`: independent enumerations for sequential closure,
   information boundaries, partial activation evidence, atomic-bypass and mixed
   evidence certificates, common-solvency settlement separation, and finite
@@ -119,18 +127,19 @@ equality, and the recorded coverage condition.
   capture/admission and tamper checkers, Foundry/Halmos harness, preserved
   certificates/log, locked build metadata, and tests.
 - `threshold_deployment_audit/`: frozen four-case cohort, pinned structured
-  capture, per-case v2 evidence records, 36 raw public responses plus two
-  indexes, generic status compiler, canonical generated decisions, and offline
-  byte-comparison verifiers. Two finite-state fixtures are separately labelled
+  capture, per-case v2 evidence records under the v3 checker policy, 36 raw
+  public responses plus two indexes, strict supplied-LTS status checker,
+  canonical generated decisions, and offline byte-comparison verifiers. Two finite-state fixtures are separately labelled
   as constructed diagnostics.
-- `third_party_contract_survey/`: preserved exploratory stress cohort. The v48
+- `third_party_contract_survey/`: preserved exploratory stress cohort. The v49
   paper does not use it for a prevalence or contribution claim.
 - `chiado_public_runs/`: TraceThenSlash source, build metadata, deployment and
   read-only verification scripts, plus both canonical result JSON files.
 
-The finite check establishes its 117-state by exactly-35-terminal product,
-terminal-family completeness, payment-labelled closed-contract trace--outcome
-correspondence, and exact acquisition-call-value arithmetic. The formal tier additionally establishes the
+The separate joint-incidence finite-schema check establishes its 117-state by
+exactly-35-terminal product, terminal-family completeness, payment-labelled
+closed-contract trace--outcome correspondence, and exact
+acquisition-call-value arithmetic. The formal tier additionally establishes the
 restricted fixture-specific EVM-to-schema bridge and, inside the admitted
 contract ledger, controller-funded credits, external exact-value acquisition
 funding with no payer refund/withdrawal path, and transfer of four controlled

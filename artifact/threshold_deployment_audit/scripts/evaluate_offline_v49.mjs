@@ -2,21 +2,37 @@ import { createHash } from "node:crypto";
 import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  ZERO,
+  addAmount,
+  amountToJson,
+  compareAmount,
+  isPositiveAmount,
+  minAmount,
+  parseExactAmount,
+  parseJsonRejectingDuplicateKeys,
+  requireFiniteLts,
+  subtractAmount,
+  validateFiniteLts,
+} from "./finite_lts_v2.mjs";
 
 const EVALUATOR_PATH = fileURLToPath(import.meta.url);
 const SCRIPT_DIR = path.dirname(EVALUATOR_PATH);
 const ROOT = path.dirname(SCRIPT_DIR);
-const RECORD_DIR = path.join(ROOT, "data", "records_v48");
-const POLICY_PATH = path.join(ROOT, "policy.public-evidence.v2.json");
+const RECORD_DIR = path.join(ROOT, "data", "records_v49");
+const POLICY_PATH = path.join(ROOT, "policy.public-evidence.v3.json");
 const GENERATED_PATH = path.join(ROOT, "results", "bridge_audit.generated.json");
-const CANONICAL_PATH = path.join(ROOT, "results", "bridge_audit.v2.json");
+const CANONICAL_PATH = path.join(ROOT, "results", "bridge_audit.v3.json");
 const sha = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const parse = (bytes, label) => {
-  try { return JSON.parse(bytes.toString("utf8").replace(/^\uFEFF/, "")); }
-  catch (error) { throw new Error(`${label}: invalid JSON: ${error.message}`); }
+  const text = bytes.toString("utf8").replace(/^\uFEFF/, "");
+  try { return parseJsonRejectingDuplicateKeys(text, label); }
+  catch (error) {
+    if (error.message.startsWith(`${label}:`)) throw error;
+    throw new Error(`${label}: invalid JSON: ${error.message}`);
+  }
 };
 const stable = (value) => `${JSON.stringify(value, null, 2)}\n`;
-const isAmount = (value) => typeof value === "number" && Number.isSafeInteger(value) && value >= 0;
 const isInside = (base, target) => {
   const rel = path.relative(base, target);
   return rel === "" || (!rel.startsWith(`..${path.sep}`) && rel !== ".." && !path.isAbsolute(rel));
@@ -82,52 +98,56 @@ async function verifySourceRef(recordPath, ref) {
 function inspectLts(lts, gate) {
   const fail = (detail, witness = null) => ({ status: "FAIL_COUNTEREXAMPLE", detail, witness });
   const unknown = (detail) => ({ status: "UNKNOWN", detail, witness: null });
-  if (lts?.schema !== "finite-acquisition-lts/v1" || !Array.isArray(lts.states) || !Array.isArray(lts.transitions)) return unknown("malformed finite LTS");
-  if (!lts.states.includes(lts.initialState) || new Set(lts.states).size !== lts.states.length) return unknown("invalid state set or initial state");
-  const mapped = new Set(lts.mappedRoutes ?? []);
+  const validation = validateFiniteLts(lts);
+  if (!validation.ok) return unknown(`malformed finite LTS: ${validation.errors.join("; ")}`);
+  const amount = (transition, field) => validation.amounts.get(transition)[field];
+  const mapped = new Set(lts.mappedRoutes);
   const outgoing = new Map(lts.states.map((state) => [state, []]));
-  for (const transition of lts.transitions) {
-    if (!outgoing.has(transition.from) || !outgoing.has(transition.to)) return unknown(`transition ${transition.id ?? "?"} has an unknown endpoint`);
-    for (const field of ["buyerDebit", "buyerPrefund", "returnToControl", "externalFunding"]) {
-      const amount = transition[field] ?? 0;
-      if (!isAmount(amount)) return unknown(`transition ${transition.id ?? "?"} has invalid or inexact ${field}`);
-    }
-    outgoing.get(transition.from).push(transition);
-  }
+  for (const transition of lts.transitions) outgoing.get(transition.from).push(transition);
+
   const reachable = new Set([lts.initialState]);
   const queue = [lts.initialState];
   while (queue.length) {
     const state = queue.shift();
-    for (const transition of outgoing.get(state)) if (!reachable.has(transition.to)) { reachable.add(transition.to); queue.push(transition.to); }
+    for (const transition of outgoing.get(state)) if (!reachable.has(transition.to)) {
+      reachable.add(transition.to);
+      queue.push(transition.to);
+    }
   }
   const transitions = lts.transitions.filter((transition) => reachable.has(transition.from));
   const successes = transitions.filter((transition) => transition.success === true);
   const nonterminalSuccess = successes.find((transition) => outgoing.get(transition.to).length > 0);
-  if (nonterminalSuccess) return unknown(`success ${nonterminalSuccess.id ?? "?"} does not end at the accounting-window terminal`);
+  if (nonterminalSuccess) return unknown(`success ${nonterminalSuccess.id} does not end at the accounting-window terminal`);
   if (successes.length === 0) return { status: "NOT_APPLICABLE", detail: "the exact finite LTS has no reachable successful acquisition", witness: null };
+
   if (gate === "B1") {
     const witness = successes.find((transition) => transition.usableDelivery !== true);
-    return witness ? fail("reachable success lacks usable delivery", witness.id) : { status: "PASS", detail: `${successes.length} reachable success transition(s) satisfy the pinned usable-delivery predicate`, witness: null };
+    return witness
+      ? fail("reachable success lacks usable delivery", witness.id)
+      : { status: "PASS", detail: `${successes.length} reachable success transition(s) satisfy the pinned usable-delivery predicate`, witness: null };
   }
   if (gate === "B2") {
-    const badOrigin = transitions.find((transition) => Number(transition.buyerDebit ?? 0) > 0 && transition.debitOrigin !== lts.namedAcquirer);
+    const badOrigin = transitions.find((transition) => isPositiveAmount(amount(transition, "buyerDebit")) && transition.debitOrigin !== lts.namedAcquirer);
     if (badOrigin) return fail("positive debit is not bound to the named acquirer", badOrigin.id);
-    const badPrefund = transitions.find((transition) => Number(transition.buyerPrefund ?? 0) > 0 && transition.prefundOrigin !== lts.namedAcquirer);
+    const badPrefund = transitions.find((transition) => isPositiveAmount(amount(transition, "buyerPrefund")) && transition.prefundOrigin !== lts.namedAcquirer);
     if (badPrefund) return fail("positive prefund is not bound to the named acquirer", badPrefund.id);
-    const minBalance = new Map(lts.states.map((state) => [state, Number.POSITIVE_INFINITY]));
-    minBalance.set(lts.initialState, 0);
+
+    const minBalance = new Map(lts.states.map((state) => [state, null]));
+    minBalance.set(lts.initialState, ZERO);
     for (let round = 0; round < lts.states.length; round += 1) {
       let changed = false;
       for (const transition of transitions) {
         const before = minBalance.get(transition.from);
-        if (!Number.isFinite(before)) continue;
-        const prefund = transition.buyerPrefund ?? 0;
-        const debit = transition.buyerDebit ?? 0;
-        const available = before + prefund;
-        if (!Number.isSafeInteger(available)) return unknown("prefunding path sum exceeds exact safe-integer arithmetic");
-        if (debit > available) return fail("a reachable debit path lacks named-acquirer prefunding", transition.id);
-        const after = available - debit;
-        if (after < minBalance.get(transition.to)) { minBalance.set(transition.to, after); changed = true; }
+        if (before === null) continue;
+        const available = addAmount(before, amount(transition, "buyerPrefund"));
+        const debit = amount(transition, "buyerDebit");
+        if (compareAmount(debit, available) > 0) return fail("a reachable debit path lacks named-acquirer prefunding", transition.id);
+        const after = subtractAmount(available, debit);
+        const previous = minBalance.get(transition.to);
+        if (previous === null || compareAmount(after, previous) < 0) {
+          minBalance.set(transition.to, after);
+          changed = true;
+        }
       }
       if (!changed) break;
       if (round === lts.states.length - 1) return unknown("prefunding reachability contains a decreasing cycle");
@@ -135,8 +155,28 @@ function inspectLts(lts, gate) {
     return { status: "PASS", detail: "every reachable debit path is funded from the named acquirer", witness: null };
   }
   if (gate === "B3") {
-    const bad = successes.find((transition) => mapped.has(transition.route) && (transition.usableDelivery !== true || Number(transition.buyerDebit ?? 0) <= 0 || transition.irreversible !== true));
-    return bad ? fail("mapped usable success is not atomic with an irreversible positive debit", bad.id) : { status: "PASS", detail: "every mapped usable success is atomic with an irreversible positive debit", witness: null };
+    const mappedSuccesses = successes.filter((transition) => mapped.has(transition.route));
+    const reverse = new Map(lts.states.map((state) => [state, []]));
+    for (const transition of transitions) reverse.get(transition.to).push(transition.from);
+    const canReachMappedSuccess = new Set(mappedSuccesses.map((transition) => transition.from));
+    const pending = [...canReachMappedSuccess];
+    while (pending.length) {
+      const state = pending.shift();
+      for (const predecessor of reverse.get(state)) if (!canReachMappedSuccess.has(predecessor)) {
+        canReachMappedSuccess.add(predecessor);
+        pending.push(predecessor);
+      }
+    }
+    const relevant = transitions.filter((transition) =>
+      mappedSuccesses.includes(transition) || canReachMappedSuccess.has(transition.to));
+    const reversibleDebit = relevant.find((transition) =>
+      isPositiveAmount(amount(transition, "buyerDebit")) && transition.irreversible !== true);
+    if (reversibleDebit) return fail("a mapped-success prefix counts a debit that is not explicitly irreversible", reversibleDebit.id);
+    const bad = mappedSuccesses.find((transition) =>
+      transition.usableDelivery !== true || !isPositiveAmount(amount(transition, "buyerDebit")) || transition.irreversible !== true);
+    return bad
+      ? fail("mapped usable success is not atomic with an irreversible positive debit", bad.id)
+      : { status: "PASS", detail: "every counted mapped-success-prefix debit is irreversible and every usable success is atomic with a positive debit", witness: null };
   }
   if (gate === "B4") {
     const mappedSuccesses = successes.filter((transition) => mapped.has(transition.route));
@@ -146,51 +186,51 @@ function inspectLts(lts, gate) {
     const pending = [...canReachMappedSuccess];
     while (pending.length) {
       const state = pending.shift();
-      for (const predecessor of reverse.get(state)) if (!canReachMappedSuccess.has(predecessor)) { canReachMappedSuccess.add(predecessor); pending.push(predecessor); }
+      for (const predecessor of reverse.get(state)) if (!canReachMappedSuccess.has(predecessor)) {
+        canReachMappedSuccess.add(predecessor);
+        pending.push(predecessor);
+      }
     }
     const relevant = transitions.filter((transition) => mappedSuccesses.includes(transition) || canReachMappedSuccess.has(transition.to));
-    const bad = relevant.find((transition) => Number(transition.returnToControl ?? 0) > 0 || Number(transition.externalFunding ?? 0) > 0);
-    return bad ? fail("a mapped-success prefix contains an unclosed return or external-funding edge", bad.id) : { status: "PASS", detail: "every mapped-success prefix closes return-to-control and external-funding edges", witness: null };
+    const bad = relevant.find((transition) => isPositiveAmount(amount(transition, "returnToControl"))
+      || isPositiveAmount(amount(transition, "externalFunding")));
+    return bad
+      ? fail("a mapped-success prefix contains an unclosed return or external-funding edge", bad.id)
+      : { status: "PASS", detail: "every mapped-success prefix closes return-to-control and external-funding edges", witness: null };
   }
   if (gate === "B5") {
     const bad = successes.find((transition) => transition.usableDelivery === true && !mapped.has(transition.route));
-    return bad ? fail("usable success exists outside the mapped payment-preserving route set", bad.id) : { status: "PASS", detail: "every reachable usable success is in the mapped route set", witness: null };
+    return bad
+      ? fail("usable success exists outside the mapped payment-preserving route set", bad.id)
+      : { status: "PASS", detail: "every reachable usable success is in the mapped route set", witness: null };
   }
   return unknown(`unsupported gate ${gate}`);
 }
 
 function shortestSuccessfulLtsOutflow(lts) {
-  if (lts?.schema !== "finite-acquisition-lts/v1" || !Array.isArray(lts.states) || !Array.isArray(lts.transitions)) {
-    throw new Error("cannot compute a certificate from a malformed finite LTS");
-  }
-  if (!lts.states.includes(lts.initialState) || new Set(lts.states).size !== lts.states.length) {
-    throw new Error("cannot compute a certificate from an invalid finite LTS state set");
-  }
-  const distances = new Map(lts.states.map((state) => [state, Number.POSITIVE_INFINITY]));
-  distances.set(lts.initialState, 0);
-  let best = Number.POSITIVE_INFINITY;
+  const validation = requireFiniteLts(lts);
+  const amount = (transition, field) => validation.amounts.get(transition)[field];
+  const distances = new Map(lts.states.map((state) => [state, null]));
+  distances.set(lts.initialState, ZERO);
+  let best = null;
   for (let round = 0; round < lts.states.length; round += 1) {
     let changed = false;
     for (const transition of lts.transitions) {
-      if (!distances.has(transition.from) || !distances.has(transition.to)) throw new Error(`transition ${transition.id ?? "?"} has an unknown endpoint`);
-      const weight = transition.buyerDebit ?? 0;
-      if (!isAmount(weight)) throw new Error(`transition ${transition.id ?? "?"} has an invalid or inexact buyer debit`);
       const before = distances.get(transition.from);
-      if (!Number.isFinite(before)) continue;
-      const candidate = before + weight;
-      if (!Number.isSafeInteger(candidate)) throw new Error("path sum exceeds exact safe-integer arithmetic");
-      if (transition.success === true) best = Math.min(best, candidate);
-      if (candidate < distances.get(transition.to)) {
+      if (before === null) continue;
+      const candidate = addAmount(before, amount(transition, "buyerDebit"));
+      if (transition.success === true) best = best === null ? candidate : minAmount(best, candidate);
+      const previous = distances.get(transition.to);
+      if (previous === null || compareAmount(candidate, previous) < 0) {
         distances.set(transition.to, candidate);
         changed = true;
       }
     }
     if (!changed) break;
   }
-  if (!Number.isFinite(best)) throw new Error("admitted finite LTS has no reachable successful acquisition");
+  if (best === null) throw new Error("admitted finite LTS has no reachable successful acquisition");
   return best;
 }
-
 function combineGate(evidenceResults) {
   if (evidenceResults.some((result) => result.status === "FAIL_COUNTEREXAMPLE")) return "FAIL_COUNTEREXAMPLE";
   if (evidenceResults.length === 0) return "FAIL_CLOSED_MISSING_EVIDENCE";
@@ -251,9 +291,9 @@ for (const record of records) {
   if (status === "PASS") {
     if (ltsSourceRefs.length !== 1) throw new Error(`${value.id}: a positive certificate requires exactly one admitted finite LTS`);
     const sourceRef = ltsSourceRefs[0];
-    certificate = shortestSuccessfulLtsOutflow(verifiedRefs.get(sourceRef).value);
-    if (!(certificate > 0)) throw new Error(`${value.id}: admitted finite LTS has no positive shortest successful outflow`);
-
+    const exactCertificate = shortestSuccessfulLtsOutflow(verifiedRefs.get(sourceRef).value);
+    if (!isPositiveAmount(exactCertificate)) throw new Error(`${value.id}: admitted finite LTS has no positive shortest successful outflow`);
+    certificate = amountToJson(exactCertificate);
     certificateDerivation = { type: "shortest-successful-path", sourceRef, value: certificate };
   }
   compiled.push({
@@ -267,25 +307,19 @@ for (const record of records) {
     certifiedNamedAcquirerNetIrreversibleOutflow: certificate,
     certificateDerivation,
     claimBoundary: value.claimBoundary,
-    interpretation: certificate === 0 ? policy.zeroInterpretation : "Positive only in the exact typed scope and mechanism language above."
+    interpretation: status === "PASS" ? "Positive only in the supplied finite LTS; deployment-wide lift requires an independent route-completeness proof." : policy.zeroInterpretation
   });
 }
 compiled.sort((a, b) => a.id.localeCompare(b.id));
-const invalidAmounts = [-1, 1.5, Number.POSITIVE_INFINITY, Number.MAX_SAFE_INTEGER + 1, "1", null];
-if (![0, 1, Number.MAX_SAFE_INTEGER].every(isAmount) || invalidAmounts.some(isAmount)) throw new Error("safe-integer amount predicate self-test failed");
-const overflowLts = {
-  schema: "finite-acquisition-lts/v1", states: ["s0", "s1", "s2"], initialState: "s0",
-  transitions: [
-    { id: "large", from: "s0", to: "s1", buyerDebit: Number.MAX_SAFE_INTEGER - 1 },
-    { id: "overflow", from: "s1", to: "s2", buyerDebit: 2, success: true }
-  ]
-};
-let rejectedOverflow = false;
-try { shortestSuccessfulLtsOutflow(overflowLts); } catch (error) { rejectedOverflow = error.message.includes("exceeds exact safe-integer arithmetic"); }
-if (!rejectedOverflow) throw new Error("unsafe path-sum overflow was not rejected");
+const oneThird = parseExactAmount({ numerator: "1", denominator: "3" }, "self-test one-third");
+const oneSixth = parseExactAmount({ numerator: "1", denominator: "6" }, "self-test one-sixth");
+const oneHalf = addAmount(oneThird, oneSixth);
+if (compareAmount(oneHalf, parseExactAmount({ numerator: "1", denominator: "2" })) !== 0) {
+  throw new Error("exact-rational arithmetic self-test failed");
+}
 const publicRecords = compiled.filter((record) => record.recordType === "public-deployment");
 const result = {
-  schema: "public-evidence-compiler-result/v2",
+  schema: "finite-lts-evidence-checker-result/v3",
   generatedFrom: {
     evaluatorPath: path.relative(ROOT, EVALUATOR_PATH).replaceAll("\\", "/"),
     evaluatorSha256: sha(evaluatorBytes),
@@ -296,9 +330,9 @@ const result = {
   statusVocabulary: policy.primitiveStatuses,
   publicDeploymentCount: publicRecords.length,
   constructedDiagnosticCount: compiled.length - publicRecords.length,
-  positivePublicDeploymentCertificates: publicRecords.filter((record) => record.certifiedNamedAcquirerNetIrreversibleOutflow > 0).length,
+  positivePublicDeploymentCertificates: publicRecords.filter((record) => record.status === "PASS").length,
   auditQuestion: "What named-acquirer net irreversible outflow follows from the admitted typed evidence; not whether any project claimed such a bound.",
-  resultBoundary: "Fixed author-selected public cohort plus separately labelled constructed diagnostics; no prevalence, insecurity, independent preregistration, fiat-value, or buyer-bound cryptographic-delivery claim.",
+  resultBoundary: "Checker over supplied records and explicit finite LTS inputs. It does not synthesize routes from bytecode or establish deployment-wide route completeness. The public cohort is author selected; no prevalence, insecurity, fiat-value, or buyer-bound cryptographic-delivery claim.",
   records: compiled
 };
 await mkdir(path.dirname(GENERATED_PATH), { recursive: true });
@@ -308,5 +342,7 @@ if (process.argv.includes("--freeze")) await writeFile(CANONICAL_PATH, output, "
 console.log(`PUBLIC_DEPLOYMENTS=${result.publicDeploymentCount}`);
 console.log(`CONSTRUCTED_DIAGNOSTICS=${result.constructedDiagnosticCount}`);
 console.log(`POSITIVE_PUBLIC_CERTIFICATES=${result.positivePublicDeploymentCertificates}`);
-console.log("EXACT_SAFE_INTEGER_AMOUNT_ARITHMETIC=PASS");
-console.log("DATA_DRIVEN_EVIDENCE_COMPILER=PASS");
+console.log("EXACT_CANONICAL_RATIONAL_ARITHMETIC=PASS");
+console.log("FINITE_LTS_EVIDENCE_CHECKER=PASS");
+
+export { inspectLts, shortestSuccessfulLtsOutflow };

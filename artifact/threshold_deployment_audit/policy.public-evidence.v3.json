@@ -1,5 +1,5 @@
 {
-  "schema": "public-evidence-compiler-policy/v2",
+  "schema": "finite-lts-evidence-checker-policy/v3",
   "claimType": "named-acquirer-net-irreversible-outflow",
   "primitiveStatuses": ["PASS", "FAIL_CLOSED_MISSING_EVIDENCE", "FAIL_COUNTEREXAMPLE", "UNKNOWN", "NOT_APPLICABLE"],
   "claimScopeRequired": ["system", "deploymentIdentifier", "committee", "event", "validityInterval", "usableDeliveryPredicate", "namedAcquirer", "numeraire", "accountingWindow", "controlPolicy", "mechanismLanguage"],
@@ -13,5 +13,6 @@
   ],
   "decisionPrecedence": ["FAIL_COUNTEREXAMPLE", "FAIL_CLOSED_MISSING_EVIDENCE", "UNKNOWN", "NOT_APPLICABLE", "PASS"],
   "zeroInterpretation": "The admitted record does not exclude a zero-outflow compatible world; this is not an insecurity or behavior claim.",
+  "inputBoundary": "The checker consumes an explicitly materialized finite LTS; it neither derives routes from bytecode nor proves deployment-wide route completeness.",
   "notApplicableRule": "NOT_APPLICABLE requires a machine-checked proof that the gate antecedent is unreachable; author or operator assertion is insufficient."
 }

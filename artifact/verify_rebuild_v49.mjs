@@ -19,14 +19,14 @@ function probe(command, args) {
   return !result.error && result.status === 0;
 }
 function basePython() {
-  if (process.env.V48_PYTHON) return { command: process.env.V48_PYTHON, prefix: [] };
+  if (process.env.V49_PYTHON) return { command: process.env.V49_PYTHON, prefix: [] };
   const candidates = process.platform === "win32" ? [["py", ["-3"]], ["python3", []], ["python", []]] : [["python3", []], ["python", []]];
   for (const [command, prefix] of candidates) if (probe(command, [...prefix, "--version"])) return { command, prefix };
-  throw new Error("Python 3 not found; set V48_PYTHON");
+  throw new Error("Python 3 not found; set V49_PYTHON");
 }
 async function halmosPython() {
-  if (process.env.V48_PYTHON && probe(process.env.V48_PYTHON, ["-m", "halmos", "--version"])) return process.env.V48_PYTHON;
-  const venv = path.join(root, ".runtime", "halmos-v48");
+  if (process.env.V49_PYTHON && probe(process.env.V49_PYTHON, ["-m", "halmos", "--version"])) return process.env.V49_PYTHON;
+  const venv = path.join(root, ".runtime", "halmos-v49");
   const python = process.platform === "win32" ? path.join(venv, "Scripts", "python.exe") : path.join(venv, "bin", "python");
   if (!probe(python, ["-m", "halmos", "--version"])) {
     const base = basePython();
@@ -46,12 +46,12 @@ function forgePath() {
   throw new Error("Foundry forge not found; install Foundry or set FOUNDRY_BIN");
 }
 
-console.log("REBUILD_DRIVER=v48");
+console.log("REBUILD_DRIVER=v49");
 console.log("FORMAL_MODE=FRESH_HALMOS_REEXECUTION");
 const hardhat = path.join(refinement, "node_modules", "hardhat", "dist", "src", "cli.js");
 if (!existsSync(hardhat)) execute(process.platform === "win32" ? "npm.cmd" : "npm", ["ci", "--no-audit", "--no-fund"], { cwd: refinement, timeout: 900000 });
 execute(process.execPath, [hardhat, "compile", "--force"], { cwd: refinement, timeout: 300000 });
-const admissionTemp = path.join(os.tmpdir(), `threshcert-v48-admission-${process.pid}.json`);
+const admissionTemp = path.join(os.tmpdir(), `threshcert-v49-admission-${process.pid}.json`);
 const testEnv = { ...process.env, DEPLOYMENT_ADMISSION_RESULT: admissionTemp };
 const tests = execute(process.execPath, [hardhat, "test"], { cwd: refinement, capture: true, timeout: 300000, env: testEnv });
 process.stdout.write(tests);
@@ -66,7 +66,7 @@ const normalizeAdmission = (record) => {
   return copy;
 };
 if (JSON.stringify(normalizeAdmission(freshAdmission)) !== JSON.stringify(normalizeAdmission(canonicalAdmission))) throw new Error("fresh deployment admission differs outside ephemeral local block hashes");
-if (path.dirname(admissionTemp) !== path.resolve(os.tmpdir()) || !path.basename(admissionTemp).startsWith("threshcert-v48-admission-")) throw new Error("unsafe admission temp path");
+if (path.dirname(admissionTemp) !== path.resolve(os.tmpdir()) || !path.basename(admissionTemp).startsWith("threshcert-v49-admission-")) throw new Error("unsafe admission temp path");
 await rm(admissionTemp, { force: true });
 console.log("HARDHAT_RECOMPILE_11_TESTS_AND_ADMISSION_REGENERATION=PASS");
 
@@ -74,7 +74,7 @@ const python = await halmosPython();
 const forge = forgePath();
 const toolPath = [path.dirname(python), path.dirname(forge), process.env.PATH ?? ""].join(path.delimiter);
 const proofEnv = { ...process.env, PATH: toolPath, PYTHONDONTWRITEBYTECODE: "1" };
-const tempRoot = await mkdtemp(path.join(os.tmpdir(), "threshcert-v48-halmos-"));
+const tempRoot = await mkdtemp(path.join(os.tmpdir(), "threshcert-v49-halmos-"));
 try {
   execute(python, [path.join("scripts", "run_halmos_bridge.py"), "--jobs", "4", "--loop", "8", "--solver", "yices-2.6.4", "--results-dir", tempRoot], { cwd: refinement, env: proofEnv, timeout: 3600000 });
   const fresh = JSON.parse(await readFile(path.join(tempRoot, "halmos_evm_bridge.json"), "utf8"));
@@ -87,13 +87,13 @@ try {
 } finally {
   const resolved = path.resolve(tempRoot);
   const tempBase = path.resolve(os.tmpdir());
-  if (!resolved.startsWith(`${tempBase}${path.sep}`) || !path.basename(resolved).startsWith("threshcert-v48-halmos-")) throw new Error("refusing unsafe temp cleanup");
+  if (!resolved.startsWith(`${tempBase}${path.sep}`) || !path.basename(resolved).startsWith("threshcert-v49-halmos-")) throw new Error("refusing unsafe temp cleanup");
   await rm(resolved, { recursive: true, force: true });
 }
-execute(process.execPath, ["verify_offline_v48.mjs"], { cwd: path.join(root, "threshold_deployment_audit") });
+execute(process.execPath, ["verify_offline_v49.mjs"], { cwd: path.join(root, "threshold_deployment_audit") });
 execute(process.execPath, ["scripts/verify_raw_capture_v48.mjs"], { cwd: path.join(root, "threshold_deployment_audit") });
 execute(process.execPath, ["verify_refinement.mjs"], { cwd: refinement });
 execute(process.execPath, ["verify_prefunded_exchange.mjs"], { cwd: refinement });
 execute(process.execPath, ["build_manifest.mjs", "--check"], { cwd: root });
 console.log(`REBUILD_VERIFICATION_SECONDS=${Math.ceil((Date.now() - started) / 1000)}`);
-console.log("V48_FRESH_REBUILD=PASS");
+console.log("V49_FRESH_REBUILD=PASS");

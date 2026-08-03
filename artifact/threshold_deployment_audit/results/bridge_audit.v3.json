@@ -1,11 +1,11 @@
 {
-  "schema": "public-evidence-compiler-result/v2",
+  "schema": "finite-lts-evidence-checker-result/v3",
   "generatedFrom": {
-    "evaluatorPath": "scripts/evaluate_offline_v48.mjs",
-    "evaluatorSha256": "94b19db53a26ab4cd3118eb893683aa208450d48d6fb45f16998f22846b677bc",
-    "policyPath": "policy.public-evidence.v2.json",
-    "policySha256": "a31ebf357d5545125ed5a7d122e4bc0748272d9b7537994ce57536c47af44eaf",
-    "recordSetSha256": "f2704d712a3055207340fb84c3f2f00fb7faae07f541215751548391d0db423e"
+    "evaluatorPath": "scripts/evaluate_offline_v49.mjs",
+    "evaluatorSha256": "9c87d53e0bfc8b8a3c53789c8ee601f634533f75145c67743b1646974d723569",
+    "policyPath": "policy.public-evidence.v3.json",
+    "policySha256": "9fa86c2fe0c2e3d4641b624c0878c20c3cd38dedd7f4b079ff9b3864c35bff35",
+    "recordSetSha256": "53de739fde7358fc1389fecfac4fe3d4a3734ae3118f1bbe2f46b8146edd94b8"
   },
   "statusVocabulary": [
     "PASS",
@@ -18,16 +18,16 @@
   "constructedDiagnosticCount": 2,
   "positivePublicDeploymentCertificates": 0,
   "auditQuestion": "What named-acquirer net irreversible outflow follows from the admitted typed evidence; not whether any project claimed such a bound.",
-  "resultBoundary": "Fixed author-selected public cohort plus separately labelled constructed diagnostics; no prevalence, insecurity, independent preregistration, fiat-value, or buyer-bound cryptographic-delivery claim.",
+  "resultBoundary": "Checker over supplied records and explicit finite LTS inputs. It does not synthesize routes from bytecode or establish deployment-wide route completeness. The public cohort is author selected; no prevalence, insecurity, fiat-value, or buyer-bound cryptographic-delivery claim.",
   "records": [
     {
       "id": "constructed-bridge-pass",
       "recordType": "constructed-diagnostic",
-      "recordPath": "data/records_v48/constructed-bridge-pass.json",
-      "recordSha256": "bf70890df4bc0704482ae9594d41463d2e82a60cc2d05642cb2f617b21dfdcdf",
+      "recordPath": "data/records_v49/constructed-bridge-pass.json",
+      "recordSha256": "f49498a9a4e3ee24878cf3629db3efa961a41c2189dad039e345f30b9d53c159",
       "scope": {
         "system": "Constructed finite-language bridge",
-        "deploymentIdentifier": "fixture:bridge_pass_lts.v1",
+        "deploymentIdentifier": "fixture:bridge_pass_lts.v2",
         "committee": "one delivered right suffices in the finite fixture",
         "event": "usable fixture capability delivery",
         "validityInterval": "single finite run",
@@ -51,10 +51,10 @@
           "context": [
             {
               "id": "lts",
-              "path": "data/constructed/bridge_pass_lts.v1.json",
-              "sourceSha256": "e05af7d2eac72335ea8db2df30b4a59f0f383e0cc1e25ac5b9175370082ea125",
+              "path": "data/constructed/bridge_pass_lts.v2.json",
+              "sourceSha256": "1f3faa8a8732e9a9851192a09f89efafcb039d40eaaa2313e7e11248aede042e",
               "pointer": "",
-              "pointerValueSha256": "1931b48853f2c1b6e1f29a4ccc236245123971cdffa635deb95d3a8715397245"
+              "pointerValueSha256": "276f3124586a456ff5e833ac97da06f32f6915dbb86dddf3e229722f6b869d45"
             }
           ],
           "evidenceResults": [
@@ -73,10 +73,10 @@
           "context": [
             {
               "id": "lts",
-              "path": "data/constructed/bridge_pass_lts.v1.json",
-              "sourceSha256": "e05af7d2eac72335ea8db2df30b4a59f0f383e0cc1e25ac5b9175370082ea125",
+              "path": "data/constructed/bridge_pass_lts.v2.json",
+              "sourceSha256": "1f3faa8a8732e9a9851192a09f89efafcb039d40eaaa2313e7e11248aede042e",
               "pointer": "",
-              "pointerValueSha256": "1931b48853f2c1b6e1f29a4ccc236245123971cdffa635deb95d3a8715397245"
+              "pointerValueSha256": "276f3124586a456ff5e833ac97da06f32f6915dbb86dddf3e229722f6b869d45"
             }
           ],
           "evidenceResults": [
@@ -95,10 +95,10 @@
           "context": [
             {
               "id": "lts",
-              "path": "data/constructed/bridge_pass_lts.v1.json",
-              "sourceSha256": "e05af7d2eac72335ea8db2df30b4a59f0f383e0cc1e25ac5b9175370082ea125",
+              "path": "data/constructed/bridge_pass_lts.v2.json",
+              "sourceSha256": "1f3faa8a8732e9a9851192a09f89efafcb039d40eaaa2313e7e11248aede042e",
               "pointer": "",
-              "pointerValueSha256": "1931b48853f2c1b6e1f29a4ccc236245123971cdffa635deb95d3a8715397245"
+              "pointerValueSha256": "276f3124586a456ff5e833ac97da06f32f6915dbb86dddf3e229722f6b869d45"
             }
           ],
           "evidenceResults": [
@@ -106,7 +106,7 @@
               "type": "finite_lts_gate",
               "sourceRef": "lts",
               "status": "PASS",
-              "detail": "every mapped usable success is atomic with an irreversible positive debit",
+              "detail": "every counted mapped-success-prefix debit is irreversible and every usable success is atomic with a positive debit",
               "witness": null
             }
           ]
@@ -117,10 +117,10 @@
           "context": [
             {
               "id": "lts",
-              "path": "data/constructed/bridge_pass_lts.v1.json",
-              "sourceSha256": "e05af7d2eac72335ea8db2df30b4a59f0f383e0cc1e25ac5b9175370082ea125",
+              "path": "data/constructed/bridge_pass_lts.v2.json",
+              "sourceSha256": "1f3faa8a8732e9a9851192a09f89efafcb039d40eaaa2313e7e11248aede042e",
               "pointer": "",
-              "pointerValueSha256": "1931b48853f2c1b6e1f29a4ccc236245123971cdffa635deb95d3a8715397245"
+              "pointerValueSha256": "276f3124586a456ff5e833ac97da06f32f6915dbb86dddf3e229722f6b869d45"
             }
           ],
           "evidenceResults": [
@@ -139,10 +139,10 @@
           "context": [
             {
               "id": "lts",
-              "path": "data/constructed/bridge_pass_lts.v1.json",
-              "sourceSha256": "e05af7d2eac72335ea8db2df30b4a59f0f383e0cc1e25ac5b9175370082ea125",
+              "path": "data/constructed/bridge_pass_lts.v2.json",
+              "sourceSha256": "1f3faa8a8732e9a9851192a09f89efafcb039d40eaaa2313e7e11248aede042e",
               "pointer": "",
-              "pointerValueSha256": "1931b48853f2c1b6e1f29a4ccc236245123971cdffa635deb95d3a8715397245"
+              "pointerValueSha256": "276f3124586a456ff5e833ac97da06f32f6915dbb86dddf3e229722f6b869d45"
             }
           ],
           "evidenceResults": [
@@ -164,16 +164,16 @@
         "value": 4
       },
       "claimBoundary": "Constructed finite-language witness only; not a deployment measurement or buyer-bound cryptographic-delivery claim.",
-      "interpretation": "Positive only in the exact typed scope and mechanism language above."
+      "interpretation": "Positive only in the supplied finite LTS; deployment-wide lift requires an independent route-completeness proof."
     },
     {
       "id": "constructed-near-pass",
       "recordType": "constructed-diagnostic",
-      "recordPath": "data/records_v48/constructed-near-pass.json",
-      "recordSha256": "9fec0508f126fae90914291ff9a61e3e823bed52be924d90dcecabd424f06a00",
+      "recordPath": "data/records_v49/constructed-near-pass.json",
+      "recordSha256": "f373a585e6c20dc0171e53f68826ce5c0eeda18522ea6e0df08abbf21b88153c",
       "scope": {
         "system": "Constructed finite-state near-pass",
-        "deploymentIdentifier": "fixture:near_pass_lts.v1",
+        "deploymentIdentifier": "fixture:near_pass_lts.v2",
         "committee": "one delivered right suffices in the finite fixture",
         "event": "usable fixture capability delivery",
         "validityInterval": "single finite run",
@@ -197,10 +197,10 @@
           "context": [
             {
               "id": "lts",
-              "path": "data/constructed/near_pass_lts.v1.json",
-              "sourceSha256": "913f09526707fd9df0ba93488800665f5480fa05ad540e841a365bad5cfb84f8",
+              "path": "data/constructed/near_pass_lts.v2.json",
+              "sourceSha256": "d8a3d1ca16aa2477f0916c9b1a0ce37232aee5203524b167f1512c270122fa63",
               "pointer": "",
-              "pointerValueSha256": "4580f78b6d55e0ca5b419af26ac796b855d38cc21e8fa292aa60f8c38fa21922"
+              "pointerValueSha256": "d62d92352918d3762b7057a21dad63527e7c595d126aad23e9b7c7a2bc2c93ec"
             }
           ],
           "evidenceResults": [
@@ -219,10 +219,10 @@
           "context": [
             {
               "id": "lts",
-              "path": "data/constructed/near_pass_lts.v1.json",
-              "sourceSha256": "913f09526707fd9df0ba93488800665f5480fa05ad540e841a365bad5cfb84f8",
+              "path": "data/constructed/near_pass_lts.v2.json",
+              "sourceSha256": "d8a3d1ca16aa2477f0916c9b1a0ce37232aee5203524b167f1512c270122fa63",
               "pointer": "",
-              "pointerValueSha256": "4580f78b6d55e0ca5b419af26ac796b855d38cc21e8fa292aa60f8c38fa21922"
+              "pointerValueSha256": "d62d92352918d3762b7057a21dad63527e7c595d126aad23e9b7c7a2bc2c93ec"
             }
           ],
           "evidenceResults": [
@@ -241,10 +241,10 @@
           "context": [
             {
               "id": "lts",
-              "path": "data/constructed/near_pass_lts.v1.json",
-              "sourceSha256": "913f09526707fd9df0ba93488800665f5480fa05ad540e841a365bad5cfb84f8",
+              "path": "data/constructed/near_pass_lts.v2.json",
+              "sourceSha256": "d8a3d1ca16aa2477f0916c9b1a0ce37232aee5203524b167f1512c270122fa63",
               "pointer": "",
-              "pointerValueSha256": "4580f78b6d55e0ca5b419af26ac796b855d38cc21e8fa292aa60f8c38fa21922"
+              "pointerValueSha256": "d62d92352918d3762b7057a21dad63527e7c595d126aad23e9b7c7a2bc2c93ec"
             }
           ],
           "evidenceResults": [
@@ -252,7 +252,7 @@
               "type": "finite_lts_gate",
               "sourceRef": "lts",
               "status": "PASS",
-              "detail": "every mapped usable success is atomic with an irreversible positive debit",
+              "detail": "every counted mapped-success-prefix debit is irreversible and every usable success is atomic with a positive debit",
               "witness": null
             }
           ]
@@ -263,10 +263,10 @@
           "context": [
             {
               "id": "lts",
-              "path": "data/constructed/near_pass_lts.v1.json",
-              "sourceSha256": "913f09526707fd9df0ba93488800665f5480fa05ad540e841a365bad5cfb84f8",
+              "path": "data/constructed/near_pass_lts.v2.json",
+              "sourceSha256": "d8a3d1ca16aa2477f0916c9b1a0ce37232aee5203524b167f1512c270122fa63",
               "pointer": "",
-              "pointerValueSha256": "4580f78b6d55e0ca5b419af26ac796b855d38cc21e8fa292aa60f8c38fa21922"
+              "pointerValueSha256": "d62d92352918d3762b7057a21dad63527e7c595d126aad23e9b7c7a2bc2c93ec"
             }
           ],
           "evidenceResults": [
@@ -285,10 +285,10 @@
           "context": [
             {
               "id": "lts",
-              "path": "data/constructed/near_pass_lts.v1.json",
-              "sourceSha256": "913f09526707fd9df0ba93488800665f5480fa05ad540e841a365bad5cfb84f8",
+              "path": "data/constructed/near_pass_lts.v2.json",
+              "sourceSha256": "d8a3d1ca16aa2477f0916c9b1a0ce37232aee5203524b167f1512c270122fa63",
               "pointer": "",
-              "pointerValueSha256": "4580f78b6d55e0ca5b419af26ac796b855d38cc21e8fa292aa60f8c38fa21922"
+              "pointerValueSha256": "d62d92352918d3762b7057a21dad63527e7c595d126aad23e9b7c7a2bc2c93ec"
             }
           ],
           "evidenceResults": [
@@ -315,7 +315,7 @@
     {
       "id": "drand-quicknet",
       "recordType": "public-deployment",
-      "recordPath": "data/records_v48/drand-quicknet.json",
+      "recordPath": "data/records_v49/drand-quicknet.json",
       "recordSha256": "563934bd22d168e2adffccc8f810632f96d7ae5491e551facf20ce6fb5445497",
       "scope": {
         "system": "League of Entropy drand quicknet",
@@ -431,7 +431,7 @@
     {
       "id": "gnosis-shutter-set10",
       "recordType": "public-deployment",
-      "recordPath": "data/records_v48/gnosis-shutter-set10.json",
+      "recordPath": "data/records_v49/gnosis-shutter-set10.json",
       "recordSha256": "d4bdbe8b6babdd7287280c38f8b67fe5ea381b9e255ef65fcab3c73b532225a6",
       "scope": {
         "system": "Gnosis Shutter",
@@ -547,7 +547,7 @@
     {
       "id": "ssv-mainnet-cluster",
       "recordType": "public-deployment",
-      "recordPath": "data/records_v48/ssv-mainnet-cluster.json",
+      "recordPath": "data/records_v49/ssv-mainnet-cluster.json",
       "recordSha256": "45c0fb9f1dc2f91fcbff870eef1a4a3f168df90d944e02a07eb47851fbefb0dd",
       "scope": {
         "system": "SSV Network",
@@ -663,7 +663,7 @@
     {
       "id": "tbtc-v2-mainnet-wallet",
       "recordType": "public-deployment",
-      "recordPath": "data/records_v48/tbtc-v2-mainnet-wallet.json",
+      "recordPath": "data/records_v49/tbtc-v2-mainnet-wallet.json",
       "recordSha256": "dc90eda3e4a5da43fa63ffbd44599de9babd89ace6595cfde23520f560ee89ca",
       "scope": {
         "system": "Threshold Network tBTC v2",

@@ -1,0 +1,95 @@
+{
+  "schema": "public-evidence-record/v2",
+  "recordType": "constructed-diagnostic",
+  "id": "constructed-near-pass",
+  "scope": {
+    "system": "Constructed finite-state near-pass",
+    "deploymentIdentifier": "fixture:near_pass_lts.v2",
+    "committee": "one delivered right suffices in the finite fixture",
+    "event": "usable fixture capability delivery",
+    "validityInterval": "single finite run",
+    "usableDeliveryPredicate": "transition has usableDelivery=true and success=true",
+    "namedAcquirer": "buyer-A",
+    "numeraire": {
+      "asset": "synthetic-accounting-unit",
+      "unit": "wei",
+      "valuationTime": "transition",
+      "conversionLowerPrice": "identity",
+      "gasTreatment": "excluded-accounting-only"
+    },
+    "accountingWindow": "entire finite run",
+    "controlPolicy": "buyer-A only",
+    "mechanismLanguage": "exchange plus the explicitly enumerated off-contract-leak route"
+  },
+  "sourceRefs": [
+    {
+      "id": "lts",
+      "path": "../constructed/near_pass_lts.v2.json",
+      "sha256": "d8a3d1ca16aa2477f0916c9b1a0ce37232aee5203524b167f1512c270122fa63",
+      "pointer": ""
+    }
+  ],
+  "gates": {
+    "B1": {
+      "contextRefs": [
+        "lts"
+      ],
+      "evidence": [
+        {
+          "type": "finite_lts_gate",
+          "sourceRef": "lts",
+          "gate": "B1"
+        }
+      ]
+    },
+    "B2": {
+      "contextRefs": [
+        "lts"
+      ],
+      "evidence": [
+        {
+          "type": "finite_lts_gate",
+          "sourceRef": "lts",
+          "gate": "B2"
+        }
+      ]
+    },
+    "B3": {
+      "contextRefs": [
+        "lts"
+      ],
+      "evidence": [
+        {
+          "type": "finite_lts_gate",
+          "sourceRef": "lts",
+          "gate": "B3"
+        }
+      ]
+    },
+    "B4": {
+      "contextRefs": [
+        "lts"
+      ],
+      "evidence": [
+        {
+          "type": "finite_lts_gate",
+          "sourceRef": "lts",
+          "gate": "B4"
+        }
+      ]
+    },
+    "B5": {
+      "contextRefs": [
+        "lts"
+      ],
+      "evidence": [
+        {
+          "type": "finite_lts_gate",
+          "sourceRef": "lts",
+          "gate": "B5"
+        }
+      ]
+    }
+  },
+  "claimBoundary": "Constructed discriminative diagnostic, not a deployed-system measurement."
+}

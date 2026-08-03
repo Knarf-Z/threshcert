@@ -19,11 +19,11 @@ function python(args, cwd) {
   }
   throw new Error("Python 3 not found");
 }
-console.log("INTEGRITY_DRIVER=v48");
+console.log("INTEGRITY_DRIVER=v49");
 console.log("FORMAL_MODE=PRESERVED_PROOF_HASH_AND_SEMANTIC_VERIFICATION_NOT_REEXECUTION");
 run(process.execPath, ["build_manifest.mjs", "--check"]);
 run(process.execPath, ["verify_freeze_evidence.mjs"], path.join(root, "threshold_deployment_audit"));
-run(process.execPath, ["verify_offline_v48.mjs"], path.join(root, "threshold_deployment_audit"));
+run(process.execPath, ["verify_offline_v49.mjs"], path.join(root, "threshold_deployment_audit"));
 run(process.execPath, ["scripts/verify_raw_capture_v48.mjs"], path.join(root, "threshold_deployment_audit"));
 python(["verify_offline.py"], path.join(root, "production_snapshot"));
 const evidenceRoot = path.join(root, "evidence_admission");
@@ -39,4 +39,4 @@ python(["verify_schema_independent.py"], refinementRoot);
 python(["verify_unbridged_member_loss_proxies.py"], path.join(root, "core_formula_checks"));
 run(process.execPath, ["build_manifest.mjs", "--check"]);
 console.log(`INTEGRITY_VERIFICATION_SECONDS=${Math.ceil((Date.now() - started) / 1000)}`);
-console.log("V48_INTEGRITY_AND_PRESERVED_PROOFS=PASS");
+console.log("V49_INTEGRITY_AND_PRESERVED_PROOFS=PASS");

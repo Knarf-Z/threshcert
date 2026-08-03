@@ -1,54 +1,71 @@
-# Data-driven public-evidence evaluation
+# Finite-LTS public-evidence checker
 
-This directory asks whether typed public records certify a named acquirer's net
-irreversible outflow for threshold acquisition. The four-deployment cohort and
-the original checklist were author-frozen before the reported audit, but the
-freeze was not independently preregistered and does not support a prevalence
-claim. Earlier manuscript work had already found the Shutter zero;
-post-selection bias cannot be excluded. No project is said to have made the
-paper's payment claim, and zero is not an insecurity finding.
+This directory checks whether typed records certify a named acquirer's net
+irreversible outflow for threshold acquisition. It consumes an explicitly
+materialized finite acquisition LTS. It does not synthesize entries, callbacks,
+proxy or upgrade behavior from bytecode, and it does not discover leak,
+coercion, theft, common-control, reimbursement, or other off-chain routes.
+A deployment-wide lift therefore requires an independent route-completeness or
+success- and payment-preserving refinement proof.
 
-## v48 compiler inputs
+The four public records are author-selected worked diagnostics. The cohort
+freeze was not independently preregistered, prior work had already found the
+Shutter zero, and no prevalence claim follows. All five gate-evidence arrays are
+empty in each public record. Their zeros are record-derived missing-evidence
+outputs, not routes independently inferred by the checker, project claims, or
+findings of insecurity.
 
-- `cohort.v1.json` and `data/capture.public.v1.json` preserve the frozen public
-  cohort and structured capture.
-- `policy.public-evidence.v2.json` defines the complete claim header, five gates,
-  and the statuses `PASS`, `FAIL_CLOSED_MISSING_EVIDENCE`,
-  `FAIL_COUNTEREXAMPLE`, `UNKNOWN`, and `NOT_APPLICABLE`.
-- `data/records_v48/*.json` contains one structured record per public case plus
-  two separately labelled finite-state diagnostics. Every gate names exact
-  source references; no gate conclusion is shared across systems.
-- `data/raw_v48/` preserves 10 official pages, 23 API responses, three fixed
-  RPC responses, and their indexes. Dynamic recapture bytes are not assumed to
-  equal the earlier frozen digest.
-- `results/bridge_audit.v2.json` and
-  `results/raw_capture_integrity.v48.json` are canonical compiler outputs.
+## v49 inputs and outputs
 
-`scripts/evaluate_offline_v48.mjs` contains no deployment identifier or
-prewritten system verdict. It validates the scope schema and source hashes,
-checks the finite-LTS evidence type, derives every gate status, writes
-`results/bridge_audit.generated.json`, and computes a positive certificate from
-the finite LTS's shortest successful path. Input records contain neither gate
-verdicts nor certificate floors; missing obligations are derived from policy and the
-evidence list. The reference evaluator accepts only nonnegative safe-integer
-base-unit amounts; the abstract logic may instead use exact rationals. Every
-admitted success state must be terminal for the accounting window, and every
-positive prefund must originate in the named-acquirer control class; otherwise
-evaluation fails closed.
-`verify_offline_v48.mjs` reruns it, byte-compares generated and canonical bytes,
-checks that no public record name occurs in evaluator source, verifies the
-positive and one-gate-failure diagnostics, and exhausts 1,024 positive-evidence
-refinements for monotonicity.
+- cohort.v1.json and data/capture.public.v1.json preserve the selected public
+  cases and structured capture.
+- policy.public-evidence.v3.json fixes the claim header, five gates, status
+  vocabulary, and the explicit-LTS input boundary.
+- data/records_v49/*.json contains one record per public case plus two
+  separately labelled constructed diagnostics.
+- data/raw_v48/ preserves the v48 frozen raw capture: 10 official pages,
+  23 API responses, three fixed RPC responses, and their indexes. The v48
+  suffix dates the capture; it is not the checker version.
+- results/bridge_audit.v3.json and
+  results/raw_capture_integrity.v48.json are canonical outputs.
+
+scripts/evaluate_offline_v49.mjs validates source hashes, the strict
+finite-acquisition-lts/v2 schema, B1--B5, and the exact shortest successful
+path in the supplied LTS. Every transition must explicitly provide all semantic amount and origin
+fields. Parsed-object schema errors make every gate UNKNOWN; duplicate raw JSON
+members or lexically inexact number tokens are rejected before evaluation.
+Neither path can produce a positive certificate, and no semantic field has a
+default value.
+
+JSON number tokens must be canonical nonnegative safe integers. Fractions and
+larger integers use reduced rational objects with canonical unsigned decimal
+numerator and positive denominator strings. Exponents, decimals, negative
+tokens, duplicate members, and underflow are rejected before native numeric
+conversion. All addition and comparison use BigInt fractions. B3 also requires
+every positive debit counted on a mapped-success prefix to be explicitly
+irreversible. The constructed positive
+fixture has five states, four transitions, and successful path values four and
+seven; the near-pass has four states and three transitions and fails only B5.
+Neither is a deployment measurement or buyer-bound cryptographic delivery.
+
+test_finite_lts_v2.mjs runs 40 malformed-schema cases, including the reported
+returnToControl/externalFunding omission, wrong and non-finite values, typos,
+duplicate identifiers, endpoint errors, and amount-origin conflicts. Eight raw
+JSON cases reject duplicate members, underflowing exponents, decimals, and
+invalid numeric tokens. Four well-formed semantic counterexamples include a
+reversible prefix debit, while four exact-rational and three boundary cases
+cover fractions, MAX_SAFE, and a multi-edge sum above MAX_SAFE.
+verify_offline_v49.mjs reruns those tests, byte-compares generated and
+canonical results, checks the empty public evidence arrays, verifies the two
+constructed diagnostics, and exhausts 1,024 positive-evidence refinements.
 
 ## Offline verification
 
 From the artifact root:
 
-```text
-node threshold_deployment_audit/verify_offline_v48.mjs
-node threshold_deployment_audit/scripts/verify_raw_capture_v48.mjs
-```
+    node threshold_deployment_audit/verify_offline_v49.mjs
+    node threshold_deployment_audit/scripts/verify_raw_capture_v48.mjs
 
-The legacy filenames are compatibility wrappers for the v48 scripts. Live
-recapture is optional, read-only, and requires a user-supplied archive RPC for
-historical code queries; it is not needed for integrity verification.
+The unversioned evaluator and verifier filenames delegate to v49. Live recapture
+is optional, read-only, and requires a user-supplied archive RPC for historical
+code queries; it is not needed for integrity verification.

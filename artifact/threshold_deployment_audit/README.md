@@ -9,6 +9,12 @@ earlier manuscript work had already established the Shutter zero. Post-selection
 bias cannot be excluded. The audit is purposive, not a random sample or a
 prevalence estimate, and it does not test a claim made by the four projects.
 
+The frozen commit is now preserved offline under `freeze_evidence/`. The paper
+driver recomputes its Git object SHA-1 and checks the bundle head before
+accepting the audit provenance. This authenticates the author-controlled freeze;
+it does not create an independent timestamp or remove the stated selection-bias
+limitation.
+
 The frozen inputs are:
 
 - `cohort.v1.json`: four public threshold deployments and their selection rule;

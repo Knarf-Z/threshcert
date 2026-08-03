@@ -1,30 +1,43 @@
-# Reproducibility artifact v45
+# Reproducibility artifact v46
 
-This is the reproducibility artifact for the v45 manuscript. It keeps
-locked dependencies, contract source and build metadata, canonical result
-JSON, the failed calibration JSON, the fresh covered-run JSON, and executable
-checkers in one tree. It also includes the pinned Gnosis production snapshot,
-its public-evidence ledger and canonical zero-certificate result, plus offline and
-read-only archive-RPC verification. Raw terminal transcripts are omitted because
-they contain local paths; no canonical result JSON is omitted.
+This archive separates the v46 manuscript checks from retained exploratory and
+legacy modules. The legacy sentinel `0_PUBLIC_FLOOR_CERTIFICATE` belongs to the
+member-loss submodule; it is **not** the deployment-wide attacker-payment
+certificate. The bridge audit uses `ATTACKER_PAYMENT_NOT_CERTIFIED` when public
+evidence leaves a positive route unsupported.
 
-## One-command offline verification
+The archive keeps locked dependencies, contract source and build metadata,
+canonical JSON results, the pinned four-system capture, and an offline Git
+bundle containing the frozen-plan commit. It performs no network access or
+chain write during verification.
+
+## Paper-only one-command verification
 
 Prerequisites: Node.js 20+ and Python 3.10+. From the extracted archive root:
+
+```text
+node verify_paper_v46.mjs
+```
+
+This is the default manuscript reproduction path. It verifies the root
+manifest, recomputes the frozen Git commit object hash, checks the four-system
+bridge audit and pinned Shutter snapshot, runs the member-loss and refresh
+experiments, checks the prefunded payment-accounting core and its admitted EVM
+refinement, and reproduces the `0/4/18/40` quantitative table. It checks the
+manifest again before returning `PAPER_V46_CLAIMS=PASS` and prints its measured
+runtime. Expected runtime on the reference Windows host is under two minutes.
+
+## Full archival verification
 
 ```text
 node verify_all.mjs
 ```
 
-The command verifies the root manifest, recomputes the pinned Gnosis production
-snapshot certificate, runs the report-invariant, member-attributed floor-admission and refresh-window experiments and their unit tests, checks both preserved Chiado result files, their full
-identifiers and six-contract 0.108-xDAI settlement plan, checks the declared
-finite transaction schema and preserved formal certificate with separately written Node and Python implementations,
-runs the prospectively frozen four-system threshold-deployment audit, the prefunded
-threshold-exchange checker, the fixed third-party contract stress-cohort checks
-and 41-entry survey manifest, and the core formula checks. It performs no
-network access or chain write.
-
+The archival driver additionally runs preserved Chiado evidence, the withdrawn
+third-party contract survey, financing/activation formula families, and other
+historical checks. It labels those sections `EXPLORATORY_NOT_USED_BY_V46` or
+`ARCHIVAL_FORMULA_FAMILIES_NOT_USED_BY_V46`. They are retained for provenance,
+not used as evidence for the v46 manuscript.
 The joint-incidence certificate reports `CONFIGURATION_PREFIX_TOTALITY=PASS`
 and `POSTCONFIGURATION_EVM_TO_SCHEMA_BRIDGE=PASS` only for an admitted Cancun
 runtime and the declared universe. Admission checks the direct creation input,
@@ -84,7 +97,7 @@ equality, and the recorded coverage condition.
 - `threshold_deployment_audit/`: prospectively frozen author-controlled cohort and policy, pinned public
   capture for Gnosis Shutter, SSV, tBTC v2, and drand, per-gate rejection
   reasons, canonical result, and an offline verifier.
-- `third_party_contract_survey/`: preserved exploratory stress cohort. The v45
+- `third_party_contract_survey/`: preserved exploratory stress cohort. The v46
   paper does not use it for a prevalence or contribution claim.
 - `chiado_public_runs/`: TraceThenSlash source, build metadata, deployment and
   read-only verification scripts, plus both canonical result JSON files.

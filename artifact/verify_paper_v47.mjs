@@ -20,7 +20,7 @@ function python(args, cwd) {
   throw new Error("Python 3 not found");
 }
 
-console.log("PAPER_DRIVER=v46");
+console.log("PAPER_DRIVER=v47");
 run(process.execPath, ["build_manifest.mjs", "--check"]);
 run(process.execPath, ["verify_freeze_evidence.mjs"], path.join(root, "threshold_deployment_audit"));
 run(process.execPath, ["verify_offline.mjs"], path.join(root, "threshold_deployment_audit"));
@@ -38,7 +38,7 @@ run(process.execPath, ["verify_refinement.mjs"], refinementRoot);
 run(process.execPath, ["verify_prefunded_exchange.mjs"], refinementRoot);
 python(["verify_schema_independent.py"], refinementRoot);
 
-python(["verify_payment_baselines.py"], path.join(root, "core_formula_checks"));
+python(["verify_unbridged_member_loss_proxies.py"], path.join(root, "core_formula_checks"));
 run(process.execPath, ["build_manifest.mjs", "--check"]);
 console.log(`PAPER_VERIFICATION_SECONDS=${Math.ceil((Date.now() - started) / 1000)}`);
-console.log("PAPER_V46_CLAIMS=PASS");
+console.log("PAPER_V47_CLAIMS=PASS");

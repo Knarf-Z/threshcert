@@ -1,6 +1,6 @@
-# Reproducibility artifact v46
+# Reproducibility artifact v47
 
-This archive separates the v46 manuscript checks from retained exploratory and
+This archive separates the v47 manuscript checks from retained exploratory and
 legacy modules. The legacy sentinel `0_PUBLIC_FLOOR_CERTIFICATE` belongs to the
 member-loss submodule; it is **not** the deployment-wide attacker-payment
 certificate. The bridge audit uses `ATTACKER_PAYMENT_NOT_CERTIFIED` when public
@@ -16,7 +16,7 @@ chain write during verification.
 Prerequisites: Node.js 20+ and Python 3.10+. From the extracted archive root:
 
 ```text
-node verify_paper_v46.mjs
+node verify_paper_v47.mjs
 ```
 
 This is the default manuscript reproduction path. It verifies the root
@@ -24,8 +24,11 @@ manifest, recomputes the frozen Git commit object hash, checks the four-system
 bridge audit and pinned Shutter snapshot, runs the member-loss and refresh
 experiments, checks the prefunded payment-accounting core and its admitted EVM
 refinement, and reproduces the `0/4/18/40` quantitative table. It checks the
-manifest again before returning `PAPER_V46_CLAIMS=PASS` and prints its measured
-runtime. Expected runtime on the reference Windows host is under two minutes.
+manifest again before returning `PAPER_V47_CLAIMS=PASS` and prints its measured
+runtime. The reference run took approximately 19 seconds. The four displayed
+values are deliberately typed as `CERTIFIED_ATTACKER_PAYMENT=0`,
+`UNBRIDGED_MEMBER_FLOOR_PROXY=4`, `UNBRIDGED_LOWER_TAIL_PROXY=18`, and
+`INVALID_MEAN_HEURISTIC=40`: only the first is an attacker-payment certificate.
 
 ## Full archival verification
 
@@ -33,11 +36,12 @@ runtime. Expected runtime on the reference Windows host is under two minutes.
 node verify_all.mjs
 ```
 
-The archival driver additionally runs preserved Chiado evidence, the withdrawn
+The archival driver took approximately two minutes (121.6 seconds) on the
+reference host. It additionally runs preserved Chiado evidence, the withdrawn
 third-party contract survey, financing/activation formula families, and other
-historical checks. It labels those sections `EXPLORATORY_NOT_USED_BY_V46` or
-`ARCHIVAL_FORMULA_FAMILIES_NOT_USED_BY_V46`. They are retained for provenance,
-not used as evidence for the v46 manuscript.
+historical checks. It labels those sections `EXPLORATORY_NOT_USED_BY_V47` or
+`ARCHIVAL_FORMULA_FAMILIES_NOT_USED_BY_V47`. They are retained for provenance,
+not used as evidence for the v47 manuscript.
 The joint-incidence certificate reports `CONFIGURATION_PREFIX_TOTALITY=PASS`
 and `POSTCONFIGURATION_EVM_TO_SCHEMA_BRIDGE=PASS` only for an admitted Cancun
 runtime and the declared universe. Admission checks the direct creation input,
@@ -97,7 +101,7 @@ equality, and the recorded coverage condition.
 - `threshold_deployment_audit/`: prospectively frozen author-controlled cohort and policy, pinned public
   capture for Gnosis Shutter, SSV, tBTC v2, and drand, per-gate rejection
   reasons, canonical result, and an offline verifier.
-- `third_party_contract_survey/`: preserved exploratory stress cohort. The v46
+- `third_party_contract_survey/`: preserved exploratory stress cohort. The v47
   paper does not use it for a prevalence or contribution claim.
 - `chiado_public_runs/`: TraceThenSlash source, build metadata, deployment and
   read-only verification scripts, plus both canonical result JSON files.

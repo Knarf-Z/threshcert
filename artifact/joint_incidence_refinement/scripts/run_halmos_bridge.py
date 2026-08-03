@@ -23,6 +23,7 @@ import subprocess
 import sys
 import tempfile
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from importlib.metadata import version as package_version
 from itertools import combinations
 from pathlib import Path
 
@@ -93,10 +94,17 @@ def strip_metadata(bytecode: str) -> bytes:
 
 def version(command: list[str]) -> str:
     result = subprocess.run(
-        command, cwd=ROOT, text=True, stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT, check=True
+        command, cwd=ROOT, text=True, encoding="utf-8", errors="replace",
+        stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True
     )
     return ANSI.sub("", result.stdout).strip()
+
+
+def solver_version() -> str:
+    try:
+        return version(["yices-smt2", "--version"])
+    except (FileNotFoundError, subprocess.CalledProcessError):
+        return f"yices-solver {package_version('yices-solver')} (portable Python backend)"
 
 
 def alternatives(items) -> str:
@@ -179,6 +187,7 @@ def run_job(parent: Path, spec, solver: str, loop_bound: int):
     environment["FOUNDRY_OUT"] = "halmos-out"
     result = subprocess.run(
         command, cwd=worker, env=environment, text=True,
+        encoding="utf-8", errors="replace",
         stdout=subprocess.PIPE, stderr=subprocess.STDOUT
     )
     output = ANSI.sub("", result.stdout).replace(str(parent), "<HALMOS_WORKDIR>")
@@ -326,7 +335,7 @@ def main() -> None:
             "python": sys.version.split()[0], "platform": platform.platform(),
             "forge": version(["forge", "--version"]),
             "halmos": version([sys.executable, "-m", "halmos", "--version"]),
-            "solver": version(["yices-smt2", "--version"]),
+            "solver": solver_version(),
         },
         "trustedComputingBase": {
             "components": [

@@ -1,0 +1,82 @@
+[
+    {
+        "url":  "https://docs.gnosischain.com/shutterized-gc/DeployedContracts",
+        "path":  "data/raw_v48/official-01.html",
+        "sha256":  "8090b935b5466b6b614224bd915acfaff7d41ea30c439796ee1a754c211663d6",
+        "bytes":  24472,
+        "v1_sha256":  "8090b935b5466b6b614224bd915acfaff7d41ea30c439796ee1a754c211663d6",
+        "matches_v1":  true
+    },
+    {
+        "url":  "https://docs.gnosischain.com/shutterized-gc/",
+        "path":  "data/raw_v48/official-02.html",
+        "sha256":  "572ed561ca1f29f2d999ca99bb93fd3e577f22657a55b371e1ee2a52aa059135",
+        "bytes":  28286,
+        "v1_sha256":  "572ed561ca1f29f2d999ca99bb93fd3e577f22657a55b371e1ee2a52aa059135",
+        "matches_v1":  true
+    },
+    {
+        "url":  "https://docs.ssv.network/developers/smart-contracts",
+        "path":  "data/raw_v48/official-03.html",
+        "sha256":  "acdbed6a551c50139ada2d771e04702ad369c58378f652c570530e75eda8874f",
+        "bytes":  25209,
+        "v1_sha256":  "acdbed6a551c50139ada2d771e04702ad369c58378f652c570530e75eda8874f",
+        "matches_v1":  true
+    },
+    {
+        "url":  "https://docs.ssv.network/developers/security/",
+        "path":  "data/raw_v48/official-04.html",
+        "sha256":  "f2cf7084d8fd9b986b5123287b7a70c1ee9036fac19fa091c745832254bbdb90",
+        "bytes":  22595,
+        "v1_sha256":  "f2cf7084d8fd9b986b5123287b7a70c1ee9036fac19fa091c745832254bbdb90",
+        "matches_v1":  true
+    },
+    {
+        "url":  "https://docs.ssv.network/developers/tools/ssv-subgraph/subgraph-examples",
+        "path":  "data/raw_v48/official-05.json",
+        "sha256":  "0361f6f4c203b711bf727c48d4001ad2e616e08b5c7790f7f521b94c663fa693",
+        "bytes":  364,
+        "v1_sha256":  "0361f6f4c203b711bf727c48d4001ad2e616e08b5c7790f7f521b94c663fa693",
+        "matches_v1":  true
+    },
+    {
+        "url":  "https://docs.threshold.network/contract-addresses/tbtc",
+        "path":  "data/raw_v48/official-06.html",
+        "sha256":  "c44806bb755ea6e7a6953bf00801e27b87f445e4af37795182af91505728e394",
+        "bytes":  693466,
+        "v1_sha256":  "494f219da671ce9f4970ea11e6d9b668227f7b1f7124df621b846e3c95b2395d",
+        "matches_v1":  false
+    },
+    {
+        "url":  "https://docs.threshold.network/applications/tbtc-v2/wallet-signing",
+        "path":  "data/raw_v48/official-07.html",
+        "sha256":  "448aaf9d53be88eeb21fbafcfecce49e3a7cd927b0de443f23a3dc56493848b7",
+        "bytes":  432977,
+        "v1_sha256":  "7864e37460b046c36b6db3deeca0b5893c082ea4a9123c079655a944c2603335",
+        "matches_v1":  false
+    },
+    {
+        "url":  "https://docs.threshold.network/app-development/tbtc-contracts-api/ecdsa-api/walletregistry",
+        "path":  "data/raw_v48/official-08.html",
+        "sha256":  "01fd0007243db4cd6147419bda5e1d76f5a4d24ad223ed31d527d00a6567cc6e",
+        "bytes":  2016617,
+        "v1_sha256":  "01fd0007243db4cd6147419bda5e1d76f5a4d24ad223ed31d527d00a6567cc6e",
+        "matches_v1":  true
+    },
+    {
+        "url":  "https://docs.drand.love/developer/",
+        "path":  "data/raw_v48/official-09.html",
+        "sha256":  "82c27d0bdd97a030109d281b456f982dfde0374742290b8f276257cd630d4c27",
+        "bytes":  19535,
+        "v1_sha256":  "82c27d0bdd97a030109d281b456f982dfde0374742290b8f276257cd630d4c27",
+        "matches_v1":  true
+    },
+    {
+        "url":  "https://docs.drand.love/docs/specification/",
+        "path":  "data/raw_v48/official-10.html",
+        "sha256":  "d807051b4d5744001dc1db3d80e4527733a41cd48a786fe441247ef18284b566",
+        "bytes":  228743,
+        "v1_sha256":  "d807051b4d5744001dc1db3d80e4527733a41cd48a786fe441247ef18284b566",
+        "matches_v1":  true
+    }
+]

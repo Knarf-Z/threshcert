@@ -1,35 +1,55 @@
-# Reproducibility artifact v47
+# Reproducibility artifact v48
 
-This archive separates the v47 manuscript checks from retained exploratory and
-legacy modules. The legacy sentinel `0_PUBLIC_FLOOR_CERTIFICATE` belongs to the
-member-loss submodule; it is **not** the deployment-wide attacker-payment
-certificate. The bridge audit uses `ATTACKER_PAYMENT_NOT_CERTIFIED` when public
-evidence leaves a positive route unsupported.
+This archive separates the v48 manuscript checks from retained exploratory and
+legacy modules. It also separates integrity verification from fresh tool
+execution. A preserved Halmos certificate is not described as a rerun.
 
-The archive keeps locked dependencies, contract source and build metadata,
-canonical JSON results, the pinned four-system capture, and an offline Git
-bundle containing the frozen-plan commit. It performs no network access or
-chain write during verification.
+The payment claim is the named acquirer's net irreversible outflow in the typed
+asset, unit, control closure, funding lookback, and refund horizon. Legacy
+member-loss sentinels and the unbridged values 4, 18, and 40 are not
+attacker-payment certificates.
 
-## Paper-only one-command verification
+## Integrity and preserved-proof verification
 
 Prerequisites: Node.js 20+ and Python 3.10+. From the extracted archive root:
 
 ```text
-node verify_paper_v47.mjs
+node verify_integrity_v48.mjs
 ```
 
-This is the default manuscript reproduction path. It verifies the root
-manifest, recomputes the frozen Git commit object hash, checks the four-system
-bridge audit and pinned Shutter snapshot, runs the member-loss and refresh
-experiments, checks the prefunded payment-accounting core and its admitted EVM
-refinement, and reproduces the `0/4/18/40` quantitative table. It checks the
-manifest again before returning `PAPER_V47_CLAIMS=PASS` and prints its measured
-runtime. The reference run took approximately 19 seconds. The four displayed
-values are deliberately typed as `CERTIFIED_ATTACKER_PAYMENT=0`,
-`UNBRIDGED_MEMBER_FLOOR_PROXY=4`, `UNBRIDGED_LOWER_TAIL_PROXY=18`, and
-`INVALID_MEAN_HEURISTIC=40`: only the first is an attacker-payment certificate.
+This offline entry point checks the root manifest and frozen Git object,
+verifies the raw HTML/JSON/RPC recapture, regenerates the generic evidence
+compiler result, byte-compares generated and canonical JSON, reruns the
+admission/refresh formula checks, and checks the preserved Hardhat and Halmos
+certificates against their bound sources, transcripts, proof names, empty
+bounds, and runtime hashes. It prints
+`FORMAL_MODE=PRESERVED_PROOF_HASH_AND_SEMANTIC_VERIFICATION_NOT_REEXECUTION` and
+does not invoke Halmos. It took roughly 20 seconds on the reference host; filesystem and antivirus overhead vary.
 
+`node verify_paper_v48.mjs` is a thin compatibility alias for this integrity
+entry point.
+
+## Fresh source rebuild and proof re-execution
+
+```text
+node verify_rebuild_v48.mjs
+```
+
+This entry point installs locked Node dependencies when absent, force-recompiles
+the Solidity sources with solc 0.8.28/Cancun, requires all 11 Hardhat tests, and
+freshly invokes Halmos 0.3.3 with Yices 2.6.4, loop bound eight, and four jobs.
+It writes proof outputs only to a validated system-temporary directory, then
+compares all 82 proof names, zero failures, empty bounds, source/config hashes,
+and compiled runtime with the canonical certificate before removing the temp
+directory. It prints `V48_FRESH_REBUILD=PASS` only after this re-execution. A complete
+run took approximately 25 minutes on the reference host; solver and CPU
+variability can change that time substantially.
+
+Foundry must be on `PATH` or named by `FOUNDRY_BIN`. The driver creates an
+excluded local Python virtual environment when needed; `V48_PYTHON` may instead
+name an existing Python that provides Halmos 0.3.3. On Windows/Python 3.11 the
+portable environment uses `eth-hash[pycryptodome]` because the obsolete
+`safe-pysha3` source dependency requires a separate MSVC toolchain.
 ## Full archival verification
 
 ```text
@@ -39,9 +59,9 @@ node verify_all.mjs
 The archival driver took approximately two minutes (121.6 seconds) on the
 reference host. It additionally runs preserved Chiado evidence, the withdrawn
 third-party contract survey, financing/activation formula families, and other
-historical checks. It labels those sections `EXPLORATORY_NOT_USED_BY_V47` or
-`ARCHIVAL_FORMULA_FAMILIES_NOT_USED_BY_V47`. They are retained for provenance,
-not used as evidence for the v47 manuscript.
+historical checks. It labels those sections `EXPLORATORY_NOT_USED_BY_V48` or
+`ARCHIVAL_FORMULA_FAMILIES_NOT_USED_BY_V48`. They are retained for provenance,
+not used as evidence for the v48 manuscript.
 The joint-incidence certificate reports `CONFIGURATION_PREFIX_TOTALITY=PASS`
 and `POSTCONFIGURATION_EVM_TO_SCHEMA_BRIDGE=PASS` only for an admitted Cancun
 runtime and the declared universe. Admission checks the direct creation input,
@@ -98,10 +118,12 @@ equality, and the recorded coverage condition.
   fixtures (including the prefunded threshold exchange), deployment
   capture/admission and tamper checkers, Foundry/Halmos harness, preserved
   certificates/log, locked build metadata, and tests.
-- `threshold_deployment_audit/`: prospectively frozen author-controlled cohort and policy, pinned public
-  capture for Gnosis Shutter, SSV, tBTC v2, and drand, per-gate rejection
-  reasons, canonical result, and an offline verifier.
-- `third_party_contract_survey/`: preserved exploratory stress cohort. The v47
+- `threshold_deployment_audit/`: frozen four-case cohort, pinned structured
+  capture, per-case v2 evidence records, 36 raw public responses plus two
+  indexes, generic status compiler, canonical generated decisions, and offline
+  byte-comparison verifiers. Two finite-state fixtures are separately labelled
+  as constructed diagnostics.
+- `third_party_contract_survey/`: preserved exploratory stress cohort. The v48
   paper does not use it for a prevalence or contribution claim.
 - `chiado_public_runs/`: TraceThenSlash source, build metadata, deployment and
   read-only verification scripts, plus both canonical result JSON files.

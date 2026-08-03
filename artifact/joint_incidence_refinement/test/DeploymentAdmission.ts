@@ -15,7 +15,9 @@ const ARTIFACT = path.join(
   "OverlappingPoolEscrow.sol",
   "OverlappingPoolEscrow.json",
 );
-const RESULT = path.join(ROOT, "results", "deployment_admission_local.json");
+const RESULT = process.env.DEPLOYMENT_ADMISSION_RESULT
+  ? path.resolve(process.env.DEPLOYMENT_ADMISSION_RESULT)
+  : null;
 const sha = (hex: `0x${string}`) =>
   createHash("sha256").update(Buffer.from(hex.slice(2), "hex")).digest("hex");
 
@@ -122,7 +124,9 @@ describe("deployment admission fixture", () => {
         ).toString(),
       },
     };
-    await mkdir(path.dirname(RESULT), { recursive: true });
-    await writeFile(RESULT, `${JSON.stringify(record, null, 2)}\n`, "utf8");
+    if (RESULT !== null) {
+      await mkdir(path.dirname(RESULT), { recursive: true });
+      await writeFile(RESULT, `${JSON.stringify(record, null, 2)}\n`, "utf8");
+    }
   });
 });

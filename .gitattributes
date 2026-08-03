@@ -1,2 +1,3 @@
 * text=auto eol=lf
 artifact/joint_incidence_refinement/formal/OverlappingPoolEscrowBridge.t.sol -text whitespace=cr-at-eol
+artifact/threshold_deployment_audit/data/raw_v48/** -text -whitespace

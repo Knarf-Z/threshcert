@@ -1,0 +1,780 @@
+{
+  "schema": "public-evidence-compiler-result/v2",
+  "generatedFrom": {
+    "evaluatorPath": "scripts/evaluate_offline_v48.mjs",
+    "evaluatorSha256": "94b19db53a26ab4cd3118eb893683aa208450d48d6fb45f16998f22846b677bc",
+    "policyPath": "policy.public-evidence.v2.json",
+    "policySha256": "a31ebf357d5545125ed5a7d122e4bc0748272d9b7537994ce57536c47af44eaf",
+    "recordSetSha256": "f2704d712a3055207340fb84c3f2f00fb7faae07f541215751548391d0db423e"
+  },
+  "statusVocabulary": [
+    "PASS",
+    "FAIL_CLOSED_MISSING_EVIDENCE",
+    "FAIL_COUNTEREXAMPLE",
+    "UNKNOWN",
+    "NOT_APPLICABLE"
+  ],
+  "publicDeploymentCount": 4,
+  "constructedDiagnosticCount": 2,
+  "positivePublicDeploymentCertificates": 0,
+  "auditQuestion": "What named-acquirer net irreversible outflow follows from the admitted typed evidence; not whether any project claimed such a bound.",
+  "resultBoundary": "Fixed author-selected public cohort plus separately labelled constructed diagnostics; no prevalence, insecurity, independent preregistration, fiat-value, or buyer-bound cryptographic-delivery claim.",
+  "records": [
+    {
+      "id": "constructed-bridge-pass",
+      "recordType": "constructed-diagnostic",
+      "recordPath": "data/records_v48/constructed-bridge-pass.json",
+      "recordSha256": "bf70890df4bc0704482ae9594d41463d2e82a60cc2d05642cb2f617b21dfdcdf",
+      "scope": {
+        "system": "Constructed finite-language bridge",
+        "deploymentIdentifier": "fixture:bridge_pass_lts.v1",
+        "committee": "one delivered right suffices in the finite fixture",
+        "event": "usable fixture capability delivery",
+        "validityInterval": "single finite run",
+        "usableDeliveryPredicate": "transition has usableDelivery=true and success=true",
+        "namedAcquirer": "buyer-A",
+        "numeraire": {
+          "asset": "synthetic-accounting-unit",
+          "unit": "wei",
+          "valuationTime": "transition",
+          "conversionLowerPrice": "identity",
+          "gasTreatment": "excluded-accounting-only"
+        },
+        "accountingWindow": "entire finite run",
+        "controlPolicy": "buyer-A only",
+        "mechanismLanguage": "the two enumerated exchange routes only"
+      },
+      "gates": {
+        "B1": {
+          "status": "PASS",
+          "missingPredicates": [],
+          "context": [
+            {
+              "id": "lts",
+              "path": "data/constructed/bridge_pass_lts.v1.json",
+              "sourceSha256": "e05af7d2eac72335ea8db2df30b4a59f0f383e0cc1e25ac5b9175370082ea125",
+              "pointer": "",
+              "pointerValueSha256": "1931b48853f2c1b6e1f29a4ccc236245123971cdffa635deb95d3a8715397245"
+            }
+          ],
+          "evidenceResults": [
+            {
+              "type": "finite_lts_gate",
+              "sourceRef": "lts",
+              "status": "PASS",
+              "detail": "2 reachable success transition(s) satisfy the pinned usable-delivery predicate",
+              "witness": null
+            }
+          ]
+        },
+        "B2": {
+          "status": "PASS",
+          "missingPredicates": [],
+          "context": [
+            {
+              "id": "lts",
+              "path": "data/constructed/bridge_pass_lts.v1.json",
+              "sourceSha256": "e05af7d2eac72335ea8db2df30b4a59f0f383e0cc1e25ac5b9175370082ea125",
+              "pointer": "",
+              "pointerValueSha256": "1931b48853f2c1b6e1f29a4ccc236245123971cdffa635deb95d3a8715397245"
+            }
+          ],
+          "evidenceResults": [
+            {
+              "type": "finite_lts_gate",
+              "sourceRef": "lts",
+              "status": "PASS",
+              "detail": "every reachable debit path is funded from the named acquirer",
+              "witness": null
+            }
+          ]
+        },
+        "B3": {
+          "status": "PASS",
+          "missingPredicates": [],
+          "context": [
+            {
+              "id": "lts",
+              "path": "data/constructed/bridge_pass_lts.v1.json",
+              "sourceSha256": "e05af7d2eac72335ea8db2df30b4a59f0f383e0cc1e25ac5b9175370082ea125",
+              "pointer": "",
+              "pointerValueSha256": "1931b48853f2c1b6e1f29a4ccc236245123971cdffa635deb95d3a8715397245"
+            }
+          ],
+          "evidenceResults": [
+            {
+              "type": "finite_lts_gate",
+              "sourceRef": "lts",
+              "status": "PASS",
+              "detail": "every mapped usable success is atomic with an irreversible positive debit",
+              "witness": null
+            }
+          ]
+        },
+        "B4": {
+          "status": "PASS",
+          "missingPredicates": [],
+          "context": [
+            {
+              "id": "lts",
+              "path": "data/constructed/bridge_pass_lts.v1.json",
+              "sourceSha256": "e05af7d2eac72335ea8db2df30b4a59f0f383e0cc1e25ac5b9175370082ea125",
+              "pointer": "",
+              "pointerValueSha256": "1931b48853f2c1b6e1f29a4ccc236245123971cdffa635deb95d3a8715397245"
+            }
+          ],
+          "evidenceResults": [
+            {
+              "type": "finite_lts_gate",
+              "sourceRef": "lts",
+              "status": "PASS",
+              "detail": "every mapped-success prefix closes return-to-control and external-funding edges",
+              "witness": null
+            }
+          ]
+        },
+        "B5": {
+          "status": "PASS",
+          "missingPredicates": [],
+          "context": [
+            {
+              "id": "lts",
+              "path": "data/constructed/bridge_pass_lts.v1.json",
+              "sourceSha256": "e05af7d2eac72335ea8db2df30b4a59f0f383e0cc1e25ac5b9175370082ea125",
+              "pointer": "",
+              "pointerValueSha256": "1931b48853f2c1b6e1f29a4ccc236245123971cdffa635deb95d3a8715397245"
+            }
+          ],
+          "evidenceResults": [
+            {
+              "type": "finite_lts_gate",
+              "sourceRef": "lts",
+              "status": "PASS",
+              "detail": "every reachable usable success is in the mapped route set",
+              "witness": null
+            }
+          ]
+        }
+      },
+      "status": "PASS",
+      "certifiedNamedAcquirerNetIrreversibleOutflow": 4,
+      "certificateDerivation": {
+        "type": "shortest-successful-path",
+        "sourceRef": "lts",
+        "value": 4
+      },
+      "claimBoundary": "Constructed finite-language witness only; not a deployment measurement or buyer-bound cryptographic-delivery claim.",
+      "interpretation": "Positive only in the exact typed scope and mechanism language above."
+    },
+    {
+      "id": "constructed-near-pass",
+      "recordType": "constructed-diagnostic",
+      "recordPath": "data/records_v48/constructed-near-pass.json",
+      "recordSha256": "9fec0508f126fae90914291ff9a61e3e823bed52be924d90dcecabd424f06a00",
+      "scope": {
+        "system": "Constructed finite-state near-pass",
+        "deploymentIdentifier": "fixture:near_pass_lts.v1",
+        "committee": "one delivered right suffices in the finite fixture",
+        "event": "usable fixture capability delivery",
+        "validityInterval": "single finite run",
+        "usableDeliveryPredicate": "transition has usableDelivery=true and success=true",
+        "namedAcquirer": "buyer-A",
+        "numeraire": {
+          "asset": "synthetic-accounting-unit",
+          "unit": "wei",
+          "valuationTime": "transition",
+          "conversionLowerPrice": "identity",
+          "gasTreatment": "excluded-accounting-only"
+        },
+        "accountingWindow": "entire finite run",
+        "controlPolicy": "buyer-A only",
+        "mechanismLanguage": "exchange plus the explicitly enumerated off-contract-leak route"
+      },
+      "gates": {
+        "B1": {
+          "status": "PASS",
+          "missingPredicates": [],
+          "context": [
+            {
+              "id": "lts",
+              "path": "data/constructed/near_pass_lts.v1.json",
+              "sourceSha256": "913f09526707fd9df0ba93488800665f5480fa05ad540e841a365bad5cfb84f8",
+              "pointer": "",
+              "pointerValueSha256": "4580f78b6d55e0ca5b419af26ac796b855d38cc21e8fa292aa60f8c38fa21922"
+            }
+          ],
+          "evidenceResults": [
+            {
+              "type": "finite_lts_gate",
+              "sourceRef": "lts",
+              "status": "PASS",
+              "detail": "2 reachable success transition(s) satisfy the pinned usable-delivery predicate",
+              "witness": null
+            }
+          ]
+        },
+        "B2": {
+          "status": "PASS",
+          "missingPredicates": [],
+          "context": [
+            {
+              "id": "lts",
+              "path": "data/constructed/near_pass_lts.v1.json",
+              "sourceSha256": "913f09526707fd9df0ba93488800665f5480fa05ad540e841a365bad5cfb84f8",
+              "pointer": "",
+              "pointerValueSha256": "4580f78b6d55e0ca5b419af26ac796b855d38cc21e8fa292aa60f8c38fa21922"
+            }
+          ],
+          "evidenceResults": [
+            {
+              "type": "finite_lts_gate",
+              "sourceRef": "lts",
+              "status": "PASS",
+              "detail": "every reachable debit path is funded from the named acquirer",
+              "witness": null
+            }
+          ]
+        },
+        "B3": {
+          "status": "PASS",
+          "missingPredicates": [],
+          "context": [
+            {
+              "id": "lts",
+              "path": "data/constructed/near_pass_lts.v1.json",
+              "sourceSha256": "913f09526707fd9df0ba93488800665f5480fa05ad540e841a365bad5cfb84f8",
+              "pointer": "",
+              "pointerValueSha256": "4580f78b6d55e0ca5b419af26ac796b855d38cc21e8fa292aa60f8c38fa21922"
+            }
+          ],
+          "evidenceResults": [
+            {
+              "type": "finite_lts_gate",
+              "sourceRef": "lts",
+              "status": "PASS",
+              "detail": "every mapped usable success is atomic with an irreversible positive debit",
+              "witness": null
+            }
+          ]
+        },
+        "B4": {
+          "status": "PASS",
+          "missingPredicates": [],
+          "context": [
+            {
+              "id": "lts",
+              "path": "data/constructed/near_pass_lts.v1.json",
+              "sourceSha256": "913f09526707fd9df0ba93488800665f5480fa05ad540e841a365bad5cfb84f8",
+              "pointer": "",
+              "pointerValueSha256": "4580f78b6d55e0ca5b419af26ac796b855d38cc21e8fa292aa60f8c38fa21922"
+            }
+          ],
+          "evidenceResults": [
+            {
+              "type": "finite_lts_gate",
+              "sourceRef": "lts",
+              "status": "PASS",
+              "detail": "every mapped-success prefix closes return-to-control and external-funding edges",
+              "witness": null
+            }
+          ]
+        },
+        "B5": {
+          "status": "FAIL_COUNTEREXAMPLE",
+          "missingPredicates": [],
+          "context": [
+            {
+              "id": "lts",
+              "path": "data/constructed/near_pass_lts.v1.json",
+              "sourceSha256": "913f09526707fd9df0ba93488800665f5480fa05ad540e841a365bad5cfb84f8",
+              "pointer": "",
+              "pointerValueSha256": "4580f78b6d55e0ca5b419af26ac796b855d38cc21e8fa292aa60f8c38fa21922"
+            }
+          ],
+          "evidenceResults": [
+            {
+              "type": "finite_lts_gate",
+              "sourceRef": "lts",
+              "status": "FAIL_COUNTEREXAMPLE",
+              "detail": "usable success exists outside the mapped payment-preserving route set",
+              "witness": "off-contract-leak"
+            }
+          ]
+        }
+      },
+      "status": "FAIL_COUNTEREXAMPLE",
+      "certifiedNamedAcquirerNetIrreversibleOutflow": 0,
+      "certificateDerivation": {
+        "type": "fail-closed-zero",
+        "sourceRef": null,
+        "value": 0
+      },
+      "claimBoundary": "Constructed discriminative diagnostic, not a deployed-system measurement.",
+      "interpretation": "The admitted record does not exclude a zero-outflow compatible world; this is not an insecurity or behavior claim."
+    },
+    {
+      "id": "drand-quicknet",
+      "recordType": "public-deployment",
+      "recordPath": "data/records_v48/drand-quicknet.json",
+      "recordSha256": "563934bd22d168e2adffccc8f810632f96d7ae5491e551facf20ce6fb5445497",
+      "scope": {
+        "system": "League of Entropy drand quicknet",
+        "deploymentIdentifier": "chainHash:52db9ba70e0cc0f6eaf7803dd07447a1f5477735fd3f661792ba94600c84e971",
+        "committee": "current quicknet group, threshold and members not exposed by captured public client endpoint",
+        "event": "premature usable beacon output for a pinned round",
+        "validityInterval": "captured chain info and latest round 30964232",
+        "usableDeliveryPredicate": "a contribution set sufficient to produce a valid quicknet beacon before its scheduled round",
+        "namedAcquirer": "arbitrary fixed externally controlled principal a",
+        "numeraire": {
+          "asset": "deployment-native settlement asset",
+          "unit": "base unit",
+          "valuationTime": "time of irreversible debit",
+          "conversionLowerPrice": "identity for the same asset only",
+          "gasTreatment": "excluded from the payment certificate and reported separately"
+        },
+        "accountingWindow": "declared funding lookback through refund horizon, including controlled-party returns",
+        "controlPolicy": "transitive common-control closure of the named acquirer",
+        "mechanismLanguage": "protocol messages, off-contract disclosure, side purchase, coercion, key compromise, and common-control routes"
+      },
+      "gates": {
+        "B1": {
+          "status": "FAIL_CLOSED_MISSING_EVIDENCE",
+          "missingPredicates": [
+            "B1: required usable-delivery-completeness proof object"
+          ],
+          "context": [
+            {
+              "id": "capture",
+              "path": "data/capture.public.v1.json",
+              "sourceSha256": "23a1b82c745ebf350d8feb6847f594d2ee3f7d1cefe04e878f5f4eba10822e93",
+              "pointer": "/systems/drand-quicknet",
+              "pointerValueSha256": "fce54693b6a43b599dfff84d6ae7259fb5c7d92a0a6c3d7fdfd5d41f5a0a96a2"
+            }
+          ],
+          "evidenceResults": []
+        },
+        "B2": {
+          "status": "FAIL_CLOSED_MISSING_EVIDENCE",
+          "missingPredicates": [
+            "B2: required named-acquirer-funding proof object"
+          ],
+          "context": [
+            {
+              "id": "capture",
+              "path": "data/capture.public.v1.json",
+              "sourceSha256": "23a1b82c745ebf350d8feb6847f594d2ee3f7d1cefe04e878f5f4eba10822e93",
+              "pointer": "/systems/drand-quicknet",
+              "pointerValueSha256": "fce54693b6a43b599dfff84d6ae7259fb5c7d92a0a6c3d7fdfd5d41f5a0a96a2"
+            }
+          ],
+          "evidenceResults": []
+        },
+        "B3": {
+          "status": "FAIL_CLOSED_MISSING_EVIDENCE",
+          "missingPredicates": [
+            "B3: required delivery-payment-atomicity proof object"
+          ],
+          "context": [
+            {
+              "id": "capture",
+              "path": "data/capture.public.v1.json",
+              "sourceSha256": "23a1b82c745ebf350d8feb6847f594d2ee3f7d1cefe04e878f5f4eba10822e93",
+              "pointer": "/systems/drand-quicknet",
+              "pointerValueSha256": "fce54693b6a43b599dfff84d6ae7259fb5c7d92a0a6c3d7fdfd5d41f5a0a96a2"
+            }
+          ],
+          "evidenceResults": []
+        },
+        "B4": {
+          "status": "FAIL_CLOSED_MISSING_EVIDENCE",
+          "missingPredicates": [
+            "B4: required return-funding-control-closure proof object"
+          ],
+          "context": [
+            {
+              "id": "capture",
+              "path": "data/capture.public.v1.json",
+              "sourceSha256": "23a1b82c745ebf350d8feb6847f594d2ee3f7d1cefe04e878f5f4eba10822e93",
+              "pointer": "/systems/drand-quicknet",
+              "pointerValueSha256": "fce54693b6a43b599dfff84d6ae7259fb5c7d92a0a6c3d7fdfd5d41f5a0a96a2"
+            }
+          ],
+          "evidenceResults": []
+        },
+        "B5": {
+          "status": "FAIL_CLOSED_MISSING_EVIDENCE",
+          "missingPredicates": [
+            "B5: required alternative-route-closure proof object"
+          ],
+          "context": [
+            {
+              "id": "capture",
+              "path": "data/capture.public.v1.json",
+              "sourceSha256": "23a1b82c745ebf350d8feb6847f594d2ee3f7d1cefe04e878f5f4eba10822e93",
+              "pointer": "/systems/drand-quicknet",
+              "pointerValueSha256": "fce54693b6a43b599dfff84d6ae7259fb5c7d92a0a6c3d7fdfd5d41f5a0a96a2"
+            }
+          ],
+          "evidenceResults": []
+        }
+      },
+      "status": "FAIL_CLOSED_MISSING_EVIDENCE",
+      "certifiedNamedAcquirerNetIrreversibleOutflow": 0,
+      "certificateDerivation": {
+        "type": "fail-closed-zero",
+        "sourceRef": null,
+        "value": 0
+      },
+      "claimBoundary": "Worked public-record diagnostic; not a project claim, insecurity finding, or population estimate.",
+      "interpretation": "The admitted record does not exclude a zero-outflow compatible world; this is not an insecurity or behavior claim."
+    },
+    {
+      "id": "gnosis-shutter-set10",
+      "recordType": "public-deployment",
+      "recordPath": "data/records_v48/gnosis-shutter-set10.json",
+      "recordSha256": "d4bdbe8b6babdd7287280c38f8b67fe5ea381b9e255ef65fcab3c73b532225a6",
+      "scope": {
+        "system": "Gnosis Shutter",
+        "deploymentIdentifier": "chain:100;block:46666718;manager:0x7C2337f9bFce19d8970661DA50dE8DD7d3D34abb;set:10",
+        "committee": "4-of-7 set 10",
+        "event": "premature usable decryption material before scheduled release",
+        "validityInterval": "pinned block 46666718 and the corresponding set-10 validity interval",
+        "usableDeliveryPredicate": "four valid set-10 shares reconstruct the event plaintext before release",
+        "namedAcquirer": "arbitrary fixed externally controlled principal a",
+        "numeraire": {
+          "asset": "deployment-native settlement asset",
+          "unit": "base unit",
+          "valuationTime": "time of irreversible debit",
+          "conversionLowerPrice": "identity for the same asset only",
+          "gasTreatment": "excluded from the payment certificate and reported separately"
+        },
+        "accountingWindow": "declared funding lookback through refund horizon, including controlled-party returns",
+        "controlPolicy": "transitive common-control closure of the named acquirer",
+        "mechanismLanguage": "contract calls, off-contract disclosure, side purchase, coercion, key compromise, and common-control routes"
+      },
+      "gates": {
+        "B1": {
+          "status": "FAIL_CLOSED_MISSING_EVIDENCE",
+          "missingPredicates": [
+            "B1: required usable-delivery-completeness proof object"
+          ],
+          "context": [
+            {
+              "id": "capture",
+              "path": "data/capture.public.v1.json",
+              "sourceSha256": "23a1b82c745ebf350d8feb6847f594d2ee3f7d1cefe04e878f5f4eba10822e93",
+              "pointer": "/systems/gnosis-shutter-set10",
+              "pointerValueSha256": "324da7a4e50c9efede224bb5b1b21aa2a4489ca7e22244270902c4ecd880d071"
+            }
+          ],
+          "evidenceResults": []
+        },
+        "B2": {
+          "status": "FAIL_CLOSED_MISSING_EVIDENCE",
+          "missingPredicates": [
+            "B2: required named-acquirer-funding proof object"
+          ],
+          "context": [
+            {
+              "id": "capture",
+              "path": "data/capture.public.v1.json",
+              "sourceSha256": "23a1b82c745ebf350d8feb6847f594d2ee3f7d1cefe04e878f5f4eba10822e93",
+              "pointer": "/systems/gnosis-shutter-set10",
+              "pointerValueSha256": "324da7a4e50c9efede224bb5b1b21aa2a4489ca7e22244270902c4ecd880d071"
+            }
+          ],
+          "evidenceResults": []
+        },
+        "B3": {
+          "status": "FAIL_CLOSED_MISSING_EVIDENCE",
+          "missingPredicates": [
+            "B3: required delivery-payment-atomicity proof object"
+          ],
+          "context": [
+            {
+              "id": "capture",
+              "path": "data/capture.public.v1.json",
+              "sourceSha256": "23a1b82c745ebf350d8feb6847f594d2ee3f7d1cefe04e878f5f4eba10822e93",
+              "pointer": "/systems/gnosis-shutter-set10",
+              "pointerValueSha256": "324da7a4e50c9efede224bb5b1b21aa2a4489ca7e22244270902c4ecd880d071"
+            }
+          ],
+          "evidenceResults": []
+        },
+        "B4": {
+          "status": "FAIL_CLOSED_MISSING_EVIDENCE",
+          "missingPredicates": [
+            "B4: required return-funding-control-closure proof object"
+          ],
+          "context": [
+            {
+              "id": "capture",
+              "path": "data/capture.public.v1.json",
+              "sourceSha256": "23a1b82c745ebf350d8feb6847f594d2ee3f7d1cefe04e878f5f4eba10822e93",
+              "pointer": "/systems/gnosis-shutter-set10",
+              "pointerValueSha256": "324da7a4e50c9efede224bb5b1b21aa2a4489ca7e22244270902c4ecd880d071"
+            }
+          ],
+          "evidenceResults": []
+        },
+        "B5": {
+          "status": "FAIL_CLOSED_MISSING_EVIDENCE",
+          "missingPredicates": [
+            "B5: required alternative-route-closure proof object"
+          ],
+          "context": [
+            {
+              "id": "capture",
+              "path": "data/capture.public.v1.json",
+              "sourceSha256": "23a1b82c745ebf350d8feb6847f594d2ee3f7d1cefe04e878f5f4eba10822e93",
+              "pointer": "/systems/gnosis-shutter-set10",
+              "pointerValueSha256": "324da7a4e50c9efede224bb5b1b21aa2a4489ca7e22244270902c4ecd880d071"
+            }
+          ],
+          "evidenceResults": []
+        }
+      },
+      "status": "FAIL_CLOSED_MISSING_EVIDENCE",
+      "certifiedNamedAcquirerNetIrreversibleOutflow": 0,
+      "certificateDerivation": {
+        "type": "fail-closed-zero",
+        "sourceRef": null,
+        "value": 0
+      },
+      "claimBoundary": "Worked public-record diagnostic; not a project claim, insecurity finding, or population estimate.",
+      "interpretation": "The admitted record does not exclude a zero-outflow compatible world; this is not an insecurity or behavior claim."
+    },
+    {
+      "id": "ssv-mainnet-cluster",
+      "recordType": "public-deployment",
+      "recordPath": "data/records_v48/ssv-mainnet-cluster.json",
+      "recordSha256": "45c0fb9f1dc2f91fcbff870eef1a4a3f168df90d944e02a07eb47851fbefb0dd",
+      "scope": {
+        "system": "SSV Network",
+        "deploymentIdentifier": "chain:1;contract:0xDD9BC35aE942eF0cFa76930954a156B3fF30a4E1;cluster:0x000b854eb063fc4fc09331eacca9ca6fcdd890bd7257127bd979c1fab74487d2",
+        "committee": "3-of-4 selected cluster",
+        "event": "unauthorized usable threshold signature for the pinned validator-cluster scope",
+        "validityInterval": "captured finalized block 25668973 and selected cluster record block 23171001",
+        "usableDeliveryPredicate": "three valid operator contributions produce an accepted scoped signature",
+        "namedAcquirer": "arbitrary fixed externally controlled principal a",
+        "numeraire": {
+          "asset": "deployment-native settlement asset",
+          "unit": "base unit",
+          "valuationTime": "time of irreversible debit",
+          "conversionLowerPrice": "identity for the same asset only",
+          "gasTreatment": "excluded from the payment certificate and reported separately"
+        },
+        "accountingWindow": "declared funding lookback through refund horizon, including controlled-party returns",
+        "controlPolicy": "transitive common-control closure of the named acquirer",
+        "mechanismLanguage": "registered contract paths, off-contract signing, side purchase, coercion, key compromise, proxy upgrade, and common-control routes"
+      },
+      "gates": {
+        "B1": {
+          "status": "FAIL_CLOSED_MISSING_EVIDENCE",
+          "missingPredicates": [
+            "B1: required usable-delivery-completeness proof object"
+          ],
+          "context": [
+            {
+              "id": "capture",
+              "path": "data/capture.public.v1.json",
+              "sourceSha256": "23a1b82c745ebf350d8feb6847f594d2ee3f7d1cefe04e878f5f4eba10822e93",
+              "pointer": "/systems/ssv-mainnet-cluster",
+              "pointerValueSha256": "f6a50ad1dfbfc123ebba602d00516b26ceb1acd9cb4362ed8e4a852f205e941e"
+            }
+          ],
+          "evidenceResults": []
+        },
+        "B2": {
+          "status": "FAIL_CLOSED_MISSING_EVIDENCE",
+          "missingPredicates": [
+            "B2: required named-acquirer-funding proof object"
+          ],
+          "context": [
+            {
+              "id": "capture",
+              "path": "data/capture.public.v1.json",
+              "sourceSha256": "23a1b82c745ebf350d8feb6847f594d2ee3f7d1cefe04e878f5f4eba10822e93",
+              "pointer": "/systems/ssv-mainnet-cluster",
+              "pointerValueSha256": "f6a50ad1dfbfc123ebba602d00516b26ceb1acd9cb4362ed8e4a852f205e941e"
+            }
+          ],
+          "evidenceResults": []
+        },
+        "B3": {
+          "status": "FAIL_CLOSED_MISSING_EVIDENCE",
+          "missingPredicates": [
+            "B3: required delivery-payment-atomicity proof object"
+          ],
+          "context": [
+            {
+              "id": "capture",
+              "path": "data/capture.public.v1.json",
+              "sourceSha256": "23a1b82c745ebf350d8feb6847f594d2ee3f7d1cefe04e878f5f4eba10822e93",
+              "pointer": "/systems/ssv-mainnet-cluster",
+              "pointerValueSha256": "f6a50ad1dfbfc123ebba602d00516b26ceb1acd9cb4362ed8e4a852f205e941e"
+            }
+          ],
+          "evidenceResults": []
+        },
+        "B4": {
+          "status": "FAIL_CLOSED_MISSING_EVIDENCE",
+          "missingPredicates": [
+            "B4: required return-funding-control-closure proof object"
+          ],
+          "context": [
+            {
+              "id": "capture",
+              "path": "data/capture.public.v1.json",
+              "sourceSha256": "23a1b82c745ebf350d8feb6847f594d2ee3f7d1cefe04e878f5f4eba10822e93",
+              "pointer": "/systems/ssv-mainnet-cluster",
+              "pointerValueSha256": "f6a50ad1dfbfc123ebba602d00516b26ceb1acd9cb4362ed8e4a852f205e941e"
+            }
+          ],
+          "evidenceResults": []
+        },
+        "B5": {
+          "status": "FAIL_CLOSED_MISSING_EVIDENCE",
+          "missingPredicates": [
+            "B5: required alternative-route-closure proof object"
+          ],
+          "context": [
+            {
+              "id": "capture",
+              "path": "data/capture.public.v1.json",
+              "sourceSha256": "23a1b82c745ebf350d8feb6847f594d2ee3f7d1cefe04e878f5f4eba10822e93",
+              "pointer": "/systems/ssv-mainnet-cluster",
+              "pointerValueSha256": "f6a50ad1dfbfc123ebba602d00516b26ceb1acd9cb4362ed8e4a852f205e941e"
+            }
+          ],
+          "evidenceResults": []
+        }
+      },
+      "status": "FAIL_CLOSED_MISSING_EVIDENCE",
+      "certifiedNamedAcquirerNetIrreversibleOutflow": 0,
+      "certificateDerivation": {
+        "type": "fail-closed-zero",
+        "sourceRef": null,
+        "value": 0
+      },
+      "claimBoundary": "Worked public-record diagnostic; not a project claim, insecurity finding, or population estimate.",
+      "interpretation": "The admitted record does not exclude a zero-outflow compatible world; this is not an insecurity or behavior claim."
+    },
+    {
+      "id": "tbtc-v2-mainnet-wallet",
+      "recordType": "public-deployment",
+      "recordPath": "data/records_v48/tbtc-v2-mainnet-wallet.json",
+      "recordSha256": "dc90eda3e4a5da43fa63ffbd44599de9babd89ace6595cfde23520f560ee89ca",
+      "scope": {
+        "system": "Threshold Network tBTC v2",
+        "deploymentIdentifier": "chain:1;walletRegistry:0x46d52E41C2F300BC82217Ce22b920c34995204eb;wallet:0xf296081cbeec91a27aa5334f90a71a226aa0a43db9c5f36c257c3acae2554c53",
+        "committee": "51-of-100 selected wallet",
+        "event": "unauthorized usable threshold wallet signature",
+        "validityInterval": "captured finalized block 25668973 through the selected wallet validity interval",
+        "usableDeliveryPredicate": "fifty-one valid member contributions produce an accepted wallet signature",
+        "namedAcquirer": "arbitrary fixed externally controlled principal a",
+        "numeraire": {
+          "asset": "deployment-native settlement asset",
+          "unit": "base unit",
+          "valuationTime": "time of irreversible debit",
+          "conversionLowerPrice": "identity for the same asset only",
+          "gasTreatment": "excluded from the payment certificate and reported separately"
+        },
+        "accountingWindow": "declared funding lookback through refund horizon, including controlled-party returns",
+        "controlPolicy": "transitive common-control closure of the named acquirer",
+        "mechanismLanguage": "registry paths, off-contract signing, side purchase, coercion, key compromise, proxy upgrade, repeated-seat control, and common-control routes"
+      },
+      "gates": {
+        "B1": {
+          "status": "FAIL_CLOSED_MISSING_EVIDENCE",
+          "missingPredicates": [
+            "B1: required usable-delivery-completeness proof object"
+          ],
+          "context": [
+            {
+              "id": "capture",
+              "path": "data/capture.public.v1.json",
+              "sourceSha256": "23a1b82c745ebf350d8feb6847f594d2ee3f7d1cefe04e878f5f4eba10822e93",
+              "pointer": "/systems/tbtc-v2-mainnet-wallet",
+              "pointerValueSha256": "f02b350606733e99326274d40e36670ca0ea77b343c7d9013d103a08f28b65f9"
+            }
+          ],
+          "evidenceResults": []
+        },
+        "B2": {
+          "status": "FAIL_CLOSED_MISSING_EVIDENCE",
+          "missingPredicates": [
+            "B2: required named-acquirer-funding proof object"
+          ],
+          "context": [
+            {
+              "id": "capture",
+              "path": "data/capture.public.v1.json",
+              "sourceSha256": "23a1b82c745ebf350d8feb6847f594d2ee3f7d1cefe04e878f5f4eba10822e93",
+              "pointer": "/systems/tbtc-v2-mainnet-wallet",
+              "pointerValueSha256": "f02b350606733e99326274d40e36670ca0ea77b343c7d9013d103a08f28b65f9"
+            }
+          ],
+          "evidenceResults": []
+        },
+        "B3": {
+          "status": "FAIL_CLOSED_MISSING_EVIDENCE",
+          "missingPredicates": [
+            "B3: required delivery-payment-atomicity proof object"
+          ],
+          "context": [
+            {
+              "id": "capture",
+              "path": "data/capture.public.v1.json",
+              "sourceSha256": "23a1b82c745ebf350d8feb6847f594d2ee3f7d1cefe04e878f5f4eba10822e93",
+              "pointer": "/systems/tbtc-v2-mainnet-wallet",
+              "pointerValueSha256": "f02b350606733e99326274d40e36670ca0ea77b343c7d9013d103a08f28b65f9"
+            }
+          ],
+          "evidenceResults": []
+        },
+        "B4": {
+          "status": "FAIL_CLOSED_MISSING_EVIDENCE",
+          "missingPredicates": [
+            "B4: required return-funding-control-closure proof object"
+          ],
+          "context": [
+            {
+              "id": "capture",
+              "path": "data/capture.public.v1.json",
+              "sourceSha256": "23a1b82c745ebf350d8feb6847f594d2ee3f7d1cefe04e878f5f4eba10822e93",
+              "pointer": "/systems/tbtc-v2-mainnet-wallet",
+              "pointerValueSha256": "f02b350606733e99326274d40e36670ca0ea77b343c7d9013d103a08f28b65f9"
+            }
+          ],
+          "evidenceResults": []
+        },
+        "B5": {
+          "status": "FAIL_CLOSED_MISSING_EVIDENCE",
+          "missingPredicates": [
+            "B5: required alternative-route-closure proof object"
+          ],
+          "context": [
+            {
+              "id": "capture",
+              "path": "data/capture.public.v1.json",
+              "sourceSha256": "23a1b82c745ebf350d8feb6847f594d2ee3f7d1cefe04e878f5f4eba10822e93",
+              "pointer": "/systems/tbtc-v2-mainnet-wallet",
+              "pointerValueSha256": "f02b350606733e99326274d40e36670ca0ea77b343c7d9013d103a08f28b65f9"
+            }
+          ],
+          "evidenceResults": []
+        }
+      },
+      "status": "FAIL_CLOSED_MISSING_EVIDENCE",
+      "certifiedNamedAcquirerNetIrreversibleOutflow": 0,
+      "certificateDerivation": {
+        "type": "fail-closed-zero",
+        "sourceRef": null,
+        "value": 0
+      },
+      "claimBoundary": "Worked public-record diagnostic; not a project claim, insecurity finding, or population estimate.",
+      "interpretation": "The admitted record does not exclude a zero-outflow compatible world; this is not an insecurity or behavior claim."
+    }
+  ]
+}

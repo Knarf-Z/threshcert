@@ -1,0 +1,75 @@
+{
+    "schema":  "public-evidence-record/v2",
+    "recordType":  "public-deployment",
+    "id":  "gnosis-shutter-set10",
+    "scope":  {
+                  "system":  "Gnosis Shutter",
+                  "deploymentIdentifier":  "chain:100;block:46666718;manager:0x7C2337f9bFce19d8970661DA50dE8DD7d3D34abb;set:10",
+                  "committee":  "4-of-7 set 10",
+                  "event":  "premature usable decryption material before scheduled release",
+                  "validityInterval":  "pinned block 46666718 and the corresponding set-10 validity interval",
+                  "usableDeliveryPredicate":  "four valid set-10 shares reconstruct the event plaintext before release",
+                  "namedAcquirer":  "arbitrary fixed externally controlled principal a",
+                  "numeraire":  {
+                                    "asset":  "deployment-native settlement asset",
+                                    "unit":  "base unit",
+                                    "valuationTime":  "time of irreversible debit",
+                                    "conversionLowerPrice":  "identity for the same asset only",
+                                    "gasTreatment":  "excluded from the payment certificate and reported separately"
+                                },
+                  "accountingWindow":  "declared funding lookback through refund horizon, including controlled-party returns",
+                  "controlPolicy":  "transitive common-control closure of the named acquirer",
+                  "mechanismLanguage":  "contract calls, off-contract disclosure, side purchase, coercion, key compromise, and common-control routes"
+              },
+    "sourceRefs":  [
+                       {
+                           "id":  "capture",
+                           "path":  "../capture.public.v1.json",
+                           "sha256":  "23a1b82c745ebf350d8feb6847f594d2ee3f7d1cefe04e878f5f4eba10822e93",
+                           "pointer":  "/systems/gnosis-shutter-set10"
+                       }
+                   ],
+    "gates":  {
+                  "B1":  {
+                             "contextRefs":  [
+                                                 "capture"
+                                             ],
+                             "evidence":  [
+
+                                          ]
+                         },
+                  "B2":  {
+                             "contextRefs":  [
+                                                 "capture"
+                                             ],
+                             "evidence":  [
+
+                                          ]
+                         },
+                  "B3":  {
+                             "contextRefs":  [
+                                                 "capture"
+                                             ],
+                             "evidence":  [
+
+                                          ]
+                         },
+                  "B4":  {
+                             "contextRefs":  [
+                                                 "capture"
+                                             ],
+                             "evidence":  [
+
+                                          ]
+                         },
+                  "B5":  {
+                             "contextRefs":  [
+                                                 "capture"
+                                             ],
+                             "evidence":  [
+
+                                          ]
+                         }
+              },
+    "claimBoundary":  "Worked public-record diagnostic; not a project claim, insecurity finding, or population estimate."
+}

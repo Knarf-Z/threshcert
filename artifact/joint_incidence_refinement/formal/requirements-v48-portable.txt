@@ -1,0 +1,10 @@
+sortedcontainers==2.4.0
+toml==0.10.2
+z3-solver==4.12.6.0
+yices-solver==2.6.4.post23
+xxhash==3.8.1
+psutil==7.2.2
+requests==2.34.2
+python-dotenv==1.2.2
+rich==14.0.0
+eth-hash[pycryptodome]==0.8.0

@@ -1,0 +1,14 @@
+{
+  "schema": "finite-acquisition-lts/v2",
+  "description": "Constructed discriminative near-pass: the mapped exchange is funded and atomic, while an explicit off-contract leak gives a zero-debit usable-success counterexample.",
+  "initialState": "s0",
+  "namedAcquirer": "buyer-A",
+  "numeraire": {"asset":"synthetic-accounting-unit","unit":"wei","valuationTime":"transition","conversionLowerPrice":"identity","gasTreatment":"excluded-accounting-only"},
+  "mappedRoutes": ["exchange"],
+  "states": ["s0", "funded", "delivered", "leaked"],
+  "transitions": [
+    {"id":"fund","from":"s0","to":"funded","route":"exchange","success":false,"usableDelivery":false,"buyerDebit":0,"debitOrigin":"none","irreversible":false,"returnToControl":0,"externalFunding":0,"buyerPrefund":4,"prefundOrigin":"buyer-A"},
+    {"id":"atomic-exchange","from":"funded","to":"delivered","route":"exchange","success":true,"usableDelivery":true,"buyerDebit":4,"debitOrigin":"buyer-A","irreversible":true,"returnToControl":0,"externalFunding":0,"buyerPrefund":0,"prefundOrigin":"none"},
+    {"id":"off-contract-leak","from":"s0","to":"leaked","route":"off-contract-leak","success":true,"usableDelivery":true,"buyerDebit":0,"debitOrigin":"none","irreversible":false,"returnToControl":0,"externalFunding":0,"buyerPrefund":0,"prefundOrigin":"none"}
+  ]
+}

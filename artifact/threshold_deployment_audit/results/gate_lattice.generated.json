@@ -1,0 +1,815 @@
+{
+  "schema": "gate-lattice-and-rectangularity/v1",
+  "generatedFrom": {
+    "driverPath": "scripts/gate_lattice_v51.mjs",
+    "driverSha256": "91b9d1a8133a4d67f2e555157ed43fbd3b8cf7d8cf51213d86ab782fafb4a332",
+    "fixturePath": "data/constructed/bridge_pass_lts.v2.json",
+    "fixtureSha256": "1f3faa8a8732e9a9851192a09f89efafcb039d40eaaa2313e7e11248aede042e"
+  },
+  "preregisteredPredictions": {
+    "P1": "the certificate is positive exactly for the empty ablation; all 31 nonempty ablations return the fail-closed sentinel zero",
+    "P2": "each targeted mutation drives its own gate away from PASS (diagonal)",
+    "P3": "off-diagonal entries are measured, not assumed; the gates are not claimed independent",
+    "P4": "the edgewise encoding of a jointly constrained ledger passes all five gates and returns a floor strictly below the true constrained minimum"
+  },
+  "s1GateAblationLattice": {
+    "baselineCertificate": "4",
+    "subsetsEvaluated": 32,
+    "nonEmptyAblationsWithPositiveCertificate": 0,
+    "everyTargetedMutationHitsItsGate": true,
+    "offDiagonalCellCount": 20,
+    "offDiagonalGateFailures": [
+      {
+        "mutation": "M1-usable-delivery-withdrawn",
+        "target": "B1",
+        "alsoFails": "B3"
+      }
+    ],
+    "overlapMatrix": {
+      "M1-usable-delivery-withdrawn": {
+        "target": "B1",
+        "note": "a reachable mapped success no longer carries usable delivery",
+        "gates": {
+          "B1": "FAIL_COUNTEREXAMPLE",
+          "B2": "PASS",
+          "B3": "FAIL_COUNTEREXAMPLE",
+          "B4": "PASS",
+          "B5": "PASS"
+        }
+      },
+      "M2-debit-origin-sponsor": {
+        "target": "B2",
+        "note": "the counted positive debit originates outside the named acquirer",
+        "gates": {
+          "B1": "PASS",
+          "B2": "FAIL_COUNTEREXAMPLE",
+          "B3": "PASS",
+          "B4": "PASS",
+          "B5": "PASS"
+        }
+      },
+      "M3-debit-reversible": {
+        "target": "B3",
+        "note": "the counted debit on a mapped-success prefix is not irreversible",
+        "gates": {
+          "B1": "PASS",
+          "B2": "PASS",
+          "B3": "FAIL_COUNTEREXAMPLE",
+          "B4": "PASS",
+          "B5": "PASS"
+        }
+      },
+      "M4-open-return-edge": {
+        "target": "B4",
+        "note": "a mapped-success prefix carries an unclosed return-to-control edge",
+        "gates": {
+          "B1": "PASS",
+          "B2": "PASS",
+          "B3": "PASS",
+          "B4": "FAIL_COUNTEREXAMPLE",
+          "B5": "PASS"
+        }
+      },
+      "M5-unmapped-usable-success": {
+        "target": "B5",
+        "note": "an off-contract route reaches usable success with zero debit",
+        "gates": {
+          "B1": "PASS",
+          "B2": "PASS",
+          "B3": "PASS",
+          "B4": "PASS",
+          "B5": "FAIL_COUNTEREXAMPLE"
+        }
+      }
+    },
+    "cells": [
+      {
+        "mask": 0,
+        "appliedMutations": [],
+        "targetedGates": [],
+        "wellFormed": true,
+        "gates": {
+          "B1": "PASS",
+          "B2": "PASS",
+          "B3": "PASS",
+          "B4": "PASS",
+          "B5": "PASS"
+        },
+        "certificate": "4",
+        "unguardedShortestPath": "4"
+      },
+      {
+        "mask": 1,
+        "appliedMutations": [
+          "M1-usable-delivery-withdrawn"
+        ],
+        "targetedGates": [
+          "B1"
+        ],
+        "wellFormed": true,
+        "gates": {
+          "B1": "FAIL_COUNTEREXAMPLE",
+          "B2": "PASS",
+          "B3": "FAIL_COUNTEREXAMPLE",
+          "B4": "PASS",
+          "B5": "PASS"
+        },
+        "certificate": "0",
+        "unguardedShortestPath": "4"
+      },
+      {
+        "mask": 2,
+        "appliedMutations": [
+          "M2-debit-origin-sponsor"
+        ],
+        "targetedGates": [
+          "B2"
+        ],
+        "wellFormed": true,
+        "gates": {
+          "B1": "PASS",
+          "B2": "FAIL_COUNTEREXAMPLE",
+          "B3": "PASS",
+          "B4": "PASS",
+          "B5": "PASS"
+        },
+        "certificate": "0",
+        "unguardedShortestPath": "4"
+      },
+      {
+        "mask": 3,
+        "appliedMutations": [
+          "M1-usable-delivery-withdrawn",
+          "M2-debit-origin-sponsor"
+        ],
+        "targetedGates": [
+          "B1",
+          "B2"
+        ],
+        "wellFormed": true,
+        "gates": {
+          "B1": "FAIL_COUNTEREXAMPLE",
+          "B2": "FAIL_COUNTEREXAMPLE",
+          "B3": "FAIL_COUNTEREXAMPLE",
+          "B4": "PASS",
+          "B5": "PASS"
+        },
+        "certificate": "0",
+        "unguardedShortestPath": "4"
+      },
+      {
+        "mask": 4,
+        "appliedMutations": [
+          "M3-debit-reversible"
+        ],
+        "targetedGates": [
+          "B3"
+        ],
+        "wellFormed": true,
+        "gates": {
+          "B1": "PASS",
+          "B2": "PASS",
+          "B3": "FAIL_COUNTEREXAMPLE",
+          "B4": "PASS",
+          "B5": "PASS"
+        },
+        "certificate": "0",
+        "unguardedShortestPath": "4"
+      },
+      {
+        "mask": 5,
+        "appliedMutations": [
+          "M1-usable-delivery-withdrawn",
+          "M3-debit-reversible"
+        ],
+        "targetedGates": [
+          "B1",
+          "B3"
+        ],
+        "wellFormed": true,
+        "gates": {
+          "B1": "FAIL_COUNTEREXAMPLE",
+          "B2": "PASS",
+          "B3": "FAIL_COUNTEREXAMPLE",
+          "B4": "PASS",
+          "B5": "PASS"
+        },
+        "certificate": "0",
+        "unguardedShortestPath": "4"
+      },
+      {
+        "mask": 6,
+        "appliedMutations": [
+          "M2-debit-origin-sponsor",
+          "M3-debit-reversible"
+        ],
+        "targetedGates": [
+          "B2",
+          "B3"
+        ],
+        "wellFormed": true,
+        "gates": {
+          "B1": "PASS",
+          "B2": "FAIL_COUNTEREXAMPLE",
+          "B3": "FAIL_COUNTEREXAMPLE",
+          "B4": "PASS",
+          "B5": "PASS"
+        },
+        "certificate": "0",
+        "unguardedShortestPath": "4"
+      },
+      {
+        "mask": 7,
+        "appliedMutations": [
+          "M1-usable-delivery-withdrawn",
+          "M2-debit-origin-sponsor",
+          "M3-debit-reversible"
+        ],
+        "targetedGates": [
+          "B1",
+          "B2",
+          "B3"
+        ],
+        "wellFormed": true,
+        "gates": {
+          "B1": "FAIL_COUNTEREXAMPLE",
+          "B2": "FAIL_COUNTEREXAMPLE",
+          "B3": "FAIL_COUNTEREXAMPLE",
+          "B4": "PASS",
+          "B5": "PASS"
+        },
+        "certificate": "0",
+        "unguardedShortestPath": "4"
+      },
+      {
+        "mask": 8,
+        "appliedMutations": [
+          "M4-open-return-edge"
+        ],
+        "targetedGates": [
+          "B4"
+        ],
+        "wellFormed": true,
+        "gates": {
+          "B1": "PASS",
+          "B2": "PASS",
+          "B3": "PASS",
+          "B4": "FAIL_COUNTEREXAMPLE",
+          "B5": "PASS"
+        },
+        "certificate": "0",
+        "unguardedShortestPath": "4"
+      },
+      {
+        "mask": 9,
+        "appliedMutations": [
+          "M1-usable-delivery-withdrawn",
+          "M4-open-return-edge"
+        ],
+        "targetedGates": [
+          "B1",
+          "B4"
+        ],
+        "wellFormed": true,
+        "gates": {
+          "B1": "FAIL_COUNTEREXAMPLE",
+          "B2": "PASS",
+          "B3": "FAIL_COUNTEREXAMPLE",
+          "B4": "FAIL_COUNTEREXAMPLE",
+          "B5": "PASS"
+        },
+        "certificate": "0",
+        "unguardedShortestPath": "4"
+      },
+      {
+        "mask": 10,
+        "appliedMutations": [
+          "M2-debit-origin-sponsor",
+          "M4-open-return-edge"
+        ],
+        "targetedGates": [
+          "B2",
+          "B4"
+        ],
+        "wellFormed": true,
+        "gates": {
+          "B1": "PASS",
+          "B2": "FAIL_COUNTEREXAMPLE",
+          "B3": "PASS",
+          "B4": "FAIL_COUNTEREXAMPLE",
+          "B5": "PASS"
+        },
+        "certificate": "0",
+        "unguardedShortestPath": "4"
+      },
+      {
+        "mask": 11,
+        "appliedMutations": [
+          "M1-usable-delivery-withdrawn",
+          "M2-debit-origin-sponsor",
+          "M4-open-return-edge"
+        ],
+        "targetedGates": [
+          "B1",
+          "B2",
+          "B4"
+        ],
+        "wellFormed": true,
+        "gates": {
+          "B1": "FAIL_COUNTEREXAMPLE",
+          "B2": "FAIL_COUNTEREXAMPLE",
+          "B3": "FAIL_COUNTEREXAMPLE",
+          "B4": "FAIL_COUNTEREXAMPLE",
+          "B5": "PASS"
+        },
+        "certificate": "0",
+        "unguardedShortestPath": "4"
+      },
+      {
+        "mask": 12,
+        "appliedMutations": [
+          "M3-debit-reversible",
+          "M4-open-return-edge"
+        ],
+        "targetedGates": [
+          "B3",
+          "B4"
+        ],
+        "wellFormed": true,
+        "gates": {
+          "B1": "PASS",
+          "B2": "PASS",
+          "B3": "FAIL_COUNTEREXAMPLE",
+          "B4": "FAIL_COUNTEREXAMPLE",
+          "B5": "PASS"
+        },
+        "certificate": "0",
+        "unguardedShortestPath": "4"
+      },
+      {
+        "mask": 13,
+        "appliedMutations": [
+          "M1-usable-delivery-withdrawn",
+          "M3-debit-reversible",
+          "M4-open-return-edge"
+        ],
+        "targetedGates": [
+          "B1",
+          "B3",
+          "B4"
+        ],
+        "wellFormed": true,
+        "gates": {
+          "B1": "FAIL_COUNTEREXAMPLE",
+          "B2": "PASS",
+          "B3": "FAIL_COUNTEREXAMPLE",
+          "B4": "FAIL_COUNTEREXAMPLE",
+          "B5": "PASS"
+        },
+        "certificate": "0",
+        "unguardedShortestPath": "4"
+      },
+      {
+        "mask": 14,
+        "appliedMutations": [
+          "M2-debit-origin-sponsor",
+          "M3-debit-reversible",
+          "M4-open-return-edge"
+        ],
+        "targetedGates": [
+          "B2",
+          "B3",
+          "B4"
+        ],
+        "wellFormed": true,
+        "gates": {
+          "B1": "PASS",
+          "B2": "FAIL_COUNTEREXAMPLE",
+          "B3": "FAIL_COUNTEREXAMPLE",
+          "B4": "FAIL_COUNTEREXAMPLE",
+          "B5": "PASS"
+        },
+        "certificate": "0",
+        "unguardedShortestPath": "4"
+      },
+      {
+        "mask": 15,
+        "appliedMutations": [
+          "M1-usable-delivery-withdrawn",
+          "M2-debit-origin-sponsor",
+          "M3-debit-reversible",
+          "M4-open-return-edge"
+        ],
+        "targetedGates": [
+          "B1",
+          "B2",
+          "B3",
+          "B4"
+        ],
+        "wellFormed": true,
+        "gates": {
+          "B1": "FAIL_COUNTEREXAMPLE",
+          "B2": "FAIL_COUNTEREXAMPLE",
+          "B3": "FAIL_COUNTEREXAMPLE",
+          "B4": "FAIL_COUNTEREXAMPLE",
+          "B5": "PASS"
+        },
+        "certificate": "0",
+        "unguardedShortestPath": "4"
+      },
+      {
+        "mask": 16,
+        "appliedMutations": [
+          "M5-unmapped-usable-success"
+        ],
+        "targetedGates": [
+          "B5"
+        ],
+        "wellFormed": true,
+        "gates": {
+          "B1": "PASS",
+          "B2": "PASS",
+          "B3": "PASS",
+          "B4": "PASS",
+          "B5": "FAIL_COUNTEREXAMPLE"
+        },
+        "certificate": "0",
+        "unguardedShortestPath": "0"
+      },
+      {
+        "mask": 17,
+        "appliedMutations": [
+          "M1-usable-delivery-withdrawn",
+          "M5-unmapped-usable-success"
+        ],
+        "targetedGates": [
+          "B1",
+          "B5"
+        ],
+        "wellFormed": true,
+        "gates": {
+          "B1": "FAIL_COUNTEREXAMPLE",
+          "B2": "PASS",
+          "B3": "FAIL_COUNTEREXAMPLE",
+          "B4": "PASS",
+          "B5": "FAIL_COUNTEREXAMPLE"
+        },
+        "certificate": "0",
+        "unguardedShortestPath": "0"
+      },
+      {
+        "mask": 18,
+        "appliedMutations": [
+          "M2-debit-origin-sponsor",
+          "M5-unmapped-usable-success"
+        ],
+        "targetedGates": [
+          "B2",
+          "B5"
+        ],
+        "wellFormed": true,
+        "gates": {
+          "B1": "PASS",
+          "B2": "FAIL_COUNTEREXAMPLE",
+          "B3": "PASS",
+          "B4": "PASS",
+          "B5": "FAIL_COUNTEREXAMPLE"
+        },
+        "certificate": "0",
+        "unguardedShortestPath": "0"
+      },
+      {
+        "mask": 19,
+        "appliedMutations": [
+          "M1-usable-delivery-withdrawn",
+          "M2-debit-origin-sponsor",
+          "M5-unmapped-usable-success"
+        ],
+        "targetedGates": [
+          "B1",
+          "B2",
+          "B5"
+        ],
+        "wellFormed": true,
+        "gates": {
+          "B1": "FAIL_COUNTEREXAMPLE",
+          "B2": "FAIL_COUNTEREXAMPLE",
+          "B3": "FAIL_COUNTEREXAMPLE",
+          "B4": "PASS",
+          "B5": "FAIL_COUNTEREXAMPLE"
+        },
+        "certificate": "0",
+        "unguardedShortestPath": "0"
+      },
+      {
+        "mask": 20,
+        "appliedMutations": [
+          "M3-debit-reversible",
+          "M5-unmapped-usable-success"
+        ],
+        "targetedGates": [
+          "B3",
+          "B5"
+        ],
+        "wellFormed": true,
+        "gates": {
+          "B1": "PASS",
+          "B2": "PASS",
+          "B3": "FAIL_COUNTEREXAMPLE",
+          "B4": "PASS",
+          "B5": "FAIL_COUNTEREXAMPLE"
+        },
+        "certificate": "0",
+        "unguardedShortestPath": "0"
+      },
+      {
+        "mask": 21,
+        "appliedMutations": [
+          "M1-usable-delivery-withdrawn",
+          "M3-debit-reversible",
+          "M5-unmapped-usable-success"
+        ],
+        "targetedGates": [
+          "B1",
+          "B3",
+          "B5"
+        ],
+        "wellFormed": true,
+        "gates": {
+          "B1": "FAIL_COUNTEREXAMPLE",
+          "B2": "PASS",
+          "B3": "FAIL_COUNTEREXAMPLE",
+          "B4": "PASS",
+          "B5": "FAIL_COUNTEREXAMPLE"
+        },
+        "certificate": "0",
+        "unguardedShortestPath": "0"
+      },
+      {
+        "mask": 22,
+        "appliedMutations": [
+          "M2-debit-origin-sponsor",
+          "M3-debit-reversible",
+          "M5-unmapped-usable-success"
+        ],
+        "targetedGates": [
+          "B2",
+          "B3",
+          "B5"
+        ],
+        "wellFormed": true,
+        "gates": {
+          "B1": "PASS",
+          "B2": "FAIL_COUNTEREXAMPLE",
+          "B3": "FAIL_COUNTEREXAMPLE",
+          "B4": "PASS",
+          "B5": "FAIL_COUNTEREXAMPLE"
+        },
+        "certificate": "0",
+        "unguardedShortestPath": "0"
+      },
+      {
+        "mask": 23,
+        "appliedMutations": [
+          "M1-usable-delivery-withdrawn",
+          "M2-debit-origin-sponsor",
+          "M3-debit-reversible",
+          "M5-unmapped-usable-success"
+        ],
+        "targetedGates": [
+          "B1",
+          "B2",
+          "B3",
+          "B5"
+        ],
+        "wellFormed": true,
+        "gates": {
+          "B1": "FAIL_COUNTEREXAMPLE",
+          "B2": "FAIL_COUNTEREXAMPLE",
+          "B3": "FAIL_COUNTEREXAMPLE",
+          "B4": "PASS",
+          "B5": "FAIL_COUNTEREXAMPLE"
+        },
+        "certificate": "0",
+        "unguardedShortestPath": "0"
+      },
+      {
+        "mask": 24,
+        "appliedMutations": [
+          "M4-open-return-edge",
+          "M5-unmapped-usable-success"
+        ],
+        "targetedGates": [
+          "B4",
+          "B5"
+        ],
+        "wellFormed": true,
+        "gates": {
+          "B1": "PASS",
+          "B2": "PASS",
+          "B3": "PASS",
+          "B4": "FAIL_COUNTEREXAMPLE",
+          "B5": "FAIL_COUNTEREXAMPLE"
+        },
+        "certificate": "0",
+        "unguardedShortestPath": "0"
+      },
+      {
+        "mask": 25,
+        "appliedMutations": [
+          "M1-usable-delivery-withdrawn",
+          "M4-open-return-edge",
+          "M5-unmapped-usable-success"
+        ],
+        "targetedGates": [
+          "B1",
+          "B4",
+          "B5"
+        ],
+        "wellFormed": true,
+        "gates": {
+          "B1": "FAIL_COUNTEREXAMPLE",
+          "B2": "PASS",
+          "B3": "FAIL_COUNTEREXAMPLE",
+          "B4": "FAIL_COUNTEREXAMPLE",
+          "B5": "FAIL_COUNTEREXAMPLE"
+        },
+        "certificate": "0",
+        "unguardedShortestPath": "0"
+      },
+      {
+        "mask": 26,
+        "appliedMutations": [
+          "M2-debit-origin-sponsor",
+          "M4-open-return-edge",
+          "M5-unmapped-usable-success"
+        ],
+        "targetedGates": [
+          "B2",
+          "B4",
+          "B5"
+        ],
+        "wellFormed": true,
+        "gates": {
+          "B1": "PASS",
+          "B2": "FAIL_COUNTEREXAMPLE",
+          "B3": "PASS",
+          "B4": "FAIL_COUNTEREXAMPLE",
+          "B5": "FAIL_COUNTEREXAMPLE"
+        },
+        "certificate": "0",
+        "unguardedShortestPath": "0"
+      },
+      {
+        "mask": 27,
+        "appliedMutations": [
+          "M1-usable-delivery-withdrawn",
+          "M2-debit-origin-sponsor",
+          "M4-open-return-edge",
+          "M5-unmapped-usable-success"
+        ],
+        "targetedGates": [
+          "B1",
+          "B2",
+          "B4",
+          "B5"
+        ],
+        "wellFormed": true,
+        "gates": {
+          "B1": "FAIL_COUNTEREXAMPLE",
+          "B2": "FAIL_COUNTEREXAMPLE",
+          "B3": "FAIL_COUNTEREXAMPLE",
+          "B4": "FAIL_COUNTEREXAMPLE",
+          "B5": "FAIL_COUNTEREXAMPLE"
+        },
+        "certificate": "0",
+        "unguardedShortestPath": "0"
+      },
+      {
+        "mask": 28,
+        "appliedMutations": [
+          "M3-debit-reversible",
+          "M4-open-return-edge",
+          "M5-unmapped-usable-success"
+        ],
+        "targetedGates": [
+          "B3",
+          "B4",
+          "B5"
+        ],
+        "wellFormed": true,
+        "gates": {
+          "B1": "PASS",
+          "B2": "PASS",
+          "B3": "FAIL_COUNTEREXAMPLE",
+          "B4": "FAIL_COUNTEREXAMPLE",
+          "B5": "FAIL_COUNTEREXAMPLE"
+        },
+        "certificate": "0",
+        "unguardedShortestPath": "0"
+      },
+      {
+        "mask": 29,
+        "appliedMutations": [
+          "M1-usable-delivery-withdrawn",
+          "M3-debit-reversible",
+          "M4-open-return-edge",
+          "M5-unmapped-usable-success"
+        ],
+        "targetedGates": [
+          "B1",
+          "B3",
+          "B4",
+          "B5"
+        ],
+        "wellFormed": true,
+        "gates": {
+          "B1": "FAIL_COUNTEREXAMPLE",
+          "B2": "PASS",
+          "B3": "FAIL_COUNTEREXAMPLE",
+          "B4": "FAIL_COUNTEREXAMPLE",
+          "B5": "FAIL_COUNTEREXAMPLE"
+        },
+        "certificate": "0",
+        "unguardedShortestPath": "0"
+      },
+      {
+        "mask": 30,
+        "appliedMutations": [
+          "M2-debit-origin-sponsor",
+          "M3-debit-reversible",
+          "M4-open-return-edge",
+          "M5-unmapped-usable-success"
+        ],
+        "targetedGates": [
+          "B2",
+          "B3",
+          "B4",
+          "B5"
+        ],
+        "wellFormed": true,
+        "gates": {
+          "B1": "PASS",
+          "B2": "FAIL_COUNTEREXAMPLE",
+          "B3": "FAIL_COUNTEREXAMPLE",
+          "B4": "FAIL_COUNTEREXAMPLE",
+          "B5": "FAIL_COUNTEREXAMPLE"
+        },
+        "certificate": "0",
+        "unguardedShortestPath": "0"
+      },
+      {
+        "mask": 31,
+        "appliedMutations": [
+          "M1-usable-delivery-withdrawn",
+          "M2-debit-origin-sponsor",
+          "M3-debit-reversible",
+          "M4-open-return-edge",
+          "M5-unmapped-usable-success"
+        ],
+        "targetedGates": [
+          "B1",
+          "B2",
+          "B3",
+          "B4",
+          "B5"
+        ],
+        "wellFormed": true,
+        "gates": {
+          "B1": "FAIL_COUNTEREXAMPLE",
+          "B2": "FAIL_COUNTEREXAMPLE",
+          "B3": "FAIL_COUNTEREXAMPLE",
+          "B4": "FAIL_COUNTEREXAMPLE",
+          "B5": "FAIL_COUNTEREXAMPLE"
+        },
+        "certificate": "0",
+        "unguardedShortestPath": "0"
+      }
+    ]
+  },
+  "s3RectangularitySeparation": {
+    "admittedConstraints": {
+      "edgewiseFloors": {
+        "step-a": 1,
+        "step-b": 1
+      },
+      "jointFloor": "debit(step-a) + debit(step-b) >= 5"
+    },
+    "edgewiseEncodingGates": {
+      "B1": "PASS",
+      "B2": "PASS",
+      "B3": "PASS",
+      "B4": "PASS",
+      "B5": "PASS"
+    },
+    "edgewiseEncodingAllGatesPass": true,
+    "checkerFloor": 2,
+    "trueConstrainedMinimumAnalytic": 5,
+    "trueConstrainedMinimumGridSearch": 5,
+    "gapAbsolute": 3,
+    "gapRatio": 2.5,
+    "checkerFloorAsFractionOfTruth": 0.4,
+    "soundness": true,
+    "boundary": "The checker is not incorrect: soundness holds unconditionally. The instance shows that the pathwise-rectangular premise is load-bearing for the exactness clause, and that an edgewise finite-LTS encoding silently discards joint amount constraints."
+  }
+}

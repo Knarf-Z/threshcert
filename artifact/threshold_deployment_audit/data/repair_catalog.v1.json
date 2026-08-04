@@ -1,0 +1,25 @@
+{
+  "schema": "evidence-repair-catalog/v1",
+  "claimBoundary": "A catalog-relative proof-family frontier, not an estimate of engineering effort, economic cost, or deployment prevalence.",
+  "challenges": [
+    {"id":"G_POSITIVE","meaning":"a positive finite-LTS payment mechanism is supplied"},
+    {"id":"B1","meaning":"usable-delivery completeness"},
+    {"id":"B2","meaning":"named-acquirer funding"},
+    {"id":"B3","meaning":"delivery/payment atomicity"},
+    {"id":"B4","meaning":"return/funding/control closure"},
+    {"id":"B5","meaning":"alternative-route closure"},
+    {"id":"W_EXACT","meaning":"pathwise completion for exactness"},
+    {"id":"W_DEPLOY","meaning":"deployment-wide route coverage or refinement"}
+  ],
+  "candidateFamilies": [
+    {"id":"positive-finite-lts","covers":["G_POSITIVE"]},
+    {"id":"usable-delivery-proof","covers":["B1"]},
+    {"id":"buyer-funding-proof","covers":["B2"]},
+    {"id":"atomicity-proof","covers":["B3"]},
+    {"id":"offset-closure-proof","covers":["B4"]},
+    {"id":"local-route-proof","covers":["B5"]},
+    {"id":"pathwise-completion-witness","covers":["W_EXACT"]},
+    {"id":"deployment-coverage-proof","covers":["B5","W_DEPLOY"]},
+    {"id":"closed-exchange-proof-family","covers":["G_POSITIVE","B1","B2","B3","B4"]}
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "schema": "finite-acquisition-lts/v2",
+  "description": "Scope-bound compatible-world countermodel: the admitted public record does not exclude a usable off-contract signing route with zero named-acquirer debit. This is not an observed attack path.",
+  "initialState": "s0",
+  "namedAcquirer": "arbitrary fixed externally controlled principal a",
+  "numeraire": {
+    "asset": "deployment-native settlement asset",
+    "unit": "base unit",
+    "valuationTime": "time of irreversible debit",
+    "conversionLowerPrice": "identity for the same asset only",
+    "gasTreatment": "excluded from the payment certificate and reported separately"
+  },
+  "mappedRoutes": [],
+  "states": ["s0", "usable"],
+  "transitions": [
+    {
+      "id": "unexcluded-free-signing",
+      "from": "s0",
+      "to": "usable",
+      "route": "off-contract-signing",
+      "success": true,
+      "usableDelivery": true,
+      "buyerDebit": 0,
+      "debitOrigin": "none",
+      "irreversible": false,
+      "returnToControl": 0,
+      "externalFunding": 0,
+      "buyerPrefund": 0,
+      "prefundOrigin": "none"
+    }
+  ]
+}

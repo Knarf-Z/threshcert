@@ -1,0 +1,15 @@
+{
+  "schema": "finite-acquisition-lts/v2",
+  "description": "Constructed finite-language positive witness: named-buyer prefunding and one atomic exchange route; no claim of buyer-bound cryptographic delivery outside this enumerated language.",
+  "initialState": "s0",
+  "namedAcquirer": "buyer-A",
+  "numeraire": {"asset":"synthetic-accounting-unit","unit":"wei","valuationTime":"transition","conversionLowerPrice":"identity","gasTreatment":"excluded-accounting-only"},
+  "mappedRoutes": ["exchange", "exchange-high"],
+  "states": ["s0", "funded", "delivered", "funded-high", "delivered-high"],
+  "transitions": [
+    {"id":"fund","from":"s0","to":"funded","route":"exchange","success":false,"usableDelivery":false,"buyerDebit":0,"debitOrigin":"none","irreversible":false,"returnToControl":0,"externalFunding":0,"buyerPrefund":4,"prefundOrigin":"buyer-A"},
+    {"id":"atomic-exchange","from":"funded","to":"delivered","route":"exchange","success":true,"usableDelivery":true,"buyerDebit":4,"debitOrigin":"buyer-A","irreversible":true,"returnToControl":0,"externalFunding":0,"buyerPrefund":0,"prefundOrigin":"none"},
+    {"id":"fund-high","from":"s0","to":"funded-high","route":"exchange-high","success":false,"usableDelivery":false,"buyerDebit":0,"debitOrigin":"none","irreversible":false,"returnToControl":0,"externalFunding":0,"buyerPrefund":7,"prefundOrigin":"buyer-A"},
+    {"id":"atomic-exchange-high","from":"funded-high","to":"delivered-high","route":"exchange-high","success":true,"usableDelivery":true,"buyerDebit":7,"debitOrigin":"buyer-A","irreversible":true,"returnToControl":0,"externalFunding":0,"buyerPrefund":0,"prefundOrigin":"none"}
+  ]
+}

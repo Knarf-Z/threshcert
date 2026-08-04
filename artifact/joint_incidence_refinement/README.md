@@ -41,6 +41,12 @@ call value, receives exactly the four selected on-chain share rights, and has
 no claimable balance, refund, rebate, or withdrawal path. Thus the controlled
 share-right incidence value of four is machine discharged rather than assumed.
 
+A second, deliberately narrower construction, `PrefundedThresholdExchange`,
+tests the payment bridge directly: a named buyer prefunds an immutable order,
+registered members submit verifier-approved shares, credits become withdrawable
+only after the registered threshold set is complete, and the contract has no
+cancel, refund, upgrade, delegate-call, or fallback entry. The certificate and
+offline checker preserve the source/runtime hashes and five focused tests.
 This closed-contract claim is not an oracle for off-contract beneficial
 ownership or reimbursement. It does not prove that a controlled share right
 contains a confidential, cryptographically usable premature decryption share,
@@ -57,6 +63,7 @@ npm test
 npm run admission:verify
 npm run admission:negative
 npm run refinement:check
+npm run prefunded:verify
 python verify_schema_independent.py
 ```
 

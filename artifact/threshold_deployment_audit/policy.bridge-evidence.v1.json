@@ -1,0 +1,89 @@
+{
+  "schema": "threshold-deployment-bridge-policy/v1",
+  "frozenAt": "2026-08-03T02:21:32+08:00",
+  "claim": {
+    "quantity": "named-acquirer net irreversible outflow",
+    "success": "usable threshold-reaching material for the pinned committee, event, and validity interval",
+    "scopeKeys": [
+      "system",
+      "deploymentOrChainIdentifier",
+      "codeOrReleaseHash",
+      "committee",
+      "threshold",
+      "event",
+      "timeOrBlockInterval",
+      "usableDeliveryPredicate",
+      "namedAcquirer",
+      "mechanismLanguage"
+    ],
+    "netting": [
+      "refunds",
+      "rebates",
+      "credits",
+      "recoveries",
+      "reimbursements",
+      "sponsor transfers",
+      "returns to acquirer-controlled parties"
+    ]
+  },
+  "bridgeGates": [
+    {
+      "id": "B1",
+      "name": "usable-delivery-completeness",
+      "question": "Does every counted artifact satisfy a pinned usable-material predicate, and does every covered success contain a threshold-reaching covered delivery?",
+      "acceptedEvidence": ["pinned verifier plus entry-complete success mapping", "machine-checked equivalent proof"]
+    },
+    {
+      "id": "B2",
+      "name": "acquirer-funding",
+      "question": "Does every counted irreversible debit originate from the named acquiring principal?",
+      "acceptedEvidence": ["payer-bound prefunding or debit trace", "machine-checked equivalent proof"]
+    },
+    {
+      "id": "B3",
+      "name": "delivery-payment-atomicity",
+      "question": "Is usable delivery impossible before the required debit is irreversible, including failed and reverted paths?",
+      "acceptedEvidence": ["state-machine or contract proof covering all success entries", "machine-checked equivalent proof"]
+    },
+    {
+      "id": "B4",
+      "name": "offset-closure",
+      "question": "Are all in-scope refunds, rebates, credits, recoveries, reimbursements, circular transfers, and controlled-party returns closed or subtracted?",
+      "acceptedEvidence": ["closed accounting graph with upper bounds", "machine-checked or legally enforceable offset caps with identified counterparties"]
+    },
+    {
+      "id": "B5",
+      "name": "alternative-route-closure",
+      "question": "Does every successful route in the claimed mechanism language map to the checked transition, and are excluded languages named?",
+      "acceptedEvidence": ["success-preserving and payment-preserving refinement over every usable-success route", "proved cryptographic or trusted-execution non-exportability under an explicit trust base"]
+    }
+  ],
+  "memberLossFields": [
+    "member-and-scope-binding",
+    "member-specific-attribution",
+    "member-ownership-or-pass-through",
+    "automatic-forfeiture",
+    "recovery-upper-bound",
+    "reimbursement-upper-bound",
+    "issuance-expiry-revocation"
+  ],
+  "temporalFields": [
+    "generation-binding",
+    "cross-generation-non-combinability",
+    "old-generation-erasure-or-invalidation",
+    "covered-acquisition-latency-floor"
+  ],
+  "baselines": {
+    "threshold-only": "zero attacker-payment certificate",
+    "slashing-only": "may certify member loss; zero attacker-payment certificate without B1-B5",
+    "self-reported-price": "zero robust floor unless independently made binding",
+    "bridge-qualified": "positive only for the exact admitted mechanism language"
+  },
+  "decisionRule": {
+    "routeExclusionAuthority": "No deployer, operator, governance body, or author has authority to exclude a route by identity or assertion; the verifier admits only same-scope evidence that the route cannot produce usable success.",
+    "positiveMechanismConditionalPayment": "all B1-B5 pass under one scope and a positive net debit floor is proved",
+    "positiveDeploymentWidePayment": "every allowed acquisition language passes or is excluded by binding evidence",
+    "missingOrAmbiguous": "fail closed to zero and emit explicit rejection reasons",
+    "zeroInterpretation": "public evidence does not rule out a zero-payment compatible world; it is not an insecurity or behavior claim"
+  }
+}

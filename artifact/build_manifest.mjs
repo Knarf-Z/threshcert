@@ -29,7 +29,20 @@ for (const rel of await walk(root)) {
 const canonical = `${lines.join("\n")}\n`;
 if (process.argv.includes("--check")) {
   const recorded = await readFile(manifestPath, "utf8");
-  if (recorded !== canonical) throw new Error("MANIFEST.sha256 mismatch");
+  if (recorded !== canonical) {
+    const parse = (text) => new Map(text.trimEnd().split("\n").filter(Boolean).map((line) => {
+      const match = line.match(/^([0-9a-f]{64})  (.+)$/);
+      return match ? [match[2], match[1]] : [`<malformed:${line}>`, "MALFORMED"];
+    }));
+    const expected = parse(recorded);
+    const actual = parse(canonical);
+    const paths = [...new Set([...expected.keys(), ...actual.keys()])].sort();
+    const first = paths.find((rel) => expected.get(rel) !== actual.get(rel)) ?? "<unknown>";
+    throw new Error(
+      `MANIFEST.sha256 mismatch; first mismatch: ${first}; ` +
+      `recorded=${expected.get(first) ?? "MISSING"}; actual=${actual.get(first) ?? "MISSING"}`,
+    );
+  }
   console.log(`MANIFEST=PASS (${lines.length} files)`);
 } else {
   await writeFile(manifestPath, canonical, "utf8");

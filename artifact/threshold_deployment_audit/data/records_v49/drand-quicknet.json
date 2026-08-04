@@ -1,0 +1,75 @@
+{
+    "schema":  "public-evidence-record/v2",
+    "recordType":  "public-deployment",
+    "id":  "drand-quicknet",
+    "scope":  {
+                  "system":  "League of Entropy drand quicknet",
+                  "deploymentIdentifier":  "chainHash:52db9ba70e0cc0f6eaf7803dd07447a1f5477735fd3f661792ba94600c84e971",
+                  "committee":  "current quicknet group, threshold and members not exposed by captured public client endpoint",
+                  "event":  "premature usable beacon output for a pinned round",
+                  "validityInterval":  "captured chain info and latest round 30964232",
+                  "usableDeliveryPredicate":  "a contribution set sufficient to produce a valid quicknet beacon before its scheduled round",
+                  "namedAcquirer":  "arbitrary fixed externally controlled principal a",
+                  "numeraire":  {
+                                    "asset":  "deployment-native settlement asset",
+                                    "unit":  "base unit",
+                                    "valuationTime":  "time of irreversible debit",
+                                    "conversionLowerPrice":  "identity for the same asset only",
+                                    "gasTreatment":  "excluded from the payment certificate and reported separately"
+                                },
+                  "accountingWindow":  "declared funding lookback through refund horizon, including controlled-party returns",
+                  "controlPolicy":  "transitive common-control closure of the named acquirer",
+                  "mechanismLanguage":  "protocol messages, off-contract disclosure, side purchase, coercion, key compromise, and common-control routes"
+              },
+    "sourceRefs":  [
+                       {
+                           "id":  "capture",
+                           "path":  "../capture.public.v1.json",
+                           "sha256":  "23a1b82c745ebf350d8feb6847f594d2ee3f7d1cefe04e878f5f4eba10822e93",
+                           "pointer":  "/systems/drand-quicknet"
+                       }
+                   ],
+    "gates":  {
+                  "B1":  {
+                             "contextRefs":  [
+                                                 "capture"
+                                             ],
+                             "evidence":  [
+
+                                          ]
+                         },
+                  "B2":  {
+                             "contextRefs":  [
+                                                 "capture"
+                                             ],
+                             "evidence":  [
+
+                                          ]
+                         },
+                  "B3":  {
+                             "contextRefs":  [
+                                                 "capture"
+                                             ],
+                             "evidence":  [
+
+                                          ]
+                         },
+                  "B4":  {
+                             "contextRefs":  [
+                                                 "capture"
+                                             ],
+                             "evidence":  [
+
+                                          ]
+                         },
+                  "B5":  {
+                             "contextRefs":  [
+                                                 "capture"
+                                             ],
+                             "evidence":  [
+
+                                          ]
+                         }
+              },
+    "claimBoundary":  "Worked public-record diagnostic; not a project claim, insecurity finding, or population estimate."
+}

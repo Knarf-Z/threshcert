@@ -1,0 +1,97 @@
+{
+  "schema": "scope-bound-countermodel-frontier-result/v1",
+  "countermodelCatalogSha256": "ee853c696c9d07052aace2dcdfc9ba9c50e7f8200f296d750aae7878173702f6",
+  "repairCatalogSha256": "81ec51c781ac0f67904338801c62504c43b04b7fc9cc99e429243fba74b623a9",
+  "sourceCorpus": {
+    "officialFiles": 10,
+    "apiFiles": 23,
+    "rpcFiles": 3,
+    "totalFilesRehashed": 36,
+    "totalBytesRehashed": 6801141,
+    "exactEarlierFreezeDigestMatches": 15,
+    "admittedBridgeProofObjects": 0,
+    "interpretation": "These files establish context and identifiers; none is admitted by the frozen records as a B1--B5 proof object."
+  },
+  "publicRecords": 4,
+  "gateCellsScreened": 20,
+  "admittedGateEvidenceObjects": 0,
+  "exactZeroCompatibleCountermodels": 4,
+  "countermodels": [
+    {
+      "recordId": "drand-quicknet",
+      "routePhrase": "off-contract disclosure",
+      "transitionWitness": "unexcluded-free-disclosure",
+      "states": 2,
+      "transitions": 1,
+      "shortestNamedAcquirerOutflow": 0,
+      "b1UsableDelivery": "PASS",
+      "b5AlternativeRoute": "FAIL_COUNTEREXAMPLE",
+      "semanticCertificate": 0,
+      "interpretation": "Exact zero in the admitted public-record compatible-world semantics; not evidence that this route occurs in the physical deployment.",
+      "recordSha256": "563934bd22d168e2adffccc8f810632f96d7ae5491e551facf20ce6fb5445497",
+      "scopeSha256": "a2ac316372f73fd3c8781f3bf1f2f492c41986e8f29c8a9a7535c97dd180c411",
+      "countermodelLtsSha256": "a928f0063d57b8308051c11e4aafdaaa8f770ab81046a1d23093ba65006c89b0"
+    },
+    {
+      "recordId": "gnosis-shutter-set10",
+      "routePhrase": "off-contract disclosure",
+      "transitionWitness": "unexcluded-free-disclosure",
+      "states": 2,
+      "transitions": 1,
+      "shortestNamedAcquirerOutflow": 0,
+      "b1UsableDelivery": "PASS",
+      "b5AlternativeRoute": "FAIL_COUNTEREXAMPLE",
+      "semanticCertificate": 0,
+      "interpretation": "Exact zero in the admitted public-record compatible-world semantics; not evidence that this route occurs in the physical deployment.",
+      "recordSha256": "d4bdbe8b6babdd7287280c38f8b67fe5ea381b9e255ef65fcab3c73b532225a6",
+      "scopeSha256": "4f128cb8dd708f0c9703a59b19f26edf30c95578ae8965afd77a1df06aaf0b95",
+      "countermodelLtsSha256": "a928f0063d57b8308051c11e4aafdaaa8f770ab81046a1d23093ba65006c89b0"
+    },
+    {
+      "recordId": "ssv-mainnet-cluster",
+      "routePhrase": "off-contract signing",
+      "transitionWitness": "unexcluded-free-signing",
+      "states": 2,
+      "transitions": 1,
+      "shortestNamedAcquirerOutflow": 0,
+      "b1UsableDelivery": "PASS",
+      "b5AlternativeRoute": "FAIL_COUNTEREXAMPLE",
+      "semanticCertificate": 0,
+      "interpretation": "Exact zero in the admitted public-record compatible-world semantics; not evidence that this route occurs in the physical deployment.",
+      "recordSha256": "45c0fb9f1dc2f91fcbff870eef1a4a3f168df90d944e02a07eb47851fbefb0dd",
+      "scopeSha256": "5fa0c469b050cf9acf1f14d8111d1cca12ce53b1cefc51572a734dca6f6849f9",
+      "countermodelLtsSha256": "aa323f6d08c18dd842c0eedcc941ce5e862640bf342404b5227bc187b31249c4"
+    },
+    {
+      "recordId": "tbtc-v2-mainnet-wallet",
+      "routePhrase": "off-contract signing",
+      "transitionWitness": "unexcluded-free-signing",
+      "states": 2,
+      "transitions": 1,
+      "shortestNamedAcquirerOutflow": 0,
+      "b1UsableDelivery": "PASS",
+      "b5AlternativeRoute": "FAIL_COUNTEREXAMPLE",
+      "semanticCertificate": 0,
+      "interpretation": "Exact zero in the admitted public-record compatible-world semantics; not evidence that this route occurs in the physical deployment.",
+      "recordSha256": "dc90eda3e4a5da43fa63ffbd44599de9babd89ace6595cfde23520f560ee89ca",
+      "scopeSha256": "a88d88e8be999bc0284a5b0dfe5abb848c5e0eb6f9e28d599ad1280adebba910",
+      "countermodelLtsSha256": "aa323f6d08c18dd842c0eedcc941ce5e862640bf342404b5227bc187b31249c4"
+    }
+  ],
+  "repairFrontier": {
+    "challengeCount": 8,
+    "candidateFamilyCount": 9,
+    "minimumFamilyCount": 3,
+    "minimumSolutions": [
+      [
+        "pathwise-completion-witness",
+        "deployment-coverage-proof",
+        "closed-exchange-proof-family"
+      ]
+    ],
+    "observedCandidateFamiliesInPublicRecords": 0,
+    "unresolvedChallengeClassesPerPublicRecord": 8,
+    "interpretation": "The count is relative to the declared candidate-family catalog. It is not a time, money, or proof-construction estimate."
+  },
+  "claimBoundary": "The countermodels prove exact zero only in the admitted public-record compatible-world semantics. They do not allege an implemented route, insecurity, or population prevalence; eliminating them requires new evidence or a narrower proved mechanism language."
+}

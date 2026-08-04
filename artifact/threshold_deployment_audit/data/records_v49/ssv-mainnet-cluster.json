@@ -1,0 +1,75 @@
+{
+    "schema":  "public-evidence-record/v2",
+    "recordType":  "public-deployment",
+    "id":  "ssv-mainnet-cluster",
+    "scope":  {
+                  "system":  "SSV Network",
+                  "deploymentIdentifier":  "chain:1;contract:0xDD9BC35aE942eF0cFa76930954a156B3fF30a4E1;cluster:0x000b854eb063fc4fc09331eacca9ca6fcdd890bd7257127bd979c1fab74487d2",
+                  "committee":  "3-of-4 selected cluster",
+                  "event":  "unauthorized usable threshold signature for the pinned validator-cluster scope",
+                  "validityInterval":  "captured finalized block 25668973 and selected cluster record block 23171001",
+                  "usableDeliveryPredicate":  "three valid operator contributions produce an accepted scoped signature",
+                  "namedAcquirer":  "arbitrary fixed externally controlled principal a",
+                  "numeraire":  {
+                                    "asset":  "deployment-native settlement asset",
+                                    "unit":  "base unit",
+                                    "valuationTime":  "time of irreversible debit",
+                                    "conversionLowerPrice":  "identity for the same asset only",
+                                    "gasTreatment":  "excluded from the payment certificate and reported separately"
+                                },
+                  "accountingWindow":  "declared funding lookback through refund horizon, including controlled-party returns",
+                  "controlPolicy":  "transitive common-control closure of the named acquirer",
+                  "mechanismLanguage":  "registered contract paths, off-contract signing, side purchase, coercion, key compromise, proxy upgrade, and common-control routes"
+              },
+    "sourceRefs":  [
+                       {
+                           "id":  "capture",
+                           "path":  "../capture.public.v1.json",
+                           "sha256":  "23a1b82c745ebf350d8feb6847f594d2ee3f7d1cefe04e878f5f4eba10822e93",
+                           "pointer":  "/systems/ssv-mainnet-cluster"
+                       }
+                   ],
+    "gates":  {
+                  "B1":  {
+                             "contextRefs":  [
+                                                 "capture"
+                                             ],
+                             "evidence":  [
+
+                                          ]
+                         },
+                  "B2":  {
+                             "contextRefs":  [
+                                                 "capture"
+                                             ],
+                             "evidence":  [
+
+                                          ]
+                         },
+                  "B3":  {
+                             "contextRefs":  [
+                                                 "capture"
+                                             ],
+                             "evidence":  [
+
+                                          ]
+                         },
+                  "B4":  {
+                             "contextRefs":  [
+                                                 "capture"
+                                             ],
+                             "evidence":  [
+
+                                          ]
+                         },
+                  "B5":  {
+                             "contextRefs":  [
+                                                 "capture"
+                                             ],
+                             "evidence":  [
+
+                                          ]
+                         }
+              },
+    "claimBoundary":  "Worked public-record diagnostic; not a project claim, insecurity finding, or population estimate."
+}

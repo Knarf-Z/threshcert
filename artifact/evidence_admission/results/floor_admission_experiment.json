@@ -1,0 +1,709 @@
+{
+  "claimBoundary": {
+    "admittedFloor": "max(0, lockedMemberCollateral - maxRecovery - maxExternalReimbursement)",
+    "missingEvidence": "0_PUBLIC_FLOOR_CERTIFICATE",
+    "reportedReservationPrice": "IGNORED_NOT_EVIDENCE",
+    "unknownEconomicCost": "UNKNOWN_NOT_MEASURED"
+  },
+  "disclosureFrontier": {
+    "assignmentsChecked": 128,
+    "certificateValuesByPositiveCount": {
+      "0": [
+        0
+      ],
+      "1": [
+        0
+      ],
+      "2": [
+        0
+      ],
+      "3": [
+        0
+      ],
+      "4": [
+        1
+      ],
+      "5": [
+        2
+      ],
+      "6": [
+        3
+      ],
+      "7": [
+        4
+      ]
+    },
+    "mismatches": 0,
+    "positiveExactlyWhen": "k > n - q"
+  },
+  "randomizedChecks": {
+    "inflationInvariantTrials": 10000,
+    "revocationSafeTrials": 10000,
+    "seed": 20260802,
+    "soundTrials": 10000,
+    "trials": 10000
+  },
+  "scenarios": [
+    {
+      "admittedRecords": [
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
+            "AUTOMATIC_FORFEITURE_MISSING",
+            "OFFSET_CAP_MISSING",
+            "CODE_HASH_BINDING_MISSING",
+            "EXPIRED"
+          ],
+          "member": 0,
+          "reportedFloor": 1000000000000
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
+            "AUTOMATIC_FORFEITURE_MISSING",
+            "OFFSET_CAP_MISSING",
+            "CODE_HASH_BINDING_MISSING",
+            "EXPIRED"
+          ],
+          "member": 1,
+          "reportedFloor": 1000000000000
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
+            "AUTOMATIC_FORFEITURE_MISSING",
+            "OFFSET_CAP_MISSING",
+            "CODE_HASH_BINDING_MISSING",
+            "EXPIRED"
+          ],
+          "member": 2,
+          "reportedFloor": 1000000000000
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
+            "AUTOMATIC_FORFEITURE_MISSING",
+            "OFFSET_CAP_MISSING",
+            "CODE_HASH_BINDING_MISSING",
+            "EXPIRED"
+          ],
+          "member": 3,
+          "reportedFloor": 1000000000000
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
+            "AUTOMATIC_FORFEITURE_MISSING",
+            "OFFSET_CAP_MISSING",
+            "CODE_HASH_BINDING_MISSING",
+            "EXPIRED"
+          ],
+          "member": 4,
+          "reportedFloor": 1000000000000
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
+            "AUTOMATIC_FORFEITURE_MISSING",
+            "OFFSET_CAP_MISSING",
+            "CODE_HASH_BINDING_MISSING",
+            "EXPIRED"
+          ],
+          "member": 5,
+          "reportedFloor": 1000000000000
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
+            "AUTOMATIC_FORFEITURE_MISSING",
+            "OFFSET_CAP_MISSING",
+            "CODE_HASH_BINDING_MISSING",
+            "EXPIRED"
+          ],
+          "member": 6,
+          "reportedFloor": 1000000000000
+        }
+      ],
+      "name": "signed_only_inflated",
+      "orderedAdmittedFloors": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "thresholdCertificate": 0
+    },
+    {
+      "admittedRecords": [
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING"
+          ],
+          "member": 0,
+          "reportedFloor": 1000000000000
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING"
+          ],
+          "member": 1,
+          "reportedFloor": 1000000000000
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING"
+          ],
+          "member": 2,
+          "reportedFloor": 1000000000000
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING"
+          ],
+          "member": 3,
+          "reportedFloor": 1000000000000
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING"
+          ],
+          "member": 4,
+          "reportedFloor": 1000000000000
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING"
+          ],
+          "member": 5,
+          "reportedFloor": 1000000000000
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING"
+          ],
+          "member": 6,
+          "reportedFloor": 1000000000000
+        }
+      ],
+      "name": "owner_funded_without_member_pass_through",
+      "orderedAdmittedFloors": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "thresholdCertificate": 0
+    },
+    {
+      "admittedRecords": [
+        {
+          "admittedFloor": 5,
+          "failures": [],
+          "member": 0,
+          "reportedFloor": 5
+        },
+        {
+          "admittedFloor": 4,
+          "failures": [],
+          "member": 1,
+          "reportedFloor": 4
+        },
+        {
+          "admittedFloor": 3,
+          "failures": [],
+          "member": 2,
+          "reportedFloor": 3
+        },
+        {
+          "admittedFloor": 2,
+          "failures": [],
+          "member": 3,
+          "reportedFloor": 2
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
+            "AUTOMATIC_FORFEITURE_MISSING",
+            "OFFSET_CAP_MISSING",
+            "CODE_HASH_BINDING_MISSING",
+            "EXPIRED"
+          ],
+          "member": 4,
+          "reportedFloor": 1000000000000
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
+            "AUTOMATIC_FORFEITURE_MISSING",
+            "OFFSET_CAP_MISSING",
+            "CODE_HASH_BINDING_MISSING",
+            "EXPIRED"
+          ],
+          "member": 5,
+          "reportedFloor": 1000000000000
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
+            "AUTOMATIC_FORFEITURE_MISSING",
+            "OFFSET_CAP_MISSING",
+            "CODE_HASH_BINDING_MISSING",
+            "EXPIRED"
+          ],
+          "member": 6,
+          "reportedFloor": 1000000000000
+        }
+      ],
+      "name": "four_complete_member_bound_records",
+      "orderedAdmittedFloors": [
+        0,
+        0,
+        0,
+        2,
+        3,
+        4,
+        5
+      ],
+      "thresholdCertificate": 2
+    },
+    {
+      "admittedRecords": [
+        {
+          "admittedFloor": 5,
+          "failures": [],
+          "member": 0,
+          "reportedFloor": 1000000000000000
+        },
+        {
+          "admittedFloor": 4,
+          "failures": [],
+          "member": 1,
+          "reportedFloor": 1000000000000000
+        },
+        {
+          "admittedFloor": 3,
+          "failures": [],
+          "member": 2,
+          "reportedFloor": 1000000000000000
+        },
+        {
+          "admittedFloor": 2,
+          "failures": [],
+          "member": 3,
+          "reportedFloor": 1000000000000000
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
+            "AUTOMATIC_FORFEITURE_MISSING",
+            "OFFSET_CAP_MISSING",
+            "CODE_HASH_BINDING_MISSING",
+            "EXPIRED"
+          ],
+          "member": 4,
+          "reportedFloor": 1000000000000000
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
+            "AUTOMATIC_FORFEITURE_MISSING",
+            "OFFSET_CAP_MISSING",
+            "CODE_HASH_BINDING_MISSING",
+            "EXPIRED"
+          ],
+          "member": 5,
+          "reportedFloor": 1000000000000000
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
+            "AUTOMATIC_FORFEITURE_MISSING",
+            "OFFSET_CAP_MISSING",
+            "CODE_HASH_BINDING_MISSING",
+            "EXPIRED"
+          ],
+          "member": 6,
+          "reportedFloor": 1000000000000000
+        }
+      ],
+      "name": "inflated_reports_same_backing",
+      "orderedAdmittedFloors": [
+        0,
+        0,
+        0,
+        2,
+        3,
+        4,
+        5
+      ],
+      "thresholdCertificate": 2
+    },
+    {
+      "admittedRecords": [
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "REVOKED"
+          ],
+          "member": 0,
+          "reportedFloor": 5
+        },
+        {
+          "admittedFloor": 4,
+          "failures": [],
+          "member": 1,
+          "reportedFloor": 4
+        },
+        {
+          "admittedFloor": 3,
+          "failures": [],
+          "member": 2,
+          "reportedFloor": 3
+        },
+        {
+          "admittedFloor": 2,
+          "failures": [],
+          "member": 3,
+          "reportedFloor": 2
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
+            "AUTOMATIC_FORFEITURE_MISSING",
+            "OFFSET_CAP_MISSING",
+            "CODE_HASH_BINDING_MISSING",
+            "EXPIRED"
+          ],
+          "member": 4,
+          "reportedFloor": 1000000000000
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
+            "AUTOMATIC_FORFEITURE_MISSING",
+            "OFFSET_CAP_MISSING",
+            "CODE_HASH_BINDING_MISSING",
+            "EXPIRED"
+          ],
+          "member": 5,
+          "reportedFloor": 1000000000000
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
+            "AUTOMATIC_FORFEITURE_MISSING",
+            "OFFSET_CAP_MISSING",
+            "CODE_HASH_BINDING_MISSING",
+            "EXPIRED"
+          ],
+          "member": 6,
+          "reportedFloor": 1000000000000
+        }
+      ],
+      "name": "one_record_revoked",
+      "orderedAdmittedFloors": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        3,
+        4
+      ],
+      "thresholdCertificate": 0
+    },
+    {
+      "admittedRecords": [
+        {
+          "admittedFloor": 5,
+          "failures": [],
+          "member": 0,
+          "reportedFloor": 5
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "EXPIRED"
+          ],
+          "member": 1,
+          "reportedFloor": 4
+        },
+        {
+          "admittedFloor": 3,
+          "failures": [],
+          "member": 2,
+          "reportedFloor": 3
+        },
+        {
+          "admittedFloor": 2,
+          "failures": [],
+          "member": 3,
+          "reportedFloor": 2
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
+            "AUTOMATIC_FORFEITURE_MISSING",
+            "OFFSET_CAP_MISSING",
+            "CODE_HASH_BINDING_MISSING",
+            "EXPIRED"
+          ],
+          "member": 4,
+          "reportedFloor": 1000000000000
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
+            "AUTOMATIC_FORFEITURE_MISSING",
+            "OFFSET_CAP_MISSING",
+            "CODE_HASH_BINDING_MISSING",
+            "EXPIRED"
+          ],
+          "member": 5,
+          "reportedFloor": 1000000000000
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
+            "AUTOMATIC_FORFEITURE_MISSING",
+            "OFFSET_CAP_MISSING",
+            "CODE_HASH_BINDING_MISSING",
+            "EXPIRED"
+          ],
+          "member": 6,
+          "reportedFloor": 1000000000000
+        }
+      ],
+      "name": "one_record_expired",
+      "orderedAdmittedFloors": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        3,
+        5
+      ],
+      "thresholdCertificate": 0
+    },
+    {
+      "admittedRecords": [
+        {
+          "admittedFloor": 5,
+          "failures": [],
+          "member": 0,
+          "reportedFloor": 5
+        },
+        {
+          "admittedFloor": 4,
+          "failures": [],
+          "member": 1,
+          "reportedFloor": 4
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "OFFSET_CAP_MISSING"
+          ],
+          "member": 2,
+          "reportedFloor": 3
+        },
+        {
+          "admittedFloor": 2,
+          "failures": [],
+          "member": 3,
+          "reportedFloor": 2
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
+            "AUTOMATIC_FORFEITURE_MISSING",
+            "OFFSET_CAP_MISSING",
+            "CODE_HASH_BINDING_MISSING",
+            "EXPIRED"
+          ],
+          "member": 4,
+          "reportedFloor": 1000000000000
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
+            "AUTOMATIC_FORFEITURE_MISSING",
+            "OFFSET_CAP_MISSING",
+            "CODE_HASH_BINDING_MISSING",
+            "EXPIRED"
+          ],
+          "member": 5,
+          "reportedFloor": 1000000000000
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
+            "AUTOMATIC_FORFEITURE_MISSING",
+            "OFFSET_CAP_MISSING",
+            "CODE_HASH_BINDING_MISSING",
+            "EXPIRED"
+          ],
+          "member": 6,
+          "reportedFloor": 1000000000000
+        }
+      ],
+      "name": "one_offset_cap_unknown",
+      "orderedAdmittedFloors": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        4,
+        5
+      ],
+      "thresholdCertificate": 0
+    },
+    {
+      "admittedRecords": [
+        {
+          "admittedFloor": 5,
+          "failures": [],
+          "member": 0,
+          "reportedFloor": 5
+        },
+        {
+          "admittedFloor": 4,
+          "failures": [],
+          "member": 1,
+          "reportedFloor": 4
+        },
+        {
+          "admittedFloor": 3,
+          "failures": [],
+          "member": 2,
+          "reportedFloor": 3
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_ATTRIBUTION_MISSING"
+          ],
+          "member": 3,
+          "reportedFloor": 2
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
+            "AUTOMATIC_FORFEITURE_MISSING",
+            "OFFSET_CAP_MISSING",
+            "CODE_HASH_BINDING_MISSING",
+            "EXPIRED"
+          ],
+          "member": 4,
+          "reportedFloor": 1000000000000
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
+            "AUTOMATIC_FORFEITURE_MISSING",
+            "OFFSET_CAP_MISSING",
+            "CODE_HASH_BINDING_MISSING",
+            "EXPIRED"
+          ],
+          "member": 5,
+          "reportedFloor": 1000000000000
+        },
+        {
+          "admittedFloor": 0,
+          "failures": [
+            "MEMBER_OWNERSHIP_MISSING",
+            "MEMBER_ATTRIBUTION_MISSING",
+            "AUTOMATIC_FORFEITURE_MISSING",
+            "OFFSET_CAP_MISSING",
+            "CODE_HASH_BINDING_MISSING",
+            "EXPIRED"
+          ],
+          "member": 6,
+          "reportedFloor": 1000000000000
+        }
+      ],
+      "name": "one_member_attribution_missing",
+      "orderedAdmittedFloors": [
+        0,
+        0,
+        0,
+        0,
+        3,
+        4,
+        5
+      ],
+      "thresholdCertificate": 0
+    }
+  ],
+  "schema": "fc-floor-admission-experiment-v1"
+}

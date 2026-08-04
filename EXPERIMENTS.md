@@ -1,5 +1,24 @@
 # Experiment inventory and interpretation boundaries
 
+## Floor admission and refresh-window experiments
+
+1. **Enforceable floor admission.** Seven controlled 4-of-7 ledgers separate
+   signed self-reports from verifier-computed member-borne loss floors. The
+   experiment tests inflated reports, owner-funded collateral without
+   pass-through, complete member-bound collateral, revocation, expiry, and an
+   unknown reimbursement cap. It additionally checks 10,000 seeded records for
+   soundness, report-inflation invariance, and revocation safety, and exhausts
+   all 128 subsets of positive disclosures. The experiment measures the
+   admission rule, not real Keyper reservation prices.
+2. **Proactive-refresh window semantics.** A paired-world instance holds every
+   per-epoch ledger fixed while changing only cross-epoch share compatibility.
+   It compares erasure after refresh with persistent shares, then varies epoch
+   duration under certified acquisition latencies. Five thousand seeded
+   instances check that shorter validity cannot lower an epoch-local
+   certificate and that erasure decomposes the window problem into the minimum
+   of its epoch-local problems. The experiment does not prove that a production
+   deployment securely erases old shares; that requires separate evidence.
+
 ## Production deployment evidence audit
 
 1. Archival Gnosis snapshot: fixes `2026-06-13T00:00:00Z` to block

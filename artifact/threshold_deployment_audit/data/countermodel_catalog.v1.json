@@ -1,0 +1,38 @@
+{
+  "schema": "scope-bound-compatible-countermodel-catalog/v1",
+  "claimBoundary": "Each entry is an explicit world compatible with the admitted typed public record because the named route class is in scope and no admitted B5 object excludes it. It is not an observed or alleged attack path.",
+  "entries": [
+    {
+      "recordId": "drand-quicknet",
+      "recordPath": "data/records_v49/drand-quicknet.json",
+      "scopeSha256": "a2ac316372f73fd3c8781f3bf1f2f492c41986e8f29c8a9a7535c97dd180c411",
+      "routePhrase": "off-contract disclosure",
+      "ltsPath": "data/countermodels_v50/drand-quicknet.zero.json",
+      "ltsSha256": "a928f0063d57b8308051c11e4aafdaaa8f770ab81046a1d23093ba65006c89b0"
+    },
+    {
+      "recordId": "gnosis-shutter-set10",
+      "recordPath": "data/records_v49/gnosis-shutter-set10.json",
+      "scopeSha256": "4f128cb8dd708f0c9703a59b19f26edf30c95578ae8965afd77a1df06aaf0b95",
+      "routePhrase": "off-contract disclosure",
+      "ltsPath": "data/countermodels_v50/gnosis-shutter-set10.zero.json",
+      "ltsSha256": "a928f0063d57b8308051c11e4aafdaaa8f770ab81046a1d23093ba65006c89b0"
+    },
+    {
+      "recordId": "ssv-mainnet-cluster",
+      "recordPath": "data/records_v49/ssv-mainnet-cluster.json",
+      "scopeSha256": "5fa0c469b050cf9acf1f14d8111d1cca12ce53b1cefc51572a734dca6f6849f9",
+      "routePhrase": "off-contract signing",
+      "ltsPath": "data/countermodels_v50/ssv-mainnet-cluster.zero.json",
+      "ltsSha256": "aa323f6d08c18dd842c0eedcc941ce5e862640bf342404b5227bc187b31249c4"
+    },
+    {
+      "recordId": "tbtc-v2-mainnet-wallet",
+      "recordPath": "data/records_v49/tbtc-v2-mainnet-wallet.json",
+      "scopeSha256": "a88d88e8be999bc0284a5b0dfe5abb848c5e0eb6f9e28d599ad1280adebba910",
+      "routePhrase": "off-contract signing",
+      "ltsPath": "data/countermodels_v50/tbtc-v2-mainnet-wallet.zero.json",
+      "ltsSha256": "aa323f6d08c18dd842c0eedcc941ce5e862640bf342404b5227bc187b31249c4"
+    }
+  ]
+}

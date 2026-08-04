@@ -1,0 +1,7 @@
+refresh_window_schema=fc-refresh-window-experiment-v1
+paired_erasure_cost=INF
+paired_persistent_cost=4
+duration_ladder=4:INF,6:16,8:12,10:8,12:4
+duration_monotonicity=5000/5000
+erasure_decomposition=5000/5000
+refresh_window_experiment=PASS

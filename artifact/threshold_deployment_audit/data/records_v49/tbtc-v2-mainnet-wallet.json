@@ -1,0 +1,75 @@
+{
+    "schema":  "public-evidence-record/v2",
+    "recordType":  "public-deployment",
+    "id":  "tbtc-v2-mainnet-wallet",
+    "scope":  {
+                  "system":  "Threshold Network tBTC v2",
+                  "deploymentIdentifier":  "chain:1;walletRegistry:0x46d52E41C2F300BC82217Ce22b920c34995204eb;wallet:0xf296081cbeec91a27aa5334f90a71a226aa0a43db9c5f36c257c3acae2554c53",
+                  "committee":  "51-of-100 selected wallet",
+                  "event":  "unauthorized usable threshold wallet signature",
+                  "validityInterval":  "captured finalized block 25668973 through the selected wallet validity interval",
+                  "usableDeliveryPredicate":  "fifty-one valid member contributions produce an accepted wallet signature",
+                  "namedAcquirer":  "arbitrary fixed externally controlled principal a",
+                  "numeraire":  {
+                                    "asset":  "deployment-native settlement asset",
+                                    "unit":  "base unit",
+                                    "valuationTime":  "time of irreversible debit",
+                                    "conversionLowerPrice":  "identity for the same asset only",
+                                    "gasTreatment":  "excluded from the payment certificate and reported separately"
+                                },
+                  "accountingWindow":  "declared funding lookback through refund horizon, including controlled-party returns",
+                  "controlPolicy":  "transitive common-control closure of the named acquirer",
+                  "mechanismLanguage":  "registry paths, off-contract signing, side purchase, coercion, key compromise, proxy upgrade, repeated-seat control, and common-control routes"
+              },
+    "sourceRefs":  [
+                       {
+                           "id":  "capture",
+                           "path":  "../capture.public.v1.json",
+                           "sha256":  "23a1b82c745ebf350d8feb6847f594d2ee3f7d1cefe04e878f5f4eba10822e93",
+                           "pointer":  "/systems/tbtc-v2-mainnet-wallet"
+                       }
+                   ],
+    "gates":  {
+                  "B1":  {
+                             "contextRefs":  [
+                                                 "capture"
+                                             ],
+                             "evidence":  [
+
+                                          ]
+                         },
+                  "B2":  {
+                             "contextRefs":  [
+                                                 "capture"
+                                             ],
+                             "evidence":  [
+
+                                          ]
+                         },
+                  "B3":  {
+                             "contextRefs":  [
+                                                 "capture"
+                                             ],
+                             "evidence":  [
+
+                                          ]
+                         },
+                  "B4":  {
+                             "contextRefs":  [
+                                                 "capture"
+                                             ],
+                             "evidence":  [
+
+                                          ]
+                         },
+                  "B5":  {
+                             "contextRefs":  [
+                                                 "capture"
+                                             ],
+                             "evidence":  [
+
+                                          ]
+                         }
+              },
+    "claimBoundary":  "Worked public-record diagnostic; not a project claim, insecurity finding, or population estimate."
+}

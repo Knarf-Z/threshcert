@@ -1,0 +1,14 @@
+floor_admission_schema=fc-floor-admission-experiment-v1
+signed_only_inflated=0
+owner_funded_without_member_pass_through=0
+four_complete_member_bound_records=2
+inflated_reports_same_backing=2
+one_record_revoked=0
+one_record_expired=0
+one_offset_cap_unknown=0
+one_member_attribution_missing=0
+randomized_sound=10000/10000
+inflation_invariant=10000/10000
+revocation_safe=10000/10000
+disclosure_frontier=128/128
+floor_admission_experiment=PASS

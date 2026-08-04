@@ -12,3 +12,4 @@ deployment/results/*.json
 deployment/rolling-shutter/upstream/
 deployment/rolling-shutter/bin/
 paper/
+artifact/.runtime/

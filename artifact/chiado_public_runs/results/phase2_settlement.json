@@ -1,0 +1,111 @@
+{
+  "schema": "fc-trace-then-slash-phase2-settlement-v2",
+  "generatedAt": "2026-08-04T04:49:09.835Z",
+  "network": {
+    "name": "Chiado",
+    "chainId": 10200,
+    "confirmations": 1
+  },
+  "owner": "0x567aeea37b709ad4cba411868d953db3061b82b7",
+  "sourceRuns": [
+    {
+      "sourceRun": "calibration",
+      "file": "phase2_chiado_underfunded_run1.json"
+    },
+    {
+      "sourceRun": "covered",
+      "file": "phase2_chiado_covered_run2.json"
+    }
+  ],
+  "expectedContracts": 6,
+  "expectedTotalWei": "108000000000000000",
+  "recoveredContracts": 6,
+  "recoveredTotalWei": "108000000000000000",
+  "complete": true,
+  "settlements": [
+    {
+      "sourceRun": "calibration",
+      "sourceFile": "phase2_chiado_underfunded_run1.json",
+      "mode": "sequential",
+      "contractAddress": "0xd8f5a6a0a10d52a3f4a01eda658f49ebeb94794a",
+      "recipient": "0x567aeea37b709ad4cba411868d953db3061b82b7",
+      "amountWei": "6000000000000000",
+      "transactionHash": "0x6c4b9b9288d3417abfdb4184fb0e8e32f1fe992d942aa628bf42502a76c126c6",
+      "blockNumber": "22401586",
+      "blockHash": "0xc22b67b0de19890187e45e797e0fd2af0b03525a759ef592ecd1f460ad129381",
+      "gasUsed": "66004",
+      "effectiveGasPrice": "8",
+      "gasCostWei": "528032"
+    },
+    {
+      "sourceRun": "calibration",
+      "sourceFile": "phase2_chiado_underfunded_run1.json",
+      "mode": "atomic_package",
+      "contractAddress": "0x56f391fc0689826a24e4f0276a213708042f8378",
+      "recipient": "0x567aeea37b709ad4cba411868d953db3061b82b7",
+      "amountWei": "6000000000000000",
+      "transactionHash": "0x112dc5f781b81b99c94ef0df3fb6d0867571598d2b7ba1867daf4cf230f63c2d",
+      "blockNumber": "22401588",
+      "blockHash": "0xa4f7385fb86af14d5722ecba72a80f6fa7ae8cf81b001bdaa1796726cea0d3d0",
+      "gasUsed": "66004",
+      "effectiveGasPrice": "8",
+      "gasCostWei": "528032"
+    },
+    {
+      "sourceRun": "calibration",
+      "sourceFile": "phase2_chiado_underfunded_run1.json",
+      "mode": "repeated_packages",
+      "contractAddress": "0xa5f282d81a9689c20ac00780b5465a27269a9f73",
+      "recipient": "0x567aeea37b709ad4cba411868d953db3061b82b7",
+      "amountWei": "6000000000000000",
+      "transactionHash": "0x2affc5b9cec8bd45cae2454cc757bd9c077d2c3a885be5dcf1ccdf8764cc4262",
+      "blockNumber": "22401590",
+      "blockHash": "0x52d9cb88747546693f241071bc6d9771a9bdced8f571ebacc0c30132d32e85d5",
+      "gasUsed": "66004",
+      "effectiveGasPrice": "8",
+      "gasCostWei": "528032"
+    },
+    {
+      "sourceRun": "covered",
+      "sourceFile": "phase2_chiado_covered_run2.json",
+      "mode": "sequential",
+      "contractAddress": "0xdea1a5ef0ab80b732320912b4b052a491d26b9b2",
+      "recipient": "0x567aeea37b709ad4cba411868d953db3061b82b7",
+      "amountWei": "30000000000000000",
+      "transactionHash": "0xbc4330338d4d2257c043b2f9ff691093d98b261908e3f498d6d053e3794ee6d3",
+      "blockNumber": "22401592",
+      "blockHash": "0x2f1f2716bca5b350d6cd996cf3d0d4b6c1da32f82800c60b9d4b479d12653624",
+      "gasUsed": "66004",
+      "effectiveGasPrice": "8",
+      "gasCostWei": "528032"
+    },
+    {
+      "sourceRun": "covered",
+      "sourceFile": "phase2_chiado_covered_run2.json",
+      "mode": "atomic_package",
+      "contractAddress": "0x38a4f19c5ea07590ffd7bc23b3abb53928c7601e",
+      "recipient": "0x567aeea37b709ad4cba411868d953db3061b82b7",
+      "amountWei": "30000000000000000",
+      "transactionHash": "0xcf9986fb7dc567c1de452d95bc47128a1dd184002f4825e2c65e8cd6c59458fe",
+      "blockNumber": "22401596",
+      "blockHash": "0x5b70db327f135355a3c020b941fe60aba44500d50eddcb0b950ca269c0f7e64b",
+      "gasUsed": "66004",
+      "effectiveGasPrice": "8",
+      "gasCostWei": "528032"
+    },
+    {
+      "sourceRun": "covered",
+      "sourceFile": "phase2_chiado_covered_run2.json",
+      "mode": "repeated_packages",
+      "contractAddress": "0xc1d420e29d443562de84e82947a39fc35a04d297",
+      "recipient": "0x567aeea37b709ad4cba411868d953db3061b82b7",
+      "amountWei": "30000000000000000",
+      "transactionHash": "0xc2e1109598bb204702f3f8cc4fe0946add6cd747754bdeab5fbbfdb09e48828e",
+      "blockNumber": "22401598",
+      "blockHash": "0x4971c16397bc5aaba801297ab0d81a265c33a2bdb3a03242ebace420285b1ad0",
+      "gasUsed": "66004",
+      "effectiveGasPrice": "8",
+      "gasCostWei": "528032"
+    }
+  ]
+}

@@ -33,6 +33,8 @@ run(process.execPath, ["verify_refinement.mjs"], path.join(root, "joint_incidenc
 run(process.execPath, ["verify_prefunded_exchange.mjs"], path.join(root, "joint_incidence_refinement"));
 python(["verify_schema_independent.py"], path.join(root, "joint_incidence_refinement"));
 run(process.execPath, ["verify_offline_v49.mjs"], path.join(root, "threshold_deployment_audit"));
+run(process.execPath, ["verify_offline_v50.mjs"], path.join(root, "threshold_deployment_audit"));
+run(process.execPath, ["verify_gate_lattice_v51.mjs"], path.join(root, "threshold_deployment_audit"));
 run(process.execPath, ["scripts/verify_raw_capture_v48.mjs"], path.join(root, "threshold_deployment_audit"));
 console.log("EXPLORATORY_NOT_USED_BY_V49=third_party_contract_survey");
 const surveyRoot = path.join(root, "third_party_contract_survey");

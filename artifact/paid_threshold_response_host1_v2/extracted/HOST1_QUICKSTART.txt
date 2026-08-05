@@ -1,0 +1,35 @@
+﻿HOST 1 QUICK START (v2)
+=======================
+
+1. Extract this folder anywhere, then in PowerShell:
+
+   Set-Location "<extracted folder>"
+   Set-ExecutionPolicy -Scope Process Bypass
+   .\powershell\Setup-Host1.ps1
+   .\powershell\Run-Host1-Experiment.ps1
+
+2. Expected core output:
+
+   UNIT_TESTS=PASS
+   THEORY_COVER=10
+   CATALOG_CERTIFICATE=10
+   OBSERVED_MINIMUM=10
+   ROUTES_ENUMERATED=840
+   ALL_ROUTE_FLOORS_LEDGER_DERIVED=true
+   MINIMIZING_ROUTES=24
+   EXPENSIVE_COALITION_4567_EXECUTION_FLOOR=22
+   BASELINE_STATUS=CERTIFIED
+   MULTIPROCESS_WORKERS=4
+   HOST1_EXPERIMENT=PASS
+   DETERMINISTIC_CANONICAL_REPLAY=PASS
+   RESULT_VERIFICATION=PASS
+   HOST1_RUN=PASS
+
+3. Result files:
+
+   results\canonical_result.v2.json   deterministic content only
+   results\run_metadata.v2.json       platform, PIDs, timings
+
+4. Verify again without rerunning:
+
+   .\powershell\Verify-Host1-Results.ps1

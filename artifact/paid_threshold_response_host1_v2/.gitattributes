@@ -1,0 +1,5 @@
+﻿# The extracted/ subtree must stay byte-identical to frozen/ptr_host1_v2.zip,
+# which verify_ptr_host1_v2.mjs checks entry by entry. Any end-of-line
+# normalisation by Git would break that comparison on a Linux checkout, so no
+# file in this module is treated as text.
+* -text

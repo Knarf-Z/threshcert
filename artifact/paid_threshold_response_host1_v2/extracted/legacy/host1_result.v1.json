@@ -1,0 +1,1802 @@
+{
+  "ablations": {
+    "B1_wrong_buyer": {
+      "execution": {
+        "aggregate_valid": true,
+        "buyer": "host1-buyer",
+        "gateway_accepted": false,
+        "ledger": {
+          "buyer": "host1-buyer",
+          "buyer_debit": 28,
+          "credits_total": 10,
+          "deposit": 28,
+          "deposit_source": "buyer",
+          "named_buyer_net_outflow": 10,
+          "order_id": "ablation-B1_wrong_buyer",
+          "refund_to_buyer": 18,
+          "reimbursement_to_buyer": 0,
+          "responses": [
+            {
+              "credit_step": 1,
+              "operator_id": 1,
+              "price": 1,
+              "proof_valid": true,
+              "release_step": 2,
+              "response_hash": "88d819efb25c2f4a8ad37c10e1f5f2cc13f32f26e548fbf5bb9e39bd83c7f004",
+              "route": "paid_response",
+              "usable": true
+            },
+            {
+              "credit_step": 3,
+              "operator_id": 2,
+              "price": 2,
+              "proof_valid": true,
+              "release_step": 4,
+              "response_hash": "69766b2886f9a4b61b7a93be79625b00f2bec160c8bca80678c86b6f11a7dce5",
+              "route": "paid_response",
+              "usable": true
+            },
+            {
+              "credit_step": 5,
+              "operator_id": 3,
+              "price": 3,
+              "proof_valid": true,
+              "release_step": 6,
+              "response_hash": "db26ced6d56f3e194d2eb02ddad00cb88ba431253416deac85d826269430bc2b",
+              "route": "paid_response",
+              "usable": true
+            },
+            {
+              "credit_step": 7,
+              "operator_id": 4,
+              "price": 4,
+              "proof_valid": true,
+              "release_step": 8,
+              "response_hash": "90dada113e2f5a199df7624259c7e9c99afe7cbbca2eae00c047e86e38f1feb0",
+              "route": "paid_response",
+              "usable": true
+            }
+          ],
+          "sponsor_funding": 0,
+          "success_step": null
+        },
+        "mode": "in_process",
+        "order_id": "ablation-B1_wrong_buyer",
+        "plaintext": "0x2698ce3cf40e01d128c167287d2702c67fde2862916c1fefdaf2f3fd41990a02c24226aff0cd3b8012e2ee3fdbeda951cd9b03e127048f0de1c072667d4c33dbed9453aef18e04a9d8b6e5890bffa97a44f77225106d649812441e62efce47822eac779daf77290858d71725c04edfa5f513f09bdfa941aa0f7782f248b7ff0648891b31f4d612ad8e53a922eada5989dc209d64cea5e2321efb994c848c28b53bc5bfc4b1fc16e2ed3d98ac27173a26ec0027757616fa6b144903de50c894c2c0255161126cb833feedffbcf1816009a7175d6a7b6c48081fc605f1d2e179922d2c0e422e8b5274ba75a6178c666b3171030133417bafb3e479c7c12575574",
+        "prices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "resource": "encrypted-mempool-early-plaintext-token",
+        "responder_ids": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "response_order": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "threshold": 4,
+        "worker_pids": []
+      },
+      "report": {
+        "certificate": 0,
+        "exact_observed_outflow": 10,
+        "gates": {
+          "B1": {
+            "passed": false,
+            "reason": "usable delivery not established"
+          },
+          "B2": {
+            "passed": true,
+            "reason": "deposit funded by named buyer"
+          },
+          "B3": {
+            "passed": false,
+            "reason": "usable response released before irreversible credit"
+          },
+          "B4": {
+            "passed": true,
+            "reason": "refund and reimbursement closure exact"
+          },
+          "B5": {
+            "passed": true,
+            "reason": "all used responses follow the declared paid route"
+          }
+        },
+        "status": "ATTACKER_PAYMENT_NOT_CERTIFIED"
+      }
+    },
+    "B2_sponsor_funded": {
+      "execution": {
+        "aggregate_valid": true,
+        "buyer": "host1-buyer",
+        "gateway_accepted": true,
+        "ledger": {
+          "buyer": "host1-buyer",
+          "buyer_debit": 0,
+          "credits_total": 10,
+          "deposit": 28,
+          "deposit_source": "sponsor",
+          "named_buyer_net_outflow": 0,
+          "order_id": "ablation-B2_sponsor_funded",
+          "refund_to_buyer": 18,
+          "reimbursement_to_buyer": 0,
+          "responses": [
+            {
+              "credit_step": 1,
+              "operator_id": 1,
+              "price": 1,
+              "proof_valid": true,
+              "release_step": 2,
+              "response_hash": "9a59a3270d341fd91d631396a2ade0c3e34df8205d3e7bf3d9de77f6a8fe93b2",
+              "route": "paid_response",
+              "usable": true
+            },
+            {
+              "credit_step": 3,
+              "operator_id": 2,
+              "price": 2,
+              "proof_valid": true,
+              "release_step": 4,
+              "response_hash": "c011b9337b7356ab65b721a2809f6c84d2a013cc0d13f12c10e2f272d09f81c7",
+              "route": "paid_response",
+              "usable": true
+            },
+            {
+              "credit_step": 5,
+              "operator_id": 3,
+              "price": 3,
+              "proof_valid": true,
+              "release_step": 6,
+              "response_hash": "8751e0aa327a26c45e6e0dc6c86f07fd17fa2782332b30863e02e8e7ebaa800f",
+              "route": "paid_response",
+              "usable": true
+            },
+            {
+              "credit_step": 7,
+              "operator_id": 4,
+              "price": 4,
+              "proof_valid": true,
+              "release_step": 8,
+              "response_hash": "5ee11de28af8e70b2f5ad7f51c857e7c1f439b4ade1c5335a7cc0988bd4bf11c",
+              "route": "paid_response",
+              "usable": true
+            }
+          ],
+          "sponsor_funding": 28,
+          "success_step": 9
+        },
+        "mode": "in_process",
+        "order_id": "ablation-B2_sponsor_funded",
+        "plaintext": "0xbf9f9d6efd69202eaf184eec48a933aa4e1a5ab94f1d41bbe2223413cbe68b2da0d7239a86caea5d790dc21932ef76997daa1b658b3012ba10a37a70b84cb035c6e50244371e02f4a0ccadf080f12309f643aaacaea556500eb07b161d36df38d3880879c7d59055dcf672a03fe0f2358f0fe1bd944b6b53fc4e6eb014c086055330852febd7c041e9105959d34ea4bbbdd4819dd9abeaaa6ed31ffdfd6e8d386a1bce868dacb4120905da46d97856cf9d08c085cd034f4a6502a6d4267b5f1e95557067690e93dd7a4b54d5eaaafd50e24a13da9cb95b0d73885b1a83359dc2e7a8fc554180ee6db0c9e48cb3f008cca1ac0b81106f460d1bac39766d2abc99",
+        "prices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "resource": "encrypted-mempool-early-plaintext-token",
+        "responder_ids": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "response_order": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "threshold": 4,
+        "worker_pids": []
+      },
+      "report": {
+        "certificate": 0,
+        "exact_observed_outflow": 0,
+        "gates": {
+          "B1": {
+            "passed": true,
+            "reason": "valid threshold plaintext consumed by the named buyer"
+          },
+          "B2": {
+            "passed": false,
+            "reason": "buyer funding provenance failed"
+          },
+          "B3": {
+            "passed": true,
+            "reason": "credit precedes every released partial"
+          },
+          "B4": {
+            "passed": false,
+            "reason": "netting/return closure failed"
+          },
+          "B5": {
+            "passed": true,
+            "reason": "all used responses follow the declared paid route"
+          }
+        },
+        "status": "ATTACKER_PAYMENT_NOT_CERTIFIED"
+      }
+    },
+    "B3_early_release": {
+      "execution": {
+        "aggregate_valid": true,
+        "buyer": "host1-buyer",
+        "gateway_accepted": true,
+        "ledger": {
+          "buyer": "host1-buyer",
+          "buyer_debit": 28,
+          "credits_total": 10,
+          "deposit": 28,
+          "deposit_source": "buyer",
+          "named_buyer_net_outflow": 10,
+          "order_id": "ablation-B3_early_release",
+          "refund_to_buyer": 18,
+          "reimbursement_to_buyer": 0,
+          "responses": [
+            {
+              "credit_step": null,
+              "operator_id": 1,
+              "price": 1,
+              "proof_valid": true,
+              "release_step": 1,
+              "response_hash": "f92e7852ca56d921de900b3a5af71c4a8d487084cde5490fa4aa5d89cd121736",
+              "route": "early_release",
+              "usable": true
+            },
+            {
+              "credit_step": null,
+              "operator_id": 2,
+              "price": 2,
+              "proof_valid": true,
+              "release_step": 2,
+              "response_hash": "9b17347806ac5ab2015685a010aa05e2aad880bddcc1798b384febd648926949",
+              "route": "early_release",
+              "usable": true
+            },
+            {
+              "credit_step": null,
+              "operator_id": 3,
+              "price": 3,
+              "proof_valid": true,
+              "release_step": 3,
+              "response_hash": "06c2a4d22afa5e08178edd7ac41a2a5d7336526d88d924548360b4b944b766c3",
+              "route": "early_release",
+              "usable": true
+            },
+            {
+              "credit_step": null,
+              "operator_id": 4,
+              "price": 4,
+              "proof_valid": true,
+              "release_step": 4,
+              "response_hash": "5e262f448d97de34088124d1034e561da54cca53f4bc13ae36f81e5d55f8a5b8",
+              "route": "early_release",
+              "usable": true
+            }
+          ],
+          "sponsor_funding": 0,
+          "success_step": 5
+        },
+        "mode": "in_process",
+        "order_id": "ablation-B3_early_release",
+        "plaintext": "0x41f75a338567af69cafb8b29fb0fc29b5796662208e3e2056a085a53e89daf2cac66f6c36528e4678a8eea0661cc2ece06a9545c1882ef4a17bd9ff640ad12391744f3e1ad78fa4d1282ea197821bae0bcfae6f9c47067e00216f5180df1629d93528828158be6d986e196616724f746e47d9717975118c1f1b84938b6bf5ceed31643355a1cdbc06e2329ef65f25c8189b934c2df7ff50a03856c60132f9c7c1e6bb4f94e8f2e2cb91199c804b4ac573ecf6272777d0df8f1bed6d2fc028cc9d0e5504c43a9058ce532a6dea856a5b6c5024b6ede9695d795a6db2ac0816f41e59187317f83e275def297929b381764e968467cab8ae98393f384cf8ab31c0b",
+        "prices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "resource": "encrypted-mempool-early-plaintext-token",
+        "responder_ids": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "response_order": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "threshold": 4,
+        "worker_pids": []
+      },
+      "report": {
+        "certificate": 0,
+        "exact_observed_outflow": 10,
+        "gates": {
+          "B1": {
+            "passed": true,
+            "reason": "valid threshold plaintext consumed by the named buyer"
+          },
+          "B2": {
+            "passed": true,
+            "reason": "deposit funded by named buyer"
+          },
+          "B3": {
+            "passed": false,
+            "reason": "usable response released before irreversible credit"
+          },
+          "B4": {
+            "passed": true,
+            "reason": "refund and reimbursement closure exact"
+          },
+          "B5": {
+            "passed": false,
+            "reason": "unmapped or bypass response route remains"
+          }
+        },
+        "status": "ATTACKER_PAYMENT_NOT_CERTIFIED"
+      }
+    },
+    "B4_full_reimbursement": {
+      "execution": {
+        "aggregate_valid": true,
+        "buyer": "host1-buyer",
+        "gateway_accepted": true,
+        "ledger": {
+          "buyer": "host1-buyer",
+          "buyer_debit": 28,
+          "credits_total": 10,
+          "deposit": 28,
+          "deposit_source": "buyer",
+          "named_buyer_net_outflow": 0,
+          "order_id": "ablation-B4_full_reimbursement",
+          "refund_to_buyer": 18,
+          "reimbursement_to_buyer": 10,
+          "responses": [
+            {
+              "credit_step": 1,
+              "operator_id": 1,
+              "price": 1,
+              "proof_valid": true,
+              "release_step": 2,
+              "response_hash": "e78c3def2ca505b5eccfdf222859f9e743acf0d71874945e045f05ab1f2f00f3",
+              "route": "paid_response",
+              "usable": true
+            },
+            {
+              "credit_step": 3,
+              "operator_id": 2,
+              "price": 2,
+              "proof_valid": true,
+              "release_step": 4,
+              "response_hash": "4ec7e45b70452287e5a9ff326c6fd4a7df96dae5dd6a2b6a92e2632d252913b8",
+              "route": "paid_response",
+              "usable": true
+            },
+            {
+              "credit_step": 5,
+              "operator_id": 3,
+              "price": 3,
+              "proof_valid": true,
+              "release_step": 6,
+              "response_hash": "b49d2af0f5f00de2701ba387351fb381619fdd09a6491524431a171c2b087c11",
+              "route": "paid_response",
+              "usable": true
+            },
+            {
+              "credit_step": 7,
+              "operator_id": 4,
+              "price": 4,
+              "proof_valid": true,
+              "release_step": 8,
+              "response_hash": "a578238af2dbfd851db4f0c2ba7ac996238d6c3d59b9a8731f7973308d9e5f09",
+              "route": "paid_response",
+              "usable": true
+            }
+          ],
+          "sponsor_funding": 0,
+          "success_step": 9
+        },
+        "mode": "in_process",
+        "order_id": "ablation-B4_full_reimbursement",
+        "plaintext": "0x1ed64883abd1a9dd211605af1f3cd4d2ccf64cd609dcfe10fb9ffb2ed5956f477811e40a537ece105c5b78831e00408d48b92820d8b1fa153cd600ac834a8f255a738897250bceb963da7a38232c803d895d2e02a52616e08b42725e9a694e3208434b2fc5a4cb1487e749d1cc78028c9bf8c22a4a5615f4c626054abdd1b85bcf71a72a5bec71f392f7955dc3be6d4261560e378612f1756b06188d2c3f3738e625bffd741c0238b2e65191f99af573de5ee43097bbf01ecdf70c44374f546bc63f02d1c497460802038a2e13511e08483f6fb83b4f72ab5a7728696af80815cbec8bea9aa7988cd43810d1d3aaf768a4bf814a5552851d8ad49c503218c525",
+        "prices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "resource": "encrypted-mempool-early-plaintext-token",
+        "responder_ids": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "response_order": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "threshold": 4,
+        "worker_pids": []
+      },
+      "report": {
+        "certificate": 0,
+        "exact_observed_outflow": 0,
+        "gates": {
+          "B1": {
+            "passed": true,
+            "reason": "valid threshold plaintext consumed by the named buyer"
+          },
+          "B2": {
+            "passed": true,
+            "reason": "deposit funded by named buyer"
+          },
+          "B3": {
+            "passed": true,
+            "reason": "credit precedes every released partial"
+          },
+          "B4": {
+            "passed": false,
+            "reason": "netting/return closure failed"
+          },
+          "B5": {
+            "passed": true,
+            "reason": "all used responses follow the declared paid route"
+          }
+        },
+        "status": "ATTACKER_PAYMENT_NOT_CERTIFIED"
+      }
+    },
+    "B5_bypass_route": {
+      "execution": {
+        "aggregate_valid": true,
+        "buyer": "host1-buyer",
+        "gateway_accepted": true,
+        "ledger": {
+          "buyer": "host1-buyer",
+          "buyer_debit": 28,
+          "credits_total": 0,
+          "deposit": 28,
+          "deposit_source": "buyer",
+          "named_buyer_net_outflow": 0,
+          "order_id": "ablation-B5_bypass_route",
+          "refund_to_buyer": 28,
+          "reimbursement_to_buyer": 0,
+          "responses": [
+            {
+              "credit_step": null,
+              "operator_id": 1,
+              "price": 0,
+              "proof_valid": true,
+              "release_step": 1,
+              "response_hash": "d8b668edd1a27b5c81eb0081187fe4c569d791616ae2347a82729f53f3ff0117",
+              "route": "bypass_response",
+              "usable": true
+            },
+            {
+              "credit_step": null,
+              "operator_id": 2,
+              "price": 0,
+              "proof_valid": true,
+              "release_step": 2,
+              "response_hash": "2b13e211a4ea405301805f8406257a1dfe302b0a6365017fbe4d60d8b359801a",
+              "route": "bypass_response",
+              "usable": true
+            },
+            {
+              "credit_step": null,
+              "operator_id": 3,
+              "price": 0,
+              "proof_valid": true,
+              "release_step": 3,
+              "response_hash": "9af8147df33d804faa00b9c6d29f5876753528bba57348e2bf679bdc6df2a47b",
+              "route": "bypass_response",
+              "usable": true
+            },
+            {
+              "credit_step": null,
+              "operator_id": 4,
+              "price": 0,
+              "proof_valid": true,
+              "release_step": 4,
+              "response_hash": "a697fb620bdd5163d6c3aea4e3632353b54dd7527cf3feebd478c83dd6e204ae",
+              "route": "bypass_response",
+              "usable": true
+            }
+          ],
+          "sponsor_funding": 0,
+          "success_step": 5
+        },
+        "mode": "in_process",
+        "order_id": "ablation-B5_bypass_route",
+        "plaintext": "0xc7eaad808214e24cc5a1874186aa3d65787ecd536313dc1814e897f8b2259b5418483af11e4dc79c3d8bd0390f6a2dc711a1e9502f1266de9d4c3531219c6633ea384e6a11b65c127e2d8db3bd039a589e887d4c81aafe3380d3b486eacf7fa24ee82c4349be6e23c78638b97f6caab6f010d4e78ab8bbd89017065ff9151a4c0c47d9617c1f0bc098f929c0a754c7d3b839bb62d716cf494b77b212890be8a9cb73a22541a2e663c37a99636019d40c2d2ad9d19dea6fc89e7d0edd34cbb91936d85e78da818ea0112551f000ea2bbe48e0e6a31640a0db79c54646509f6d2945a50e778704aab7fa47a706d511a774a39ed7046e6400c8f0416a11158c544d",
+        "prices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "resource": "encrypted-mempool-early-plaintext-token",
+        "responder_ids": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "response_order": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "threshold": 4,
+        "worker_pids": []
+      },
+      "report": {
+        "certificate": 0,
+        "exact_observed_outflow": 0,
+        "gates": {
+          "B1": {
+            "passed": true,
+            "reason": "valid threshold plaintext consumed by the named buyer"
+          },
+          "B2": {
+            "passed": true,
+            "reason": "deposit funded by named buyer"
+          },
+          "B3": {
+            "passed": false,
+            "reason": "usable response released before irreversible credit"
+          },
+          "B4": {
+            "passed": false,
+            "reason": "netting/return closure failed"
+          },
+          "B5": {
+            "passed": false,
+            "reason": "unmapped or bypass response route remains"
+          }
+        },
+        "status": "ATTACKER_PAYMENT_NOT_CERTIFIED"
+      }
+    }
+  },
+  "adoption_threshold": [
+    {
+      "certificate": 0,
+      "positive": false,
+      "positive_members": 0,
+      "prices": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "certificate": 0,
+      "positive": false,
+      "positive_members": 1,
+      "prices": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "certificate": 0,
+      "positive": false,
+      "positive_members": 2,
+      "prices": [
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "certificate": 0,
+      "positive": false,
+      "positive_members": 3,
+      "prices": [
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "certificate": 1,
+      "positive": true,
+      "positive_members": 4,
+      "prices": [
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "certificate": 2,
+      "positive": true,
+      "positive_members": 5,
+      "prices": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "certificate": 3,
+      "positive": true,
+      "positive_members": 6,
+      "prices": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "certificate": 4,
+      "positive": true,
+      "positive_members": 7,
+      "prices": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  ],
+  "baseline": {
+    "elapsed_ms": 631.5038000029745,
+    "execution": {
+      "aggregate_valid": true,
+      "buyer": "host1-buyer",
+      "gateway_accepted": true,
+      "ledger": {
+        "buyer": "host1-buyer",
+        "buyer_debit": 28,
+        "credits_total": 10,
+        "deposit": 28,
+        "deposit_source": "buyer",
+        "named_buyer_net_outflow": 10,
+        "order_id": "baseline-4of7",
+        "refund_to_buyer": 18,
+        "reimbursement_to_buyer": 0,
+        "responses": [
+          {
+            "credit_step": 1,
+            "operator_id": 1,
+            "price": 1,
+            "proof_valid": true,
+            "release_step": 2,
+            "response_hash": "52181b22c3a78461dea429a4f7c3c3be695680e112683fd884a3d0643ef19af1",
+            "route": "paid_response",
+            "usable": true
+          },
+          {
+            "credit_step": 3,
+            "operator_id": 2,
+            "price": 2,
+            "proof_valid": true,
+            "release_step": 4,
+            "response_hash": "9542e6edec5c1388c552b58ad49e7c2bd72ddbc96752c8450e4c7611e09cfdfd",
+            "route": "paid_response",
+            "usable": true
+          },
+          {
+            "credit_step": 5,
+            "operator_id": 3,
+            "price": 3,
+            "proof_valid": true,
+            "release_step": 6,
+            "response_hash": "5d8d05212d3f8ac47289b4441cce1cf88e45eb33542a1af8711185a8cd9e675e",
+            "route": "paid_response",
+            "usable": true
+          },
+          {
+            "credit_step": 7,
+            "operator_id": 4,
+            "price": 4,
+            "proof_valid": true,
+            "release_step": 8,
+            "response_hash": "1c3f2ef0624c03bb76141f4978c9047d218570eb894a0e40cd43e760f7652b34",
+            "route": "paid_response",
+            "usable": true
+          }
+        ],
+        "sponsor_funding": 0,
+        "success_step": 9
+      },
+      "mode": "in_process",
+      "order_id": "baseline-4of7",
+      "plaintext": "0xa577a6141ad261bd625b45d4de326919f0c1f5b2e4dad1e1fe2d02ac6319bd0c497c967d1a2be59edc6bf26ee4940691b43eb6b1e05a289c5f62fbbbd6973a48331ae1bc54b7a7abd975093a33d1e60665864217dd7ea376d688e9c7acbf700017824770023355185d1d0e250550524b76936759cd138239fcb3479abc74a3cc203f4f1eed8e72355111ab6bba727c769d2273025510a40bfb5bcede065bb4bf0a3bf6633ce5b714d04dd97d031202ae777b452811e6e6bdc720939cd265644c920fc933930f37767f3555760b285b5eee4963eed1f577237d2be679d33959a0d2ab3d9a2bcad48b1b7ae01b3b04c559d9cb262b5217dc7c86bc2f08823492e6",
+      "prices": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "resource": "encrypted-mempool-early-plaintext-token",
+      "responder_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "response_order": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "threshold": 4,
+      "worker_pids": []
+    },
+    "report": {
+      "certificate": 10,
+      "exact_observed_outflow": 10,
+      "gates": {
+        "B1": {
+          "passed": true,
+          "reason": "valid threshold plaintext consumed by the named buyer"
+        },
+        "B2": {
+          "passed": true,
+          "reason": "deposit funded by named buyer"
+        },
+        "B3": {
+          "passed": true,
+          "reason": "credit precedes every released partial"
+        },
+        "B4": {
+          "passed": true,
+          "reason": "refund and reimbursement closure exact"
+        },
+        "B5": {
+          "passed": true,
+          "reason": "all used responses follow the declared paid route"
+        }
+      },
+      "status": "CERTIFIED"
+    }
+  },
+  "checks": {
+    "adoption_threshold_correct": true,
+    "all_ablations_not_certified": true,
+    "all_coalitions_exact": true,
+    "all_minimum_orders_exact": true,
+    "baseline_exact": true,
+    "baseline_positive": true,
+    "minimum_observed_matches_theory": true,
+    "multiprocess_certificate_exact": true,
+    "multiprocess_realized": true,
+    "weighted_dp_matches_bruteforce": true
+  },
+  "coalition_exhaustion": {
+    "all_exact": true,
+    "count": 35,
+    "entries": [
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "exact_match": true,
+        "expected": 10,
+        "gateway_accepted": true,
+        "observed": 10
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          1,
+          2,
+          3,
+          5
+        ],
+        "exact_match": true,
+        "expected": 11,
+        "gateway_accepted": true,
+        "observed": 11
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          1,
+          2,
+          3,
+          6
+        ],
+        "exact_match": true,
+        "expected": 12,
+        "gateway_accepted": true,
+        "observed": 12
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          1,
+          2,
+          3,
+          7
+        ],
+        "exact_match": true,
+        "expected": 13,
+        "gateway_accepted": true,
+        "observed": 13
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          1,
+          2,
+          4,
+          5
+        ],
+        "exact_match": true,
+        "expected": 12,
+        "gateway_accepted": true,
+        "observed": 12
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          1,
+          2,
+          4,
+          6
+        ],
+        "exact_match": true,
+        "expected": 13,
+        "gateway_accepted": true,
+        "observed": 13
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          1,
+          2,
+          4,
+          7
+        ],
+        "exact_match": true,
+        "expected": 14,
+        "gateway_accepted": true,
+        "observed": 14
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          1,
+          2,
+          5,
+          6
+        ],
+        "exact_match": true,
+        "expected": 14,
+        "gateway_accepted": true,
+        "observed": 14
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          1,
+          2,
+          5,
+          7
+        ],
+        "exact_match": true,
+        "expected": 15,
+        "gateway_accepted": true,
+        "observed": 15
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          1,
+          2,
+          6,
+          7
+        ],
+        "exact_match": true,
+        "expected": 16,
+        "gateway_accepted": true,
+        "observed": 16
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          1,
+          3,
+          4,
+          5
+        ],
+        "exact_match": true,
+        "expected": 13,
+        "gateway_accepted": true,
+        "observed": 13
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          1,
+          3,
+          4,
+          6
+        ],
+        "exact_match": true,
+        "expected": 14,
+        "gateway_accepted": true,
+        "observed": 14
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          1,
+          3,
+          4,
+          7
+        ],
+        "exact_match": true,
+        "expected": 15,
+        "gateway_accepted": true,
+        "observed": 15
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          1,
+          3,
+          5,
+          6
+        ],
+        "exact_match": true,
+        "expected": 15,
+        "gateway_accepted": true,
+        "observed": 15
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "exact_match": true,
+        "expected": 16,
+        "gateway_accepted": true,
+        "observed": 16
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          1,
+          3,
+          6,
+          7
+        ],
+        "exact_match": true,
+        "expected": 17,
+        "gateway_accepted": true,
+        "observed": 17
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          1,
+          4,
+          5,
+          6
+        ],
+        "exact_match": true,
+        "expected": 16,
+        "gateway_accepted": true,
+        "observed": 16
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          1,
+          4,
+          5,
+          7
+        ],
+        "exact_match": true,
+        "expected": 17,
+        "gateway_accepted": true,
+        "observed": 17
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          1,
+          4,
+          6,
+          7
+        ],
+        "exact_match": true,
+        "expected": 18,
+        "gateway_accepted": true,
+        "observed": 18
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          1,
+          5,
+          6,
+          7
+        ],
+        "exact_match": true,
+        "expected": 19,
+        "gateway_accepted": true,
+        "observed": 19
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "exact_match": true,
+        "expected": 14,
+        "gateway_accepted": true,
+        "observed": 14
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          2,
+          3,
+          4,
+          6
+        ],
+        "exact_match": true,
+        "expected": 15,
+        "gateway_accepted": true,
+        "observed": 15
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          2,
+          3,
+          4,
+          7
+        ],
+        "exact_match": true,
+        "expected": 16,
+        "gateway_accepted": true,
+        "observed": 16
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          2,
+          3,
+          5,
+          6
+        ],
+        "exact_match": true,
+        "expected": 16,
+        "gateway_accepted": true,
+        "observed": 16
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          2,
+          3,
+          5,
+          7
+        ],
+        "exact_match": true,
+        "expected": 17,
+        "gateway_accepted": true,
+        "observed": 17
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          2,
+          3,
+          6,
+          7
+        ],
+        "exact_match": true,
+        "expected": 18,
+        "gateway_accepted": true,
+        "observed": 18
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          2,
+          4,
+          5,
+          6
+        ],
+        "exact_match": true,
+        "expected": 17,
+        "gateway_accepted": true,
+        "observed": 17
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          2,
+          4,
+          5,
+          7
+        ],
+        "exact_match": true,
+        "expected": 18,
+        "gateway_accepted": true,
+        "observed": 18
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          2,
+          4,
+          6,
+          7
+        ],
+        "exact_match": true,
+        "expected": 19,
+        "gateway_accepted": true,
+        "observed": 19
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          2,
+          5,
+          6,
+          7
+        ],
+        "exact_match": true,
+        "expected": 20,
+        "gateway_accepted": true,
+        "observed": 20
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "exact_match": true,
+        "expected": 18,
+        "gateway_accepted": true,
+        "observed": 18
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          3,
+          4,
+          5,
+          7
+        ],
+        "exact_match": true,
+        "expected": 19,
+        "gateway_accepted": true,
+        "observed": 19
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          3,
+          4,
+          6,
+          7
+        ],
+        "exact_match": true,
+        "expected": 20,
+        "gateway_accepted": true,
+        "observed": 20
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          3,
+          5,
+          6,
+          7
+        ],
+        "exact_match": true,
+        "expected": 21,
+        "gateway_accepted": true,
+        "observed": 21
+      },
+      {
+        "aggregate_valid": true,
+        "certificate": 10,
+        "coalition": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "exact_match": true,
+        "expected": 22,
+        "gateway_accepted": true,
+        "observed": 22
+      }
+    ],
+    "observed_min": 10
+  },
+  "config": {
+    "buyer": "host1-buyer",
+    "committee_size": 7,
+    "resource": "encrypted-mempool-early-plaintext-token",
+    "response_floors": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "seed": 20260805,
+    "threshold": 4
+  },
+  "crypto": {
+    "key_generation_ms": 129.84439999854658,
+    "public_key": "0xac8f03a646ecc4fc5505a9f3e0ddaa7cb9495113fb2724bda5b19f321abf57aa716c8344eac64d521e1e7d7ca164942774a71cc76620b4c8b989e3143af287e5d50cabcdcd0b41357f74055deec6ed6dc496585bdcbce0d0c02834d6f329488d685e866d717833b232fd6b1a8afd0f3f4b61ff6037cf5bea633e223bb846d776e24687486240e89b907760af2ac1af6358607213671018a37ef9bbc19023683edf52bd4519fe83e5cfc72018a4ed657310b38afd489cfd32a9439925d1f9773b287064dc2171c0e2cfa3ccca64764ba8fdb9a1ae255cbcde97a6521a86a9e89b0c93c1640614c545431787824380f69f6cc01375240bfed61d0187b202a86a5d",
+    "public_shares": [
+      "0x1f28aee166a8de5d42bb9e15b310772ad29c0a3f6d9e6ec3fe5afce1800c8dffe71f61ba857b49e4e17247a2e980835fe5cdc41d2bfe45527d29e33be682888f3ebeacaf6cd2825927d141f5f4d16a65c338e74f26d619e3d1fa81e1c4bb96d4c2601b121e9970bb19561dedbba60a792e89b2ec22d966fd4a55cdc97b6fa0de87844f927d62834479868199fe3b6903aa920a8e4d8cfdf3303d42b146e4e92f67edd5b1cbc314239e2cb16e5936222a0f587b9ed1a8cbc2553f4ffca1549414049696e1a5c198647957f54e04b0918ad639738e33a552aadf2123258f3b0fa578193cf765772a2c142367b74e7dd209da304931b8e2b43d040912230ad00c35",
+      "0x90a5c56f360d140969698f71e68ec55296370a342b074b2ca9b40de1e0e3eda1225af87f4c2617c93b534531732c5f2036510a7f27fe513c33f2fc2d8be0edda2af1f30eb7bc9ad7be170df9d4cacaa3a6e7283b742d6a94a50d72e8ff178b1fda3d886d5171a91ebcf16b7bfea2b509e20614d7d313d21dfc0aaf64d9caf9cd068f453b66079590a6b6623a18c64b678e582f2ee85548e689e39c46fa80e46e1d43eed7106ff479bc96b71b0a6635ce239cacf09b76e47afbd0e98504089880aa0938b4a9987ba3f21726f5645db2a3bbd4cdbf5b3a82758525baf075ca848c9fab6649cabab3a5ed6df74af8e5e818869b5c1ca91a7f465a815d6791120672",
+      "0x9391cb72af1c656bc74d56ac32c3e1d223218b1bebbf73565ed5fc1c48218876aa62b85b038b86f6abcdf17a8140384f6e863fc28b666402875765cdbb836cf1b6e214fff7203b9d160dd6d5a7e754a3ac2ddf702c02fdf5dd195e573466fff0ea2a12c80c6a689757061ba0c61f3c3ff09ba35e4fa600c4b3eacf4480dc2c54be19c91f20377a85b7e005a346ae8a518d39887e7ec2f07c16661d4cd60981a12aebb6f50ffc9460f1f6812991ef1c2e377cd7f735880beaa21c80e3021d798ba0a9816e0baeb8023852cf7cb2208728918deab21cdd9413082f15551a4cc40c7b40d11b7ff46b410a3fc44206d1729d7408cb6d732036ee2ad09bfa7cdc5fe8",
+      "0xbb3f2eef93f1545047531f55adb6dadebb5d4ebc8e11f57b424d8d46dd095bae93946cad631384843fdb576f7cc229874c945e5c4fa25e5db62bf2db0ca46a1c0e0a2b1e3058b2056cb57417121a447cd9822c3fab582d5b630b8e1153c039bc22490665726b12d86480b474613c23d99772b7f289337964a8ab4ac07c11cfb0fd9d977a62b933bca4bd2d32cecf739b82a20a989b8217487649e09f14c0896fbacb4fadab50f34ab10c45e5f288d0d40c617fde9dd04c378c0168505a03995b46c75d79a3656b25317a6a02cedfa3abc8c080d6c8d225889504712322f9fcfc060ce4c980e361e097315fc248c454e7fc2c8aeda1113224f8fbb94c5c57c791",
+      "0xd17fe5802cfd5234a9204f59b2897cbd8d70b6cc143f7abe18fbabdebaac0bd4273cf9d12cc7cc35663ac53f42191471b3c6d47df13efd8e31fdc464df11ca49d0edbf3b3a272e7c09402eb94af1286cfb891adeeea465301bb1b8ea9bfb28155658e8207c9ddc6df34d89a352289084c17a1006446b8aa90e9bc0f0c1e83ec6950853dc4ca02fc863a3f71d749e458335b7d2622f0b343f504ea335ee27f38e1788a85acec7a065aa85c2c42b5c3fcb7f29c27b5629c5493f8de26bbb83db2c325f2524cdcf79f0458390ae2a72a84e8c8c78c3f284ab4682167cf181976fc087aa048ef8b36aa5fb1e3a8ac232668e121d54e76084e1906fabcc33527e1148",
+      "0x5011bf227e7f37845ed9ded4cf7451b0df7750b677ba6f657c6c09c56b8bdeff9a8bd8f6bb4adfec55b8179c17c4e97ed4b60dc0aad74771b8cee225039d0b24d594420f398bc648239edcf5861f15b8d8eb8960c2b7e3af368b40932f49bf2f7a0ed0f44906e2f4d6c2f4361ada01ea65dee165820727bbbab1627435279ca172b4f91bd420aac27488532f10b75ca7c141a3614292909c82ec753bf233fe39919a488e4b0241817aef1db7ecf70b927840f042142ad1fd90ac87b8a42f38818606800ab31842ac9950f663226e4a26e9ef492c6109b8e75b04efce091b0677d550beb9f9ae27176416f20e9e4110daa100c52e34d73e4358840e526c85764e",
+      "0x199abceed06da50e2f56abc90923caef55fbacf9565ff387ef5a5a6bcafbd5d419e757038a842bcf38c959149c71a4575665423b30279f76a50d158aa22db94d6496525d5feeea2ac8c7598b3b4cfbfb9d8bd6801a1d45ccbe3a0c0e371a806e302e552b5cff3b850b605ea76f066122ddee22c3c0cb5b8ef1604ed7fd938de15824596323337095cddd81203ce3e540d960ebe2ba622d863cbd6b4f413d7667cdeab3e266b0a25d75d1e57af50a0ff207ff69ed13c4d3648af4d09ec83ca3e027ebeb49b70059ced94bf83e4769643de31f75414a1a1ded063f5cba1d043409d88a8e5b0846dd567da6302068b77cd4783b67645cd4da6d80d311b23a38b5b4"
+    ],
+    "scheme": "Shamir threshold ElGamal over RFC3526 group14 with Chaum-Pedersen partial proofs"
+  },
+  "elapsed_ms": 8940.54959999994,
+  "minimum_coalition_orderings": {
+    "all_equal": true,
+    "count": 24,
+    "entries": [
+      {
+        "aggregate_valid": true,
+        "gateway_accepted": true,
+        "observed": 10,
+        "order": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "aggregate_valid": true,
+        "gateway_accepted": true,
+        "observed": 10,
+        "order": [
+          1,
+          2,
+          4,
+          3
+        ]
+      },
+      {
+        "aggregate_valid": true,
+        "gateway_accepted": true,
+        "observed": 10,
+        "order": [
+          1,
+          3,
+          2,
+          4
+        ]
+      },
+      {
+        "aggregate_valid": true,
+        "gateway_accepted": true,
+        "observed": 10,
+        "order": [
+          1,
+          3,
+          4,
+          2
+        ]
+      },
+      {
+        "aggregate_valid": true,
+        "gateway_accepted": true,
+        "observed": 10,
+        "order": [
+          1,
+          4,
+          2,
+          3
+        ]
+      },
+      {
+        "aggregate_valid": true,
+        "gateway_accepted": true,
+        "observed": 10,
+        "order": [
+          1,
+          4,
+          3,
+          2
+        ]
+      },
+      {
+        "aggregate_valid": true,
+        "gateway_accepted": true,
+        "observed": 10,
+        "order": [
+          2,
+          1,
+          3,
+          4
+        ]
+      },
+      {
+        "aggregate_valid": true,
+        "gateway_accepted": true,
+        "observed": 10,
+        "order": [
+          2,
+          1,
+          4,
+          3
+        ]
+      },
+      {
+        "aggregate_valid": true,
+        "gateway_accepted": true,
+        "observed": 10,
+        "order": [
+          2,
+          3,
+          1,
+          4
+        ]
+      },
+      {
+        "aggregate_valid": true,
+        "gateway_accepted": true,
+        "observed": 10,
+        "order": [
+          2,
+          3,
+          4,
+          1
+        ]
+      },
+      {
+        "aggregate_valid": true,
+        "gateway_accepted": true,
+        "observed": 10,
+        "order": [
+          2,
+          4,
+          1,
+          3
+        ]
+      },
+      {
+        "aggregate_valid": true,
+        "gateway_accepted": true,
+        "observed": 10,
+        "order": [
+          2,
+          4,
+          3,
+          1
+        ]
+      },
+      {
+        "aggregate_valid": true,
+        "gateway_accepted": true,
+        "observed": 10,
+        "order": [
+          3,
+          1,
+          2,
+          4
+        ]
+      },
+      {
+        "aggregate_valid": true,
+        "gateway_accepted": true,
+        "observed": 10,
+        "order": [
+          3,
+          1,
+          4,
+          2
+        ]
+      },
+      {
+        "aggregate_valid": true,
+        "gateway_accepted": true,
+        "observed": 10,
+        "order": [
+          3,
+          2,
+          1,
+          4
+        ]
+      },
+      {
+        "aggregate_valid": true,
+        "gateway_accepted": true,
+        "observed": 10,
+        "order": [
+          3,
+          2,
+          4,
+          1
+        ]
+      },
+      {
+        "aggregate_valid": true,
+        "gateway_accepted": true,
+        "observed": 10,
+        "order": [
+          3,
+          4,
+          1,
+          2
+        ]
+      },
+      {
+        "aggregate_valid": true,
+        "gateway_accepted": true,
+        "observed": 10,
+        "order": [
+          3,
+          4,
+          2,
+          1
+        ]
+      },
+      {
+        "aggregate_valid": true,
+        "gateway_accepted": true,
+        "observed": 10,
+        "order": [
+          4,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "aggregate_valid": true,
+        "gateway_accepted": true,
+        "observed": 10,
+        "order": [
+          4,
+          1,
+          3,
+          2
+        ]
+      },
+      {
+        "aggregate_valid": true,
+        "gateway_accepted": true,
+        "observed": 10,
+        "order": [
+          4,
+          2,
+          1,
+          3
+        ]
+      },
+      {
+        "aggregate_valid": true,
+        "gateway_accepted": true,
+        "observed": 10,
+        "order": [
+          4,
+          2,
+          3,
+          1
+        ]
+      },
+      {
+        "aggregate_valid": true,
+        "gateway_accepted": true,
+        "observed": 10,
+        "order": [
+          4,
+          3,
+          1,
+          2
+        ]
+      },
+      {
+        "aggregate_valid": true,
+        "gateway_accepted": true,
+        "observed": 10,
+        "order": [
+          4,
+          3,
+          2,
+          1
+        ]
+      }
+    ]
+  },
+  "multiprocess_smoke": {
+    "distinct_worker_pids": [
+      3228,
+      4980,
+      13204,
+      14112
+    ],
+    "execution": {
+      "aggregate_valid": true,
+      "buyer": "host1-buyer",
+      "gateway_accepted": true,
+      "ledger": {
+        "buyer": "host1-buyer",
+        "buyer_debit": 28,
+        "credits_total": 10,
+        "deposit": 28,
+        "deposit_source": "buyer",
+        "named_buyer_net_outflow": 10,
+        "order_id": "host1-seven-process-smoke",
+        "refund_to_buyer": 18,
+        "reimbursement_to_buyer": 0,
+        "responses": [
+          {
+            "credit_step": 1,
+            "operator_id": 1,
+            "price": 1,
+            "proof_valid": true,
+            "release_step": 2,
+            "response_hash": "b9f8b48a1c7ebc28e0e55dfc46ced3f413d6729b4a75585170b12c8558a5d2b4",
+            "route": "paid_response",
+            "usable": true
+          },
+          {
+            "credit_step": 3,
+            "operator_id": 2,
+            "price": 2,
+            "proof_valid": true,
+            "release_step": 4,
+            "response_hash": "a19632a2e64f3200daece1baa3c97b77a64834b61a4d876cd250832b9701f49e",
+            "route": "paid_response",
+            "usable": true
+          },
+          {
+            "credit_step": 5,
+            "operator_id": 3,
+            "price": 3,
+            "proof_valid": true,
+            "release_step": 6,
+            "response_hash": "d770edfbcb717cac432d3d1eaee2319c7d0831a3892fd9eb4ad7f14bc023e3d5",
+            "route": "paid_response",
+            "usable": true
+          },
+          {
+            "credit_step": 7,
+            "operator_id": 4,
+            "price": 4,
+            "proof_valid": true,
+            "release_step": 8,
+            "response_hash": "ed97b746a2f38d80cb9d391a8fa9fdfd8558b9f40ac123ad20257fb3c7906405",
+            "route": "paid_response",
+            "usable": true
+          }
+        ],
+        "sponsor_funding": 0,
+        "success_step": 9
+      },
+      "mode": "multiprocess",
+      "order_id": "host1-seven-process-smoke",
+      "plaintext": "0x99903c31f2c9975da7a1bb428c88394e9f7770001144eb4c17d1e19bfb1d4481e09e629dbf29fe737e5d531d25513011452327f96141ef96672026c627143e9f13ed8aa8b8e86f4f7814be228b6a374bc7ac2a6be8bb7af2f5ec2bae8031281bcb7f2870e90474696c832077bddfd11b6da5ade3fb38ed8b0cd772299214e7b2616b68adca4cecbe0ddb42d2c026f7135f9c7e499ad8e5356de09a9965b7d4b2f286273796397f24e5731586b8dbfc269ee5332aa6ba33940e6b09967fed8c38675ee42efd81a600d9f85fca79aeed46bed62df19478dfcad84cf98e0992750e0d5fe98f95f26f8687cd62f4607fabea85e46e97c2c13bec805ef821484ec71",
+      "prices": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "resource": "encrypted-mempool-early-plaintext-token",
+      "responder_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "response_order": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "threshold": 4,
+      "worker_pids": [
+        4980,
+        14112,
+        13204,
+        3228
+      ]
+    },
+    "report": {
+      "certificate": 10,
+      "exact_observed_outflow": 10,
+      "gates": {
+        "B1": {
+          "passed": true,
+          "reason": "valid threshold plaintext consumed by the named buyer"
+        },
+        "B2": {
+          "passed": true,
+          "reason": "deposit funded by named buyer"
+        },
+        "B3": {
+          "passed": true,
+          "reason": "credit precedes every released partial"
+        },
+        "B4": {
+          "passed": true,
+          "reason": "refund and reimbursement closure exact"
+        },
+        "B5": {
+          "passed": true,
+          "reason": "all used responses follow the declared paid route"
+        }
+      },
+      "status": "CERTIFIED"
+    }
+  },
+  "schema": "paid-threshold-response-host1/v1",
+  "scope": {
+    "claim": "finite-language named-buyer net-outflow certificate",
+    "deployment_wide": false,
+    "hardware_non_exportability_proved": false,
+    "operator_processes": 7,
+    "physical_hosts": 1,
+    "real_threshold_crypto": true,
+    "trusted_dealer": true
+  },
+  "theory_prediction": {
+    "certificate": 10,
+    "cheapest_responder_ids": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "formula": "sum of the q smallest per-member response floors"
+  },
+  "weighted_committee": {
+    "brute_force_certificate": 7,
+    "brute_force_coalition": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "dynamic_program_certificate": 7,
+    "match": true,
+    "prices": [
+      5,
+      2,
+      3,
+      1,
+      1,
+      4,
+      6
+    ],
+    "threshold": 6,
+    "weights": [
+      3,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1
+    ]
+  }
+}

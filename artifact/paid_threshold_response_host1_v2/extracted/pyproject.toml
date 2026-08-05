@@ -1,0 +1,9 @@
+[project]
+name = "paid-threshold-response-host1"
+version = "1.0.0"
+description = "Controlled finite-language positive threshold-payment certificate experiment"
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.ruff]
+line-length = 120

@@ -1,0 +1,61 @@
+name: Paid threshold response (host 1, v2)
+
+# The module claims a canonical result that is byte-identical across hosts, so
+# the point of running the same job on Linux and Windows is to make that claim
+# falsifiable: any platform-dependent serialisation would move the digest and
+# fail here.
+
+on:
+  push:
+    paths:
+      - "artifact/paid_threshold_response_host1_v2/**"
+      - ".github/workflows/ptr-host1-v2.yml"
+  pull_request:
+    paths:
+      - "artifact/paid_threshold_response_host1_v2/**"
+      - ".github/workflows/ptr-host1-v2.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: artifact/paid_threshold_response_host1_v2
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Record toolchain
+        run: |
+          node --version
+          python --version
+      - name: Verify frozen archive, replay and pinned claims
+        run: node verify_ptr_host1_v2.mjs
+      - name: Confirm the canonical digest is the one the paper pins
+        shell: bash
+        working-directory: artifact/paid_threshold_response_host1_v2/extracted
+        run: |
+          expected=492ada8c05d24193fec4821d9038c851eab8861214145974a12b36b269bf8148
+          actual=$(python -c "import hashlib,pathlib;print(hashlib.sha256(pathlib.Path('results/canonical_result.v2.json').read_bytes()).hexdigest())")
+          echo "canonical=$actual"
+          test "$actual" = "$expected"
+      - name: Confirm the canonical result carries no CR bytes
+        shell: bash
+        working-directory: artifact/paid_threshold_response_host1_v2/extracted
+        run: |
+          python - <<'PY'
+          import pathlib, sys
+          data = pathlib.Path("results/canonical_result.v2.json").read_bytes()
+          if b"\r" in data:
+              sys.exit("canonical result contains CR; newline handling is platform dependent")
+          print("canonical result is LF-only")
+          PY

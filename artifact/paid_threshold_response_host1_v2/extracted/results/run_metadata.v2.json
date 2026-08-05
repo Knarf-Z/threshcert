@@ -1,0 +1,16 @@
+{
+  "canonical_schema": "paid-threshold-response-host1/v2",
+  "canonical_sha256": "492ada8c05d24193fec4821d9038c851eab8861214145974a12b36b269bf8148",
+  "elapsed_ms": 69071.96299999487,
+  "operator_processes_spawned": 7,
+  "platform": "Windows-10-10.0.26200-SP0",
+  "processor": "Intel64 Family 6 Model 204 Stepping 2, GenuineIntel",
+  "python_version": "3.11.1 (tags/v3.11.1:a7a450f, Dec  6 2022, 19:58:39) [MSC v.1934 64 bit (AMD64)]",
+  "schema": "paid-threshold-response-host1-metadata/v2",
+  "worker_pids": [
+    8416,
+    9056,
+    12520,
+    13724
+  ]
+}

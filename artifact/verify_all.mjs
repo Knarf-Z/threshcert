@@ -36,6 +36,7 @@ run(process.execPath, ["verify_offline_v49.mjs"], path.join(root, "threshold_dep
 run(process.execPath, ["verify_offline_v50.mjs"], path.join(root, "threshold_deployment_audit"));
 run(process.execPath, ["verify_gate_lattice_v51.mjs"], path.join(root, "threshold_deployment_audit"));
 run(process.execPath, ["scripts/verify_raw_capture_v48.mjs"], path.join(root, "threshold_deployment_audit"));
+run(process.execPath, ["verify_ptr_host1_v2.mjs"], path.join(root, "paid_threshold_response_host1_v2"));
 console.log("EXPLORATORY_NOT_USED_BY_V49=third_party_contract_survey");
 const surveyRoot = path.join(root, "third_party_contract_survey");
 run(process.execPath, ["test_screen_contract_v2.mjs"], surveyRoot);

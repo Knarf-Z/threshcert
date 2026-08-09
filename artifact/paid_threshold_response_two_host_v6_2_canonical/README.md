@@ -5,10 +5,18 @@ paper. It combines the frozen two-host V6 execution evidence, the RSP-V6.2
 control/effect/simulation supplement, and the pinned external NuCypher source
 audit in one deterministic archive.
 
-Run from the repository root with CPython 3.11 and Node.js:
+Run from the repository root with CPython 3.11 and Node.js.
+
+Windows:
 
 ```text
 py -3.11 -B artifact/paid_threshold_response_two_host_v6_2_canonical/verify_canonical_archive.py
+```
+
+Linux/macOS:
+
+```text
+python3.11 -B artifact/paid_threshold_response_two_host_v6_2_canonical/verify_canonical_archive.py
 ```
 
 The wrapper verifies the exact archive identity, extracts it to a temporary

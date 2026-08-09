@@ -1,6 +1,6 @@
 {
   "audit_status": "UNKNOWN",
-  "interpretation": "The verifier reproduces a fail-closed UNKNOWN result on independently maintained real-world threshold-service code. It is not a positive certificate, a third-party replication, or evidence that the service violates an obligation.",
+  "interpretation": "The verifier reproduces a fail-closed UNKNOWN result on a pinned, independently authored open-source threshold-service snapshot. It is not a positive certificate, a third-party replication, or evidence that the service violates an obligation.",
   "obligations": {
     "LC1": {
       "reason": "The Flask decorator, request proxy, metrics context, and native share producer are outside the closed RSP call-and-effect fragment; producer completeness is not proved.",
@@ -40,7 +40,9 @@
     "commit": "547a9646d929f5f035b054bef94720c5712448c5",
     "name": "NuCypher Threshold Access Control node runtime",
     "release": "https://github.com/nucypher/nucypher/releases/tag/v7.6.1",
+    "release_published_utc": "2025-09-24T14:47:51Z",
     "repository": "https://github.com/nucypher/nucypher",
+    "repository_status_at_retrieval": "inactive",
     "selected_files": {
       "LICENSE": "E0EEDBA615D5CD1B986AFB6C5B3A4B1AE33713E7E9DC74D19DAEC5E3221F9D2E",
       "nucypher/blockchain/eth/actors.py": "262FCE9EB941A36882ECB9547558F46BFE77A715F4334D09A60753E6F9B35DA0",

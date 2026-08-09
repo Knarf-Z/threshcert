@@ -12,6 +12,8 @@ from typing import Any, Iterable
 SCHEMA = "external-threshold-service-source-audit/v1"
 UPSTREAM_COMMIT = "547a9646d929f5f035b054bef94720c5712448c5"
 UPSTREAM_TAG = "v7.6.1"
+UPSTREAM_RELEASE_PUBLISHED_UTC = "2025-09-24T14:47:51Z"
+UPSTREAM_REPOSITORY_STATUS = "inactive"
 
 
 def sha256(data: bytes) -> str:
@@ -99,6 +101,8 @@ def audit(snapshot: Path, metadata_path: Path) -> dict[str, Any]:
             metadata.get("commit") == UPSTREAM_COMMIT
             and metadata.get("tag") == UPSTREAM_TAG
             and metadata.get("repository") == "https://github.com/nucypher/nucypher"
+            and metadata.get("release_published_utc") == UPSTREAM_RELEASE_PUBLISHED_UTC
+            and metadata.get("repository_status_at_retrieval") == UPSTREAM_REPOSITORY_STATUS
         ),
         "FLASK_DECRYPT_ROUTE_PRESENT": any(
             "rest_app.route" in item and "/decrypt" in item for item in route_decorators
@@ -173,6 +177,8 @@ def audit(snapshot: Path, metadata_path: Path) -> dict[str, Any]:
             "release": metadata["release"],
             "tag": metadata["tag"],
             "commit": metadata["commit"],
+            "release_published_utc": metadata["release_published_utc"],
+            "repository_status_at_retrieval": metadata["repository_status_at_retrieval"],
             "snapshot_sha256": sha256(snapshot.read_bytes()),
             "selected_files": {name: sha256(data) for name, data in sorted(entries.items())},
         },
@@ -183,8 +189,8 @@ def audit(snapshot: Path, metadata_path: Path) -> dict[str, Any]:
             "reason": "The target is a threshold-access service, not the paper's contingent-payment instance.",
         },
         "interpretation": (
-            "The verifier reproduces a fail-closed UNKNOWN result on independently maintained "
-            "real-world threshold-service code. It is not a positive certificate, a third-party "
+            "The verifier reproduces a fail-closed UNKNOWN result on a pinned, independently "
+            "authored open-source threshold-service snapshot. It is not a positive certificate, a third-party "
             "replication, or evidence that the service violates an obligation."
         ),
     }

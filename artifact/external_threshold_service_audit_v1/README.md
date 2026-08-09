@@ -1,9 +1,10 @@
 # External threshold-service source audit v1
 
-This artifact applies the paper's source-obligation audit to an independently
-maintained real-world threshold service: the NuCypher Threshold Access Control
-node runtime, pinned to release `v7.6.1` and commit
-`547a9646d929f5f035b054bef94720c5712448c5`.
+This artifact applies the paper's source-obligation audit to a pinned,
+independently authored open-source snapshot of the NuCypher Threshold Access
+Control node runtime at release `v7.6.1`, published 2025-09-24, and commit
+`547a9646d929f5f035b054bef94720c5712448c5`. At retrieval, the official
+repository marked the project inactive and no longer maintained.
 
 The result is deliberately fail-closed: `LC1`, `LC3`, `LC5`, and `LC7` are all
 `UNKNOWN`. The selected Python source confirms the decryption route and share
@@ -20,8 +21,16 @@ does not turn an unclosed source model into a positive certificate.
 
 From the repository root, with CPython 3.11:
 
+Windows:
+
 ```text
 py -3.11 -B artifact/external_threshold_service_audit_v1/verify_external_audit.py
+```
+
+Linux/macOS:
+
+```text
+python3.11 -B artifact/external_threshold_service_audit_v1/verify_external_audit.py
 ```
 
 Expected final lines include:

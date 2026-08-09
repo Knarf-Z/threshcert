@@ -1,9 +1,14 @@
 # Two-host V6.2 canonical public release
 
-This archive has one manifest and one top-level command:
+This archive has one manifest and one top-level verifier. Invoke it with the
+platform's CPython 3.11 launcher:
 
 ```text
+# Windows
 py -3.11 -B verify_canonical_release.py
+
+# Linux/macOS
+python3.11 -B verify_canonical_release.py
 ```
 
 `MANIFEST.sha256` covers every other extracted file. The top-level verifier
@@ -16,7 +21,7 @@ then runs three byte-bound checks:
    result is `UNKNOWN` for all four source obligations.
 
 An `UNKNOWN` external audit is not a vulnerability report or a positive
-certificate. It records that independently maintained real-world code crosses
+certificate. It records that a pinned, independently authored open-source snapshot crosses
 framework, native, concurrency, and lifecycle boundaries outside the accepted
 restricted source model.
 

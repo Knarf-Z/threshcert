@@ -1,0 +1,10 @@
+{
+  "commit": "547a9646d929f5f035b054bef94720c5712448c5",
+  "license": "AGPL-3.0-only",
+  "release": "https://github.com/nucypher/nucypher/releases/tag/v7.6.1",
+  "release_published_utc": "2025-09-24T14:47:51Z",
+  "repository": "https://github.com/nucypher/nucypher",
+  "repository_status_at_retrieval": "inactive",
+  "retrieved_utc": "2026-08-09T00:00:00Z",
+  "tag": "v7.6.1"
+}

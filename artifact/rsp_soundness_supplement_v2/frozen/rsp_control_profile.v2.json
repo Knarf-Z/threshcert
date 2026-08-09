@@ -1,0 +1,710 @@
+{
+  "binding": {
+    "code_manifest_sha256": "49DCDDF87FFB94654EB1D5788BD132600B2D2C63BACCFEE36D2552A1C5C0B2F2",
+    "execution_archive_sha256": "2DE5E3B7EC8AE38E25FC745AC5A2988F62E430E255F6FDCE9784001F357E3D84",
+    "identity_note": "AST digests and SHA-256 values bind identity only. The semantic premises are the structural checks in this certificate.",
+    "source_files": {
+      "scripts/run_two_host.py": "BA07C95199C1040EC5AC4DEDE5E22F7879684B43C308F244E8534B7342101B01",
+      "src/ptr_v3/__init__.py": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "src/ptr_v3/capability.py": "2E3B48F98AB3F98067C9FA365E76407D2599E2AB4738616D619D62487D157035",
+      "src/ptr_v3/certificate.py": "3857DABD2BAA80D98D201A4CEC2D27B39A77D552CAE701AC89DC10DC1772B2E4",
+      "src/ptr_v3/checker.py": "6D5461EE9583DA40535C8721FC170125259AEE03DA26244318094B5339C94AEE",
+      "src/ptr_v3/contracts.py": "5F8F4D1F40F347615EB6779847768388E135C8B408AA67BB1E44C148A12070AE",
+      "src/ptr_v3/coordinator.py": "34711BBA2B65B80ACFB135B66A39C46F50C457EC90BC55B9B0550B51794194C9",
+      "src/ptr_v3/crypto.py": "47B29FB37953B42189E41042293E3F592CBA4ABBF4973691B2F54F2A4E144189",
+      "src/ptr_v3/dealer.py": "C7E5938E7EC258A1B4C9C1923055FEF5A5BA1A7BDB37D176F87787811051458E",
+      "src/ptr_v3/evidence.py": "58BFE7AC0167C1CFA3B7C141095E5F109E1C020D4DBAB15C15957AC05EC9425E",
+      "src/ptr_v3/experiment.py": "94DD521E84AC7390A7E281660FE9895B8A21C05F42FFD35B089249A7A7318718",
+      "src/ptr_v3/ledger.py": "FC5DE59D6032D69C6A8DD8A05BE176A208886C31665D5CEF37F323CD8E88117E",
+      "src/ptr_v3/network_identity.py": "9AA7BE07F9029ED6488E7D4E0EEF365F42B5A831C115C72E66E49BD3D30B80BE",
+      "src/ptr_v3/operator_server.py": "4F092CC84CE22C8D834A937E1459B6CE5FE965D57F79F6451F09FBA8ACF3089D",
+      "src/ptr_v3/service_model.py": "C5017FC11A7504A10A9753FD0DC81F4AF4E463BC286E898ACA430A97619626B5",
+      "src/ptr_v3/utils.py": "0322736EDEA46DE5F681927512F5253B1CDC98695F8DE4C1011D1430C618AA2C",
+      "src/ptr_v3/witness.py": "538111A216D97CF46796214CB8C9DAEE6186D742C8183216B949C75E10AC7648"
+    },
+    "source_kernel_sha256": "3F770950D0A6F22BE62D987C66F6FBEEFE6645651000D6F22BB06E14DB65B02D"
+  },
+  "checks": {
+    "AST_DIGESTS_ARE_IDENTITY_ONLY": true,
+    "CALLBACK_AND_THREAD_SURFACE_EXACT": true,
+    "CERTIFIED_SOURCE_BYTES_EXACT": true,
+    "CONTEXT_MANAGERS_ALLOWLISTED_AND_LOCKS_NONNESTED": true,
+    "DECORATOR_ALLOWLIST_EXACT": true,
+    "DELIVERY_GUARDS_STRUCTURALLY_DERIVED": true,
+    "EXCEPTION_PATHS_FAIL_CLOSED": true,
+    "FROZEN_EXECUTION_ARCHIVE_EXACT": true,
+    "LAMBDA_BODIES_PRIVILEGE_FREE": true,
+    "LOOPS_FINITE_OR_EVENT_SILENT": true,
+    "NO_ASYNC_GENERATOR_OR_DECORATOR_IN_PRIVILEGED_SLICE": true,
+    "NO_DYNAMIC_EXECUTION_OR_NATIVE_ESCAPE": true,
+    "NO_OPERATOR_DESCRIPTOR_HOOKS": true,
+    "PRIVILEGED_SITES_EXHAUSTIVE": true,
+    "RESPONSE_DATAFLOW_STRUCTURALLY_DERIVED": true,
+    "SOURCE_KERNEL_BINDING_EXACT": true
+  },
+  "concurrency_semantics": {
+    "concrete_execution": "E is one global CPython execution containing request-tagged events and global lifecycle events.",
+    "local_trace_set": "Trace_RSP_V6_2^r is prefix-closed for request r.",
+    "property_scope": {
+      "LC1": "request-local prefix-closed safety",
+      "LC3": "request-local prefix-closed safety",
+      "LC5": "global lifecycle invariant across the shuffle",
+      "LC7": "request-local prefix-closed safety"
+    },
+    "request_projection": "alpha_r(E) filters alpha(E) to request r and preserves concrete order.",
+    "shuffle_closure": "All interleavings preserve each request-local order and global lifecycle order."
+  },
+  "diagnostics": {
+    "all_control_nodes": [
+      {
+        "context": "build_coordinator",
+        "file": "scripts/run_two_host.py",
+        "kind": "For",
+        "line": 38
+      },
+      {
+        "context": "_partition_by_host",
+        "file": "scripts/run_two_host.py",
+        "kind": "For",
+        "line": 54
+      },
+      {
+        "context": "_ordered_route_count",
+        "file": "scripts/run_two_host.py",
+        "kind": "For",
+        "line": 69
+      },
+      {
+        "context": "_summarise_catalog",
+        "file": "scripts/run_two_host.py",
+        "kind": "For",
+        "line": 166
+      },
+      {
+        "context": "main",
+        "file": "scripts/run_two_host.py",
+        "kind": "For",
+        "line": 242
+      },
+      {
+        "context": "main",
+        "file": "scripts/run_two_host.py",
+        "kind": "For",
+        "line": 339
+      },
+      {
+        "context": "main",
+        "file": "scripts/run_two_host.py",
+        "kind": "For",
+        "line": 650
+      },
+      {
+        "context": "main",
+        "file": "scripts/run_two_host.py",
+        "kind": "For",
+        "line": 375
+      },
+      {
+        "context": "main",
+        "file": "scripts/run_two_host.py",
+        "kind": "For",
+        "line": 376
+      },
+      {
+        "context": "_qualifying_subsets",
+        "file": "src/ptr_v3/capability.py",
+        "kind": "For",
+        "line": 126
+      },
+      {
+        "context": "circuit_value",
+        "file": "src/ptr_v3/capability.py",
+        "kind": "For",
+        "line": 137
+      },
+      {
+        "context": "verify_potential",
+        "file": "src/ptr_v3/capability.py",
+        "kind": "For",
+        "line": 168
+      },
+      {
+        "context": "is_decomposable",
+        "file": "src/ptr_v3/capability.py",
+        "kind": "For",
+        "line": 296
+      },
+      {
+        "context": "duplicate_resources",
+        "file": "src/ptr_v3/capability.py",
+        "kind": "For",
+        "line": 312
+      },
+      {
+        "context": "unique_resource_cost",
+        "file": "src/ptr_v3/capability.py",
+        "kind": "For",
+        "line": 326
+      },
+      {
+        "context": "set_cover_circuit",
+        "file": "src/ptr_v3/capability.py",
+        "kind": "For",
+        "line": 341
+      },
+      {
+        "context": "set_cover_circuit",
+        "file": "src/ptr_v3/capability.py",
+        "kind": "For",
+        "line": 345
+      },
+      {
+        "context": "min_unique_cover_cost",
+        "file": "src/ptr_v3/capability.py",
+        "kind": "For",
+        "line": 355
+      },
+      {
+        "context": "threshold_service",
+        "file": "src/ptr_v3/capability.py",
+        "kind": "For",
+        "line": 373
+      },
+      {
+        "context": "_qualifying_subsets",
+        "file": "src/ptr_v3/capability.py",
+        "kind": "For",
+        "line": 127
+      },
+      {
+        "context": "Derivation.leaves",
+        "file": "src/ptr_v3/capability.py",
+        "kind": "For",
+        "line": 211
+      },
+      {
+        "context": "is_decomposable",
+        "file": "src/ptr_v3/capability.py",
+        "kind": "For",
+        "line": 297
+      },
+      {
+        "context": "duplicate_resources",
+        "file": "src/ptr_v3/capability.py",
+        "kind": "For",
+        "line": 314
+      },
+      {
+        "context": "min_unique_cover_cost",
+        "file": "src/ptr_v3/capability.py",
+        "kind": "For",
+        "line": 356
+      },
+      {
+        "context": "Circuit.topological_order.visit",
+        "file": "src/ptr_v3/capability.py",
+        "kind": "For",
+        "line": 107
+      },
+      {
+        "context": "min_derivation.build",
+        "file": "src/ptr_v3/capability.py",
+        "kind": "For",
+        "line": 241
+      },
+      {
+        "context": "duplicate_resources",
+        "file": "src/ptr_v3/capability.py",
+        "kind": "For",
+        "line": 315
+      },
+      {
+        "context": "min_unique_cover_cost",
+        "file": "src/ptr_v3/capability.py",
+        "kind": "For",
+        "line": 358
+      },
+      {
+        "context": "_qualifying_subsets",
+        "file": "src/ptr_v3/capability.py",
+        "kind": "Yield",
+        "line": 129
+      },
+      {
+        "context": "circuit_value",
+        "file": "src/ptr_v3/capability.py",
+        "kind": "For",
+        "line": 147
+      },
+      {
+        "context": "verify_potential",
+        "file": "src/ptr_v3/capability.py",
+        "kind": "For",
+        "line": 182
+      },
+      {
+        "context": "brute_force_weighted",
+        "file": "src/ptr_v3/certificate.py",
+        "kind": "For",
+        "line": 64
+      },
+      {
+        "context": "weighted_dp",
+        "file": "src/ptr_v3/certificate.py",
+        "kind": "For",
+        "line": 83
+      },
+      {
+        "context": "brute_force_weighted",
+        "file": "src/ptr_v3/certificate.py",
+        "kind": "For",
+        "line": 65
+      },
+      {
+        "context": "weighted_dp",
+        "file": "src/ptr_v3/certificate.py",
+        "kind": "For",
+        "line": 87
+      },
+      {
+        "context": "with_shared_debit",
+        "file": "src/ptr_v3/checker.py",
+        "kind": "For",
+        "line": 65
+      },
+      {
+        "context": "_counter_derivation",
+        "file": "src/ptr_v3/contracts.py",
+        "kind": "For",
+        "line": 111
+      },
+      {
+        "context": "verify_composition",
+        "file": "src/ptr_v3/contracts.py",
+        "kind": "For",
+        "line": 126
+      },
+      {
+        "context": "verify_composition",
+        "file": "src/ptr_v3/contracts.py",
+        "kind": "For",
+        "line": 131
+      },
+      {
+        "context": "verify_composition",
+        "file": "src/ptr_v3/contracts.py",
+        "kind": "For",
+        "line": 138
+      },
+      {
+        "context": "verify_composition",
+        "file": "src/ptr_v3/contracts.py",
+        "kind": "For",
+        "line": 146
+      },
+      {
+        "context": "verify_composition",
+        "file": "src/ptr_v3/contracts.py",
+        "kind": "For",
+        "line": 151
+      },
+      {
+        "context": "verify_composition",
+        "file": "src/ptr_v3/contracts.py",
+        "kind": "For",
+        "line": 159
+      },
+      {
+        "context": "verify_composition",
+        "file": "src/ptr_v3/contracts.py",
+        "kind": "For",
+        "line": 165
+      },
+      {
+        "context": "verify_composition",
+        "file": "src/ptr_v3/contracts.py",
+        "kind": "For",
+        "line": 171
+      },
+      {
+        "context": "verify_composition",
+        "file": "src/ptr_v3/contracts.py",
+        "kind": "For",
+        "line": 188
+      },
+      {
+        "context": "_counter_derivation",
+        "file": "src/ptr_v3/contracts.py",
+        "kind": "For",
+        "line": 112
+      },
+      {
+        "context": "verify_composition.visit",
+        "file": "src/ptr_v3/contracts.py",
+        "kind": "For",
+        "line": 184
+      },
+      {
+        "context": "Coordinator.health",
+        "file": "src/ptr_v3/coordinator.py",
+        "kind": "Try",
+        "line": 99
+      },
+      {
+        "context": "Coordinator.probe_endpoint",
+        "file": "src/ptr_v3/coordinator.py",
+        "kind": "Try",
+        "line": 116
+      },
+      {
+        "context": "Coordinator.request",
+        "file": "src/ptr_v3/coordinator.py",
+        "kind": "Try",
+        "line": 277
+      },
+      {
+        "context": "lagrange_at_zero",
+        "file": "src/ptr_v3/crypto.py",
+        "kind": "For",
+        "line": 45
+      },
+      {
+        "context": "combine_partials",
+        "file": "src/ptr_v3/crypto.py",
+        "kind": "For",
+        "line": 333
+      },
+      {
+        "context": "ScalarRng.scalar",
+        "file": "src/ptr_v3/crypto.py",
+        "kind": "While",
+        "line": 60
+      },
+      {
+        "context": "ThresholdKeySet.generate.eval_poly",
+        "file": "src/ptr_v3/crypto.py",
+        "kind": "For",
+        "line": 165
+      },
+      {
+        "context": "_assert_public_clean",
+        "file": "src/ptr_v3/dealer.py",
+        "kind": "For",
+        "line": 99
+      },
+      {
+        "context": "_assert_public_clean",
+        "file": "src/ptr_v3/dealer.py",
+        "kind": "For",
+        "line": 104
+      },
+      {
+        "context": "write_dealt",
+        "file": "src/ptr_v3/dealer.py",
+        "kind": "For",
+        "line": 127
+      },
+      {
+        "context": "run_order",
+        "file": "src/ptr_v3/experiment.py",
+        "kind": "For",
+        "line": 146
+      },
+      {
+        "context": "build_witnesses",
+        "file": "src/ptr_v3/experiment.py",
+        "kind": "For",
+        "line": 231
+      },
+      {
+        "context": "Committee.from_file",
+        "file": "src/ptr_v3/experiment.py",
+        "kind": "For",
+        "line": 66
+      },
+      {
+        "context": "OperatorRegistry.public_key",
+        "file": "src/ptr_v3/network_identity.py",
+        "kind": "For",
+        "line": 170
+      },
+      {
+        "context": "OperatorRegistry.host_of",
+        "file": "src/ptr_v3/network_identity.py",
+        "kind": "For",
+        "line": 176
+      },
+      {
+        "context": "main",
+        "file": "src/ptr_v3/operator_server.py",
+        "kind": "For",
+        "line": 284
+      },
+      {
+        "context": "main",
+        "file": "src/ptr_v3/operator_server.py",
+        "kind": "Try",
+        "line": 315
+      },
+      {
+        "context": "main",
+        "file": "src/ptr_v3/operator_server.py",
+        "kind": "While",
+        "line": 316
+      },
+      {
+        "context": "build_handler.Handler.do_POST",
+        "file": "src/ptr_v3/operator_server.py",
+        "kind": "Try",
+        "line": 170
+      },
+      {
+        "context": "encode_parts",
+        "file": "src/ptr_v3/utils.py",
+        "kind": "For",
+        "line": 18
+      },
+      {
+        "context": "file_sha256",
+        "file": "src/ptr_v3/utils.py",
+        "kind": "For",
+        "line": 45
+      },
+      {
+        "context": "bitmap_of",
+        "file": "src/ptr_v3/witness.py",
+        "kind": "For",
+        "line": 22
+      },
+      {
+        "context": "ids_of_bitmap",
+        "file": "src/ptr_v3/witness.py",
+        "kind": "While",
+        "line": 33
+      },
+      {
+        "context": "build_separation_witness",
+        "file": "src/ptr_v3/witness.py",
+        "kind": "For",
+        "line": 244
+      },
+      {
+        "context": "build_separation_witness",
+        "file": "src/ptr_v3/witness.py",
+        "kind": "For",
+        "line": 251
+      },
+      {
+        "context": "verify_allocation_witness",
+        "file": "src/ptr_v3/witness.py",
+        "kind": "For",
+        "line": 454
+      },
+      {
+        "context": "AggregationWitness.counted_by_host",
+        "file": "src/ptr_v3/witness.py",
+        "kind": "For",
+        "line": 56
+      },
+      {
+        "context": "build_host_local_secret_file_placement_witness",
+        "file": "src/ptr_v3/witness.py",
+        "kind": "For",
+        "line": 379
+      },
+      {
+        "context": "verify_allocation_witness",
+        "file": "src/ptr_v3/witness.py",
+        "kind": "For",
+        "line": 469
+      }
+    ],
+    "context_managers": [
+      {
+        "context": "Coordinator._post",
+        "expression": "urllib.request.urlopen",
+        "file": "src/ptr_v3/coordinator.py",
+        "line": 92
+      },
+      {
+        "context": "Coordinator.health",
+        "expression": "urllib.request.urlopen",
+        "file": "src/ptr_v3/coordinator.py",
+        "line": 100
+      },
+      {
+        "context": "Coordinator.probe_endpoint",
+        "expression": "socket.create_connection",
+        "file": "src/ptr_v3/coordinator.py",
+        "line": 117
+      },
+      {
+        "context": "OperatorState._append_line",
+        "expression": "path.open",
+        "file": "src/ptr_v3/operator_server.py",
+        "line": 105
+      },
+      {
+        "context": "OperatorState.record",
+        "expression": "self.lock",
+        "file": "src/ptr_v3/operator_server.py",
+        "line": 117
+      },
+      {
+        "context": "OperatorState._load_nonces",
+        "expression": "self.nonce_path.open",
+        "file": "src/ptr_v3/operator_server.py",
+        "line": 99
+      },
+      {
+        "context": "build_handler.Handler.do_POST",
+        "expression": "state.lock",
+        "file": "src/ptr_v3/operator_server.py",
+        "line": 201
+      },
+      {
+        "context": "file_sha256",
+        "expression": "path.open",
+        "file": "src/ptr_v3/utils.py",
+        "line": 44
+      },
+      {
+        "context": "write_json",
+        "expression": "path.open",
+        "file": "src/ptr_v3/utils.py",
+        "line": 60
+      }
+    ],
+    "critical_async_or_generator_nodes": [],
+    "critical_decorators": [],
+    "critical_functions": [
+      "src/ptr_v3/coordinator.py::Coordinator._post",
+      "src/ptr_v3/coordinator.py::Coordinator._verify",
+      "src/ptr_v3/coordinator.py::Coordinator.request",
+      "src/ptr_v3/crypto.py::ScalarRng.scalar",
+      "src/ptr_v3/crypto.py::combine_partials",
+      "src/ptr_v3/crypto.py::create_partial",
+      "src/ptr_v3/crypto.py::verify_threshold_result",
+      "src/ptr_v3/experiment.py::run_order",
+      "src/ptr_v3/operator_server.py::_partial_and_proof",
+      "src/ptr_v3/operator_server.py::build_handler.Handler._send",
+      "src/ptr_v3/operator_server.py::build_handler.Handler.do_GET",
+      "src/ptr_v3/operator_server.py::build_handler.Handler.do_POST",
+      "src/ptr_v3/operator_server.py::serve"
+    ],
+    "critical_try_contexts": [
+      "src/ptr_v3/coordinator.py::Coordinator.request",
+      "src/ptr_v3/operator_server.py::build_handler.Handler.do_POST"
+    ],
+    "descriptor_hooks": [],
+    "dynamic_calls": [],
+    "nested_lock_sites": [],
+    "payload_fields": {
+      "buyer": "request['buyer']",
+      "chaum_pedersen_proof": "response.proof.to_dict()",
+      "epoch": "int(request['epoch'])",
+      "host_id": "state.host_id",
+      "nonce": "nonce",
+      "operator_id": "state.operator_id",
+      "operator_signature": "signature.to_dict()",
+      "order_id": "request['order_id']",
+      "partial_decryption": "hex(response.value)",
+      "partial_hash": "partial_hash",
+      "proof_hash": "proof_hash",
+      "protocol_version": "PROTOCOL_VERSION",
+      "resource": "request['resource']",
+      "runtime_source_digest": "RUNTIME_SOURCE_DIGEST"
+    },
+    "privileged_calls": {
+      "combine_partials": [
+        {
+          "call": "combine_partials",
+          "context": "run_order",
+          "file": "src/ptr_v3/experiment.py",
+          "line": 180
+        }
+      ],
+      "create_partial": [
+        {
+          "call": "create_partial",
+          "context": "_partial_and_proof",
+          "file": "src/ptr_v3/operator_server.py",
+          "line": 124
+        }
+      ],
+      "end_headers": [
+        {
+          "call": "self.end_headers",
+          "context": "build_handler.Handler._send",
+          "file": "src/ptr_v3/operator_server.py",
+          "line": 144
+        }
+      ],
+      "send_header": [
+        {
+          "call": "self.send_header",
+          "context": "build_handler.Handler._send",
+          "file": "src/ptr_v3/operator_server.py",
+          "line": 142
+        },
+        {
+          "call": "self.send_header",
+          "context": "build_handler.Handler._send",
+          "file": "src/ptr_v3/operator_server.py",
+          "line": 143
+        }
+      ],
+      "send_response": [
+        {
+          "call": "self.send_response",
+          "context": "build_handler.Handler._send",
+          "file": "src/ptr_v3/operator_server.py",
+          "line": 141
+        }
+      ],
+      "write": [
+        {
+          "call": "handle.write",
+          "context": "OperatorState._append_line",
+          "file": "src/ptr_v3/operator_server.py",
+          "line": 106
+        },
+        {
+          "call": "self.wfile.write",
+          "context": "build_handler.Handler._send",
+          "file": "src/ptr_v3/operator_server.py",
+          "line": 145
+        },
+        {
+          "call": "handle.write",
+          "context": "write_json",
+          "file": "src/ptr_v3/utils.py",
+          "line": 61
+        }
+      ]
+    },
+    "share_loads": [
+      {
+        "context": "_partial_and_proof",
+        "file": "src/ptr_v3/operator_server.py",
+        "line": 124
+      }
+    ],
+    "unexpected_context_managers": []
+  },
+  "not_claimed": [
+    "a proof of the CPython interpreter or standard library",
+    "operating-system, native-runtime, hardware, or side-channel integrity",
+    "semantic meaning inferred from an AST hash",
+    "arbitrary Python, arbitrary callbacks, or off-language mechanisms"
+  ],
+  "runtime_lift": {
+    "cryptographic_assumption": "collision resistance of SHA-256 and correctness of runtime measurement",
+    "offline_object": "the exact source bytes archived as S_cert",
+    "recorded_test": "SHA256(S_loaded) equals the signed certified runtime digest",
+    "required_equality": "S_loaded is byte-identical to S_cert"
+  },
+  "schema": "rsp-v6.2-control-profile/v2",
+  "simulation_statement": "For every global CPython execution E and request r, alpha_r(E) belongs to Trace_RSP_V6_2^r(S, alpha(i_r)); equivalently, alpha(E) belongs to Shuffle_RSP_V6_2(S, alpha(I)).",
+  "status": "PASS"
+}

@@ -1,0 +1,60 @@
+{
+  "audit_status": "UNKNOWN",
+  "interpretation": "The verifier reproduces a fail-closed UNKNOWN result on independently maintained real-world threshold-service code. It is not a positive certificate, a third-party replication, or evidence that the service violates an obligation.",
+  "obligations": {
+    "LC1": {
+      "reason": "The Flask decorator, request proxy, metrics context, and native share producer are outside the closed RSP call-and-effect fragment; producer completeness is not proved.",
+      "status": "UNKNOWN"
+    },
+    "LC3": {
+      "reason": "The operator private key crosses the nucypher_core DKG boundary, so secret confinement cannot be discharged from the selected Python source.",
+      "status": "UNKNOWN"
+    },
+    "LC5": {
+      "reason": "Ritual, handover, blockchain, storage, and worker-pool lifecycle state are not closed under the restricted source model.",
+      "status": "UNKNOWN"
+    },
+    "LC7": {
+      "reason": "Flask response construction, decorators, broad exception handling, callbacks, and network sinks do not admit the program-specific delivery-root proof.",
+      "status": "UNKNOWN"
+    }
+  },
+  "payment_bridge": {
+    "reason": "The target is a threshold-access service, not the paper's contingent-payment instance.",
+    "status": "NOT_AUDITED"
+  },
+  "schema": "external-threshold-service-source-audit/v1",
+  "structural_facts": {
+    "ACTOR_AUTHORIZATION_AND_SHARE_CHAIN_PRESENT": true,
+    "AGPL_LICENSE_INCLUDED": true,
+    "APPLICATION_HANDLER_CHAIN_PRESENT": true,
+    "FLASK_DECRYPT_ROUTE_PRESENT": true,
+    "METRICS_CONTEXT_DECORATOR_PRESENT": true,
+    "NATIVE_DKG_BOUNDARY_PRESENT": true,
+    "ROUTE_HAS_BROAD_EXCEPTION": true,
+    "ROUTE_HAS_DYNAMIC_FRAMEWORK_AND_RESPONSE_SITES": true,
+    "UPSTREAM_IDENTITY_PINNED": true,
+    "WORKER_POOL_CALLBACK_SURFACE_PRESENT": true
+  },
+  "subject": {
+    "commit": "547a9646d929f5f035b054bef94720c5712448c5",
+    "name": "NuCypher Threshold Access Control node runtime",
+    "release": "https://github.com/nucypher/nucypher/releases/tag/v7.6.1",
+    "repository": "https://github.com/nucypher/nucypher",
+    "selected_files": {
+      "LICENSE": "E0EEDBA615D5CD1B986AFB6C5B3A4B1AE33713E7E9DC74D19DAEC5E3221F9D2E",
+      "nucypher/blockchain/eth/actors.py": "262FCE9EB941A36882ECB9547558F46BFE77A715F4334D09A60753E6F9B35DA0",
+      "nucypher/characters/lawful.py": "B83F8F14D07B39038E9AA487733DDB4F69BD2E83D8F020000E6BF46045640E5F",
+      "nucypher/crypto/ferveo/dkg.py": "26C7C5B3359BF183858B2791C950D4A3094F83DC503641648096FC3B2672C8A8",
+      "nucypher/crypto/powers.py": "07A0CAEA6E49E429C4203C6D06A91FA1B42AE9B2E46A6FE29DEE17802D908A57",
+      "nucypher/network/decryption.py": "6AE1E8770BC89D3659A1E078193551FB9486EA81032EC661FF158AADFD4166CB",
+      "nucypher/network/middleware.py": "BAB81BC539207B797E11FC6E3FFE2E5257B23742D3DD1D21EF88A4E08057F527",
+      "nucypher/network/server.py": "19D1FB35A775E8F740286371540CFDA1269E95C0EC6068C74C070068FAE2BD5B",
+      "nucypher/utilities/concurrency.py": "20AD23801FC2CA3E751900986F653EC0DA9CF5823ECBA9AF9ECADB101956B21A",
+      "pyproject.toml": "D32F6242D44081A7FB29238CB6F44EE8FF24F89CC13C0BB398360B8BAC632726"
+    },
+    "snapshot_sha256": "AED1534C19905DF6CA5DD50547A340762170D2D5E2C3A7DCBB3471B62051870A",
+    "tag": "v7.6.1"
+  },
+  "verification_status": "PASS"
+}

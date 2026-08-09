@@ -1,0 +1,261 @@
+{
+  "checks": {
+    "ALL_FOUR_BOOLEAN_INPUTS_EXECUTED": true,
+    "ALL_SIX_SEMANTIC_MUTANTS_CAUGHT": true,
+    "BOUNDED_GRAMMAR_ENUMERATION_NONEMPTY": true,
+    "CPYTHON_AND_RSP_TRACES_EQUAL": true
+  },
+  "claim": "For every enumerated program and Boolean input, the abstract RSP trace equals the alpha-projection of its concrete CPython 3.11 trace.",
+  "corpus_sha256": "F48750E4333689C1AFEF12C8A993013A09F71574D02DCD831C6263EE8CCB4FAF",
+  "generated_source_stream_sha256": "9045C0E5F91EDB8A46599356621FD81D0B77665A6238823EC13CAEC3FA51023F",
+  "mismatches": [],
+  "mutants": {
+    "branch-both": {
+      "first_witness": {
+        "concrete": [
+          [
+            "buyer-guard"
+          ],
+          "normal"
+        ],
+        "guards": {
+          "g0": false,
+          "g1": false
+        },
+        "mutated": [
+          [
+            "buyer-guard",
+            "buyer-guard"
+          ],
+          "normal"
+        ],
+        "program": [
+          "call",
+          [
+            "if",
+            "g0",
+            [
+              "event",
+              "buyer-guard"
+            ],
+            [
+              "event",
+              "buyer-guard"
+            ]
+          ]
+        ]
+      },
+      "status": "CAUGHT"
+    },
+    "call-drops-body": {
+      "first_witness": {
+        "concrete": [
+          [
+            "buyer-guard"
+          ],
+          "normal"
+        ],
+        "guards": {
+          "g0": false,
+          "g1": false
+        },
+        "mutated": [
+          [],
+          "normal"
+        ],
+        "program": [
+          "call",
+          [
+            "call",
+            [
+              "event",
+              "buyer-guard"
+            ]
+          ]
+        ]
+      },
+      "status": "CAUGHT"
+    },
+    "exception-skips-handler": {
+      "first_witness": {
+        "concrete": [
+          [
+            "buyer-guard"
+          ],
+          "normal"
+        ],
+        "guards": {
+          "g0": false,
+          "g1": false
+        },
+        "mutated": [
+          [],
+          "normal"
+        ],
+        "program": [
+          "call",
+          [
+            "try",
+            [
+              "raise"
+            ],
+            [
+              "event",
+              "buyer-guard"
+            ]
+          ]
+        ]
+      },
+      "status": "CAUGHT"
+    },
+    "loop-once": {
+      "first_witness": {
+        "concrete": [
+          [],
+          "normal"
+        ],
+        "guards": {
+          "g0": false,
+          "g1": false
+        },
+        "mutated": [
+          [
+            "buyer-guard"
+          ],
+          "normal"
+        ],
+        "program": [
+          "call",
+          [
+            "for",
+            0,
+            [
+              "event",
+              "buyer-guard"
+            ]
+          ]
+        ]
+      },
+      "status": "CAUGHT"
+    },
+    "return-falls-through": {
+      "first_witness": {
+        "concrete": [
+          [],
+          "normal"
+        ],
+        "guards": {
+          "g0": false,
+          "g1": false
+        },
+        "mutated": [
+          [
+            "buyer-guard"
+          ],
+          "normal"
+        ],
+        "program": [
+          "call",
+          [
+            "seq",
+            [
+              "return"
+            ],
+            [
+              "event",
+              "buyer-guard"
+            ]
+          ]
+        ]
+      },
+      "status": "CAUGHT"
+    },
+    "sequence-reversed": {
+      "first_witness": {
+        "concrete": [
+          [
+            "buyer-guard",
+            "commitment-verify"
+          ],
+          "normal"
+        ],
+        "guards": {
+          "g0": false,
+          "g1": false
+        },
+        "mutated": [
+          [
+            "commitment-verify",
+            "buyer-guard"
+          ],
+          "normal"
+        ],
+        "program": [
+          "call",
+          [
+            "seq",
+            [
+              "event",
+              "buyer-guard"
+            ],
+            [
+              "event",
+              "commitment-verify"
+            ]
+          ]
+        ]
+      },
+      "status": "CAUGHT"
+    }
+  },
+  "not_claimed": [
+    "a proof of CPython correctness",
+    "an exhaustive test of arbitrary Python",
+    "a replacement for the RSP-V6.1 statement-simulation proof",
+    "an independent implementation by a different research group"
+  ],
+  "schema": "rsp-bounded-differential-validation/v1",
+  "scope": {
+    "boolean_inputs": [
+      "g0",
+      "g1"
+    ],
+    "cpython_executions": 36652,
+    "events": [
+      "request-entry",
+      "share-read",
+      "partial-create",
+      "http-emit",
+      "threshold-combine",
+      "commitment-verify",
+      "buyer-guard",
+      "usable-deliver"
+    ],
+    "grammar": [
+      "skip",
+      "event",
+      "sequence",
+      "if",
+      "finite-for",
+      "return",
+      "raise/catch",
+      "threading.Lock context",
+      "fixed local call"
+    ],
+    "maximum_constructor_depth": 2,
+    "programs": 9163,
+    "programs_by_outer_constructor": {
+      "call": 550,
+      "event": 8,
+      "for": 572,
+      "if": 781,
+      "raise": 1,
+      "return": 1,
+      "seq": 6050,
+      "skip": 1,
+      "try": 660,
+      "with-lock": 539
+    }
+  },
+  "status": "PASS"
+}

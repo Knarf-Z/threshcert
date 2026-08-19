@@ -22,16 +22,29 @@ def dump(path: Path, value: Any) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
-    parser.add_argument("--output", type=Path, default=Path("reviewer_revision_v76/results/completeness_negative_controls.v1.json"))
+    parser.add_argument("--output", type=Path, default=None)
     args = parser.parse_args()
     root = args.root.resolve()
-    output = args.output if args.output.is_absolute() else root / args.output
-    refinement = root / "joint_incidence_refinement"
+    refinement_candidates = [
+        root / "joint_incidence_refinement",
+        root / "verify_v42_clean/joint_incidence_refinement",
+        root / "artifact/joint_incidence_refinement",
+    ]
+    refinement = next((path for path in refinement_candidates if path.is_dir()), refinement_candidates[0])
+    review_candidates = [root / "reviewer_revision_v76", root / "review_revision", root / "artifact/reviewer_revision_v76"]
+    review_dir = next((path for path in review_candidates if path.is_dir()), review_candidates[0])
+    result_candidates = [root / "results", review_dir / "results"]
+    result_dir = next((path for path in result_candidates if (path / "completeness_certificates.v1.json").is_file()), result_candidates[-1])
+    output = (
+        args.output if args.output is not None and args.output.is_absolute()
+        else root / args.output if args.output is not None
+        else result_dir / "completeness_negative_controls.v1.json"
+    )
     artifact_path = refinement / "artifacts/contracts/OverlappingPoolEscrow.sol/OverlappingPoolEscrow.json"
     record_path = refinement / "results/deployment_admission_local.json"
     admission_checker = refinement / "verify_deployment_admission.mjs"
-    completeness_checker = root / "reviewer_revision_v76/verify_completeness_certificates_v1.py"
-    certificate_path = root / "reviewer_revision_v76/results/completeness_certificates.v1.json"
+    completeness_checker = review_dir / "verify_completeness_certificates_v1.py"
+    certificate_path = result_dir / "completeness_certificates.v1.json"
     artifact = json.loads(artifact_path.read_text(encoding="utf-8"))
     certificate = json.loads(certificate_path.read_text(encoding="utf-8"))
     controls: list[dict[str, Any]] = []

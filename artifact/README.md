@@ -135,6 +135,7 @@ equality, and the recorded coverage condition.
   paper does not use it for a prevalence or contribution claim.
 - `chiado_public_runs/`: TraceThenSlash source, build metadata, deployment and
   read-only verification scripts, plus both canonical result JSON files.
+- `reviewer_revision_v76/`: deterministic C6 completeness records for all 4,095 OPE root/terminal pairs and a scoped B5 result (contract-local `PASS`; deployment-global `OPEN`).
 
 The separate joint-incidence finite-schema check establishes its 117-state by
 exactly-35-terminal product, terminal-family completeness, payment-labelled

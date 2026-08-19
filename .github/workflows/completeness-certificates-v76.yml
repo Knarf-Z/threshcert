@@ -1,0 +1,51 @@
+name: C6 and B5 completeness certificates v76
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "artifact/joint_incidence_refinement/**"
+      - "artifact/reviewer_revision_v76/**"
+      - "artifact/MANIFEST.sha256"
+      - "MANIFEST.sha256"
+      - ".github/workflows/completeness-certificates-v76.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: artifact/joint_incidence_refinement/package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify committed manifests before build
+        run: |
+          node artifact/build_manifest.mjs --check
+          python scripts/verify_manifest.py
+      - name: Install locked EVM dependencies
+        working-directory: artifact/joint_incidence_refinement
+        run: npm ci --no-audit --no-fund
+      - name: Typecheck and run EVM tests
+        working-directory: artifact/joint_incidence_refinement
+        run: |
+          npm run typecheck
+          npm test
+      - name: Verify deployment and refinement evidence
+        working-directory: artifact/joint_incidence_refinement
+        run: |
+          npm run admission:verify
+          npm run admission:negative
+          npm run refinement:check
+          python verify_schema_independent.py
+      - name: Verify C6/B5 materialization and negative controls
+        run: |
+          python artifact/reviewer_revision_v76/verify_completeness_certificates_v1.py --output reviewer_revision_v76/results/completeness_certificates.v1.json --verify
+          python artifact/reviewer_revision_v76/test_completeness_negative_controls_v1.py

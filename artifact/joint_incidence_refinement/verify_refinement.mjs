@@ -18,6 +18,16 @@ const DEPLOYMENT_CHECKER = path.join(ROOT, "verify_deployment_admission.mjs");
 const RESULT = path.join(ROOT, "results", "refinement_certificate.json");
 const OBLIGATION_MAP = path.join(ROOT, "results", "refinement_obligation_map.json");
 const sha = (x) => createHash("sha256").update(x).digest("hex");
+const canonical = (value) => {
+  if (Array.isArray(value)) return value.map(canonical);
+  if (value !== null && typeof value === "object") return Object.fromEntries(Object.entries(value).sort(([a], [b]) => a.localeCompare(b)).map(([k, v]) => [k, canonical(v)]));
+  return value;
+};
+const artifactSemanticHash = (artifact) => {
+  const copy = { ...artifact };
+  delete copy.buildInfoId;
+  return sha(Buffer.from(JSON.stringify(canonical(copy))));
+};
 const check = (x, m) => { if (!x) throw new Error(m); };
 const occurrences = (s, r) => [...s.matchAll(r)].length;
 
@@ -101,7 +111,7 @@ const deploymentNegative = JSON.parse(deploymentNegativeText);
 check(deploymentCertificate.schema === "overlapping-pool-deployment-admission-certificate/v1", "bad deployment admission certificate schema");
 check(deploymentCertificate.status === "PASS", "deployment admission is not PASS");
 check(deploymentCertificate.recordSha256 === sha(deploymentRecordText), "deployment admission record hash mismatch");
-check(deploymentCertificate.artifactSha256 === sha(artifactText), "deployment admission artifact hash mismatch");
+check(deploymentCertificate.artifactSemanticSha256 === artifactSemanticHash(artifact), "deployment admission artifact semantic hash mismatch");
 check(deploymentNegative.schema === "overlapping-pool-deployment-admission-negative/v1", "bad negative admission schema");
 check(deploymentNegative.status === "PASS" && deploymentNegative.totalRejected === 10, "deployment admission tamper suite failed");
 check(deploymentNegative.canonicalRecordSha256 === sha(deploymentRecordText), "negative suite record hash mismatch");
@@ -370,7 +380,7 @@ const certificate = {
   generatedFromPinnedInputs: true,
   implementationAuditEvidence: {
     source: "contracts/OverlappingPoolEscrow.sol", sourceSha256: sha(source),
-    artifact: "artifacts/contracts/OverlappingPoolEscrow.sol/OverlappingPoolEscrow.json", artifactSha256: sha(artifactText),
+    artifact: "artifacts/contracts/OverlappingPoolEscrow.sol/OverlappingPoolEscrow.json", artifactSha256: sha(artifactText), artifactSemanticSha256: artifactSemanticHash(artifact), ignoredArtifactMetadataFields: ["buildInfoId"],
     creationBytecodeSha256: sha(Buffer.from(artifact.bytecode.slice(2),"hex")),
     runtimeBytecodeSha256: sha(Buffer.from(artifact.deployedBytecode.slice(2),"hex")),
     runtimeExecutableSha256: hardhatExecutableSha,

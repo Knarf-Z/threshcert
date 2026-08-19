@@ -1,0 +1,35 @@
+{
+  "controls": [
+    {
+      "expected": "ACCEPT",
+      "mutation": "buildInfoId-only drift",
+      "observed": "ACCEPT"
+    },
+    {
+      "expected": "REJECT",
+      "mutation": "semantic ABI route added",
+      "observed": "REJECT"
+    },
+    {
+      "expected": "REJECT",
+      "mutation": "one C6 path removed",
+      "observed": "REJECT"
+    },
+    {
+      "expected": "REJECT",
+      "mutation": "reverse proof bound inserted",
+      "observed": "REJECT"
+    },
+    {
+      "expected": "REJECT",
+      "mutation": "global B5 escalated from OPEN to PASS",
+      "observed": "REJECT"
+    }
+  ],
+  "schema": "fc-c6-b5-completeness-negative-controls/v1",
+  "status": "PASS",
+  "summary": {
+    "matched_expectation": 5,
+    "tested": 5
+  }
+}

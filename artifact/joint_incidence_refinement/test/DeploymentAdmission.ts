@@ -20,6 +20,18 @@ const RESULT = process.env.DEPLOYMENT_ADMISSION_RESULT
   : null;
 const sha = (hex: `0x${string}`) =>
   createHash("sha256").update(Buffer.from(hex.slice(2), "hex")).digest("hex");
+const canonical = (value: unknown): unknown => {
+  if (Array.isArray(value)) return value.map(canonical);
+  if (value !== null && typeof value === "object") {
+    return Object.fromEntries(Object.entries(value).sort(([a], [b]) => a.localeCompare(b)).map(([k, v]) => [k, canonical(v)]));
+  }
+  return value;
+};
+const artifactSemanticHash = (artifact: Record<string, unknown>) => {
+  const copy = { ...artifact };
+  delete copy.buildInfoId;
+  return createHash("sha256").update(JSON.stringify(canonical(copy))).digest("hex");
+};
 
 describe("deployment admission fixture", () => {
   it("captures a direct deployment with pinned runtime and constructor", async () => {
@@ -53,7 +65,8 @@ describe("deployment admission fixture", () => {
       blockNumber: block.number,
     });
     assert.ok(runtimeCode && runtimeCode !== "0x");
-    const artifact = JSON.parse(await readFile(ARTIFACT, "utf8"));
+    const artifactText = await readFile(ARTIFACT);
+    const artifact = JSON.parse(artifactText.toString("utf8"));
     const observedMembers = [];
     const memberCode = [];
     const credits = [];
@@ -72,9 +85,9 @@ describe("deployment admission fixture", () => {
       compiler: {
         version: "0.8.28",
         evmRevision: "cancun",
-        artifactSha256: createHash("sha256")
-          .update(await readFile(ARTIFACT))
-          .digest("hex"),
+        artifactSha256: createHash("sha256").update(artifactText).digest("hex"),
+        artifactSemanticSha256: artifactSemanticHash(artifact),
+        ignoredArtifactMetadataFields: ["buildInfoId"],
       },
       chain: {
         chainId: await publicClient.getChainId(),

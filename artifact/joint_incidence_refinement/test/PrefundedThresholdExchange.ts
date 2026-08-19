@@ -26,7 +26,7 @@ async function setup() {
 async function open(fixture: Awaited<ReturnType<typeof setup>>) {
   const simulation = await fixture.exchange.simulate.openOrder(
     [COMMITTEE, 7n, fixture.memberAddresses, fixture.amounts],
-    { account: fixture.buyer.account, value: 10n * ONE },
+    { account: fixture.buyer.account.address, value: 10n * ONE },
   );
   await fixture.exchange.write.openOrder(
     [COMMITTEE, 7n, fixture.memberAddresses, fixture.amounts],

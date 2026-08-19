@@ -15,6 +15,16 @@ const bytes = (hex) => Buffer.from(hex.replace(/^0x/, ""), "hex");
 const addressWord = (address) => Buffer.from(address.toLowerCase().replace(/^0x/, "").padStart(64, "0"), "hex");
 const canonicalAddress = (x) => /^0x[0-9a-fA-F]{40}$/.test(x) && x.toLowerCase();
 const signature = (x) => `${x.name}(${(x.inputs ?? []).map((v) => v.type).join(",")})`;
+const canonical = (value) => {
+  if (Array.isArray(value)) return value.map(canonical);
+  if (value !== null && typeof value === "object") return Object.fromEntries(Object.entries(value).sort(([a], [b]) => a.localeCompare(b)).map(([k, v]) => [k, canonical(v)]));
+  return value;
+};
+const artifactSemanticHash = (artifact) => {
+  const copy = { ...artifact };
+  delete copy.buildInfoId;
+  return sha(Buffer.from(JSON.stringify(canonical(copy))));
+};
 
 function opcodeCounts(runtime) {
   const raw = bytes(runtime);
@@ -44,7 +54,8 @@ const recordText = await readFile(RECORD);
 const record = JSON.parse(recordText);
 check(record.schema === "overlapping-pool-deployment-admission/v1", "bad admission schema");
 check(record.compiler.version === "0.8.28" && record.compiler.evmRevision === "cancun", "compiler scope mismatch");
-check(record.compiler.artifactSha256 === sha(artifactText), "artifact hash mismatch");
+check(record.compiler.artifactSemanticSha256 === artifactSemanticHash(artifact), "artifact semantic hash mismatch");
+check(JSON.stringify(record.compiler.ignoredArtifactMetadataFields) === JSON.stringify(["buildInfoId"]), "unexpected ignored artifact metadata fields");
 check(Number(record.chain.chainId) > 0 && BigInt(record.chain.blockNumber) >= 0n, "bad chain identity");
 check(/^0x[0-9a-fA-F]{64}$/.test(record.chain.blockHash), "bad block hash");
 check(record.deployment.to === null, "not a direct top-level creation transaction");
@@ -100,6 +111,8 @@ const certificate = {
   recordSha256: sha(recordText),
   artifact: "artifacts/contracts/OverlappingPoolEscrow.sol/OverlappingPoolEscrow.json",
   artifactSha256: sha(artifactText),
+  artifactSemanticSha256: artifactSemanticHash(artifact),
+  ignoredArtifactMetadataFields: ["buildInfoId"],
   chain: record.chain,
   contractAddress: record.deployment.contractAddress,
   runtimeSha256: record.runtime.sha256,

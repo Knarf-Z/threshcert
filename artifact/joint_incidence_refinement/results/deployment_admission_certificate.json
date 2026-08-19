@@ -2,13 +2,17 @@
   "schema": "overlapping-pool-deployment-admission-certificate/v1",
   "status": "PASS",
   "record": "results/deployment_admission_local.json",
-  "recordSha256": "6d7a6e4f84fb85fd00990f8d7054fbe06103ce9cfe0642da28bc73c64c86ce16",
+  "recordSha256": "f65bec41d56551db9c9cd22e5819ececf0f5c37d6b14915c14e2af1b86bdf4fd",
   "artifact": "artifacts/contracts/OverlappingPoolEscrow.sol/OverlappingPoolEscrow.json",
-  "artifactSha256": "d14de4d0a73fe3395517bf6dab932aca9b5daa7a51ba5979f4a272b498dbfe43",
+  "artifactSha256": "be8cc2cf99c70201e4dff2e8575a9b09f00affb8bfc8e1cb66e6339225d70ddd",
+  "artifactSemanticSha256": "f7eb23f7831c734db5dfc09dce2acc3757876b942ef4c77fd16c804cf37140c7",
+  "ignoredArtifactMetadataFields": [
+    "buildInfoId"
+  ],
   "chain": {
     "chainId": 31337,
     "blockNumber": "1",
-    "blockHash": "0x6d1b56d28022632bd44c18593371a0acf1dd6d5776de9484d1c98770857e4557",
+    "blockHash": "0x0650a3601dc7264600a06e9e803ce14ec9dd561484a53e8ecfa00976012b2bd0",
     "transactionHashes": [
       "0x6bd5a2501acfa2c03ece8c6594ed0635fa3cbb77362a01caa9abc56880f3f6a0"
     ]

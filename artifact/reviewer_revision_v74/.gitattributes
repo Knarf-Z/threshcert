@@ -1,0 +1,3 @@
+# The v74 manifest binds exact file bytes. Disable Git end-of-line
+# normalisation for this self-contained artifact.
+* -text

@@ -1,0 +1,216 @@
+{
+  "checks": {
+    "all_rows_exact": true,
+    "overlapping_pool_family": "two pools of capacity ceil(m/2) sharing one member",
+    "second_deployed_runtime": false,
+    "uniform_formula": "min sum of q distinct indices in {1..n} = q(q+1)/2"
+  },
+  "purpose": "parameterized abstract-family evidence, not deployment-wide validation",
+  "rows": [
+    {
+      "exact_floor": 3,
+      "family": "uniform_q_of_n",
+      "independent_formula_check": 1,
+      "n": 3,
+      "q": 2,
+      "successful_routes": 3
+    },
+    {
+      "exact_floor": 3,
+      "family": "uniform_q_of_n",
+      "independent_formula_check": 1,
+      "n": 4,
+      "q": 2,
+      "successful_routes": 6
+    },
+    {
+      "exact_floor": 6,
+      "family": "uniform_q_of_n",
+      "independent_formula_check": 1,
+      "n": 4,
+      "q": 3,
+      "successful_routes": 4
+    },
+    {
+      "exact_floor": 3,
+      "family": "uniform_q_of_n",
+      "independent_formula_check": 1,
+      "n": 5,
+      "q": 2,
+      "successful_routes": 10
+    },
+    {
+      "exact_floor": 6,
+      "family": "uniform_q_of_n",
+      "independent_formula_check": 1,
+      "n": 5,
+      "q": 3,
+      "successful_routes": 10
+    },
+    {
+      "exact_floor": 10,
+      "family": "uniform_q_of_n",
+      "independent_formula_check": 1,
+      "n": 5,
+      "q": 4,
+      "successful_routes": 5
+    },
+    {
+      "exact_floor": 3,
+      "family": "uniform_q_of_n",
+      "independent_formula_check": 1,
+      "n": 6,
+      "q": 2,
+      "successful_routes": 15
+    },
+    {
+      "exact_floor": 6,
+      "family": "uniform_q_of_n",
+      "independent_formula_check": 1,
+      "n": 6,
+      "q": 3,
+      "successful_routes": 20
+    },
+    {
+      "exact_floor": 10,
+      "family": "uniform_q_of_n",
+      "independent_formula_check": 1,
+      "n": 6,
+      "q": 4,
+      "successful_routes": 15
+    },
+    {
+      "exact_floor": 15,
+      "family": "uniform_q_of_n",
+      "independent_formula_check": 1,
+      "n": 6,
+      "q": 5,
+      "successful_routes": 6
+    },
+    {
+      "exact_floor": 3,
+      "family": "uniform_q_of_n",
+      "independent_formula_check": 1,
+      "n": 7,
+      "q": 2,
+      "successful_routes": 21
+    },
+    {
+      "exact_floor": 6,
+      "family": "uniform_q_of_n",
+      "independent_formula_check": 1,
+      "n": 7,
+      "q": 3,
+      "successful_routes": 35
+    },
+    {
+      "exact_floor": 10,
+      "family": "uniform_q_of_n",
+      "independent_formula_check": 1,
+      "n": 7,
+      "q": 4,
+      "successful_routes": 35
+    },
+    {
+      "exact_floor": 15,
+      "family": "uniform_q_of_n",
+      "independent_formula_check": 1,
+      "n": 7,
+      "q": 5,
+      "successful_routes": 21
+    },
+    {
+      "exact_floor": 21,
+      "family": "uniform_q_of_n",
+      "independent_formula_check": 1,
+      "n": 7,
+      "q": 6,
+      "successful_routes": 7
+    },
+    {
+      "exact_floor": 3,
+      "family": "uniform_q_of_n",
+      "independent_formula_check": 1,
+      "n": 8,
+      "q": 2,
+      "successful_routes": 28
+    },
+    {
+      "exact_floor": 6,
+      "family": "uniform_q_of_n",
+      "independent_formula_check": 1,
+      "n": 8,
+      "q": 3,
+      "successful_routes": 56
+    },
+    {
+      "exact_floor": 10,
+      "family": "uniform_q_of_n",
+      "independent_formula_check": 1,
+      "n": 8,
+      "q": 4,
+      "successful_routes": 70
+    },
+    {
+      "exact_floor": 15,
+      "family": "uniform_q_of_n",
+      "independent_formula_check": 1,
+      "n": 8,
+      "q": 5,
+      "successful_routes": 56
+    },
+    {
+      "exact_floor": 21,
+      "family": "uniform_q_of_n",
+      "independent_formula_check": 1,
+      "n": 8,
+      "q": 6,
+      "successful_routes": 28
+    },
+    {
+      "exact_floor": 28,
+      "family": "uniform_q_of_n",
+      "independent_formula_check": 1,
+      "n": 8,
+      "q": 7,
+      "successful_routes": 8
+    },
+    {
+      "exact_local_floor": 2,
+      "family": "overlapping_pool",
+      "independent_lower_corner_check": 0,
+      "members": 5,
+      "pool_capacity": 2,
+      "pool_width": 3,
+      "reachable_roots": 46,
+      "successful_root_terminal_pairs": 16,
+      "terminal_choices": 460,
+      "threshold": 3
+    },
+    {
+      "exact_local_floor": 4,
+      "family": "overlapping_pool",
+      "independent_lower_corner_check": 0,
+      "members": 7,
+      "pool_capacity": 2,
+      "pool_width": 4,
+      "reachable_roots": 117,
+      "successful_root_terminal_pairs": 9,
+      "terminal_choices": 4095,
+      "threshold": 4
+    },
+    {
+      "exact_local_floor": 9,
+      "family": "overlapping_pool",
+      "independent_lower_corner_check": 0,
+      "members": 9,
+      "pool_capacity": 3,
+      "pool_width": 5,
+      "reachable_roots": 1211,
+      "successful_root_terminal_pairs": 276,
+      "terminal_choices": 152586,
+      "threshold": 5
+    }
+  ],
+  "schema": "reviewer_revision_parameter_sweep.v1"
+}

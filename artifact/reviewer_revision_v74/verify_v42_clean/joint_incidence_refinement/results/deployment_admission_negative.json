@@ -1,0 +1,19 @@
+{
+  "schema": "overlapping-pool-deployment-admission-negative/v1",
+  "status": "PASS",
+  "canonicalRecordSha256": "6b3ed37a1df66a55a5ce42dc2171d5a3c8f9d6312a2631b401103ecf281f0b7b",
+  "checkerSha256": "74f309ec32158eb66c13573371c3bec8dd9eefd404fb3252d04b1000a0ccdc49",
+  "rejectedTamperCases": [
+    "creation-input",
+    "runtime-template",
+    "constructor-controller",
+    "nonfresh-state",
+    "nonzero-acquirer",
+    "controller-member-role",
+    "initial-share-owner",
+    "receipt-block",
+    "transaction-order",
+    "immutable-reference"
+  ],
+  "totalRejected": 10
+}

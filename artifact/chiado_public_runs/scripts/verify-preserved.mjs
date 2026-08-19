@@ -9,11 +9,13 @@ const files = {
   canonical: "phase2_chiado.json",
   covered: "phase2_chiado_covered_run2.json",
   calibration: "phase2_chiado_underfunded_run1.json",
+  settlement: "phase2_settlement.json",
 };
 const expectedHashes = {
   canonical: "461f753b1a24dc6b023755a1efc6fc8871c9906ce3ea347c1f680ecad8222a6c",
   covered: "461f753b1a24dc6b023755a1efc6fc8871c9906ce3ea347c1f680ecad8222a6c",
   calibration: "79f87e1b1c88e23fed292c69882ab19b60dccada0ee265f3fcdd456e0641017f",
+  settlement: "e173cac183e8c015be8a43d08e1951182d85ac2b0a5b094c965b95d6af1b71e7",
 };
 
 function assert(condition, message) {
@@ -88,6 +90,27 @@ const latestReleaseTime = recoveryScenarios.reduce(
 );
 assert(recoveryTotalWei === 108000000000000000n, "settlement plan: aggregate bond mismatch");
 assert(latestReleaseTime === 1785808050n, "settlement plan: latest release mismatch");
+const settlement = parsed.settlement;
+assert(settlement.schema === "fc-trace-then-slash-phase2-settlement-v2", "settlement: schema mismatch");
+assert(settlement.network?.chainId === 10200 && settlement.complete === true, "settlement: incomplete or wrong chain");
+assert(settlement.expectedContracts === 6 && settlement.recoveredContracts === 6, "settlement: contract count mismatch");
+assert(BigInt(settlement.expectedTotalWei) === recoveryTotalWei, "settlement: expected total mismatch");
+assert(BigInt(settlement.recoveredTotalWei) === recoveryTotalWei, "settlement: recovered total mismatch");
+assert(Date.parse(settlement.generatedAt) >= Number(latestReleaseTime) * 1000, "settlement: generated before latest release window");
+assert(fullAddress(settlement.owner), "settlement: malformed owner");
+const sourceRuns = new Map([["calibration", parsed.calibration], ["covered", parsed.covered]]);
+for (const item of settlement.settlements) {
+  const source = sourceRuns.get(item.sourceRun);
+  assert(source, `settlement: unknown source run ${item.sourceRun}`);
+  const scenario = source.scenarios.find((candidate) => candidate.mode === item.mode);
+  assert(scenario, `settlement: missing source scenario ${item.sourceRun}/${item.mode}`);
+  assert(item.contractAddress.toLowerCase() === scenario.contractAddress.toLowerCase(), "settlement: contract mismatch");
+  assert(item.recipient.toLowerCase() === settlement.owner.toLowerCase(), "settlement: recipient mismatch");
+  assert(BigInt(item.amountWei) === BigInt(scenario.remainingBondWei), "settlement: amount mismatch");
+  assert(fullHash(item.transactionHash) && fullHash(item.blockHash), "settlement: malformed transaction or block hash");
+  assert(BigInt(item.gasCostWei) === BigInt(item.gasUsed) * BigInt(item.effectiveGasPrice), "settlement: gas arithmetic mismatch");
+}
+assert(settlement.settlements.length === 6, "settlement: expected six receipts");
 console.log(
   `CHIADO_SETTLEMENT_PLAN=PASS contracts=6 remainingWei=${recoveryTotalWei} latestReleaseTime=${latestReleaseTime}`,
 );
@@ -96,4 +119,6 @@ console.log("CHIADO_CANONICAL_COPY_IDENTITY=PASS");
 console.log("CHIADO_FULL_ADDRESSES_TX_AND_BLOCK_HASHES=PASS");
 console.log("CHIADO_CALIBRATION_STATUS=PASS");
 console.log("CHIADO_FRESH_EXECUTION_STATUS=PASS");
+console.log("CHIADO_SETTLEMENT_RECEIPTS=PASS contracts=6 recoveredWei=108000000000000000");
+console.log("CHIADO_POST_WINDOW_TIMING=PASS");
 console.log("CHIADO_PRESERVED_RESULTS=PASS");

@@ -196,9 +196,9 @@ def build_certificate(root: Path) -> dict[str, Any]:
         "inputs": {
             label: {
                 "path": (
-                    str(path.relative_to(root)).replace("\\", "/")
-                    if label != "checker" and path.is_relative_to(root)
-                    else ("review_revision/verify_completeness_certificates_v1.py" if label == "checker" else str(path).replace("\\", "/"))
+                    "reviewer_revision_v76/verify_completeness_certificates_v1.py"
+                    if label == "checker"
+                    else "joint_incidence_refinement/" + str(path.relative_to(refinement_dir)).replace("\\", "/")
                 ),
                 "sha256": input_hashes[label],
                 "digest_kind": "canonical-json-minus-buildInfoId" if label == "artifact" else "raw-file",

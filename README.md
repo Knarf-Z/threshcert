@@ -112,6 +112,19 @@ defines every experiment and its interpretation boundary.
 
 ## Reproduce
 
+For the v77 review certificate, run the single public entry below. It checks
+the committed manifests, installs the locked EVM dependencies, and executes
+the C6/B5 certificates, finite-world global certificate, negative controls,
+18 EVM tests, deployment admission, and refinement checks:
+
+```bash
+python reproduce_v77.py
+```
+
+Expected final line: `v77_public_review_artifact=PASS`. The command is offline
+after `npm ci` has obtained the lockfile-pinned dependencies; it performs no
+public-chain write and does not contain or reproduce the paper.
+
 Run every offline, deterministic check from one entry point:
 
 ```bash

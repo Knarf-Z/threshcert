@@ -47,7 +47,7 @@
     },
     "fullSuitePassing": 18,
     "inputs": {
-      "compiledArtifactSha256": "50abde973222781634b58b7921f6fc04653e09f42dc15db58c6f99313acc4cb7",
+      "compiledArtifactSemanticSha256": "f084893f66e5aeb09de09c048164406747abce98f9ce09086e76185ef6cfec34",
       "sourceSha256": "439468735aa45c0a992986ad945354198c3adaaa337c45cfdf9784a3526f9762",
       "testSha256": "209ebcb02b53ec5aa662eb6478acfdee00cf7ef0301a70b930451806d80efeb8"
     },
@@ -56,7 +56,7 @@
     "status": "PASS",
     "transcript": {
       "path": "results/global_named_acquirer_toy_evm.log",
-      "sha256": "60c4458c40be81a59596962a60746c030dbbe69bd96f8e83f73c0806a24a528a"
+      "sha256": "3f2a00387c7255307d8f4d939e9b4a4533b84932d7d0a324660e217d2373f70f"
     }
   },
   "gates": {
@@ -82,13 +82,13 @@
     }
   },
   "inputs": {
-    "compiledArtifactSha256": "50abde973222781634b58b7921f6fc04653e09f42dc15db58c6f99313acc4cb7",
-    "evmEvidenceSha256": "58dcd2b351383c9526daa375d010eaf2fe82943fc0991eec0e0e3c5af78cd357",
-    "evmTranscriptSha256": "60c4458c40be81a59596962a60746c030dbbe69bd96f8e83f73c0806a24a528a",
+    "compiledArtifactSemanticSha256": "f084893f66e5aeb09de09c048164406747abce98f9ce09086e76185ef6cfec34",
+    "evmEvidenceSha256": "4fdd16b6d66955416d02fe8ff3ceb833e597d417a16302cc27ba3bab03c12049",
+    "evmTranscriptSha256": "3f2a00387c7255307d8f4d939e9b4a4533b84932d7d0a324660e217d2373f70f",
     "modelSha256": "2eb5eb860e2da30fbfa94dcf103ff22ea1f89cbffb1e2da6e9ad4b5709ebf9b1",
     "sourceSha256": "439468735aa45c0a992986ad945354198c3adaaa337c45cfdf9784a3526f9762",
     "testSha256": "209ebcb02b53ec5aa662eb6478acfdee00cf7ef0301a70b930451806d80efeb8",
-    "verifierSha256": "722a85e681875510ac92408993175ce014aac42aaa5868a721d30e4a07ba30a5"
+    "verifierSha256": "fd73155307beba9f3bbca0d2f3de5bbed72b8a8ab4d0fd90440efd5fa7d5eba5"
   },
   "interfaceAblation": [
     {

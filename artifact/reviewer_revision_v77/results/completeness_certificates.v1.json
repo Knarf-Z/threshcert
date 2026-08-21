@@ -151587,7 +151587,7 @@
     "artifact": {
       "digest_kind": "canonical-json-minus-buildInfoId",
       "path": "joint_incidence_refinement/artifacts/contracts/OverlappingPoolEscrow.sol/OverlappingPoolEscrow.json",
-      "sha256": "f7eb23f7831c734db5dfc09dce2acc3757876b942ef4c77fd16c804cf37140c7"
+      "sha256": "047744077388a6a7c5d2cb0bf30c361075e881116a9b95425a0f354fd8e8eeff"
     },
     "checker": {
       "digest_kind": "raw-file",
@@ -151602,12 +151602,12 @@
     "deployment": {
       "digest_kind": "raw-file",
       "path": "joint_incidence_refinement/results/deployment_admission_certificate.json",
-      "sha256": "41fb91a3a1615c18d75022fbfaf1868020856b3fb178187a78f1423623480b16"
+      "sha256": "ec1c47de0c4c56969362e16b51057d00dacc3077ac110bcd355b34b0aef546bb"
     },
     "deployment_negative": {
       "digest_kind": "raw-file",
       "path": "joint_incidence_refinement/results/deployment_admission_negative.json",
-      "sha256": "5534145441f9f540bcc6812c04c3c08895b0fb441ce45759c41aea11b56528ec"
+      "sha256": "2dc8661126f0c6a4ee471eb203469d6038e404c465b5db96a31e6196baa30a82"
     },
     "halmos": {
       "digest_kind": "raw-file",
@@ -151632,7 +151632,7 @@
     "refinement": {
       "digest_kind": "raw-file",
       "path": "joint_incidence_refinement/results/refinement_certificate.json",
-      "sha256": "b848ad78aca16ea411c3894037510e474d188ae8664e36b303d736ec22429ccf"
+      "sha256": "0e9f76e0e75a86215075ad24d9f028c8b9af8edad94aa944ab678275097f363c"
     }
   },
   "schema": "fc-c6-b5-completeness-certificate/v1",

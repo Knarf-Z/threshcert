@@ -214,10 +214,16 @@ def validate_evm(model: dict) -> dict:
         raise ValueError("bad EVM evidence status")
     if evidence["fullSuitePassing"] != 18 or evidence["namedTestCases"] != 6:
         raise ValueError("unexpected EVM test counts")
+    artifact = load_json(paths["compiledArtifact"])
+    semantic_artifact = dict(artifact)
+    semantic_artifact.pop("buildInfoId", None)
+    artifact_semantic_sha256 = hashlib.sha256(
+        json.dumps(semantic_artifact, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
     if evidence["inputs"] != {
         "sourceSha256": digest(paths["source"]),
         "testSha256": digest(paths["test"]),
-        "compiledArtifactSha256": digest(paths["compiledArtifact"]),
+        "compiledArtifactSemanticSha256": artifact_semantic_sha256,
     }:
         raise ValueError("EVM evidence input hash mismatch")
     if evidence["transcript"] != {
@@ -226,7 +232,6 @@ def validate_evm(model: dict) -> dict:
     }:
         raise ValueError("EVM transcript mismatch")
 
-    artifact = load_json(paths["compiledArtifact"])
     runtime = bytes.fromhex(artifact["deployedBytecode"][2:])
     if evidence["compiledRuntime"] != {"bytes": len(runtime), "sha256": hashlib.sha256(runtime).hexdigest()}:
         raise ValueError("compiled runtime mismatch")
@@ -400,7 +405,13 @@ def build_certificate(model: dict) -> dict:
             "modelSha256": digest(MODEL_PATH),
             "sourceSha256": digest(binding["source"]),
             "testSha256": digest(binding["test"]),
-            "compiledArtifactSha256": digest(binding["compiledArtifact"]),
+            "compiledArtifactSemanticSha256": hashlib.sha256(
+                json.dumps(
+                    {key: value for key, value in load_json(binding["compiledArtifact"]).items() if key != "buildInfoId"},
+                    sort_keys=True,
+                    separators=(",", ":"),
+                ).encode("utf-8")
+            ).hexdigest(),
             "evmEvidenceSha256": digest(binding["evidence"]),
             "evmTranscriptSha256": digest(binding["transcript"]),
             "verifierSha256": digest(Path(__file__).resolve()),

@@ -31,6 +31,8 @@ def main() -> None:
 
     run(node, "artifact/build_manifest.mjs", "--check")
     run(sys.executable, "scripts/verify_manifest.py")
+    run(npm, "ci", "--no-audit", "--no-fund", cwd=EVM)
+    run(npm, "run", "typecheck", cwd=EVM)
     run(
         sys.executable,
         "artifact/reviewer_revision_v77/verify_completeness_certificates_v1.py",
@@ -42,8 +44,6 @@ def main() -> None:
         sys.executable,
         "artifact/reviewer_revision_v77/test_completeness_negative_controls_v1.py",
     )
-    run(npm, "ci", "--no-audit", "--no-fund", cwd=EVM)
-    run(npm, "run", "typecheck", cwd=EVM)
     run(npm, "test", cwd=EVM)
     run(
         sys.executable,

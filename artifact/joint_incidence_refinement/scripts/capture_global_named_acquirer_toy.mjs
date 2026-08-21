@@ -40,6 +40,16 @@ const [source, test, artifactBytes] = await Promise.all([
 const artifact = JSON.parse(artifactBytes);
 const runtime = Buffer.from(artifact.deployedBytecode.slice(2), "hex");
 const sha = (bytes) => createHash("sha256").update(bytes).digest("hex");
+const canonical = (value) => {
+  if (Array.isArray(value)) return value.map(canonical);
+  if (value !== null && typeof value === "object") {
+    return Object.fromEntries(Object.keys(value).sort().map((key) => [key, canonical(value[key])]));
+  }
+  return value;
+};
+const semanticArtifact = { ...artifact };
+delete semanticArtifact.buildInfoId;
+const artifactSemanticSha256 = sha(Buffer.from(JSON.stringify(canonical(semanticArtifact))));
 const results = path.join(ROOT, "results");
 await mkdir(results, { recursive: true });
 const logPath = path.join(results, "global_named_acquirer_toy_evm.log");
@@ -52,7 +62,7 @@ const evidence = {
   inputs: {
     sourceSha256: sha(source),
     testSha256: sha(test),
-    compiledArtifactSha256: sha(artifactBytes),
+    compiledArtifactSemanticSha256: artifactSemanticSha256,
   },
   compiledRuntime: {
     bytes: runtime.length,

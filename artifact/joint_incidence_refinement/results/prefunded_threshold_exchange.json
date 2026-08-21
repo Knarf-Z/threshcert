@@ -4,7 +4,7 @@
   "constructionBoundary": "contract-language only; usable-share verifier, threshold-set registry, funding provenance, beneficial-control separation, and off-contract routes remain external evidence",
   "certifiedMinimumOutflowWei": "10000000000000000000",
   "namedTestCases": 5,
-  "fullSuitePassing": 12,
+  "fullSuitePassing": 18,
   "inputs": {
     "sourceSha256": "0514aeeb1a6f21972ddac462099484faf797a316e865a6e8a594a4b762bb9a2e",
     "mockDependenciesSha256": "0ace5fe98acad8b18938f9cdd02a804847b00888ddd41fe3e2d7a024ace3247e",
@@ -17,6 +17,6 @@
   },
   "transcript": {
     "path": "results/prefunded_threshold_exchange.log",
-    "sha256": "803d6c14a2adb2c855e5cad78dcd2ff9bad1d4f641ef7706d33f2ad96c45b24a"
+    "sha256": "fc38f179352f1f6260f64fe71f5f4688345a1ac5c0eda02c530b052d4ca8cf66"
   }
 }

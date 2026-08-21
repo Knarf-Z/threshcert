@@ -196,7 +196,7 @@ def build_certificate(root: Path) -> dict[str, Any]:
         "inputs": {
             label: {
                 "path": (
-                    "reviewer_revision_v76/verify_completeness_certificates_v1.py"
+                    "reviewer_revision_v77/verify_completeness_certificates_v1.py"
                     if label == "checker"
                     else "joint_incidence_refinement/" + str(path.relative_to(refinement_dir)).replace("\\", "/")
                 ),

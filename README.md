@@ -305,6 +305,31 @@ and execute a 4-unit minimizing transaction. The fixture establishes the
 declared finite state--set relation and payment equality at contract level.
 It does not establish ultimate beneficial ownership or attacker-independence
 of the pool funds, production member costs, or a real collusion price.
+## Finite global named-acquirer certificate (v77)
+
+The v77 artifact adds a separate positive instance whose complete declared toy
+world contains four accounts, a singleton buyer control closure, explicit initial
+balances, no external-funding or return events, and five possible actions. The
+Solidity harness requires a five-ether-denominated simulated debit before two
+fixed members can certify a buyer/resource-bound output. An independent Python
+checker enumerates all 8 reachable states, 9 enabled transitions, and both
+first-success routes; B1--B5 all pass and the result is
+`GLOBAL-NAMED-ACQUIRER-CERTIFIED(5000000000000000000)` simulated wei.
+
+```powershell
+cd artifact\joint_incidence_refinement
+npm ci --no-audit --no-fund
+npm run typecheck
+npm test
+py -3.11 ..\global_named_acquirer_toy\verify_global_named_acquirer_toy.py --verify --self-test
+```
+
+Six single-gate negative controls and two interface-ablation cases are committed.
+In each ablation, equating a positive contract-local debit with global payment
+would falsely emit `CERTIFIED(g)`; sponsor funding or a complete return instead
+makes the typed global floor zero. The positive result is therefore global only
+inside the fully enumerated finite toy world, not a production or Internet-wide
+beneficial-control claim.
 
 ## Production deployment evidence audit
 

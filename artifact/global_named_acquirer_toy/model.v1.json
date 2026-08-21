@@ -1,0 +1,46 @@
+{
+  "schema": "global-named-acquirer-toy-world/v1",
+  "claim": {
+    "namedAcquirer": "buyer",
+    "accountingUnit": "simulated-wei",
+    "certifiedFloor": "5000000000000000000",
+    "window": [0, 5],
+    "successPredicate": "both committed shares accepted and usable output commitment nonzero"
+  },
+  "worldClosure": {
+    "finite": true,
+    "accounts": ["buyer", "exchange", "member_a", "member_b"],
+    "controlEdges": [],
+    "namedAcquirerControlClosure": ["buyer"],
+    "initialBalances": {
+      "buyer": "10000000000000000000",
+      "exchange": "0",
+      "member_a": "0",
+      "member_b": "0"
+    },
+    "externalFundingEvents": [],
+    "returnOrReimbursementEvents": [],
+    "mechanismUniverseComplete": true
+  },
+  "mechanism": {
+    "actions": ["open", "submit_a", "submit_b", "withdraw_a", "withdraw_b"],
+    "openDebit": "5000000000000000000",
+    "memberCredits": {
+      "member_a": "2000000000000000000",
+      "member_b": "3000000000000000000"
+    },
+    "successfulRoutes": [
+      ["open", "submit_a", "submit_b"],
+      ["open", "submit_b", "submit_a"]
+    ],
+    "buyerRefundAction": null,
+    "bypassSuccessAction": null
+  },
+  "evmBinding": {
+    "source": "../joint_incidence_refinement/contracts/GlobalNamedAcquirerToy.sol",
+    "test": "../joint_incidence_refinement/test/GlobalNamedAcquirerToy.ts",
+    "compiledArtifact": "../joint_incidence_refinement/artifacts/contracts/GlobalNamedAcquirerToy.sol/GlobalNamedAcquirerToy.json",
+    "evidence": "../joint_incidence_refinement/results/global_named_acquirer_toy_evm.json",
+    "transcript": "../joint_incidence_refinement/results/global_named_acquirer_toy_evm.log"
+  }
+}

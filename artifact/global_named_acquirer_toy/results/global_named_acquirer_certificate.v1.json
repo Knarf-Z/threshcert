@@ -1,0 +1,223 @@
+{
+  "claim": {
+    "accountingUnit": "simulated-wei",
+    "certifiedFloor": "5000000000000000000",
+    "namedAcquirer": "buyer",
+    "successPredicate": "both committed shares accepted and usable output commitment nonzero",
+    "window": [
+      0,
+      5
+    ]
+  },
+  "enumeration": {
+    "enabledTransitions": 9,
+    "firstSuccessRoutes": 2,
+    "reachableStates": 8,
+    "routeRecords": [
+      {
+        "actions": [
+          "open",
+          "submit_a",
+          "submit_b"
+        ],
+        "boundaryDebit": "5000000000000000000",
+        "externalFunding": "0",
+        "netNamedAcquirerOutflow": "5000000000000000000",
+        "returnsOrReimbursement": "0",
+        "usableOutput": true
+      },
+      {
+        "actions": [
+          "open",
+          "submit_b",
+          "submit_a"
+        ],
+        "boundaryDebit": "5000000000000000000",
+        "externalFunding": "0",
+        "netNamedAcquirerOutflow": "5000000000000000000",
+        "returnsOrReimbursement": "0",
+        "usableOutput": true
+      }
+    ]
+  },
+  "evm": {
+    "compiledRuntime": {
+      "bytes": 2124,
+      "sha256": "8aef27a420c25445f7a5b7424b4e3c652624f1f017535b771ecb92b920362bb3"
+    },
+    "fullSuitePassing": 18,
+    "inputs": {
+      "compiledArtifactSha256": "50abde973222781634b58b7921f6fc04653e09f42dc15db58c6f99313acc4cb7",
+      "sourceSha256": "439468735aa45c0a992986ad945354198c3adaaa337c45cfdf9784a3526f9762",
+      "testSha256": "209ebcb02b53ec5aa662eb6478acfdee00cf7ef0301a70b930451806d80efeb8"
+    },
+    "namedTestCases": 6,
+    "schema": "global-named-acquirer-toy-evm/v1",
+    "status": "PASS",
+    "transcript": {
+      "path": "results/global_named_acquirer_toy_evm.log",
+      "sha256": "60c4458c40be81a59596962a60746c030dbbe69bd96f8e83f73c0806a24a528a"
+    }
+  },
+  "gates": {
+    "B1": {
+      "evidence": "both fixed share commitments imply a nonzero buyer/resource-bound output commitment",
+      "status": "PASS"
+    },
+    "B2": {
+      "evidence": "buyer starts with 10e18 units, pays 5e18, and the complete action universe has no funding action",
+      "status": "PASS"
+    },
+    "B3": {
+      "evidence": "every first-success trace starts with the irreversible open debit",
+      "status": "PASS"
+    },
+    "B4": {
+      "evidence": "singleton buyer control closure; no refund, reimbursement, circular return, or buyer credit transition",
+      "status": "PASS"
+    },
+    "B5": {
+      "evidence": "all enabled actions enumerated; exactly two first-success routes match the supplied route inventory",
+      "status": "PASS"
+    }
+  },
+  "inputs": {
+    "compiledArtifactSha256": "50abde973222781634b58b7921f6fc04653e09f42dc15db58c6f99313acc4cb7",
+    "evmEvidenceSha256": "58dcd2b351383c9526daa375d010eaf2fe82943fc0991eec0e0e3c5af78cd357",
+    "evmTranscriptSha256": "60c4458c40be81a59596962a60746c030dbbe69bd96f8e83f73c0806a24a528a",
+    "modelSha256": "2eb5eb860e2da30fbfa94dcf103ff22ea1f89cbffb1e2da6e9ad4b5709ebf9b1",
+    "sourceSha256": "439468735aa45c0a992986ad945354198c3adaaa337c45cfdf9784a3526f9762",
+    "testSha256": "209ebcb02b53ec5aa662eb6478acfdee00cf7ef0301a70b930451806d80efeb8",
+    "verifierSha256": "722a85e681875510ac92408993175ce014aac42aaa5868a721d30e4a07ba30a5"
+  },
+  "interfaceAblation": [
+    {
+      "case": "outside sponsor supplies the five-unit debit",
+      "mutation": {
+        "bypass_success": false,
+        "debit_before_output": true,
+        "external_funding": 5000000000000000000,
+        "return_to_closure": 0,
+        "usable_output": true
+      },
+      "naiveLocalEqualsGlobal": "CERTIFIED(5000000000000000000)",
+      "typedGlobalOutflow": "0",
+      "typedVerdict": "MODEL-REFUTED(5000000000000000000)"
+    },
+    {
+      "case": "five units return to the buyer after local success",
+      "mutation": {
+        "bypass_success": false,
+        "debit_before_output": true,
+        "external_funding": 0,
+        "return_to_closure": 5000000000000000000,
+        "usable_output": true
+      },
+      "naiveLocalEqualsGlobal": "CERTIFIED(5000000000000000000)",
+      "typedGlobalOutflow": "0",
+      "typedVerdict": "MODEL-REFUTED(5000000000000000000)"
+    }
+  ],
+  "negativeControls": [
+    {
+      "expectedFailedGate": "B1",
+      "expectedVerdict": "UNKNOWN",
+      "mutation": {
+        "bypass_success": false,
+        "debit_before_output": true,
+        "external_funding": 0,
+        "return_to_closure": 0,
+        "usable_output": false
+      },
+      "name": "missing_usable_output",
+      "observedFailedGate": "B1",
+      "observedOutflow": "5000000000000000000",
+      "observedVerdict": "UNKNOWN",
+      "status": "PASS"
+    },
+    {
+      "expectedFailedGate": "B2",
+      "expectedVerdict": "MODEL-REFUTED",
+      "mutation": {
+        "bypass_success": false,
+        "debit_before_output": true,
+        "external_funding": 5000000000000000000,
+        "return_to_closure": 0,
+        "usable_output": true
+      },
+      "name": "outside_sponsor_funds_exact_debit",
+      "observedFailedGate": "B2",
+      "observedOutflow": "0",
+      "observedVerdict": "MODEL-REFUTED",
+      "status": "PASS"
+    },
+    {
+      "expectedFailedGate": "B3",
+      "expectedVerdict": "UNKNOWN",
+      "mutation": {
+        "bypass_success": false,
+        "debit_before_output": false,
+        "external_funding": 0,
+        "return_to_closure": 0,
+        "usable_output": true
+      },
+      "name": "output_precedes_irreversible_debit",
+      "observedFailedGate": "B3",
+      "observedOutflow": "5000000000000000000",
+      "observedVerdict": "UNKNOWN",
+      "status": "PASS"
+    },
+    {
+      "expectedFailedGate": "B4",
+      "expectedVerdict": "MODEL-REFUTED",
+      "mutation": {
+        "bypass_success": false,
+        "debit_before_output": true,
+        "external_funding": 0,
+        "return_to_closure": 5000000000000000000,
+        "usable_output": true
+      },
+      "name": "buyer_receives_complete_return",
+      "observedFailedGate": "B4",
+      "observedOutflow": "0",
+      "observedVerdict": "MODEL-REFUTED",
+      "status": "PASS"
+    },
+    {
+      "expectedFailedGate": "B4",
+      "expectedVerdict": "MODEL-REFUTED",
+      "mutation": {
+        "bypass_success": false,
+        "debit_before_output": true,
+        "external_funding": 0,
+        "return_to_closure": 2000000000000000000,
+        "usable_output": true
+      },
+      "name": "member_a_added_to_buyer_control_closure",
+      "observedFailedGate": "B4",
+      "observedOutflow": "3000000000000000000",
+      "observedVerdict": "MODEL-REFUTED",
+      "status": "PASS"
+    },
+    {
+      "expectedFailedGate": "B5",
+      "expectedVerdict": "MODEL-REFUTED",
+      "mutation": {
+        "bypass_success": true,
+        "debit_before_output": true,
+        "external_funding": 0,
+        "return_to_closure": 0,
+        "usable_output": true
+      },
+      "name": "unlisted_zero_debit_success_bypass",
+      "observedFailedGate": "B5",
+      "observedOutflow": "0",
+      "observedVerdict": "MODEL-REFUTED",
+      "status": "PASS"
+    }
+  ],
+  "schema": "global-named-acquirer-certificate/v1",
+  "scope": "complete finite declared toy world only; not an Internet-wide or production-control claim",
+  "status": "PASS",
+  "verdict": "GLOBAL-NAMED-ACQUIRER-CERTIFIED(5000000000000000000)"
+}

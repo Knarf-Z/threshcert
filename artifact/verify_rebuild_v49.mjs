@@ -55,7 +55,7 @@ const admissionTemp = path.join(os.tmpdir(), `threshcert-v49-admission-${process
 const testEnv = { ...process.env, DEPLOYMENT_ADMISSION_RESULT: admissionTemp };
 const tests = execute(process.execPath, [hardhat, "test"], { cwd: refinement, capture: true, timeout: 300000, env: testEnv });
 process.stdout.write(tests);
-if (!tests.includes("12 passing") || !tests.includes("PrefundedThresholdExchange positive bridge")) throw new Error("Hardhat 12-test closure missing");
+if (!tests.includes("18 passing") || !tests.includes("PrefundedThresholdExchange positive bridge") || !tests.includes("GlobalNamedAcquirerToy finite-world bridge")) throw new Error("Hardhat 18-test closure missing");
 const freshAdmission = JSON.parse(await readFile(admissionTemp, "utf8"));
 const canonicalAdmission = JSON.parse(await readFile(path.join(refinement, "results", "deployment_admission_local.json"), "utf8"));
 if (!/^0x[0-9a-f]{64}$/i.test(freshAdmission.chain.blockHash) || freshAdmission.deployment.receiptBlockHash.toLowerCase() !== freshAdmission.chain.blockHash.toLowerCase()) throw new Error("fresh local block-hash relation failed");
@@ -94,6 +94,7 @@ execute(process.execPath, ["verify_offline_v49.mjs"], { cwd: path.join(root, "th
 execute(process.execPath, ["scripts/verify_raw_capture_v48.mjs"], { cwd: path.join(root, "threshold_deployment_audit") });
 execute(process.execPath, ["verify_refinement.mjs"], { cwd: refinement });
 execute(process.execPath, ["verify_prefunded_exchange.mjs"], { cwd: refinement });
+execute(python, [path.join(root, "global_named_acquirer_toy", "verify_global_named_acquirer_toy.py"), "--verify", "--self-test"]);
 execute(process.execPath, ["build_manifest.mjs", "--check"], { cwd: root });
 console.log(`REBUILD_VERIFICATION_SECONDS=${Math.ceil((Date.now() - started) / 1000)}`);
 console.log("V49_FRESH_REBUILD=PASS");

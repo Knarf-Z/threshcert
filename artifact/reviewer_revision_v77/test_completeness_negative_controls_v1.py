@@ -1,4 +1,4 @@
-"""Negative controls for the v76 C6/B5 completeness certificate."""
+"""Negative controls for the v77 C6/B5 completeness certificate."""
 
 from __future__ import annotations
 
@@ -31,7 +31,7 @@ def main() -> int:
         root / "artifact/joint_incidence_refinement",
     ]
     refinement = next((path for path in refinement_candidates if path.is_dir()), refinement_candidates[0])
-    review_candidates = [root / "reviewer_revision_v76", root / "review_revision", root / "artifact/reviewer_revision_v76"]
+    review_candidates = [root / "reviewer_revision_v77", root / "review_revision", root / "artifact/reviewer_revision_v77"]
     review_dir = next((path for path in review_candidates if path.is_dir()), review_candidates[0])
     result_candidates = [root / "results", review_dir / "results"]
     result_dir = next((path for path in result_candidates if (path / "completeness_certificates.v1.json").is_file()), result_candidates[-1])
@@ -49,7 +49,7 @@ def main() -> int:
     certificate = json.loads(certificate_path.read_text(encoding="utf-8"))
     controls: list[dict[str, Any]] = []
 
-    with tempfile.TemporaryDirectory(prefix="fc-v76-") as tmp_name:
+    with tempfile.TemporaryDirectory(prefix="fc-v77-") as tmp_name:
         tmp = Path(tmp_name)
         metadata_drift = dict(artifact)
         metadata_drift["buildInfoId"] = "deliberate-nonsemantic-drift"

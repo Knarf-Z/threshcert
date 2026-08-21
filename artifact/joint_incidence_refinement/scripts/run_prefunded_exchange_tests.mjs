@@ -9,7 +9,7 @@ const hardhat = path.join(ROOT, "node_modules", "hardhat", "dist", "src", "cli.j
 const run = spawnSync(process.execPath, [hardhat, "test"], { cwd: ROOT, encoding: "utf8", shell: false, env: process.env });
 const transcript = `${run.stdout ?? ""}${run.stderr ?? ""}`.replaceAll(ROOT, "<ARTIFACT_ROOT>").trimEnd() + "\n";
 if (run.error) throw run.error;
-if (run.status !== 0 || !transcript.includes("PrefundedThresholdExchange positive bridge") || !transcript.includes("12 passing")) {
+if (run.status !== 0 || !transcript.includes("PrefundedThresholdExchange positive bridge") || !transcript.includes("18 passing")) {
   process.stderr.write(transcript);
   process.exit(run.status ?? 1);
 }
@@ -35,7 +35,7 @@ const certificate = {
   constructionBoundary: "contract-language only; usable-share verifier, threshold-set registry, funding provenance, beneficial-control separation, and off-contract routes remain external evidence",
   certifiedMinimumOutflowWei: "10000000000000000000",
   namedTestCases: 5,
-  fullSuitePassing: 12,
+  fullSuitePassing: 18,
   inputs: {
     sourceSha256: sha(source),
     mockDependenciesSha256: sha(registry),

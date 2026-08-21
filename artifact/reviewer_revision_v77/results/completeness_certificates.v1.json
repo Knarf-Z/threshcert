@@ -151591,8 +151591,8 @@
     },
     "checker": {
       "digest_kind": "raw-file",
-      "path": "reviewer_revision_v76/verify_completeness_certificates_v1.py",
-      "sha256": "f3cf0cf6085be5b9480353cac7a1cfee8030cdc4074ce0c4bd85495048df5356"
+      "path": "reviewer_revision_v77/verify_completeness_certificates_v1.py",
+      "sha256": "fc1ae83983f2e072372266ca2cacd921bbbf8897e74e3eef0e75af90d4feca33"
     },
     "contract": {
       "digest_kind": "raw-file",

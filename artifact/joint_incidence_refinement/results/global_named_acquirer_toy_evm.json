@@ -1,0 +1,19 @@
+{
+  "schema": "global-named-acquirer-toy-evm/v1",
+  "status": "PASS",
+  "fullSuitePassing": 18,
+  "namedTestCases": 6,
+  "inputs": {
+    "sourceSha256": "439468735aa45c0a992986ad945354198c3adaaa337c45cfdf9784a3526f9762",
+    "testSha256": "209ebcb02b53ec5aa662eb6478acfdee00cf7ef0301a70b930451806d80efeb8",
+    "compiledArtifactSha256": "50abde973222781634b58b7921f6fc04653e09f42dc15db58c6f99313acc4cb7"
+  },
+  "compiledRuntime": {
+    "bytes": 2124,
+    "sha256": "8aef27a420c25445f7a5b7424b4e3c652624f1f017535b771ecb92b920362bb3"
+  },
+  "transcript": {
+    "path": "results/global_named_acquirer_toy_evm.log",
+    "sha256": "60c4458c40be81a59596962a60746c030dbbe69bd96f8e83f73c0806a24a528a"
+  }
+}

@@ -1,5 +1,18 @@
 # ThreshCert artifact changelog
 
+## 2026-08-21 v77 finite-world global certificate
+
+- Added `GlobalNamedAcquirerToy`, six EVM tests, a strict four-account world
+  model, and an independent state enumerator.
+- The checker covers 8 reachable states, 9 enabled transitions, and both
+  first-success routes; B1--B5 pass and certify exactly
+  `5,000,000,000,000,000,000` simulated wei in the declared finite world.
+- Six executable single-gate mutations and two local-equals-global ablations
+  recompute gate failures and global outflow rather than self-reporting them.
+- Published source, model, EVM transcript, certificate, verifier, workflow, and
+  nested SHA-256 manifests. No manuscript source or PDF is in this repository.
+- The OPE and Chiado production-facing named-acquirer verdicts remain `UNKNOWN`;
+  the toy closure is not exported to an open deployment.
 ## 2026-07-23 fourteenth pass: an FC-targeted narrative closing pass
 
 The user asked directly: why is evidence-relative certification an FC

@@ -8,3 +8,4 @@ halmos-out/
 preflight-out/
 !results/halmos_evm_bridge.log
 !results/prefunded_threshold_exchange.log
+!results/global_named_acquirer_toy_evm.log

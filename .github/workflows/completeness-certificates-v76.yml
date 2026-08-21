@@ -30,6 +30,10 @@ jobs:
         run: |
           node artifact/build_manifest.mjs --check
           python scripts/verify_manifest.py
+      - name: Verify committed C6/B5 certificate and controls
+        run: |
+          python artifact/reviewer_revision_v76/verify_completeness_certificates_v1.py --output reviewer_revision_v76/results/completeness_certificates.v1.json --verify
+          python artifact/reviewer_revision_v76/test_completeness_negative_controls_v1.py
       - name: Install locked EVM dependencies
         working-directory: artifact/joint_incidence_refinement
         run: npm ci --no-audit --no-fund
@@ -45,7 +49,3 @@ jobs:
           npm run admission:negative
           npm run refinement:check
           python verify_schema_independent.py
-      - name: Verify C6/B5 materialization and negative controls
-        run: |
-          python artifact/reviewer_revision_v76/verify_completeness_certificates_v1.py --output reviewer_revision_v76/results/completeness_certificates.v1.json --verify
-          python artifact/reviewer_revision_v76/test_completeness_negative_controls_v1.py

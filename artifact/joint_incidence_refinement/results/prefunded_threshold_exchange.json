@@ -9,7 +9,7 @@
     "sourceSha256": "0514aeeb1a6f21972ddac462099484faf797a316e865a6e8a594a4b762bb9a2e",
     "mockDependenciesSha256": "0ace5fe98acad8b18938f9cdd02a804847b00888ddd41fe3e2d7a024ace3247e",
     "testSha256": "47ca13b4f2f1be713993512e42c48763397918ece5e8d1d0438ada7ad244c737",
-    "compiledArtifactSha256": "76ea28565f0471d89ee9d87a980f5689c38979dbb8b145eb67f06fcc7ac594f9"
+    "compiledArtifactSemanticSha256": "a1d24c8263c54d245a7fb23d42a80fcee4401d75365cad355239f295081f137f"
   },
   "compiledRuntime": {
     "bytes": 3009,
@@ -17,6 +17,6 @@
   },
   "transcript": {
     "path": "results/prefunded_threshold_exchange.log",
-    "sha256": "e06865e9c5900291c499f8b2789ccea3276dd657219bd4caf9a2aa9f8c7078ec"
+    "sha256": "7629e29971a84eeb7efc1b6d5ed7c1020f8374c0ed701eabb97a9b9ad74885fd"
   }
 }

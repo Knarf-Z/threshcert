@@ -24,6 +24,16 @@ const [source, registry, test, artifactBytes] = await Promise.all([
 const artifact = JSON.parse(artifactBytes);
 const rawRuntime = Buffer.from(artifact.deployedBytecode.slice(2), "hex");
 const sha = (bytes) => createHash("sha256").update(bytes).digest("hex");
+const canonical = (value) => {
+  if (Array.isArray(value)) return value.map(canonical);
+  if (value !== null && typeof value === "object") {
+    return Object.fromEntries(Object.keys(value).sort().map((key) => [key, canonical(value[key])]));
+  }
+  return value;
+};
+const semanticArtifact = { ...artifact };
+delete semanticArtifact.buildInfoId;
+const artifactSemanticSha256 = sha(Buffer.from(JSON.stringify(canonical(semanticArtifact))));
 
 const results = path.join(ROOT, "results");
 await mkdir(results, { recursive: true });
@@ -40,7 +50,7 @@ const certificate = {
     sourceSha256: sha(source),
     mockDependenciesSha256: sha(registry),
     testSha256: sha(test),
-    compiledArtifactSha256: sha(artifactBytes),
+    compiledArtifactSemanticSha256: artifactSemanticSha256,
   },
   compiledRuntime: {
     bytes: rawRuntime.length,

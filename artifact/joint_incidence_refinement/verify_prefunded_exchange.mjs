@@ -5,6 +5,18 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const sha = (bytes) => createHash("sha256").update(bytes).digest("hex");
+const canonical = (value) => {
+  if (Array.isArray(value)) return value.map(canonical);
+  if (value !== null && typeof value === "object") {
+    return Object.fromEntries(Object.keys(value).sort().map((key) => [key, canonical(value[key])]));
+  }
+  return value;
+};
+const artifactSemanticHash = (artifact) => {
+  const copy = { ...artifact };
+  delete copy.buildInfoId;
+  return sha(Buffer.from(JSON.stringify(canonical(copy))));
+};
 const [source, mocks, test, artifactBytes, certificateBytes, transcript] = await Promise.all([
   readFile(path.join(ROOT, "contracts", "PrefundedThresholdExchange.sol")),
   readFile(path.join(ROOT, "contracts", "test", "MockThresholdBridgeDependencies.sol")),
@@ -19,7 +31,7 @@ if (certificate.schema !== "prefunded-threshold-exchange-test/v1" || certificate
 if (certificate.inputs.sourceSha256 !== sha(source)) throw new Error("source hash mismatch");
 if (certificate.inputs.mockDependenciesSha256 !== sha(mocks)) throw new Error("mock hash mismatch");
 if (certificate.inputs.testSha256 !== sha(test)) throw new Error("test hash mismatch");
-if (certificate.inputs.compiledArtifactSha256 !== sha(artifactBytes)) throw new Error("artifact hash mismatch");
+if (certificate.inputs.compiledArtifactSemanticSha256 !== artifactSemanticHash(artifact)) throw new Error("artifact semantic hash mismatch");
 if (certificate.transcript.sha256 !== sha(transcript)) throw new Error("transcript hash mismatch");
 if (!transcript.toString("utf8").includes("18 passing")) throw new Error("test transcript mismatch");
 

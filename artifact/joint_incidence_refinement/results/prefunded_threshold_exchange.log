@@ -6,7 +6,7 @@ Running Solidity tests
 Running node:test tests
 
   deployment admission fixture
-    ✔ captures a direct deployment with pinned runtime and constructor (911ms)
+    ✔ captures a direct deployment with pinned runtime and constructor (671ms)
 
   GlobalNamedAcquirerToy finite-world bridge
     ✔ requires the named buyer, exact five-ether prefunding, and one opening
@@ -17,8 +17,8 @@ Running node:test tests
     ✔ permits only member withdrawals and never returns value to the buyer
 
   OverlappingPoolEscrow residual-price fixture
-    ✔ checks the complete 117-by-35 discrete state-set grid (1036ms)
-    ✔ accepts exactly 117 of the 2,187 integer credit states (2085ms)
+    ✔ checks the complete 117-by-35 discrete state-set grid (856ms)
+    ✔ accepts exactly 117 of the 2,187 integer credit states (2493ms)
     ✔ realizes the exact four-unit minimizing execution
     ✔ enforces controller/member separation from the acquisition payer
     ✔ rejects cap violations, fractional credits, and duplicate sets

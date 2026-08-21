@@ -21,7 +21,7 @@ if (certificate.inputs.mockDependenciesSha256 !== sha(mocks)) throw new Error("m
 if (certificate.inputs.testSha256 !== sha(test)) throw new Error("test hash mismatch");
 if (certificate.inputs.compiledArtifactSha256 !== sha(artifactBytes)) throw new Error("artifact hash mismatch");
 if (certificate.transcript.sha256 !== sha(transcript)) throw new Error("transcript hash mismatch");
-if (!transcript.toString("utf8").includes("11 passing")) throw new Error("test transcript mismatch");
+if (!transcript.toString("utf8").includes("12 passing")) throw new Error("test transcript mismatch");
 
 const runtime = Buffer.from(artifact.deployedBytecode.slice(2), "hex");
 if (certificate.compiledRuntime.bytes !== runtime.length || certificate.compiledRuntime.sha256 !== sha(runtime)) throw new Error("runtime mismatch");

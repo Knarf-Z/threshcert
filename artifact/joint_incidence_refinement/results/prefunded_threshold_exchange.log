@@ -1,0 +1,29 @@
+No contracts to compile
+
+Running Solidity tests
+
+
+Running node:test tests
+
+  deployment admission fixture
+    ✔ captures a direct deployment with pinned runtime and constructor (1668ms)
+
+  OverlappingPoolEscrow residual-price fixture
+    ✔ checks the complete 117-by-35 discrete state-set grid (2041ms)
+    ✔ accepts exactly 117 of the 2,187 integer credit states (2340ms)
+    ✔ realizes the exact four-unit minimizing execution
+    ✔ enforces controller/member separation from the acquisition payer
+    ✔ rejects cap violations, fractional credits, and duplicate sets
+
+  PrefundedThresholdExchange positive bridge
+    ✔ requires exact buyer prefunding and a registry-approved threshold set
+    ✔ rejects buyer-as-member, duplicate members, and zero payment
+    ✔ rejects outsider, invalid proof, and replay
+    ✔ successful acquisition implies the exact prefunded outflow and member credits
+    ✔ contains no buyer cancellation or refund entry and only members withdraw credits
+
+  receipt-gated threshold bridge capture
+    ✔ records a real successful OPE receipt and a real underpayment revert
+
+
+12 passing (12 nodejs)

@@ -55,7 +55,7 @@ const admissionTemp = path.join(os.tmpdir(), `threshcert-v49-admission-${process
 const testEnv = { ...process.env, DEPLOYMENT_ADMISSION_RESULT: admissionTemp };
 const tests = execute(process.execPath, [hardhat, "test"], { cwd: refinement, capture: true, timeout: 300000, env: testEnv });
 process.stdout.write(tests);
-if (!tests.includes("11 passing") || !tests.includes("PrefundedThresholdExchange positive bridge")) throw new Error("Hardhat 11-test closure missing");
+if (!tests.includes("12 passing") || !tests.includes("PrefundedThresholdExchange positive bridge")) throw new Error("Hardhat 12-test closure missing");
 const freshAdmission = JSON.parse(await readFile(admissionTemp, "utf8"));
 const canonicalAdmission = JSON.parse(await readFile(path.join(refinement, "results", "deployment_admission_local.json"), "utf8"));
 if (!/^0x[0-9a-f]{64}$/i.test(freshAdmission.chain.blockHash) || freshAdmission.deployment.receiptBlockHash.toLowerCase() !== freshAdmission.chain.blockHash.toLowerCase()) throw new Error("fresh local block-hash relation failed");
@@ -68,7 +68,7 @@ const normalizeAdmission = (record) => {
 if (JSON.stringify(normalizeAdmission(freshAdmission)) !== JSON.stringify(normalizeAdmission(canonicalAdmission))) throw new Error("fresh deployment admission differs outside ephemeral local block hashes");
 if (path.dirname(admissionTemp) !== path.resolve(os.tmpdir()) || !path.basename(admissionTemp).startsWith("threshcert-v49-admission-")) throw new Error("unsafe admission temp path");
 await rm(admissionTemp, { force: true });
-console.log("HARDHAT_RECOMPILE_11_TESTS_AND_ADMISSION_REGENERATION=PASS");
+console.log("HARDHAT_RECOMPILE_12_TESTS_AND_ADMISSION_REGENERATION=PASS");
 
 const python = await halmosPython();
 const forge = forgePath();

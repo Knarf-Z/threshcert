@@ -7,3 +7,4 @@ out/
 halmos-out/
 preflight-out/
 !results/halmos_evm_bridge.log
+!results/prefunded_threshold_exchange.log

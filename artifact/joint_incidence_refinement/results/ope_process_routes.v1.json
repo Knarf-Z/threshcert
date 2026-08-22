@@ -1,0 +1,1997 @@
+{
+  "schema": "ope-controlled-process-routes/v1",
+  "chain_id": 31337,
+  "scope": {
+    "configuration_credits_units": [
+      2,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0
+    ],
+    "accounting_unit": "native call value / 10^18 wei",
+    "gas_excluded": true,
+    "resource": "threshold-capability-v16",
+    "first_success_ends_at_commitment_valid_plaintext_delivery": true
+  },
+  "roles": {
+    "attacker": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+    "service_contract_controller": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+    "committee_member_addresses": [
+      "0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc",
+      "0x90f79bf6eb2c4f870365e785982e1f101e93b906",
+      "0x15d34aaf54267db7d7c367839aaf71a00a2c6a65",
+      "0x9965507d1a55bcc2695c58ba16fb37d819b0a4dc",
+      "0x976ea74026e726554db657fa54763abd0c3a0aa9",
+      "0x14dc79964da2c08b23698b3d3cc7ca32193d9955",
+      "0x23618e81e3f5cdf7f54c3d65f7fbc0abf5b21e8f"
+    ]
+  },
+  "route_count": 35,
+  "minimum_contract_cost_units": 4,
+  "maximum_contract_cost_units": 8,
+  "routes": [
+    {
+      "route_id": "ope-0-1-2-3",
+      "selected_member_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "selected_operator_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "contract": {
+        "address": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0x19fc65afbb80643873cbb5e51c23d26959ad0ecc3f302ed0c05b73eb99045f6b",
+        "status": "success",
+        "block_number": "2",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0x3273396676d7210ee622ed30ad4d0b589bec94d6d9208eaeda2b91751ce0443a",
+        "status": "success",
+        "block_number": "3",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+        "value_wei": "6000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "8",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0x5fbdb2315678afecb367f032d93f642f64180aa3|0x3273396676d7210ee622ed30ad4d0b589bec94d6d9208eaeda2b91751ce0443a|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|0,1,2,3|6000000000000000000|threshold-capability-v16",
+        "signature": "0x03c3509ba309050a3a2658b4b8575260ab5c4ad9952e4774d76e27be3fb3cee400f17ab6ef3734ca39ac4f3dd25dd7591c6ccdee20e901ad6f4b62527a006fa51c",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 15,
+        "terminal_mask": 15,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "6000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-0-1-2-4",
+      "selected_member_indices": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "selected_operator_ids": [
+        1,
+        2,
+        3,
+        5
+      ],
+      "contract": {
+        "address": "0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0x3745ffa62dcc0e80812ce900ef27d39958ba61cc0478293558c680becbff98ad",
+        "status": "success",
+        "block_number": "10",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0x7a623322fdf884bfc4f7df059a40c91dd1d356cd88c5931fa7875f12dfc617ee",
+        "status": "success",
+        "block_number": "11",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0",
+        "value_wei": "4000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "16",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0|0x7a623322fdf884bfc4f7df059a40c91dd1d356cd88c5931fa7875f12dfc617ee|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|0,1,2,4|4000000000000000000|threshold-capability-v16",
+        "signature": "0x0499c4c5aa814bdde79b17d342cb33406cb63483b5d10772dd61dfe402fa641061a702c787922f664506ac72321c9814d5dc8f31fbcb416f0fb23b80ce8967551c",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 23,
+        "terminal_mask": 23,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "4000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-0-1-2-5",
+      "selected_member_indices": [
+        0,
+        1,
+        2,
+        5
+      ],
+      "selected_operator_ids": [
+        1,
+        2,
+        3,
+        6
+      ],
+      "contract": {
+        "address": "0xdc64a140aa3e981100a9beca4e685f962f0cf6c9",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0xf8520afe34d710b1b29951c9e6d823e612a015b37efb54ee7990aae6b9aea798",
+        "status": "success",
+        "block_number": "18",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0xeb57faa206acbddcfd8749dce6362fc6fc0c5dc52a5d1f01efd49e4f94bb4295",
+        "status": "success",
+        "block_number": "19",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0xdc64a140aa3e981100a9beca4e685f962f0cf6c9",
+        "value_wei": "6000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "24",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0xdc64a140aa3e981100a9beca4e685f962f0cf6c9|0xeb57faa206acbddcfd8749dce6362fc6fc0c5dc52a5d1f01efd49e4f94bb4295|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|0,1,2,5|6000000000000000000|threshold-capability-v16",
+        "signature": "0x42cd72499b07e6397b8822cc6c839bf57f9fe7959bc6fa53768100d1132297a56d49a4391b0953856e01ebff2b005ab541a3acea3c247d0d7ae946f8e4dde7181b",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 39,
+        "terminal_mask": 39,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "6000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-0-1-2-6",
+      "selected_member_indices": [
+        0,
+        1,
+        2,
+        6
+      ],
+      "selected_operator_ids": [
+        1,
+        2,
+        3,
+        7
+      ],
+      "contract": {
+        "address": "0x0165878a594ca255338adfa4d48449f69242eb8f",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0x561968163baf07dbf9b463552632ad8daf3d85a6d9ef6301b2d4cb52f73a51b5",
+        "status": "success",
+        "block_number": "26",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0x5dbe443cf644e6ad829e10740950e02e3b6d3c5f73c8755f718755b4b18df8c9",
+        "status": "success",
+        "block_number": "27",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0x0165878a594ca255338adfa4d48449f69242eb8f",
+        "value_wei": "6000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "32",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0x0165878a594ca255338adfa4d48449f69242eb8f|0x5dbe443cf644e6ad829e10740950e02e3b6d3c5f73c8755f718755b4b18df8c9|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|0,1,2,6|6000000000000000000|threshold-capability-v16",
+        "signature": "0xd1159f64d7b34ce5079a9a86a234c4f71e89beff24e71812f3f6d48d28c61da81e81b1c75ed42cc7c86198127f0fd5509909533e6fde6d01fe52f527cab1771f1c",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 71,
+        "terminal_mask": 71,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "6000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-0-1-3-4",
+      "selected_member_indices": [
+        0,
+        1,
+        3,
+        4
+      ],
+      "selected_operator_ids": [
+        1,
+        2,
+        4,
+        5
+      ],
+      "contract": {
+        "address": "0x2279b7a0a67db372996a5fab50d91eaa73d2ebe6",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0xb411a96796ae2df13d9795790b4ac292cdb71210d37e4807f51f6f87e05639aa",
+        "status": "success",
+        "block_number": "34",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0x539db30c6b171a5846d93fe16acb05ed7a5d7d9a8078e92f00695e52200cc135",
+        "status": "success",
+        "block_number": "35",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0x2279b7a0a67db372996a5fab50d91eaa73d2ebe6",
+        "value_wei": "4000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "40",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0x2279b7a0a67db372996a5fab50d91eaa73d2ebe6|0x539db30c6b171a5846d93fe16acb05ed7a5d7d9a8078e92f00695e52200cc135|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|0,1,3,4|4000000000000000000|threshold-capability-v16",
+        "signature": "0xafc9f02d9c0b123eaebb7ba3f846819d09c7d113b01257a41d39b6260ca4c93a5e1e49de4ac89fcc64d6c8319b1b49daf85fa9781583bcea95b7a62a73090c9d1c",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 27,
+        "terminal_mask": 27,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "4000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-0-1-3-5",
+      "selected_member_indices": [
+        0,
+        1,
+        3,
+        5
+      ],
+      "selected_operator_ids": [
+        1,
+        2,
+        4,
+        6
+      ],
+      "contract": {
+        "address": "0x610178da211fef7d417bc0e6fed39f05609ad788",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0x561c9d7a05ecef610729d3f33d0262b38bb3aa1142611066b9661cd024eaff32",
+        "status": "success",
+        "block_number": "42",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0xa81990434a7fd4cf69dba3c0e4087bbc8f998f468a66f32cdc622c7575570748",
+        "status": "success",
+        "block_number": "43",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0x610178da211fef7d417bc0e6fed39f05609ad788",
+        "value_wei": "6000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "48",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0x610178da211fef7d417bc0e6fed39f05609ad788|0xa81990434a7fd4cf69dba3c0e4087bbc8f998f468a66f32cdc622c7575570748|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|0,1,3,5|6000000000000000000|threshold-capability-v16",
+        "signature": "0xe80a094d899bcf4e94b7cd7e8023bb3d67e8e77031b419a7f51e78ccf2a031134abb8077982ca4c9ddbbefef338bdd791c1b95faee12eefd404f5bf2b227c3c31c",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 43,
+        "terminal_mask": 43,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "6000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-0-1-3-6",
+      "selected_member_indices": [
+        0,
+        1,
+        3,
+        6
+      ],
+      "selected_operator_ids": [
+        1,
+        2,
+        4,
+        7
+      ],
+      "contract": {
+        "address": "0xa51c1fc2f0d1a1b8494ed1fe312d7c3a78ed91c0",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0x4a654170c4cfe67df708646c880211b38061edd6890ae793f1e7ab8c4454a0e4",
+        "status": "success",
+        "block_number": "50",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0xbe4f54a899c4fb1453c6aa22957324a50a9a515b2b56e8e29c39b0ac5fd1f5d9",
+        "status": "success",
+        "block_number": "51",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0xa51c1fc2f0d1a1b8494ed1fe312d7c3a78ed91c0",
+        "value_wei": "6000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "56",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0xa51c1fc2f0d1a1b8494ed1fe312d7c3a78ed91c0|0xbe4f54a899c4fb1453c6aa22957324a50a9a515b2b56e8e29c39b0ac5fd1f5d9|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|0,1,3,6|6000000000000000000|threshold-capability-v16",
+        "signature": "0x5a946df7721c43fb6378689a25dc85366bdc757ba312869f12f30050b7e4bec61b081e57c1568237e917d3b17762669383546e96eb77199caac24fb5ac013f1d1c",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 75,
+        "terminal_mask": 75,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "6000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-0-1-4-5",
+      "selected_member_indices": [
+        0,
+        1,
+        4,
+        5
+      ],
+      "selected_operator_ids": [
+        1,
+        2,
+        5,
+        6
+      ],
+      "contract": {
+        "address": "0x9a676e781a523b5d0c0e43731313a708cb607508",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0xc321376d6c0d18099189f0b98b7f671d0171a8c3e1ee3aec711d15432fed2bb7",
+        "status": "success",
+        "block_number": "58",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0xb5c9732ed970a68e21ba93b9ecf1ce558d985141d3d1554573fb02d961ffedad",
+        "status": "success",
+        "block_number": "59",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0x9a676e781a523b5d0c0e43731313a708cb607508",
+        "value_wei": "4000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "64",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0x9a676e781a523b5d0c0e43731313a708cb607508|0xb5c9732ed970a68e21ba93b9ecf1ce558d985141d3d1554573fb02d961ffedad|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|0,1,4,5|4000000000000000000|threshold-capability-v16",
+        "signature": "0x695c7fa3f0c1aaa69cc59505214eb7e9a9cbbd1da658a31c03d5d4c070f85fbb56a08fd22bd6042fed4f1c52570fc80a4db50017f2b83aef06845305d668e7ba1b",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 51,
+        "terminal_mask": 51,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "4000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-0-1-4-6",
+      "selected_member_indices": [
+        0,
+        1,
+        4,
+        6
+      ],
+      "selected_operator_ids": [
+        1,
+        2,
+        5,
+        7
+      ],
+      "contract": {
+        "address": "0x959922be3caee4b8cd9a407cc3ac1c251c2007b1",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0x1fd54e5c9de9dfddcac2bf6515432352b4992e903c755fb352b65efcb5edc9eb",
+        "status": "success",
+        "block_number": "66",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0x257232260c0183bdb8d9acf33dba3f2a091e55ba3916c43d56198a8d925fe2b4",
+        "status": "success",
+        "block_number": "67",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0x959922be3caee4b8cd9a407cc3ac1c251c2007b1",
+        "value_wei": "4000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "72",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0x959922be3caee4b8cd9a407cc3ac1c251c2007b1|0x257232260c0183bdb8d9acf33dba3f2a091e55ba3916c43d56198a8d925fe2b4|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|0,1,4,6|4000000000000000000|threshold-capability-v16",
+        "signature": "0xf4cc17d4eb30b49670f9396d756747490fbd4608a44f352db36a4087509f5c8a67bc5414dff3ed8c31e69dd4f423bd1c593aa39a190e9d4751ad4e377d1d53501c",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 83,
+        "terminal_mask": 83,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "4000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-0-1-5-6",
+      "selected_member_indices": [
+        0,
+        1,
+        5,
+        6
+      ],
+      "selected_operator_ids": [
+        1,
+        2,
+        6,
+        7
+      ],
+      "contract": {
+        "address": "0x68b1d87f95878fe05b998f19b66f4baba5de1aed",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0xc70a14b71e51603ffd8b967ca4d0707da282bd35f0e2cea62a44e8b00a3bda15",
+        "status": "success",
+        "block_number": "74",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0x72d489ff136970a1e4e3566882993cc8a04bf3d8ada7a1f58d4ee33e69ba0947",
+        "status": "success",
+        "block_number": "75",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0x68b1d87f95878fe05b998f19b66f4baba5de1aed",
+        "value_wei": "6000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "80",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0x68b1d87f95878fe05b998f19b66f4baba5de1aed|0x72d489ff136970a1e4e3566882993cc8a04bf3d8ada7a1f58d4ee33e69ba0947|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|0,1,5,6|6000000000000000000|threshold-capability-v16",
+        "signature": "0x4ace77fef0adcc1145962d6e3f995550022f0286e6a99e04478df59f3243c721247382aff657da8674ac259d5ff9ba533fa51cec035e3ac88ab214df0ec4a23a1c",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 99,
+        "terminal_mask": 99,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "6000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-0-2-3-4",
+      "selected_member_indices": [
+        0,
+        2,
+        3,
+        4
+      ],
+      "selected_operator_ids": [
+        1,
+        3,
+        4,
+        5
+      ],
+      "contract": {
+        "address": "0xc6e7df5e7b4f2a278906862b61205850344d4e7d",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0x24fd26efd674dfb7bb581b251c3247d2f3b111f03bb5763e69b7af1d56b92991",
+        "status": "success",
+        "block_number": "82",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0x1ed8dbca01248b3509607ca5ecbb3b3c3b7451acff0582d78dc78bb9821b5cc1",
+        "status": "success",
+        "block_number": "83",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0xc6e7df5e7b4f2a278906862b61205850344d4e7d",
+        "value_wei": "4000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "88",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0xc6e7df5e7b4f2a278906862b61205850344d4e7d|0x1ed8dbca01248b3509607ca5ecbb3b3c3b7451acff0582d78dc78bb9821b5cc1|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|0,2,3,4|4000000000000000000|threshold-capability-v16",
+        "signature": "0x59bb99d0dd7223c12398b7e52b302336dd6284e482d078e2ea08e8a3aa1851896cbc5d4b14be2b9de9e6ac67c3f7e4f0e49de62853aab5c6d0d34050ef384c391b",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 29,
+        "terminal_mask": 29,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "4000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-0-2-3-5",
+      "selected_member_indices": [
+        0,
+        2,
+        3,
+        5
+      ],
+      "selected_operator_ids": [
+        1,
+        3,
+        4,
+        6
+      ],
+      "contract": {
+        "address": "0x4ed7c70f96b99c776995fb64377f0d4ab3b0e1c1",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0x5735d6220834acef55a5d7671edd3e479b86c771238cc33ac2aeb61fe86acf81",
+        "status": "success",
+        "block_number": "90",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0x671851882623314ba9573d47a0e9313f67437f40099e82b6ecc7b40629d32835",
+        "status": "success",
+        "block_number": "91",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0x4ed7c70f96b99c776995fb64377f0d4ab3b0e1c1",
+        "value_wei": "6000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "96",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0x4ed7c70f96b99c776995fb64377f0d4ab3b0e1c1|0x671851882623314ba9573d47a0e9313f67437f40099e82b6ecc7b40629d32835|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|0,2,3,5|6000000000000000000|threshold-capability-v16",
+        "signature": "0x316afd596843cf58ddcbdeb1b889036a56d879a969139eef5aaf8f8efe55191655e58a3cf10652cbe654aeb204761b2613d7add4030c150a1f8c45fca5e2c3a31c",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 45,
+        "terminal_mask": 45,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "6000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-0-2-3-6",
+      "selected_member_indices": [
+        0,
+        2,
+        3,
+        6
+      ],
+      "selected_operator_ids": [
+        1,
+        3,
+        4,
+        7
+      ],
+      "contract": {
+        "address": "0xa85233c63b9ee964add6f2cffe00fd84eb32338f",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0xa46f97a4dc9281308078f2bbbcec496472f8c2fef2baea8a9c993cb7e8a6cecf",
+        "status": "success",
+        "block_number": "98",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0x423eead6d306384be1ede30d32f04540161e0c981c8b3f26008f8ad3911d76e2",
+        "status": "success",
+        "block_number": "99",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0xa85233c63b9ee964add6f2cffe00fd84eb32338f",
+        "value_wei": "6000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "104",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0xa85233c63b9ee964add6f2cffe00fd84eb32338f|0x423eead6d306384be1ede30d32f04540161e0c981c8b3f26008f8ad3911d76e2|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|0,2,3,6|6000000000000000000|threshold-capability-v16",
+        "signature": "0xe15e88002298913465bcd46daac486441505b2cb4d0b3f785fd48859c23b72ab2ccbebc8007bbbdd71dce594eb05b6f1c9d4fbaec8cfa5615f14f958379dcf091c",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 77,
+        "terminal_mask": 77,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "6000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-0-2-4-5",
+      "selected_member_indices": [
+        0,
+        2,
+        4,
+        5
+      ],
+      "selected_operator_ids": [
+        1,
+        3,
+        5,
+        6
+      ],
+      "contract": {
+        "address": "0x7a2088a1bfc9d81c55368ae168c2c02570cb814f",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0x8493b47370b0a75603507a84d4c486dd9c35c8bd8164b9a8129f0520e80b6997",
+        "status": "success",
+        "block_number": "106",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0x6ecd208dcfbe1555a86d39f65ec04cbd920d6bcdcae6038cde4059f91fde9334",
+        "status": "success",
+        "block_number": "107",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0x7a2088a1bfc9d81c55368ae168c2c02570cb814f",
+        "value_wei": "4000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "112",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0x7a2088a1bfc9d81c55368ae168c2c02570cb814f|0x6ecd208dcfbe1555a86d39f65ec04cbd920d6bcdcae6038cde4059f91fde9334|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|0,2,4,5|4000000000000000000|threshold-capability-v16",
+        "signature": "0x0d926e64d3a4f5ca680a3c4ba1d9eb3b6fe04aa47632beace8b3ca1a3b43616b174b05ce9d0c54939f3949d3d4341daeaedce0f42702a79586889fbac0bac1ae1c",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 53,
+        "terminal_mask": 53,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "4000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-0-2-4-6",
+      "selected_member_indices": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "selected_operator_ids": [
+        1,
+        3,
+        5,
+        7
+      ],
+      "contract": {
+        "address": "0xc5a5c42992decbae36851359345fe25997f5c42d",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0x0cde2e6f3d142b64c3fb71d68ae0a1e1609637fe0ccbc7fcbaa7135f7c3c6b00",
+        "status": "success",
+        "block_number": "114",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0x36b957b478d4a5fb587d52c4cd68f4a91d68a2d644038e8e750111159cf822f3",
+        "status": "success",
+        "block_number": "115",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0xc5a5c42992decbae36851359345fe25997f5c42d",
+        "value_wei": "4000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "120",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0xc5a5c42992decbae36851359345fe25997f5c42d|0x36b957b478d4a5fb587d52c4cd68f4a91d68a2d644038e8e750111159cf822f3|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|0,2,4,6|4000000000000000000|threshold-capability-v16",
+        "signature": "0x6453437b974e78c3cab6742094f72fbcc37518cf2a22fe8716c81974ba5facb550f0fbc5f0fea322bbf7d8a2800ccc6288ce327896581d875e08d834acfe5f211c",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 85,
+        "terminal_mask": 85,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "4000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-0-2-5-6",
+      "selected_member_indices": [
+        0,
+        2,
+        5,
+        6
+      ],
+      "selected_operator_ids": [
+        1,
+        3,
+        6,
+        7
+      ],
+      "contract": {
+        "address": "0xe6e340d132b5f46d1e472debcd681b2abc16e57e",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0x56b8c8d3ce5e3f66a82de7bac9d2927d4df3fd8a533a81c7c1df56e0f9ee1694",
+        "status": "success",
+        "block_number": "122",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0xa98ad79c7aac02694e6370ff629e716de225546bccae5e0f37b6fd779d456858",
+        "status": "success",
+        "block_number": "123",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0xe6e340d132b5f46d1e472debcd681b2abc16e57e",
+        "value_wei": "6000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "128",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0xe6e340d132b5f46d1e472debcd681b2abc16e57e|0xa98ad79c7aac02694e6370ff629e716de225546bccae5e0f37b6fd779d456858|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|0,2,5,6|6000000000000000000|threshold-capability-v16",
+        "signature": "0xfe2bbc76b707abcad2e9117f3adb4328fe24054a4085c4c4266d1916aa13e76f64c7a4535c0b5b2038250c22f8fea3f7b36a807bb010028f80195a10e51e43441c",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 101,
+        "terminal_mask": 101,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "6000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-0-3-4-5",
+      "selected_member_indices": [
+        0,
+        3,
+        4,
+        5
+      ],
+      "selected_operator_ids": [
+        1,
+        4,
+        5,
+        6
+      ],
+      "contract": {
+        "address": "0x84ea74d481ee0a5332c457a4d796187f6ba67feb",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0xb962589c292cef74e8054f3c810a9c86658395468883c6c8855beddd2067aed7",
+        "status": "success",
+        "block_number": "130",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0x554bc523eb5e070230b031b9a9029de168bf3b1701ffe10642f24c211ae9df3b",
+        "status": "success",
+        "block_number": "131",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0x84ea74d481ee0a5332c457a4d796187f6ba67feb",
+        "value_wei": "4000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "136",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0x84ea74d481ee0a5332c457a4d796187f6ba67feb|0x554bc523eb5e070230b031b9a9029de168bf3b1701ffe10642f24c211ae9df3b|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|0,3,4,5|4000000000000000000|threshold-capability-v16",
+        "signature": "0x39eaa32d371221f368b4d1306650203b3e75ac259ce3f4b7602bef9184c0b3a83be7b3a8897e12b22bf589d1733bbc6422d2159d6538dac879993f4ed769a0ef1b",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 57,
+        "terminal_mask": 57,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "4000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-0-3-4-6",
+      "selected_member_indices": [
+        0,
+        3,
+        4,
+        6
+      ],
+      "selected_operator_ids": [
+        1,
+        4,
+        5,
+        7
+      ],
+      "contract": {
+        "address": "0xa82ff9afd8f496c3d6ac40e2a0f282e47488cfc9",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0x5241c38797b0d179cbf52cdfe0b2e2dd6fded27c06b7b74e4c186fa29f9c82da",
+        "status": "success",
+        "block_number": "138",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0x34dbc8749ba35c133069d210a92a38a989531f0d56595d322b8dc60c4f9b77a3",
+        "status": "success",
+        "block_number": "139",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0xa82ff9afd8f496c3d6ac40e2a0f282e47488cfc9",
+        "value_wei": "4000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "144",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0xa82ff9afd8f496c3d6ac40e2a0f282e47488cfc9|0x34dbc8749ba35c133069d210a92a38a989531f0d56595d322b8dc60c4f9b77a3|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|0,3,4,6|4000000000000000000|threshold-capability-v16",
+        "signature": "0x221d43fc467c0cdb14479f48a8c44ea202fef50303d1f9cfb50977ade40414d937af72251281fc3985bcd6d42e75a1f05aa7caec40669e29f2b2daa1a21f3f4d1c",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 89,
+        "terminal_mask": 89,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "4000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-0-3-5-6",
+      "selected_member_indices": [
+        0,
+        3,
+        5,
+        6
+      ],
+      "selected_operator_ids": [
+        1,
+        4,
+        6,
+        7
+      ],
+      "contract": {
+        "address": "0x851356ae760d987e095750cceb3bc6014560891c",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0x1b5f535598132c121ac77da29961f2e32aafc633d0ab875926f44b673b880b65",
+        "status": "success",
+        "block_number": "146",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0x85239cb7b52d1276a5a4d6606f2c19ac801699767bec7c7a1f91a6077bca92e9",
+        "status": "success",
+        "block_number": "147",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0x851356ae760d987e095750cceb3bc6014560891c",
+        "value_wei": "6000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "152",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0x851356ae760d987e095750cceb3bc6014560891c|0x85239cb7b52d1276a5a4d6606f2c19ac801699767bec7c7a1f91a6077bca92e9|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|0,3,5,6|6000000000000000000|threshold-capability-v16",
+        "signature": "0xea28f9904282dc52c6f118f48578f3b5e0dc2888eb2a753bfae329fa7e7a574764385b9cbf51a6d6ade452c981099c1ee0c783a23706696de0734eb637403ae31c",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 105,
+        "terminal_mask": 105,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "6000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-0-4-5-6",
+      "selected_member_indices": [
+        0,
+        4,
+        5,
+        6
+      ],
+      "selected_operator_ids": [
+        1,
+        5,
+        6,
+        7
+      ],
+      "contract": {
+        "address": "0x95401dc811bb5740090279ba06cfa8fcf6113778",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0x50c91ccda25b97243c52b0167c9087044f0d456da46dbd13a0b949afcdaa399b",
+        "status": "success",
+        "block_number": "154",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0x66e8827396dc9d27bbe36be27e52ec43086c58daf7a63de8a2bf240c81adc932",
+        "status": "success",
+        "block_number": "155",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0x95401dc811bb5740090279ba06cfa8fcf6113778",
+        "value_wei": "4000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "160",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0x95401dc811bb5740090279ba06cfa8fcf6113778|0x66e8827396dc9d27bbe36be27e52ec43086c58daf7a63de8a2bf240c81adc932|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|0,4,5,6|4000000000000000000|threshold-capability-v16",
+        "signature": "0xe5bdea9777fe91f0038a089f7999208a6bad4857074e1965486a7fd6d84d43aa13e1678d96d7341c3639f00e60106987ab32e9a4efaa56ac5b39ef50f2731b7f1c",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 113,
+        "terminal_mask": 113,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "4000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-1-2-3-4",
+      "selected_member_indices": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "selected_operator_ids": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "contract": {
+        "address": "0x70e0ba845a1a0f2da3359c97e0285013525ffc49",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0x393f8923df2a41c55deacc30d09d00571fc4fc2aae8e82a7394f3ccda6535d7a",
+        "status": "success",
+        "block_number": "162",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0x98eff08beae1c37a1f3e2862d4355d66bd9116db4b2656d67cc0c0099661b173",
+        "status": "success",
+        "block_number": "163",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0x70e0ba845a1a0f2da3359c97e0285013525ffc49",
+        "value_wei": "6000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "168",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0x70e0ba845a1a0f2da3359c97e0285013525ffc49|0x98eff08beae1c37a1f3e2862d4355d66bd9116db4b2656d67cc0c0099661b173|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|1,2,3,4|6000000000000000000|threshold-capability-v16",
+        "signature": "0x998bfd1982f4a9d6f0046bc8a813751d7cb5b24ad025c0e09c19d1523e5f7f5f2ead55a7c7cdf4e8b78842af415cc47a398c7a492f3ab2c3d5218f68a41da6da1c",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 30,
+        "terminal_mask": 30,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "6000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-1-2-3-5",
+      "selected_member_indices": [
+        1,
+        2,
+        3,
+        5
+      ],
+      "selected_operator_ids": [
+        2,
+        3,
+        4,
+        6
+      ],
+      "contract": {
+        "address": "0x99bba657f2bbc93c02d617f8ba121cb8fc104acf",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0x0c97c5160efb19309b459c29ae53f465c2a22dca4fe292e53019b995991d47ac",
+        "status": "success",
+        "block_number": "170",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0x0c655fc2426203d2273d46293efeaa1cf779a8193de28dc08dc091fdd36bdbd2",
+        "status": "success",
+        "block_number": "171",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0x99bba657f2bbc93c02d617f8ba121cb8fc104acf",
+        "value_wei": "8000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "176",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0x99bba657f2bbc93c02d617f8ba121cb8fc104acf|0x0c655fc2426203d2273d46293efeaa1cf779a8193de28dc08dc091fdd36bdbd2|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|1,2,3,5|8000000000000000000|threshold-capability-v16",
+        "signature": "0x412c9c6b2ad35cb656e36d8cecf404b3726667f8d9630b51f4a8d3f63fa3cc9c7ca0473ac290d888a8134858d5ebc53827d8fb1d5129fb17de9b35b5ed028fdc1c",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 46,
+        "terminal_mask": 46,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "8000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-1-2-3-6",
+      "selected_member_indices": [
+        1,
+        2,
+        3,
+        6
+      ],
+      "selected_operator_ids": [
+        2,
+        3,
+        4,
+        7
+      ],
+      "contract": {
+        "address": "0x8f86403a4de0bb5791fa46b8e795c547942fe4cf",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0x1a3fa48a651fc28e03920ba22dc2959fc6d7931129807858609796ddf4a4867d",
+        "status": "success",
+        "block_number": "178",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0x89f35bc4790fdc8e403c6544988cd96881dca1316b2578b303f65798116e5a86",
+        "status": "success",
+        "block_number": "179",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0x8f86403a4de0bb5791fa46b8e795c547942fe4cf",
+        "value_wei": "8000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "184",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0x8f86403a4de0bb5791fa46b8e795c547942fe4cf|0x89f35bc4790fdc8e403c6544988cd96881dca1316b2578b303f65798116e5a86|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|1,2,3,6|8000000000000000000|threshold-capability-v16",
+        "signature": "0xe07def79ddfe9d3536a7fa4966bdfff159a91b70260eab0fc615acea1ba7491272f2d7ae728914d74ccee540eed156b12cec2074adbd05168a78629d0492a7b11c",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 78,
+        "terminal_mask": 78,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "8000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-1-2-4-5",
+      "selected_member_indices": [
+        1,
+        2,
+        4,
+        5
+      ],
+      "selected_operator_ids": [
+        2,
+        3,
+        5,
+        6
+      ],
+      "contract": {
+        "address": "0x5eb3bc0a489c5a8288765d2336659ebca68fcd00",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0x7ab2ef474b7dd6c676ff69e4dbbc033b7eeb212177985228ee44e0e5f5653afa",
+        "status": "success",
+        "block_number": "186",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0x9702c42d11078da1afb63ad6387ea8a7da02e51c480a4316bfd4c5b78c182afa",
+        "status": "success",
+        "block_number": "187",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0x5eb3bc0a489c5a8288765d2336659ebca68fcd00",
+        "value_wei": "6000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "192",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0x5eb3bc0a489c5a8288765d2336659ebca68fcd00|0x9702c42d11078da1afb63ad6387ea8a7da02e51c480a4316bfd4c5b78c182afa|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|1,2,4,5|6000000000000000000|threshold-capability-v16",
+        "signature": "0x479ad726db7b338f619eeb70bb0ffb80c8399ff9a1de2794ca96a550f5b1ea7f0676b4dce74415f1b2213661694cc603f4b7f1cbb9f5708c3c05e0cc43c61bf21c",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 54,
+        "terminal_mask": 54,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "6000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-1-2-4-6",
+      "selected_member_indices": [
+        1,
+        2,
+        4,
+        6
+      ],
+      "selected_operator_ids": [
+        2,
+        3,
+        5,
+        7
+      ],
+      "contract": {
+        "address": "0x809d550fca64d94bd9f66e60752a544199cfac3d",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0xda2d84e05d11bcbff80a20bf17822332fc7f3294c0e3fe5a650805a26d3bc9b0",
+        "status": "success",
+        "block_number": "194",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0x2deb1930d4dc1af44936b693206fcf8adab407d781314a69ec4457d873f101c8",
+        "status": "success",
+        "block_number": "195",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0x809d550fca64d94bd9f66e60752a544199cfac3d",
+        "value_wei": "6000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "200",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0x809d550fca64d94bd9f66e60752a544199cfac3d|0x2deb1930d4dc1af44936b693206fcf8adab407d781314a69ec4457d873f101c8|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|1,2,4,6|6000000000000000000|threshold-capability-v16",
+        "signature": "0x65cfaf12b47304ad3c7bba88fabfa92f47e177860ab0bbc788113f10e6621def0b297fd67f1d8f066f4fce2bd5402bd98ee2a7cb16ff92ba3e27d8eb5a044b0e1b",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 86,
+        "terminal_mask": 86,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "6000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-1-2-5-6",
+      "selected_member_indices": [
+        1,
+        2,
+        5,
+        6
+      ],
+      "selected_operator_ids": [
+        2,
+        3,
+        6,
+        7
+      ],
+      "contract": {
+        "address": "0x1291be112d480055dafd8a610b7d1e203891c274",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0x3ab1d112de6d7deeace261c50f3b7e04b00dee5673bc4c4c86ced93c2c1d5214",
+        "status": "success",
+        "block_number": "202",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0x02095cb0ff6560e61b5f603bcfed9c2769ff296bd28073acc31381bae11ff163",
+        "status": "success",
+        "block_number": "203",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0x1291be112d480055dafd8a610b7d1e203891c274",
+        "value_wei": "8000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "208",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0x1291be112d480055dafd8a610b7d1e203891c274|0x02095cb0ff6560e61b5f603bcfed9c2769ff296bd28073acc31381bae11ff163|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|1,2,5,6|8000000000000000000|threshold-capability-v16",
+        "signature": "0xd0a21de2331a75836340b41d71cf13a13a01200c81c168e7df87f69c3789084c0f30359d5c7988b3fd18ec30f8c1169c494fca8516beae5197e8aeaa2ce3d5411b",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 102,
+        "terminal_mask": 102,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "8000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-1-3-4-5",
+      "selected_member_indices": [
+        1,
+        3,
+        4,
+        5
+      ],
+      "selected_operator_ids": [
+        2,
+        4,
+        5,
+        6
+      ],
+      "contract": {
+        "address": "0xb7278a61aa25c888815afc32ad3cc52ff24fe575",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0x4a09702c836755778ec48690fd11cb1a6cb8c9470685125ff243da0c5a33ae2d",
+        "status": "success",
+        "block_number": "210",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0x19203cb3f9a4efe36131a79238c134f3e0b69af09e3643aa1c77660c87461247",
+        "status": "success",
+        "block_number": "211",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0xb7278a61aa25c888815afc32ad3cc52ff24fe575",
+        "value_wei": "6000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "216",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0xb7278a61aa25c888815afc32ad3cc52ff24fe575|0x19203cb3f9a4efe36131a79238c134f3e0b69af09e3643aa1c77660c87461247|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|1,3,4,5|6000000000000000000|threshold-capability-v16",
+        "signature": "0xfcdc2ec5fe3a51a9df2c7a6cd6fcfbc48ec55b72ec11d03343f527245bdc44202dd410e7d8c64d71282791601eb8ac1d9e8311af1cb6a5644f3ff6fa0de051a21c",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 58,
+        "terminal_mask": 58,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "6000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-1-3-4-6",
+      "selected_member_indices": [
+        1,
+        3,
+        4,
+        6
+      ],
+      "selected_operator_ids": [
+        2,
+        4,
+        5,
+        7
+      ],
+      "contract": {
+        "address": "0x82e01223d51eb87e16a03e24687edf0f294da6f1",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0xf08d476c7c7d2653ca6dc2682cfb974e5728a50f4ec42b099c29d750e3c79121",
+        "status": "success",
+        "block_number": "218",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0x84fc021cc56dbe2cd47748a9779ba1ed222883517c12767e2fd06e294323420b",
+        "status": "success",
+        "block_number": "219",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0x82e01223d51eb87e16a03e24687edf0f294da6f1",
+        "value_wei": "6000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "224",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0x82e01223d51eb87e16a03e24687edf0f294da6f1|0x84fc021cc56dbe2cd47748a9779ba1ed222883517c12767e2fd06e294323420b|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|1,3,4,6|6000000000000000000|threshold-capability-v16",
+        "signature": "0xba766ef79323d65ec280604844c54043b3d8a859d4a7a1a0655d93fc0575a28d7991520a7d0e2093b225769ffc90b518d42c9d302a8ff87937d0e26b6c9242411b",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 90,
+        "terminal_mask": 90,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "6000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-1-3-5-6",
+      "selected_member_indices": [
+        1,
+        3,
+        5,
+        6
+      ],
+      "selected_operator_ids": [
+        2,
+        4,
+        6,
+        7
+      ],
+      "contract": {
+        "address": "0x7969c5ed335650692bc04293b07f5bf2e7a673c0",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0x8c1ae26e3cd5f87272579e8e2e561a9f442ce9e0df6a1689e663a115cd9f88d7",
+        "status": "success",
+        "block_number": "226",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0x1326f319763b7ba63a76490af545d6784dd518549fd6fc88fb905f01a90fe721",
+        "status": "success",
+        "block_number": "227",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0x7969c5ed335650692bc04293b07f5bf2e7a673c0",
+        "value_wei": "8000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "232",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0x7969c5ed335650692bc04293b07f5bf2e7a673c0|0x1326f319763b7ba63a76490af545d6784dd518549fd6fc88fb905f01a90fe721|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|1,3,5,6|8000000000000000000|threshold-capability-v16",
+        "signature": "0x7d9111ed721c9a90a2a98facdd319a56ad21afdefbd86e251b4ea9b2b73361a54aa838f00a3c730d181d00f41be8d844608d8c253af9283fad99b9235fe4bcac1c",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 106,
+        "terminal_mask": 106,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "8000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-1-4-5-6",
+      "selected_member_indices": [
+        1,
+        4,
+        5,
+        6
+      ],
+      "selected_operator_ids": [
+        2,
+        5,
+        6,
+        7
+      ],
+      "contract": {
+        "address": "0xc351628eb244ec633d5f21fbd6621e1a683b1181",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0x8d242cb1785d9ffee6363fef6e2bf37be7f29e379701ae5bf2b2a5175bdad21d",
+        "status": "success",
+        "block_number": "234",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0xf81b1deb09656cffc87a45431f7f8922fae1819657b2c096702a8417f24bb8d7",
+        "status": "success",
+        "block_number": "235",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0xc351628eb244ec633d5f21fbd6621e1a683b1181",
+        "value_wei": "6000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "240",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0xc351628eb244ec633d5f21fbd6621e1a683b1181|0xf81b1deb09656cffc87a45431f7f8922fae1819657b2c096702a8417f24bb8d7|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|1,4,5,6|6000000000000000000|threshold-capability-v16",
+        "signature": "0x6550d6b9659131672c934f454998d724ab466d35c4fd617eb2c271c89b709f2e32f7f4ac4bf29733e01545be9937e53b89a5c811fab005a060e5355c9114909f1c",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 114,
+        "terminal_mask": 114,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "6000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-2-3-4-5",
+      "selected_member_indices": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "selected_operator_ids": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "contract": {
+        "address": "0xcbeaf3bde82155f56486fb5a1072cb8baaf547cc",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0x887bf4b9c024fda1af71fda447ac13f2093242bbdbf0dc5bca0599b673bc7215",
+        "status": "success",
+        "block_number": "242",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0xc0d199fc372c7c5796752d9ffbac4618030d1182f63eb070b40e90b65d58cc4c",
+        "status": "success",
+        "block_number": "243",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0xcbeaf3bde82155f56486fb5a1072cb8baaf547cc",
+        "value_wei": "6000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "248",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0xcbeaf3bde82155f56486fb5a1072cb8baaf547cc|0xc0d199fc372c7c5796752d9ffbac4618030d1182f63eb070b40e90b65d58cc4c|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|2,3,4,5|6000000000000000000|threshold-capability-v16",
+        "signature": "0x0b9f6d4eadc9b59fd701a257b12eefd82fa9522a41498870f37b135bb2c19e2309e15f130a766793c1a2a0faa83976ec75b02460c14a6e7e1939b7b09e278edb1b",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 60,
+        "terminal_mask": 60,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "6000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-2-3-4-6",
+      "selected_member_indices": [
+        2,
+        3,
+        4,
+        6
+      ],
+      "selected_operator_ids": [
+        3,
+        4,
+        5,
+        7
+      ],
+      "contract": {
+        "address": "0xb0d4afd8879ed9f52b28595d31b441d079b2ca07",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0xad17b1e87e389f656102b9536673d801f76f87e7b9ddbb4449e93666654cdf23",
+        "status": "success",
+        "block_number": "250",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0x61383a846b1c5e97b0b65ab13b4112b811f859a7f7026e9bf057b0ada7a2edff",
+        "status": "success",
+        "block_number": "251",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0xb0d4afd8879ed9f52b28595d31b441d079b2ca07",
+        "value_wei": "6000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "256",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0xb0d4afd8879ed9f52b28595d31b441d079b2ca07|0x61383a846b1c5e97b0b65ab13b4112b811f859a7f7026e9bf057b0ada7a2edff|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|2,3,4,6|6000000000000000000|threshold-capability-v16",
+        "signature": "0xa9c7adedd47d3b2b78b49f8bb20787dd81745c09e12fe6eb5064115905456d3176ff32b145deb2932caee9122aaa0b7fc1b09136c40684c0c31c5bf253ddfa461c",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 92,
+        "terminal_mask": 92,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "6000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-2-3-5-6",
+      "selected_member_indices": [
+        2,
+        3,
+        5,
+        6
+      ],
+      "selected_operator_ids": [
+        3,
+        4,
+        6,
+        7
+      ],
+      "contract": {
+        "address": "0x922d6956c99e12dfeb3224dea977d0939758a1fe",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0x7b9284254d1d853dc64318469f51727024f17f01486a655de078d08067122a89",
+        "status": "success",
+        "block_number": "258",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0x516fadcf35709aae4682a2057cd30892a21c7d829207d829552c9859ad11e6c2",
+        "status": "success",
+        "block_number": "259",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0x922d6956c99e12dfeb3224dea977d0939758a1fe",
+        "value_wei": "8000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "264",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0x922d6956c99e12dfeb3224dea977d0939758a1fe|0x516fadcf35709aae4682a2057cd30892a21c7d829207d829552c9859ad11e6c2|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|2,3,5,6|8000000000000000000|threshold-capability-v16",
+        "signature": "0x3974ffa8a2b9cb826df55be705c9582be36065b0e064aa50de5b523bdfdfb1e8493e66942ace02fa047f9ef2db7bf3a4aee8cb6a7de5a3f7d519145987e03ab31c",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 108,
+        "terminal_mask": 108,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "8000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-2-4-5-6",
+      "selected_member_indices": [
+        2,
+        4,
+        5,
+        6
+      ],
+      "selected_operator_ids": [
+        3,
+        5,
+        6,
+        7
+      ],
+      "contract": {
+        "address": "0x1fa02b2d6a771842690194cf62d91bdd92bfe28d",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0x1e694712960383b023c7abd711c1b3fc876f2b8c2ac78644214704c7dc1084b4",
+        "status": "success",
+        "block_number": "266",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0x875758bfee494fd69587245ef26168d47d84adba582e231423c96ff4c7a11b5d",
+        "status": "success",
+        "block_number": "267",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0x1fa02b2d6a771842690194cf62d91bdd92bfe28d",
+        "value_wei": "6000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "272",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0x1fa02b2d6a771842690194cf62d91bdd92bfe28d|0x875758bfee494fd69587245ef26168d47d84adba582e231423c96ff4c7a11b5d|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|2,4,5,6|6000000000000000000|threshold-capability-v16",
+        "signature": "0x232dc07f21514959c1cb242335e99aeda4c0ab3fbc0594921c8a4fb20f26752647947b3864a31668760826823b98c157f0295e6acff2dbe506337e17f51f2db91b",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 116,
+        "terminal_mask": 116,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "6000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    },
+    {
+      "route_id": "ope-3-4-5-6",
+      "selected_member_indices": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "selected_operator_ids": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "contract": {
+        "address": "0x04c89607413713ec9775e14b954286519d836fef",
+        "runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac"
+      },
+      "configure_transaction": {
+        "hash": "0x0c554e1e8a3a04509bb300adbb8a9f315748c6827828e4fdf5329e29e8bea06b",
+        "status": "success",
+        "block_number": "274",
+        "value_wei": "4000000000000000000"
+      },
+      "payment_transaction": {
+        "hash": "0x2e615438b8f5faa5143abc81e2fb6556ca620526a2a3e15732b29c9429b51c6d",
+        "status": "success",
+        "block_number": "275",
+        "from": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "to": "0x04c89607413713ec9775e14b954286519d836fef",
+        "value_wei": "6000000000000000000"
+      },
+      "finality": {
+        "policy_confirmations": 6,
+        "observed_head_block": "280",
+        "observed_confirmations": 6
+      },
+      "request_authentication": {
+        "scheme": "EIP-191/secp256k1",
+        "message": "THRESHCERT-OPE-PROCESS-AUTH-V1|31337|0x04c89607413713ec9775e14b954286519d836fef|0x2e615438b8f5faa5143abc81e2fb6556ca620526a2a3e15732b29c9429b51c6d|0x70997970c51812dc3a010c7d01b50e0d17dc79c8|3,4,5,6|6000000000000000000|threshold-capability-v16",
+        "signature": "0x1b5bf21b8ab25d54b85cee49e548a07a7a98c9081c89f13abe00a784a3d4474e7342d2485439d1d64336353d878510cf77a613c4e5c5a0c5b06a670ab5ce3fb31b",
+        "recovered_signer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+      },
+      "terminal_state": {
+        "completed": true,
+        "acquirer": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "delivered_share_mask": 120,
+        "terminal_mask": 120,
+        "buyer_claimable_wei": "0",
+        "total_acquisition_call_value_wei": "6000000000000000000"
+      },
+      "single_use": {
+        "second_acquire_rejected": true,
+        "buyer_withdraw_rejected": true
+      }
+    }
+  ]
+}

@@ -17,6 +17,8 @@
     "prefunded:verify": "node verify_prefunded_exchange.mjs",
     "global-toy:capture": "node scripts/capture_global_named_acquirer_toy.mjs",
     "global-toy:verify": "python ../global_named_acquirer_toy/verify_global_named_acquirer_toy.py --verify --self-test",
+    "process:positive:capture": "hardhat test scripts/OpeProcessPositiveCapture.ts",
+    "process:positive:auth": "node scripts/VerifyOpeProcessAuth.mjs results/ope_process_routes.v1.json",
     "ready": "npm run typecheck && npm test && npm run admission:verify && npm run admission:negative && npm run refinement:check",
     "manifest:build": "node scripts/build-manifest.mjs",
     "manifest:check": "node scripts/build-manifest.mjs --check"

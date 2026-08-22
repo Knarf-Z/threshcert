@@ -338,3 +338,33 @@ certificate:
 Run all three from the repository root with
 `python reproduce_v15_experiments.py`. The entry also checks both manifests and
 all 4,095 C6 records. It performs no public-chain write.
+
+## v16 positive OPE process certificate
+
+The v16 experiment adds the missing nontrivial positive process result without
+changing the deployment-global verdict.
+
+1. The Hardhat capture fixes credits to `(2,0,0,0,2,0,0)`, deploys a fresh
+   admitted OPE runtime for each of the 35 four-member terminal choices, sends
+   the exact quoted attacker payment, mines to a six-confirmation policy, signs
+   each process request with the EVM buyer key, and checks the terminal state,
+   zero buyer claimable balance, rejected buyer withdrawal, and rejected second
+   acquisition.
+2. The process runner deals artifact-only 4-of-7 keys, starts seven separate
+   operator HTTP processes, maps all seven EVM members to signed operator
+   identities, and obtains four network-signed, Chaum--Pedersen-proved partials
+   for every route. It reconstructs plaintext only after four valid responses
+   and checks the ciphertext commitment.
+3. The fixed C6 root contributes exactly 35 forward and 35 unbounded reverse
+   records. The executable composition replays the same 35 whole routes and
+   preserves every route cost. Their exact relative process minimum is four.
+4. Executable controls reject receipt/nonce reuse, session swapping, proof
+   tampering, and three-response delivery. Gate/accounting controls reject
+   unauthenticated or pre-finality delivery, omitted return evidence, missing
+   forward/reverse routes, cost tampering, and undeclared cross-session return.
+
+Run `python reproduce_v16_experiments.py`. The final verdict is
+`PROCESS-LEVEL-CERTIFIED(4)` only for the admitted local composition.
+Hardhat finality, deterministic artifact keys, gas exclusion, OS integrity,
+side channels, external transfers, and economic operator independence remain
+explicit limitations.

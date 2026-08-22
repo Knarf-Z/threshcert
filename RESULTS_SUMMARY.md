@@ -275,6 +275,30 @@ Python implementation.
 - OPE-anchored process fixture v2: contract costs `[4,4,4]`, net costs `[4,3,0]`,
   `ROUTE_EXCLUSIONS=PASS_5_OF_5`, and `MUTATIONS=PASS_3_OF_3`; verdict
   `MODEL-REFUTED(4)` in the declared counterfactual process language.
-- These process fixtures do not change the production/deployment verdict. The
-  broader process P3-P5 evidence remains open, so that verdict remains
-  `UNKNOWN`.
+- These v15 process fixtures did not change the production/deployment verdict;
+  at v15 the nontrivial positive process lift remained open. The v16 controlled
+  composition below closes that local lift, while the deployment-global verdict
+  remains `UNKNOWN`.
+
+## v16 positive OPE process-certificate result
+
+- OPE fixed-root contract routes: `35/35` forward and `35/35` reverse
+  records, with exact contract cost range `4..8` units.
+- Executable process routes: `35/35` complete replays through a fresh OPE
+  execution, six-confirmation finality, four of seven operator HTTP responses,
+  verified Chaum--Pedersen proofs and network signatures, and
+  commitment-valid plaintext delivery.
+- Buyer authentication: `35/35` EIP-191 signatures recover to the exact
+  address that sent the OPE payment.
+- Return/reuse closure in the admitted composition: buyer claimable balance
+  zero, buyer withdrawal and second acquisition rejected on every route, no
+  refund/cancel/rebate entry point, no service economic-transfer API, and
+  persistent operator nonce rejection.
+- Negative controls: `4/4` executable mutations and `7/7`
+  gate/accounting mutations rejected.
+- Exact relative result: `Gamma_A = 4` and
+  `PROCESS-LEVEL-CERTIFIED(4)`.
+- This does not replace the deployment-global `UNKNOWN` verdict. It is a
+  controlled, local, relative process certificate and makes no claim about
+  public-chain finality, undeclared transfers, OS compromise, side channels, or
+  seven economically independent operators.

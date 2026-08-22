@@ -115,8 +115,27 @@ defines every experiment and its interpretation boundary.
 - `artifact/process_route_stress_fixture/`: an OPE-receipt-anchored v2 process
   fixture with contract costs `(4,4,4)`, net costs `(4,3,0)`, five route
   exclusions, and three process-certificate mutations.
+- `artifact/ope_process_positive/`: an executable OPE controlled composition
+  with seven operator HTTP processes, 35/35 fixed-root routes, EIP-191 buyer
+  authentication, six-confirmation finality, four verified responses per
+  route, commitment-valid delivery, closed return interfaces, and verdict
+  `PROCESS-LEVEL-CERTIFIED(4)`.
 
 ## Reproduce
+
+For the complete v16 experiment set, including the nontrivial positive OPE
+process certificate, run:
+
+```bash
+python reproduce_v16_experiments.py
+```
+
+Expected final line: `V16_OPE_PROCESS_CERTIFICATE=PASS`. This regenerates all
+35 fixed-configuration OPE executions, verifies 35 buyer signatures, starts
+seven operator processes, verifies 140 threshold responses, replays all 35
+complete process routes, and checks the negative controls. The claim is
+relative to the admitted local composition; it is not a production or
+deployment-global attacker-cost claim.
 
 For the v77 review certificate, run the single public entry below. It checks
 the committed manifests, installs the locked EVM dependencies, and executes

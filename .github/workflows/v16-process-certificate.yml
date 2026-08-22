@@ -1,0 +1,47 @@
+name: v16 OPE process certificate
+
+on:
+  push:
+    paths:
+      - ".github/workflows/v16-process-certificate.yml"
+      - "artifact/finite_toy_delivery_extension/**"
+      - "artifact/joint_incidence_refinement/**"
+      - "artifact/ope_process_positive/**"
+      - "artifact/process_route_stress_fixture/**"
+      - "artifact/reviewer_revision_v77/**"
+      - "artifact/MANIFEST.sha256"
+      - "MANIFEST.sha256"
+      - "reproduce_v15_experiments.py"
+      - "reproduce_v16_experiments.py"
+  pull_request:
+    paths:
+      - ".github/workflows/v16-process-certificate.yml"
+      - "artifact/finite_toy_delivery_extension/**"
+      - "artifact/joint_incidence_refinement/**"
+      - "artifact/ope_process_positive/**"
+      - "artifact/process_route_stress_fixture/**"
+      - "artifact/reviewer_revision_v77/**"
+      - "artifact/MANIFEST.sha256"
+      - "MANIFEST.sha256"
+      - "reproduce_v15_experiments.py"
+      - "reproduce_v16_experiments.py"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: artifact/joint_incidence_refinement/package-lock.json
+      - name: Verify all v16 experiment certificates
+        run: python reproduce_v16_experiments.py

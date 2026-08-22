@@ -1,5 +1,22 @@
 # ThreshCert artifact changelog
 
+## 2026-08-22 v16 positive OPE process certificate
+
+- Added a nontrivial executable OPE composition that satisfies P1-P5 and
+  reports the exact relative verdict `PROCESS-LEVEL-CERTIFIED(4)`.
+- Executed all 35 terminal choices for the fixed C6 root with EIP-191 buyer
+  authentication, exact attacker payments, six-confirmation local finality,
+  seven operator processes, four signed/proved responses per route, and
+  commitment-valid plaintext delivery.
+- Bound `35/35` forward and `35/35` reverse C6 records to 35 complete
+  process replays while preserving route costs; the exact process range is
+  `4..8`.
+- Added closed return/single-use checks, `4/4` executable mutations, `7/7`
+  gate/accounting mutations, one-command reproduction, and focused CI.
+- Kept the claim relative to the admitted controlled composition. The
+  deployment-global verdict remains `UNKNOWN`, and no manuscript source or PDF
+  is included.
+
 ## 2026-08-22 v15 experiment-certificate extensions
 
 - Added a finite explicit-delivery model with distinct roles `A,S`, members

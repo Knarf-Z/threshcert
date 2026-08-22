@@ -143,6 +143,12 @@ equality, and the recorded coverage condition.
 - `process_route_stress_fixture/`: OPE-receipt-anchored v2 counterfactual routes
   with rebates and cross-session return/reuse; the exact fixture minimum is zero
   while the underlying contract floor remains four.
+- `ope_process_positive/`: the controlled positive lift. It composes the
+  admitted OPE runtime with seven real operator HTTP processes, executes all 35
+  terminal choices for one fixed C6 root, verifies EIP-191 request
+  authentication, six-confirmation finality, four signed/proved responses and
+  commitment-valid delivery, closes declared return and reuse interfaces, and
+  reports the relative verdict `PROCESS-LEVEL-CERTIFIED(4)`.
 
 The separate joint-incidence finite-schema check establishes its 117-state by
 exactly-35-terminal product, terminal-family completeness, payment-labelled

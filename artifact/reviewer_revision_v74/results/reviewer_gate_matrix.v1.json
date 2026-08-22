@@ -1,0 +1,774 @@
+{
+  "checks": {
+    "admission_mutations_all_rejected": true,
+    "all_nonempty_gate_omission_subsets_covered": true,
+    "five_single_gate_countermodels_explicit": true,
+    "receipt_mutations_all_rejected": true,
+    "receipt_negative_cases_rejected": true,
+    "route_baseline_agrees": true,
+    "semantic_mutations_all_caught": true
+  },
+  "gate_countermodels": {
+    "interpretation": "logical compatible-world templates, not observed attacks",
+    "nonempty_omission_subsets": 31,
+    "omission_subsets": [
+      {
+        "compatible_completion_template": true,
+        "interpretation": "logical compatible-world template, not an observed attack",
+        "omitted_gates": [
+          "B1"
+        ],
+        "retained_gates": [
+          "B2",
+          "B3",
+          "B4",
+          "B5"
+        ]
+      },
+      {
+        "compatible_completion_template": true,
+        "interpretation": "logical compatible-world template, not an observed attack",
+        "omitted_gates": [
+          "B2"
+        ],
+        "retained_gates": [
+          "B1",
+          "B3",
+          "B4",
+          "B5"
+        ]
+      },
+      {
+        "compatible_completion_template": true,
+        "interpretation": "logical compatible-world template, not an observed attack",
+        "omitted_gates": [
+          "B1",
+          "B2"
+        ],
+        "retained_gates": [
+          "B3",
+          "B4",
+          "B5"
+        ]
+      },
+      {
+        "compatible_completion_template": true,
+        "interpretation": "logical compatible-world template, not an observed attack",
+        "omitted_gates": [
+          "B3"
+        ],
+        "retained_gates": [
+          "B1",
+          "B2",
+          "B4",
+          "B5"
+        ]
+      },
+      {
+        "compatible_completion_template": true,
+        "interpretation": "logical compatible-world template, not an observed attack",
+        "omitted_gates": [
+          "B1",
+          "B3"
+        ],
+        "retained_gates": [
+          "B2",
+          "B4",
+          "B5"
+        ]
+      },
+      {
+        "compatible_completion_template": true,
+        "interpretation": "logical compatible-world template, not an observed attack",
+        "omitted_gates": [
+          "B2",
+          "B3"
+        ],
+        "retained_gates": [
+          "B1",
+          "B4",
+          "B5"
+        ]
+      },
+      {
+        "compatible_completion_template": true,
+        "interpretation": "logical compatible-world template, not an observed attack",
+        "omitted_gates": [
+          "B1",
+          "B2",
+          "B3"
+        ],
+        "retained_gates": [
+          "B4",
+          "B5"
+        ]
+      },
+      {
+        "compatible_completion_template": true,
+        "interpretation": "logical compatible-world template, not an observed attack",
+        "omitted_gates": [
+          "B4"
+        ],
+        "retained_gates": [
+          "B1",
+          "B2",
+          "B3",
+          "B5"
+        ]
+      },
+      {
+        "compatible_completion_template": true,
+        "interpretation": "logical compatible-world template, not an observed attack",
+        "omitted_gates": [
+          "B1",
+          "B4"
+        ],
+        "retained_gates": [
+          "B2",
+          "B3",
+          "B5"
+        ]
+      },
+      {
+        "compatible_completion_template": true,
+        "interpretation": "logical compatible-world template, not an observed attack",
+        "omitted_gates": [
+          "B2",
+          "B4"
+        ],
+        "retained_gates": [
+          "B1",
+          "B3",
+          "B5"
+        ]
+      },
+      {
+        "compatible_completion_template": true,
+        "interpretation": "logical compatible-world template, not an observed attack",
+        "omitted_gates": [
+          "B1",
+          "B2",
+          "B4"
+        ],
+        "retained_gates": [
+          "B3",
+          "B5"
+        ]
+      },
+      {
+        "compatible_completion_template": true,
+        "interpretation": "logical compatible-world template, not an observed attack",
+        "omitted_gates": [
+          "B3",
+          "B4"
+        ],
+        "retained_gates": [
+          "B1",
+          "B2",
+          "B5"
+        ]
+      },
+      {
+        "compatible_completion_template": true,
+        "interpretation": "logical compatible-world template, not an observed attack",
+        "omitted_gates": [
+          "B1",
+          "B3",
+          "B4"
+        ],
+        "retained_gates": [
+          "B2",
+          "B5"
+        ]
+      },
+      {
+        "compatible_completion_template": true,
+        "interpretation": "logical compatible-world template, not an observed attack",
+        "omitted_gates": [
+          "B2",
+          "B3",
+          "B4"
+        ],
+        "retained_gates": [
+          "B1",
+          "B5"
+        ]
+      },
+      {
+        "compatible_completion_template": true,
+        "interpretation": "logical compatible-world template, not an observed attack",
+        "omitted_gates": [
+          "B1",
+          "B2",
+          "B3",
+          "B4"
+        ],
+        "retained_gates": [
+          "B5"
+        ]
+      },
+      {
+        "compatible_completion_template": true,
+        "interpretation": "logical compatible-world template, not an observed attack",
+        "omitted_gates": [
+          "B5"
+        ],
+        "retained_gates": [
+          "B1",
+          "B2",
+          "B3",
+          "B4"
+        ]
+      },
+      {
+        "compatible_completion_template": true,
+        "interpretation": "logical compatible-world template, not an observed attack",
+        "omitted_gates": [
+          "B1",
+          "B5"
+        ],
+        "retained_gates": [
+          "B2",
+          "B3",
+          "B4"
+        ]
+      },
+      {
+        "compatible_completion_template": true,
+        "interpretation": "logical compatible-world template, not an observed attack",
+        "omitted_gates": [
+          "B2",
+          "B5"
+        ],
+        "retained_gates": [
+          "B1",
+          "B3",
+          "B4"
+        ]
+      },
+      {
+        "compatible_completion_template": true,
+        "interpretation": "logical compatible-world template, not an observed attack",
+        "omitted_gates": [
+          "B1",
+          "B2",
+          "B5"
+        ],
+        "retained_gates": [
+          "B3",
+          "B4"
+        ]
+      },
+      {
+        "compatible_completion_template": true,
+        "interpretation": "logical compatible-world template, not an observed attack",
+        "omitted_gates": [
+          "B3",
+          "B5"
+        ],
+        "retained_gates": [
+          "B1",
+          "B2",
+          "B4"
+        ]
+      },
+      {
+        "compatible_completion_template": true,
+        "interpretation": "logical compatible-world template, not an observed attack",
+        "omitted_gates": [
+          "B1",
+          "B3",
+          "B5"
+        ],
+        "retained_gates": [
+          "B2",
+          "B4"
+        ]
+      },
+      {
+        "compatible_completion_template": true,
+        "interpretation": "logical compatible-world template, not an observed attack",
+        "omitted_gates": [
+          "B2",
+          "B3",
+          "B5"
+        ],
+        "retained_gates": [
+          "B1",
+          "B4"
+        ]
+      },
+      {
+        "compatible_completion_template": true,
+        "interpretation": "logical compatible-world template, not an observed attack",
+        "omitted_gates": [
+          "B1",
+          "B2",
+          "B3",
+          "B5"
+        ],
+        "retained_gates": [
+          "B4"
+        ]
+      },
+      {
+        "compatible_completion_template": true,
+        "interpretation": "logical compatible-world template, not an observed attack",
+        "omitted_gates": [
+          "B4",
+          "B5"
+        ],
+        "retained_gates": [
+          "B1",
+          "B2",
+          "B3"
+        ]
+      },
+      {
+        "compatible_completion_template": true,
+        "interpretation": "logical compatible-world template, not an observed attack",
+        "omitted_gates": [
+          "B1",
+          "B4",
+          "B5"
+        ],
+        "retained_gates": [
+          "B2",
+          "B3"
+        ]
+      },
+      {
+        "compatible_completion_template": true,
+        "interpretation": "logical compatible-world template, not an observed attack",
+        "omitted_gates": [
+          "B2",
+          "B4",
+          "B5"
+        ],
+        "retained_gates": [
+          "B1",
+          "B3"
+        ]
+      },
+      {
+        "compatible_completion_template": true,
+        "interpretation": "logical compatible-world template, not an observed attack",
+        "omitted_gates": [
+          "B1",
+          "B2",
+          "B4",
+          "B5"
+        ],
+        "retained_gates": [
+          "B3"
+        ]
+      },
+      {
+        "compatible_completion_template": true,
+        "interpretation": "logical compatible-world template, not an observed attack",
+        "omitted_gates": [
+          "B3",
+          "B4",
+          "B5"
+        ],
+        "retained_gates": [
+          "B1",
+          "B2"
+        ]
+      },
+      {
+        "compatible_completion_template": true,
+        "interpretation": "logical compatible-world template, not an observed attack",
+        "omitted_gates": [
+          "B1",
+          "B3",
+          "B4",
+          "B5"
+        ],
+        "retained_gates": [
+          "B2"
+        ]
+      },
+      {
+        "compatible_completion_template": true,
+        "interpretation": "logical compatible-world template, not an observed attack",
+        "omitted_gates": [
+          "B2",
+          "B3",
+          "B4",
+          "B5"
+        ],
+        "retained_gates": [
+          "B1"
+        ]
+      },
+      {
+        "compatible_completion_template": true,
+        "interpretation": "logical compatible-world template, not an observed attack",
+        "omitted_gates": [
+          "B1",
+          "B2",
+          "B3",
+          "B4",
+          "B5"
+        ],
+        "retained_gates": []
+      }
+    ],
+    "single_gate_rows": [
+      {
+        "construction": "Keep the visible payment fixed but bind the output to another buyer or set u=0.",
+        "coverage": "explicit single-gate countermodel",
+        "expected_status": "MODEL-REFUTED or UNKNOWN",
+        "gate": "B1",
+        "mutation": "wrong buyer / unusable material",
+        "name": "usable delivery"
+      },
+      {
+        "construction": "Keep the receipt fixed and add an acquisition-linked sponsor who supplies the debit.",
+        "coverage": "explicit single-gate countermodel",
+        "expected_status": "MODEL-REFUTED or UNKNOWN",
+        "gate": "B2",
+        "mutation": "outside sponsor funding",
+        "name": "named funding"
+      },
+      {
+        "construction": "Release usable output before irreversible payment and let the buyer stop before paying.",
+        "coverage": "explicit single-gate countermodel",
+        "expected_status": "MODEL-REFUTED or UNKNOWN",
+        "gate": "B3",
+        "mutation": "early delivery",
+        "name": "atomicity"
+      },
+      {
+        "construction": "Add a scope-matched return or common controller that offsets the visible debit.",
+        "coverage": "explicit single-gate countermodel",
+        "expected_status": "MODEL-REFUTED or UNKNOWN",
+        "gate": "B4",
+        "mutation": "refund, reimbursement, or common control",
+        "name": "return/control closure"
+      },
+      {
+        "construction": "Add an undeclared successful route that supplies the same output without the checked debit.",
+        "coverage": "explicit single-gate countermodel",
+        "expected_status": "MODEL-REFUTED or UNKNOWN",
+        "gate": "B5",
+        "mutation": "open bypass",
+        "name": "route closure"
+      }
+    ]
+  },
+  "mutation_matrix": {
+    "families": {
+      "deployment_admission": {
+        "caught": 10,
+        "tested": 10
+      },
+      "receipt_bridge": {
+        "caught": 5,
+        "tested": 5
+      },
+      "restricted_source_semantic": {
+        "caught": 6,
+        "coverage": {
+          "concrete_executions": 36652,
+          "programs": 9163,
+          "trace_mismatches": 0
+        },
+        "tested": 6
+      }
+    },
+    "rows": [
+      {
+        "family": "restricted-source semantic",
+        "first_failure_witness_present": true,
+        "mutation": "branch-both",
+        "status": "CAUGHT",
+        "witness_guards": {
+          "g0": false,
+          "g1": false
+        },
+        "witness_program": [
+          "call",
+          [
+            "if",
+            "g0",
+            [
+              "event",
+              "buyer-guard"
+            ],
+            [
+              "event",
+              "buyer-guard"
+            ]
+          ]
+        ]
+      },
+      {
+        "family": "restricted-source semantic",
+        "first_failure_witness_present": true,
+        "mutation": "call-drops-body",
+        "status": "CAUGHT",
+        "witness_guards": {
+          "g0": false,
+          "g1": false
+        },
+        "witness_program": [
+          "call",
+          [
+            "call",
+            [
+              "event",
+              "buyer-guard"
+            ]
+          ]
+        ]
+      },
+      {
+        "family": "restricted-source semantic",
+        "first_failure_witness_present": true,
+        "mutation": "exception-skips-handler",
+        "status": "CAUGHT",
+        "witness_guards": {
+          "g0": false,
+          "g1": false
+        },
+        "witness_program": [
+          "call",
+          [
+            "try",
+            [
+              "raise"
+            ],
+            [
+              "event",
+              "buyer-guard"
+            ]
+          ]
+        ]
+      },
+      {
+        "family": "restricted-source semantic",
+        "first_failure_witness_present": true,
+        "mutation": "loop-once",
+        "status": "CAUGHT",
+        "witness_guards": {
+          "g0": false,
+          "g1": false
+        },
+        "witness_program": [
+          "call",
+          [
+            "for",
+            0,
+            [
+              "event",
+              "buyer-guard"
+            ]
+          ]
+        ]
+      },
+      {
+        "family": "restricted-source semantic",
+        "first_failure_witness_present": true,
+        "mutation": "return-falls-through",
+        "status": "CAUGHT",
+        "witness_guards": {
+          "g0": false,
+          "g1": false
+        },
+        "witness_program": [
+          "call",
+          [
+            "seq",
+            [
+              "return"
+            ],
+            [
+              "event",
+              "buyer-guard"
+            ]
+          ]
+        ]
+      },
+      {
+        "family": "restricted-source semantic",
+        "first_failure_witness_present": true,
+        "mutation": "sequence-reversed",
+        "status": "CAUGHT",
+        "witness_guards": {
+          "g0": false,
+          "g1": false
+        },
+        "witness_program": [
+          "call",
+          [
+            "seq",
+            [
+              "event",
+              "buyer-guard"
+            ],
+            [
+              "event",
+              "commitment-verify"
+            ]
+          ]
+        ]
+      },
+      {
+        "family": "deployment admission",
+        "first_failure_witness_present": true,
+        "mutation": "creation-input",
+        "status": "REJECTED"
+      },
+      {
+        "family": "deployment admission",
+        "first_failure_witness_present": true,
+        "mutation": "runtime-template",
+        "status": "REJECTED"
+      },
+      {
+        "family": "deployment admission",
+        "first_failure_witness_present": true,
+        "mutation": "constructor-controller",
+        "status": "REJECTED"
+      },
+      {
+        "family": "deployment admission",
+        "first_failure_witness_present": true,
+        "mutation": "nonfresh-state",
+        "status": "REJECTED"
+      },
+      {
+        "family": "deployment admission",
+        "first_failure_witness_present": true,
+        "mutation": "nonzero-acquirer",
+        "status": "REJECTED"
+      },
+      {
+        "family": "deployment admission",
+        "first_failure_witness_present": true,
+        "mutation": "controller-member-role",
+        "status": "REJECTED"
+      },
+      {
+        "family": "deployment admission",
+        "first_failure_witness_present": true,
+        "mutation": "initial-share-owner",
+        "status": "REJECTED"
+      },
+      {
+        "family": "deployment admission",
+        "first_failure_witness_present": true,
+        "mutation": "receipt-block",
+        "status": "REJECTED"
+      },
+      {
+        "family": "deployment admission",
+        "first_failure_witness_present": true,
+        "mutation": "transaction-order",
+        "status": "REJECTED"
+      },
+      {
+        "family": "deployment admission",
+        "first_failure_witness_present": true,
+        "mutation": "immutable-reference",
+        "status": "REJECTED"
+      },
+      {
+        "family": "receipt bridge",
+        "first_failure_witness_present": true,
+        "mutation": "ciphertext_or_order_substitution",
+        "reason": {
+          "operator_id": 1,
+          "reason": "context mismatch: order, buyer, resource, epoch or runtime source"
+        },
+        "status": "REJECTED"
+      },
+      {
+        "family": "receipt bridge",
+        "first_failure_witness_present": true,
+        "mutation": "mask_substitution",
+        "reason": "delivered mask does not match the selected member set",
+        "status": "REJECTED"
+      },
+      {
+        "family": "receipt bridge",
+        "first_failure_witness_present": true,
+        "mutation": "operator_substitution",
+        "reason": "member index to operator id mapping was substituted",
+        "status": "REJECTED"
+      },
+      {
+        "family": "receipt bridge",
+        "first_failure_witness_present": true,
+        "mutation": "underpayment",
+        "reason": "payment value differs from the contract quote",
+        "status": "REJECTED"
+      },
+      {
+        "family": "receipt bridge",
+        "first_failure_witness_present": true,
+        "mutation": "wrong_buyer",
+        "reason": "OPE acquirer does not equal the payment sender",
+        "status": "REJECTED"
+      }
+    ]
+  },
+  "receipt_negative": {
+    "all_rejected": true,
+    "rejected": 5,
+    "tested": 5
+  },
+  "route_comparison": {
+    "all_fields_agree": true,
+    "baseline": {
+      "admissible_roots": 117,
+      "first_minimizer": {
+        "credits": [
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          2
+        ],
+        "quote": 4,
+        "selected": [
+          0,
+          1,
+          2,
+          6
+        ]
+      },
+      "maximum_residual_payment": 8,
+      "method": "direct_product_enumeration_of_declared_OPE_equations",
+      "minimizer_count": 171,
+      "minimum_residual_payment": 4,
+      "root_terminal_edges": 4095,
+      "terminal_sets": 35
+    },
+    "certificate": {
+      "admissible_roots": 117,
+      "maximum_residual_payment": 8,
+      "minimum_residual_payment": 4,
+      "root_terminal_edges": 4095,
+      "terminal_sets": 35
+    },
+    "interpretation": "sanity check against the materialized certificate; not an EVM-semantics proof"
+  },
+  "schema": "reviewer_gate_matrix.v1",
+  "scope": {
+    "global_payment_certificate": false,
+    "logical_gate_matrix_is_runtime_execution": false,
+    "route_baseline_is_independent_of_project_checkers": true
+  },
+  "source_records": {
+    "admission_negative": "verify_v42_clean\\joint_incidence_refinement\\results\\deployment_admission_negative.json",
+    "certificate": "verify_v42_clean\\joint_incidence_refinement\\results\\refinement_certificate.json",
+    "receipt_result": "paid_threshold_response_two_host_v6\\results\\ope_receipt_bridge.v1.json",
+    "rsp_result": "code\\artifact\\rsp_soundness_supplement_v2\\frozen\\rsp_differential_validation.v1.json"
+  },
+  "status": "PASS"
+}

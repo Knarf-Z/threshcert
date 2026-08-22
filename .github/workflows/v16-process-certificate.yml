@@ -40,7 +40,7 @@ jobs:
           python-version: "3.11"
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
           cache: npm
           cache-dependency-path: artifact/joint_incidence_refinement/package-lock.json
       - name: Verify all v16 experiment certificates

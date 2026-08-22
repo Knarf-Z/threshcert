@@ -1,0 +1,114 @@
+{
+  "controls": {
+    "member_names_do_not_alias_attacker": true,
+    "missing_deliver_rejected": true,
+    "prefinality_delivery_rejected": true,
+    "undeclared_bypass_rejected": true
+  },
+  "first_success_routes": [
+    {
+      "actions": [
+        "open",
+        "finalize",
+        "submit_M_1",
+        "submit_M_2",
+        "deliver"
+      ],
+      "cost": 5000000000000000000,
+      "events": [
+        {
+          "position": 0,
+          "type": "Request"
+        },
+        {
+          "amount": 5000000000000000000,
+          "debit_id": "toy-debit-1",
+          "position": 0,
+          "receiver_role": "S",
+          "sender_role": "A",
+          "type": "Transfer"
+        },
+        {
+          "confirmations": 1,
+          "position": 1,
+          "type": "Finalize"
+        },
+        {
+          "member": "M_1",
+          "position": 2,
+          "type": "Respond"
+        },
+        {
+          "member": "M_2",
+          "position": 3,
+          "type": "Respond"
+        },
+        {
+          "commitment_valid": true,
+          "position": 4,
+          "type": "Deliver"
+        }
+      ],
+      "p1_explicit_delivery": true,
+      "p2_same_session_role_binding": true,
+      "p3_finalize_before_delivery": true,
+      "p4_closed_and_single_use": true,
+      "p5_forward_and_reverse": true
+    },
+    {
+      "actions": [
+        "open",
+        "finalize",
+        "submit_M_2",
+        "submit_M_1",
+        "deliver"
+      ],
+      "cost": 5000000000000000000,
+      "events": [
+        {
+          "position": 0,
+          "type": "Request"
+        },
+        {
+          "amount": 5000000000000000000,
+          "debit_id": "toy-debit-1",
+          "position": 0,
+          "receiver_role": "S",
+          "sender_role": "A",
+          "type": "Transfer"
+        },
+        {
+          "confirmations": 1,
+          "position": 1,
+          "type": "Finalize"
+        },
+        {
+          "member": "M_2",
+          "position": 2,
+          "type": "Respond"
+        },
+        {
+          "member": "M_1",
+          "position": 3,
+          "type": "Respond"
+        },
+        {
+          "commitment_valid": true,
+          "position": 4,
+          "type": "Deliver"
+        }
+      ],
+      "p1_explicit_delivery": true,
+      "p2_same_session_role_binding": true,
+      "p3_finalize_before_delivery": true,
+      "p4_closed_and_single_use": true,
+      "p5_forward_and_reverse": true
+    }
+  ],
+  "lts": {
+    "enabled_transitions": 11,
+    "reachable_states": 10
+  },
+  "schema": "finite-process-delivery-result/v15",
+  "verdict": "CERTIFIED(5000000000000000000)"
+}

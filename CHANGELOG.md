@@ -1,5 +1,17 @@
 # ThreshCert artifact changelog
 
+## 2026-08-22 v15 experiment-certificate extensions
+
+- Added a finite explicit-delivery model with distinct roles `A,S`, members
+  `M_1,M_2`, explicit finality and delivery, 10 states, 11 transitions, two
+  first-success routes, and four rejected mutations.
+- Added OPE-anchored process fixture v2 with a single accounting unit, explicit
+  delivery/finality records, contract costs `(4,4,4)`, net costs `(4,3,0)`,
+  five route exclusions, and three rejected certificate mutations.
+- Expanded C6 extractor negative controls from 5/5 to 7/7 by rejecting a forged
+  cheap successful route and a route-cost change without runtime evidence.
+- Added `reproduce_v15_experiments.py` and a focused GitHub Actions workflow.
+  The update contains experiment code/results only; no manuscript source or PDF.
 ## 2026-08-21 v77 finite-world global certificate
 
 - Added `GlobalNamedAcquirerToy`, six EVM tests, a strict four-account world

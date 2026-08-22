@@ -262,3 +262,19 @@ larger-committee rows, and the generalized committee-shape sweep are all
 normalized or seeded controlled constructions, not observations of production
 Keyper resistance. The scalability times are tied to the recorded machine and
 Python implementation.
+## v15 experiment-certificate results
+
+- Frozen v77 C6 certificate: `4095/4095` paths, contract-local cost range `4..8`,
+  contract-local B5 `PASS`, deployment-global B5 `OPEN`.
+- Adversarial extractor controls: `7/7` matched expectation. Removed reachable
+  paths, forged cheap successes, and unsupported cost changes are rejected.
+- Finite explicit-delivery model: 10 states, 11 transitions, two first-success
+  routes, `P1_EXPLICIT_DELIVERY=PASS`, `P3_EXPLICIT_FINALITY=PASS`, and
+  `MUTATIONS=PASS_4_OF_4`; verdict
+  `CERTIFIED(5000000000000000000)` in the declared model.
+- OPE-anchored process fixture v2: contract costs `[4,4,4]`, net costs `[4,3,0]`,
+  `ROUTE_EXCLUSIONS=PASS_5_OF_5`, and `MUTATIONS=PASS_3_OF_3`; verdict
+  `MODEL-REFUTED(4)` in the declared counterfactual process language.
+- These process fixtures do not change the production/deployment verdict. The
+  broader process P3-P5 evidence remains open, so that verdict remains
+  `UNKNOWN`.

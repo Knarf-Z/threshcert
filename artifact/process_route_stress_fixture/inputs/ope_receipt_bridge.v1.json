@@ -1,0 +1,356 @@
+{
+  "binding": {
+    "entries": [
+      {
+        "chain_id": 31337,
+        "committee_registry_digest": "ef2e136eedebf61ce175776fb2843c229146788424504593ffe0bcf650f91420",
+        "committee_size": 7,
+        "contract_address": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+        "contract_runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac",
+        "host_id": "host1",
+        "member_address": "0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc",
+        "member_index": 0,
+        "network_public_key": "0xb1a0706888abcc4d1ac3d743c27923fdcd05349f4560f7d1a1d869b8385a097b18f5292907018e74f0d8c5b2d1c588670c174a820c18ff9ab6c7a1dcc1b28a0234679c53f7ffddf0053455298f4a1f9d24d01dac3fe15d021f4de649f5cd8b37ef153eed0f4683b413dff7d6f20f87421fd4184d0694afb79c5e1f6d5da0f55b8450130ba0a7191d55366a4abb52ade9b329f19194301a7648e53958e2d8f9b270037b4cfd518e496cffd33c3cdada4de1519df493914852c42de80860659cfb3ca009ce057d200f5fdd5060e0a2ed8d824a384a66e78d0d6b422306f372f6f862c0b136d74895c996c2924540f24d6de55587b43cc7a56f053d1f23bc77f33d",
+        "operator_id": 1,
+        "schema": "ptr-ope-member-binding/v1",
+        "signature": {
+          "r": "0x2e77dc07cf5ad0c2b35bd4309fd5053ee211432c1d56f815f542b8657ed16940dfda02b3da7acf4dc156b0b4afdb23dffca6c30194de432ff45959e3e82c94153fec0a3b2a307f4a896a4e4685780a83f2c458676bfdbd25bd513c54a8fed8ff711da3833de29e589cab89777d0734dda57c9b58aa4e15ed757994c86ccade000147bf18599e39d7c65522075872d9503e46292140e3de479d9ecc603971425392cc4ed5a36a80d3fb65d3276d781d75f316b471a1b70346be2e753ce4b59e34194576589fa13a7059c733a36231481bdef3bf365f2d96c0c26c7eec2fa268fcb6d57dbda42d257d8eb21303de11dacb6299ca828a20b0e101f940357db91d53",
+          "s": "0x391a3634b74fc007d7e00c7aaa1cf1df28e453726cbcedba4a02e30964a7da65b44c2c06b063d76fec0e7287e55de80934d467318d59346d7fe68c67795c2561"
+        },
+        "threshold": 4
+      },
+      {
+        "chain_id": 31337,
+        "committee_registry_digest": "ef2e136eedebf61ce175776fb2843c229146788424504593ffe0bcf650f91420",
+        "committee_size": 7,
+        "contract_address": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+        "contract_runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac",
+        "host_id": "host2",
+        "member_address": "0x90f79bf6eb2c4f870365e785982e1f101e93b906",
+        "member_index": 1,
+        "network_public_key": "0x1fdbd03a0bcdb1d6f3de6d71bba2e6dbe5f52f661cb4133f74f6fed0bfd2b202ec57b1c2211f38614c4efc4d1eada0ca593efff6baa7e58d05f5cfd1b14070ca2109e421c2681f9ae20175e8de314212af4f7df4c5206257630a981b65797f70841fe21ec63585ea59b1a2e759aceb31177ebdde2a016ce9ab14fac4f65a3c1d1ad014775e45ac76c480eaf342d7ccfb8b3b29acbbc33820049a7b2b484186b73c58848968ee62c82bdfc84165b6ce0708da70e97481bb2ad8072ffc7659ab0e0a0297e79ef8a33883cf2558fd4d347cc2ff94633019c042c565a2b7242ea857a7f94801e9ce2120a46baa4acdf37b9bc500de998f90fc25c44ed1477204d48b",
+        "operator_id": 2,
+        "schema": "ptr-ope-member-binding/v1",
+        "signature": {
+          "r": "0x1e99d30541a741d641aed919e8728d1f0c7b990483bd95ed65487cb0e0255fa23616cdae0019bce02b3f3a0fb14ed9901ad56e23eabd0f6c682d3b7bbca8a1ef7ea0317b545b6ac4ec175991ff6e1d7c83ea67474fd362f3e42774f84b60db52bc52ec7cec8996104c6b336fda08dac81fe48ee2c5f97ca73d0a82f03c61979f4b23ad59d59700558da1976593d2dce406dc945d35016318a3f1059274accee08767b4b1d8949f15acd4f4a29a24ec50aac1bfdb877a710aabae9ade61c933bcfac3258574fde8ced2294fe0d17560bc09eba1fff440c76af257606eab06852f26ddac08febc4e86023a25acdeecb3b09420a196e1c7c163feea951fc7ecee3b",
+          "s": "0x4d11d447caf3c67c8d3cdd4a1a4f571b0024b09d60ab7dda18a842e3997574fdcbf7451b5cf29c23282cd8cb58d1fb88a50537e3064f158485492b3b5b2bbe4"
+        },
+        "threshold": 4
+      },
+      {
+        "chain_id": 31337,
+        "committee_registry_digest": "ef2e136eedebf61ce175776fb2843c229146788424504593ffe0bcf650f91420",
+        "committee_size": 7,
+        "contract_address": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+        "contract_runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac",
+        "host_id": "host1",
+        "member_address": "0x15d34aaf54267db7d7c367839aaf71a00a2c6a65",
+        "member_index": 2,
+        "network_public_key": "0xac6c7ccffee94524d34378dc27aedc39917ec6b743d1c2371fc76f79cb1fecb400e7bdc3b4936213c25a90cad274fb60a831c397bc8007ebbb685539d9d227d96b2634dfc092ccbe7d70b9f1802ef2d704fdacf6c161f916860f595b03afdfd8cf8757bdda68988c298893ccd481221e2709061ce1d8e13aaa48e13350083b8423d9534b4721e466a64af3970aeb3b98baa7c80d103a4f83f42655a9f32f28d51dacbd189bc567644807c0edb685a13da75cc8e251fb8d619b61816314ce4d0345b94da894f4f53af3f9c2da49c8a26d2c8032b0d7ac34a62e9791035ce4c2b58fc7364f11fd53bd2f665a1a9549eb9ff0ba2e38f21ae509222e896bce9640cd",
+        "operator_id": 3,
+        "schema": "ptr-ope-member-binding/v1",
+        "signature": {
+          "r": "0xc95dfcda99b75cdce8a8af26e7eff48e2ac4d15b2b12573f4c4fe39a72143afbe0e6b9d3704b71e43f902164773dfcb953b847f2f136ecde5d4b6babab78a9528d23dcda8ffd764432dc489b4f31e158588d9da0cadf67aa3471518430771bdfc05e0340fba3e4deada45a93890641a2ede1d87ff4e30f35bd92e9990965771486689db5f0d73fa5657996cbbd411d7ce8bcb4473eb570b844332f6b4d7530932e6f1447874d6419196f8d07e36fe0a627839482e46ad02311fc23c56297412573413cfd21c30d9ebe986b0415097d67a7342d4c880dd87f4fc8b86cae6b61f9aaa34589e0fbdb8efae88fc98de7b29b3460f400f40c5ecf45feb31aaab0d9d5",
+          "s": "0x9b6140367586a627aa0e01f559e83d114a9dfe6b33fd2843cc006b335637d77b4a6cd8440d6251de4644378efe3c0b76f4225dbc349475a67520f7921e3c48d4"
+        },
+        "threshold": 4
+      },
+      {
+        "chain_id": 31337,
+        "committee_registry_digest": "ef2e136eedebf61ce175776fb2843c229146788424504593ffe0bcf650f91420",
+        "committee_size": 7,
+        "contract_address": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+        "contract_runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac",
+        "host_id": "host2",
+        "member_address": "0x9965507d1a55bcc2695c58ba16fb37d819b0a4dc",
+        "member_index": 3,
+        "network_public_key": "0x5a26db1c12fafcabfdd05c8aabfaafcf7ffd60b50dac7197beaa5ef5535f4ff5d806b8352a0a0b7eade482375a25ed0590a3a65562e1bd6f9f4328238dc5e34e2e4579be2e8ca66e44c8dbf407e3b47127d83d170043671ffb66e6388774bedd433fb460e57c7d2ee549cef7ed63263a067f6a394fb96efda26934ed3e5e1e314d777f6b60827d383a4ac1a57b9ad26ad02d963b9a48ed32e81f9a4f744f03e46588b68a42ac8f82a82edae8c058242ccbbbde17cf8438de411430c7744524dcd34dd2affd03f5f920096bbff2c9fda017b787914ee146ac5477dbc02fb95ca3c652eb1f783b62c4ed65ca1b441e05b1235c36f39960f79fa8a7ca5e00b31897",
+        "operator_id": 4,
+        "schema": "ptr-ope-member-binding/v1",
+        "signature": {
+          "r": "0x50216e6e52c68d6cd04097fa3004615e846c5610731e54b26f0c7cf7f26086b16b896c7283a6c42ec92b644a063031228bb40871a1cd24b68c86f41ac939fe2b21a2d02e618bd52e6c655a84ce842493721edcb910d066f909a2feed9cb35851be8bed5ce90d7a65d906d071de34c7cc4f491fdde85e4820b3f86673dfb0995a649ccf1ca53b7da105857d4c62581542294adacc93bb7047df5b37e6989d18abb753615f5e60a5dced4705ed04d275777cb69158afcb0802d9bf8a9125b32890c4e03eaf4010ee57937c5648ee51645b181b312c93060cf96ed33d606fd89c6e31375ce723663e78d6fb05cac4a9bae3a9822400c7ef8399725fc98c646a8e6",
+          "s": "0x5e285e61f66baa5ca51f3e7fc62feab8644425029ab67be2e2120eddfa29a1f2554420c2600f96921b97d06e9107067f891259c455c75717a62d2e5c8ec65420"
+        },
+        "threshold": 4
+      },
+      {
+        "chain_id": 31337,
+        "committee_registry_digest": "ef2e136eedebf61ce175776fb2843c229146788424504593ffe0bcf650f91420",
+        "committee_size": 7,
+        "contract_address": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+        "contract_runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac",
+        "host_id": "host1",
+        "member_address": "0x976ea74026e726554db657fa54763abd0c3a0aa9",
+        "member_index": 4,
+        "network_public_key": "0x81a2639856c0bb647fdd432b5a43e004bfca74f4497d280d0b1d5cd2925a2820b05fb534745a2c596d5c6e07fd4f518680c03f6a4d9c8988f4a947556072404a8107ebb815518e539e34dfad25a0c774322b4471e0169cda2c576e0707af39acc7341c252cdb509d21520f2c8138af57ea0a9059224b897ccc77ab0a5438e061eb4c56216015e3553ef8c0d92f7218bcb28f4efbde75c8f6ad8db0333426f7716261e4bd8a91fb371e6f471b496903d188acd0b1e968d3c886618a692285eb97a79b349ee0a0f6597e5c1b13ca3dd0dccab2b9e58624847d36d6a270f545fa68fa7d1697d61c2a7a3470ebf6646a46e8ec8623081575928fdc6020de29ff645c",
+        "operator_id": 5,
+        "schema": "ptr-ope-member-binding/v1",
+        "signature": {
+          "r": "0x69248d19ff1e366aaa6e5e6c300f717ad0c0ac782a43f5590f5b4105d52e09565694c8f1e93405c935e7f72abbc0496c0f00677042b5c6a9b28720564df274610514d08f24392b88a4957dffbb685f699f0808ea26328ee8d67534ec8a1716a816c3d91d9265daea7c15dce681181badb8cec57666c9bcbbb2ee9385935db69134ceb5e552774476143000f92a6ed19efab3779e67b8ad281b9b666073a3cde04c799e69d65cec3e018e60fcbb045ca60b81709efb01f592c4acaaf6fbcffd6bbf4a23ec1a23191698bd445a33352a30b74e9dbdc245c1cc438fea9dc3cbdf6b2b10b4206dc8aca0e778ea147814aaab9678d5bc680407e605044b7f08606d50",
+          "s": "0xa5d55e2b5d939c656b6291d94cb4b9a60a76a8c3b8359394b69bbaf38d5822ea7e7acb5984795ecabb742414cc938de37a6b76f5f146fc27dfac770b0e5842"
+        },
+        "threshold": 4
+      },
+      {
+        "chain_id": 31337,
+        "committee_registry_digest": "ef2e136eedebf61ce175776fb2843c229146788424504593ffe0bcf650f91420",
+        "committee_size": 7,
+        "contract_address": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+        "contract_runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac",
+        "host_id": "host2",
+        "member_address": "0x14dc79964da2c08b23698b3d3cc7ca32193d9955",
+        "member_index": 5,
+        "network_public_key": "0xac6acb57a93b55331d96b519468db8b2edb3613491d5bac2a6c14b1b50ee5a21cd9c1dbe2d46b990aa45fc706180e3e525af9d37e7c709d69e6a8548a01c562abf7008fb551a7979917dbc3c27e18322f84f613fe8b934d2d3294b477a084a6d0c77a197510ca07399fdbecdcb560e7e76f1ee795a9d2325b42a06492dd2db38780615b4ef01f3706947367b178a54408b362b0322c05f4ca7cf1b291746bb1a9c66b168a4fe7ef5cc83403bdc8b390d8b57cf5ba59b095f59eda714f41394f308642307eb56584fcd7836289d21d0199898aff0835d6618c5eac5720fdc4112c89291016aeeec9eb733b5a348f69574b6f3b267e1882f492800bc3d39e3d22d",
+        "operator_id": 6,
+        "schema": "ptr-ope-member-binding/v1",
+        "signature": {
+          "r": "0xc3c9ef25c8370ba9f612ab57309927a5f4b6a41a0e004564f5465ac786018bfa2b4c56c609d9252e9903266b664a3dd9cd5242c4e5bd5b858aef1c5f010469ca6eec9022bebc4b811332fb7503189d281b12d4a4357f068fa80ad6b4a6d800f7e4e813aafe455b02f17b8f3ec6e3aa098ed05ba7fb2935d3dcbb026cb135068452cf2cc65b72ace3b119df57538a3de7724c7a6a37e0fe42dd87e0fda2b03edeb88ace15c6222c0b7bd43309543d91f0171e9a488734adbf10c93b884650dc0e6ab76d015edf39b294a36e2189f3b1ce1eeb15750089d0808a902f795dc8a6f62abbe8773614ee49c9b0edae535c0d4c6832aec2a2553c99b8be599a5e624614",
+          "s": "0x2c8d8bb8619eac546ee549f124ff61d28c4656e0d4bcc4a5950fa426c69783b6ede2413a946c1aecc5f125ff1c7d4b2743f63d7a9283c97c4dfd2c2abb19b1c5"
+        },
+        "threshold": 4
+      },
+      {
+        "chain_id": 31337,
+        "committee_registry_digest": "ef2e136eedebf61ce175776fb2843c229146788424504593ffe0bcf650f91420",
+        "committee_size": 7,
+        "contract_address": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+        "contract_runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac",
+        "host_id": "host2",
+        "member_address": "0x23618e81e3f5cdf7f54c3d65f7fbc0abf5b21e8f",
+        "member_index": 6,
+        "network_public_key": "0x4388b08cc0d21e0061b3e6df81d967564b123de0bdf0278dd51ac1f7be608a4793645a73690b271cc246d49d8a8b7a54ecb594412db8e65ee0596083c3d83c2c388cd18d68c7609cd1733d368eef2ec00d337f410cb0f5e3343c3275737b48caeb1ea1a4cd87ad1ef05b883430871068e75f7472cb08b8bd5034c5f9f4c1e873af071aa4619c1ac7d46be1b405e5945457efed0371070e4bc5c05852c7b489b4a4a543b6f3497bbad0da34d292d1fb141609bf29b44fa840677d4037e3c22aae47a5d9ac5dcaa2af1f2f39ea67b1ff96f9dc127b99bd91e1f35c74037a056d415ff3e9a063f4f055f8de351111151180ce6b58fc10585cb682964f75d190ef50",
+        "operator_id": 7,
+        "schema": "ptr-ope-member-binding/v1",
+        "signature": {
+          "r": "0xe7573708c451dd0ac5a6ce773d3906046f31ec84de08b0f70d709b8a72cb18ddcdcc8538951611b97fb1c59195e54285056fb4b97756c2f30f2254c2b72cbbf8e4c72a45b3077b2e0d54326ba06e04e84a88d169c9010f069c188f9a27d86fe053cd45ced637a68d1ab731de60653916bf2ea1bdb3f6a9d0697d813eeef7349fe520914734986936a7a60ea3263ebf82f38447fd1b52b964cd9bb4a82965382f574ed00be3085820be3a0128b864922ede7972ef0465ae3d99da01ceb893af7225a1a1c1fa28afa036e9d903ad9b99e81eceb3475d99ab5f390f2db0eefbf1cfa1b44be2793b58e3434d2d50eff91c7e6fc1facd46c2fc17423c4b3f200d39e3",
+          "s": "0x20bf305c9255fd2bd244f7a17af46199610e7ffee86104a1d16e0aee909ffbec22269bbc2479365b950d186bdfe98523cedb8842ea37d48aabb92434ce0bfb72"
+        },
+        "threshold": 4
+      }
+    ],
+    "registry_digest": "ef2e136eedebf61ce175776fb2843c229146788424504593ffe0bcf650f91420",
+    "schema": "ptr-ope-member-binding/v1"
+  },
+  "claims": {
+    "no_secret_material_serialized": true,
+    "real_dealt_threshold_shares_used": true,
+    "real_network_signatures_verified": true,
+    "real_operator_http_processes_used": true,
+    "receipt_selected_exactly_four_operators": true,
+    "underpayment_reverted_in_capture": true
+  },
+  "gate": {
+    "binding_entries": [
+      {
+        "chain_id": 31337,
+        "committee_registry_digest": "ef2e136eedebf61ce175776fb2843c229146788424504593ffe0bcf650f91420",
+        "committee_size": 7,
+        "contract_address": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+        "contract_runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac",
+        "host_id": "host1",
+        "member_address": "0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc",
+        "member_index": 0,
+        "network_public_key": "0xb1a0706888abcc4d1ac3d743c27923fdcd05349f4560f7d1a1d869b8385a097b18f5292907018e74f0d8c5b2d1c588670c174a820c18ff9ab6c7a1dcc1b28a0234679c53f7ffddf0053455298f4a1f9d24d01dac3fe15d021f4de649f5cd8b37ef153eed0f4683b413dff7d6f20f87421fd4184d0694afb79c5e1f6d5da0f55b8450130ba0a7191d55366a4abb52ade9b329f19194301a7648e53958e2d8f9b270037b4cfd518e496cffd33c3cdada4de1519df493914852c42de80860659cfb3ca009ce057d200f5fdd5060e0a2ed8d824a384a66e78d0d6b422306f372f6f862c0b136d74895c996c2924540f24d6de55587b43cc7a56f053d1f23bc77f33d",
+        "operator_id": 1,
+        "schema": "ptr-ope-member-binding/v1",
+        "signature": {
+          "r": "0x2e77dc07cf5ad0c2b35bd4309fd5053ee211432c1d56f815f542b8657ed16940dfda02b3da7acf4dc156b0b4afdb23dffca6c30194de432ff45959e3e82c94153fec0a3b2a307f4a896a4e4685780a83f2c458676bfdbd25bd513c54a8fed8ff711da3833de29e589cab89777d0734dda57c9b58aa4e15ed757994c86ccade000147bf18599e39d7c65522075872d9503e46292140e3de479d9ecc603971425392cc4ed5a36a80d3fb65d3276d781d75f316b471a1b70346be2e753ce4b59e34194576589fa13a7059c733a36231481bdef3bf365f2d96c0c26c7eec2fa268fcb6d57dbda42d257d8eb21303de11dacb6299ca828a20b0e101f940357db91d53",
+          "s": "0x391a3634b74fc007d7e00c7aaa1cf1df28e453726cbcedba4a02e30964a7da65b44c2c06b063d76fec0e7287e55de80934d467318d59346d7fe68c67795c2561"
+        },
+        "threshold": 4
+      },
+      {
+        "chain_id": 31337,
+        "committee_registry_digest": "ef2e136eedebf61ce175776fb2843c229146788424504593ffe0bcf650f91420",
+        "committee_size": 7,
+        "contract_address": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+        "contract_runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac",
+        "host_id": "host2",
+        "member_address": "0x90f79bf6eb2c4f870365e785982e1f101e93b906",
+        "member_index": 1,
+        "network_public_key": "0x1fdbd03a0bcdb1d6f3de6d71bba2e6dbe5f52f661cb4133f74f6fed0bfd2b202ec57b1c2211f38614c4efc4d1eada0ca593efff6baa7e58d05f5cfd1b14070ca2109e421c2681f9ae20175e8de314212af4f7df4c5206257630a981b65797f70841fe21ec63585ea59b1a2e759aceb31177ebdde2a016ce9ab14fac4f65a3c1d1ad014775e45ac76c480eaf342d7ccfb8b3b29acbbc33820049a7b2b484186b73c58848968ee62c82bdfc84165b6ce0708da70e97481bb2ad8072ffc7659ab0e0a0297e79ef8a33883cf2558fd4d347cc2ff94633019c042c565a2b7242ea857a7f94801e9ce2120a46baa4acdf37b9bc500de998f90fc25c44ed1477204d48b",
+        "operator_id": 2,
+        "schema": "ptr-ope-member-binding/v1",
+        "signature": {
+          "r": "0x1e99d30541a741d641aed919e8728d1f0c7b990483bd95ed65487cb0e0255fa23616cdae0019bce02b3f3a0fb14ed9901ad56e23eabd0f6c682d3b7bbca8a1ef7ea0317b545b6ac4ec175991ff6e1d7c83ea67474fd362f3e42774f84b60db52bc52ec7cec8996104c6b336fda08dac81fe48ee2c5f97ca73d0a82f03c61979f4b23ad59d59700558da1976593d2dce406dc945d35016318a3f1059274accee08767b4b1d8949f15acd4f4a29a24ec50aac1bfdb877a710aabae9ade61c933bcfac3258574fde8ced2294fe0d17560bc09eba1fff440c76af257606eab06852f26ddac08febc4e86023a25acdeecb3b09420a196e1c7c163feea951fc7ecee3b",
+          "s": "0x4d11d447caf3c67c8d3cdd4a1a4f571b0024b09d60ab7dda18a842e3997574fdcbf7451b5cf29c23282cd8cb58d1fb88a50537e3064f158485492b3b5b2bbe4"
+        },
+        "threshold": 4
+      },
+      {
+        "chain_id": 31337,
+        "committee_registry_digest": "ef2e136eedebf61ce175776fb2843c229146788424504593ffe0bcf650f91420",
+        "committee_size": 7,
+        "contract_address": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+        "contract_runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac",
+        "host_id": "host1",
+        "member_address": "0x15d34aaf54267db7d7c367839aaf71a00a2c6a65",
+        "member_index": 2,
+        "network_public_key": "0xac6c7ccffee94524d34378dc27aedc39917ec6b743d1c2371fc76f79cb1fecb400e7bdc3b4936213c25a90cad274fb60a831c397bc8007ebbb685539d9d227d96b2634dfc092ccbe7d70b9f1802ef2d704fdacf6c161f916860f595b03afdfd8cf8757bdda68988c298893ccd481221e2709061ce1d8e13aaa48e13350083b8423d9534b4721e466a64af3970aeb3b98baa7c80d103a4f83f42655a9f32f28d51dacbd189bc567644807c0edb685a13da75cc8e251fb8d619b61816314ce4d0345b94da894f4f53af3f9c2da49c8a26d2c8032b0d7ac34a62e9791035ce4c2b58fc7364f11fd53bd2f665a1a9549eb9ff0ba2e38f21ae509222e896bce9640cd",
+        "operator_id": 3,
+        "schema": "ptr-ope-member-binding/v1",
+        "signature": {
+          "r": "0xc95dfcda99b75cdce8a8af26e7eff48e2ac4d15b2b12573f4c4fe39a72143afbe0e6b9d3704b71e43f902164773dfcb953b847f2f136ecde5d4b6babab78a9528d23dcda8ffd764432dc489b4f31e158588d9da0cadf67aa3471518430771bdfc05e0340fba3e4deada45a93890641a2ede1d87ff4e30f35bd92e9990965771486689db5f0d73fa5657996cbbd411d7ce8bcb4473eb570b844332f6b4d7530932e6f1447874d6419196f8d07e36fe0a627839482e46ad02311fc23c56297412573413cfd21c30d9ebe986b0415097d67a7342d4c880dd87f4fc8b86cae6b61f9aaa34589e0fbdb8efae88fc98de7b29b3460f400f40c5ecf45feb31aaab0d9d5",
+          "s": "0x9b6140367586a627aa0e01f559e83d114a9dfe6b33fd2843cc006b335637d77b4a6cd8440d6251de4644378efe3c0b76f4225dbc349475a67520f7921e3c48d4"
+        },
+        "threshold": 4
+      },
+      {
+        "chain_id": 31337,
+        "committee_registry_digest": "ef2e136eedebf61ce175776fb2843c229146788424504593ffe0bcf650f91420",
+        "committee_size": 7,
+        "contract_address": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+        "contract_runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac",
+        "host_id": "host2",
+        "member_address": "0x9965507d1a55bcc2695c58ba16fb37d819b0a4dc",
+        "member_index": 3,
+        "network_public_key": "0x5a26db1c12fafcabfdd05c8aabfaafcf7ffd60b50dac7197beaa5ef5535f4ff5d806b8352a0a0b7eade482375a25ed0590a3a65562e1bd6f9f4328238dc5e34e2e4579be2e8ca66e44c8dbf407e3b47127d83d170043671ffb66e6388774bedd433fb460e57c7d2ee549cef7ed63263a067f6a394fb96efda26934ed3e5e1e314d777f6b60827d383a4ac1a57b9ad26ad02d963b9a48ed32e81f9a4f744f03e46588b68a42ac8f82a82edae8c058242ccbbbde17cf8438de411430c7744524dcd34dd2affd03f5f920096bbff2c9fda017b787914ee146ac5477dbc02fb95ca3c652eb1f783b62c4ed65ca1b441e05b1235c36f39960f79fa8a7ca5e00b31897",
+        "operator_id": 4,
+        "schema": "ptr-ope-member-binding/v1",
+        "signature": {
+          "r": "0x50216e6e52c68d6cd04097fa3004615e846c5610731e54b26f0c7cf7f26086b16b896c7283a6c42ec92b644a063031228bb40871a1cd24b68c86f41ac939fe2b21a2d02e618bd52e6c655a84ce842493721edcb910d066f909a2feed9cb35851be8bed5ce90d7a65d906d071de34c7cc4f491fdde85e4820b3f86673dfb0995a649ccf1ca53b7da105857d4c62581542294adacc93bb7047df5b37e6989d18abb753615f5e60a5dced4705ed04d275777cb69158afcb0802d9bf8a9125b32890c4e03eaf4010ee57937c5648ee51645b181b312c93060cf96ed33d606fd89c6e31375ce723663e78d6fb05cac4a9bae3a9822400c7ef8399725fc98c646a8e6",
+          "s": "0x5e285e61f66baa5ca51f3e7fc62feab8644425029ab67be2e2120eddfa29a1f2554420c2600f96921b97d06e9107067f891259c455c75717a62d2e5c8ec65420"
+        },
+        "threshold": 4
+      },
+      {
+        "chain_id": 31337,
+        "committee_registry_digest": "ef2e136eedebf61ce175776fb2843c229146788424504593ffe0bcf650f91420",
+        "committee_size": 7,
+        "contract_address": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+        "contract_runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac",
+        "host_id": "host1",
+        "member_address": "0x976ea74026e726554db657fa54763abd0c3a0aa9",
+        "member_index": 4,
+        "network_public_key": "0x81a2639856c0bb647fdd432b5a43e004bfca74f4497d280d0b1d5cd2925a2820b05fb534745a2c596d5c6e07fd4f518680c03f6a4d9c8988f4a947556072404a8107ebb815518e539e34dfad25a0c774322b4471e0169cda2c576e0707af39acc7341c252cdb509d21520f2c8138af57ea0a9059224b897ccc77ab0a5438e061eb4c56216015e3553ef8c0d92f7218bcb28f4efbde75c8f6ad8db0333426f7716261e4bd8a91fb371e6f471b496903d188acd0b1e968d3c886618a692285eb97a79b349ee0a0f6597e5c1b13ca3dd0dccab2b9e58624847d36d6a270f545fa68fa7d1697d61c2a7a3470ebf6646a46e8ec8623081575928fdc6020de29ff645c",
+        "operator_id": 5,
+        "schema": "ptr-ope-member-binding/v1",
+        "signature": {
+          "r": "0x69248d19ff1e366aaa6e5e6c300f717ad0c0ac782a43f5590f5b4105d52e09565694c8f1e93405c935e7f72abbc0496c0f00677042b5c6a9b28720564df274610514d08f24392b88a4957dffbb685f699f0808ea26328ee8d67534ec8a1716a816c3d91d9265daea7c15dce681181badb8cec57666c9bcbbb2ee9385935db69134ceb5e552774476143000f92a6ed19efab3779e67b8ad281b9b666073a3cde04c799e69d65cec3e018e60fcbb045ca60b81709efb01f592c4acaaf6fbcffd6bbf4a23ec1a23191698bd445a33352a30b74e9dbdc245c1cc438fea9dc3cbdf6b2b10b4206dc8aca0e778ea147814aaab9678d5bc680407e605044b7f08606d50",
+          "s": "0xa5d55e2b5d939c656b6291d94cb4b9a60a76a8c3b8359394b69bbaf38d5822ea7e7acb5984795ecabb742414cc938de37a6b76f5f146fc27dfac770b0e5842"
+        },
+        "threshold": 4
+      },
+      {
+        "chain_id": 31337,
+        "committee_registry_digest": "ef2e136eedebf61ce175776fb2843c229146788424504593ffe0bcf650f91420",
+        "committee_size": 7,
+        "contract_address": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+        "contract_runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac",
+        "host_id": "host2",
+        "member_address": "0x14dc79964da2c08b23698b3d3cc7ca32193d9955",
+        "member_index": 5,
+        "network_public_key": "0xac6acb57a93b55331d96b519468db8b2edb3613491d5bac2a6c14b1b50ee5a21cd9c1dbe2d46b990aa45fc706180e3e525af9d37e7c709d69e6a8548a01c562abf7008fb551a7979917dbc3c27e18322f84f613fe8b934d2d3294b477a084a6d0c77a197510ca07399fdbecdcb560e7e76f1ee795a9d2325b42a06492dd2db38780615b4ef01f3706947367b178a54408b362b0322c05f4ca7cf1b291746bb1a9c66b168a4fe7ef5cc83403bdc8b390d8b57cf5ba59b095f59eda714f41394f308642307eb56584fcd7836289d21d0199898aff0835d6618c5eac5720fdc4112c89291016aeeec9eb733b5a348f69574b6f3b267e1882f492800bc3d39e3d22d",
+        "operator_id": 6,
+        "schema": "ptr-ope-member-binding/v1",
+        "signature": {
+          "r": "0xc3c9ef25c8370ba9f612ab57309927a5f4b6a41a0e004564f5465ac786018bfa2b4c56c609d9252e9903266b664a3dd9cd5242c4e5bd5b858aef1c5f010469ca6eec9022bebc4b811332fb7503189d281b12d4a4357f068fa80ad6b4a6d800f7e4e813aafe455b02f17b8f3ec6e3aa098ed05ba7fb2935d3dcbb026cb135068452cf2cc65b72ace3b119df57538a3de7724c7a6a37e0fe42dd87e0fda2b03edeb88ace15c6222c0b7bd43309543d91f0171e9a488734adbf10c93b884650dc0e6ab76d015edf39b294a36e2189f3b1ce1eeb15750089d0808a902f795dc8a6f62abbe8773614ee49c9b0edae535c0d4c6832aec2a2553c99b8be599a5e624614",
+          "s": "0x2c8d8bb8619eac546ee549f124ff61d28c4656e0d4bcc4a5950fa426c69783b6ede2413a946c1aecc5f125ff1c7d4b2743f63d7a9283c97c4dfd2c2abb19b1c5"
+        },
+        "threshold": 4
+      },
+      {
+        "chain_id": 31337,
+        "committee_registry_digest": "ef2e136eedebf61ce175776fb2843c229146788424504593ffe0bcf650f91420",
+        "committee_size": 7,
+        "contract_address": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+        "contract_runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac",
+        "host_id": "host2",
+        "member_address": "0x23618e81e3f5cdf7f54c3d65f7fbc0abf5b21e8f",
+        "member_index": 6,
+        "network_public_key": "0x4388b08cc0d21e0061b3e6df81d967564b123de0bdf0278dd51ac1f7be608a4793645a73690b271cc246d49d8a8b7a54ecb594412db8e65ee0596083c3d83c2c388cd18d68c7609cd1733d368eef2ec00d337f410cb0f5e3343c3275737b48caeb1ea1a4cd87ad1ef05b883430871068e75f7472cb08b8bd5034c5f9f4c1e873af071aa4619c1ac7d46be1b405e5945457efed0371070e4bc5c05852c7b489b4a4a543b6f3497bbad0da34d292d1fb141609bf29b44fa840677d4037e3c22aae47a5d9ac5dcaa2af1f2f39ea67b1ff96f9dc127b99bd91e1f35c74037a056d415ff3e9a063f4f055f8de351111151180ce6b58fc10585cb682964f75d190ef50",
+        "operator_id": 7,
+        "schema": "ptr-ope-member-binding/v1",
+        "signature": {
+          "r": "0xe7573708c451dd0ac5a6ce773d3906046f31ec84de08b0f70d709b8a72cb18ddcdcc8538951611b97fb1c59195e54285056fb4b97756c2f30f2254c2b72cbbf8e4c72a45b3077b2e0d54326ba06e04e84a88d169c9010f069c188f9a27d86fe053cd45ced637a68d1ab731de60653916bf2ea1bdb3f6a9d0697d813eeef7349fe520914734986936a7a60ea3263ebf82f38447fd1b52b964cd9bb4a82965382f574ed00be3085820be3a0128b864922ede7972ef0465ae3d99da01ceb893af7225a1a1c1fa28afa036e9d903ad9b99e81eceb3475d99ab5f390f2db0eefbf1cfa1b44be2793b58e3434d2d50eff91c7e6fc1facd46c2fc17423c4b3f200d39e3",
+          "s": "0x20bf305c9255fd2bd244f7a17af46199610e7ffee86104a1d16e0aee909ffbec22269bbc2479365b950d186bdfe98523cedb8842ea37d48aabb92434ce0bfb72"
+        },
+        "threshold": 4
+      }
+    ],
+    "buyer": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+    "contract_address": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+    "contract_runtime_bytecode_keccak256": "0x51f89b3652096ce4eeda17677d575b104bf7d5f3b05dcffc503ad4f8f26a69ac",
+    "payment_block_number": "3",
+    "payment_tx_hash": "0x1be651211b9e452942db5a4799ccfa524b99f181c863f74d2fc1d075cff649cc",
+    "payment_value_wei": "4000000000000000000",
+    "registry_digest": "ef2e136eedebf61ce175776fb2843c229146788424504593ffe0bcf650f91420",
+    "selected_mask": "0x33",
+    "selected_member_indices": [
+      0,
+      1,
+      4,
+      5
+    ],
+    "selected_operator_ids": [
+      1,
+      2,
+      5,
+      6
+    ]
+  },
+  "negative_cases": {
+    "ciphertext_or_order_substitution": {
+      "reason": {
+        "operator_id": 1,
+        "reason": "context mismatch: order, buyer, resource, epoch or runtime source"
+      },
+      "rejected": true
+    },
+    "mask_substitution": {
+      "reason": "delivered mask does not match the selected member set",
+      "rejected": true
+    },
+    "operator_substitution": {
+      "reason": "member index to operator id mapping was substituted",
+      "rejected": true
+    },
+    "underpayment": {
+      "reason": "payment value differs from the contract quote",
+      "rejected": true
+    },
+    "wrong_buyer": {
+      "reason": "OPE acquirer does not equal the payment sender",
+      "rejected": true
+    }
+  },
+  "protocol": {
+    "buyer": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+    "ciphertext_hash": "b4bb3beea5f5e5dbe4ea5ca4dddb50222d7b61a4ad1427baa768d38530f33ed7",
+    "ciphertext_plaintext_commitment": "e88091d0ddeb08031eb4001dbfacbfa0fa572f156727ad06f7d84973c24a6f1d",
+    "epoch": 1,
+    "operator_registry_digest": "ef2e136eedebf61ce175776fb2843c229146788424504593ffe0bcf650f91420",
+    "order_id": "ope-receipt:0x1be651211b9e452942db5a4799ccfa524b99f181c863f74d2fc1d075cff649cc",
+    "partial_hashes": [
+      "ee803c27aba75579a3c17146474abfb606ea2d15fb25d12ae00dff343dda497f",
+      "de70ee6926eaa24eac9ab97bd2ae8aac390a47b98791e9d5cec493a39975a16f",
+      "a4235cc0067481525bf43ec6052fb4cf82cbcda9e934bcbe6001e9baae12719b",
+      "58c75b5ed06b3e55d48e2cbfc4cf23f762a8d1aca5e0c7b30d5e132598aea653"
+    ],
+    "plaintext_commitment_verified": true,
+    "plaintext_hash": "3c9fde43f28a1468ddb902291641a33d47cb9679603fbd08c3d98a833edf4260",
+    "proof_hashes": [
+      "6a2d5358e06bb86ea55b81e91b40a513eeedae45d1a1935add1eba6b68d632b6",
+      "90a23b08d414abe223c70d00f764814ff0f654aefdb49d20048acd87dba15bed",
+      "48e68fe229f79ca840b3f0d9978ca5e330af90f9a47f26f245a889302c62d0bf",
+      "6e4958c66c3ce33def92e8692e51d50c3c0677575e11aeb9fb7e0aa5f2e0933a"
+    ],
+    "resource": "encrypted-mempool-early-plaintext-token",
+    "response_hashes": [
+      "96ea59c5b1cbf3db5158c9407ee77937a79e9dc087986e5cff601f3f9cdd7de8",
+      "7b58f1238b45793af565de4edbadbef0e165b3cfc1df40e4754072190408d209",
+      "fc51d9447fd390457b55e4374083551ad47874c32171cf39a0902c45b95ca5c9",
+      "1d5170a8fc69d462b07cbe6e5843b7b4d1c4e55823ab9a80315b0730cec297a0"
+    ],
+    "runtime_source_digest": "3767dc9a1ce38ac53936fdd00890c1937c7dbd6f22503733dd72e67c821db9bb",
+    "selected_operator_ids": [
+      1,
+      2,
+      5,
+      6
+    ],
+    "threshold": 4
+  },
+  "receipt_sha256": "f3c5cc595004c4172f12333cc2fccd829efdb2d94a6dffcf67b139084017e869",
+  "schema": "ptr-ope-receipt-bridge-result/v1"
+}

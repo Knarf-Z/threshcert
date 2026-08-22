@@ -1,0 +1,87 @@
+{
+  "accounting_unit": {
+    "excluded": [
+      "gas",
+      "ERC-20 and other token transfers",
+      "coordinator fees not declared in this header",
+      "off-chain transfers"
+    ],
+    "id": "ope-unit-a",
+    "included": [
+      "same-session native call debit",
+      "certified same-unit rebate",
+      "certified same-unit cross-session return"
+    ],
+    "projection": "native call value divided by 10^18 wei"
+  },
+  "controls": {
+    "five_source_bypasses_excluded": true,
+    "missing_delivery_rejected": true,
+    "omitted_return_rejected": true,
+    "prefinality_delivery_rejected": true,
+    "same_contract_costs_different_process_costs": true
+  },
+  "floors": {
+    "contract": 4,
+    "net_process": 0,
+    "target": 4,
+    "unit": "ope-unit-a"
+  },
+  "route_exclusions": {
+    "ciphertext-order-bypass": true,
+    "delivery-mask-bypass": true,
+    "operator-binding-bypass": true,
+    "wrong-requester": true,
+    "zero-or-underpayment": true
+  },
+  "routes": [
+    {
+      "contract_cost": 4,
+      "event_count": 5,
+      "id": "clean-success",
+      "net_process_cost": 4,
+      "p1_explicit_delivery": true,
+      "p2_same_session_roles": true,
+      "p3_explicit_finality": true,
+      "p4_complete_returns_and_single_use": true,
+      "p5_forward_and_reverse": true,
+      "session": "clean-session"
+    },
+    {
+      "contract_cost": 4,
+      "event_count": 6,
+      "id": "rebated-success",
+      "net_process_cost": 3,
+      "p1_explicit_delivery": true,
+      "p2_same_session_roles": true,
+      "p3_explicit_finality": true,
+      "p4_complete_returns_and_single_use": true,
+      "p5_forward_and_reverse": true,
+      "session": "rebate-session"
+    },
+    {
+      "contract_cost": 4,
+      "event_count": 6,
+      "id": "cross-session-return-success",
+      "net_process_cost": 0,
+      "p1_explicit_delivery": true,
+      "p2_same_session_roles": true,
+      "p3_explicit_finality": true,
+      "p4_complete_returns_and_single_use": true,
+      "p5_forward_and_reverse": true,
+      "session": "cross-return-session"
+    }
+  ],
+  "schema": "ope-anchored-process-branch-result/v2",
+  "source_binding": {
+    "payment_block_number": 3,
+    "payment_tx_hash": "0x1be651211b9e452942db5a4799ccfa524b99f181c863f74d2fc1d075cff649cc",
+    "receipt_sha256": "2b95a8a348eb84169849c69e570caba6e70496d8988c21db176fdce4f4807a59"
+  },
+  "theorem3": {
+    "bidirectional_p5": true,
+    "exact_process_floor": 0,
+    "infimum_attained": true
+  },
+  "verdict": "MODEL-REFUTED(4)"
+}

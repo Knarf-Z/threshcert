@@ -1,0 +1,101 @@
+{
+  "schema": "ope-anchored-process-branch/v2",
+  "description": "Reproducible synthetic process branches anchored to one preserved OPE receipt. Returns are counterfactual overlays, not observed deployment events.",
+  "header": {
+    "roles": ["A", "S"],
+    "committee_members": [1, 2, 3, 4, 5, 6, 7],
+    "accounting_unit": {
+      "id": "ope-unit-a",
+      "projection": "native call value divided by 10^18 wei",
+      "included": [
+        "same-session native call debit",
+        "certified same-unit rebate",
+        "certified same-unit cross-session return"
+      ],
+      "excluded": [
+        "gas",
+        "ERC-20 and other token transfers",
+        "coordinator fees not declared in this header",
+        "off-chain transfers"
+      ]
+    },
+    "finality_policy": {
+      "kind": "local mined receipt",
+      "confirmations": 1
+    }
+  },
+  "source": {
+    "path": "inputs/ope_receipt_bridge.v1.json",
+    "sha256": "2b95a8a348eb84169849c69e570caba6e70496d8988c21db176fdce4f4807a59",
+    "expected_schema": "ptr-ope-receipt-bridge-result/v1",
+    "expected_chain_id": 31337,
+    "expected_payment_block_number": 3,
+    "expected_payment_tx_hash": "0x1be651211b9e452942db5a4799ccfa524b99f181c863f74d2fc1d075cff649cc",
+    "expected_payment_value_wei": "4000000000000000000",
+    "expected_selected_operator_ids": [1, 2, 5, 6]
+  },
+  "target": {
+    "g": 4,
+    "unit": "ope-unit-a"
+  },
+  "route_exclusions": [
+    {"id": "zero-or-underpayment", "source_negative_case": "underpayment"},
+    {"id": "wrong-requester", "source_negative_case": "wrong_buyer"},
+    {"id": "delivery-mask-bypass", "source_negative_case": "mask_substitution"},
+    {"id": "operator-binding-bypass", "source_negative_case": "operator_substitution"},
+    {"id": "ciphertext-order-bypass", "source_negative_case": "ciphertext_or_order_substitution"}
+  ],
+  "routes": [
+    {
+      "id": "clean-success",
+      "session": "clean-session",
+      "events": [
+        {"position": 0, "type": "Request"},
+        {"amount": 4, "debit_id": "ope-payment-receipt", "position": 1, "receiver_role": "S", "sender_role": "A", "type": "Transfer"},
+        {"block_number": 3, "confirmations": 1, "position": 2, "type": "Finalize"},
+        {"operators": [1, 2, 5, 6], "position": 3, "type": "Respond"},
+        {"commitment_valid": true, "position": 4, "type": "Deliver"}
+      ],
+      "contract_level_returns": [],
+      "process_returns": [],
+      "expected_contract_cost": 4,
+      "expected_process_cost": 4
+    },
+    {
+      "id": "rebated-success",
+      "session": "rebate-session",
+      "events": [
+        {"position": 0, "type": "Request"},
+        {"amount": 4, "debit_id": "ope-payment-receipt", "position": 1, "receiver_role": "S", "sender_role": "A", "type": "Transfer"},
+        {"block_number": 3, "confirmations": 1, "position": 2, "type": "Finalize"},
+        {"operators": [1, 2, 5, 6], "position": 3, "type": "Respond"},
+        {"commitment_valid": true, "position": 4, "type": "Deliver"},
+        {"amount": 1, "kind": "same-session-rebate", "linked_debit_id": "ope-payment-receipt", "position": 5, "type": "Return"}
+      ],
+      "contract_level_returns": [],
+      "process_returns": [
+        {"amount": 1, "kind": "same-session-rebate", "linked_debit_id": "ope-payment-receipt"}
+      ],
+      "expected_contract_cost": 4,
+      "expected_process_cost": 3
+    },
+    {
+      "id": "cross-session-return-success",
+      "session": "cross-return-session",
+      "events": [
+        {"position": 0, "type": "Request"},
+        {"amount": 4, "debit_id": "ope-payment-receipt", "position": 1, "receiver_role": "S", "sender_role": "A", "type": "Transfer"},
+        {"block_number": 3, "confirmations": 1, "position": 2, "type": "Finalize"},
+        {"operators": [1, 2, 5, 6], "position": 3, "type": "Respond"},
+        {"commitment_valid": true, "position": 4, "type": "Deliver"},
+        {"amount": 4, "kind": "cross-session-return", "linked_debit_id": "ope-payment-receipt", "position": 5, "type": "Return"}
+      ],
+      "contract_level_returns": [],
+      "process_returns": [
+        {"amount": 4, "kind": "cross-session-return", "linked_debit_id": "ope-payment-receipt"}
+      ],
+      "expected_contract_cost": 4,
+      "expected_process_cost": 0
+    }
+  ]
+}

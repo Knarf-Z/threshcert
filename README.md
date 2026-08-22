@@ -109,6 +109,12 @@ defines every experiment and its interpretation boundary.
   residual-price mechanism. It classifies all \(3^7=2,187\) integer credit
   candidates, checks all \(117\times35=4,095\) admissible state--set pairs,
   and executes an exact 4-unit minimizer.
+- `artifact/finite_toy_delivery_extension/`: a 10-state, 11-transition finite
+  process model with separate service role and member identifiers, explicit
+  finality and delivery events, two first-success routes, and four mutations.
+- `artifact/process_route_stress_fixture/`: an OPE-receipt-anchored v2 process
+  fixture with contract costs `(4,4,4)`, net costs `(4,3,0)`, five route
+  exclusions, and three process-certificate mutations.
 
 ## Reproduce
 

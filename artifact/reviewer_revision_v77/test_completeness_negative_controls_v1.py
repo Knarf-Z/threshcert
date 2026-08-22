@@ -23,6 +23,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument("--output", type=Path, default=None)
+    parser.add_argument("--verify", action="store_true", help="compare with the committed deterministic result")
     args = parser.parse_args()
     root = args.root.resolve()
     refinement_candidates = [
@@ -82,7 +83,17 @@ def main() -> int:
         mutations = []
         missing_record = json.loads(json.dumps(certificate))
         missing_record["c6"]["records"].pop()
-        mutations.append(("one C6 path removed", missing_record))
+        mutations.append(("reachable C6 path removed", missing_record))
+        forged_route = json.loads(json.dumps(certificate))
+        fake = json.loads(json.dumps(forged_route["c6"]["records"][0]))
+        fake["root_id"] = "r-forged"
+        fake["local_cost_units"] = 0
+        fake["reverse_witness"] = "forged-cheap-route"
+        forged_route["c6"]["records"].append(fake)
+        mutations.append(("forged cheap successful route added", forged_route))
+        cost_tamper = json.loads(json.dumps(certificate))
+        cost_tamper["c6"]["records"][0]["local_cost_units"] = 0
+        mutations.append(("route cost changed without runtime change", cost_tamper))
         bounded_reverse = json.loads(json.dumps(certificate))
         bounded_reverse["c6"]["records"][0]["reverse_proof_bounds"] = [1]
         mutations.append(("reverse proof bound inserted", bounded_reverse))
@@ -112,8 +123,15 @@ def main() -> int:
             "matched_expectation": sum(row["expected"] == row["observed"] for row in controls),
         },
     }
-    output.parent.mkdir(parents=True, exist_ok=True)
-    dump(output, result)
+    encoded = json.dumps(result, indent=2, sort_keys=True) + "\n"
+    if args.verify:
+        if not output.is_file():
+            raise SystemExit(f"missing negative-control result: {output}")
+        if output.read_text(encoding="utf-8") != encoded:
+            raise SystemExit("negative-control result does not match deterministic regeneration")
+    else:
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(encoded, encoding="utf-8", newline="\n")
     for row in controls:
         print(f"{row['mutation']}={row['observed']}")
     print(f"NEGATIVE_CONTROLS={result['status']} ({result['summary']['matched_expectation']}/{result['summary']['tested']})")

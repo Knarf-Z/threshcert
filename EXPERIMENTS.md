@@ -310,3 +310,31 @@ resistance, activation, operator independence, or payment conditions.
   not funding provenance. Its positive 4-unit value cannot be exported to a
   production attacker-cost certificate without separate evidence that the
   pool credits are attacker-independent.
+## v15 certificate-interface experiments
+
+The v15 extensions are additive and do not modify the frozen v77 runtime
+certificate:
+
+1. `artifact/finite_toy_delivery_extension` enumerates a complete finite process
+   language with seven actions, 10 reachable states, 11 transitions, two
+   first-success routes, separate service/member identifiers, explicit
+   `Finalize` and `Deliver`, and 4/4 rejected mutations. Its exact
+   `5,000,000,000,000,000,000` simulated-wei result applies only to the declared
+   finite model.
+2. `artifact/process_route_stress_fixture` binds a preserved valid OPE receipt to
+   three declared process routes. Contract costs remain `(4,4,4)`, while a
+   coordinator rebate and a reuse-linked cross-session return produce net costs
+   `(4,3,0)`. Five receipt/contract-backed bypass classes and three
+   process-certificate mutations are rejected. The resulting
+   `MODEL-REFUTED(4)` verdict applies only to the counterfactual fixture; it is
+   not evidence that a rebate, return, or one-confirmation finality policy
+   occurred in the deployment.
+3. `artifact/reviewer_revision_v77/test_completeness_negative_controls_v1.py`
+   now verifies seven controls. In addition to the original checks, it rejects
+   a forged cheap success and a route-cost change unsupported by runtime
+   evidence. Its `--verify` mode byte-compares deterministic regeneration with
+   the committed v15 result.
+
+Run all three from the repository root with
+`python reproduce_v15_experiments.py`. The entry also checks both manifests and
+all 4,095 C6 records. It performs no public-chain write.

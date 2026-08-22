@@ -1,0 +1,43 @@
+{
+  "schema": "finite-process-delivery/v15",
+  "description": "Finite formal-sanity instance with explicit finality and delivery actions.",
+  "header": {
+    "roles": {
+      "A": ["buyer"],
+      "S": ["escrow", "M_1", "M_2"]
+    },
+    "committee_members": ["M_1", "M_2"],
+    "threshold": 2,
+    "accounting_unit": {
+      "id": "simulated-wei",
+      "included": ["same-session native debit", "certified returns"],
+      "excluded": ["gas", "tokens", "off-chain transfers"]
+    },
+    "finality_policy": {
+      "kind": "declared finite-ledger commit",
+      "confirmations": 1
+    }
+  },
+  "payment": {
+    "debit_id": "toy-debit-1",
+    "amount": 5000000000000000000,
+    "sender_role": "A",
+    "receiver_role": "S",
+    "single_use": true
+  },
+  "actions": [
+    "open",
+    "finalize",
+    "submit_M_1",
+    "submit_M_2",
+    "deliver",
+    "withdraw_M_1",
+    "withdraw_M_2"
+  ],
+  "success_action": "deliver",
+  "expected": {
+    "first_success_route_count": 2,
+    "first_success_cost": 5000000000000000000,
+    "verdict": "CERTIFIED(5000000000000000000)"
+  }
+}

@@ -1,0 +1,8 @@
+routes: 3
+contract costs: [4, 4, 4]
+net process costs: [4, 3, 0]
+P1_EXPLICIT_DELIVERY=PASS
+P3_EXPLICIT_FINALITY=PASS
+ROUTE_EXCLUSIONS=PASS_5_OF_5
+MUTATIONS=PASS_3_OF_3
+verdict: MODEL-REFUTED(4)

@@ -1,4 +1,4 @@
-2b71232a25cd3872d2358ce62d50a9d4dc76d68ef1e26caa9f9ef98cee0c1f96  ./.gitattributes
+b5915c52b29eb2555ebcb0782243ddc93250dfecf31867060106b9e0bfa8d497  ./.gitattributes
 420da675b3c19a18b6241c9efedff6970e2eecfd14c1f20504ec2451ccbd629c  ./.github/workflows/completeness-certificates-v77.yml
 a67f6480fad7549a8aae309ac4042561ea5e1d795cafb15cd54a37a31e04bb99  ./.github/workflows/phase1-cross-platform.yml
 52de30269fec868cfc0e47d9fa4f2bf129aa5f9f6900c6d3125daa66c2bd10db  ./.github/workflows/ptr-host1-v2.yml

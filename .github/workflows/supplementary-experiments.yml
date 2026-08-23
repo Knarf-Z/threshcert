@@ -1,0 +1,52 @@
+name: supplementary experiment packages
+
+on:
+  push:
+    paths:
+      - ".github/workflows/supplementary-experiments.yml"
+      - "artifact/fc_experiment_upgrade_v4_2/**"
+      - "artifact/paid_threshold_response_two_host_v6/**"
+  pull_request:
+    paths:
+      - ".github/workflows/supplementary-experiments.yml"
+      - "artifact/fc_experiment_upgrade_v4_2/**"
+      - "artifact/paid_threshold_response_two_host_v6/**"
+
+permissions:
+  contents: read
+
+jobs:
+  two-host-public-release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify privacy-scrubbed frozen archive
+        run: >-
+          python artifact/paid_threshold_response_two_host_v6/extracted/project/scripts/export_public_release.py
+          --verify-only
+          artifact/paid_threshold_response_two_host_v6/frozen/two_host_execution_evidence.v68.public.zip
+      - name: Run source-level tests
+        run: python artifact/paid_threshold_response_two_host_v6/run_public_tests.py
+
+  fc-upgrade-v4-2:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: artifact/fc_experiment_upgrade_v4_2/requirements.txt
+      - name: Install locked Python dependencies
+        run: python -m pip install -r artifact/fc_experiment_upgrade_v4_2/requirements.txt
+      - name: Run Python tests
+        working-directory: artifact/fc_experiment_upgrade_v4_2
+        run: python -m pytest -q
+      - name: Verify frozen result manifest
+        working-directory: artifact/fc_experiment_upgrade_v4_2
+        run: python experiments/verify_results.py

@@ -1,0 +1,111 @@
+{
+  "correct_public_only_certificate": 0,
+  "false_resistance_promotion_curve": [
+    0,
+    4,
+    8,
+    8,
+    8,
+    8,
+    9,
+    10
+  ],
+  "full_activation_certificate": 10,
+  "heterogeneous_identity_effect": {
+    "0": {
+      "argmax_example": "",
+      "argmin_example": "",
+      "distinct_values": 1,
+      "max": 7,
+      "min": 7
+    },
+    "1": {
+      "argmax_example": "0",
+      "argmin_example": "1",
+      "distinct_values": 2,
+      "max": 10,
+      "min": 7
+    },
+    "2": {
+      "argmax_example": "0;2",
+      "argmin_example": "1;2",
+      "distinct_values": 3,
+      "max": 13,
+      "min": 7
+    },
+    "3": {
+      "argmax_example": "0;1;2",
+      "argmin_example": "1;2;3",
+      "distinct_values": 3,
+      "max": 13,
+      "min": 7
+    },
+    "4": {
+      "argmax_example": "0;1;2;3",
+      "argmin_example": "1;2;3;4",
+      "distinct_values": 3,
+      "max": 13,
+      "min": 7
+    },
+    "5": {
+      "argmax_example": "0;1;2;3;4",
+      "argmin_example": "1;2;3;4;5",
+      "distinct_values": 3,
+      "max": 13,
+      "min": 7
+    },
+    "6": {
+      "argmax_example": "0;1;2;3;4;5",
+      "argmin_example": "0;1;2;3;4;5",
+      "distinct_values": 1,
+      "max": 13,
+      "min": 13
+    }
+  },
+  "interpretation": "The symmetric fixture isolates a plateau through three floors followed by jumps at four and five. The heterogeneous fixture separately shows that equal evidence counts can yield different values because member identity and substitute covers matter. Promoting uncertified estimates to resistance floors can raise a correct zero certificate to a spurious positive value.",
+  "maximum_false_elevation": 10,
+  "symmetric_complementarity": {
+    "0": {
+      "argmax_example": "",
+      "argmin_example": "",
+      "distinct_values": 1,
+      "max": 4,
+      "min": 4
+    },
+    "1": {
+      "argmax_example": "2",
+      "argmin_example": "2",
+      "distinct_values": 1,
+      "max": 4,
+      "min": 4
+    },
+    "2": {
+      "argmax_example": "2;3",
+      "argmin_example": "2;3",
+      "distinct_values": 1,
+      "max": 4,
+      "min": 4
+    },
+    "3": {
+      "argmax_example": "2;3;4",
+      "argmin_example": "2;3;4",
+      "distinct_values": 1,
+      "max": 4,
+      "min": 4
+    },
+    "4": {
+      "argmax_example": "2;3;4;5",
+      "argmin_example": "2;3;4;5",
+      "distinct_values": 1,
+      "max": 7,
+      "min": 7
+    },
+    "5": {
+      "argmax_example": "2;3;4;5;6",
+      "argmin_example": "2;3;4;5;6",
+      "distinct_values": 1,
+      "max": 10,
+      "min": 10
+    }
+  }
+}

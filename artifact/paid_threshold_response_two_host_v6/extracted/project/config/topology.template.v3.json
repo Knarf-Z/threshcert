@@ -1,0 +1,9 @@
+{
+  "_comment": "Public template. Insert the two LAN addresses locally; real addresses are excluded.",
+  "host1": {
+    "address": "HOST1_LAN_ADDRESS"
+  },
+  "host2": {
+    "address": "HOST2_LAN_ADDRESS"
+  }
+}

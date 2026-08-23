@@ -1,0 +1,39 @@
+{
+  "checks": {
+    "EXPECTED_PUBLIC_ROUTES_EXACT": true,
+    "FILE_HASHES_EXACT": true,
+    "FILE_SET_EXACT": true,
+    "MANIFEST_DIGEST": true,
+    "MANIFEST_SCHEMA": true,
+    "NO_DYNAMIC_EXEC": true,
+    "PYTHON_SYNTAX": true,
+    "SURFACE_DYNAMIC_EXEC_SITES_EXACT": true,
+    "SURFACE_HANDLER_METHODS_EXACT": true,
+    "SURFACE_HTTP_ROUTES_EXACT": true,
+    "SURFACE_POWERSHELL_SENSITIVE_SITES_EXACT": true,
+    "SURFACE_PROCESS_SPAWN_SITES_EXACT": true,
+    "SURFACE_PRODUCER_SEND_SITES_EXACT": true,
+    "SURFACE_SERVER_SITES_EXACT": true
+  },
+  "diagnostics": {
+    "actual_public_http_routes": [
+      "/health",
+      "/respond"
+    ],
+    "extra_files": [],
+    "hash_mismatches": [],
+    "missing_files": [],
+    "surface_differences": {}
+  },
+  "manifest_sha256": "49DCDDF87FFB94654EB1D5788BD132600B2D2C63BACCFEE36D2552A1C5C0B2F2",
+  "schema": "ptr-code-manifest-fidelity-result/v1",
+  "scope": {
+    "claim": "byte-bound and statically extracted code-to-manifest fidelity for the controlled Python, PowerShell, and test tree",
+    "not_claimed": [
+      "semantic equivalence to arbitrary deployed binaries",
+      "absence of OS, firmware, hardware, side-channel, or off-tree routes",
+      "deployment-wide route discovery"
+    ]
+  },
+  "status": "PASS"
+}

@@ -1,0 +1,24 @@
+{
+  "code_manifest_sha256": "49DCDDF87FFB94654EB1D5788BD132600B2D2C63BACCFEE36D2552A1C5C0B2F2",
+  "end_to_end_certificate_sha256": "5034A4864BBBA2732D668CD55797BD76A7780224F15D808A670E4FC693DFF1F2",
+  "not_claimed": [
+    "deployment-wide route closure",
+    "operating-system or interpreter integrity",
+    "hardware non-exportability",
+    "seven independent economic operators",
+    "a measured bribery or acquisition price"
+  ],
+  "privacy_transform": {
+    "canonical_result_contains_no_peer_address": true,
+    "excluded": [
+      "all operator secret shares and the private Host 2 package",
+      "dealer seed and network secret material",
+      "actual topology addresses and machine metadata",
+      "operator replay logs and Python caches",
+      "historical archives, patch backups, and failed runs"
+    ]
+  },
+  "schema": "ptr-two-host-public-release/v6",
+  "source_coverage_result_sha256": "3F770950D0A6F22BE62D987C66F6FBEEFE6645651000D6F22BB06E14DB65B02D",
+  "status": "PASS"
+}

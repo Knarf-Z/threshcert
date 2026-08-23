@@ -296,8 +296,12 @@ Python implementation.
   persistent operator nonce rejection.
 - Negative controls: `4/4` executable mutations and `7/7`
   gate/accounting mutations rejected.
-- Exact relative result: `Gamma_A = 4` and
-  `PROCESS-LEVEL-CERTIFIED(4)`.
+- Exact authenticated relative-process result: `Gamma_A = 4` and
+  `AUTHENTICATED-RELATIVE-PROCESS-CERTIFIED(4)`.
+- Independent artifact verification: public JSON Schema accepted, 35/35 routes,
+  140/140 operator signatures, and 140/140 Chaum--Pedersen proofs verified.
+  The v2 certificate is 625,243 bytes; the committed benchmark reports
+  1/5/10/20/35-route scaling and labels every prefix as non-certifying.
 - This does not replace the deployment-global `UNKNOWN` verdict. It is a
   controlled, local, relative process certificate and makes no claim about
   public-chain finality, undeclared transfers, OS compromise, side channels, or

@@ -1,0 +1,353 @@
+{
+  "accepted_language": {
+    "forbidden_constructs": [
+      "dynamic import or execution",
+      "reflection over capability-bearing state",
+      "privileged-name aliasing or rebinding",
+      "process or native-library escape",
+      "undeclared listener or HTTP sink",
+      "critical-function AST drift"
+    ],
+    "name": "RSP-V6",
+    "scope": "the exact module closure, privileged-operation grammar, critical normal forms, and declared first-four response service",
+    "trace_events": [
+      "request-entry",
+      "share-read",
+      "partial-create",
+      "http-emit",
+      "threshold-combine",
+      "commitment-verify",
+      "buyer-guard",
+      "usable-deliver"
+    ]
+  },
+  "assumptions": [
+    "CPython parses and executes the accepted AST according to its documented semantics",
+    "the imported standard-library primitives have their documented effects",
+    "loaded application bytes equal the separately verified source hashes",
+    "the operating system, interpreter, native runtime, and hardware are not compromised"
+  ],
+  "bytecode_crosscheck": {
+    "checks": {
+      "CPYTHON_COMPILES_ALL_SOURCES": true,
+      "CRITICAL_CODE_OBJECTS_UNIQUE": true,
+      "NO_DYNAMIC_OR_NATIVE_ESCAPE_NAMES": true,
+      "PARTIAL_PRIMITIVE_IN_PRODUCER_ONLY": true,
+      "POST_REACHES_DECLARED_PRODUCER_AND_SEND": true,
+      "RAW_HTTP_SINKS_CONFINED_TO_SEND": true,
+      "SENSITIVE_STORES_CONSTRUCTOR_ONLY": true,
+      "SINGLE_LISTENER_IN_SERVE": true,
+      "THRESHOLD_AND_COMMITMENT_IN_RUN_ORDER": true
+    },
+    "claim": "CPython's compiler independently maps the frozen source to code objects with the same privileged-operation confinement required by the AST proof.",
+    "diagnostics": {
+      "critical_instruction_sha256": {
+        "ptr_v3.experiment:run_order": "0CA72B96FCBF35FAF85A874E6CD3C93085A2B970C78307CDA0A1A974BCEFF4E0",
+        "ptr_v3.experiment:run_order.<locals>.<dictcomp>": "B21E19B141873E0792A7763727BD07F0D399910D847888E60C7A333176557B8B",
+        "ptr_v3.experiment:run_order.<locals>.<listcomp>": "1082A58CDC288618F459C2178D1CB4CA504463D74D59FCDD06F5BBA1DB7EE20D",
+        "ptr_v3.operator_server:_partial_and_proof": "397508DDCB2465A8EC57AEFCD548A7D5BFDA8DBF9736BF78CA41BE24893AA6EA",
+        "ptr_v3.operator_server:build_handler.<locals>.Handler._send": "807D39FC1B0C36356EE6338070E0A131DCCC896FBD7E4D18711128BF2E5ADA24",
+        "ptr_v3.operator_server:build_handler.<locals>.Handler.do_POST": "F17394A9D2747D95EC1170F878C7CF0F5A9BE83725E04750979A93694229F9D5",
+        "ptr_v3.operator_server:build_handler.<locals>.Handler.do_POST.<locals>.<listcomp>": "41855036A8218ED1F39AB64507CA552A37EBC285587130A3E8C80E7FA4EC84AE",
+        "ptr_v3.operator_server:serve": "60022A8A341E2E4DB58275D79F4ACD1198B55C95E702B024C891A28EC19294E0"
+      },
+      "dynamic_names": [],
+      "sensitive_store_instructions": [
+        {
+          "attr": "share",
+          "object": "ptr_v3.operator_server:OperatorState.__init__"
+        },
+        {
+          "attr": "public_share",
+          "object": "ptr_v3.operator_server:OperatorState.__init__"
+        },
+        {
+          "attr": "identity",
+          "object": "ptr_v3.operator_server:OperatorState.__init__"
+        }
+      ]
+    },
+    "not_claimed": [
+      "a proof of CPython compiler or interpreter correctness",
+      "operating-system or native-runtime integrity",
+      "replacement for the restricted-source soundness theorem"
+    ],
+    "schema": "ptr-cpython-bytecode-crosscheck/v1",
+    "status": "PASS"
+  },
+  "checks": {
+    "CPYTHON_BYTECODE_REPRESENTATION_CROSSCHECK": true,
+    "CRITICAL_NORMAL_FORMS_EXACT": true,
+    "HANDLER_AND_ENTRY_METHODS_EXACT": true,
+    "NO_DYNAMIC_NATIVE_OR_PROCESS_ESCAPE": true,
+    "NO_WILDCARD_IMPORT": true,
+    "OPERATOR_IMPORT_CLOSURE_EXACT": true,
+    "PARTIAL_PRODUCER_SITE_UNIQUE": true,
+    "PRIVILEGED_SYMBOLS_NOT_ALIASED_OR_REBOUND": true,
+    "PYTHON_SYNTAX": true,
+    "RAW_HTTP_SINKS_CONFINED": true,
+    "RECONSTRUCTION_SITE_UNIQUE": true,
+    "ROUTE_GUARDS_EXACT": true,
+    "RUNTIME_SOURCE_BINDING_END_TO_END": true,
+    "SECRET_SHARE_READ_CONFINED_TO_PRODUCER": true,
+    "SENSITIVE_STATE_LIFECYCLE_EXACT": true,
+    "SINGLE_DECLARED_LISTENER": true,
+    "SOURCE_MODULE_SET_EXACT": true,
+    "SUCCESS_RESPONSE_DERIVED_FROM_PRODUCER": true,
+    "THRESHOLD_AND_BUYER_GUARD_DELIVERY_ROOT": true,
+    "UNTRUSTED_INVENTORY_RECOMPUTED": true
+  },
+  "diagnostics": {
+    "critical_ast_sha256": {
+      "scripts/run_two_host.py::main": "7A40BFDAC543240629025892450A7D2D6C74FCEEE2610F1AB903260C0971A404",
+      "src/ptr_v3/coordinator.py::Coordinator._post": "A063642960C3475D201E8815EEEC3F4AE940EA57844BAB398CB884A209AB2743",
+      "src/ptr_v3/coordinator.py::Coordinator._verify": "9F93D8535FBED6A0D6FA44F17C10D33B0B5038D158DE553CEE090C54D7E7F324",
+      "src/ptr_v3/coordinator.py::Coordinator.request": "4D9F2A5390958E0BA332E898C1758D50C9692E7DB7BB9992F0E9CB198C68A3C4",
+      "src/ptr_v3/crypto.py::Ciphertext.to_dict": "3ED1A0E64B531853D35A4FD09097DD053C05836054E06C663BEE135D363A727D",
+      "src/ptr_v3/crypto.py::ScalarRng.bytes": "28692A038CC78002143EF121343486B62ADF0814C385A93CE2C9BD5C38ABCBE3",
+      "src/ptr_v3/crypto.py::ScalarRng.scalar": "FEDC8D7822032E78B3C824C7125344B20F007504233E434B91BC85A4EA9558AC",
+      "src/ptr_v3/crypto.py::combine_partials": "12ED77BD644FC1C6F49A6AF16F1D2905C2D2A0977D6030BCBF24BDBB7B620481",
+      "src/ptr_v3/crypto.py::create_partial": "7763D08F20E8C576D6D2B6C0BB0A73DE79ECB1A5914D7D7785244A8DAFE8BB3A",
+      "src/ptr_v3/crypto.py::encrypt_capability": "4739470BF9BCAF7DB4E898CCD2C370A47C2C2E67718B1054FE73122F54EE2908",
+      "src/ptr_v3/crypto.py::verify_threshold_result": "25E2C7DB07DED659EFA2848F8EB2EDAAFBB1BE7818A8C7D1BB990E0B201DD659",
+      "src/ptr_v3/experiment.py::make_ciphertext": "005D5AA631BADF490C137924BB9022DEC3CEC0CF92CA094026F24052FFB360C1",
+      "src/ptr_v3/experiment.py::run_order": "EC0247E16E9475FFE2EB4D3FFC6F5859108C75ECB3E2DB8DF75A56BEDF6F38D4",
+      "src/ptr_v3/network_identity.py::sign": "E4DB85DEDF6D60230FF04DC4D956CB78BAFDB6129F4F2B59965EECBD9E20A422",
+      "src/ptr_v3/network_identity.py::signing_message": "C32735328A37A76FDA09B93EED856093E336CA43BEA079E51C2598C4DC48AF0F",
+      "src/ptr_v3/operator_server.py::OperatorState.__init__": "716CFF34ED84794B7C9DAF3FC8B33CD782F90BA504C746CB2D202342BA37A7A3",
+      "src/ptr_v3/operator_server.py::_partial_and_proof": "6CAAB5B3A2954384D3A21F193A06519C9DF74968922D843B766820EC35643A18",
+      "src/ptr_v3/operator_server.py::build_handler": "F330B1D6E3A7BFB6E811D111869B228B874BB628A451CEB0CE990D8E80BBA713",
+      "src/ptr_v3/operator_server.py::build_handler.Handler._send": "C8563733920DA56212EBB21178E68D70CB53057C46ABF9AE5FFD16D6C5CE3315",
+      "src/ptr_v3/operator_server.py::build_handler.Handler.do_GET": "39AF26033F81FFAAC630E3A83820076D1332C3B32D7983CC7F918F8EB9EEBF9F",
+      "src/ptr_v3/operator_server.py::build_handler.Handler.do_POST": "88CDEF8316643221FF7647D571E3FB2C582586CF9615232A6D75E25B077609A4",
+      "src/ptr_v3/operator_server.py::main": "D0DC2445991DFC0C6C1A438E6563B758230DC6CD696F6AF4894AC36230F9A466",
+      "src/ptr_v3/operator_server.py::runtime_source_digest": "0866D90B87132693286B6C62ECEA2B61633A65145AC4266A7D2231DA188F3495",
+      "src/ptr_v3/operator_server.py::serve": "89CBCE6E705DF111791693C057F2719E6CB64068992B9A0B6AB8DF9382912D6C"
+    },
+    "critical_calls": {
+      "_partial_and_proof": [
+        {
+          "call": "_partial_and_proof",
+          "context": "build_handler.Handler.do_POST",
+          "file": "src/ptr_v3/operator_server.py",
+          "line": 215
+        }
+      ],
+      "combine_partials": [
+        {
+          "call": "combine_partials",
+          "context": "run_order",
+          "file": "src/ptr_v3/experiment.py",
+          "line": 180
+        }
+      ],
+      "create_partial": [
+        {
+          "call": "create_partial",
+          "context": "_partial_and_proof",
+          "file": "src/ptr_v3/operator_server.py",
+          "line": 124
+        }
+      ]
+    },
+    "delivery_facts": {
+      "candidate_has_initial_and_combine_writes": true,
+      "combine_is_threshold_guarded": true,
+      "deliverable_has_two_writes": true,
+      "deliverable_starts_empty": true,
+      "exposure_is_gateway_guarded": true,
+      "gateway_guard_is_exact": true,
+      "ledger_success_has_same_guard": true,
+      "returned_field_is_guarded_deliverable": true
+    },
+    "forbidden_calls": [],
+    "forbidden_imports": [],
+    "listeners": [
+      {
+        "call": "ThreadingHTTPServer",
+        "context": "serve",
+        "file": "src/ptr_v3/operator_server.py",
+        "line": 262
+      }
+    ],
+    "missing_operator_imports": [],
+    "operator_import_closure": [
+      "ptr_v3.__init__",
+      "ptr_v3.crypto",
+      "ptr_v3.network_identity",
+      "ptr_v3.operator_server",
+      "ptr_v3.utils"
+    ],
+    "parse_errors": {},
+    "privileged_rebinding": [],
+    "sensitive_loads": [
+      {
+        "context": "_partial_and_proof",
+        "line": 124,
+        "name": "state.share",
+        "tail": "share"
+      },
+      {
+        "context": "_partial_and_proof",
+        "line": 124,
+        "name": "state.public_share",
+        "tail": "public_share"
+      },
+      {
+        "context": "build_handler.Handler.do_POST",
+        "line": 228,
+        "name": "state.identity",
+        "tail": "identity"
+      },
+      {
+        "context": "build_handler.Handler.do_GET",
+        "line": 158,
+        "name": "state.public_share",
+        "tail": "public_share"
+      },
+      {
+        "context": "build_handler.Handler.do_GET",
+        "line": 157,
+        "name": "state.identity",
+        "tail": "identity"
+      }
+    ],
+    "sensitive_stores": [
+      {
+        "context": "OperatorState.__init__",
+        "line": 84,
+        "name": "self.share",
+        "tail": "share"
+      },
+      {
+        "context": "OperatorState.__init__",
+        "line": 85,
+        "name": "self.public_share",
+        "tail": "public_share"
+      },
+      {
+        "context": "OperatorState.__init__",
+        "line": 86,
+        "name": "self.identity",
+        "tail": "identity"
+      }
+    ],
+    "wildcard_imports": []
+  },
+  "inventory_sha256": "29AA51336A9314B1CEAB9E64838C805547F1FA5EA263154014E66C5FED87488F",
+  "not_claimed": [
+    "operating-system, interpreter, firmware, side-channel, or physical security",
+    "hardware non-exportability or secure dealer erasure",
+    "closure of mechanisms outside RSP-V6",
+    "deployment-wide refinement",
+    "independent economic control of operators"
+  ],
+  "obligations": {
+    "LC1_SOURCE_PRODUCER_COMPLETENESS": {
+      "rules": [
+        "R-CLOSURE",
+        "R-EMIT"
+      ],
+      "status": "PROVED_IN_RESTRICTED_SOURCE_MODEL"
+    },
+    "LC3_SOURCE_SECRET_CONFINEMENT": {
+      "rules": [
+        "R-CLOSURE",
+        "R-SECRET",
+        "R-EMIT"
+      ],
+      "status": "PROVED_IN_RESTRICTED_SOURCE_MODEL"
+    },
+    "LC5_SOURCE_LIFECYCLE_CLOSURE": {
+      "rules": [
+        "R-CLOSURE",
+        "R-LIFECYCLE"
+      ],
+      "status": "PROVED_IN_RESTRICTED_SOURCE_MODEL"
+    },
+    "LC7_SOURCE_DELIVERY_ROOT": {
+      "rules": [
+        "R-CLOSURE",
+        "R-DELIVER"
+      ],
+      "status": "PROVED_IN_RESTRICTED_SOURCE_MODEL"
+    }
+  },
+  "rule_derivations": {
+    "R-CLOSURE": {
+      "premises": [
+        "PYTHON_SYNTAX",
+        "SOURCE_MODULE_SET_EXACT",
+        "UNTRUSTED_INVENTORY_RECOMPUTED",
+        "OPERATOR_IMPORT_CLOSURE_EXACT",
+        "NO_DYNAMIC_NATIVE_OR_PROCESS_ESCAPE",
+        "NO_WILDCARD_IMPORT",
+        "PRIVILEGED_SYMBOLS_NOT_ALIASED_OR_REBOUND",
+        "SINGLE_DECLARED_LISTENER",
+        "CRITICAL_NORMAL_FORMS_EXACT"
+      ],
+      "status": "DERIVED"
+    },
+    "R-CROSS-REPRESENTATION": {
+      "premises": [
+        "CPYTHON_BYTECODE_REPRESENTATION_CROSSCHECK"
+      ],
+      "status": "DERIVED"
+    },
+    "R-DELIVER": {
+      "premises": [
+        "RECONSTRUCTION_SITE_UNIQUE",
+        "THRESHOLD_AND_BUYER_GUARD_DELIVERY_ROOT"
+      ],
+      "status": "DERIVED"
+    },
+    "R-EMIT": {
+      "premises": [
+        "HANDLER_AND_ENTRY_METHODS_EXACT",
+        "ROUTE_GUARDS_EXACT",
+        "RAW_HTTP_SINKS_CONFINED",
+        "PARTIAL_PRODUCER_SITE_UNIQUE",
+        "SUCCESS_RESPONSE_DERIVED_FROM_PRODUCER"
+      ],
+      "status": "DERIVED"
+    },
+    "R-LIFECYCLE": {
+      "premises": [
+        "SENSITIVE_STATE_LIFECYCLE_EXACT",
+        "RUNTIME_SOURCE_BINDING_END_TO_END",
+        "OPERATOR_IMPORT_CLOSURE_EXACT"
+      ],
+      "status": "DERIVED"
+    },
+    "R-SECRET": {
+      "premises": [
+        "SECRET_SHARE_READ_CONFINED_TO_PRODUCER",
+        "SENSITIVE_STATE_LIFECYCLE_EXACT",
+        "SUCCESS_RESPONSE_DERIVED_FROM_PRODUCER"
+      ],
+      "status": "DERIVED"
+    }
+  },
+  "schema": "ptr-restricted-source-kernel/v2",
+  "source_sha256": {
+    "scripts/run_two_host.py": "BA07C95199C1040EC5AC4DEDE5E22F7879684B43C308F244E8534B7342101B01",
+    "src/ptr_v3/__init__.py": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "src/ptr_v3/capability.py": "2E3B48F98AB3F98067C9FA365E76407D2599E2AB4738616D619D62487D157035",
+    "src/ptr_v3/certificate.py": "3857DABD2BAA80D98D201A4CEC2D27B39A77D552CAE701AC89DC10DC1772B2E4",
+    "src/ptr_v3/checker.py": "6D5461EE9583DA40535C8721FC170125259AEE03DA26244318094B5339C94AEE",
+    "src/ptr_v3/contracts.py": "5F8F4D1F40F347615EB6779847768388E135C8B408AA67BB1E44C148A12070AE",
+    "src/ptr_v3/coordinator.py": "34711BBA2B65B80ACFB135B66A39C46F50C457EC90BC55B9B0550B51794194C9",
+    "src/ptr_v3/crypto.py": "47B29FB37953B42189E41042293E3F592CBA4ABBF4973691B2F54F2A4E144189",
+    "src/ptr_v3/dealer.py": "C7E5938E7EC258A1B4C9C1923055FEF5A5BA1A7BDB37D176F87787811051458E",
+    "src/ptr_v3/evidence.py": "58BFE7AC0167C1CFA3B7C141095E5F109E1C020D4DBAB15C15957AC05EC9425E",
+    "src/ptr_v3/experiment.py": "94DD521E84AC7390A7E281660FE9895B8A21C05F42FFD35B089249A7A7318718",
+    "src/ptr_v3/ledger.py": "FC5DE59D6032D69C6A8DD8A05BE176A208886C31665D5CEF37F323CD8E88117E",
+    "src/ptr_v3/network_identity.py": "9AA7BE07F9029ED6488E7D4E0EEF365F42B5A831C115C72E66E49BD3D30B80BE",
+    "src/ptr_v3/operator_server.py": "4F092CC84CE22C8D834A937E1459B6CE5FE965D57F79F6451F09FBA8ACF3089D",
+    "src/ptr_v3/service_model.py": "C5017FC11A7504A10A9753FD0DC81F4AF4E463BC286E898ACA430A97619626B5",
+    "src/ptr_v3/utils.py": "0322736EDEA46DE5F681927512F5253B1CDC98695F8DE4C1011D1430C618AA2C",
+    "src/ptr_v3/witness.py": "538111A216D97CF46796214CB8C9DAEE6186D742C8183216B949C75E10AC7648"
+  },
+  "status": "PROVED_IN_RESTRICTED_SOURCE_MODEL",
+  "theorem_claim": "For every standard-Python execution accepted by RSP-V6 whose loaded bytes equal the recorded hashes, every capability-bearing HTTP success is produced at the declared partial site; threshold shares reach external output only through that producer; the producer lifecycle is fixed by the signed runtime binding; and deliverable plaintext is populated only after threshold reconstruction, commitment verification, and the named-buyer guard."
+}

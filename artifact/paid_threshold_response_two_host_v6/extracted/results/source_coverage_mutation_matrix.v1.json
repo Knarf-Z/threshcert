@@ -1,0 +1,179 @@
+{
+  "baseline_status": "PROVED_IN_RESTRICTED_SOURCE_MODEL",
+  "mutations_caught": 14,
+  "mutations_total": 14,
+  "rows": [
+    {
+      "actual_failed_checks": [
+        "CRITICAL_NORMAL_FORMS_EXACT",
+        "HANDLER_AND_ENTRY_METHODS_EXACT",
+        "UNTRUSTED_INVENTORY_RECOMPUTED"
+      ],
+      "expected_failed_checks": [
+        "HANDLER_AND_ENTRY_METHODS_EXACT"
+      ],
+      "mutation": "extra_request_entry",
+      "status": "CAUGHT"
+    },
+    {
+      "actual_failed_checks": [
+        "CRITICAL_NORMAL_FORMS_EXACT",
+        "ROUTE_GUARDS_EXACT",
+        "UNTRUSTED_INVENTORY_RECOMPUTED"
+      ],
+      "expected_failed_checks": [
+        "ROUTE_GUARDS_EXACT"
+      ],
+      "mutation": "undeclared_http_route",
+      "status": "CAUGHT"
+    },
+    {
+      "actual_failed_checks": [
+        "CRITICAL_NORMAL_FORMS_EXACT",
+        "RAW_HTTP_SINKS_CONFINED",
+        "ROUTE_GUARDS_EXACT",
+        "UNTRUSTED_INVENTORY_RECOMPUTED"
+      ],
+      "expected_failed_checks": [
+        "RAW_HTTP_SINKS_CONFINED"
+      ],
+      "mutation": "direct_response_sink",
+      "status": "CAUGHT"
+    },
+    {
+      "actual_failed_checks": [
+        "CRITICAL_NORMAL_FORMS_EXACT",
+        "ROUTE_GUARDS_EXACT",
+        "SECRET_SHARE_READ_CONFINED_TO_PRODUCER",
+        "UNTRUSTED_INVENTORY_RECOMPUTED"
+      ],
+      "expected_failed_checks": [
+        "SECRET_SHARE_READ_CONFINED_TO_PRODUCER"
+      ],
+      "mutation": "secret_share_leak",
+      "status": "CAUGHT"
+    },
+    {
+      "actual_failed_checks": [
+        "CPYTHON_BYTECODE_REPRESENTATION_CROSSCHECK",
+        "NO_DYNAMIC_NATIVE_OR_PROCESS_ESCAPE",
+        "UNTRUSTED_INVENTORY_RECOMPUTED"
+      ],
+      "expected_failed_checks": [
+        "NO_DYNAMIC_NATIVE_OR_PROCESS_ESCAPE"
+      ],
+      "mutation": "dynamic_eval",
+      "status": "CAUGHT"
+    },
+    {
+      "actual_failed_checks": [
+        "CPYTHON_BYTECODE_REPRESENTATION_CROSSCHECK",
+        "NO_DYNAMIC_NATIVE_OR_PROCESS_ESCAPE",
+        "UNTRUSTED_INVENTORY_RECOMPUTED"
+      ],
+      "expected_failed_checks": [
+        "NO_DYNAMIC_NATIVE_OR_PROCESS_ESCAPE"
+      ],
+      "mutation": "process_import",
+      "status": "CAUGHT"
+    },
+    {
+      "actual_failed_checks": [
+        "SINGLE_DECLARED_LISTENER",
+        "UNTRUSTED_INVENTORY_RECOMPUTED"
+      ],
+      "expected_failed_checks": [
+        "SINGLE_DECLARED_LISTENER"
+      ],
+      "mutation": "second_listener",
+      "status": "CAUGHT"
+    },
+    {
+      "actual_failed_checks": [
+        "CPYTHON_BYTECODE_REPRESENTATION_CROSSCHECK",
+        "CRITICAL_NORMAL_FORMS_EXACT",
+        "ROUTE_GUARDS_EXACT",
+        "SECRET_SHARE_READ_CONFINED_TO_PRODUCER",
+        "SENSITIVE_STATE_LIFECYCLE_EXACT",
+        "UNTRUSTED_INVENTORY_RECOMPUTED"
+      ],
+      "expected_failed_checks": [
+        "SENSITIVE_STATE_LIFECYCLE_EXACT"
+      ],
+      "mutation": "lifecycle_replacement",
+      "status": "CAUGHT"
+    },
+    {
+      "actual_failed_checks": [
+        "CRITICAL_NORMAL_FORMS_EXACT",
+        "UNTRUSTED_INVENTORY_RECOMPUTED"
+      ],
+      "expected_failed_checks": [
+        "CRITICAL_NORMAL_FORMS_EXACT"
+      ],
+      "mutation": "plaintext_oracle",
+      "status": "CAUGHT"
+    },
+    {
+      "actual_failed_checks": [
+        "CRITICAL_NORMAL_FORMS_EXACT",
+        "UNTRUSTED_INVENTORY_RECOMPUTED"
+      ],
+      "expected_failed_checks": [
+        "CRITICAL_NORMAL_FORMS_EXACT"
+      ],
+      "mutation": "deterministic_experiment_seed",
+      "status": "CAUGHT"
+    },
+    {
+      "actual_failed_checks": [
+        "CRITICAL_NORMAL_FORMS_EXACT",
+        "THRESHOLD_AND_BUYER_GUARD_DELIVERY_ROOT",
+        "UNTRUSTED_INVENTORY_RECOMPUTED"
+      ],
+      "expected_failed_checks": [
+        "THRESHOLD_AND_BUYER_GUARD_DELIVERY_ROOT"
+      ],
+      "mutation": "threshold_plaintext_bypass",
+      "status": "CAUGHT"
+    },
+    {
+      "actual_failed_checks": [
+        "CRITICAL_NORMAL_FORMS_EXACT",
+        "THRESHOLD_AND_BUYER_GUARD_DELIVERY_ROOT",
+        "UNTRUSTED_INVENTORY_RECOMPUTED"
+      ],
+      "expected_failed_checks": [
+        "THRESHOLD_AND_BUYER_GUARD_DELIVERY_ROOT"
+      ],
+      "mutation": "delivery_root_bypass",
+      "status": "CAUGHT"
+    },
+    {
+      "actual_failed_checks": [
+        "PARTIAL_PRODUCER_SITE_UNIQUE",
+        "SECRET_SHARE_READ_CONFINED_TO_PRODUCER",
+        "UNTRUSTED_INVENTORY_RECOMPUTED"
+      ],
+      "expected_failed_checks": [
+        "PARTIAL_PRODUCER_SITE_UNIQUE"
+      ],
+      "mutation": "second_capability_producer",
+      "status": "CAUGHT"
+    },
+    {
+      "actual_failed_checks": [
+        "CRITICAL_NORMAL_FORMS_EXACT",
+        "RUNTIME_SOURCE_BINDING_END_TO_END",
+        "UNTRUSTED_INVENTORY_RECOMPUTED"
+      ],
+      "expected_failed_checks": [
+        "RUNTIME_SOURCE_BINDING_END_TO_END"
+      ],
+      "mutation": "unsigned_runtime_source",
+      "status": "CAUGHT"
+    }
+  ],
+  "schema": "ptr-source-coverage-mutations/v1",
+  "status": "PASS"
+}

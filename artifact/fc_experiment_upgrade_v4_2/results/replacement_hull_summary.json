@@ -1,0 +1,100 @@
+{
+  "clear_classification_error_rate": 0.0,
+  "clear_classification_errors": 0,
+  "clear_error_rate_wilson_95_upper": 0.0015980499906090792,
+  "clear_separable_errors": 0,
+  "clear_trials": 2400,
+  "exact_replaceable_errors": 0,
+  "ground_truth_note": "Replaceable labels carry an explicit convex-combination witness. Separable labels carry an analytic supporting-coordinate margin independent of the LP output.",
+  "ground_truth_witness_failures": 0,
+  "near_boundary_classification_by_tolerance": {
+    "1e-06": {
+      "replaceable": 1200,
+      "separable": 0
+    },
+    "1e-08": {
+      "replaceable": 0,
+      "separable": 1200
+    },
+    "1e-10": {
+      "replaceable": 0,
+      "separable": 1200
+    }
+  },
+  "near_boundary_max_distance": 2.0000000100879532e-07,
+  "near_boundary_min_distance": 1.9999999903038324e-07,
+  "results_by_seed": {
+    "20260725": {
+      "clear_errors": 0,
+      "clear_trials": 480,
+      "ground_truth_witness_failures": 0,
+      "trials": 720
+    },
+    "20260726": {
+      "clear_errors": 0,
+      "clear_trials": 480,
+      "ground_truth_witness_failures": 0,
+      "trials": 720
+    },
+    "20260727": {
+      "clear_errors": 0,
+      "clear_trials": 480,
+      "ground_truth_witness_failures": 0,
+      "trials": 720
+    },
+    "20260728": {
+      "clear_errors": 0,
+      "clear_trials": 480,
+      "ground_truth_witness_failures": 0,
+      "trials": 720
+    },
+    "20260729": {
+      "clear_errors": 0,
+      "clear_trials": 480,
+      "ground_truth_witness_failures": 0,
+      "trials": 720
+    }
+  },
+  "runtime_by_scale": {
+    "d10_k8": {
+      "runtime_ms_max": 0.5593999958364293,
+      "runtime_ms_median": 0.3482000029180199,
+      "runtime_ms_p95": 0.39591000240761787,
+      "trials": 900
+    },
+    "d20_k12": {
+      "runtime_ms_max": 0.8087000023806468,
+      "runtime_ms_median": 0.439799994637724,
+      "runtime_ms_p95": 0.47840500410529785,
+      "trials": 900
+    },
+    "d3_k4": {
+      "runtime_ms_max": 1.321300005656667,
+      "runtime_ms_median": 0.28485000075306743,
+      "runtime_ms_p95": 0.3403000009711832,
+      "trials": 900
+    },
+    "d5_k5": {
+      "runtime_ms_max": 0.5144000024301931,
+      "runtime_ms_median": 0.3008999992744066,
+      "runtime_ms_p95": 0.3546150073816534,
+      "trials": 900
+    }
+  },
+  "seeds": [
+    20260725,
+    20260726,
+    20260727,
+    20260728,
+    20260729
+  ],
+  "solver": {
+    "dual_feasibility_tolerance": 1e-10,
+    "ipm_optimality_tolerance": 1e-12,
+    "method": "scipy.optimize.linprog-highs",
+    "primal_feasibility_tolerance": 1e-10
+  },
+  "tolerance": 1e-08,
+  "trials": 3600,
+  "warning": "Near-boundary classifications depend on the declared numerical tolerance and must be reported with the distance."
+}

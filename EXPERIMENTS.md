@@ -339,7 +339,7 @@ Run all three from the repository root with
 `python reproduce_v15_experiments.py`. The entry also checks both manifests and
 all 4,095 C6 records. It performs no public-chain write.
 
-## v16 positive OPE process certificate
+## v16 authenticated relative-process OPE certificate
 
 The v16 experiment adds the missing nontrivial positive process result without
 changing the deployment-global verdict.
@@ -357,14 +357,35 @@ changing the deployment-global verdict.
    and checks the ciphertext commitment.
 3. The fixed C6 root contributes exactly 35 forward and 35 unbounded reverse
    records. The executable composition replays the same 35 whole routes and
-   preserves every route cost. Their exact relative process minimum is four.
+   preserves every route cost. Their exact authenticated relative-process
+   minimum is four.
 4. Executable controls reject receipt/nonce reuse, session swapping, proof
    tampering, and three-response delivery. Gate/accounting controls reject
    unauthenticated or pre-finality delivery, omitted return evidence, missing
    forward/reverse routes, cost tampering, and undeclared cross-session return.
 
 Run `python reproduce_v16_experiments.py`. The final verdict is
-`PROCESS-LEVEL-CERTIFIED(4)` only for the admitted local composition.
+`AUTHENTICATED-RELATIVE-PROCESS-CERTIFIED(4)` only for the admitted local
+composition.
 Hardhat finality, deterministic artifact keys, gas exclusion, OS integrity,
 side channels, external transfers, and economic operator independence remain
 explicit limitations.
+
+## Supplementary archived experiment packages
+
+Two previously local experiment suites are published for repository
+completeness. They do not change the v16 authenticated relative-process claim.
+
+1. `artifact/paid_threshold_response_two_host_v6` contains the verified public
+   release of a controlled 4-of-7 service divided across two physical Windows
+   hosts. The frozen archive has 83 entries and excludes all operator shares,
+   dealer material, real LAN addresses, replay logs, and failed-run snapshots.
+   Its exact value of 10 is restricted to its declared finite first-four route
+   language and recorded ledger; it is not a deployment-global cost claim.
+2. `artifact/fc_experiment_upgrade_v4_2` preserves the deterministic pinned
+   snapshot audit, the optional read-only 11-set historical audit, atomic
+   bypass contracts, replacement-hull numerical checks, and evidence-omission
+   sensitivity suite. The historical audit distinguishes committee-state
+   verification from missing period-matched resistance evidence.
+
+Both packages have path-scoped CI in

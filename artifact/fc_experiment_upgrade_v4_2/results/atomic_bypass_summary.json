@@ -1,0 +1,15 @@
+{
+  "matches_paper_curve": true,
+  "pinned_curve": [
+    10,
+    7,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4
+  ],
+  "repeated_singletons_reach_threshold_cover": true,
+  "scope_warning": "Execution feasibility does not establish that production Keypers accept an atomic offer. The Solidity experiment uses an attested boundary whose trusted process must perform the native Rolling Shutter checks off chain; it is not direct on-chain BLS verification."
+}

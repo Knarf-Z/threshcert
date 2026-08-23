@@ -1,0 +1,18 @@
+{
+  "active_set_index": 10,
+  "chain_id": 100,
+  "committee_states_verified": 1,
+  "events_verified": 1,
+  "interpretation": "Committee address, rotation span, membership, threshold, and KeyperSetAdded event are independently checked by live RPC. A period receives a certificate only when period-matched public floor evidence was separately audited. Missing evidence is not zero.",
+  "missing_period_evidence_sets": 0,
+  "mode": "fixture",
+  "period_evidence_sets_audited": 1,
+  "persistent_zero_across_observed_sets": null,
+  "scope": "single_pinned_snapshot_fixture",
+  "sets_audited": 1,
+  "snapshot_block": 46666718,
+  "snapshot_block_hash": "0x574ec26ee7b2e2bfddd991bf99d37a79455428bc4dfe342b0ccf55d071229b60",
+  "supports_longitudinal_certificate_claim": false,
+  "supports_longitudinal_committee_claim": false,
+  "zero_public_floor_certificate_sets": 1
+}

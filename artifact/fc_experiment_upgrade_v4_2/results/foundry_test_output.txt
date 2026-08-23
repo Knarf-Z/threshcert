@@ -1,0 +1,29 @@
+No files changed, compilation skipped
+
+Ran 6 tests for test/AttestedShareVerifier.t.sol:AttestedShareVerifierTest
+[PASS] testAttestationBindsEscrow() (gas: 2952332)
+[PASS] testAttestationBindsMember() (gas: 1866318)
+[PASS] testAttestationBindsOffer() (gas: 1896081)
+[PASS] testAttestationBindsShareHash() (gas: 1725026)
+[PASS] testAttestationRejectsWrongSigner() (gas: 1725118)
+[PASS] testAttestedShareAccepted() (gas: 1789747)
+Suite result: ok. 6 passed; 0 failed; 0 skipped; finished in 3.00ms (14.22ms CPU time)
+
+Ran 14 tests for test/AtomicBypassEscrow.t.sol:AtomicBypassEscrowTest
+[PASS] testAtomicSettlement() (gas: 2188452)
+[PASS] testDuplicateCommitmentRejected() (gas: 2105859)
+[PASS] testDuplicateTargetRejected() (gas: 1696045)
+[PASS] testExpiredOfferRefundAndAccessControl() (gas: 1964139)
+[PASS] testGlobalInvocationLimit() (gas: 1704660)
+[PASS] testIncompletePackageCannotSettle() (gas: 2074119)
+[PASS] testInvalidShareRejected() (gas: 1804679)
+[PASS] testNonTargetCannotAccept() (gas: 1960507)
+[PASS] testPackageSizeLimit() (gas: 1960874)
+[PASS] testRepeatedSingletonPackages() (gas: 2357202)
+[PASS] testRevertingMemberPreservesAtomicity() (gas: 2086629)
+[PASS] testUnknownOfferCannotSettle() (gas: 1250459)
+[PASS] testZeroPaymentRejected() (gas: 1485460)
+[PASS] testZeroVerifierRejected() (gas: 34252)
+Suite result: ok. 14 passed; 0 failed; 0 skipped; finished in 3.04ms (17.44ms CPU time)
+
+Ran 2 test suites in 4.54ms (6.04ms CPU time): 20 tests passed, 0 failed, 0 skipped (20 total tests)

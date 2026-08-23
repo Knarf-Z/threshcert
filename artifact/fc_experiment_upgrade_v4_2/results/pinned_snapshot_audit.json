@@ -1,0 +1,26 @@
+{
+  "sets": [
+    {
+      "address": "0xE817E77109e2E6a8025eB30dB3542eC18bBDE828",
+      "certificate_status": "0_PUBLIC_FLOOR_CERTIFICATE",
+      "committee_state_verified": true,
+      "end_block": 46666718,
+      "event_block": 46270333,
+      "event_tx": "0xd00adb4be576a75026e28f8fefea31fe94413fecfc9ebffc17bf75d31458a864",
+      "event_verified": true,
+      "finalized": true,
+      "member_count": 7,
+      "members": "0x4ba8E8e0061EA7CE9353e7B641A116F1d48d9d46|0xcB43AEAA8c029Da18A499dC684FdD250ab3FCd13|0x46c24A9B4C92Aeb416d732801208ADD353635EC4|0x772213aaD4c6B37d2cc0Fa3B74F9ace5a028B8C8|0x2711d53B3dF060D08AC30C6517D4B8EED50A54B3|0x4B5E2356b666898e101627BdDc518956bcd90a03|0x48A0e1789C82084aE28c179bd5742454f8CD4ed6",
+      "owner": "0x8A7589135584CECFA5Bd73De02864075232407DD",
+      "period_evidence_audited": true,
+      "positive_activation_floors": 0,
+      "positive_penalty_floors": 0,
+      "positive_resistance_floors": 0,
+      "publisher": "0xa6eE35704F4e9A73712b514e15D1DB8b34EC8d76",
+      "set_id": 10,
+      "source": "retained_production_record_and_public_evidence_ledger",
+      "start_block": 46271880,
+      "threshold": 4
+    }
+  ]
+}

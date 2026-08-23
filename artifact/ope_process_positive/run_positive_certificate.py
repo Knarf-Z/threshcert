@@ -23,7 +23,9 @@ RUNTIME = HERE / "runtime"
 EVM = REPO / "artifact" / "joint_incidence_refinement"
 ROUTES_PATH = EVM / "results" / "ope_process_routes.v1.json"
 C6_PATH = REPO / "artifact" / "reviewer_revision_v77" / "results" / "completeness_certificates.v1.json"
-RESULT_PATH = HERE / "results" / "ope_process_positive.v1.json"
+RESULT_PATH = HERE / "results" / "ope_process_positive.v2.json"
+SCHEMA_PATH = HERE / "schema" / "ope_process_certificate.schema.json"
+VERIFIER_PATH = HERE / "verify_process_certificate.py"
 sys.path.insert(0, str(RUNTIME))
 
 from ptr_v3.coordinator import Coordinator, OperatorEndpoint, RejectedResponse  # noqa: E402
@@ -342,6 +344,8 @@ def source_inventory() -> dict[str, Any]:
             for path in modules
         },
         "runner_sha256": file_sha256(Path(__file__).resolve()),
+        "certificate_schema_sha256": file_sha256(SCHEMA_PATH),
+        "independent_verifier_sha256": file_sha256(VERIFIER_PATH),
         "critical_call_sites": call_sites,
         "served_http_routes": list(SERVED_ROUTES),
         "forbidden_imports_absent": sorted(forbidden_imports),
@@ -600,13 +604,55 @@ def evaluate() -> dict[str, Any]:
 
     costs = [int(route["net_attacker_cost_units"]) for route in routes]
     result: dict[str, Any] = {
-        "schema": "ope-controlled-positive-process-certificate/v1",
-        "verdict": "PROCESS-LEVEL-CERTIFIED(4)",
+        "schema": "ope-controlled-positive-process-certificate/v2",
+        "verdict": "AUTHENTICATED-RELATIVE-PROCESS-CERTIFIED(4)",
         "claim": {
-            "quantity": "relative attacker net cost through first commitment-valid plaintext delivery",
+            "claim_type": "authenticated-relative-process-cost",
+            "quantity": "authenticated relative-process attacker net cost through first commitment-valid plaintext delivery",
             "scope": "admitted local OPE plus seven-process 4-of-7 threshold-service composition",
             "attacker_role": committee.buyer,
             "accounting_unit": "native call value / 10^18 wei",
+        },
+        "model": {
+            "control_boundary": {
+                "attacker": committee.buyer,
+                "included_identities": [committee.buyer],
+                "closure_rule": "identities declared under the attacker's beneficial control in the admitted model",
+                "excluded_service_controller": str(capture["roles"]["service_contract_controller"]).lower(),
+                "excluded_committee_members": [
+                    str(value).lower()
+                    for value in capture["roles"]["committee_member_addresses"]
+                ],
+                "internal_transfer_treatment": "transfers wholly inside the declared control closure are not boundary-crossing debits",
+            },
+            "real_success_histories": {
+                "domain": "all successful executions admitted by the controlled runtime and the P1-P4 evidence header",
+                "success_event": "first commitment-valid plaintext delivery to the authenticated attacker",
+                "represented_history_count": len(routes),
+            },
+            "checked_routes": {
+                "domain": "all successful fixed-root routes accepted by the independent checker",
+                "route_count": len(routes),
+                "whole_process_routes": True,
+            },
+            "observation_projection": {
+                "observer": "independent artifact verifier",
+                "fields": [
+                    "authenticated request",
+                    "payment receipt and finality",
+                    "member/operator binding",
+                    "threshold responses",
+                    "commitment-valid delivery",
+                    "settlement and return closure",
+                ],
+            },
+            "p5_completeness": {
+                "forward_totality": True,
+                "whole_process_reverse_replay": True,
+                "same_session_state_continuity": True,
+                "cost_preservation": True,
+                "minimum_equality_not_assumed": True,
+            },
         },
         "p1_p5": {
             "P1": {
@@ -661,6 +707,21 @@ def evaluate() -> dict[str, Any]:
         "runtime": {
             "operator_processes": 7,
             "threshold": 4,
+            "committee": {
+                "committee_size": committee.committee_size,
+                "threshold": committee.threshold,
+                "public_key": hex(committee.public_key),
+                "public_shares": {
+                    str(key): hex(value) for key, value in committee.public_shares.items()
+                },
+                "network_public_keys": {
+                    str(key): hex(value)
+                    for key, value in committee.network_public_keys.items()
+                },
+                "operator_hosts": {
+                    str(key): value for key, value in committee.operator_hosts.items()
+                },
+            },
             "signed_bindings": bindings,
             "source_inventory": sources,
             "deterministic_artifact_keys": True,
@@ -682,7 +743,10 @@ def evaluate() -> dict[str, Any]:
         },
     }
     result["mutations"]["gate_and_accounting"] = gate_mutations_rejected(result)
-    require(result["verdict"] == "PROCESS-LEVEL-CERTIFIED(4)", "verdict drift")
+    require(
+        result["verdict"] == "AUTHENTICATED-RELATIVE-PROCESS-CERTIFIED(4)",
+        "verdict drift",
+    )
     require(result["cost"]["process_minimum_units"] == 4, "positive process floor is not four")
     require(all(item["status"] == "PASS" for item in result["p1_p5"].values()), "P1-P5 not all PASS")
     return result

@@ -1,0 +1,268 @@
+{
+  "baseline": {
+    "counter_derivation": null,
+    "status": "SEALED",
+    "violations": []
+  },
+  "checks": {
+    "all_conditions_covered": true,
+    "baseline_sealed": true,
+    "bypass_has_counter_derivation": true,
+    "each_isolates_one_condition": true,
+    "every_mutation_caught": true
+  },
+  "manifest": {
+    "components": [
+      {
+        "code_hash": "operators@v3",
+        "component_id": "operators",
+        "emitting_sites": [
+          "POST /respond"
+        ],
+        "holds_secret": true,
+        "input_ports": [
+          "operator-in"
+        ],
+        "lifecycle_fixed": true,
+        "output_ports": [
+          "operator-out"
+        ],
+        "producer_sites": [
+          "POST /respond"
+        ],
+        "rules": [
+          {
+            "external": true,
+            "inputs": [
+              "Ciphertext",
+              "BuyerRequest"
+            ],
+            "output": "ValidPartial",
+            "site": "POST /respond"
+          }
+        ],
+        "secret_external_sites": [
+          "POST /respond"
+        ]
+      },
+      {
+        "code_hash": "coordinator@v3",
+        "component_id": "coordinator",
+        "emitting_sites": [
+          "aggregate"
+        ],
+        "holds_secret": false,
+        "input_ports": [
+          "coordinator-in"
+        ],
+        "lifecycle_fixed": true,
+        "output_ports": [
+          "coordinator-out"
+        ],
+        "producer_sites": [
+          "aggregate"
+        ],
+        "rules": [
+          {
+            "external": true,
+            "inputs": [
+              "ValidPartial"
+            ],
+            "output": "ThresholdOutput",
+            "site": "aggregate"
+          }
+        ],
+        "secret_external_sites": []
+      },
+      {
+        "code_hash": "ledger@v3",
+        "component_id": "ledger",
+        "emitting_sites": [
+          "debit"
+        ],
+        "holds_secret": false,
+        "input_ports": [],
+        "lifecycle_fixed": true,
+        "output_ports": [
+          "ledger-out"
+        ],
+        "producer_sites": [
+          "debit"
+        ],
+        "rules": [
+          {
+            "external": true,
+            "inputs": [
+              "BuyerAuthorization"
+            ],
+            "output": "IrreversibleDebit",
+            "site": "debit"
+          }
+        ],
+        "secret_external_sites": []
+      },
+      {
+        "code_hash": "gateway@v3",
+        "component_id": "gateway",
+        "emitting_sites": [
+          "release"
+        ],
+        "holds_secret": false,
+        "input_ports": [
+          "gateway-in"
+        ],
+        "lifecycle_fixed": true,
+        "output_ports": [
+          "gateway-out"
+        ],
+        "producer_sites": [
+          "release"
+        ],
+        "rules": [
+          {
+            "external": true,
+            "inputs": [
+              "ThresholdOutput",
+              "BuyerAuthorization"
+            ],
+            "output": "UsablePlaintext",
+            "site": "release"
+          }
+        ],
+        "secret_external_sites": []
+      }
+    ],
+    "cross_flows": [
+      [
+        "operators",
+        "coordinator",
+        "operator-out"
+      ],
+      [
+        "coordinator",
+        "gateway",
+        "coordinator-out"
+      ],
+      [
+        "ledger",
+        "gateway",
+        "ledger-out"
+      ]
+    ],
+    "initial_capabilities": [
+      "BuyerAuthorization",
+      "BuyerRequest",
+      "Ciphertext"
+    ],
+    "port_connections": [
+      [
+        "coordinator",
+        "coordinator-out",
+        "gateway",
+        "gateway-in"
+      ],
+      [
+        "ledger",
+        "ledger-out",
+        "gateway",
+        "gateway-in"
+      ],
+      [
+        "operators",
+        "operator-out",
+        "coordinator",
+        "coordinator-in"
+      ]
+    ],
+    "root_capability": "UsablePlaintext",
+    "root_producer": "gateway"
+  },
+  "mutations": {
+    "cached_output_bypass": {
+      "counter_derivation": [
+        "gateway:GET /cache",
+        "=> UsablePlaintext",
+        "(via undeclared/bypass site)"
+      ],
+      "expected_condition": "LC1",
+      "isolates_expected_condition": true,
+      "status": "COVERAGE_NOT_ESTABLISHED",
+      "violated_conditions": [
+        "LC1"
+      ]
+    },
+    "lc0_unruled_producer_site": {
+      "counter_derivation": null,
+      "expected_condition": "LC0",
+      "isolates_expected_condition": true,
+      "status": "COVERAGE_NOT_ESTABLISHED",
+      "violated_conditions": [
+        "LC0"
+      ]
+    },
+    "lc1_undeclared_producer": {
+      "counter_derivation": null,
+      "expected_condition": "LC1",
+      "isolates_expected_condition": true,
+      "status": "COVERAGE_NOT_ESTABLISHED",
+      "violated_conditions": [
+        "LC1"
+      ]
+    },
+    "lc2_undeclared_port": {
+      "counter_derivation": null,
+      "expected_condition": "LC2",
+      "isolates_expected_condition": true,
+      "status": "COVERAGE_NOT_ESTABLISHED",
+      "violated_conditions": [
+        "LC2"
+      ]
+    },
+    "lc3_secret_state_leak": {
+      "counter_derivation": null,
+      "expected_condition": "LC3",
+      "isolates_expected_condition": true,
+      "status": "COVERAGE_NOT_ESTABLISHED",
+      "violated_conditions": [
+        "LC3"
+      ]
+    },
+    "lc4_missing_provenance": {
+      "counter_derivation": null,
+      "expected_condition": "LC4",
+      "isolates_expected_condition": true,
+      "status": "COVERAGE_NOT_ESTABLISHED",
+      "violated_conditions": [
+        "LC4"
+      ]
+    },
+    "lc5_lifecycle_upgrade": {
+      "counter_derivation": null,
+      "expected_condition": "LC5",
+      "isolates_expected_condition": true,
+      "status": "COVERAGE_NOT_ESTABLISHED",
+      "violated_conditions": [
+        "LC5"
+      ]
+    },
+    "lc6_cyclic_producer": {
+      "counter_derivation": null,
+      "expected_condition": "LC6",
+      "isolates_expected_condition": true,
+      "status": "COVERAGE_NOT_ESTABLISHED",
+      "violated_conditions": [
+        "LC6"
+      ]
+    },
+    "lc7_root_producer_missing": {
+      "counter_derivation": null,
+      "expected_condition": "LC7",
+      "isolates_expected_condition": true,
+      "status": "COVERAGE_NOT_ESTABLISHED",
+      "violated_conditions": [
+        "LC7"
+      ]
+    }
+  },
+  "schema": "paid-threshold-response-two-host-coverage/v5"
+}

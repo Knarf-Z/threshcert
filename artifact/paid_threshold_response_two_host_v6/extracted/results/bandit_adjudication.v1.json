@@ -1,0 +1,86 @@
+{
+  "checks": {
+    "ALL_FINDINGS_HAVE_EXPLICIT_DISPOSITION": true,
+    "EXPECTED_FINDING_SET_EXACT": true,
+    "NO_HIGH_SEVERITY_FINDINGS": true,
+    "NO_NOSEC_SUPPRESSIONS": true,
+    "REPORT_HAS_NO_ERRORS": true
+  },
+  "findings": [
+    {
+      "confidence": "MEDIUM",
+      "disposition": "The CLI default permits the remote Host 2 service to listen on its LAN interface. This is intentional exposure, not treated as harmless; the accepted application surface is limited to the two checked routes and the deployment still relies on host firewall and OS integrity.",
+      "file": "src\\ptr_v3\\operator_server.py",
+      "line": 271,
+      "severity": "MEDIUM",
+      "test_id": "B104"
+    },
+    {
+      "confidence": "MEDIUM",
+      "disposition": "The reported strings are a schema tag and the literal gate status PASS, not credentials.",
+      "file": "src\\ptr_v3\\dealer.py",
+      "line": 36,
+      "severity": "LOW",
+      "test_id": "B105"
+    },
+    {
+      "confidence": "MEDIUM",
+      "disposition": "The reported strings are a schema tag and the literal gate status PASS, not credentials.",
+      "file": "src\\ptr_v3\\evidence.py",
+      "line": 23,
+      "severity": "LOW",
+      "test_id": "B105"
+    },
+    {
+      "confidence": "HIGH",
+      "disposition": "The two calls receive URLs constructed by OperatorEndpoint.url or a literal http prefix plus the typed endpoint. No request-controlled URL scheme reaches urlopen; coordinator normal forms are frozen.",
+      "file": "src\\ptr_v3\\coordinator.py",
+      "line": 92,
+      "severity": "MEDIUM",
+      "test_id": "B310"
+    },
+    {
+      "confidence": "HIGH",
+      "disposition": "The two calls receive URLs constructed by OperatorEndpoint.url or a literal http prefix plus the typed endpoint. No request-controlled URL scheme reaches urlopen; coordinator normal forms are frozen.",
+      "file": "src\\ptr_v3\\coordinator.py",
+      "line": 100,
+      "severity": "MEDIUM",
+      "test_id": "B310"
+    },
+    {
+      "confidence": "HIGH",
+      "disposition": "random.Random is reachable only when an explicit test seed is supplied. The physical experiment calls encrypt_capability without a seed, and RSP-V6 freezes that call plus secrets.randbelow/token_bytes.",
+      "file": "src\\ptr_v3\\crypto.py",
+      "line": 55,
+      "severity": "LOW",
+      "test_id": "B311"
+    }
+  ],
+  "not_claimed": [
+    "absence of vulnerabilities",
+    "soundness of the RSP-V6 theorem",
+    "operating-system or network-stack integrity",
+    "that intentional LAN exposure is risk free"
+  ],
+  "report_sha256": "0DAFF06BB98B8A90DDD19650F42425CF35D59F33AAE63811D62E5DEF86AC65CD",
+  "schema": "ptr-bandit-adjudication/v1",
+  "status": "REVIEWED_NO_HIGH_SEVERITY",
+  "tool": {
+    "name": "Bandit",
+    "role": "third-party generic security scan; not a proof kernel",
+    "version": "1.9.4"
+  },
+  "totals": {
+    "CONFIDENCE.HIGH": 3,
+    "CONFIDENCE.LOW": 0,
+    "CONFIDENCE.MEDIUM": 3,
+    "CONFIDENCE.UNDEFINED": 0,
+    "SEVERITY.HIGH": 0,
+    "SEVERITY.LOW": 3,
+    "SEVERITY.MEDIUM": 3,
+    "SEVERITY.UNDEFINED": 0,
+    "loc": 3628,
+    "nosec": 0,
+    "skipped_tests": 0
+  }
+}

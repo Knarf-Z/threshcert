@@ -1,0 +1,29 @@
+{
+  "schema": "threshcert-cost-domain-registry/v1",
+  "claims": [
+    {
+      "artifact": "artifact/ope_process_positive/results/ope_process_positive.v2.json",
+      "value": 4,
+      "verdict": "AUTHENTICATED-RELATIVE-PROCESS-CERTIFIED(4)",
+      "quantity": "authenticated relative-process attacker net cost through first commitment-valid plaintext delivery",
+      "accounting_unit": "native call value / 10^18 wei",
+      "route_domain": "all 35 successful routes at the fixed controlled OPE root",
+      "execution_domain": "local Hardhat EVM plus seven local operator processes",
+      "current_main_result": true
+    },
+    {
+      "artifact": "artifact/paid_threshold_response_two_host_v6/frozen/two_host_execution_evidence.v68.public.zip",
+      "value": 10,
+      "verdict": "FINITE-LANGUAGE-PAYMENT-CERTIFIED(10)",
+      "quantity": "named-acquirer outflow in the recorded controlled ledger",
+      "accounting_unit": "V6 token units",
+      "route_domain": "declared ordered first-four-responder finite language",
+      "execution_domain": "historical controlled two-physical-host integration",
+      "current_main_result": false
+    }
+  ],
+  "consistency": {
+    "status": "DISTINCT_DOMAINS_NOT_NUMERICALLY_COMPARABLE",
+    "reason": "The values four and ten come from different route languages, ledgers, execution environments, and accounting units. Neither value is a revision of the other."
+  }
+}

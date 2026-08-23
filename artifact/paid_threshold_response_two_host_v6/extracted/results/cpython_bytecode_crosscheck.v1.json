@@ -1,0 +1,48 @@
+{
+  "checks": {
+    "CPYTHON_COMPILES_ALL_SOURCES": true,
+    "CRITICAL_CODE_OBJECTS_UNIQUE": true,
+    "NO_DYNAMIC_OR_NATIVE_ESCAPE_NAMES": true,
+    "PARTIAL_PRIMITIVE_IN_PRODUCER_ONLY": true,
+    "POST_REACHES_DECLARED_PRODUCER_AND_SEND": true,
+    "RAW_HTTP_SINKS_CONFINED_TO_SEND": true,
+    "SENSITIVE_STORES_CONSTRUCTOR_ONLY": true,
+    "SINGLE_LISTENER_IN_SERVE": true,
+    "THRESHOLD_AND_COMMITMENT_IN_RUN_ORDER": true
+  },
+  "claim": "CPython's compiler independently maps the frozen source to code objects with the same privileged-operation confinement required by the AST proof.",
+  "diagnostics": {
+    "critical_instruction_sha256": {
+      "ptr_v3.experiment:run_order": "5438FD5379983B47C694E1029EB3F992D6CC4B8D12662D3DE4E6FA1DC7E2B1F7",
+      "ptr_v3.experiment:run_order.<locals>.<dictcomp>": "B21E19B141873E0792A7763727BD07F0D399910D847888E60C7A333176557B8B",
+      "ptr_v3.experiment:run_order.<locals>.<listcomp>": "1082A58CDC288618F459C2178D1CB4CA504463D74D59FCDD06F5BBA1DB7EE20D",
+      "ptr_v3.operator_server:_partial_and_proof": "397508DDCB2465A8EC57AEFCD548A7D5BFDA8DBF9736BF78CA41BE24893AA6EA",
+      "ptr_v3.operator_server:build_handler.<locals>.Handler._send": "807D39FC1B0C36356EE6338070E0A131DCCC896FBD7E4D18711128BF2E5ADA24",
+      "ptr_v3.operator_server:build_handler.<locals>.Handler.do_POST": "0C88D058BE263BBCBFFD7D9FB9DE645C615E1D668E3F758553B90285DEFA6B31",
+      "ptr_v3.operator_server:build_handler.<locals>.Handler.do_POST.<locals>.<listcomp>": "41855036A8218ED1F39AB64507CA552A37EBC285587130A3E8C80E7FA4EC84AE",
+      "ptr_v3.operator_server:serve": "60022A8A341E2E4DB58275D79F4ACD1198B55C95E702B024C891A28EC19294E0"
+    },
+    "dynamic_names": [],
+    "sensitive_store_instructions": [
+      {
+        "attr": "share",
+        "object": "ptr_v3.operator_server:OperatorState.__init__"
+      },
+      {
+        "attr": "public_share",
+        "object": "ptr_v3.operator_server:OperatorState.__init__"
+      },
+      {
+        "attr": "identity",
+        "object": "ptr_v3.operator_server:OperatorState.__init__"
+      }
+    ]
+  },
+  "not_claimed": [
+    "a proof of CPython compiler or interpreter correctness",
+    "operating-system or native-runtime integrity",
+    "replacement for the restricted-source soundness theorem"
+  ],
+  "schema": "ptr-cpython-bytecode-crosscheck/v1",
+  "status": "PASS"
+}

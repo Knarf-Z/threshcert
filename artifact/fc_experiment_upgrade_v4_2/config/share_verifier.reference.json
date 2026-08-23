@@ -1,0 +1,28 @@
+{
+  "schema": "fc-share-verification-boundary-v1",
+  "rolling_shutter": {
+    "version": "v1.4.4",
+    "commit": "d143fffcf51f85b30375134d2d29756417f333b9",
+    "repository": "https://github.com/shutter-network/rolling-shutter",
+    "native_share_check": "shcrypto.VerifyEpochSecretKeyShare",
+    "native_signature_check": "serviceztypes.NewDecryptionSignatureData(...).CheckSignature(...)",
+    "reconstruction_check": "reconstruct threshold aggregate and compare with the retained aggregate key"
+  },
+  "on_chain_adapter": {
+    "contract": "AttestedShareVerifier.sol",
+    "standard": "EIP-712-style typed-data digest with canonical ECDSA recovery",
+    "attested_fields": [
+      "chainId",
+      "escrow",
+      "offerId",
+      "member",
+      "shareHash"
+    ],
+    "security_boundary": "The off-chain attester must run native Shutter share and signature checks before signing. The Solidity adapter verifies the attestation, not the BLS share equation itself."
+  },
+  "non_claims": [
+    "No direct BLS12-381 verification is claimed on Gnosis EVM.",
+    "A valid attestation does not establish that a real Keyper is willing to join an offer.",
+    "The adapter is an executable experimental boundary, not an audited production deployment."
+  ]
+}

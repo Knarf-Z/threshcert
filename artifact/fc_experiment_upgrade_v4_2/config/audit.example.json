@@ -1,0 +1,47 @@
+{
+  "mode": "fixture",
+  "chain_id": 100,
+  "rpc_url": "https://rpc.gnosischain.com",
+  "manager_address": "0x7C2337f9bFce19d8970661DA50dE8DD7d3D34abb",
+  "snapshot_block": 46666718,
+  "snapshot_block_hash": "0x574ec26ee7b2e2bfddd991bf99d37a79455428bc4dfe342b0ccf55d071229b60",
+  "expected_num_keyper_sets": 11,
+  "expected_active_set_index": 10,
+  "keyper_set_added_topic0": "0xa940387dac06ebd336730f1d14b21629a9d137069a9137e871f95313e1010165",
+  "event_search_lookback_blocks": 250000,
+  "event_search_forward_blocks": 100,
+  "rpc_log_chunk_blocks": 10000,
+  "rpc_max_attempts": 4,
+  "rpc_timeout_seconds": 45,
+  "rpc_retry_base_seconds": 2,
+  "retained_period_evidence": {
+    "set_id": 10,
+    "positive_resistance_floors": 0,
+    "positive_activation_floors": 0,
+    "positive_penalty_floors": 0,
+    "scope": "public evidence ledger retained for the pinned set-10 period only"
+  },
+  "fixture_sets": [
+    {
+      "set_id": 10,
+      "address": "0xE817E77109e2E6a8025eB30dB3542eC18bBDE828",
+      "start_block": 46271880,
+      "end_block": 46666718,
+      "member_count": 7,
+      "threshold": 4,
+      "members": "0x4ba8E8e0061EA7CE9353e7B641A116F1d48d9d46|0xcB43AEAA8c029Da18A499dC684FdD250ab3FCd13|0x46c24A9B4C92Aeb416d732801208ADD353635EC4|0x772213aaD4c6B37d2cc0Fa3B74F9ace5a028B8C8|0x2711d53B3dF060D08AC30C6517D4B8EED50A54B3|0x4B5E2356b666898e101627BdDc518956bcd90a03|0x48A0e1789C82084aE28c179bd5742454f8CD4ed6",
+      "owner": "0x8A7589135584CECFA5Bd73De02864075232407DD",
+      "publisher": "0xa6eE35704F4e9A73712b514e15D1DB8b34EC8d76",
+      "finalized": true,
+      "event_block": 46270333,
+      "event_tx": "0xd00adb4be576a75026e28f8fefea31fe94413fecfc9ebffc17bf75d31458a864",
+      "event_verified": true,
+      "committee_state_verified": true,
+      "period_evidence_audited": true,
+      "positive_resistance_floors": 0,
+      "positive_activation_floors": 0,
+      "positive_penalty_floors": 0,
+      "source": "retained_production_record_and_public_evidence_ledger"
+    }
+  ]
+}

@@ -148,7 +148,9 @@ equality, and the recorded coverage condition.
   terminal choices for one fixed C6 root, verifies EIP-191 request
   authentication, six-confirmation finality, four signed/proved responses and
   commitment-valid delivery, closes declared return and reuse interfaces, and
-  reports the relative verdict `PROCESS-LEVEL-CERTIFIED(4)`.
+  reports `AUTHENTICATED-RELATIVE-PROCESS-CERTIFIED(4)`. Its v2 JSON Schema,
+  independent standard-library verifier, and size/scaling benchmark are stored
+  beside the certificate.
 
 The separate joint-incidence finite-schema check establishes its 117-state by
 exactly-35-terminal product, terminal-family completeness, payment-labelled

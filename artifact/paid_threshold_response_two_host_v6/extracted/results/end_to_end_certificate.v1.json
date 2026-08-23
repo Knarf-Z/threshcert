@@ -1,0 +1,58 @@
+{
+  "certificate": {
+    "certification_outcome": {
+      "floor": 10,
+      "status": "CERTIFIED"
+    },
+    "deployment_wide": false,
+    "exactness_basis": "verified lower-bound potential plus an observed minimizing execution",
+    "language": "declared finite two-host service language",
+    "named_acquirer_outflow_exact_value": 10,
+    "named_acquirer_outflow_lower_bound": 10
+  },
+  "checks": {
+    "CANONICAL_SOURCE_BINDING": true,
+    "CODE_MANIFEST_LIVE_PASS": true,
+    "CONSEQUENTIAL_LC_PROVED_IN_RESTRICTED_MODEL": true,
+    "FREE_BYPASS_REFUTED": true,
+    "LEDGER_AND_CATALOG_INTEGRATION": true,
+    "MINIMIZING_EXECUTION_REALIZES_VALUE": true,
+    "OUTAGE_FAILS_CLOSED": true,
+    "OUTAGE_FINAL_BINDING": true,
+    "PAYMENT_DECOMPOSABLE": true,
+    "PAYMENT_POTENTIAL": true,
+    "RECOVERY_FINAL_BINDING": true,
+    "RECOVERY_SUCCEEDS": true,
+    "RESTRICTED_SOURCE_THEOREM_LIVE_PROVED": true,
+    "SCOPE_DOES_NOT_OVERCLAIM": true,
+    "SEALED_CONTRACT": true,
+    "SHARED_DEBIT_WITHHELD": true,
+    "SOURCE_KERNEL_RESULT_MATCHES_LIVE": true
+  },
+  "input_sha256": {
+    "canonical": "61CE2F1573154EBBCF21B854E9F9CC0BD831530B8ACD3C4BC8C5A101DC231FE5",
+    "capability": "5B56199EBEA715E82C9DB2901F6BDBAF8EAD68F8AD206B0B1C32F601F64BFC91",
+    "coverage": "6EC84670C66D49CC9E610FB6A3D634769D57FE791E06AE6A153B05F1AF643221",
+    "manifest": "49DCDDF87FFB94654EB1D5788BD132600B2D2C63BACCFEE36D2552A1C5C0B2F2",
+    "manifest_digest": "5D00A04BC0DFF3451F49920C803D74A9084ED142D6BE8B4C41623DB71A516FE8",
+    "outage": "E719C06B12A49F50F95F7A0DE76084A72A54626AEBA1514CE90002E6DD562B61",
+    "recovery": "582772DD2D86ACECDF8AEFBEB8D1A05A5095C21FB291A503B7FF36D08072A2AF",
+    "source": "3F770950D0A6F22BE62D987C66F6FBEEFE6645651000D6F22BB06E14DB65B02D"
+  },
+  "not_claimed": [
+    "deployment-wide route closure",
+    "hardware non-exportability",
+    "seven independent economic operators",
+    "a measured bribery or acquisition price",
+    "operating-system or interpreter integrity"
+  ],
+  "proof_chain": [
+    "the RSP-V6 soundness derivation proves the source-level producer, secret-flow, lifecycle, and delivery-root obligations",
+    "the sealed component contract supplies the remaining typed composition premises",
+    "ledger-derived leaf floors and allocation witnesses establish decomposable payment supports",
+    "the verified potential proves the lower bound",
+    "the minimizing execution proves exactness inside the declared language"
+  ],
+  "schema": "ptr-end-to-end-finite-language-certificate/v1",
+  "status": "PASS"
+}

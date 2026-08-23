@@ -1,0 +1,580 @@
+{
+  "baseline": {
+    "circuit": {
+      "nodes": [
+        {
+          "floor": 1,
+          "kind": "LEAF",
+          "name": "op1",
+          "support": {
+            "debit_ids": [
+              "debit-op1"
+            ],
+            "funding_ids": [],
+            "refund_ids": []
+          }
+        },
+        {
+          "floor": 2,
+          "kind": "LEAF",
+          "name": "op2",
+          "support": {
+            "debit_ids": [
+              "debit-op2"
+            ],
+            "funding_ids": [],
+            "refund_ids": []
+          }
+        },
+        {
+          "floor": 3,
+          "kind": "LEAF",
+          "name": "op3",
+          "support": {
+            "debit_ids": [
+              "debit-op3"
+            ],
+            "funding_ids": [],
+            "refund_ids": []
+          }
+        },
+        {
+          "floor": 4,
+          "kind": "LEAF",
+          "name": "op4",
+          "support": {
+            "debit_ids": [
+              "debit-op4"
+            ],
+            "funding_ids": [],
+            "refund_ids": []
+          }
+        },
+        {
+          "floor": 5,
+          "kind": "LEAF",
+          "name": "op5",
+          "support": {
+            "debit_ids": [
+              "debit-op5"
+            ],
+            "funding_ids": [],
+            "refund_ids": []
+          }
+        },
+        {
+          "floor": 6,
+          "kind": "LEAF",
+          "name": "op6",
+          "support": {
+            "debit_ids": [
+              "debit-op6"
+            ],
+            "funding_ids": [],
+            "refund_ids": []
+          }
+        },
+        {
+          "floor": 7,
+          "kind": "LEAF",
+          "name": "op7",
+          "support": {
+            "debit_ids": [
+              "debit-op7"
+            ],
+            "funding_ids": [],
+            "refund_ids": []
+          }
+        },
+        {
+          "children": [
+            "op1",
+            "op2",
+            "op3",
+            "op4",
+            "op5",
+            "op6",
+            "op7"
+          ],
+          "kind": "THR",
+          "name": "u",
+          "threshold": 4,
+          "weights": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "root": "u",
+      "type": "payment_capability_circuit"
+    },
+    "circuit_value": 10,
+    "decomposable": true,
+    "derivation": {
+      "children": [
+        {
+          "floor": 1,
+          "kind": "LEAF",
+          "name": "op1",
+          "support": {
+            "debit_ids": [
+              "debit-op1"
+            ],
+            "funding_ids": [],
+            "refund_ids": []
+          }
+        },
+        {
+          "floor": 2,
+          "kind": "LEAF",
+          "name": "op2",
+          "support": {
+            "debit_ids": [
+              "debit-op2"
+            ],
+            "funding_ids": [],
+            "refund_ids": []
+          }
+        },
+        {
+          "floor": 3,
+          "kind": "LEAF",
+          "name": "op3",
+          "support": {
+            "debit_ids": [
+              "debit-op3"
+            ],
+            "funding_ids": [],
+            "refund_ids": []
+          }
+        },
+        {
+          "floor": 4,
+          "kind": "LEAF",
+          "name": "op4",
+          "support": {
+            "debit_ids": [
+              "debit-op4"
+            ],
+            "funding_ids": [],
+            "refund_ids": []
+          }
+        }
+      ],
+      "kind": "THR",
+      "name": "u"
+    },
+    "derivation_cost": 10,
+    "duplicate_resources": {},
+    "potential": {
+      "op1": 1,
+      "op2": 2,
+      "op3": 3,
+      "op4": 4,
+      "op5": 5,
+      "op6": 6,
+      "op7": 7,
+      "u": 10
+    },
+    "potential_verified": true,
+    "reason": "potential certifies value 10; cheapest derivation is decomposable",
+    "status": "CERTIFIED",
+    "target": 10
+  },
+  "bypass_fixture": {
+    "circuit": {
+      "nodes": [
+        {
+          "floor": 0,
+          "kind": "LEAF",
+          "name": "bypass",
+          "support": {
+            "debit_ids": [
+              "debit-bypass"
+            ],
+            "funding_ids": [],
+            "refund_ids": []
+          }
+        },
+        {
+          "floor": 1,
+          "kind": "LEAF",
+          "name": "op1",
+          "support": {
+            "debit_ids": [
+              "debit-op1"
+            ],
+            "funding_ids": [],
+            "refund_ids": []
+          }
+        },
+        {
+          "floor": 2,
+          "kind": "LEAF",
+          "name": "op2",
+          "support": {
+            "debit_ids": [
+              "debit-op2"
+            ],
+            "funding_ids": [],
+            "refund_ids": []
+          }
+        },
+        {
+          "floor": 3,
+          "kind": "LEAF",
+          "name": "op3",
+          "support": {
+            "debit_ids": [
+              "debit-op3"
+            ],
+            "funding_ids": [],
+            "refund_ids": []
+          }
+        },
+        {
+          "floor": 4,
+          "kind": "LEAF",
+          "name": "op4",
+          "support": {
+            "debit_ids": [
+              "debit-op4"
+            ],
+            "funding_ids": [],
+            "refund_ids": []
+          }
+        },
+        {
+          "floor": 5,
+          "kind": "LEAF",
+          "name": "op5",
+          "support": {
+            "debit_ids": [
+              "debit-op5"
+            ],
+            "funding_ids": [],
+            "refund_ids": []
+          }
+        },
+        {
+          "floor": 6,
+          "kind": "LEAF",
+          "name": "op6",
+          "support": {
+            "debit_ids": [
+              "debit-op6"
+            ],
+            "funding_ids": [],
+            "refund_ids": []
+          }
+        },
+        {
+          "floor": 7,
+          "kind": "LEAF",
+          "name": "op7",
+          "support": {
+            "debit_ids": [
+              "debit-op7"
+            ],
+            "funding_ids": [],
+            "refund_ids": []
+          }
+        },
+        {
+          "children": [
+            "u",
+            "bypass"
+          ],
+          "kind": "OR",
+          "name": "root"
+        },
+        {
+          "children": [
+            "op1",
+            "op2",
+            "op3",
+            "op4",
+            "op5",
+            "op6",
+            "op7"
+          ],
+          "kind": "THR",
+          "name": "u",
+          "threshold": 4,
+          "weights": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "root": "root",
+      "type": "payment_capability_circuit"
+    },
+    "circuit_value": 0,
+    "decomposable": true,
+    "derivation": {
+      "children": [
+        {
+          "floor": 0,
+          "kind": "LEAF",
+          "name": "bypass",
+          "support": {
+            "debit_ids": [
+              "debit-bypass"
+            ],
+            "funding_ids": [],
+            "refund_ids": []
+          }
+        }
+      ],
+      "kind": "OR",
+      "name": "root"
+    },
+    "derivation_cost": 0,
+    "duplicate_resources": {},
+    "potential": {
+      "bypass": 0,
+      "op1": 1,
+      "op2": 2,
+      "op3": 3,
+      "op4": 4,
+      "op5": 5,
+      "op6": 6,
+      "op7": 7,
+      "root": 0,
+      "u": 10
+    },
+    "potential_verified": true,
+    "reason": "an accepting derivation costs 0 < target 10",
+    "status": "REFUTED_BY_DERIVATION",
+    "target": 10
+  },
+  "checks": {
+    "baseline_certified_at_cover": true,
+    "baseline_potential_verified": true,
+    "bypass_refutes_cover": true,
+    "compression_840_35_1": true,
+    "shared_debit_nondecomposable": true
+  },
+  "committee": {
+    "floors": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "size": 7,
+    "threshold": 4
+  },
+  "cover": 10,
+  "route_compression": {
+    "coalition_derivations": 35,
+    "ordered_routes": 840,
+    "threshold_nodes": 1
+  },
+  "schema": "paid-threshold-response-two-host-capability/v5",
+  "shared_debit_fixture": {
+    "circuit": {
+      "nodes": [
+        {
+          "floor": 1,
+          "kind": "LEAF",
+          "name": "op1",
+          "support": {
+            "debit_ids": [
+              "debit-shared"
+            ],
+            "funding_ids": [],
+            "refund_ids": []
+          }
+        },
+        {
+          "floor": 2,
+          "kind": "LEAF",
+          "name": "op2",
+          "support": {
+            "debit_ids": [
+              "debit-shared"
+            ],
+            "funding_ids": [],
+            "refund_ids": []
+          }
+        },
+        {
+          "floor": 3,
+          "kind": "LEAF",
+          "name": "op3",
+          "support": {
+            "debit_ids": [
+              "debit-op3"
+            ],
+            "funding_ids": [],
+            "refund_ids": []
+          }
+        },
+        {
+          "floor": 4,
+          "kind": "LEAF",
+          "name": "op4",
+          "support": {
+            "debit_ids": [
+              "debit-op4"
+            ],
+            "funding_ids": [],
+            "refund_ids": []
+          }
+        },
+        {
+          "floor": 5,
+          "kind": "LEAF",
+          "name": "op5",
+          "support": {
+            "debit_ids": [
+              "debit-op5"
+            ],
+            "funding_ids": [],
+            "refund_ids": []
+          }
+        },
+        {
+          "floor": 6,
+          "kind": "LEAF",
+          "name": "op6",
+          "support": {
+            "debit_ids": [
+              "debit-op6"
+            ],
+            "funding_ids": [],
+            "refund_ids": []
+          }
+        },
+        {
+          "floor": 7,
+          "kind": "LEAF",
+          "name": "op7",
+          "support": {
+            "debit_ids": [
+              "debit-op7"
+            ],
+            "funding_ids": [],
+            "refund_ids": []
+          }
+        },
+        {
+          "children": [
+            "op1",
+            "op2",
+            "op3",
+            "op4",
+            "op5",
+            "op6",
+            "op7"
+          ],
+          "kind": "THR",
+          "name": "u",
+          "threshold": 4,
+          "weights": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "root": "u",
+      "type": "payment_capability_circuit"
+    },
+    "circuit_value": 10,
+    "decomposable": false,
+    "derivation": {
+      "children": [
+        {
+          "floor": 1,
+          "kind": "LEAF",
+          "name": "op1",
+          "support": {
+            "debit_ids": [
+              "debit-shared"
+            ],
+            "funding_ids": [],
+            "refund_ids": []
+          }
+        },
+        {
+          "floor": 2,
+          "kind": "LEAF",
+          "name": "op2",
+          "support": {
+            "debit_ids": [
+              "debit-shared"
+            ],
+            "funding_ids": [],
+            "refund_ids": []
+          }
+        },
+        {
+          "floor": 3,
+          "kind": "LEAF",
+          "name": "op3",
+          "support": {
+            "debit_ids": [
+              "debit-op3"
+            ],
+            "funding_ids": [],
+            "refund_ids": []
+          }
+        },
+        {
+          "floor": 4,
+          "kind": "LEAF",
+          "name": "op4",
+          "support": {
+            "debit_ids": [
+              "debit-op4"
+            ],
+            "funding_ids": [],
+            "refund_ids": []
+          }
+        }
+      ],
+      "kind": "THR",
+      "name": "u"
+    },
+    "derivation_cost": 10,
+    "duplicate_resources": {
+      "debit_ids": [
+        "debit-shared"
+      ]
+    },
+    "potential": {
+      "op1": 1,
+      "op2": 2,
+      "op3": 3,
+      "op4": 4,
+      "op5": 5,
+      "op6": 6,
+      "op7": 7,
+      "u": 10
+    },
+    "potential_verified": true,
+    "reason": "cheapest derivation shares payment resources {'debit_ids': ['debit-shared']}; value withheld",
+    "status": "NONDECOMPOSABLE",
+    "target": 10
+  }
+}

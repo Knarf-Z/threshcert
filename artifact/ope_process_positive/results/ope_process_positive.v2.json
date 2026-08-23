@@ -2,7 +2,8 @@
   "claim": {
     "accounting_unit": "native call value / 10^18 wei",
     "attacker_role": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
-    "quantity": "relative attacker net cost through first commitment-valid plaintext delivery",
+    "claim_type": "authenticated-relative-process-cost",
+    "quantity": "authenticated relative-process attacker net cost through first commitment-valid plaintext delivery",
     "scope": "admitted local OPE plus seven-process 4-of-7 threshold-service composition"
   },
   "cost": {
@@ -23,6 +24,54 @@
     "gas, operating-system compromise, side channels, and undeclared external transfers are outside the accounting header",
     "no claim of seven economically independent operators"
   ],
+  "model": {
+    "checked_routes": {
+      "domain": "all successful fixed-root routes accepted by the independent checker",
+      "route_count": 35,
+      "whole_process_routes": true
+    },
+    "control_boundary": {
+      "attacker": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+      "closure_rule": "identities declared under the attacker's beneficial control in the admitted model",
+      "excluded_committee_members": [
+        "0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc",
+        "0x90f79bf6eb2c4f870365e785982e1f101e93b906",
+        "0x15d34aaf54267db7d7c367839aaf71a00a2c6a65",
+        "0x9965507d1a55bcc2695c58ba16fb37d819b0a4dc",
+        "0x976ea74026e726554db657fa54763abd0c3a0aa9",
+        "0x14dc79964da2c08b23698b3d3cc7ca32193d9955",
+        "0x23618e81e3f5cdf7f54c3d65f7fbc0abf5b21e8f"
+      ],
+      "excluded_service_controller": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+      "included_identities": [
+        "0x70997970c51812dc3a010c7d01b50e0d17dc79c8"
+      ],
+      "internal_transfer_treatment": "transfers wholly inside the declared control closure are not boundary-crossing debits"
+    },
+    "observation_projection": {
+      "fields": [
+        "authenticated request",
+        "payment receipt and finality",
+        "member/operator binding",
+        "threshold responses",
+        "commitment-valid delivery",
+        "settlement and return closure"
+      ],
+      "observer": "independent artifact verifier"
+    },
+    "p5_completeness": {
+      "cost_preservation": true,
+      "forward_totality": true,
+      "minimum_equality_not_assumed": true,
+      "same_session_state_continuity": true,
+      "whole_process_reverse_replay": true
+    },
+    "real_success_histories": {
+      "domain": "all successful executions admitted by the controlled runtime and the P1-P4 evidence header",
+      "represented_history_count": 35,
+      "success_event": "first commitment-valid plaintext delivery to the authenticated attacker"
+    }
+  },
   "mutations": {
     "executable": {
       "proof_tamper_rejected": true,
@@ -4746,6 +4795,38 @@
     }
   ],
   "runtime": {
+    "committee": {
+      "committee_size": 7,
+      "network_public_keys": {
+        "1": "0xdc992982ae2816ab263ba309e78d2e5e57f4a785b888760e808cef085964290ca4484e2113cba754cd5a9b6d9e354063bd04c47b754043331b5eb8b5f19ab072638c854a9e89e93efd48807a49822a529b5576ebf6e7c6b614b4789283687c7e7296587cfa694001aeb2497f88b0aa9d36bcc9ca8cd1db1c996b9794955be7e1239464f4c4ede30c7f08bea5c4730833de882d4046a43c858670fbb0c1905b8abcf55c00c534dcdbb28f7981168baf27fd0ac9a2cf90e40fee7832f97c17aae3ad43e36f7baf6ba0679811c80e5adaf0045026c201f7e6a52d52d4326d6ec072715678e90ab85adc3017e81946abda65c398bcc5cd008e0772f47ea4577f8b25",
+        "2": "0xe3db253896e3852aaed57969b31d8e088520c2d37d534c57f8464739415fef79f331c027009e9b8a42de1f73a9bcb2c3509de6d5197b6b8f477ca360c2caf19ae540ec967412cec4a685c44502e51fb62dec571ec5450ffa1b08bc22f1661c545532986d0849df4d5f017738983169469f5cdb0443492d2577e191a76745c6600f72b158c8d39c22dbe1bc40ad585143152a7900d3181b9df3411af948ac0b0b6eddeeec939cd94df91c78cafcbd8da70e507b38c9bf61fc8ae9c3c699adb43920095973b468399cd867fe5ab06ed6d93ccbb94942d89738ebd977087e593e67d59100037c3dd149822f62a0c1c77c30901822ce5f230be5d58e80ab6c96ceaa",
+        "3": "0xde6531ad2b73931a771108c76f14b423fd965dd9ece0f3fab0c2f4eb646c7b7833ea6cd8eb152ee1c824a7581ccbd1fd567714631b94cc965446f9337695562c59af38b9783fe0bae59709734fa7ddaa9e9e0c23186b6d91c5afe2525b3d67f5bb109be622217d1c99005351f4ac64363814d1e9bb098409bf9c962258317febc9f736a37d38e75846611755abec593e5de701981fdba5e881e453f2b87d1208881001b3130379afb1f22821acb1e3d9d782548b306b1bc03a50ba1f2b96852dfb5b8d2f315750bcb61655f2b826d35899358cff679a110adf24b35b12f3fd6ecc937fe9a6f627a27077e02524896d285db189df7ab3d6f4e9984f9c4102ed02",
+        "4": "0x6eb22a3eb911278525efb6bef1303f6e4ab360453366bf64b85cc7c1785cbbbd7f6faa5310ba0a51d968e9d8c622f83caa71ce408e110dec9d8805e9c6183925d317fb6697ff3fc8adb920aeba3df03f1723efee06016454665a0afedd115e272dfef64e69aefc1b0088a100e1720e3072f03f90bd59ad0b69625435d71c430cd39ce9da66c0eae3f8f1c51dd14fedbcc4c08a8cecd2301f7d68620458052f18a582b74c6f02f2f096b0cd3b11e936c2f460ecbdab9cf7cd5a543ff3b6cc90471444cb816ba06d5131a2709ba52c689779fc615ab73daa5c0fe3b31047005b8960bae624f6134388c4456323725acc2f6bd5d25116956ed906f48902336dd31d",
+        "5": "0x6e5cde282caafb1dd432c170fdb1789ca3b8f11e00f31c96bf22843ec86911e36c26eabfc8ba71f3c52024ee679a2e1699da6edbd94ccb4bb52cafd6e10ed0ee4c0aaab13d440f3c13b0b2cf485f9efd81d51fa63f1baf796f5b91c72e31cc62e5b2b31bfcf070e894f13e5b34d929ecbdd83b194a7296dc00d041429c0773bf8c4102d8569a701e14b9aa42d8cd3a44c57b090587c5dcfdf1dbce06bbb69404675afc04bf7412ad84923367aa1e8c226d7f67da0d03038a5cdac4fd25904a8d70d0c2d25e8dc531af707c0e14aac4ccd942f2d12dd4f20c2b6c2febc6b63da2aae12a1d1fc49fae20e0b16be0ed885cb8ab6e90f36a667f520fc7aa89e2eb3e",
+        "6": "0xcdaf15e6197efe7de6f529be36a4ad5da433576c1fa2c0adca3428b37d228c0f5d3fc793a39dcd8ee4d22bb4b7fa02ef5686e9ad51cb242d8666824128292a3d17f27ecddb85fb13097c093ed064eae2a3d2c5cf0944d9ba8e37e038f1a62c785a36ecb0e308220abd0d415eda75d9d0a1a30ee6710baa76bbc3d0e7250f33a928a135daed4680f2f0116f9134f4056bbeed23ccc0cca00d0b4415ad3f3e5d89460d8404862dbf9f2443967c89268e6fa272b1887939a610d0e0d441d2269991663123b72c176db33d0e55a74b8d0e7b4f944351d5b59bc8e7ab22ac2c1ceb1d55743e95616790067b5327c449bdcc495250a8422830b14ebe90f7a026858c23",
+        "7": "0x47c26da49ea286f08c6fc738d68e029877591041abef9a8119187de55b411fcea014fbf8809366e41b01b9163dcf20fa1281a404bdfbfdcde558a180ea689c3ef9d14bc3f19755a4974c48bd1b313c4e8460e3a957cde3e27f629cf41baafa6907d5bc12ad6fd36636541d5997101c81d6b477b4325e2f32324165905c60ff1df2f768e3931a91feb37abd7511605c92a61d5861f24a158a93f263b60adbbf6e3c22d15c26e96915dbf39ddb9862e13bd32b8b3a7ce259e403e6d8846a1a0c1e0dfd500491d72d35bc69c766b5200392d3a801770deed5e3b87d3db28a610c61ced75fa72a258a3b52d7ea620d9d5a4a1e306542058b64ccaa6f6263bfa4a5b9"
+      },
+      "operator_hosts": {
+        "1": "host1",
+        "2": "host2",
+        "3": "host1",
+        "4": "host2",
+        "5": "host1",
+        "6": "host2",
+        "7": "host2"
+      },
+      "public_key": "0x8d3fb2eb461f1d12ca4b16411b474f86ff682e3a26797d430acac9b5b167604f537730fb31ccd22760b48e7560c482e5cb1ed10b87209bdf6d41f4415f26c2e37245fefe4a895f0d5ef94f34cabce2962af8792c54e7b110b14605ec7c3764d3ad1020177677cb50c8122cff6bcbb19324549311e1f016d189cab9ccc2a3a654833b4d4661000914f0f89b35e11cf9646eb9c23d9a7b9505fdea432559ea7cedda90a6b6575a9dff760217c371c29f5b77f0eeb1471096749fcbb0ea602d2bfe6a8b48e60864a8ed608c4849514c0de2d44348f5af8af9a385ec858f3f97be86dd69a15d5ae70774d397e6b4bc7c68b57aa916bb5a94e6d7d3b56b5b8938a144",
+      "public_shares": {
+        "1": "0xdee4481e0a436587a8e52c617d225a87f31309b820b7e7ce438249a85113edeb8d99228c980da750d86c6425e18755eabefae5b2d8e2c85c7bb6cf3bd8256036c491516ec458e61dab488b3d0eb2bf3759fc8113afce87894cd78db202abf1d88f31c9d76df2f59c098018d30a52827ed59d4431e3064b4e6993c92396bbf631a6fbf4135a42b11ae02623a55392554d91d1ec11c2a677fd4edb2aff2b8bb3bff386df5f3bcbf2a67b47b2633a0fa80a8da18e9b2acc8e352cd46e71f76fde5420c3ed0c5fbfd50d85b3dfbf96ca411e6d4ec07da0e82d5dbb8522b5c5383bd24db5a19adb647f1c02db8a2f284e0b639360d4ab365adb29fbb5c4caaf312d1f",
+        "2": "0xc3a51cf0eb3a5694346e4bd1b02f22f3b0729436fb6713cf7d39396b11828f8a60e4af2be0e8d98eca3a8b4cf762c2ece338e0fb50f47cb2398ecb62edc4a0e3fb2f3bdfebb19c7a231c97838a98439f089ffc52ce55d380ff9e8a8fafcaffaed14312256b720927a5e1d0ad65b5a9c3c76b5a3dd14f3d8f2570c5476d1cb4607393ec3fae524b85d80579ec6a906df61462dc45afcb6a92f05a0f0749c45cdd10a2363e7a47cb6461414c9b7e7fc1cfa4d5fc0992ac967e13668fbb6d80b316fd8c3ee29a173b6f515a55017307a1da92cbc9bf4987b21d8c78d34d66667ba0d454bc973da25d1c09e94db3b91acb8d62161008b9586748cbb17b112ceba866",
+        "3": "0x31893b117e4424ed92b426bcd254040749cab08bfee33646b1308e7de1f309bcc1be8000ad07976f188d827d65a36aaea97fd3b7f3aa55c06f8e9fad74dc9569596e1b353a9bdd08ce9629bc08c5178fea6f333321ddf51b79d9e81db7d9bdf9f3f1014c4fe37c5225c4301ed1f9f2f9462ca7b2531b447029b64af42e894670c687ab1650f9422bf04c9f44d8181b67b54d5ad9db5eb3f25aaefe6aef8ad38d204af6f7145e220cab789849882ab50e9ed8c6b2e0134bd1fbf90bc7ed2497ca9e7dd4e6a29a4ad6c499da7fc8d7fa1fcafb869cff7a545b48d1f43e6f5051ceca5a3bbb348150416c6b3ee3e38119556713d28ed1f1dd84d47fc8953134e75c",
+        "4": "0xd50fc88b047de02aba445f78bd05d51abd8372c445916ddd84277e106c165199128ebc28afbc90f791f0217bae617155dd6097a9e6a27bf4588ae0dd13b3bd81d0c3bb3b560a13bd6a8e0b828b7a9743d64295a6514ff99a8dd0f4e069016a962e70f2ca185d8cd1d56fd44fd79673f0765a0d47f955ebcbf1b20fb1fef6c534556e7f401c2faa779d09dd88440440578389eb667d60d4dd553b23345f70e73dc2d608c94b51a2644ece50dab4a7feff80bd324b9e10003a1a5d7bc359d63fe8317757dd3480aac823435fa2fe8bfb960dc920d90d0a02b87f80423d5232ba80a49a5efb0c2b26dab0ad9a90f6fd5310455caa0512ba374e0541faa3b25f7433",
+        "5": "0xf269c4843667d7be909222e68ad68c21eac85bf36aa26352ecaeca3a922e47f08d494c3eeb70f4a74561003b94a18a13f5be468c8a9eb97af90374263e8e97bad6204f9f488b4f31a1c58bb0a174dec2eddcf6b22edc69a421fa5f412219782adefe429584f2de999ed0a459415c254c7da3df19d1526f8abaafbbf03a2f87d5c4d584150f4e0f14467cb3594209a53a37aed14667577f40bf2ebd6830193c3b8765736b916a9a6357765804ff76b1b4cf25d82895a0a72b65ad25982a29e6961952982917108f3fa84c23673ca848e3352aba794e433e919841a684c5900d593d625ff2e2a5072bde07253dbbd6fc102e98fa45ba355f3136bca44a162f2850",
+        "6": "0x85f87353978bab81313c3b9e2b1ac430674da1cca6ba70b7da4087f4af5bea23818b4d889740c90a9ec7e6b1181df792c5af76206044cd051f4e5038eb84b9a6a53d3ec7dedc20f0f88a43806d41b8a77a28d61da751b456c6015cfb0f03034f43579652fdd035754d91435a13f233f36cde2e4ac7b4c3453c74871ba8a9a94e766e70ab8f56eda617c880bad9d4751c754a80da3d157c80e99646f5ed569f1c3800ab5449d51d41df26a7ac1332726736294631daa63fd577c0ec33db5fd6a78fbbd6445ddb85cad231021bf5ea541359bd1e810881a8ac63e707dcf7da04d5ab94ad66d26359b4df055cdfc6763452069e7bdb280e825023e11a6bee93f967",
+        "7": "0x854fff3f3338858be0e42876ad8fd7340b518693c60e7367d5e65c2d5ccc963e41e8f2ab23226d4a62bedaa825ec8cc89275c4223221933fede01f4dc74868633aee65180f6939038802a3662dd1831ae78cd5d0aa24fcfd57fc8daeba0a87f92327d5d66b6b8f8d16d988c176d9387f3570daf9b7a1ba42c9d515b6679e098e6d5488ac3e242381de0e57e0279a16f34f67ad446e2b1500d4b74ae88aa08665ab25ab0946ee1637a5dd9cffefd7ff5e7ea362b5704be2e99c454d94e2135ce6673fc26df05dded6f4095e98606e8f9e073fa54c8e48a30fe790303803f2fe62edd79d2469756be06ef23a51c9089343b2bac0c9213f5d9b633d9d07c6de1be5"
+      },
+      "threshold": 4
+    },
     "deterministic_artifact_keys": true,
     "operator_processes": 7,
     "signed_bindings": [
@@ -4849,6 +4930,7 @@
       }
     ],
     "source_inventory": {
+      "certificate_schema_sha256": "9d25fb5fe06e94aba4f2456d77a76da452f1ce1dbd23e59e1133edb4d25f3ed5",
       "critical_call_sites": {
         "Popen": [
           "run_positive_certificate.py:start_operators"
@@ -4876,6 +4958,7 @@
         "subprocess",
         "web3"
       ],
+      "independent_verifier_sha256": "98ab72ad87bbe65e5e94a41799332bc70af05ade64ae8acd15e442cdb2fa9fbe",
       "module_sha256": {
         "runtime/ptr_v3/__init__.py": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
         "runtime/ptr_v3/coordinator.py": "8c2dc5025fc46be9822924f89f805d89742ca8e9f19a4a50c95f98a239c483c9",
@@ -4885,7 +4968,7 @@
         "runtime/ptr_v3/operator_server.py": "8289b4a914957fea4b78b1c3c4e89f75a512534eb9753d3eab8b6e6ae770f589",
         "runtime/ptr_v3/utils.py": "22bc6692bc86cb07f2c34c17edd664a3722d5914548ae832117b75fd8f357c33"
       },
-      "runner_sha256": "4aabe977708e7865081c2e0df0aeba0576a00f286fa4f2ba0ccfd5a86a2ba8e8",
+      "runner_sha256": "10421957cf2f228136ad280c7cb988bd146ea999eabe4a5e0d7f67e3213a82a4",
       "runtime_source_digest": "55c9413190812b304883dc873dcbec12c6fce7c5f2a3cce60e11c606f13f3476",
       "served_http_routes": [
         "POST /respond",
@@ -4894,6 +4977,6 @@
     },
     "threshold": 4
   },
-  "schema": "ope-controlled-positive-process-certificate/v1",
-  "verdict": "PROCESS-LEVEL-CERTIFIED(4)"
+  "schema": "ope-controlled-positive-process-certificate/v2",
+  "verdict": "AUTHENTICATED-RELATIVE-PROCESS-CERTIFIED(4)"
 }

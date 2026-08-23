@@ -1,0 +1,50 @@
+{
+  "C_minimum_cover_coalition": {
+    "coalition": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "execution_floor": 10,
+    "gateway_accepted": true,
+    "rejections": [],
+    "responses_received": 4,
+    "status": "CERTIFIED",
+    "threshold_reached": true,
+    "usable_plaintext_released": true
+  },
+  "D_alternative_coalition": {
+    "coalition": [
+      1,
+      2,
+      3,
+      5
+    ],
+    "gateway_accepted": true,
+    "responses_received": 4,
+    "status": "CERTIFIED",
+    "threshold_reached": true,
+    "usable_plaintext_released": true
+  },
+  "checks": {
+    "floor_recovered": true,
+    "host2_reachable_again": true,
+    "new_order_succeeds": true
+  },
+  "host2_unreachable": false,
+  "reachable": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true,
+    "5": true,
+    "6": true,
+    "7": true
+  },
+  "schema": "paid-threshold-response-two-host-outage/v5",
+  "source_binding": {
+    "canonical_result_sha256": "61CE2F1573154EBBCF21B854E9F9CC0BD831530B8ACD3C4BC8C5A101DC231FE5",
+    "code_manifest_sha256": "49DCDDF87FFB94654EB1D5788BD132600B2D2C63BACCFEE36D2552A1C5C0B2F2"
+  }
+}

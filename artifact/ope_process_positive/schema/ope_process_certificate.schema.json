@@ -1,0 +1,288 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://artifact.invalid/schemas/ope-process-certificate-v2.json",
+  "title": "Authenticated relative-process OPE certificate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "verdict",
+    "claim",
+    "model",
+    "p1_p5",
+    "cost",
+    "route_coverage",
+    "return_interface",
+    "runtime",
+    "routes",
+    "mutations",
+    "limitations",
+    "inputs"
+  ],
+  "properties": {
+    "schema": {"const": "ope-controlled-positive-process-certificate/v2"},
+    "verdict": {"const": "AUTHENTICATED-RELATIVE-PROCESS-CERTIFIED(4)"},
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["claim_type", "quantity", "scope", "attacker_role", "accounting_unit"],
+      "properties": {
+        "claim_type": {"const": "authenticated-relative-process-cost"},
+        "quantity": {"type": "string", "minLength": 1},
+        "scope": {"type": "string", "minLength": 1},
+        "attacker_role": {"$ref": "#/$defs/address"},
+        "accounting_unit": {"type": "string", "minLength": 1}
+      }
+    },
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["control_boundary", "real_success_histories", "checked_routes", "observation_projection", "p5_completeness"],
+      "properties": {
+        "control_boundary": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["attacker", "included_identities", "closure_rule", "excluded_service_controller", "excluded_committee_members", "internal_transfer_treatment"],
+          "properties": {
+            "attacker": {"$ref": "#/$defs/address"},
+            "included_identities": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/address"}},
+            "closure_rule": {"type": "string", "minLength": 1},
+            "excluded_service_controller": {"$ref": "#/$defs/address"},
+            "excluded_committee_members": {"type": "array", "minItems": 7, "maxItems": 7, "uniqueItems": true, "items": {"$ref": "#/$defs/address"}},
+            "internal_transfer_treatment": {"type": "string", "minLength": 1}
+          }
+        },
+        "real_success_histories": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["domain", "success_event", "represented_history_count"],
+          "properties": {
+            "domain": {"type": "string", "minLength": 1},
+            "success_event": {"type": "string", "minLength": 1},
+            "represented_history_count": {"const": 35}
+          }
+        },
+        "checked_routes": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["domain", "route_count", "whole_process_routes"],
+          "properties": {
+            "domain": {"type": "string", "minLength": 1},
+            "route_count": {"const": 35},
+            "whole_process_routes": {"const": true}
+          }
+        },
+        "observation_projection": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["observer", "fields"],
+          "properties": {
+            "observer": {"type": "string", "minLength": 1},
+            "fields": {"type": "array", "minItems": 6, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+          }
+        },
+        "p5_completeness": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["forward_totality", "whole_process_reverse_replay", "same_session_state_continuity", "cost_preservation", "minimum_equality_not_assumed"],
+          "properties": {
+            "forward_totality": {"const": true},
+            "whole_process_reverse_replay": {"const": true},
+            "same_session_state_continuity": {"const": true},
+            "cost_preservation": {"const": true},
+            "minimum_equality_not_assumed": {"const": true}
+          }
+        }
+      }
+    },
+    "p1_p5": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["P1", "P2", "P3", "P4", "P5"],
+      "properties": {
+        "P1": {"$ref": "#/$defs/gate"},
+        "P2": {"$ref": "#/$defs/gate"},
+        "P3": {"$ref": "#/$defs/gate"},
+        "P4": {"$ref": "#/$defs/gate"},
+        "P5": {"$ref": "#/$defs/gate"}
+      }
+    },
+    "cost": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contract_minimum_units", "process_minimum_units", "process_maximum_units", "all_returns_to_attacker_units", "minimum_attained"],
+      "properties": {
+        "contract_minimum_units": {"const": 4},
+        "process_minimum_units": {"const": 4},
+        "process_maximum_units": {"type": "integer", "minimum": 4},
+        "all_returns_to_attacker_units": {"const": 0},
+        "minimum_attained": {"const": true}
+      }
+    },
+    "route_coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["forward_routes", "reverse_replayed_routes", "terminal_choices", "contract_certificate_binding"],
+      "properties": {
+        "forward_routes": {"const": 35},
+        "reverse_replayed_routes": {"const": 35},
+        "terminal_choices": {"const": 35},
+        "contract_certificate_binding": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["source_schema", "source_records_sha256", "fixed_root_forward_routes", "fixed_root_reverse_routes", "full_contract_forward_routes", "full_contract_reverse_routes"],
+          "properties": {
+            "source_schema": {"const": "fc-c6-b5-completeness-certificate/v1"},
+            "source_records_sha256": {"$ref": "#/$defs/sha256"},
+            "fixed_root_forward_routes": {"const": 35},
+            "fixed_root_reverse_routes": {"const": 35},
+            "full_contract_forward_routes": {"const": 4095},
+            "full_contract_reverse_routes": {"const": 4095}
+          }
+        }
+      }
+    },
+    "return_interface": {"type": "object"},
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operator_processes", "threshold", "committee", "signed_bindings", "source_inventory", "deterministic_artifact_keys"],
+      "properties": {
+        "operator_processes": {"const": 7},
+        "threshold": {"const": 4},
+        "committee": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["committee_size", "threshold", "public_key", "public_shares", "network_public_keys", "operator_hosts"],
+          "properties": {
+            "committee_size": {"const": 7},
+            "threshold": {"const": 4},
+            "public_key": {"$ref": "#/$defs/hex"},
+            "public_shares": {"$ref": "#/$defs/sevenHexMap"},
+            "network_public_keys": {"$ref": "#/$defs/sevenHexMap"},
+            "operator_hosts": {"$ref": "#/$defs/sevenStringMap"}
+          }
+        },
+        "signed_bindings": {"type": "array", "minItems": 7, "maxItems": 7, "items": {"$ref": "#/$defs/binding"}},
+        "source_inventory": {"type": "object"},
+        "deterministic_artifact_keys": {"const": true}
+      }
+    },
+    "routes": {"type": "array", "minItems": 35, "maxItems": 35, "items": {"$ref": "#/$defs/route"}},
+    "mutations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["executable", "gate_and_accounting"],
+      "properties": {
+        "executable": {"$ref": "#/$defs/booleanMap"},
+        "gate_and_accounting": {"$ref": "#/$defs/booleanMap"}
+      }
+    },
+    "limitations": {"type": "array", "minItems": 5, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "inputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ope_routes_sha256", "c6_certificate_sha256"],
+      "properties": {
+        "ope_routes_sha256": {"$ref": "#/$defs/sha256"},
+        "c6_certificate_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    }
+  },
+  "$defs": {
+    "address": {"type": "string", "pattern": "^0x[0-9a-f]{40}$"},
+    "hex": {"type": "string", "pattern": "^0x[0-9a-f]+$"},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "evidence"],
+      "properties": {"status": {"const": "PASS"}, "evidence": {"type": "string", "minLength": 1}}
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["r", "s"],
+      "properties": {"r": {"$ref": "#/$defs/hex"}, "s": {"$ref": "#/$defs/hex"}}
+    },
+    "proof": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["a1", "a2", "z"],
+      "properties": {"a1": {"$ref": "#/$defs/hex"}, "a2": {"$ref": "#/$defs/hex"}, "z": {"$ref": "#/$defs/hex"}}
+    },
+    "binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "member_index", "member_address", "operator_id", "host_id", "network_public_key", "operator_registry_digest", "ope_runtime_bytecode_keccak256", "signature"],
+      "properties": {
+        "schema": {"const": "ope-member-operator-binding/v16"},
+        "member_index": {"type": "integer", "minimum": 0, "maximum": 6},
+        "member_address": {"$ref": "#/$defs/address"},
+        "operator_id": {"type": "integer", "minimum": 1, "maximum": 7},
+        "host_id": {"type": "string", "minLength": 1},
+        "network_public_key": {"$ref": "#/$defs/hex"},
+        "operator_registry_digest": {"$ref": "#/$defs/sha256"},
+        "ope_runtime_bytecode_keccak256": {"$ref": "#/$defs/hex"},
+        "signature": {"$ref": "#/$defs/signature"}
+      }
+    },
+    "response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["protocol_version", "operator_id", "host_id", "order_id", "buyer", "resource", "epoch", "nonce", "partial_decryption", "chaum_pedersen_proof", "partial_hash", "proof_hash", "operator_signature", "runtime_source_digest"],
+      "properties": {
+        "protocol_version": {"const": "ptr-two-host/v5"},
+        "operator_id": {"type": "integer", "minimum": 1, "maximum": 7},
+        "host_id": {"type": "string", "minLength": 1},
+        "order_id": {"type": "string", "minLength": 1},
+        "buyer": {"$ref": "#/$defs/address"},
+        "resource": {"type": "string", "minLength": 1},
+        "epoch": {"type": "integer", "minimum": 0},
+        "nonce": {"type": "string", "pattern": "^[0-9a-f]{32}$"},
+        "partial_decryption": {"$ref": "#/$defs/hex"},
+        "chaum_pedersen_proof": {"$ref": "#/$defs/proof"},
+        "partial_hash": {"$ref": "#/$defs/sha256"},
+        "proof_hash": {"$ref": "#/$defs/sha256"},
+        "operator_signature": {"$ref": "#/$defs/signature"},
+        "runtime_source_digest": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "route": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["route_id", "order_id", "payment_tx_hash", "selected_member_indices", "selected_operator_ids", "contract_cost_units", "process_return_units", "net_attacker_cost_units", "ciphertext", "operator_responses", "delivery", "p1_authenticated_request_and_delivery", "p2_same_session_role_binding", "p3_finality_policy_satisfied", "p4_returns_complete_and_debit_single_use", "p5_complete_route_replayed"],
+      "properties": {
+        "route_id": {"type": "string", "minLength": 1},
+        "order_id": {"type": "string", "minLength": 1},
+        "payment_tx_hash": {"$ref": "#/$defs/hex"},
+        "selected_member_indices": {"type": "array", "minItems": 4, "maxItems": 4, "uniqueItems": true, "items": {"type": "integer", "minimum": 0, "maximum": 6}},
+        "selected_operator_ids": {"type": "array", "minItems": 4, "maxItems": 4, "uniqueItems": true, "items": {"type": "integer", "minimum": 1, "maximum": 7}},
+        "contract_cost_units": {"type": "integer", "minimum": 0},
+        "process_return_units": {"type": "integer", "minimum": 0},
+        "net_attacker_cost_units": {"type": "integer", "minimum": 0},
+        "ciphertext": {"type": "object"},
+        "operator_responses": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"$ref": "#/$defs/response"}},
+        "delivery": {"type": "object"},
+        "p1_authenticated_request_and_delivery": {"const": true},
+        "p2_same_session_role_binding": {"const": true},
+        "p3_finality_policy_satisfied": {"const": true},
+        "p4_returns_complete_and_debit_single_use": {"const": true},
+        "p5_complete_route_replayed": {"const": true}
+      }
+    },
+    "booleanMap": {"type": "object", "minProperties": 1, "additionalProperties": {"const": true}},
+    "sevenHexMap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["1", "2", "3", "4", "5", "6", "7"],
+      "properties": {"1": {"$ref": "#/$defs/hex"}, "2": {"$ref": "#/$defs/hex"}, "3": {"$ref": "#/$defs/hex"}, "4": {"$ref": "#/$defs/hex"}, "5": {"$ref": "#/$defs/hex"}, "6": {"$ref": "#/$defs/hex"}, "7": {"$ref": "#/$defs/hex"}}
+    },
+    "sevenStringMap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["1", "2", "3", "4", "5", "6", "7"],
+      "properties": {"1": {"type": "string"}, "2": {"type": "string"}, "3": {"type": "string"}, "4": {"type": "string"}, "5": {"type": "string"}, "6": {"type": "string"}, "7": {"type": "string"}}
+    }
+  }
+}

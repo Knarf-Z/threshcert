@@ -41,8 +41,11 @@ def main() -> None:
         "--verify",
         cwd=POSITIVE,
     )
+    run(sys.executable, "verify_process_certificate.py", cwd=POSITIVE)
+    run(sys.executable, "benchmark_certificate_verifier.py", "--verify", cwd=POSITIVE)
     if args.full_core:
         run(sys.executable, "reproduce_v77.py")
+    print("V16_AUTHENTICATED_RELATIVE_PROCESS_CERTIFICATE=PASS")
     print("V16_OPE_PROCESS_CERTIFICATE=PASS")
 
 

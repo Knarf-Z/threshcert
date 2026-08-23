@@ -1,0 +1,62 @@
+{
+  "C_minimum_cover_coalition": {
+    "coalition": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "execution_floor": 0,
+    "gateway_accepted": false,
+    "rejections": [
+      {
+        "operator_id": 2,
+        "reason": "transport failure: URLError"
+      },
+      {
+        "operator_id": 4,
+        "reason": "transport failure: URLError"
+      }
+    ],
+    "responses_received": 2,
+    "status": "REFUTED",
+    "threshold_reached": false,
+    "usable_plaintext_released": false
+  },
+  "D_alternative_coalition": {
+    "coalition": [
+      1,
+      2,
+      3,
+      5
+    ],
+    "gateway_accepted": false,
+    "responses_received": 3,
+    "status": "REFUTED",
+    "threshold_reached": false,
+    "usable_plaintext_released": false
+  },
+  "checks": {
+    "alternative_coalition_also_fails": true,
+    "gateway_refused": true,
+    "host2_confirmed_unreachable": true,
+    "no_local_substitution": true,
+    "no_usable_plaintext_release": true,
+    "threshold_not_reached": true
+  },
+  "host2_unreachable": true,
+  "reachable": {
+    "1": true,
+    "2": false,
+    "3": true,
+    "4": false,
+    "5": true,
+    "6": false,
+    "7": false
+  },
+  "schema": "paid-threshold-response-two-host-outage/v5",
+  "source_binding": {
+    "canonical_result_sha256": "61CE2F1573154EBBCF21B854E9F9CC0BD831530B8ACD3C4BC8C5A101DC231FE5",
+    "code_manifest_sha256": "49DCDDF87FFB94654EB1D5788BD132600B2D2C63BACCFEE36D2552A1C5C0B2F2"
+  }
+}

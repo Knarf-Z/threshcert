@@ -1,0 +1,79 @@
+{
+  "baseline_manifest_sha256": "49DCDDF87FFB94654EB1D5788BD132600B2D2C63BACCFEE36D2552A1C5C0B2F2",
+  "baseline_status": "PASS",
+  "caught": 6,
+  "mutations": [
+    {
+      "caught": true,
+      "expected_target_check": "FILE_HASHES_EXACT",
+      "failed_checks": [
+        "FILE_HASHES_EXACT"
+      ],
+      "mutation": "byte_hash_drift",
+      "overall_status": "FAIL",
+      "target_failed": true
+    },
+    {
+      "caught": true,
+      "expected_target_check": "FILE_SET_EXACT",
+      "failed_checks": [
+        "FILE_SET_EXACT"
+      ],
+      "mutation": "undeclared_runtime_file",
+      "overall_status": "FAIL",
+      "target_failed": true
+    },
+    {
+      "caught": true,
+      "expected_target_check": "SURFACE_HTTP_ROUTES_EXACT",
+      "failed_checks": [
+        "EXPECTED_PUBLIC_ROUTES_EXACT",
+        "FILE_HASHES_EXACT",
+        "SURFACE_HANDLER_METHODS_EXACT",
+        "SURFACE_HTTP_ROUTES_EXACT",
+        "SURFACE_PRODUCER_SEND_SITES_EXACT",
+        "SURFACE_SERVER_SITES_EXACT"
+      ],
+      "mutation": "undeclared_http_route",
+      "overall_status": "FAIL",
+      "target_failed": true
+    },
+    {
+      "caught": true,
+      "expected_target_check": "NO_DYNAMIC_EXEC",
+      "failed_checks": [
+        "FILE_HASHES_EXACT",
+        "NO_DYNAMIC_EXEC",
+        "SURFACE_DYNAMIC_EXEC_SITES_EXACT"
+      ],
+      "mutation": "dynamic_exec",
+      "overall_status": "FAIL",
+      "target_failed": true
+    },
+    {
+      "caught": true,
+      "expected_target_check": "SURFACE_SERVER_SITES_EXACT",
+      "failed_checks": [
+        "FILE_HASHES_EXACT",
+        "SURFACE_SERVER_SITES_EXACT"
+      ],
+      "mutation": "secondary_listener",
+      "overall_status": "FAIL",
+      "target_failed": true
+    },
+    {
+      "caught": true,
+      "expected_target_check": "SURFACE_POWERSHELL_SENSITIVE_SITES_EXACT",
+      "failed_checks": [
+        "FILE_HASHES_EXACT",
+        "SURFACE_POWERSHELL_SENSITIVE_SITES_EXACT"
+      ],
+      "mutation": "powershell_dynamic_execution",
+      "overall_status": "FAIL",
+      "target_failed": true
+    }
+  ],
+  "schema": "ptr-code-manifest-mutation-matrix/v1",
+  "status": "PASS",
+  "total": 6
+}

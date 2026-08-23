@@ -119,7 +119,16 @@ defines every experiment and its interpretation boundary.
   with seven operator HTTP processes, 35/35 fixed-root routes, EIP-191 buyer
   authentication, six-confirmation finality, four verified responses per
   route, commitment-valid delivery, closed return interfaces, and verdict
-  `PROCESS-LEVEL-CERTIFIED(4)`.
+  `AUTHENTICATED-RELATIVE-PROCESS-CERTIFIED(4)`.
+- `artifact/paid_threshold_response_two_host_v6/`: the verified,
+  privacy-scrubbed public release of the earlier controlled two-host
+  integration, including frozen source, tests, certificate checkers, and
+  canonical evidence. Its finite-language value of 10 is supplementary and
+  is not the current OPE relative-process result.
+- `artifact/fc_experiment_upgrade_v4_2/`: the preserved v4.2 experiment suite
+  for pinned and longitudinal Keyper-set audits, atomic bypass,
+  replacement-hull classification, and evidence sensitivity. It is retained
+  for completeness and is not presented as new production evidence.
 
 ## Reproduce
 
@@ -130,12 +139,61 @@ process certificate, run:
 python reproduce_v16_experiments.py
 ```
 
-Expected final line: `V16_OPE_PROCESS_CERTIFICATE=PASS`. This regenerates all
+Expected final lines include `V16_AUTHENTICATED_RELATIVE_PROCESS_CERTIFICATE=PASS`. This regenerates all
 35 fixed-configuration OPE executions, verifies 35 buyer signatures, starts
 seven operator processes, verifies 140 threshold responses, replays all 35
 complete process routes, and checks the negative controls. The claim is
 relative to the admitted local composition; it is not a production or
 deployment-global attacker-cost claim.
+
+The current machine verdict is explicitly narrowed to:
+
+```text
+AUTHENTICATED-RELATIVE-PROCESS-CERTIFIED(4)
+```
+
+The same command validates the public JSON Schema, runs the separately written
+standard-library verifier, and checks the committed size/scaling benchmark.
+The verifier can also be run directly:
+
+```bash
+python artifact/ope_process_positive/verify_process_certificate.py
+python artifact/ope_process_positive/benchmark_certificate_verifier.py --verify
+```
+
+The two supplementary packages have independent checks. Verify the scrubbed
+two-host archive and its source tests with:
+
+```bash
+python artifact/paid_threshold_response_two_host_v6/extracted/project/scripts/export_public_release.py --verify-only artifact/paid_threshold_response_two_host_v6/frozen/two_host_execution_evidence.v68.public.zip
+python artifact/paid_threshold_response_two_host_v6/run_public_tests.py
+```
+
+On Windows, rerun the preserved FC v4.2 suite with:
+
+```powershell
+cd artifact\fc_experiment_upgrade_v4_2
+.\setup.ps1
+.\run_all.ps1
+```
+
+Its optional live historical audit performs read-only RPC calls; the default
+run uses the committed fixture and requires no network access. The apparent
+values 4 and 10 belong to different claim domains; see
+`artifact/COST_DOMAIN_REGISTRY.json`.
+
+Build and verify the author-free review bundle with:
+
+```bash
+python build_anonymous_artifact_v16.py
+python build_anonymous_artifact_v16.py --verify-only
+```
+
+The resulting `artifact/anonymous_v16/anonymous_v16_artifact.zip` contains a
+standalone `reproduce.py`, an internal SHA-256 manifest, and no manuscript,
+citation metadata, repository history, account credentials, or private host
+material. Hosting the ZIP on the review venue is still required for genuinely
+anonymous distribution; the named GitHub repository itself is not anonymous.
 
 For the v77 review certificate, run the single public entry below. It checks
 the committed manifests, installs the locked EVM dependencies, and executes

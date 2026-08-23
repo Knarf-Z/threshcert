@@ -1,9 +1,9 @@
 # ThreshCert artifact changelog
 
-## 2026-08-22 v16 positive OPE process certificate
+## 2026-08-23 v16 authenticated relative-process certificate
 
 - Added a nontrivial executable OPE composition that satisfies P1-P5 and
-  reports the exact relative verdict `PROCESS-LEVEL-CERTIFIED(4)`.
+  reports `AUTHENTICATED-RELATIVE-PROCESS-CERTIFIED(4)`.
 - Executed all 35 terminal choices for the fixed C6 root with EIP-191 buyer
   authentication, exact attacker payments, six-confirmation local finality,
   seven operator processes, four signed/proved responses per route, and
@@ -13,6 +13,10 @@
   `4..8`.
 - Added closed return/single-use checks, `4/4` executable mutations, `7/7`
   gate/accounting mutations, one-command reproduction, and focused CI.
+- Added a public JSON Schema, a separately written standard-library verifier,
+  the deterministic v2 certificate, certificate-size and 1/5/10/20/35-route
+  verification scaling measurements, and an author-free review ZIP with an
+  internal SHA-256 manifest.
 - Kept the claim relative to the admitted controlled composition. The
   deployment-global verdict remains `UNKNOWN`, and no manuscript source or PDF
   is included.

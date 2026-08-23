@@ -13,6 +13,7 @@ MANIFEST = ROOT / "MANIFEST.sha256"
 IGNORED_PARTS = {
     ".git",
     "__pycache__",
+    ".pytest_cache",
     ".idea",
     ".venv",
     "venv",

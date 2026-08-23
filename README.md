@@ -1,16 +1,24 @@
 # ThreshCert complete experiment bundle
 
-ThreshCert is a reproducible artifact for threshold attack-cost certificates,
-activation-aware evidence acquisition, coordinated defense, and
-evidence-gated slashing. This complete bundle contains a pinned production
-deployment evidence audit, all original certificate, activation, allocation,
-exact-solver, defense-lattice, Möbius, penalty-evidence, Dune/GPv2, and public
-Chiado pilot materials, the generalized committee-shape and boundary-parameter
-sweeps, and a separately written from-scratch reimplementation produced
-within the authoring process. It can expose transcription errors but is not an
-independent replication. The three added scalability, parameter-sensitivity,
-and baseline-comparison studies remain isolated in `extended_experiments/`,
-so reproducing them does not overwrite the original experiment results.
+ThreshCert is a reproducible artifact for distinguishing a contract charge
+from the requesting attacker's authenticated relative-process net cost. The
+current main result is a controlled positive certificate over one fixed
+threshold-service composition:
+
+```text
+AUTHENTICATED-RELATIVE-PROCESS-CERTIFIED(4)
+```
+
+The result covers all 35 admitted successful routes through first
+commitment-valid plaintext delivery. It is relative to the declared local
+control boundary, settlement closure, runtime, and route language. It is not a
+production-wide, Internet-wide, or unconditional economic-cost claim.
+
+The repository also preserves the production evidence audit, controlled
+countermodels, public Chiado records, finite-language experiments, exact
+solvers, defense studies, and earlier integration packages. Preserved packages
+remain separated from the current result so that their different claim domains
+and accounting units are not conflated.
 
 Authors: Jiaqi Zhang
 ([ORCID 0009-0005-3271-3106](https://orcid.org/0009-0005-3271-3106)) and
@@ -19,13 +27,47 @@ Honghao Fu
 See `CITATION.cff` for machine-readable citation metadata and `HARDENING.md`
 for how the verification layers fit together.
 
-It intentionally excludes virtual environments, IDE metadata, `.env` files,
-and secrets.
+It intentionally excludes manuscript sources, virtual environments, IDE
+metadata, `.env` files, private keys, dealer seeds, private host material, and
+raw execution secrets.
 
 `RESULTS_SUMMARY.md` gives the compact reproduced findings. `EXPERIMENTS.md`
 defines every experiment and its interpretation boundary.
 
+## Current auditable release
+
+The v2 process certificate exposes the review-critical objects as
+machine-readable data rather than prose-only assertions:
+
+| Review requirement | Public artifact |
+| --- | --- |
+| Narrow claim | `claim_type=authenticated-relative-process-cost` and the exact quantity are stored in the v2 certificate. |
+| Declared process model | The certificate records the attacker control boundary, represented real-success histories, checked routes, and the observation projection corresponding to `Ctrl(A)`, `H_real`, `R_Theta`, and `Obs_J`. |
+| P5 completeness | Forward totality, whole-process reverse replay, same-session continuity, and cost preservation are explicit fields; minimum equality is not accepted as a premise. |
+| Machine-readable certificate | `artifact/ope_process_positive/schema/ope_process_certificate.schema.json` defines the public JSON format. |
+| Independent checking | `artifact/ope_process_positive/verify_process_certificate.py` uses only the Python standard library and does not import the generator or runtime implementation. |
+| Cost-domain consistency | `artifact/COST_DOMAIN_REGISTRY.json` explains why the current value 4 and historical value 10 are from different, non-comparable domains. |
+| Size and scaling | `artifact/ope_process_positive/results/verifier_benchmark.v1.json` reports the 625,243-byte certificate and 1/5/10/20/35-route verification measurements. Prefix measurements are explicitly non-certifying. |
+| Anonymous review package | `artifact/anonymous_v16/anonymous_v16_artifact.zip` contains an author-free review bundle with its own manifest and one-command reproduction entry. |
+
+The independent verifier checks 35/35 routes, 140/140 operator signatures,
+140/140 Chaum--Pedersen proofs, threshold reconstruction, delivery,
+settlement-linked accounting, source bindings, and the committed negative
+controls. The mathematical definitions still belong in the paper; this
+repository provides their executable representation and audit trail.
+
+Quick verification from the repository root:
+
+```bash
+python reproduce_v16_experiments.py
+```
+
+The anonymous ZIP currently has SHA-256
+`ccaf4b717f20ade9b439ff243a5bcfe878f6d7e1311c3b1c9df92c9462db7f01`.
+The named GitHub repository is not itself an anonymous submission channel.
+
 ## Contents
+
 - `scripts/run_floor_admission_experiment.py`: rejects unsupported or inflated
   floor reports and admits only member-bound, automatically forfeitable value
   net of certified recovery and reimbursement caps; it records seven scenarios,

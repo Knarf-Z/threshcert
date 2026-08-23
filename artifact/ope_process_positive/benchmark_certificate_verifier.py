@@ -21,7 +21,7 @@ from verify_process_certificate import CERTIFICATE_PATH, SCHEMA_PATH, verify_cer
 
 
 HERE = Path(__file__).resolve().parent
-RESULT_PATH = HERE / "results" / "verifier_benchmark.v1.json"
+RESULT_PATH = HERE / "results" / "verifier_benchmark.v2.json"
 ROUTE_COUNTS = (1, 5, 10, 20, 35)
 
 
@@ -67,10 +67,10 @@ def measure(repeats: int) -> dict[str, Any]:
             }
         )
     return {
-        "schema": "ope-process-independent-verifier-benchmark/v1",
-        "claim_type": "authenticated-relative-process-cost",
+        "schema": "ope-process-independent-verifier-benchmark/v2",
+        "claim_type": "boundary-complete-authenticated-relative-process-cost",
         "certificate": {
-            "path": "artifact/ope_process_positive/results/ope_process_positive.v2.json",
+            "path": "artifact/ope_process_positive/results/ope_process_positive.v3.json",
             "sha256": file_sha256(CERTIFICATE_PATH),
             "bytes": CERTIFICATE_PATH.stat().st_size,
             "declared_routes": len(certificate["routes"]),
@@ -113,7 +113,7 @@ def measure(repeats: int) -> dict[str, Any]:
 
 
 def validate_committed(committed: dict[str, Any], current: dict[str, Any]) -> None:
-    if committed["schema"] != "ope-process-independent-verifier-benchmark/v1":
+    if committed["schema"] != "ope-process-independent-verifier-benchmark/v2":
         raise ValueError("benchmark schema mismatch")
     if committed["certificate"]["sha256"] != current["certificate"]["sha256"]:
         raise ValueError("benchmark is bound to a different certificate")

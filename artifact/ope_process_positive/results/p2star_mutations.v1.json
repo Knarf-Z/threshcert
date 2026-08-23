@@ -1,0 +1,66 @@
+{
+  "all_rejected": true,
+  "certificate_sha256": "1463614de57c327419c795d348d15c7cc682b8ca7edcfaef1d63a9cd03a638f2",
+  "checker_sha256": "c40019f5ba25dbfd41a9364443fe7f4404f77ba52661253b527193fbf63731e3",
+  "mutation_count": 8,
+  "positive_verdict": "RELATIVE-PROCESS-CERTIFIED(4)",
+  "results": {
+    "add_cross_session_reuse": {
+      "expected_reason": "P2STAR_ROUTE_DEBIT_BINDING_MISMATCH",
+      "expected_verdict": "BOUNDARY-UNKNOWN",
+      "observed_reason": "P2STAR_ROUTE_DEBIT_BINDING_MISMATCH",
+      "observed_verdict": "BOUNDARY-UNKNOWN",
+      "rejected": true
+    },
+    "change_attainment_cost": {
+      "expected_reason": "ATTAINMENT_COST_MISMATCH",
+      "expected_verdict": "LOWER-BOUND-CERTIFIED(4)",
+      "observed_reason": "ATTAINMENT_COST_MISMATCH",
+      "observed_verdict": "LOWER-BOUND-CERTIFIED(4)",
+      "rejected": true
+    },
+    "change_settlement_horizon": {
+      "expected_reason": "P2STAR_HORIZON_MANIFEST_MISMATCH",
+      "expected_verdict": "BOUNDARY-UNKNOWN",
+      "observed_reason": "P2STAR_HORIZON_MANIFEST_MISMATCH",
+      "observed_verdict": "BOUNDARY-UNKNOWN",
+      "rejected": true
+    },
+    "delete_control_account": {
+      "expected_reason": "P2STAR_CONTROL_MANIFEST_MISMATCH",
+      "expected_verdict": "BOUNDARY-UNKNOWN",
+      "observed_reason": "P2STAR_CONTROL_MANIFEST_MISMATCH",
+      "observed_verdict": "BOUNDARY-UNKNOWN",
+      "rejected": true
+    },
+    "delete_successful_route": {
+      "expected_reason": "P5F_ROUTE_SET_INCOMPLETE",
+      "expected_verdict": "EXACTNESS-NOT-ESTABLISHED",
+      "observed_reason": "P5F_ROUTE_SET_INCOMPLETE",
+      "observed_verdict": "EXACTNESS-NOT-ESTABLISHED",
+      "rejected": true
+    },
+    "hide_attacker_funding_path": {
+      "expected_reason": "P2STAR_ACQUISITION_LINK_MANIFEST_MISMATCH",
+      "expected_verdict": "BOUNDARY-UNKNOWN",
+      "observed_reason": "P2STAR_ACQUISITION_LINK_MANIFEST_MISMATCH",
+      "observed_verdict": "BOUNDARY-UNKNOWN",
+      "rejected": true
+    },
+    "hide_return_interface": {
+      "expected_reason": "P2STAR_SETTLEMENT_SURFACE_MISMATCH",
+      "expected_verdict": "BOUNDARY-UNKNOWN",
+      "observed_reason": "P2STAR_SETTLEMENT_SURFACE_MISMATCH",
+      "observed_verdict": "BOUNDARY-UNKNOWN",
+      "rejected": true
+    },
+    "splice_two_sessions": {
+      "expected_reason": "P2STAR_ROUTE_SESSION_BINDING_MISMATCH",
+      "expected_verdict": "BOUNDARY-UNKNOWN",
+      "observed_reason": "P2STAR_ROUTE_SESSION_BINDING_MISMATCH",
+      "observed_verdict": "BOUNDARY-UNKNOWN",
+      "rejected": true
+    }
+  },
+  "schema": "ope-p2star-mutation-results/v1"
+}

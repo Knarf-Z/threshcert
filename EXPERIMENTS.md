@@ -339,10 +339,11 @@ Run all three from the repository root with
 `python reproduce_v15_experiments.py`. The entry also checks both manifests and
 all 4,095 C6 records. It performs no public-chain write.
 
-## v16 authenticated relative-process OPE certificate
+## Post-v16 P2-star boundary-complete relative-process OPE certificate
 
-The v16 experiment adds the missing nontrivial positive process result without
-changing the deployment-global verdict.
+This extension adds executable P2-star boundary evidence to the v16 process
+base. It does not change the deployment-global verdict and does not reinterpret
+the legacy v2 certificate as P2-star evidence.
 
 1. The Hardhat capture fixes credits to `(2,0,0,0,2,0,0)`, deploys a fresh
    admitted OPE runtime for each of the 35 four-member terminal choices, sends
@@ -359,14 +360,20 @@ changing the deployment-global verdict.
    records. The executable composition replays the same 35 whole routes and
    preserves every route cost. Their exact authenticated relative-process
    minimum is four.
-4. Executable controls reject receipt/nonce reuse, session swapping, proof
-   tampering, and three-response delivery. Gate/accounting controls reject
-   unauthenticated or pre-finality delivery, omitted return evidence, missing
-   forward/reverse routes, cost tampering, and undeclared cross-session return.
+4. Five manifests cover control, acquisition-linked funding/return paths,
+   settlement surface, reuse namespace, and horizon closure. Every manifest is
+   bound to the scope ID, certificate header, authenticated session set, capture,
+   refinement certificate, source, artifact, and runtime.
+5. Executable controls reject receipt/nonce reuse, session swapping, proof
+   tampering, and three-response delivery. Eight independent mutations alter
+   control, funding, return, reuse, same-session, horizon, P5F route coverage,
+   and attainment cost. The first six return `BOUNDARY-UNKNOWN`; route deletion
+   returns `EXACTNESS-NOT-ESTABLISHED`; attainment tampering retains only
+   `LOWER-BOUND-CERTIFIED(4)`.
 
 Run `python reproduce_v16_experiments.py`. The final verdict is
-`AUTHENTICATED-RELATIVE-PROCESS-CERTIFIED(4)` only for the admitted local
-composition.
+`RELATIVE-PROCESS-CERTIFIED(4)` only for the pinned authenticated local
+composition and declared horizon.
 Hardhat finality, deterministic artifact keys, gas exclusion, OS integrity,
 side channels, external transfers, and economic operator independence remain
 explicit limitations.
@@ -374,7 +381,7 @@ explicit limitations.
 ## Supplementary archived experiment packages
 
 Two previously local experiment suites are published for repository
-completeness. They do not change the v16 authenticated relative-process claim.
+completeness. They do not change the current boundary-relative process claim.
 
 1. `artifact/paid_threshold_response_two_host_v6` contains the verified public
    release of a controlled 4-of-7 service divided across two physical Windows

@@ -280,7 +280,7 @@ Python implementation.
   composition below closes that local lift, while the deployment-global verdict
   remains `UNKNOWN`.
 
-## v16 positive OPE process-certificate result
+## Post-v16 P2-star positive OPE process-certificate result
 
 - OPE fixed-root contract routes: `35/35` forward and `35/35` reverse
   records, with exact contract cost range `4..8` units.
@@ -290,19 +290,24 @@ Python implementation.
   commitment-valid plaintext delivery.
 - Buyer authentication: `35/35` EIP-191 signatures recover to the exact
   address that sent the OPE payment.
-- Return/reuse closure in the admitted composition: buyer claimable balance
-  zero, buyer withdrawal and second acquisition rejected on every route, no
+- P2-star boundary evidence: five manifests cover control accounts,
+  acquisition-linked funding/return paths, settlement surface, reuse namespace,
+  and horizon closure; all bind the scope/header and 35 authenticated sessions.
+- Return/reuse closure in that boundary: buyer claimable balance zero, buyer
+  withdrawal and second acquisition rejected on every route, no
   refund/cancel/rebate entry point, no service economic-transfer API, and
   persistent operator nonce rejection.
-- Negative controls: `4/4` executable mutations and `7/7`
-  gate/accounting mutations rejected.
-- Exact authenticated relative-process result: `Gamma_A = 4` and
-  `AUTHENTICATED-RELATIVE-PROCESS-CERTIFIED(4)`.
+- Negative controls: `4/4` service-process mutations and `8/8` independently
+  executed semantic certificate mutations rejected: six boundary failures, one
+  P5F exactness failure, and one attainment-to-lower-bound downgrade.
+- Exact boundary-relative result: `Gamma_A = 4`, a replayable `Attain(4)`, and
+  `RELATIVE-PROCESS-CERTIFIED(4)`.
 - Independent artifact verification: public JSON Schema accepted, 35/35 routes,
   140/140 operator signatures, and 140/140 Chaum--Pedersen proofs verified.
-  The v2 certificate is 625,243 bytes; the committed benchmark reports
+  The v3 certificate is 701,455 bytes; the committed v2 benchmark reports
   1/5/10/20/35-route scaling and labels every prefix as non-certifying.
 - This does not replace the deployment-global `UNKNOWN` verdict. It is a
-  controlled, local, relative process certificate and makes no claim about
-  public-chain finality, undeclared transfers, OS compromise, side channels, or
+  controlled, local, relative process certificate. P2-star is checked against
+  pinned inputs and does not discover activity outside those anchors. The result
+  makes no claim about public-chain finality, OS compromise, side channels, or
   seven economically independent operators.

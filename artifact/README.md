@@ -147,10 +147,12 @@ equality, and the recorded coverage condition.
   admitted OPE runtime with seven real operator HTTP processes, executes all 35
   terminal choices for one fixed C6 root, verifies EIP-191 request
   authentication, six-confirmation finality, four signed/proved responses and
-  commitment-valid delivery, closes declared return and reuse interfaces, and
-  reports `AUTHENTICATED-RELATIVE-PROCESS-CERTIFIED(4)`. Its v2 JSON Schema,
-  independent standard-library verifier, and size/scaling benchmark are stored
-  beside the certificate.
+  commitment-valid delivery, and reports `RELATIVE-PROCESS-CERTIFIED(4)` for a
+  pinned authenticated boundary. Its v3 certificate includes five P2-star
+  manifests, 35 scope/header/session bindings, and `Attain(4)`. The independent
+  standard-library verifier reconstructs those manifests from the capture,
+  refinement certificate and source; six rebound semantic mutations all fail
+  closed. The legacy v2 file remains archival and does not discharge P2-star.
 
 The separate joint-incidence finite-schema check establishes its 117-state by
 exactly-35-terminal product, terminal-family completeness, payment-labelled

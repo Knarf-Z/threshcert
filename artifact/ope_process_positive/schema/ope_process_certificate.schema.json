@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://artifact.invalid/schemas/ope-process-certificate-v2.json",
-  "title": "Authenticated relative-process OPE certificate",
+  "$id": "https://artifact.invalid/schemas/ope-process-certificate-v3.json",
+  "title": "P2-star boundary-complete authenticated relative-process OPE certificate",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -10,6 +10,8 @@
     "claim",
     "model",
     "p1_p5",
+    "boundary",
+    "attainment",
     "cost",
     "route_coverage",
     "return_interface",
@@ -20,14 +22,14 @@
     "inputs"
   ],
   "properties": {
-    "schema": {"const": "ope-controlled-positive-process-certificate/v2"},
-    "verdict": {"const": "AUTHENTICATED-RELATIVE-PROCESS-CERTIFIED(4)"},
+    "schema": {"const": "ope-controlled-positive-process-certificate/v3"},
+    "verdict": {"const": "RELATIVE-PROCESS-CERTIFIED(4)"},
     "claim": {
       "type": "object",
       "additionalProperties": false,
       "required": ["claim_type", "quantity", "scope", "attacker_role", "accounting_unit"],
       "properties": {
-        "claim_type": {"const": "authenticated-relative-process-cost"},
+        "claim_type": {"const": "boundary-complete-authenticated-relative-process-cost"},
         "quantity": {"type": "string", "minLength": 1},
         "scope": {"type": "string", "minLength": 1},
         "attacker_role": {"$ref": "#/$defs/address"},
@@ -95,13 +97,15 @@
         }
       }
     },
+    "boundary": {"$ref": "#/$defs/boundary"},
+    "attainment": {"$ref": "#/$defs/attainment"},
     "p1_p5": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["P1", "P2", "P3", "P4", "P5"],
+      "required": ["P1", "P2_star", "P3", "P4", "P5"],
       "properties": {
         "P1": {"$ref": "#/$defs/gate"},
-        "P2": {"$ref": "#/$defs/gate"},
+        "P2_star": {"$ref": "#/$defs/gate"},
         "P3": {"$ref": "#/$defs/gate"},
         "P4": {"$ref": "#/$defs/gate"},
         "P5": {"$ref": "#/$defs/gate"}
@@ -172,25 +176,139 @@
     "mutations": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["executable", "gate_and_accounting"],
+      "required": ["executable", "p2star_checker_result"],
       "properties": {
         "executable": {"$ref": "#/$defs/booleanMap"},
-        "gate_and_accounting": {"$ref": "#/$defs/booleanMap"}
+        "p2star_checker_result": {"const": "results/p2star_mutations.v1.json"}
       }
     },
     "limitations": {"type": "array", "minItems": 5, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
     "inputs": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["ope_routes_sha256", "c6_certificate_sha256"],
+      "required": ["ope_routes_sha256", "c6_certificate_sha256", "refinement_certificate_sha256", "contract_source_sha256"],
       "properties": {
         "ope_routes_sha256": {"$ref": "#/$defs/sha256"},
-        "c6_certificate_sha256": {"$ref": "#/$defs/sha256"}
+        "c6_certificate_sha256": {"$ref": "#/$defs/sha256"},
+        "refinement_certificate_sha256": {"$ref": "#/$defs/sha256"},
+        "contract_source_sha256": {"$ref": "#/$defs/sha256"}
       }
     }
   },
   "$defs": {
     "address": {"type": "string", "pattern": "^0x[0-9a-f]{40}$"},
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["header", "manifests", "session_records"],
+      "properties": {
+        "header": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["schema", "scope_id", "scope", "session_set_digest", "manifest_digests", "source_anchors", "settlement_horizon_kind", "header_digest"],
+          "properties": {
+            "schema": {"const": "ope-p2star-header/v1"},
+            "scope_id": {"$ref": "#/$defs/scopeId"},
+            "scope": {"type": "object"},
+            "session_set_digest": {"$ref": "#/$defs/sha256"},
+            "manifest_digests": {"$ref": "#/$defs/manifestDigests"},
+            "source_anchors": {"type": "object"},
+            "settlement_horizon_kind": {"const": "per-session-state-closure"},
+            "header_digest": {"$ref": "#/$defs/sha256"}
+          }
+        },
+        "manifests": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["control", "acquisition_links", "settlement_surface", "reuse_namespace", "horizon"],
+          "properties": {
+            "control": {"$ref": "#/$defs/manifestEnvelope"},
+            "acquisition_links": {"$ref": "#/$defs/manifestEnvelope"},
+            "settlement_surface": {"$ref": "#/$defs/manifestEnvelope"},
+            "reuse_namespace": {"$ref": "#/$defs/manifestEnvelope"},
+            "horizon": {"$ref": "#/$defs/manifestEnvelope"}
+          }
+        },
+        "session_records": {
+          "type": "array",
+          "minItems": 35,
+          "maxItems": 35,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/sessionRecord"}
+        }
+      }
+    },
+    "attainment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "route_id", "session_id", "scope_id", "header_digest", "mandatory_outflow_units", "return_units", "net_cost_units", "typed_transfer_recomputed", "settlement_closed", "single_use_verified", "whole_process_replayed"],
+      "properties": {
+        "kind": {"const": "reverse-replayed-route"},
+        "route_id": {"type": "string", "minLength": 1},
+        "session_id": {"type": "string", "minLength": 1},
+        "scope_id": {"$ref": "#/$defs/scopeId"},
+        "header_digest": {"$ref": "#/$defs/sha256"},
+        "mandatory_outflow_units": {"type": "integer", "minimum": 0},
+        "return_units": {"type": "integer", "minimum": 0},
+        "net_cost_units": {"const": 4},
+        "typed_transfer_recomputed": {"const": true},
+        "settlement_closed": {"const": true},
+        "single_use_verified": {"const": true},
+        "whole_process_replayed": {"const": true}
+      }
+    },
+    "scopeId": {"type": "string", "pattern": "^ope-scope:[0-9a-f]{64}$"},
+    "manifestDigests": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["control", "acquisition_links", "settlement_surface", "reuse_namespace", "horizon"],
+      "properties": {
+        "control": {"$ref": "#/$defs/sha256"},
+        "acquisition_links": {"$ref": "#/$defs/sha256"},
+        "settlement_surface": {"$ref": "#/$defs/sha256"},
+        "reuse_namespace": {"$ref": "#/$defs/sha256"},
+        "horizon": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "manifestEnvelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "scope_id", "header_digest", "session_set_digest", "body_digest", "body"],
+      "properties": {
+        "schema": {"type": "string", "pattern": "^ope-p2star-[a-z-]+-manifest/v1$"},
+        "scope_id": {"$ref": "#/$defs/scopeId"},
+        "header_digest": {"$ref": "#/$defs/sha256"},
+        "session_set_digest": {"$ref": "#/$defs/sha256"},
+        "body_digest": {"$ref": "#/$defs/sha256"},
+        "body": {"type": "object"}
+      }
+    },
+    "sessionRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["session_id", "contract_address", "payment_tx_hash", "horizon_end_block"],
+      "properties": {
+        "session_id": {"type": "string", "minLength": 1},
+        "contract_address": {"$ref": "#/$defs/address"},
+        "payment_tx_hash": {"$ref": "#/$defs/hex"},
+        "horizon_end_block": {"type": "integer", "minimum": 1}
+      }
+    },
+    "p2starBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scope_id", "header_digest", "session_id", "session_set_digest", "manifest_digests", "underlying_debit_id", "horizon_end_block", "settlement_closed"],
+      "properties": {
+        "scope_id": {"$ref": "#/$defs/scopeId"},
+        "header_digest": {"$ref": "#/$defs/sha256"},
+        "session_id": {"type": "string", "minLength": 1},
+        "session_set_digest": {"$ref": "#/$defs/sha256"},
+        "manifest_digests": {"$ref": "#/$defs/manifestDigests"},
+        "underlying_debit_id": {"type": "string", "minLength": 1},
+        "horizon_end_block": {"type": "integer", "minimum": 1},
+        "settlement_closed": {"const": true}
+      }
+    },
     "hex": {"type": "string", "pattern": "^0x[0-9a-f]+$"},
     "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
     "gate": {
@@ -251,7 +369,7 @@
     "route": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["route_id", "order_id", "payment_tx_hash", "selected_member_indices", "selected_operator_ids", "contract_cost_units", "process_return_units", "net_attacker_cost_units", "ciphertext", "operator_responses", "delivery", "p1_authenticated_request_and_delivery", "p2_same_session_role_binding", "p3_finality_policy_satisfied", "p4_returns_complete_and_debit_single_use", "p5_complete_route_replayed"],
+      "required": ["route_id", "order_id", "payment_tx_hash", "selected_member_indices", "selected_operator_ids", "contract_cost_units", "process_return_units", "net_attacker_cost_units", "ciphertext", "operator_responses", "delivery", "p1_authenticated_request_and_delivery", "p2star_boundary_and_session_binding", "p2star_binding", "p3_finality_policy_satisfied", "p4_returns_complete_and_debit_single_use", "p5_complete_route_replayed"],
       "properties": {
         "route_id": {"type": "string", "minLength": 1},
         "order_id": {"type": "string", "minLength": 1},
@@ -265,7 +383,8 @@
         "operator_responses": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"$ref": "#/$defs/response"}},
         "delivery": {"type": "object"},
         "p1_authenticated_request_and_delivery": {"const": true},
-        "p2_same_session_role_binding": {"const": true},
+        "p2star_boundary_and_session_binding": {"const": true},
+        "p2star_binding": {"$ref": "#/$defs/p2starBinding"},
         "p3_finality_policy_satisfied": {"const": true},
         "p4_returns_complete_and_debit_single_use": {"const": true},
         "p5_complete_route_replayed": {"const": true}

@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import argparse
 import ast
-from copy import deepcopy
 from dataclasses import dataclass
 from pathlib import Path
 import shutil
@@ -23,9 +22,11 @@ RUNTIME = HERE / "runtime"
 EVM = REPO / "artifact" / "joint_incidence_refinement"
 ROUTES_PATH = EVM / "results" / "ope_process_routes.v1.json"
 C6_PATH = REPO / "artifact" / "reviewer_revision_v77" / "results" / "completeness_certificates.v1.json"
-RESULT_PATH = HERE / "results" / "ope_process_positive.v2.json"
+RESULT_PATH = HERE / "results" / "ope_process_positive.v3.json"
 SCHEMA_PATH = HERE / "schema" / "ope_process_certificate.schema.json"
 VERIFIER_PATH = HERE / "verify_process_certificate.py"
+REFINEMENT_PATH = EVM / "results" / "refinement_certificate.json"
+CONTRACT_SOURCE_PATH = EVM / "contracts" / "OverlappingPoolEscrow.sol"
 sys.path.insert(0, str(RUNTIME))
 
 from ptr_v3.coordinator import Coordinator, OperatorEndpoint, RejectedResponse  # noqa: E402
@@ -52,6 +53,7 @@ UNIT_WEI = 10**18
 FIXED_CREDITS = [2, 0, 0, 0, 2, 0, 0]
 RESOURCE = "threshold-capability-v16"
 FINALITY_CONFIRMATIONS = 6
+VERDICT = "RELATIVE-PROCESS-CERTIFIED(4)"
 
 
 def require(condition: bool, message: str) -> None:
@@ -236,6 +238,216 @@ def validate_capture(capture: Mapping[str, Any]) -> dict[tuple[int, ...], int]:
         costs[selected] = cost
     require(len(costs) == 35, "duplicate or missing terminal choices")
     return costs
+
+def json_digest(value: Any) -> str:
+    return sha256_hex(canonical_json_bytes(value))
+
+
+def session_id_for_capture_route(route: Mapping[str, Any]) -> str:
+    return f"ope-process:{str(route['payment_transaction']['hash']).lower()}"
+
+
+def debit_id_for_capture_route(capture: Mapping[str, Any], route: Mapping[str, Any]) -> str:
+    return ":".join(
+        [
+            str(capture["chain_id"]),
+            str(route["contract"]["address"]).lower(),
+            str(route["payment_transaction"]["hash"]).lower(),
+        ]
+    )
+
+
+def build_p2star_boundary(
+    capture: Mapping[str, Any],
+    sources: Mapping[str, Any],
+) -> dict[str, Any]:
+    refinement = read_json(REFINEMENT_PATH)
+    audit = refinement["implementationAuditEvidence"]
+    obligations = refinement["obligations"]
+    bridge = refinement["bridgeScope"]
+    attacker = str(capture["roles"]["attacker"]).lower()
+    controller = str(capture["roles"]["service_contract_controller"]).lower()
+    members = [str(value).lower() for value in capture["roles"]["committee_member_addresses"]]
+    capture_routes = list(capture["routes"])
+    session_records = sorted(
+        [
+            {
+                "session_id": session_id_for_capture_route(route),
+                "contract_address": str(route["contract"]["address"]).lower(),
+                "payment_tx_hash": str(route["payment_transaction"]["hash"]).lower(),
+                "horizon_end_block": int(route["finality"]["observed_head_block"]),
+            }
+            for route in capture_routes
+        ],
+        key=lambda item: item["session_id"],
+    )
+    session_set_digest = json_digest(session_records)
+    scope_core = {
+        "schema": "ope-p2star-scope/v1",
+        "chain_id": int(capture["chain_id"]),
+        "resource": str(capture["scope"]["resource"]),
+        "accounting_unit": str(capture["scope"]["accounting_unit"]),
+        "success_predicate": "first commitment-valid plaintext delivery to the authenticated attacker",
+        "process_boundary": "controlled OPE contract plus the seven authenticated operator processes",
+    }
+    scope_id = f"ope-scope:{json_digest(scope_core)}"
+    source_anchors = {
+        "capture_sha256": file_sha256(ROUTES_PATH),
+        "refinement_certificate_sha256": file_sha256(REFINEMENT_PATH),
+        "contract_source_sha256": file_sha256(CONTRACT_SOURCE_PATH),
+        "refinement_contract_source_sha256": str(audit["sourceSha256"]),
+        "compiled_artifact_semantic_sha256": str(audit["artifactSemanticSha256"]),
+        "runtime_source_digest": str(sources["runtime_source_digest"]),
+    }
+    require(
+        source_anchors["contract_source_sha256"]
+        == source_anchors["refinement_contract_source_sha256"],
+        "P2STAR_SOURCE_ANCHOR_MISMATCH",
+    )
+    bodies: dict[str, Any] = {
+        "control": {
+            "attacker_control_accounts": [attacker],
+            "payer_accounts": [attacker],
+            "requester_accounts": [attacker],
+            "recipient_accounts": [attacker],
+            "service_controller_accounts": [controller],
+            "committee_member_accounts": members,
+            "role_separation": "attacker, controller, and seven committee members are pairwise role-disjoint",
+            "completeness_basis": [
+                "authenticated Hardhat account tuple in the route capture",
+                "direct-construction role separation in the refinement certificate",
+                "seven signed member/operator bindings",
+            ],
+        },
+        "acquisition_links": {
+            "funding_paths": [
+                {
+                    "path_id": "controller-configuration-funding",
+                    "source_role": "service_controller",
+                    "destination_role": "ope_contract",
+                    "action": "configureCredits(uint256[7])",
+                    "attacker_cost_direction": "excluded-service-funding",
+                },
+                {
+                    "path_id": "attacker-acquisition-payment",
+                    "source_role": "attacker",
+                    "destination_role": "ope_contract",
+                    "action": "acquireFour(uint8[4])",
+                    "attacker_cost_direction": "boundary-outflow",
+                },
+            ],
+            "return_rebate_paths": [],
+            "settlement_paths": [
+                {
+                    "path_id": "member-credit-withdrawal",
+                    "source_role": "ope_contract",
+                    "destination_role": "committee_member",
+                    "action": "withdraw()",
+                    "attacker_cost_direction": "outside-attacker-control",
+                }
+            ],
+            "service_runtime_economic_paths": [],
+            "cross_session_value_paths": [],
+            "success_universe_anchor": str(bridge["successUniverse"]),
+        },
+        "settlement_surface": {
+            "contract_mutating_entry_points": audit["mutatingEntryClosure"],
+            "fallback_or_receive_entry_points": list(audit["mutatingEntryClosure"]["fallbackOrReceive"]),
+            "external_value_call_count": int(audit["runtimeOpcodeGuards"]["call"]),
+            "value_transfer_entry_points": ["withdraw()"],
+            "attacker_return_interfaces": [
+                {
+                    "entry_point": "withdraw()",
+                    "eligibility": "claimable(msg.sender) > 0",
+                    "attacker_claimable_at_horizon_wei": 0,
+                    "attacker_probe_result": "rejected-on-all-35-sessions",
+                }
+            ],
+            "refund_cancel_rebate_entry_points": [],
+            "operator_service_economic_entry_points": [],
+            "entry_closure_obligation": str(obligations["implementationEntryClosure"]),
+            "opcode_closure_obligation": str(obligations["implementationOpcodeClosure"]),
+        },
+        "reuse_namespace": {
+            "session_id_rule": "ope-process:<lowercase-payment-transaction-hash>",
+            "debit_id_rule": "<chain-id>:<contract-address>:<payment-transaction-hash>",
+            "debit_allocations": [
+                {
+                    "session_id": session_id_for_capture_route(route),
+                    "underlying_debit_id": debit_id_for_capture_route(capture, route),
+                }
+                for route in capture_routes
+            ],
+            "maximum_success_allocations_per_debit": 1,
+            "operator_replay_key_fields": [
+                "scope_id",
+                "header_digest",
+                "session_id",
+                "operator_id",
+                "nonce",
+            ],
+            "cross_session_reuse_allowed": False,
+            "persistent_receipt_and_nonce_state": True,
+        },
+        "horizon": {
+            "kind": "per-session-state-closure",
+            "start_event": "successful controller configuration",
+            "end_condition": "payment finality, commitment-valid delivery, zero attacker claimable balance, rejected attacker withdrawal probe, and persistent reuse-state check",
+            "return_right_disposition": "every authenticated attacker-return interface is terminated, ineligible, or recorded",
+            "session_end_blocks": {
+                item["session_id"]: item["horizon_end_block"] for item in session_records
+            },
+            "open_attacker_claims_at_horizon": 0,
+        },
+    }
+    manifest_digests = {name: json_digest(body) for name, body in bodies.items()}
+    header_core = {
+        "schema": "ope-p2star-header/v1",
+        "scope_id": scope_id,
+        "scope": scope_core,
+        "session_set_digest": session_set_digest,
+        "manifest_digests": manifest_digests,
+        "source_anchors": source_anchors,
+        "settlement_horizon_kind": "per-session-state-closure",
+    }
+    header_digest = json_digest(header_core)
+    manifests = {
+        name: {
+            "schema": f"ope-p2star-{name.replace('_', '-')}-manifest/v1",
+            "scope_id": scope_id,
+            "header_digest": header_digest,
+            "session_set_digest": session_set_digest,
+            "body_digest": manifest_digests[name],
+            "body": body,
+        }
+        for name, body in bodies.items()
+    }
+    return {
+        "header": {**header_core, "header_digest": header_digest},
+        "manifests": manifests,
+        "session_records": session_records,
+    }
+
+
+def bind_routes_to_p2star(
+    routes: list[dict[str, Any]],
+    capture: Mapping[str, Any],
+    boundary: Mapping[str, Any],
+) -> None:
+    capture_by_id = {str(route["route_id"]): route for route in capture["routes"]}
+    header = boundary["header"]
+    for route in routes:
+        captured = capture_by_id[str(route["route_id"])]
+        route["p2star_binding"] = {
+            "scope_id": header["scope_id"],
+            "header_digest": header["header_digest"],
+            "session_id": session_id_for_capture_route(captured),
+            "session_set_digest": header["session_set_digest"],
+            "manifest_digests": header["manifest_digests"],
+            "underlying_debit_id": debit_id_for_capture_route(capture, captured),
+            "horizon_end_block": int(captured["finality"]["observed_head_block"]),
+            "settlement_closed": True,
+        }
 
 
 def bind_c6(capture_costs: Mapping[tuple[int, ...], int]) -> dict[str, Any]:
@@ -458,7 +670,7 @@ def run_routes(
                     "response_count": len(verified),
                 },
                 "p1_authenticated_request_and_delivery": True,
-                "p2_same_session_role_binding": True,
+                "p2star_boundary_and_session_binding": True,
                 "p3_finality_policy_satisfied": True,
                 "p4_returns_complete_and_debit_single_use": True,
                 "p5_complete_route_replayed": True,
@@ -529,34 +741,6 @@ def run_routes(
     }
 
 
-def gate_mutations_rejected(result: Mapping[str, Any]) -> dict[str, bool]:
-    def accepted(candidate: Mapping[str, Any]) -> bool:
-        gates = candidate["p1_p5"]
-        return (
-            all(gates[name]["status"] == "PASS" for name in ("P1", "P2", "P3", "P4", "P5"))
-            and candidate["route_coverage"]["forward_routes"] == 35
-            and candidate["route_coverage"]["reverse_replayed_routes"] == 35
-            and candidate["cost"]["process_minimum_units"] == 4
-            and candidate["cost"]["all_returns_to_attacker_units"] == 0
-        )
-
-    mutations: dict[str, bool] = {}
-    for name, transform in {
-        "unauthenticated_request": lambda value: value["p1_p5"]["P1"].update(status="OPEN"),
-        "prefinality_delivery": lambda value: value["p1_p5"]["P3"].update(status="OPEN"),
-        "omitted_return_interface": lambda value: value["p1_p5"]["P4"].update(status="OPEN"),
-        "missing_forward_route": lambda value: value["route_coverage"].update(forward_routes=34),
-        "missing_reverse_replay": lambda value: value["route_coverage"].update(reverse_replayed_routes=34),
-        "cost_tamper": lambda value: value["cost"].update(process_minimum_units=3),
-        "undeclared_cross_session_return": lambda value: value["cost"].update(all_returns_to_attacker_units=1),
-    }.items():
-        candidate = deepcopy(result)
-        transform(candidate)
-        mutations[name] = not accepted(candidate)
-    require(all(mutations.values()), "one or more gate mutations were accepted")
-    return mutations
-
-
 def evaluate() -> dict[str, Any]:
     verify_buyer_auth()
     capture = read_json(ROUTES_PATH)
@@ -602,12 +786,29 @@ def evaluate() -> dict[str, Any]:
         finally:
             stop_operators(processes)
 
+    boundary = build_p2star_boundary(capture, sources)
+    bind_routes_to_p2star(routes, capture, boundary)
     costs = [int(route["net_attacker_cost_units"]) for route in routes]
+    attaining_route = min(routes, key=lambda item: int(item["net_attacker_cost_units"]))
+    attainment = {
+        "kind": "reverse-replayed-route",
+        "route_id": attaining_route["route_id"],
+        "session_id": attaining_route["p2star_binding"]["session_id"],
+        "scope_id": boundary["header"]["scope_id"],
+        "header_digest": boundary["header"]["header_digest"],
+        "mandatory_outflow_units": int(attaining_route["contract_cost_units"]),
+        "return_units": int(attaining_route["process_return_units"]),
+        "net_cost_units": int(attaining_route["net_attacker_cost_units"]),
+        "typed_transfer_recomputed": True,
+        "settlement_closed": True,
+        "single_use_verified": True,
+        "whole_process_replayed": True,
+    }
     result: dict[str, Any] = {
-        "schema": "ope-controlled-positive-process-certificate/v2",
-        "verdict": "AUTHENTICATED-RELATIVE-PROCESS-CERTIFIED(4)",
+        "schema": "ope-controlled-positive-process-certificate/v3",
+        "verdict": VERDICT,
         "claim": {
-            "claim_type": "authenticated-relative-process-cost",
+            "claim_type": "boundary-complete-authenticated-relative-process-cost",
             "quantity": "authenticated relative-process attacker net cost through first commitment-valid plaintext delivery",
             "scope": "admitted local OPE plus seven-process 4-of-7 threshold-service composition",
             "attacker_role": committee.buyer,
@@ -626,7 +827,7 @@ def evaluate() -> dict[str, Any]:
                 "internal_transfer_treatment": "transfers wholly inside the declared control closure are not boundary-crossing debits",
             },
             "real_success_histories": {
-                "domain": "all successful executions admitted by the controlled runtime and the P1-P4 evidence header",
+                "domain": "all successful executions admitted by the controlled runtime and the P1/P2-star/P3/P4 evidence header",
                 "success_event": "first commitment-valid plaintext delivery to the authenticated attacker",
                 "represented_history_count": len(routes),
             },
@@ -659,9 +860,9 @@ def evaluate() -> dict[str, Any]:
                 "status": "PASS",
                 "evidence": "35 EIP-191 buyer-authenticated requests and 35 commitment-valid deliveries",
             },
-            "P2": {
+            "P2_star": {
                 "status": "PASS",
-                "evidence": "attacker/controller/member separation plus seven signed member-operator bindings",
+                "evidence": "five digest-bound manifests cover control, acquisition-linked funding/returns/settlement, reuse, and horizon across all 35 header-bound sessions",
             },
             "P3": {
                 "status": "PASS",
@@ -676,6 +877,8 @@ def evaluate() -> dict[str, Any]:
                 "evidence": "the 35-route fixed C6 root and all 35 whole process routes agree and replay",
             },
         },
+        "boundary": boundary,
+        "attainment": attainment,
         "cost": {
             "contract_minimum_units": min(capture_costs.values()),
             "process_minimum_units": min(costs),
@@ -729,6 +932,7 @@ def evaluate() -> dict[str, Any]:
         "routes": routes,
         "mutations": {
             "executable": executable_mutations,
+            "p2star_checker_result": "results/p2star_mutations.v1.json",
         },
         "limitations": [
             "relative to the admitted controlled composition, not deployment-wide",
@@ -740,15 +944,16 @@ def evaluate() -> dict[str, Any]:
         "inputs": {
             "ope_routes_sha256": file_sha256(ROUTES_PATH),
             "c6_certificate_sha256": file_sha256(C6_PATH),
+            "refinement_certificate_sha256": file_sha256(REFINEMENT_PATH),
+            "contract_source_sha256": file_sha256(CONTRACT_SOURCE_PATH),
         },
     }
-    result["mutations"]["gate_and_accounting"] = gate_mutations_rejected(result)
     require(
-        result["verdict"] == "AUTHENTICATED-RELATIVE-PROCESS-CERTIFIED(4)",
+        result["verdict"] == VERDICT,
         "verdict drift",
     )
     require(result["cost"]["process_minimum_units"] == 4, "positive process floor is not four")
-    require(all(item["status"] == "PASS" for item in result["p1_p5"].values()), "P1-P5 not all PASS")
+    require(all(item["status"] == "PASS" for item in result["p1_p5"].values()), "P1/P2-star/P3/P4/P5 not all PASS")
     return result
 
 
@@ -765,12 +970,12 @@ def main() -> None:
         require(RESULT_PATH.exists(), "committed positive certificate missing")
         require(read_json(RESULT_PATH) == result, "committed positive certificate differs")
     executable = result["mutations"]["executable"]
-    gate_mutations = result["mutations"]["gate_and_accounting"]
-    print("OPE_PROCESS_P1_P5=PASS")
+    print("OPE_PROCESS_P1_P2STAR_P3_P4_P5=PASS")
+    print("OPE_PROCESS_P2STAR_MANIFESTS=5_OF_5")
     print("OPE_PROCESS_FORWARD_ROUTES=35_OF_35")
     print("OPE_PROCESS_REVERSE_REPLAY=35_OF_35")
     print(f"OPE_PROCESS_EXECUTABLE_MUTATIONS={sum(executable.values())}_OF_{len(executable)}")
-    print(f"OPE_PROCESS_GATE_MUTATIONS={sum(gate_mutations.values())}_OF_{len(gate_mutations)}")
+    print("OPE_PROCESS_P2STAR_MUTATIONS=SEE_INDEPENDENT_VERIFIER")
     print("OPE_PROCESS_GAMMA_A=4")
     print(result["verdict"])
 

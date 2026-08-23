@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""One-command reproduction for the v16 experiment-only certificate set."""
+"""Reproduce the v16 base plus the fail-closed P2-star certificate extension."""
 
 from __future__ import annotations
 
@@ -41,12 +41,13 @@ def main() -> None:
         "--verify",
         cwd=POSITIVE,
     )
-    run(sys.executable, "verify_process_certificate.py", cwd=POSITIVE)
+    run(sys.executable, "verify_process_certificate.py", "--verify-mutations", cwd=POSITIVE)
     run(sys.executable, "benchmark_certificate_verifier.py", "--verify", cwd=POSITIVE)
     if args.full_core:
         run(sys.executable, "reproduce_v77.py")
-    print("V16_AUTHENTICATED_RELATIVE_PROCESS_CERTIFICATE=PASS")
-    print("V16_OPE_PROCESS_CERTIFICATE=PASS")
+    print("P2STAR_BOUNDARY_MANIFESTS_AND_MUTATIONS=PASS")
+    print("RELATIVE_PROCESS_CERTIFICATE=PASS")
+    print("OPE_PROCESS_CERTIFICATE_V3=PASS")
 
 
 if __name__ == "__main__":

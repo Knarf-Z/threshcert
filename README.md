@@ -6,7 +6,7 @@ current main result is a controlled positive certificate over one fixed
 threshold-service composition:
 
 ```text
-AUTHENTICATED-RELATIVE-PROCESS-CERTIFIED(4)
+RELATIVE-PROCESS-CERTIFIED(4)
 ```
 
 The result covers all 35 admitted successful routes through first
@@ -36,24 +36,27 @@ defines every experiment and its interpretation boundary.
 
 ## Current auditable release
 
-The v2 process certificate exposes the review-critical objects as
+The post-v16 v3 process certificate exposes the review-critical objects as
 machine-readable data rather than prose-only assertions:
 
 | Review requirement | Public artifact |
 | --- | --- |
-| Narrow claim | `claim_type=authenticated-relative-process-cost` and the exact quantity are stored in the v2 certificate. |
-| Declared process model | The certificate records the attacker control boundary, represented real-success histories, checked routes, and the observation projection corresponding to `Ctrl(A)`, `H_real`, `R_Theta`, and `Obs_J`. |
+| Narrow claim | `claim_type=boundary-complete-authenticated-relative-process-cost` and the exact quantity are stored in the v3 certificate. |
+| P2* boundary completeness | Five manifests cover control accounts, acquisition-linked funding/return paths, the settlement surface, reuse namespace, and horizon closure. Manifest bodies and digests bind the scope ID, header, authenticated session set, capture, refinement certificate, source, artifact, and runtime. |
+| Declared process model | The certificate records the attacker control boundary, represented success histories, checked routes, and observation projection corresponding to `Ctrl(A)`, `H_real`, `R_Theta`, and `Obs_J`. The boundary remains relative to the pinned controlled composition. |
 | P5 completeness | Forward totality, whole-process reverse replay, same-session continuity, and cost preservation are explicit fields; minimum equality is not accepted as a premise. |
 | Machine-readable certificate | `artifact/ope_process_positive/schema/ope_process_certificate.schema.json` defines the public JSON format. |
 | Independent checking | `artifact/ope_process_positive/verify_process_certificate.py` uses only the Python standard library and does not import the generator or runtime implementation. |
 | Cost-domain consistency | `artifact/COST_DOMAIN_REGISTRY.json` explains why the current value 4 and historical value 10 are from different, non-comparable domains. |
-| Size and scaling | `artifact/ope_process_positive/results/verifier_benchmark.v1.json` reports the 625,243-byte certificate and 1/5/10/20/35-route verification measurements. Prefix measurements are explicitly non-certifying. |
-| Anonymous review package | `artifact/anonymous_v16/anonymous_v16_artifact.zip` contains an author-free review bundle with its own manifest and one-command reproduction entry. |
+| Fail-closed mutations | `artifact/ope_process_positive/results/p2star_mutations.v1.json` records eight independently executed semantic mutations after bindings are recomputed: six boundary failures, one P5F failure, and one attainment failure. |
+| Size and scaling | `artifact/ope_process_positive/results/verifier_benchmark.v2.json` reports the 701,455-byte certificate and 1/5/10/20/35-route verification measurements. Prefix measurements are explicitly non-certifying. |
+| Archived anonymous package | `artifact/anonymous_v16/anonymous_v16_artifact.zip` preserves the legacy v16 package; it predates and does not substantiate the post-v16 P2* claim. |
 
 The independent verifier checks 35/35 routes, 140/140 operator signatures,
 140/140 Chaum--Pedersen proofs, threshold reconstruction, delivery,
-settlement-linked accounting, source bindings, and the committed negative
-controls. The mathematical definitions still belong in the paper; this
+settlement-linked accounting, independently reconstructed P2* manifests, source
+bindings, `Attain(4)`, and the committed negative controls. The mathematical
+definitions still belong in the paper; this
 repository provides their executable representation and audit trail.
 
 Quick verification from the repository root:
@@ -161,7 +164,7 @@ The named GitHub repository is not itself an anonymous submission channel.
   with seven operator HTTP processes, 35/35 fixed-root routes, EIP-191 buyer
   authentication, six-confirmation finality, four verified responses per
   route, commitment-valid delivery, closed return interfaces, and verdict
-  `AUTHENTICATED-RELATIVE-PROCESS-CERTIFIED(4)`.
+  `RELATIVE-PROCESS-CERTIFIED(4)` under the pinned P2* boundary.
 - `artifact/paid_threshold_response_two_host_v6/`: the verified,
   privacy-scrubbed public release of the earlier controlled two-host
   integration, including frozen source, tests, certificate checkers, and
@@ -174,28 +177,29 @@ The named GitHub repository is not itself an anonymous submission channel.
 
 ## Reproduce
 
-For the complete v16 experiment set, including the nontrivial positive OPE
-process certificate, run:
+For the v16 experiment base plus the post-v16 P2* OPE certificate extension,
+run:
 
 ```bash
 python reproduce_v16_experiments.py
 ```
 
-Expected final lines include `V16_AUTHENTICATED_RELATIVE_PROCESS_CERTIFICATE=PASS`. This regenerates all
-35 fixed-configuration OPE executions, verifies 35 buyer signatures, starts
-seven operator processes, verifies 140 threshold responses, replays all 35
-complete process routes, and checks the negative controls. The claim is
-relative to the admitted local composition; it is not a production or
+Expected final lines include `P2STAR_BOUNDARY_MANIFESTS_AND_MUTATIONS=PASS` and
+`OPE_PROCESS_CERTIFICATE_V3=PASS`. This regenerates all 35 fixed-configuration
+OPE executions, verifies 35 buyer signatures, starts seven operator processes,
+verifies 140 threshold responses, replays all 35 complete process routes,
+reconstructs the five P2* manifests, and executes eight fail-closed semantic
+mutations. The claim is relative to the admitted local composition; it is not a production or
 deployment-global attacker-cost claim.
 
 The current machine verdict is explicitly narrowed to:
 
 ```text
-AUTHENTICATED-RELATIVE-PROCESS-CERTIFIED(4)
+RELATIVE-PROCESS-CERTIFIED(4)
 ```
 
 The same command validates the public JSON Schema, runs the separately written
-standard-library verifier, and checks the committed size/scaling benchmark.
+standard-library verifier and P2* mutations, and checks the committed size/scaling benchmark.
 The verifier can also be run directly:
 
 ```bash

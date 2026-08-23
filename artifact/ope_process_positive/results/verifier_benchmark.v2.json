@@ -1,0 +1,110 @@
+{
+  "certificate": {
+    "bytes": 701455,
+    "declared_routes": 35,
+    "operator_responses": 140,
+    "path": "artifact/ope_process_positive/results/ope_process_positive.v3.json",
+    "sha256": "1463614de57c327419c795d348d15c7cc682b8ca7edcfaef1d63a9cd03a638f2"
+  },
+  "claim_type": "boundary-complete-authenticated-relative-process-cost",
+  "environment": {
+    "implementation": "CPython",
+    "logical_cpu_count": 16,
+    "machine": "AMD64",
+    "operating_system": "Windows",
+    "os_release": "11",
+    "processor": "Intel64 Family 6 Model 204 Stepping 2, GenuineIntel",
+    "python": "3.12.13"
+  },
+  "limitations": [
+    "timings are machine-specific wall-clock measurements",
+    "prefix runs measure verifier growth and do not discharge route completeness",
+    "the certificate excludes gas, host compromise, side channels, and undeclared external transfers"
+  ],
+  "method": {
+    "eip191_preflight_runs": 1,
+    "repeats_per_point": 3,
+    "route_prefixes_are_not_certificates": true,
+    "timed_points_exclude_node_eip191_startup": true,
+    "timer": "time.perf_counter"
+  },
+  "preflight": {
+    "chaum_pedersen_proofs": 140,
+    "operator_signatures": 140,
+    "schema_input_eip191_and_full_crypto": "PASS",
+    "verified_routes": 35
+  },
+  "scaling": [
+    {
+      "certification_status": "SCALING_PROBE_ONLY",
+      "cryptographically_checked_routes": 1,
+      "maximum_ms": 724.522199947387,
+      "median_ms": 710.5356999672949,
+      "minimum_ms": 708.2070999313146,
+      "route_payload_bytes": 16603,
+      "samples_ms": [
+        710.5356999672949,
+        708.2070999313146,
+        724.522199947387
+      ]
+    },
+    {
+      "certification_status": "SCALING_PROBE_ONLY",
+      "cryptographically_checked_routes": 5,
+      "maximum_ms": 3103.658100008033,
+      "median_ms": 3098.648100043647,
+      "minimum_ms": 3022.840299992822,
+      "route_payload_bytes": 83023,
+      "samples_ms": [
+        3103.658100008033,
+        3098.648100043647,
+        3022.840299992822
+      ]
+    },
+    {
+      "certification_status": "SCALING_PROBE_ONLY",
+      "cryptographically_checked_routes": 10,
+      "maximum_ms": 6018.8453999580815,
+      "median_ms": 6003.010399988852,
+      "minimum_ms": 5873.782700044103,
+      "route_payload_bytes": 166053,
+      "samples_ms": [
+        6018.8453999580815,
+        5873.782700044103,
+        6003.010399988852
+      ]
+    },
+    {
+      "certification_status": "SCALING_PROBE_ONLY",
+      "cryptographically_checked_routes": 20,
+      "maximum_ms": 11783.870999934152,
+      "median_ms": 11780.248300055973,
+      "minimum_ms": 11679.392699967138,
+      "route_payload_bytes": 332110,
+      "samples_ms": [
+        11783.870999934152,
+        11679.392699967138,
+        11780.248300055973
+      ]
+    },
+    {
+      "certification_status": "FULL_CERTIFICATE",
+      "cryptographically_checked_routes": 35,
+      "maximum_ms": 66165.53309990559,
+      "median_ms": 20102.514200028963,
+      "minimum_ms": 19319.608199992217,
+      "route_payload_bytes": 581193,
+      "samples_ms": [
+        20102.514200028963,
+        19319.608199992217,
+        66165.53309990559
+      ]
+    }
+  ],
+  "schema": "ope-process-independent-verifier-benchmark/v2",
+  "schema_document": {
+    "bytes": 18910,
+    "path": "artifact/ope_process_positive/schema/ope_process_certificate.schema.json",
+    "sha256": "af6ecf23db32559bd42cd072862eedac62a76254dc5093d9710e7098fc6fd0e1"
+  }
+}

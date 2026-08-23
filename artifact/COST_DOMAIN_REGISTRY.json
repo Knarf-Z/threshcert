@@ -2,10 +2,10 @@
   "schema": "threshcert-cost-domain-registry/v1",
   "claims": [
     {
-      "artifact": "artifact/ope_process_positive/results/ope_process_positive.v2.json",
+      "artifact": "artifact/ope_process_positive/results/ope_process_positive.v3.json",
       "value": 4,
-      "verdict": "AUTHENTICATED-RELATIVE-PROCESS-CERTIFIED(4)",
-      "quantity": "authenticated relative-process attacker net cost through first commitment-valid plaintext delivery",
+      "verdict": "RELATIVE-PROCESS-CERTIFIED(4)",
+      "quantity": "boundary-complete authenticated relative-process attacker net cost through first commitment-valid plaintext delivery",
       "accounting_unit": "native call value / 10^18 wei",
       "route_domain": "all 35 successful routes at the fixed controlled OPE root",
       "execution_domain": "local Hardhat EVM plus seven local operator processes",

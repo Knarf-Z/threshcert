@@ -1,5 +1,21 @@
 # ThreshCert artifact changelog
 
+## 2026-08-23 post-v16 P2-star boundary-completeness extension
+
+- Replaced the legacy P2 evidence with five machine-readable manifests for
+  control, acquisition-linked flows, settlement surface, reuse namespace, and
+  horizon closure, all bound to one scope/header and 35 authenticated sessions.
+- Added an independent reconstruction checker anchored to the EVM capture,
+  refinement certificate, contract source, semantic artifact and runtime.
+- Added eight actually executed semantic mutations. Deleted control/funding/return
+  evidence, cross-session reuse, route splicing and horizon drift fail boundary
+  checks after hashes are rebound; route deletion loses P5F exactness, while an
+  attainment-cost change downgrades the result to a certified lower bound.
+- Added an explicit replayable `Attain(4)` witness and v3 verdict
+  `RELATIVE-PROCESS-CERTIFIED(4)` for the pinned authenticated boundary only.
+- Preserved the v2 certificate and anonymous v16 archive as legacy evidence;
+  neither is used to discharge revised P2-star.
+
 ## 2026-08-23 v16 authenticated relative-process certificate
 
 - Added a nontrivial executable OPE composition that satisfies P1-P5 and
